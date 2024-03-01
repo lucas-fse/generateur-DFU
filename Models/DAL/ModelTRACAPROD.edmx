@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TRACA_OUTILSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TRACA_DATA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACTION" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TRACA_ETIQUETTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TYPE_ETIQUETTE" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTR" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM" Type="nvarchar" MaxLength="50" />
+          <Property Name="REFERENCE1" Type="nvarchar" MaxLength="50" />
+          <Property Name="REFERENCE2" Type="nvarchar" MaxLength="50" />
+          <Property Name="LOT" Type="nvarchar" MaxLength="50" />
+          <Property Name="CMD" Type="nvarchar" MaxLength="50" />
+          <Property Name="NMR_OF" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="ID_OPE" Type="bigint" />
+        </EntityType>
+        <EntityContainer Name="TRACA_OUTILSModelStoreContainer">
+          <EntitySet Name="TRACA_DATA" EntityType="Self.TRACA_DATA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACA_ETIQUETTES" EntityType="Self.TRACA_ETIQUETTES" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TRACA_OUTILSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TRACA_OUTILSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TRACA_ETIQUETTES" EntityType="TRACA_OUTILSModel.TRACA_ETIQUETTES" />
+          <EntitySet Name="TRACA_DATA" EntityType="TRACA_OUTILSModel.TRACA_DATA" />
+        </EntityContainer>
+        <EntityType Name="TRACA_ETIQUETTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE_ETIQUETTE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LOT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CMD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NMR_OF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
+          <Property Name="ID_OPE" Type="Int64" />
+        </EntityType>
+        <EntityType Name="TRACA_DATA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TRACA_OUTILSModelStoreContainer" CdmEntityContainer="TRACA_OUTILSEntities">
+          <EntitySetMapping Name="TRACA_ETIQUETTES">
+            <EntityTypeMapping TypeName="TRACA_OUTILSModel.TRACA_ETIQUETTES">
+              <MappingFragment StoreEntitySet="TRACA_ETIQUETTES">
+                <ScalarProperty Name="ID_OPE" ColumnName="ID_OPE" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="NMR_OF" ColumnName="NMR_OF" />
+                <ScalarProperty Name="CMD" ColumnName="CMD" />
+                <ScalarProperty Name="LOT" ColumnName="LOT" />
+                <ScalarProperty Name="REFERENCE2" ColumnName="REFERENCE2" />
+                <ScalarProperty Name="REFERENCE1" ColumnName="REFERENCE1" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="QTR" ColumnName="QTR" />
+                <ScalarProperty Name="TYPE_ETIQUETTE" ColumnName="TYPE_ETIQUETTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACA_DATA">
+            <EntityTypeMapping TypeName="TRACA_OUTILSModel.TRACA_DATA">
+              <MappingFragment StoreEntitySet="TRACA_DATA">
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

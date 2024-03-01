@@ -1,0 +1,3017 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PEGASE_PROD2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCIDENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Victime" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="NiveauDeRisque" Type="smallint" Nullable="false" />
+          <Property Name="Description2" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Service" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="UrlImage" Type="nchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="ACTIONIMMEDIATE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_QRQC" Type="bigint" Nullable="false" />
+          <Property Name="ActionPourClient" Type="nvarchar" MaxLength="500" />
+          <Property Name="Pilote" Type="nvarchar" MaxLength="500" />
+          <Property Name="Delai" Type="datetime" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="AIC_EQUIPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description2" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Acteur" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateResolution" Type="datetime" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="Pole" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AIC_POLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="POLE" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AIC_PROD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DateDeFin" Type="datetime" />
+          <Property Name="Pole" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ALEAS_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_OF_PROD_TRAITE" Type="bigint" Nullable="false" />
+          <Property Name="NMR_ALEA" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="StopTime" Type="datetime" />
+          <Property Name="Delai" Type="bigint" />
+          <Property Name="ID_OF_PROD_ORIG" Type="bigint" />
+          <Property Name="IsAlwaysOn" Type="bit" />
+        </EntityType>
+        <EntityType Name="ALEAS_OF_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ALEAS_OF" Type="bigint" Nullable="false" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="StopTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AMELIORATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nmr" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Service" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description2" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="Input" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Emetteur" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="UrlImage" Type="nchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="CONTROLE_QUALITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_OPERATEUR" Type="bigint" />
+          <Property Name="NMROF" Type="nchar" MaxLength="20" />
+          <Property Name="ITEMREF" Type="nchar" MaxLength="30" />
+          <Property Name="ITEMDESCRIPT" Type="varchar" MaxLength="100" />
+          <Property Name="Conforme" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="UrlImage" Type="nchar" MaxLength="40" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ID_TYPE_CAUSE" Type="bigint" />
+          <Property Name="ID_TYPE_ANOMALIE" Type="bigint" />
+          <Property Name="DateModif" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DATA_GENERIQUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Champ" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Datetime1" Type="datetime" />
+          <Property Name="Value1" Type="bigint" />
+          <Property Name="Value2" Type="bigint" />
+          <Property Name="StringValue1" Type="nchar" MaxLength="200" />
+          <Property Name="StringValue2" Type="nchar" MaxLength="400" />
+          <Property Name="Editable" Type="bit" />
+        </EntityType>
+        <EntityType Name="FRC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Valide" Type="bit" Nullable="false" />
+          <Property Name="NmrFRC" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nom" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="Client" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="NmrClient" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TypeProduit" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Commande" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Commentaire" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="StatusFRC" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Service" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="StatusBDD" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KPI_CA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Annee" Type="int" />
+          <Property Name="Mois" Type="int" />
+          <Property Name="CA" Type="int" />
+          <Property Name="EntreeCmd" Type="int" />
+        </EntityType>
+        <EntityType Name="KPI_PROD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Annee" Type="smallint" Nullable="false" />
+          <Property Name="Semaine" Type="smallint" Nullable="false" />
+          <Property Name="OTDByWeek" Type="float" Nullable="false" />
+          <Property Name="OTRByWeek" Type="float" Nullable="false" />
+          <Property Name="DatetimeMiseAJour" Type="datetime" Nullable="false" />
+          <Property Name="CA" Type="int" Nullable="false" />
+          <Property Name="ObjectifOTR" Type="float" />
+          <Property Name="ObjectifOTD" Type="float" />
+        </EntityType>
+        <EntityType Name="KPI_STC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_STC" Type="bigint" />
+          <Property Name="Semaine" Type="int" />
+          <Property Name="Annee" Type="int" />
+          <Property Name="Value1" Type="float" />
+          <Property Name="Value2" Type="float" />
+          <Property Name="Value3" Type="float" />
+          <Property Name="Value4" Type="float" />
+          <Property Name="Value5" Type="float" />
+          <Property Name="Value6" Type="float" />
+          <Property Name="Value7" Type="float" />
+          <Property Name="Value8" Type="float" />
+          <Property Name="Value9" Type="float" />
+          <Property Name="Value10" Type="float" />
+          <Property Name="Value11" Type="float" />
+          <Property Name="Value12" Type="float" />
+          <Property Name="Value13" Type="float" />
+          <Property Name="Value14" Type="float" />
+          <Property Name="Value15" Type="float" />
+          <Property Name="Value16" Type="float" />
+        </EntityType>
+        <EntityType Name="NON_CONFORMITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NmrChrono" Type="bigint" Nullable="false" />
+          <Property Name="NmrChronoS" Type="nchar" MaxLength="12" />
+          <Property Name="OperateursID" Type="bigint" />
+          <Property Name="Item" Type="nchar" MaxLength="20" />
+          <Property Name="DescriptionItem" Type="nchar" MaxLength="30" />
+          <Property Name="DescriptionUser" Type="nchar" MaxLength="100" />
+          <Property Name="Qtr" Type="int" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="NmrOF" Type="nchar" MaxLength="10" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NON_DETECTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_QRQC" Type="bigint" Nullable="false" />
+          <Property Name="item" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OCCURRENCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_QRQC" Type="bigint" Nullable="false" />
+          <Property Name="Item" Type="nchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OF_PROD_TRAITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMROF" Type="varchar" MaxLength="20" />
+          <Property Name="STARTTIME" Type="datetime" />
+          <Property Name="ENDTIME" Type="datetime" />
+          <Property Name="STATUSTYPE" Type="nchar" MaxLength="10" />
+          <Property Name="QTRTHEORIQUE" Type="int" />
+          <Property Name="Alea" Type="varchar" MaxLength="200" />
+          <Property Name="OPERATEUR" Type="bigint" />
+          <Property Name="ILOT" Type="varchar" MaxLength="10" />
+          <Property Name="ITEMREF" Type="varchar" MaxLength="30" />
+          <Property Name="QTRREEL" Type="int" />
+          <Property Name="TEMPSTHEORIQUE" Type="float" />
+          <Property Name="ISALIVE" Type="bit" Nullable="false" />
+          <Property Name="TEMPSSUPPL" Type="float" Nullable="false" />
+          <Property Name="MFGDES" Type="nvarchar" MaxLength="30" />
+          <Property Name="TCLCOD_0" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="OPERATEURS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ANNIVERSAIRE" Type="datetime" />
+          <Property Name="POLE" Type="int" />
+          <Property Name="NOM" Type="nvarchar" MaxLength="40" />
+          <Property Name="PRENOM" Type="nvarchar" MaxLength="40" />
+          <Property Name="SERVICE" Type="nchar" MaxLength="5" />
+          <Property Name="INITIAL" Type="nchar" MaxLength="4" />
+          <Property Name="PRESTAT" Type="bit" />
+          <Property Name="FINCONTRAT" Type="datetime" />
+          <Property Name="ANIMATEUR" Type="bit" Nullable="false" />
+          <Property Name="PATHA" Type="nvarchar" MaxLength="256" />
+          <Property Name="PATHB" Type="nvarchar" MaxLength="256" />
+          <Property Name="SousService" Type="nchar" MaxLength="5" />
+          <Property Name="HoraireByWeek" Type="float" />
+          <Property Name="Password" Type="nchar" MaxLength="30" />
+          <Property Name="Login" Type="nchar" MaxLength="100" />
+          <Property Name="Matricule" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_GENERE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_LIGNE_CLIENT" Type="nchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="NB_PACK" Type="int" />
+          <Property Name="NB_MO" Type="int" />
+          <Property Name="NB_MT" Type="int" />
+          <Property Name="NB_SIM" Type="int" />
+          <Property Name="DATE_GENERATION" Type="datetime" />
+          <Property Name="OPTION_MATERIEL_MO" Type="nvarchar" MaxLength="32" />
+          <Property Name="OPTION_MATERIEL_MT" Type="nvarchar" MaxLength="32" />
+          <Property Name="COMMANDE_SYNCHRO" Type="nvarchar" MaxLength="32" />
+          <Property Name="GENERE" Type="bit" />
+          <Property Name="MARCHE" Type="nchar" MaxLength="1" />
+          <Property Name="MODIF_MANUEL" Type="bit" Nullable="false" />
+          <Property Name="VERSION_LOG" Type="nvarchar" MaxLength="30" />
+          <Property Name="FABRIQUE" Type="bit" />
+        </EntityType>
+        <EntityType Name="PLANIF_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumOF" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pole" Type="bigint" Nullable="false" />
+          <Property Name="DatePlanif" Type="date" />
+          <Property Name="Etat" Type="int" Nullable="false" />
+          <Property Name="Rang" Type="int" Nullable="false" />
+          <Property Name="ChargeTheorique" Type="float" />
+          <Property Name="ChargeReel" Type="float" />
+        </EntityType>
+        <EntityType Name="PLANIFICATION_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMROF" Type="nchar" MaxLength="10" />
+          <Property Name="Operateur" Type="bigint" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="NmrOrdre" Type="int" />
+          <Property Name="DateCloture" Type="datetime" />
+          <Property Name="Validite" Type="bit" />
+        </EntityType>
+        <EntityType Name="PLANNING_OPERATEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_STC" Type="bigint" Nullable="false" />
+          <Property Name="Annee" Type="int" />
+          <Property Name="Semaine" Type="int" />
+          <Property Name="LundiMatin" Type="smallint" />
+          <Property Name="LundiApresmidi" Type="smallint" />
+          <Property Name="MardiMatin" Type="smallint" />
+          <Property Name="MardiApresmidi" Type="smallint" />
+          <Property Name="MercrediMatin" Type="smallint" />
+          <Property Name="MercrediApresmidi" Type="smallint" />
+          <Property Name="JeudiMatin" Type="smallint" />
+          <Property Name="JeudiApresmidi" Type="smallint" />
+          <Property Name="VendrediMatin" Type="smallint" />
+          <Property Name="VendrediApresmidi" Type="smallint" />
+          <Property Name="SamediMatin" Type="smallint" />
+          <Property Name="SamediApresmidi" Type="smallint" />
+          <Property Name="DimancheMatin" Type="smallint" />
+          <Property Name="DimancheApresmidi" Type="smallint" />
+          <Property Name="Conflit" Type="bit" />
+        </EntityType>
+        <EntityType Name="PLANNING_VALUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Value" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="50" />
+          <Property Name="Animateur" Type="bigint" />
+          <Property Name="Couleur" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="POSTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pole" Type="bigint" Nullable="false" />
+          <Property Name="libelle" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="couleur" Type="nchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="QRQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOuverture" Type="datetime" Nullable="false" />
+          <Property Name="DateCloture" Type="datetime" />
+          <Property Name="DateSuivis" Type="datetime" />
+          <Property Name="Participants" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pilote" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Origine" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DescriptionProcess" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UrlImage" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUESTIONS_QRQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_QRQC" Type="bigint" Nullable="false" />
+          <Property Name="Q1" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q2" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q3" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q4" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q5" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q6" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Q7" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERENITE">
+          <Key>
+            <PropertyRef Name="index" />
+          </Key>
+          <Property Name="index" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="NiveauSerenite" Type="int" Nullable="false" />
+          <Property Name="NiveauSerenite2" Type="int" />
+        </EntityType>
+        <EntityType Name="SOLUTION_DURABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_QRQC" Type="bigint" Nullable="false" />
+          <Property Name="NmrItem" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ActionAmelioration" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="Pilote" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Delai" Type="datetime" />
+          <Property Name="Statut" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SOUSPROJET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSOUSPROJET" Type="bigint" Nullable="false" />
+          <Property Name="NomSousProjet" Type="nchar" MaxLength="20" />
+          <Property Name="Affichage" Type="bit" Nullable="false" />
+          <Property Name="DateFinProjet" Type="datetime" />
+          <Property Name="TitreSousProjet" Type="nchar" MaxLength="40" />
+          <Property Name="Service" Type="nchar" MaxLength="5" />
+          <Property Name="Commentaire" Type="nchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="STATUS_PNC">
+          <Key>
+            <PropertyRef Name="IDSTATUS" />
+          </Key>
+          <Property Name="IDSTATUS" Type="int" Nullable="false" />
+          <Property Name="STATUS" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUIVI_OFFRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SQHNUM" Type="nchar" MaxLength="20" />
+          <Property Name="DateRelance" Type="datetime" />
+          <Property Name="Relance" Type="bit" />
+        </EntityType>
+        <EntityType Name="TEMPS_SAISI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Annee" Type="smallint" Nullable="false" />
+          <Property Name="Semaine" Type="smallint" Nullable="false" />
+          <Property Name="SOUSPROJET_ID" Type="bigint" Nullable="false" />
+          <Property Name="Days1" Type="float" Nullable="false" />
+          <Property Name="Days2" Type="float" Nullable="false" />
+          <Property Name="Days3" Type="float" Nullable="false" />
+          <Property Name="Days4" Type="float" Nullable="false" />
+          <Property Name="Days5" Type="float" Nullable="false" />
+          <Property Name="Days6" Type="float" Nullable="false" />
+          <Property Name="Days7" Type="float" Nullable="false" />
+          <Property Name="Complete" Type="bit" Nullable="false" />
+          <Property Name="OPERATEURS_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEMPS_SEMAINE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Annee" Type="smallint" />
+          <Property Name="Semaine" Type="smallint" />
+          <Property Name="Complete" Type="bit" />
+          <Property Name="OPERATEURS_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEST_OF">
+          <Key>
+            <PropertyRef Name="NumOF" />
+          </Key>
+          <Property Name="NumOF" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NumCommande" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantite" Type="int" Nullable="false" />
+          <Property Name="DateExpe" Type="date" Nullable="false" />
+          <Property Name="ChargeTravail" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEST_OPERATION">
+          <Key>
+            <PropertyRef Name="NumOpe" />
+          </Key>
+          <Property Name="NumOpe" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NumOF" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ordre" Type="int" Nullable="false" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="TRACABILITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NmrOF" Type="nchar" MaxLength="20" />
+          <Property Name="NmrPack" Type="nchar" MaxLength="20" />
+          <Property Name="logged" Type="int" />
+          <Property Name="state" Type="int" />
+          <Property Name="time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TYPE_ANOMALIE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valeur" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TYPE_CAUSE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valeur" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_ACTIONIMMEDIATE_QRQC">
+          <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
+          <End Role="ACTIONIMMEDIATE" Type="Self.ACTIONIMMEDIATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACTIONIMMEDIATE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AIC_EQUIPE_AIC_POLE">
+          <End Role="AIC_POLE" Type="Self.AIC_POLE" Multiplicity="1" />
+          <End Role="AIC_EQUIPE" Type="Self.AIC_EQUIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AIC_POLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AIC_EQUIPE">
+              <PropertyRef Name="Pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AIC_PROD_AIC_POLE">
+          <End Role="AIC_POLE" Type="Self.AIC_POLE" Multiplicity="1" />
+          <End Role="AIC_PROD" Type="Self.AIC_PROD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AIC_POLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AIC_PROD">
+              <PropertyRef Name="Pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALEAS_OF_DETAILS_ALEAS_OF">
+          <End Role="ALEAS_OF" Type="Self.ALEAS_OF" Multiplicity="1" />
+          <End Role="ALEAS_OF_DETAILS" Type="Self.ALEAS_OF_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALEAS_OF">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ALEAS_OF_DETAILS">
+              <PropertyRef Name="ID_ALEAS_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALEAS_OF_OF_PROD_TRAITE">
+          <End Role="OF_PROD_TRAITE" Type="Self.OF_PROD_TRAITE" Multiplicity="1" />
+          <End Role="ALEAS_OF" Type="Self.ALEAS_OF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OF_PROD_TRAITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ALEAS_OF">
+              <PropertyRef Name="ID_OF_PROD_TRAITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_QUALITE_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="0..1" />
+          <End Role="CONTROLE_QUALITE" Type="Self.CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_OPERATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_QUALITE_TYPE_ANOMALIE">
+          <End Role="TYPE_ANOMALIE" Type="Self.TYPE_ANOMALIE" Multiplicity="0..1" />
+          <End Role="CONTROLE_QUALITE" Type="Self.CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_ANOMALIE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_TYPE_ANOMALIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_QUALITE_TYPE_CAUSE">
+          <End Role="TYPE_CAUSE" Type="Self.TYPE_CAUSE" Multiplicity="0..1" />
+          <End Role="CONTROLE_QUALITE" Type="Self.CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_CAUSE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_TYPE_CAUSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KPI_STC_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="0..1" />
+          <End Role="KPI_STC" Type="Self.KPI_STC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KPI_STC">
+              <PropertyRef Name="ID_STC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_CONFORMITE_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="0..1" />
+          <End Role="NON_CONFORMITE" Type="Self.NON_CONFORMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NON_CONFORMITE">
+              <PropertyRef Name="OperateursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_CONFORMITE_STATUS_PNC">
+          <End Role="STATUS_PNC" Type="Self.STATUS_PNC" Multiplicity="1" />
+          <End Role="NON_CONFORMITE" Type="Self.NON_CONFORMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUS_PNC">
+              <PropertyRef Name="IDSTATUS" />
+            </Principal>
+            <Dependent Role="NON_CONFORMITE">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_DETECTION_QRQC">
+          <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
+          <End Role="NON_DETECTION" Type="Self.NON_DETECTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NON_DETECTION">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OCCURRENCE_QRQC">
+          <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
+          <End Role="OCCURRENCE" Type="Self.OCCURRENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OCCURRENCE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATEURSTEMPS_SEMAINE">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
+          <End Role="TEMPS_SEMAINE" Type="Self.TEMPS_SEMAINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SEMAINE">
+              <PropertyRef Name="OPERATEURS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="ID_STC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="LundiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE1">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="LundiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE10">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="SamediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE11">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="SamediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE12">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="DimancheMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE13">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="DimancheApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE2">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MardiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE3">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MardiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE4">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MercrediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE5">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MercrediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE6">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="JeudiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE7">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="JeudiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE8">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="VendrediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE9">
+          <End Role="PLANNING_VALUE" Type="Self.PLANNING_VALUE" Multiplicity="0..1" />
+          <End Role="PLANNING_OPERATEUR" Type="Self.PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="VendrediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POLES_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="0..1" />
+          <End Role="POLES" Type="Self.POLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="POLES">
+              <PropertyRef Name="Animateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POSTES_POLES">
+          <End Role="POLES" Type="Self.POLES" Multiplicity="1" />
+          <End Role="POSTES" Type="Self.POSTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="POSTES">
+              <PropertyRef Name="pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_QRQC_QRQC">
+          <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
+          <End Role="QUESTIONS_QRQC" Type="Self.QUESTIONS_QRQC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUESTIONS_QRQC">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERENITE_OPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
+          <End Role="SERENITE" Type="Self.SERENITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SERENITE">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLUTION_DURABLE_QRQC">
+          <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
+          <End Role="SOLUTION_DURABLE" Type="Self.SOLUTION_DURABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SOLUTION_DURABLE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPS_SAISI_SOUSPROJET">
+          <End Role="SOUSPROJET" Type="Self.SOUSPROJET" Multiplicity="1" />
+          <End Role="TEMPS_SAISI" Type="Self.TEMPS_SAISI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOUSPROJET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SAISI">
+              <PropertyRef Name="SOUSPROJET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPS_SAISIOPERATEURS">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
+          <End Role="TEMPS_SAISI" Type="Self.TEMPS_SAISI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SAISI">
+              <PropertyRef Name="OPERATEURS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEST_OPERATION_TEST_OF">
+          <End Role="TEST_OF" Type="Self.TEST_OF" Multiplicity="1" />
+          <End Role="TEST_OPERATION" Type="Self.TEST_OPERATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEST_OF">
+              <PropertyRef Name="NumOF" />
+            </Principal>
+            <Dependent Role="TEST_OPERATION">
+              <PropertyRef Name="NumOF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_PROD2ModelStoreContainer">
+          <EntitySet Name="ACCIDENT" EntityType="Self.ACCIDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACTIONIMMEDIATE" EntityType="Self.ACTIONIMMEDIATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AIC_EQUIPE" EntityType="Self.AIC_EQUIPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AIC_POLE" EntityType="Self.AIC_POLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AIC_PROD" EntityType="Self.AIC_PROD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALEAS_OF" EntityType="Self.ALEAS_OF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALEAS_OF_DETAILS" EntityType="Self.ALEAS_OF_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AMELIORATION" EntityType="Self.AMELIORATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTROLE_QUALITE" EntityType="Self.CONTROLE_QUALITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DATA_GENERIQUE" EntityType="Self.DATA_GENERIQUE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FRC" EntityType="Self.FRC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPI_CA" EntityType="Self.KPI_CA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPI_PROD" EntityType="Self.KPI_PROD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPI_STC" EntityType="Self.KPI_STC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NON_CONFORMITE" EntityType="Self.NON_CONFORMITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NON_DETECTION" EntityType="Self.NON_DETECTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OCCURRENCE" EntityType="Self.OCCURRENCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OF_PROD_TRAITE" EntityType="Self.OF_PROD_TRAITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OPERATEURS" EntityType="Self.OPERATEURS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="Self.ORDRE_FABRICATION_GENERE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANIF_OF" EntityType="Self.PLANIF_OF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANIFICATION_OF" EntityType="Self.PLANIFICATION_OF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANNING_OPERATEUR" EntityType="Self.PLANNING_OPERATEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANNING_VALUE" EntityType="Self.PLANNING_VALUE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POLES" EntityType="Self.POLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POSTES" EntityType="Self.POSTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QRQC" EntityType="Self.QRQC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUESTIONS_QRQC" EntityType="Self.QUESTIONS_QRQC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERENITE" EntityType="Self.SERENITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOLUTION_DURABLE" EntityType="Self.SOLUTION_DURABLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOUSPROJET" EntityType="Self.SOUSPROJET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUS_PNC" EntityType="Self.STATUS_PNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUIVI_OFFRE" EntityType="Self.SUIVI_OFFRE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMPS_SAISI" EntityType="Self.TEMPS_SAISI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMPS_SEMAINE" EntityType="Self.TEMPS_SEMAINE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEST_OF" EntityType="Self.TEST_OF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEST_OPERATION" EntityType="Self.TEST_OPERATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYPE_ANOMALIE" EntityType="Self.TYPE_ANOMALIE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYPE_CAUSE" EntityType="Self.TYPE_CAUSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACABILITE" EntityType="Self.TRACABILITE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TRACABILITE].[ID] AS [ID], 
+    [TRACABILITE].[NmrOF] AS [NmrOF], 
+    [TRACABILITE].[NmrPack] AS [NmrPack], 
+    [TRACABILITE].[logged] AS [logged], 
+    [TRACABILITE].[state] AS [state], 
+    [TRACABILITE].[time] AS [time]
+    FROM [dbo].[TRACABILITE] AS [TRACABILITE]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ACTIONIMMEDIATE_QRQC" Association="Self.FK_ACTIONIMMEDIATE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="ACTIONIMMEDIATE" EntitySet="ACTIONIMMEDIATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AIC_EQUIPE_AIC_POLE" Association="Self.FK_AIC_EQUIPE_AIC_POLE">
+            <End Role="AIC_POLE" EntitySet="AIC_POLE" />
+            <End Role="AIC_EQUIPE" EntitySet="AIC_EQUIPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AIC_PROD_AIC_POLE" Association="Self.FK_AIC_PROD_AIC_POLE">
+            <End Role="AIC_POLE" EntitySet="AIC_POLE" />
+            <End Role="AIC_PROD" EntitySet="AIC_PROD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALEAS_OF_DETAILS_ALEAS_OF" Association="Self.FK_ALEAS_OF_DETAILS_ALEAS_OF">
+            <End Role="ALEAS_OF" EntitySet="ALEAS_OF" />
+            <End Role="ALEAS_OF_DETAILS" EntitySet="ALEAS_OF_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALEAS_OF_OF_PROD_TRAITE" Association="Self.FK_ALEAS_OF_OF_PROD_TRAITE">
+            <End Role="OF_PROD_TRAITE" EntitySet="OF_PROD_TRAITE" />
+            <End Role="ALEAS_OF" EntitySet="ALEAS_OF" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_QUALITE_OPERATEURS" Association="Self.FK_CONTROLE_QUALITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_QUALITE_TYPE_ANOMALIE" Association="Self.FK_CONTROLE_QUALITE_TYPE_ANOMALIE">
+            <End Role="TYPE_ANOMALIE" EntitySet="TYPE_ANOMALIE" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_QUALITE_TYPE_CAUSE" Association="Self.FK_CONTROLE_QUALITE_TYPE_CAUSE">
+            <End Role="TYPE_CAUSE" EntitySet="TYPE_CAUSE" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KPI_STC_OPERATEURS" Association="Self.FK_KPI_STC_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="KPI_STC" EntitySet="KPI_STC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_CONFORMITE_OPERATEURS" Association="Self.FK_NON_CONFORMITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="NON_CONFORMITE" EntitySet="NON_CONFORMITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_CONFORMITE_STATUS_PNC" Association="Self.FK_NON_CONFORMITE_STATUS_PNC">
+            <End Role="STATUS_PNC" EntitySet="STATUS_PNC" />
+            <End Role="NON_CONFORMITE" EntitySet="NON_CONFORMITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_DETECTION_QRQC" Association="Self.FK_NON_DETECTION_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="NON_DETECTION" EntitySet="NON_DETECTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OCCURRENCE_QRQC" Association="Self.FK_OCCURRENCE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="OCCURRENCE" EntitySet="OCCURRENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATEURSTEMPS_SEMAINE" Association="Self.FK_OPERATEURSTEMPS_SEMAINE">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="TEMPS_SEMAINE" EntitySet="TEMPS_SEMAINE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_OPERATEURS" Association="Self.FK_PLANNING_OPERATEUR_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE1" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE1">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE10" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE10">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE11" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE11">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE12" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE12">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE13" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE13">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE2" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE2">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE3" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE3">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE4" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE4">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE5" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE5">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE6" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE6">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE7" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE7">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE8" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE8">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE9" Association="Self.FK_PLANNING_OPERATEUR_PLANNING_VALUE9">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POLES_OPERATEURS" Association="Self.FK_POLES_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="POLES" EntitySet="POLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSTES_POLES" Association="Self.FK_POSTES_POLES">
+            <End Role="POLES" EntitySet="POLES" />
+            <End Role="POSTES" EntitySet="POSTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_QRQC_QRQC" Association="Self.FK_Questions_QRQC_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="QUESTIONS_QRQC" EntitySet="QUESTIONS_QRQC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERENITE_OPERATEURS" Association="Self.FK_SERENITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="SERENITE" EntitySet="SERENITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLUTION_DURABLE_QRQC" Association="Self.FK_SOLUTION_DURABLE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="SOLUTION_DURABLE" EntitySet="SOLUTION_DURABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPS_SAISI_SOUSPROJET" Association="Self.FK_TEMPS_SAISI_SOUSPROJET">
+            <End Role="SOUSPROJET" EntitySet="SOUSPROJET" />
+            <End Role="TEMPS_SAISI" EntitySet="TEMPS_SAISI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPS_SAISIOPERATEURS" Association="Self.FK_TEMPS_SAISIOPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="TEMPS_SAISI" EntitySet="TEMPS_SAISI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEST_OPERATION_TEST_OF" Association="Self.FK_TEST_OPERATION_TEST_OF">
+            <End Role="TEST_OF" EntitySet="TEST_OF" />
+            <End Role="TEST_OPERATION" EntitySet="TEST_OPERATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_PROD2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PEGASE_PROD2Entities2" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ACCIDENT" EntityType="PEGASE_PROD2Model.ACCIDENT" />
+          <EntitySet Name="ACTIONIMMEDIATE" EntityType="PEGASE_PROD2Model.ACTIONIMMEDIATE" />
+          <EntitySet Name="AIC_EQUIPE" EntityType="PEGASE_PROD2Model.AIC_EQUIPE" />
+          <EntitySet Name="AIC_POLE" EntityType="PEGASE_PROD2Model.AIC_POLE" />
+          <EntitySet Name="AIC_PROD" EntityType="PEGASE_PROD2Model.AIC_PROD" />
+          <EntitySet Name="ALEAS_OF" EntityType="PEGASE_PROD2Model.ALEAS_OF" />
+          <EntitySet Name="ALEAS_OF_DETAILS" EntityType="PEGASE_PROD2Model.ALEAS_OF_DETAILS" />
+          <EntitySet Name="AMELIORATION" EntityType="PEGASE_PROD2Model.AMELIORATION" />
+          <EntitySet Name="DATA_GENERIQUE" EntityType="PEGASE_PROD2Model.DATA_GENERIQUE" />
+          <EntitySet Name="FRC" EntityType="PEGASE_PROD2Model.FRC" />
+          <EntitySet Name="KPI_CA" EntityType="PEGASE_PROD2Model.KPI_CA" />
+          <EntitySet Name="KPI_PROD" EntityType="PEGASE_PROD2Model.KPI_PROD" />
+          <EntitySet Name="KPI_STC" EntityType="PEGASE_PROD2Model.KPI_STC" />
+          <EntitySet Name="NON_CONFORMITE" EntityType="PEGASE_PROD2Model.NON_CONFORMITE" />
+          <EntitySet Name="NON_DETECTION" EntityType="PEGASE_PROD2Model.NON_DETECTION" />
+          <EntitySet Name="OCCURRENCE" EntityType="PEGASE_PROD2Model.OCCURRENCE" />
+          <EntitySet Name="OF_PROD_TRAITE" EntityType="PEGASE_PROD2Model.OF_PROD_TRAITE" />
+          <EntitySet Name="OPERATEURS" EntityType="PEGASE_PROD2Model.OPERATEURS" />
+          <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="PEGASE_PROD2Model.ORDRE_FABRICATION_GENERE" />
+          <EntitySet Name="PLANIF_OF" EntityType="PEGASE_PROD2Model.PLANIF_OF" />
+          <EntitySet Name="PLANIFICATION_OF" EntityType="PEGASE_PROD2Model.PLANIFICATION_OF" />
+          <EntitySet Name="PLANNING_OPERATEUR" EntityType="PEGASE_PROD2Model.PLANNING_OPERATEUR" />
+          <EntitySet Name="PLANNING_VALUE" EntityType="PEGASE_PROD2Model.PLANNING_VALUE" />
+          <EntitySet Name="POLES" EntityType="PEGASE_PROD2Model.POLES" />
+          <EntitySet Name="POSTES" EntityType="PEGASE_PROD2Model.POSTES" />
+          <EntitySet Name="QRQC" EntityType="PEGASE_PROD2Model.QRQC" />
+          <EntitySet Name="QUESTIONS_QRQC" EntityType="PEGASE_PROD2Model.QUESTIONS_QRQC" />
+          <EntitySet Name="SERENITE" EntityType="PEGASE_PROD2Model.SERENITE" />
+          <EntitySet Name="SOLUTION_DURABLE" EntityType="PEGASE_PROD2Model.SOLUTION_DURABLE" />
+          <EntitySet Name="SOUSPROJET" EntityType="PEGASE_PROD2Model.SOUSPROJET" />
+          <EntitySet Name="STATUS_PNC" EntityType="PEGASE_PROD2Model.STATUS_PNC" />
+          <EntitySet Name="SUIVI_OFFRE" EntityType="PEGASE_PROD2Model.SUIVI_OFFRE" />
+          <EntitySet Name="TEMPS_SAISI" EntityType="PEGASE_PROD2Model.TEMPS_SAISI" />
+          <EntitySet Name="TEMPS_SEMAINE" EntityType="PEGASE_PROD2Model.TEMPS_SEMAINE" />
+          <EntitySet Name="TEST_OF" EntityType="PEGASE_PROD2Model.TEST_OF" />
+          <EntitySet Name="TEST_OPERATION" EntityType="PEGASE_PROD2Model.TEST_OPERATION" />
+          <EntitySet Name="TRACABILITE" EntityType="PEGASE_PROD2Model.TRACABILITE" />
+          <AssociationSet Name="FK_ACTIONIMMEDIATE_QRQC" Association="PEGASE_PROD2Model.FK_ACTIONIMMEDIATE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="ACTIONIMMEDIATE" EntitySet="ACTIONIMMEDIATE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AIC_EQUIPE_AIC_POLE" Association="PEGASE_PROD2Model.FK_AIC_EQUIPE_AIC_POLE">
+            <End Role="AIC_POLE" EntitySet="AIC_POLE" />
+            <End Role="AIC_EQUIPE" EntitySet="AIC_EQUIPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AIC_PROD_AIC_POLE" Association="PEGASE_PROD2Model.FK_AIC_PROD_AIC_POLE">
+            <End Role="AIC_POLE" EntitySet="AIC_POLE" />
+            <End Role="AIC_PROD" EntitySet="AIC_PROD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALEAS_OF_DETAILS_ALEAS_OF" Association="PEGASE_PROD2Model.FK_ALEAS_OF_DETAILS_ALEAS_OF">
+            <End Role="ALEAS_OF" EntitySet="ALEAS_OF" />
+            <End Role="ALEAS_OF_DETAILS" EntitySet="ALEAS_OF_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALEAS_OF_OF_PROD_TRAITE" Association="PEGASE_PROD2Model.FK_ALEAS_OF_OF_PROD_TRAITE">
+            <End Role="OF_PROD_TRAITE" EntitySet="OF_PROD_TRAITE" />
+            <End Role="ALEAS_OF" EntitySet="ALEAS_OF" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KPI_STC_OPERATEURS" Association="PEGASE_PROD2Model.FK_KPI_STC_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="KPI_STC" EntitySet="KPI_STC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_CONFORMITE_OPERATEURS" Association="PEGASE_PROD2Model.FK_NON_CONFORMITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="NON_CONFORMITE" EntitySet="NON_CONFORMITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_CONFORMITE_STATUS_PNC" Association="PEGASE_PROD2Model.FK_NON_CONFORMITE_STATUS_PNC">
+            <End Role="STATUS_PNC" EntitySet="STATUS_PNC" />
+            <End Role="NON_CONFORMITE" EntitySet="NON_CONFORMITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NON_DETECTION_QRQC" Association="PEGASE_PROD2Model.FK_NON_DETECTION_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="NON_DETECTION" EntitySet="NON_DETECTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OCCURRENCE_QRQC" Association="PEGASE_PROD2Model.FK_OCCURRENCE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="OCCURRENCE" EntitySet="OCCURRENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATEURSTEMPS_SEMAINE" Association="PEGASE_PROD2Model.FK_OPERATEURSTEMPS_SEMAINE">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="TEMPS_SEMAINE" EntitySet="TEMPS_SEMAINE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_OPERATEURS" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POLES_OPERATEURS" Association="PEGASE_PROD2Model.FK_POLES_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="POLES" EntitySet="POLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERENITE_OPERATEURS" Association="PEGASE_PROD2Model.FK_SERENITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="SERENITE" EntitySet="SERENITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPS_SAISIOPERATEURS" Association="PEGASE_PROD2Model.FK_TEMPS_SAISIOPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="TEMPS_SAISI" EntitySet="TEMPS_SAISI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE1" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE1">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE10" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE10">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE11" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE11">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE12" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE12">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE13" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE13">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE2" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE2">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE3" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE3">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE4" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE4">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE5" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE5">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE6" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE6">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE7" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE7">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE8" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE8">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE9" Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE9">
+            <End Role="PLANNING_VALUE" EntitySet="PLANNING_VALUE" />
+            <End Role="PLANNING_OPERATEUR" EntitySet="PLANNING_OPERATEUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSTES_POLES" Association="PEGASE_PROD2Model.FK_POSTES_POLES">
+            <End Role="POLES" EntitySet="POLES" />
+            <End Role="POSTES" EntitySet="POSTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_QRQC_QRQC" Association="PEGASE_PROD2Model.FK_Questions_QRQC_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="QUESTIONS_QRQC" EntitySet="QUESTIONS_QRQC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLUTION_DURABLE_QRQC" Association="PEGASE_PROD2Model.FK_SOLUTION_DURABLE_QRQC">
+            <End Role="QRQC" EntitySet="QRQC" />
+            <End Role="SOLUTION_DURABLE" EntitySet="SOLUTION_DURABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEMPS_SAISI_SOUSPROJET" Association="PEGASE_PROD2Model.FK_TEMPS_SAISI_SOUSPROJET">
+            <End Role="SOUSPROJET" EntitySet="SOUSPROJET" />
+            <End Role="TEMPS_SAISI" EntitySet="TEMPS_SAISI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEST_OPERATION_TEST_OF" Association="PEGASE_PROD2Model.FK_TEST_OPERATION_TEST_OF">
+            <End Role="TEST_OF" EntitySet="TEST_OF" />
+            <End Role="TEST_OPERATION" EntitySet="TEST_OPERATION" />
+          </AssociationSet>
+          <EntitySet Name="CONTROLE_QUALITE" EntityType="PEGASE_PROD2Model.CONTROLE_QUALITE" />
+          <AssociationSet Name="FK_CONTROLE_QUALITE_OPERATEURS" Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+          <EntitySet Name="TYPE_ANOMALIE" EntityType="PEGASE_PROD2Model.TYPE_ANOMALIE" />
+          <EntitySet Name="TYPE_CAUSE" EntityType="PEGASE_PROD2Model.TYPE_CAUSE" />
+          <AssociationSet Name="FK_CONTROLE_QUALITE_TYPE_ANOMALIE" Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE">
+            <End Role="TYPE_ANOMALIE" EntitySet="TYPE_ANOMALIE" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_QUALITE_TYPE_CAUSE" Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE">
+            <End Role="TYPE_CAUSE" EntitySet="TYPE_CAUSE" />
+            <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ACCIDENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Victime" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="NiveauDeRisque" Type="Int16" Nullable="false" />
+          <Property Name="Description2" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Service" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="UrlImage" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ACTIONIMMEDIATE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_QRQC" Type="Int64" Nullable="false" />
+          <Property Name="ActionPourClient" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Pilote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Delai" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="QRQC" Relationship="PEGASE_PROD2Model.FK_ACTIONIMMEDIATE_QRQC" FromRole="ACTIONIMMEDIATE" ToRole="QRQC" />
+        </EntityType>
+        <EntityType Name="AIC_EQUIPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description2" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Acteur" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="DateResolution" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="Pole" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="AIC_POLE" Relationship="PEGASE_PROD2Model.FK_AIC_EQUIPE_AIC_POLE" FromRole="AIC_EQUIPE" ToRole="AIC_POLE" />
+        </EntityType>
+        <EntityType Name="AIC_POLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POLE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AIC_EQUIPE" Relationship="PEGASE_PROD2Model.FK_AIC_EQUIPE_AIC_POLE" FromRole="AIC_POLE" ToRole="AIC_EQUIPE" />
+          <NavigationProperty Name="AIC_PROD" Relationship="PEGASE_PROD2Model.FK_AIC_PROD_AIC_POLE" FromRole="AIC_POLE" ToRole="AIC_PROD" />
+        </EntityType>
+        <EntityType Name="AIC_PROD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateDeFin" Type="DateTime" Precision="3" />
+          <Property Name="Pole" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="AIC_POLE" Relationship="PEGASE_PROD2Model.FK_AIC_PROD_AIC_POLE" FromRole="AIC_PROD" ToRole="AIC_POLE" />
+        </EntityType>
+        <EntityType Name="ALEAS_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_OF_PROD_TRAITE" Type="Int64" Nullable="false" />
+          <Property Name="NMR_ALEA" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="StopTime" Type="DateTime" Precision="3" />
+          <Property Name="Delai" Type="Int64" />
+          <Property Name="ID_OF_PROD_ORIG" Type="Int64" />
+          <Property Name="IsAlwaysOn" Type="Boolean" />
+          <NavigationProperty Name="ALEAS_OF_DETAILS" Relationship="PEGASE_PROD2Model.FK_ALEAS_OF_DETAILS_ALEAS_OF" FromRole="ALEAS_OF" ToRole="ALEAS_OF_DETAILS" />
+          <NavigationProperty Name="OF_PROD_TRAITE" Relationship="PEGASE_PROD2Model.FK_ALEAS_OF_OF_PROD_TRAITE" FromRole="ALEAS_OF" ToRole="OF_PROD_TRAITE" />
+        </EntityType>
+        <EntityType Name="ALEAS_OF_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ALEAS_OF" Type="Int64" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="StopTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ALEAS_OF" Relationship="PEGASE_PROD2Model.FK_ALEAS_OF_DETAILS_ALEAS_OF" FromRole="ALEAS_OF_DETAILS" ToRole="ALEAS_OF" />
+        </EntityType>
+        <EntityType Name="AMELIORATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nmr" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Service" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description2" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="Input" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Emetteur" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="UrlImage" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DATA_GENERIQUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Champ" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Datetime1" Type="DateTime" Precision="3" />
+          <Property Name="Value1" Type="Int64" />
+          <Property Name="Value2" Type="Int64" />
+          <Property Name="StringValue1" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="StringValue2" Type="String" MaxLength="400" FixedLength="true" Unicode="true" />
+          <Property Name="Editable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FRC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Valide" Type="Boolean" Nullable="false" />
+          <Property Name="NmrFRC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Client" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="NmrClient" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TypeProduit" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Commande" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Commentaire" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StatusFRC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Service" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="StatusBDD" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KPI_CA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annee" Type="Int32" />
+          <Property Name="Mois" Type="Int32" />
+          <Property Name="CA" Type="Int32" />
+          <Property Name="EntreeCmd" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KPI_PROD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annee" Type="Int16" Nullable="false" />
+          <Property Name="Semaine" Type="Int16" Nullable="false" />
+          <Property Name="OTDByWeek" Type="Double" Nullable="false" />
+          <Property Name="OTRByWeek" Type="Double" Nullable="false" />
+          <Property Name="DatetimeMiseAJour" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CA" Type="Int32" Nullable="false" />
+          <Property Name="ObjectifOTR" Type="Double" />
+          <Property Name="ObjectifOTD" Type="Double" />
+        </EntityType>
+        <EntityType Name="KPI_STC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_STC" Type="Int64" />
+          <Property Name="Semaine" Type="Int32" />
+          <Property Name="Annee" Type="Int32" />
+          <Property Name="Value1" Type="Double" />
+          <Property Name="Value2" Type="Double" />
+          <Property Name="Value3" Type="Double" />
+          <Property Name="Value4" Type="Double" />
+          <Property Name="Value5" Type="Double" />
+          <Property Name="Value6" Type="Double" />
+          <Property Name="Value7" Type="Double" />
+          <Property Name="Value8" Type="Double" />
+          <Property Name="Value9" Type="Double" />
+          <Property Name="Value10" Type="Double" />
+          <Property Name="Value11" Type="Double" />
+          <Property Name="Value12" Type="Double" />
+          <Property Name="Value13" Type="Double" />
+          <Property Name="Value14" Type="Double" />
+          <Property Name="Value15" Type="Double" />
+          <Property Name="Value16" Type="Double" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_KPI_STC_OPERATEURS" FromRole="KPI_STC" ToRole="OPERATEURS" />
+        </EntityType>
+        <EntityType Name="NON_CONFORMITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NmrChrono" Type="Int64" Nullable="false" />
+          <Property Name="NmrChronoS" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="OperateursID" Type="Int64" />
+          <Property Name="Item" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DescriptionItem" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DescriptionUser" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Qtr" Type="Int32" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="NmrOF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_NON_CONFORMITE_OPERATEURS" FromRole="NON_CONFORMITE" ToRole="OPERATEURS" />
+          <NavigationProperty Name="STATUS_PNC" Relationship="PEGASE_PROD2Model.FK_NON_CONFORMITE_STATUS_PNC" FromRole="NON_CONFORMITE" ToRole="STATUS_PNC" />
+        </EntityType>
+        <EntityType Name="NON_DETECTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_QRQC" Type="Int64" Nullable="false" />
+          <Property Name="item" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QRQC" Relationship="PEGASE_PROD2Model.FK_NON_DETECTION_QRQC" FromRole="NON_DETECTION" ToRole="QRQC" />
+        </EntityType>
+        <EntityType Name="OCCURRENCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_QRQC" Type="Int64" Nullable="false" />
+          <Property Name="Item" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="QRQC" Relationship="PEGASE_PROD2Model.FK_OCCURRENCE_QRQC" FromRole="OCCURRENCE" ToRole="QRQC" />
+        </EntityType>
+        <EntityType Name="OF_PROD_TRAITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMROF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STARTTIME" Type="DateTime" Precision="3" />
+          <Property Name="ENDTIME" Type="DateTime" Precision="3" />
+          <Property Name="STATUSTYPE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="QTRTHEORIQUE" Type="Int32" />
+          <Property Name="Alea" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATEUR" Type="Int64" />
+          <Property Name="ILOT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMREF" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="QTRREEL" Type="Int32" />
+          <Property Name="TEMPSTHEORIQUE" Type="Double" />
+          <Property Name="ISALIVE" Type="Boolean" Nullable="false" />
+          <Property Name="TEMPSSUPPL" Type="Double" Nullable="false" />
+          <Property Name="MFGDES" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ALEAS_OF" Relationship="PEGASE_PROD2Model.FK_ALEAS_OF_OF_PROD_TRAITE" FromRole="OF_PROD_TRAITE" ToRole="ALEAS_OF" />
+          <Property Name="TCLCOD_0" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OPERATEURS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ANNIVERSAIRE" Type="DateTime" Precision="3" />
+          <Property Name="POLE" Type="Int32" />
+          <Property Name="NOM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="PRENOM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SERVICE" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="INITIAL" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="PRESTAT" Type="Boolean" />
+          <Property Name="FINCONTRAT" Type="DateTime" Precision="3" />
+          <Property Name="ANIMATEUR" Type="Boolean" Nullable="false" />
+          <Property Name="PATHA" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PATHB" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SousService" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="HoraireByWeek" Type="Double" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="KPI_STC" Relationship="PEGASE_PROD2Model.FK_KPI_STC_OPERATEURS" FromRole="OPERATEURS" ToRole="KPI_STC" />
+          <NavigationProperty Name="NON_CONFORMITE" Relationship="PEGASE_PROD2Model.FK_NON_CONFORMITE_OPERATEURS" FromRole="OPERATEURS" ToRole="NON_CONFORMITE" />
+          <NavigationProperty Name="TEMPS_SEMAINE" Relationship="PEGASE_PROD2Model.FK_OPERATEURSTEMPS_SEMAINE" FromRole="OPERATEURS" ToRole="TEMPS_SEMAINE" />
+          <NavigationProperty Name="PLANNING_OPERATEUR" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_OPERATEURS" FromRole="OPERATEURS" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="POLES" Relationship="PEGASE_PROD2Model.FK_POLES_OPERATEURS" FromRole="OPERATEURS" ToRole="POLES" />
+          <NavigationProperty Name="SERENITE" Relationship="PEGASE_PROD2Model.FK_SERENITE_OPERATEURS" FromRole="OPERATEURS" ToRole="SERENITE" />
+          <NavigationProperty Name="TEMPS_SAISI" Relationship="PEGASE_PROD2Model.FK_TEMPS_SAISIOPERATEURS" FromRole="OPERATEURS" ToRole="TEMPS_SAISI" />
+          <Property Name="Matricule" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CONTROLE_QUALITE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS" FromRole="OPERATEURS" ToRole="CONTROLE_QUALITE" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_GENERE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_OF" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_LIGNE_CLIENT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NB_PACK" Type="Int32" />
+          <Property Name="NB_MO" Type="Int32" />
+          <Property Name="NB_MT" Type="Int32" />
+          <Property Name="NB_SIM" Type="Int32" />
+          <Property Name="DATE_GENERATION" Type="DateTime" Precision="3" />
+          <Property Name="OPTION_MATERIEL_MO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OPTION_MATERIEL_MT" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="COMMANDE_SYNCHRO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="GENERE" Type="Boolean" />
+          <Property Name="MARCHE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MODIF_MANUEL" Type="Boolean" Nullable="false" />
+          <Property Name="VERSION_LOG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FABRIQUE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PLANIF_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumOF" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pole" Type="Int64" Nullable="false" />
+          <Property Name="DatePlanif" Type="DateTime" Precision="0" />
+          <Property Name="Etat" Type="Int32" Nullable="false" />
+          <Property Name="Rang" Type="Int32" Nullable="false" />
+          <Property Name="ChargeTheorique" Type="Double" />
+          <Property Name="ChargeReel" Type="Double" />
+        </EntityType>
+        <EntityType Name="PLANIFICATION_OF">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMROF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Operateur" Type="Int64" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="NmrOrdre" Type="Int32" />
+          <Property Name="DateCloture" Type="DateTime" Precision="3" />
+          <Property Name="Validite" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PLANNING_OPERATEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_STC" Type="Int64" Nullable="false" />
+          <Property Name="Annee" Type="Int32" />
+          <Property Name="Semaine" Type="Int32" />
+          <Property Name="LundiMatin" Type="Int16" />
+          <Property Name="LundiApresmidi" Type="Int16" />
+          <Property Name="MardiMatin" Type="Int16" />
+          <Property Name="MardiApresmidi" Type="Int16" />
+          <Property Name="MercrediMatin" Type="Int16" />
+          <Property Name="MercrediApresmidi" Type="Int16" />
+          <Property Name="JeudiMatin" Type="Int16" />
+          <Property Name="JeudiApresmidi" Type="Int16" />
+          <Property Name="VendrediMatin" Type="Int16" />
+          <Property Name="VendrediApresmidi" Type="Int16" />
+          <Property Name="SamediMatin" Type="Int16" />
+          <Property Name="SamediApresmidi" Type="Int16" />
+          <Property Name="DimancheMatin" Type="Int16" />
+          <Property Name="DimancheApresmidi" Type="Int16" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_OPERATEURS" FromRole="PLANNING_OPERATEUR" ToRole="OPERATEURS" />
+          <NavigationProperty Name="PLANNING_VALUE" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE1" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE1" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE2" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE10" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE3" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE11" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE4" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE12" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE5" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE13" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE6" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE2" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE7" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE3" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE8" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE4" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE9" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE5" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE10" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE6" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE11" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE7" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE12" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE8" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <NavigationProperty Name="PLANNING_VALUE13" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE9" FromRole="PLANNING_OPERATEUR" ToRole="PLANNING_VALUE" />
+          <Property Name="Conflit" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PLANNING_VALUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Value" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PLANNING_OPERATEUR" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR1" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE1" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR2" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE10" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR3" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE11" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR4" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE12" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR5" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE13" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR6" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE2" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR7" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE3" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR8" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE4" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR9" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE5" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR10" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE6" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR11" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE7" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR12" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE8" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+          <NavigationProperty Name="PLANNING_OPERATEUR13" Relationship="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE9" FromRole="PLANNING_VALUE" ToRole="PLANNING_OPERATEUR" />
+        </EntityType>
+        <EntityType Name="POLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Animateur" Type="Int64" />
+          <Property Name="Couleur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_POLES_OPERATEURS" FromRole="POLES" ToRole="OPERATEURS" />
+          <NavigationProperty Name="POSTES" Relationship="PEGASE_PROD2Model.FK_POSTES_POLES" FromRole="POLES" ToRole="POSTES" />
+        </EntityType>
+        <EntityType Name="POSTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pole" Type="Int64" Nullable="false" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="couleur" Type="String" MaxLength="7" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="POLES" Relationship="PEGASE_PROD2Model.FK_POSTES_POLES" FromRole="POSTES" ToRole="POLES" />
+        </EntityType>
+        <EntityType Name="QRQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOuverture" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCloture" Type="DateTime" Precision="3" />
+          <Property Name="DateSuivis" Type="DateTime" Precision="3" />
+          <Property Name="Participants" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Pilote" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Origine" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DescriptionProcess" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UrlImage" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ACTIONIMMEDIATE" Relationship="PEGASE_PROD2Model.FK_ACTIONIMMEDIATE_QRQC" FromRole="QRQC" ToRole="ACTIONIMMEDIATE" />
+          <NavigationProperty Name="NON_DETECTION" Relationship="PEGASE_PROD2Model.FK_NON_DETECTION_QRQC" FromRole="QRQC" ToRole="NON_DETECTION" />
+          <NavigationProperty Name="OCCURRENCE" Relationship="PEGASE_PROD2Model.FK_OCCURRENCE_QRQC" FromRole="QRQC" ToRole="OCCURRENCE" />
+          <NavigationProperty Name="QUESTIONS_QRQC" Relationship="PEGASE_PROD2Model.FK_Questions_QRQC_QRQC" FromRole="QRQC" ToRole="QUESTIONS_QRQC" />
+          <NavigationProperty Name="SOLUTION_DURABLE" Relationship="PEGASE_PROD2Model.FK_SOLUTION_DURABLE_QRQC" FromRole="QRQC" ToRole="SOLUTION_DURABLE" />
+        </EntityType>
+        <EntityType Name="QUESTIONS_QRQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_QRQC" Type="Int64" Nullable="false" />
+          <Property Name="Q1" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q2" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q3" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q4" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q5" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q6" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Q7" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QRQC" Relationship="PEGASE_PROD2Model.FK_Questions_QRQC_QRQC" FromRole="QUESTIONS_QRQC" ToRole="QRQC" />
+        </EntityType>
+        <EntityType Name="SERENITE">
+          <Key>
+            <PropertyRef Name="index" />
+          </Key>
+          <Property Name="index" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NiveauSerenite" Type="Int32" Nullable="false" />
+          <Property Name="NiveauSerenite2" Type="Int32" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_SERENITE_OPERATEURS" FromRole="SERENITE" ToRole="OPERATEURS" />
+        </EntityType>
+        <EntityType Name="SOLUTION_DURABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_QRQC" Type="Int64" Nullable="false" />
+          <Property Name="NmrItem" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ActionAmelioration" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="Pilote" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Delai" Type="DateTime" Precision="3" />
+          <Property Name="Statut" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="QRQC" Relationship="PEGASE_PROD2Model.FK_SOLUTION_DURABLE_QRQC" FromRole="SOLUTION_DURABLE" ToRole="QRQC" />
+        </EntityType>
+        <EntityType Name="SOUSPROJET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSOUSPROJET" Type="Int64" Nullable="false" />
+          <Property Name="NomSousProjet" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Affichage" Type="Boolean" Nullable="false" />
+          <Property Name="DateFinProjet" Type="DateTime" Precision="3" />
+          <Property Name="TitreSousProjet" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Service" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Commentaire" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TEMPS_SAISI" Relationship="PEGASE_PROD2Model.FK_TEMPS_SAISI_SOUSPROJET" FromRole="SOUSPROJET" ToRole="TEMPS_SAISI" />
+        </EntityType>
+        <EntityType Name="STATUS_PNC">
+          <Key>
+            <PropertyRef Name="IDSTATUS" />
+          </Key>
+          <Property Name="IDSTATUS" Type="Int32" Nullable="false" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="NON_CONFORMITE" Relationship="PEGASE_PROD2Model.FK_NON_CONFORMITE_STATUS_PNC" FromRole="STATUS_PNC" ToRole="NON_CONFORMITE" />
+        </EntityType>
+        <EntityType Name="SUIVI_OFFRE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SQHNUM" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DateRelance" Type="DateTime" Precision="3" />
+          <Property Name="Relance" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TEMPS_SAISI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annee" Type="Int16" Nullable="false" />
+          <Property Name="Semaine" Type="Int16" Nullable="false" />
+          <Property Name="SOUSPROJET_ID" Type="Int64" Nullable="false" />
+          <Property Name="Days1" Type="Double" Nullable="false" />
+          <Property Name="Days2" Type="Double" Nullable="false" />
+          <Property Name="Days3" Type="Double" Nullable="false" />
+          <Property Name="Days4" Type="Double" Nullable="false" />
+          <Property Name="Days5" Type="Double" Nullable="false" />
+          <Property Name="Days6" Type="Double" Nullable="false" />
+          <Property Name="Days7" Type="Double" Nullable="false" />
+          <Property Name="Complete" Type="Boolean" Nullable="false" />
+          <Property Name="OPERATEURS_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_TEMPS_SAISIOPERATEURS" FromRole="TEMPS_SAISI" ToRole="OPERATEURS" />
+          <NavigationProperty Name="SOUSPROJET" Relationship="PEGASE_PROD2Model.FK_TEMPS_SAISI_SOUSPROJET" FromRole="TEMPS_SAISI" ToRole="SOUSPROJET" />
+        </EntityType>
+        <EntityType Name="TEMPS_SEMAINE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Annee" Type="Int16" />
+          <Property Name="Semaine" Type="Int16" />
+          <Property Name="Complete" Type="Boolean" />
+          <Property Name="OPERATEURS_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_OPERATEURSTEMPS_SEMAINE" FromRole="TEMPS_SEMAINE" ToRole="OPERATEURS" />
+        </EntityType>
+        <EntityType Name="TEST_OF">
+          <Key>
+            <PropertyRef Name="NumOF" />
+          </Key>
+          <Property Name="NumOF" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NumCommande" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Quantite" Type="Int32" Nullable="false" />
+          <Property Name="DateExpe" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ChargeTravail" Type="Double" Nullable="false" />
+          <NavigationProperty Name="TEST_OPERATION" Relationship="PEGASE_PROD2Model.FK_TEST_OPERATION_TEST_OF" FromRole="TEST_OF" ToRole="TEST_OPERATION" />
+        </EntityType>
+        <EntityType Name="TEST_OPERATION">
+          <Key>
+            <PropertyRef Name="NumOpe" />
+          </Key>
+          <Property Name="NumOpe" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NumOF" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Ordre" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TEST_OF" Relationship="PEGASE_PROD2Model.FK_TEST_OPERATION_TEST_OF" FromRole="TEST_OPERATION" ToRole="TEST_OF" />
+        </EntityType>
+        <EntityType Name="TRACABILITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NmrOF" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NmrPack" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="logged" Type="Int32" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_ACTIONIMMEDIATE_QRQC">
+          <End Type="PEGASE_PROD2Model.QRQC" Role="QRQC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.ACTIONIMMEDIATE" Role="ACTIONIMMEDIATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ACTIONIMMEDIATE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AIC_EQUIPE_AIC_POLE">
+          <End Type="PEGASE_PROD2Model.AIC_POLE" Role="AIC_POLE" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.AIC_EQUIPE" Role="AIC_EQUIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AIC_POLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AIC_EQUIPE">
+              <PropertyRef Name="Pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AIC_PROD_AIC_POLE">
+          <End Type="PEGASE_PROD2Model.AIC_POLE" Role="AIC_POLE" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.AIC_PROD" Role="AIC_PROD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AIC_POLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AIC_PROD">
+              <PropertyRef Name="Pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALEAS_OF_DETAILS_ALEAS_OF">
+          <End Type="PEGASE_PROD2Model.ALEAS_OF" Role="ALEAS_OF" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.ALEAS_OF_DETAILS" Role="ALEAS_OF_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALEAS_OF">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ALEAS_OF_DETAILS">
+              <PropertyRef Name="ID_ALEAS_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALEAS_OF_OF_PROD_TRAITE">
+          <End Type="PEGASE_PROD2Model.OF_PROD_TRAITE" Role="OF_PROD_TRAITE" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.ALEAS_OF" Role="ALEAS_OF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OF_PROD_TRAITE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ALEAS_OF">
+              <PropertyRef Name="ID_OF_PROD_TRAITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KPI_STC_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.KPI_STC" Role="KPI_STC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KPI_STC">
+              <PropertyRef Name="ID_STC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_CONFORMITE_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.NON_CONFORMITE" Role="NON_CONFORMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NON_CONFORMITE">
+              <PropertyRef Name="OperateursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_CONFORMITE_STATUS_PNC">
+          <End Type="PEGASE_PROD2Model.STATUS_PNC" Role="STATUS_PNC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.NON_CONFORMITE" Role="NON_CONFORMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUS_PNC">
+              <PropertyRef Name="IDSTATUS" />
+            </Principal>
+            <Dependent Role="NON_CONFORMITE">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NON_DETECTION_QRQC">
+          <End Type="PEGASE_PROD2Model.QRQC" Role="QRQC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.NON_DETECTION" Role="NON_DETECTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NON_DETECTION">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OCCURRENCE_QRQC">
+          <End Type="PEGASE_PROD2Model.QRQC" Role="QRQC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.OCCURRENCE" Role="OCCURRENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OCCURRENCE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATEURSTEMPS_SEMAINE">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.TEMPS_SEMAINE" Role="TEMPS_SEMAINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SEMAINE">
+              <PropertyRef Name="OPERATEURS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="ID_STC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POLES_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.POLES" Role="POLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="POLES">
+              <PropertyRef Name="Animateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERENITE_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.SERENITE" Role="SERENITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SERENITE">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPS_SAISIOPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.TEMPS_SAISI" Role="TEMPS_SAISI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SAISI">
+              <PropertyRef Name="OPERATEURS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="LundiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE1">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="LundiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE10">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="SamediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE11">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="SamediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE12">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="DimancheMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE13">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="DimancheApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE2">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MardiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE3">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MardiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE4">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MercrediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE5">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="MercrediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE6">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="JeudiMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE7">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="JeudiApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE8">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="VendrediMatin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANNING_OPERATEUR_PLANNING_VALUE9">
+          <End Type="PEGASE_PROD2Model.PLANNING_VALUE" Role="PLANNING_VALUE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.PLANNING_OPERATEUR" Role="PLANNING_OPERATEUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANNING_VALUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PLANNING_OPERATEUR">
+              <PropertyRef Name="VendrediApresmidi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POSTES_POLES">
+          <End Type="PEGASE_PROD2Model.POLES" Role="POLES" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.POSTES" Role="POSTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="POSTES">
+              <PropertyRef Name="pole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_QRQC_QRQC">
+          <End Type="PEGASE_PROD2Model.QRQC" Role="QRQC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.QUESTIONS_QRQC" Role="QUESTIONS_QRQC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUESTIONS_QRQC">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLUTION_DURABLE_QRQC">
+          <End Type="PEGASE_PROD2Model.QRQC" Role="QRQC" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.SOLUTION_DURABLE" Role="SOLUTION_DURABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QRQC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SOLUTION_DURABLE">
+              <PropertyRef Name="ID_QRQC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEMPS_SAISI_SOUSPROJET">
+          <End Type="PEGASE_PROD2Model.SOUSPROJET" Role="SOUSPROJET" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.TEMPS_SAISI" Role="TEMPS_SAISI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOUSPROJET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TEMPS_SAISI">
+              <PropertyRef Name="SOUSPROJET_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEST_OPERATION_TEST_OF">
+          <End Type="PEGASE_PROD2Model.TEST_OF" Role="TEST_OF" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.TEST_OPERATION" Role="TEST_OPERATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEST_OF">
+              <PropertyRef Name="NumOF" />
+            </Principal>
+            <Dependent Role="TEST_OPERATION">
+              <PropertyRef Name="NumOF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CONTROLE_QUALITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_OPERATEUR" Type="Int64" />
+          <Property Name="NMROF" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ITEMREF" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ITEMDESCRIPT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Conforme" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UrlImage" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS" FromRole="CONTROLE_QUALITE" ToRole="OPERATEURS" />
+          <Property Name="ID_TYPE_CAUSE" Type="Int64" />
+          <Property Name="ID_TYPE_ANOMALIE" Type="Int64" />
+          <NavigationProperty Name="TYPE_ANOMALIE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE" FromRole="CONTROLE_QUALITE" ToRole="TYPE_ANOMALIE" />
+          <NavigationProperty Name="TYPE_CAUSE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE" FromRole="CONTROLE_QUALITE" ToRole="TYPE_CAUSE" />
+          <Property Name="DateModif" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CONTROLE_QUALITE_OPERATEURS">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.CONTROLE_QUALITE" Role="CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_OPERATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TYPE_ANOMALIE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valeur" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTROLE_QUALITE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE" FromRole="TYPE_ANOMALIE" ToRole="CONTROLE_QUALITE" />
+        </EntityType>
+        <EntityType Name="TYPE_CAUSE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valeur" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTROLE_QUALITE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE" FromRole="TYPE_CAUSE" ToRole="CONTROLE_QUALITE" />
+        </EntityType>
+        <Association Name="FK_CONTROLE_QUALITE_TYPE_ANOMALIE">
+          <End Type="PEGASE_PROD2Model.TYPE_ANOMALIE" Role="TYPE_ANOMALIE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.CONTROLE_QUALITE" Role="CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_ANOMALIE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_TYPE_ANOMALIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_QUALITE_TYPE_CAUSE">
+          <End Type="PEGASE_PROD2Model.TYPE_CAUSE" Role="TYPE_CAUSE" Multiplicity="0..1" />
+          <End Type="PEGASE_PROD2Model.CONTROLE_QUALITE" Role="CONTROLE_QUALITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPE_CAUSE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONTROLE_QUALITE">
+              <PropertyRef Name="ID_TYPE_CAUSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PEGASE_PROD2ModelStoreContainer" CdmEntityContainer="PEGASE_PROD2Entities2">
+          <EntitySetMapping Name="ACCIDENT">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ACCIDENT">
+              <MappingFragment StoreEntitySet="ACCIDENT">
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
+                <ScalarProperty Name="NiveauDeRisque" ColumnName="NiveauDeRisque" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Victime" ColumnName="Victime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTIONIMMEDIATE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ACTIONIMMEDIATE">
+              <MappingFragment StoreEntitySet="ACTIONIMMEDIATE">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Delai" ColumnName="Delai" />
+                <ScalarProperty Name="Pilote" ColumnName="Pilote" />
+                <ScalarProperty Name="ActionPourClient" ColumnName="ActionPourClient" />
+                <ScalarProperty Name="ID_QRQC" ColumnName="ID_QRQC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AIC_EQUIPE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.AIC_EQUIPE">
+              <MappingFragment StoreEntitySet="AIC_EQUIPE">
+                <ScalarProperty Name="Pole" ColumnName="Pole" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateResolution" ColumnName="DateResolution" />
+                <ScalarProperty Name="Acteur" ColumnName="Acteur" />
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AIC_POLE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.AIC_POLE">
+              <MappingFragment StoreEntitySet="AIC_POLE">
+                <ScalarProperty Name="POLE" ColumnName="POLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AIC_PROD">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.AIC_PROD">
+              <MappingFragment StoreEntitySet="AIC_PROD">
+                <ScalarProperty Name="Pole" ColumnName="Pole" />
+                <ScalarProperty Name="DateDeFin" ColumnName="DateDeFin" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALEAS_OF">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ALEAS_OF">
+              <MappingFragment StoreEntitySet="ALEAS_OF">
+                <ScalarProperty Name="IsAlwaysOn" ColumnName="IsAlwaysOn" />
+                <ScalarProperty Name="ID_OF_PROD_ORIG" ColumnName="ID_OF_PROD_ORIG" />
+                <ScalarProperty Name="Delai" ColumnName="Delai" />
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="NMR_ALEA" ColumnName="NMR_ALEA" />
+                <ScalarProperty Name="ID_OF_PROD_TRAITE" ColumnName="ID_OF_PROD_TRAITE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALEAS_OF_DETAILS">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ALEAS_OF_DETAILS">
+              <MappingFragment StoreEntitySet="ALEAS_OF_DETAILS">
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="ID_ALEAS_OF" ColumnName="ID_ALEAS_OF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AMELIORATION">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.AMELIORATION">
+              <MappingFragment StoreEntitySet="AMELIORATION">
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
+                <ScalarProperty Name="Emetteur" ColumnName="Emetteur" />
+                <ScalarProperty Name="Input" ColumnName="Input" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Nmr" ColumnName="Nmr" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATA_GENERIQUE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.DATA_GENERIQUE">
+              <MappingFragment StoreEntitySet="DATA_GENERIQUE">
+                <ScalarProperty Name="Editable" ColumnName="Editable" />
+                <ScalarProperty Name="StringValue2" ColumnName="StringValue2" />
+                <ScalarProperty Name="StringValue1" ColumnName="StringValue1" />
+                <ScalarProperty Name="Value2" ColumnName="Value2" />
+                <ScalarProperty Name="Value1" ColumnName="Value1" />
+                <ScalarProperty Name="Datetime1" ColumnName="Datetime1" />
+                <ScalarProperty Name="Champ" ColumnName="Champ" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FRC">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.FRC">
+              <MappingFragment StoreEntitySet="FRC">
+                <ScalarProperty Name="StatusBDD" ColumnName="StatusBDD" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="StatusFRC" ColumnName="StatusFRC" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Commande" ColumnName="Commande" />
+                <ScalarProperty Name="TypeProduit" ColumnName="TypeProduit" />
+                <ScalarProperty Name="NmrClient" ColumnName="NmrClient" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="NmrFRC" ColumnName="NmrFRC" />
+                <ScalarProperty Name="Valide" ColumnName="Valide" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPI_CA">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.KPI_CA">
+              <MappingFragment StoreEntitySet="KPI_CA">
+                <ScalarProperty Name="EntreeCmd" ColumnName="EntreeCmd" />
+                <ScalarProperty Name="CA" ColumnName="CA" />
+                <ScalarProperty Name="Mois" ColumnName="Mois" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPI_PROD">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.KPI_PROD">
+              <MappingFragment StoreEntitySet="KPI_PROD">
+                <ScalarProperty Name="ObjectifOTD" ColumnName="ObjectifOTD" />
+                <ScalarProperty Name="ObjectifOTR" ColumnName="ObjectifOTR" />
+                <ScalarProperty Name="CA" ColumnName="CA" />
+                <ScalarProperty Name="DatetimeMiseAJour" ColumnName="DatetimeMiseAJour" />
+                <ScalarProperty Name="OTRByWeek" ColumnName="OTRByWeek" />
+                <ScalarProperty Name="OTDByWeek" ColumnName="OTDByWeek" />
+                <ScalarProperty Name="Semaine" ColumnName="Semaine" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPI_STC">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.KPI_STC">
+              <MappingFragment StoreEntitySet="KPI_STC">
+                <ScalarProperty Name="Value16" ColumnName="Value16" />
+                <ScalarProperty Name="Value15" ColumnName="Value15" />
+                <ScalarProperty Name="Value14" ColumnName="Value14" />
+                <ScalarProperty Name="Value13" ColumnName="Value13" />
+                <ScalarProperty Name="Value12" ColumnName="Value12" />
+                <ScalarProperty Name="Value11" ColumnName="Value11" />
+                <ScalarProperty Name="Value10" ColumnName="Value10" />
+                <ScalarProperty Name="Value9" ColumnName="Value9" />
+                <ScalarProperty Name="Value8" ColumnName="Value8" />
+                <ScalarProperty Name="Value7" ColumnName="Value7" />
+                <ScalarProperty Name="Value6" ColumnName="Value6" />
+                <ScalarProperty Name="Value5" ColumnName="Value5" />
+                <ScalarProperty Name="Value4" ColumnName="Value4" />
+                <ScalarProperty Name="Value3" ColumnName="Value3" />
+                <ScalarProperty Name="Value2" ColumnName="Value2" />
+                <ScalarProperty Name="Value1" ColumnName="Value1" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="Semaine" ColumnName="Semaine" />
+                <ScalarProperty Name="ID_STC" ColumnName="ID_STC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NON_CONFORMITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.NON_CONFORMITE">
+              <MappingFragment StoreEntitySet="NON_CONFORMITE">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NmrOF" ColumnName="NmrOF" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Qtr" ColumnName="Qtr" />
+                <ScalarProperty Name="DescriptionUser" ColumnName="DescriptionUser" />
+                <ScalarProperty Name="DescriptionItem" ColumnName="DescriptionItem" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="OperateursID" ColumnName="OperateursID" />
+                <ScalarProperty Name="NmrChronoS" ColumnName="NmrChronoS" />
+                <ScalarProperty Name="NmrChrono" ColumnName="NmrChrono" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NON_DETECTION">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.NON_DETECTION">
+              <MappingFragment StoreEntitySet="NON_DETECTION">
+                <ScalarProperty Name="item" ColumnName="item" />
+                <ScalarProperty Name="ID_QRQC" ColumnName="ID_QRQC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OCCURRENCE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OCCURRENCE">
+              <MappingFragment StoreEntitySet="OCCURRENCE">
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="ID_QRQC" ColumnName="ID_QRQC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OF_PROD_TRAITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OF_PROD_TRAITE">
+              <MappingFragment StoreEntitySet="OF_PROD_TRAITE">
+                <ScalarProperty Name="TCLCOD_0" ColumnName="TCLCOD_0" />
+                <ScalarProperty Name="MFGDES" ColumnName="MFGDES" />
+                <ScalarProperty Name="TEMPSSUPPL" ColumnName="TEMPSSUPPL" />
+                <ScalarProperty Name="ISALIVE" ColumnName="ISALIVE" />
+                <ScalarProperty Name="TEMPSTHEORIQUE" ColumnName="TEMPSTHEORIQUE" />
+                <ScalarProperty Name="QTRREEL" ColumnName="QTRREEL" />
+                <ScalarProperty Name="ITEMREF" ColumnName="ITEMREF" />
+                <ScalarProperty Name="ILOT" ColumnName="ILOT" />
+                <ScalarProperty Name="OPERATEUR" ColumnName="OPERATEUR" />
+                <ScalarProperty Name="Alea" ColumnName="Alea" />
+                <ScalarProperty Name="QTRTHEORIQUE" ColumnName="QTRTHEORIQUE" />
+                <ScalarProperty Name="STATUSTYPE" ColumnName="STATUSTYPE" />
+                <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
+                <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
+                <ScalarProperty Name="NMROF" ColumnName="NMROF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OPERATEURS">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS">
+              <MappingFragment StoreEntitySet="OPERATEURS">
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HoraireByWeek" ColumnName="HoraireByWeek" />
+                <ScalarProperty Name="SousService" ColumnName="SousService" />
+                <ScalarProperty Name="PATHB" ColumnName="PATHB" />
+                <ScalarProperty Name="PATHA" ColumnName="PATHA" />
+                <ScalarProperty Name="ANIMATEUR" ColumnName="ANIMATEUR" />
+                <ScalarProperty Name="FINCONTRAT" ColumnName="FINCONTRAT" />
+                <ScalarProperty Name="PRESTAT" ColumnName="PRESTAT" />
+                <ScalarProperty Name="INITIAL" ColumnName="INITIAL" />
+                <ScalarProperty Name="SERVICE" ColumnName="SERVICE" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="POLE" ColumnName="POLE" />
+                <ScalarProperty Name="ANNIVERSAIRE" ColumnName="ANNIVERSAIRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDRE_FABRICATION_GENERE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ORDRE_FABRICATION_GENERE">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION_GENERE">
+                <ScalarProperty Name="FABRIQUE" ColumnName="FABRIQUE" />
+                <ScalarProperty Name="VERSION_LOG" ColumnName="VERSION_LOG" />
+                <ScalarProperty Name="MODIF_MANUEL" ColumnName="MODIF_MANUEL" />
+                <ScalarProperty Name="MARCHE" ColumnName="MARCHE" />
+                <ScalarProperty Name="GENERE" ColumnName="GENERE" />
+                <ScalarProperty Name="COMMANDE_SYNCHRO" ColumnName="COMMANDE_SYNCHRO" />
+                <ScalarProperty Name="OPTION_MATERIEL_MT" ColumnName="OPTION_MATERIEL_MT" />
+                <ScalarProperty Name="OPTION_MATERIEL_MO" ColumnName="OPTION_MATERIEL_MO" />
+                <ScalarProperty Name="DATE_GENERATION" ColumnName="DATE_GENERATION" />
+                <ScalarProperty Name="NB_SIM" ColumnName="NB_SIM" />
+                <ScalarProperty Name="NB_MT" ColumnName="NB_MT" />
+                <ScalarProperty Name="NB_MO" ColumnName="NB_MO" />
+                <ScalarProperty Name="NB_PACK" ColumnName="NB_PACK" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="OPTIONS_LOGICIELLES" ColumnName="OPTIONS_LOGICIELLES" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="REF_FIRMWARE_MT" ColumnName="REF_FIRMWARE_MT" />
+                <ScalarProperty Name="REF_FIRMWARE_MO" ColumnName="REF_FIRMWARE_MO" />
+                <ScalarProperty Name="REF_COMMERCIALE_SIM" ColumnName="REF_COMMERCIALE_SIM" />
+                <ScalarProperty Name="REF_COMMERCIALE_MT" ColumnName="REF_COMMERCIALE_MT" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MT" ColumnName="REF_INDUSTRIELLE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_MO" ColumnName="REF_COMMERCIALE_MO" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MO" ColumnName="REF_INDUSTRIELLE_MO" />
+                <ScalarProperty Name="NUM_LIGNE_CLIENT" ColumnName="NUM_LIGNE_CLIENT" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANIF_OF">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PLANIF_OF">
+              <MappingFragment StoreEntitySet="PLANIF_OF">
+                <ScalarProperty Name="ChargeReel" ColumnName="ChargeReel" />
+                <ScalarProperty Name="ChargeTheorique" ColumnName="ChargeTheorique" />
+                <ScalarProperty Name="Rang" ColumnName="Rang" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="DatePlanif" ColumnName="DatePlanif" />
+                <ScalarProperty Name="Pole" ColumnName="Pole" />
+                <ScalarProperty Name="NumOF" ColumnName="NumOF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANIFICATION_OF">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PLANIFICATION_OF">
+              <MappingFragment StoreEntitySet="PLANIFICATION_OF">
+                <ScalarProperty Name="Validite" ColumnName="Validite" />
+                <ScalarProperty Name="DateCloture" ColumnName="DateCloture" />
+                <ScalarProperty Name="NmrOrdre" ColumnName="NmrOrdre" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Operateur" ColumnName="Operateur" />
+                <ScalarProperty Name="NMROF" ColumnName="NMROF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANNING_OPERATEUR">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PLANNING_OPERATEUR">
+              <MappingFragment StoreEntitySet="PLANNING_OPERATEUR">
+                <ScalarProperty Name="Conflit" ColumnName="Conflit" />
+                <ScalarProperty Name="DimancheApresmidi" ColumnName="DimancheApresmidi" />
+                <ScalarProperty Name="DimancheMatin" ColumnName="DimancheMatin" />
+                <ScalarProperty Name="SamediApresmidi" ColumnName="SamediApresmidi" />
+                <ScalarProperty Name="SamediMatin" ColumnName="SamediMatin" />
+                <ScalarProperty Name="VendrediApresmidi" ColumnName="VendrediApresmidi" />
+                <ScalarProperty Name="VendrediMatin" ColumnName="VendrediMatin" />
+                <ScalarProperty Name="JeudiApresmidi" ColumnName="JeudiApresmidi" />
+                <ScalarProperty Name="JeudiMatin" ColumnName="JeudiMatin" />
+                <ScalarProperty Name="MercrediApresmidi" ColumnName="MercrediApresmidi" />
+                <ScalarProperty Name="MercrediMatin" ColumnName="MercrediMatin" />
+                <ScalarProperty Name="MardiApresmidi" ColumnName="MardiApresmidi" />
+                <ScalarProperty Name="MardiMatin" ColumnName="MardiMatin" />
+                <ScalarProperty Name="LundiApresmidi" ColumnName="LundiApresmidi" />
+                <ScalarProperty Name="LundiMatin" ColumnName="LundiMatin" />
+                <ScalarProperty Name="Semaine" ColumnName="Semaine" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="ID_STC" ColumnName="ID_STC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANNING_VALUE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PLANNING_VALUE">
+              <MappingFragment StoreEntitySet="PLANNING_VALUE">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POLES">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.POLES">
+              <MappingFragment StoreEntitySet="POLES">
+                <ScalarProperty Name="Couleur" ColumnName="Couleur" />
+                <ScalarProperty Name="Animateur" ColumnName="Animateur" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POSTES">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.POSTES">
+              <MappingFragment StoreEntitySet="POSTES">
+                <ScalarProperty Name="couleur" ColumnName="couleur" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="pole" ColumnName="pole" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QRQC">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.QRQC">
+              <MappingFragment StoreEntitySet="QRQC">
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
+                <ScalarProperty Name="DescriptionProcess" ColumnName="DescriptionProcess" />
+                <ScalarProperty Name="Origine" ColumnName="Origine" />
+                <ScalarProperty Name="Pilote" ColumnName="Pilote" />
+                <ScalarProperty Name="Participants" ColumnName="Participants" />
+                <ScalarProperty Name="DateSuivis" ColumnName="DateSuivis" />
+                <ScalarProperty Name="DateCloture" ColumnName="DateCloture" />
+                <ScalarProperty Name="DateOuverture" ColumnName="DateOuverture" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUESTIONS_QRQC">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.QUESTIONS_QRQC">
+              <MappingFragment StoreEntitySet="QUESTIONS_QRQC">
+                <ScalarProperty Name="Q7" ColumnName="Q7" />
+                <ScalarProperty Name="Q6" ColumnName="Q6" />
+                <ScalarProperty Name="Q5" ColumnName="Q5" />
+                <ScalarProperty Name="Q4" ColumnName="Q4" />
+                <ScalarProperty Name="Q3" ColumnName="Q3" />
+                <ScalarProperty Name="Q2" ColumnName="Q2" />
+                <ScalarProperty Name="Q1" ColumnName="Q1" />
+                <ScalarProperty Name="ID_QRQC" ColumnName="ID_QRQC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERENITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.SERENITE">
+              <MappingFragment StoreEntitySet="SERENITE">
+                <ScalarProperty Name="NiveauSerenite2" ColumnName="NiveauSerenite2" />
+                <ScalarProperty Name="NiveauSerenite" ColumnName="NiveauSerenite" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="index" ColumnName="index" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOLUTION_DURABLE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.SOLUTION_DURABLE">
+              <MappingFragment StoreEntitySet="SOLUTION_DURABLE">
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Delai" ColumnName="Delai" />
+                <ScalarProperty Name="Pilote" ColumnName="Pilote" />
+                <ScalarProperty Name="ActionAmelioration" ColumnName="ActionAmelioration" />
+                <ScalarProperty Name="NmrItem" ColumnName="NmrItem" />
+                <ScalarProperty Name="ID_QRQC" ColumnName="ID_QRQC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOUSPROJET">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.SOUSPROJET">
+              <MappingFragment StoreEntitySet="SOUSPROJET">
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="TitreSousProjet" ColumnName="TitreSousProjet" />
+                <ScalarProperty Name="DateFinProjet" ColumnName="DateFinProjet" />
+                <ScalarProperty Name="Affichage" ColumnName="Affichage" />
+                <ScalarProperty Name="NomSousProjet" ColumnName="NomSousProjet" />
+                <ScalarProperty Name="IDSOUSPROJET" ColumnName="IDSOUSPROJET" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUS_PNC">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.STATUS_PNC">
+              <MappingFragment StoreEntitySet="STATUS_PNC">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="IDSTATUS" ColumnName="IDSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUIVI_OFFRE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.SUIVI_OFFRE">
+              <MappingFragment StoreEntitySet="SUIVI_OFFRE">
+                <ScalarProperty Name="Relance" ColumnName="Relance" />
+                <ScalarProperty Name="DateRelance" ColumnName="DateRelance" />
+                <ScalarProperty Name="SQHNUM" ColumnName="SQHNUM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPS_SAISI">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TEMPS_SAISI">
+              <MappingFragment StoreEntitySet="TEMPS_SAISI">
+                <ScalarProperty Name="OPERATEURS_ID" ColumnName="OPERATEURS_ID" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Days7" ColumnName="Days7" />
+                <ScalarProperty Name="Days6" ColumnName="Days6" />
+                <ScalarProperty Name="Days5" ColumnName="Days5" />
+                <ScalarProperty Name="Days4" ColumnName="Days4" />
+                <ScalarProperty Name="Days3" ColumnName="Days3" />
+                <ScalarProperty Name="Days2" ColumnName="Days2" />
+                <ScalarProperty Name="Days1" ColumnName="Days1" />
+                <ScalarProperty Name="SOUSPROJET_ID" ColumnName="SOUSPROJET_ID" />
+                <ScalarProperty Name="Semaine" ColumnName="Semaine" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPS_SEMAINE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TEMPS_SEMAINE">
+              <MappingFragment StoreEntitySet="TEMPS_SEMAINE">
+                <ScalarProperty Name="OPERATEURS_ID" ColumnName="OPERATEURS_ID" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Semaine" ColumnName="Semaine" />
+                <ScalarProperty Name="Annee" ColumnName="Annee" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEST_OF">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TEST_OF">
+              <MappingFragment StoreEntitySet="TEST_OF">
+                <ScalarProperty Name="ChargeTravail" ColumnName="ChargeTravail" />
+                <ScalarProperty Name="DateExpe" ColumnName="DateExpe" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="NumCommande" ColumnName="NumCommande" />
+                <ScalarProperty Name="NumOF" ColumnName="NumOF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEST_OPERATION">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TEST_OPERATION">
+              <MappingFragment StoreEntitySet="TEST_OPERATION">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Ordre" ColumnName="Ordre" />
+                <ScalarProperty Name="NumOF" ColumnName="NumOF" />
+                <ScalarProperty Name="NumOpe" ColumnName="NumOpe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACABILITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TRACABILITE">
+              <MappingFragment StoreEntitySet="TRACABILITE">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="logged" ColumnName="logged" />
+                <ScalarProperty Name="NmrPack" ColumnName="NmrPack" />
+                <ScalarProperty Name="NmrOF" ColumnName="NmrOF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTROLE_QUALITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.CONTROLE_QUALITE">
+              <MappingFragment StoreEntitySet="CONTROLE_QUALITE">
+                <ScalarProperty Name="DateModif" ColumnName="DateModif" />
+                <ScalarProperty Name="ID_TYPE_ANOMALIE" ColumnName="ID_TYPE_ANOMALIE" />
+                <ScalarProperty Name="ID_TYPE_CAUSE" ColumnName="ID_TYPE_CAUSE" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Conforme" ColumnName="Conforme" />
+                <ScalarProperty Name="ITEMDESCRIPT" ColumnName="ITEMDESCRIPT" />
+                <ScalarProperty Name="ITEMREF" ColumnName="ITEMREF" />
+                <ScalarProperty Name="NMROF" ColumnName="NMROF" />
+                <ScalarProperty Name="ID_OPERATEUR" ColumnName="ID_OPERATEUR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYPE_ANOMALIE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TYPE_ANOMALIE">
+              <MappingFragment StoreEntitySet="TYPE_ANOMALIE">
+                <ScalarProperty Name="Valeur" ColumnName="Valeur" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYPE_CAUSE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.TYPE_CAUSE">
+              <MappingFragment StoreEntitySet="TYPE_CAUSE">
+                <ScalarProperty Name="Valeur" ColumnName="Valeur" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

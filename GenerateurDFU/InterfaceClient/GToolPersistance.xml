@@ -1,0 +1,718 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GToolPersistance</name>
+    </assembly>
+    <members>
+        <member name="T:GToolPersistance.CritereGenerics">
+            <summary>
+            Critere Generic
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.CritereGenerics.NomParametre">
+            <summary>
+            remplace le nom du parametre par P100 + n° ordre (souci d'unicité)
+            </summary>
+        </member>
+        <member name="T:GToolPersistance.CritereGenerics.ArrayItem">
+            <summary>
+            List of array values
+            </summary>
+        </member>
+        <member name="T:GToolPersistance.DaoBase`1">
+            <summary>
+             Classe permettant de réaliser des operation de CRUD basique sour tous type d'objet
+             
+            </summary>
+            <typeparam name="MonType"></typeparam>
+        </member>
+        <member name="F:GToolPersistance.DaoBase`1._MaxResults">
+            <summary>
+            permet de limiter le nombre de resultat dans les recherches
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Detach(`0)">
+            <summary>
+            detach un objet du cache nHibernate
+            </summary>
+            <param name="ObjetADetacher"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Detach(System.Collections.Generic.IList{`0})">
+            <summary>
+            detach une Liste d'objets du cache nHibernate
+            </summary>
+            <param name="ListeObjetADetacher"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheObjetParId(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="idType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.GetIdName">
+            <summary>
+             donne le nom de l'id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.IdType">
+            <summary>
+            donne le type de l'id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheObjetParId(System.Collections.ICollection)">
+            <summary>
+            REcherche une liste d'objet MonType par les Id contenu dans une liste
+            </summary>
+            <param name="pTabid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheListeObjets">
+            <summary>
+            recherche tous les objet de ce type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheListeObjets(GToolBase.Criteres[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ListeCritere"></param>
+            <param name="pEnteteSQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheListeObjets(GToolBase.Criteres[])">
+            <summary>
+            
+            </summary>
+            <param name="ListeCritere"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.SetMaxResults(System.Int32)">
+            <summary>
+            Limite le nombre d'element renvoyer dans les recherches
+            </summary>
+            <param name="pNbreMax"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.ReInitMaxResults">
+            <summary>
+            permet d'oublier le nombre d'element max à renvoyer
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheListeObjets(GToolPersistance.CritereGenerics[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ListeCritere"></param>
+            <param name="pEnteteSQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.FillDeleteParametersFromCritere(System.String,GToolPersistance.CritereGenerics[],System.Collections.ArrayList,System.Collections.Generic.List{NHibernate.Type.IType})">
+            <summary>
+            Fills the delete parameters from critere.
+            </summary>
+            <param name="query">The query.</param>
+            <param name="ListeCritere">The liste critere.</param>
+            <param name="listValue">The list value.</param>
+            <param name="valuesType">Type of the values.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.FillQueryFilterParameterValuesFromCritere(GToolPersistance.CritereGenerics[],NHibernate.IQuery)">
+            <summary>
+            Fills the query filter parameter values from critere. 
+            </summary>
+            <param name="ListeCritere">The liste critere.</param>
+            <param name="query">The query.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.CreateSqlFilterFromCritere(GToolPersistance.CritereGenerics[],System.Int32@)">
+            <summary>
+            Creates the SQL filter from critere.
+            </summary>
+            <param name="ListeCritere">The liste critere.</param>
+            <param name="iCpt">The i CPT.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.CreateSqlDeleteFilterFromCritere(GToolPersistance.CritereGenerics[],System.Int32@)">
+            <summary>
+            Creates the SQL filter from critere.
+            </summary>
+            <param name="ListeCritere">The liste critere.</param>
+            <param name="iCpt">The i CPT.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.CreateSqlFilterFromCritereAndQueryType(System.Boolean,GToolPersistance.CritereGenerics[],System.Int32@)">
+            <summary>
+            Creates the SQL filter from critere.
+            </summary>
+            <param name="delete">if set to <c>true</c> [delete].</param>
+            <param name="ListeCritere">The liste critere.</param>
+            <param name="iCpt">The i CPT.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.rechercheListeObjets(GToolPersistance.CritereGenerics[])">
+            <summary>
+            Recherches the liste objets.
+            </summary>
+            <param name="ListeCritere">The liste critere.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Sauver(`0,System.Boolean)">
+            <summary>
+            Sauve avec ou sans flush
+            </summary>
+            <param name="pobject"></param>
+            <param name="bFlush"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Sauver(`0)">
+            <summary>
+            Sauve
+            </summary>
+            <param name="pobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Sauver(System.Collections.Generic.IList{`0},System.Boolean)">
+            <summary>
+            sauvegarde d'une liste du type d'objet en une seule transaction
+            </summary>
+            <param name="pListobject"></param>
+            <param name="bFlush"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Sauver(System.Collections.Generic.IList{`0})">
+            <summary>
+            sauvegarde d'une liste du type d'objet en une seule transaction
+            </summary>
+            <param name="pListobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Effacer(System.Collections.Generic.IList{`0})">
+            <summary>
+            delete d'une liste du type d'objet en une seule transaction
+            </summary>
+            <param name="pListobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.EffacerById(System.Object)">
+            <summary>
+             efface un objet par son Identifiant
+            </summary>
+            <param name="pIdobject">valeur de l'id</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.EffacerMutiCriteres(GToolPersistance.Critere)">
+            <summary>
+            Effacers the muti criteres.
+            </summary>
+            <param name="multiCritere">The multi critere.</param>
+            <returns>le nombre d'elements effaces</returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Effacer(GToolPersistance.CritereGenerics[],System.String)">
+            <summary>
+            Effacers the specified criteres.
+            </summary>
+            <param name="criteres">The criteres.</param>
+            <param name="enteteHql">The entete HQL.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.Effacer(`0)">
+            <summary>
+            Effacer un objet
+            </summary>
+            <param name="pobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.DeleteObjectWithRefresh(`0)">
+            <summary>
+            
+            </summary>
+            <param name="pObject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.ReloadObject(`0)">
+            <summary>
+            
+            </summary>
+            <param name="pobject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.RechercheMultiCriteres(GToolPersistance.Critere,System.String)">
+            <summary>
+             recherche générique à utiliser avec les classes critères générées par GFICodeGenerator
+            </summary>
+            <param name="MultiCritere"></param>
+            <param name="enteteRequete"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.RechercheMultiCriteres(GToolPersistance.Critere)">
+            <summary>
+             recherche générique à utiliser avec les classes critères générées par GFICodeGenerator
+            </summary>
+            <param name="MultiCritere"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.RechercheMultiCriteres(GToolPersistance.Critere,GToolPersistance.Critere,System.Collections.Generic.List{System.Int64})">
+            <summary>
+             recherche générique à utiliser avec les classes critères générées par GFICodeGenerator
+             Cette variante est utilisé pour les chargement en séquence quand on recherche sur un critère in avec de nombreuse valeurs.
+            </summary>
+            <param name="MultiCritere"></param>
+            <param name="CritereIn"></param>
+            <param name="listValuesLong">List de long contenant les Id à utiliser avec le critere in</param>
+            <returns></returns>
+        </member>
+        <member name="F:GToolPersistance.DaoBase`1.CaractereUtilisateurLike">
+            <summary>
+            the CaractereUtilisateurLike (*)
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.DaoBase`1.CaractereOperateurBDLike">
+            <summary>
+            the CaractereOperateurBDLike (%)
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.DaoBase`1.RechercheStringToujoursLike">
+            <summary>
+            the RechercheStringToujoursLike
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.DaoBase`1.ParametrerCritereString(GToolPersistance.Critere,System.String)">
+            <summary>
+            Parametrers the critere string.
+            </summary>
+            <param name="unCritere">The un critere.</param>
+            <param name="valeur">The valeur.</param>
+        </member>
+        <member name="T:GToolPersistance.DaoBaseManualInsertUpdate`1">
+            <summary>
+            DAO permettant l'utilisation d'ID fixes dans la base.
+            Le fichier de mapping NHibernate doit déclarer l'ID avec generator class="assigned".
+            </summary>
+            <typeparam name="MonType">Classe Entreprise.</typeparam>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Sauver(`0)">
+            <summary>
+            Cette méthode ne doit pas être utilisée. Utilisez à la place les méthodes Insert ou Update.
+            </summary>
+            <param name="pobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Sauver(System.Collections.Generic.IList{`0})">
+            <summary>
+            Cette méthode ne doit pas être utilisée. Utilisez à la place les méthodes Insert ou Update.
+            </summary>
+            <param name="pListobject"></param>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Insert(`0)">
+            <summary>
+            Permet d'insérer un nouvel élément dans la table. L'ID doit être renseigné avant d'appeler cette méthode.
+            </summary>
+            <param name="pobject">Objet à insérer.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Insert(System.Collections.Generic.IList{`0})">
+            <summary>
+            Permet d'insérer un nouvel élément dans la table. L'ID doit être renseigné avant d'appeler cette méthode.
+            </summary>
+            <param name="pListobject">Liste des objets à insérer.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Update(`0)">
+            <summary>
+            Permet de mettre à jour un élément existant dans la table.
+            </summary>
+            <param name="pobject">Objet à mettre à jour.</param>
+        </member>
+        <member name="M:GToolPersistance.DaoBaseManualInsertUpdate`1.Update(System.Collections.Generic.IList{`0})">
+            <summary>
+            Permet de mettre à jour un élément existant dans la table.
+            </summary>
+            <param name="pListobject">Liste des objets à mettre à jour.</param>
+        </member>
+        <member name="T:GToolPersistance.ConcurrentAccess.IContextHashtableCase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GToolPersistance.ConcurrentAccess.IContextHashtableCase.IsInThisCase">
+            <summary>
+            Retourne si les condition s'appels sont dans ce cas
+            </summary>
+        </member>
+        <member name="P:GToolPersistance.ConcurrentAccess.IContextHashtableCase.GetHashtable">
+            <summary>
+            Retourne le tableau (Hastable)
+            </summary>
+        </member>
+        <member name="P:GToolPersistance.ConcurrentAccess.IContextHashtableCase.IsCallContext">
+            <summary>
+            Permet de savoir si le context est de type Appel
+            </summary>
+        </member>
+        <member name="T:GToolPersistance.AnalyseException">
+            <summary>
+             delegate permettant de preciser pour chaque projet et base le type d'analyse à faire.
+            cette annalyse peutr etre specifique à une bvase et à un contexte d'utilisation de la base.
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolPersistance.HbnUtil">
+            <summary>
+             classe de base pour fournir un connecteur aux bases de données, renvoyer une session...
+             Limite d'utilisation :
+                cette classe associe une classe à une base
+                pour l'inbstant la gestion des threats n'est pas réalié. (obj session/transaction + flag de gestion) pose le probleme d'une gestion sous forme de contexte ou de threat. La gestion de threat peut-elle etre toujours prise....
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil.DefaultCloseWithTechnicalTransaction">
+            <summary>
+            Définit comment se comporte les connexions des bases sur la fin d'un transaction
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil.CloseWithTechnicalTransaction">
+            <summary>
+            Définit comment se comporte la connexions sur cette base sur la fin d'un transaction
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil.IInterceptor">
+            <summary>
+            Classe implémentation nHibernete.IInterceptor
+            Utilisé lors de cération d'une session.
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetHbn(System.Type)">
+            <summary>
+             retourne un HbnUitil pour un objet persister
+            </summary>
+            <param name="TypeRechercher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetHbnParNom(System.String)">
+            <summary>
+             retourne un HbnUtil pour un nom de persistance
+            </summary>
+            <param name="Nom"></param>
+            <returns></returns>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil._analyseurExceptionsLanceeParLabase">
+            <summary>
+            Un objet permettant d'analyser les execption remontées par la base de données pour
+            crée une exception avec message d'erreur comprehensible par l'utilisateur
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.AddDataBase(System.String,GToolPersistance.AnalyseException,System.Type[])">
+            <summary>
+            Méthode permettant d'ajouter la gestion d'une base de données 
+            tableauDesClassesMappees represente la liste des classes de la couche entreprise qui sont mappées sur les tables de cette base
+            analyseur est un objet qui est capable d'interpreter et de transformer en exception fonctionnelle les exceptions remontées par la base
+            </summary>
+            <param name="pNom"></param>
+            <param name="pAnalyseexceptionDuProjet"></param>
+            <param name="VosTypes"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.AddDataBase(System.String,GToolPersistance.AnalyseException,System.Type[],System.Boolean)">
+            <summary>
+            Méthode permettant d'ajouter la gestion d'une base de données 
+            tableauDesClassesMappees represente la liste des classes de la couche entreprise qui sont mappées sur les tables de cette base
+            analyseur est un objet qui est capable d'interpreter et de transformer en exception fonctionnelle les exceptions remontées par la base
+            </summary>
+            <param name="pNom"></param>
+            <param name="pAnalyseexceptionDuProjet"></param>
+            <param name="VosTypes"></param>
+            <param name="pIsMultithread"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.PrivAddDataBase(System.String,GToolPersistance.AnalyseException,System.Type[])">
+            <summary>
+            Méthode permettant d'ajouter la gestion d'une base de données 
+            tableauDesClassesMappees represente la liste des classes de la couche entreprise qui sont mappées sur les tables de cette base
+            analyseur est un objet qui est capable d'interpreter et de transformer en exception fonctionnelle les exceptions remontées par la base
+            </summary>
+            <param name="pNom"></param>
+            <param name="pAnalyseexceptionDuProjet"></param>
+            <param name="VosTypes"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.AddDataBase(System.String,GToolPersistance.AnalyseException,System.Type[],System.Collections.IDictionary)">
+            <summary>
+            Méthode permettant d'ajouter la gestion d'une base de données 
+            tableauDesClassesMappees represente la liste des classes de la couche entreprise qui sont mappées sur les tables de cette base
+            analyseur est un objet qui est capable d'interpreter et de transformer en exception fonctionnelle les exceptions remontées par la base
+            </summary>
+            <param name="pNom"></param>
+            <param name="pAnalyseexceptionDuProjet"></param>
+            <param name="VosTypes"></param>
+            <param name="pProps"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.AddDataBase(System.String,GToolPersistance.AnalyseException,System.Type[],System.Collections.IDictionary,System.Boolean)">
+            <summary>
+            Méthode permettant d'ajouter la gestion d'une base de données 
+            tableauDesClassesMappees represente la liste des classes de la couche entreprise qui sont mappées sur les tables de cette base
+            analyseur est un objet qui est capable d'interpreter et de transformer en exception fonctionnelle les exceptions remontées par la base
+            </summary>
+            <param name="pNom"></param>
+            <param name="pAnalyseexceptionDuProjet"></param>
+            <param name="VosTypes"></param>
+            <param name="pProps"></param>
+            <param name="pIsMultithread"></param>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil._CalculateRelativePathClass4Hbm">
+            <summary>
+             permet de prendre le chemin de la class, sauf la partie assembly (1ere partie du namespace) afin de décrire ou se trouve le fichier HBN
+            </summary>
+        </member>
+        <member name="F:GToolPersistance.HbnUtil._UseAssemblyResources4Hbm">
+            <summary>
+            permet de prendre les fichier hbm dans les ressources incorporées de l'assembly donné
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.Init">
+            <summary>
+             Methode initalisant le composant :
+                *Recherche pour chaque entité le fichier de mapping correspondant et valide la cohérence du code (aucune correpondance n'est faite entre le code et la base à ce niveau)
+                *Associe une classe à un nom de base et à une instance Hibernate
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetTransaction">
+            <summary>
+             obtient une transaction
+             Cette fonction ne doit pas etre appelé directement
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetSession">
+            <summary>
+             obtention d'une session
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetSession(System.Boolean)">
+            <summary>
+            obtention d'une session, et d'une transaction
+            </summary>
+            <param name="pAvecTransaction">if set to <c>true</c> [p avec transaction].</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetSession(System.Boolean,System.Data.IsolationLevel)">
+            <summary>
+            obtention d'une session, et d'une transaction
+            </summary>
+            <param name="pAvecTransaction">if set to <c>true</c> [p avec transaction].</param>
+            <param name="isolationLevel">The isolation level.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetSession(System.Type,System.Boolean)">
+            <summary>
+            fournit une session 
+            </summary>
+            <param name="TypeRechercher"></param>
+            <param name="AvecTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetHbnUtilForType(System.Type)">
+            <summary>
+            Permet de recherche un HbnUtil de manière récurcive sur les types hérités
+            </summary>
+            <param name="typeRechercher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.GetSessionFactory(System.Type)">
+            <summary>
+            fournit une session 
+            </summary>
+            <param name="TypeRechercher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.FermeSessionSiNecessaire(System.Type)">
+            <summary>
+             Ferme la session si une seesion est ouiverte et qu'aucubne transaction est cours
+             en claire si un tansaction fonctionnel est ouverte rien n'est fait
+            </summary>
+            <param name="TypeRechercher"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.FermeSessionsOuvertesDesBases">
+            <summary>
+            Permet de fermer les sessions et connexions ouvertes dans le cas d'une gestion par appel
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.CommitTransaction(System.Type)">
+            <summary>
+             fait un commit trans et ferme la session si necessaire...
+             en claire si un tansaction fonctionnel est ouverte rien n'est fait
+            </summary>
+            <param name="TypeRechercher"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.RollBackTransaction(System.Type)">
+            <summary>
+            revient sur une transaction Fonctionnel sur la base correspondant a une type
+            Ce retour s'execute meme si un transaction fonctionnel est en cours...
+            </summary>
+            <param name="TypeRechercher"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.BeginFonctionnalTrans(System.String)">
+            <summary>
+             commencce une transaction fonctionnel
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.BeginFonctionnalTrans(System.String,System.Boolean)">
+            <summary>
+            commencce une transaction fonctionnel with possibility of dirty read
+            </summary>
+            <param name="Nom">The nom.</param>
+            <param name="unReadCommitted">if set to <c>true</c> [un read committed].</param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.CommitFonctionnalTrans(System.String)">
+            <summary>
+            Valide une transaction sur la base correspondant au Nom
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.Flush(System.String)">
+            <summary>
+            force les ecritures en cours 
+            et permet de detacher les objets attaché à la session en cours
+            ne ferme ni la connection ni l'eventuel transaction en cours
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.Evict(System.String)">
+            <summary>
+            force le détachement de l'objet en memoire
+            ne ferme ni la connection ni l'eventuel transaction en cours
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.Flush(System.Type)">
+            <summary>
+            force les ecritures en cours 
+            et permet de detacher les objets attaché à la session en cours
+            ne ferme ni la connection ni l'eventuel transaction en cours
+            </summary>
+            <param name="TypeRechercher"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.RollbackFonctionnalTrans(System.String)">
+            <summary>
+            revient sur une transaction Fonctionnel sur la base correspondant au Nom
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.FonctionnalTransIsOpen(System.String)">
+            <summary>
+            Détermine si une transaction est en cours
+            </summary>
+            <param name="Nom"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.HbnUtil.AnalyseException(System.String,System.Exception)">
+            <summary>
+            Lance l'analyse d'une exception sur la base correspondant au type
+            </summary>
+            <param name="Nom"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolPersistance.IPersistanceRegister">
+            <summary>
+            How to Register
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.IPersistanceRegister.DoRegister(System.String)">
+            <summary>
+            execute the registration
+            </summary>
+            <param name="baseConnexion">connection string</param>
+        </member>
+        <member name="T:GToolPersistance.MSMQ.MSMQUtility`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:GToolPersistance.MSMQ.MSMQUtility`1.MessagePersistantAuReboot">
+            <summary>
+            Message Persistant Au Reboot pour 
+            </summary>
+        </member>
+        <member name="P:GToolPersistance.MSMQ.MSMQUtility`1.queuePath">
+            <summary>
+            doit etre implemente par 
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.SendObjectToQueue(`0)">
+            <summary>
+            
+            </summary>
+            <param name="YourObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.EnsureQueueExists">
+            <summary>
+            Créer la queue s'il elle n'existe pas
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.ReadNextFromQueueWithoutDelete(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="pTimeOutSecond"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.ReadNextFromQueueWithoutDelete">
+            <summary>
+            lit un objet depuis la queue et efface cet objet de la queue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.ReadNextFromQueueWithDelete(System.Int32)">
+            <summary>
+            lit un objet de la queue sans l'effacer
+            </summary>
+            <param name="pTimeOutSecond"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.ReadNextFromQueueWithDelete">
+            <summary>
+            lit un objet de la queue sans l'effacer
+            la methode pose un lock et attends
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolPersistance.MSMQ.MSMQUtility`1.ClearQueue">
+            <summary>
+            efface tous les messages de la queue
+            </summary>
+        </member>
+        <member name="M:GToolPersistance.Test.faireTest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:GToolBase.OperateurSql">
+            <summary>
+             Enumerateur contenant les operation SQL de base supporté par la classe GtoolPersistance.DaoBase
+            </summary>
+        </member>
+        <member name="T:GToolBase.TypeDonnee">
+            <summary>
+             Type de donnée supporté par la classe GtoolPersistance.DaoBase
+            </summary>
+        </member>
+        <member name="T:GToolBase.Criteres">
+            <summary>
+             Cette classe permet de definir des critères qui seront ensuite interprété par la classe GtoolPersistance.DaoBase, afin de faire une requete nHibernate en Hql
+            </summary>
+        </member>
+        <member name="M:GToolBase.Criteres.#ctor(System.String,System.String,System.Object,System.Object[],GToolBase.OperateurSql,GToolBase.TypeDonnee,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pNomCol"></param>
+            <param name="pNomAttribut"></param>
+            <param name="pValeurObject"></param>
+            <param name="pTabValeurObject"></param>
+            <param name="pOperateur"></param>
+            <param name="pType"></param>
+            <param name="pClauseSqlWhere"></param>
+        </member>
+        <member name="M:GToolBase.Criteres.#ctor(System.String,System.String,System.Object,System.Object[],GToolBase.OperateurSql,GToolBase.TypeDonnee)">
+            <summary>
+             construteur par defaut (Minimum)
+            </summary>
+            <param name="pNomCol"></param>
+            <param name="pNomAttribut"></param>
+            <param name="pValeurObject"></param>
+            <param name="pTabValeurObject"></param>
+            <param name="pOperateur">operateur selon l'enum GToolBase.OperateurSQL</param>
+            <param name="pType">Type selon l'enum GToolBase.TypeDonné</param>
+        </member>
+    </members>
+</doc>

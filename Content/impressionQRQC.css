@@ -1,0 +1,399 @@
+.body-content { /*Centrage et definition de taille de la page*/
+    z-index: 1;
+    margin: 0 auto;
+    width: 95%;
+    text-align: center;
+    margin-top : -50px;
+}
+
+.body-content footer { /*Configuration footer*/
+    float: left;
+    display : none;
+}
+
+.navbar{
+    display : none;
+}
+
+.noscroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border: none;
+}
+
+#DivQRQC {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#bandeau {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top : 00px;
+}
+
+textarea {
+    display: block;
+    overflow: hidden;
+    border: none;
+    resize: none;
+    width: 100%;
+}
+
+#titre {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top : -100px;
+}
+
+#bandeau p {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0px;
+    margin-top: 20px;
+}
+
+#bandeau input {
+    font-size: 1.2em;
+}
+
+.topright {
+    border-right: 0px !important;
+    border-top: 0px !important;
+}
+
+.bottomright {
+    border-right: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.topleft {
+    border-left: 0px !important;
+    border-top: 0px !important;
+}
+
+.bottomleft {
+    border-left: 0px !important;
+    border-bottom: 0px !important;
+}
+
+
+.right {
+    border-right: 0px !important;
+}
+
+.top {
+    border-top: 0px !important;
+}
+
+.left {
+    border-left: 0px !important;
+}
+
+.bottom {
+    border-bottom: 0px !important;
+}
+
+
+.topDiv {
+    height: 40px;
+    min-height: 40px;
+    background: #FF6600;
+    border-radius: 26px 26px 0px 0px;
+    border-bottom: 2px solid black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#Description {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 450px;
+    border: 3px solid black;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+#SevenQuestion {
+    width: 100%;
+    height: 200px;
+}
+
+.Question {
+    width: 20%;
+}
+
+table td, th {
+    border: 1px solid black;
+}
+
+table thead{
+    display: table-group-column;
+}
+
+#DescriptionProcess {
+    width: 100%;
+    border: 1px solid black;
+}
+
+#DescriptionProcess p {
+    width: 100%;
+    height: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0px;
+    text-align: start;
+    padding-left: 10px;
+}
+
+#DescriptionProcess textarea {
+    width: 100%;
+    display: block;
+    max-width: none;
+    min-height: 205px;
+    height: auto;
+    }
+
+#ActionImmediat {
+    width: 100%;
+    height: 200px;
+}
+
+.ActionSecu {
+    width: 40%;
+}
+
+#Analyse {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 450px;
+    height: auto;
+    border: 3px solid black;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+.Analyse {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+}
+
+.fiveP p {
+    position: absolute;
+    text-align: start;
+    margin-left: 5px;
+}
+
+.fiveP textarea {
+    width: 100%;
+    height: 20%;
+    max-width: none;
+    text-indent: 80px;
+}
+
+.textVertical {
+    width: 100%;
+    padding: 20px;
+    padding-right : 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.Occurence_NonDetection {
+    width: 20%;
+    border: 1px solid black;
+}
+
+.fiveP {
+    width: 80%;
+}
+
+.Pourquoi {
+    width: 100%;
+    height: auto;
+    border: 0.5px solid black;
+}
+
+#Solution {
+    z-index : 9999;
+    margin: 20px auto;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 450px;
+    border: 3px solid black;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+#Amelioration {
+    width: 100%;
+    height: auto;
+}
+
+.Action {
+    width: 50%;
+}
+
+th {
+    background: #A9A9A9;
+    color: white;
+}
+
+.gainsboro {
+    background: #f7f7f7;
+}
+
+.lightgray {
+    background: #E0E0E0;
+}
+
+#canvas {
+    width: 100%;
+    height: 254px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#canvas canvas {
+    z-index : 10;
+    height: 100%;
+    width: 100%;
+    border-right: 1px solid black;
+    background-image: url('../image/GrapheVide.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#ConfigCan {
+    display:none;
+    padding-left: 10px;
+    margin-top: 30px;
+    width: 30%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#GraphImg{
+    display : block;
+    z-index : 0;
+    position : absolute;
+    width : 441px;
+    height : 254px;
+    border-radius : 0px 0px 30px 30px;
+}
+
+#Color {
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    #Color div {
+        height: 10px;
+        width: 10px;
+    }
+
+#white {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    margin-top: 3px;
+    border: 0.5px solid black;
+}
+
+#buttonCan {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#btn {
+    height: 40px;
+    width: 80px;
+}
+
+#clr {
+    height: 40px;
+    width: 80px;
+}
+
+#Envoyer {
+    display : none;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 160px;
+    height: 50px;
+    background-image: linear-gradient(298deg, #da2c4d, #f8ab37);
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+    #Envoyer:hover {
+        font-size: 1.8em;
+    }
+
+@media all and (max-width:1200px) {
+    #bandeau {
+        padding: 0px;
+        margin-top: 100px;
+    }
+}
+
+@media all and (max-width:550px) {
+    .textVertical {
+        padding: 0px;
+        font-size: 1em;
+        font-weight: bold;
+    }
+}
+
+@media all and (max-width:350px) {
+    .textVertical {
+        font-weight: normal;
+    }
+}

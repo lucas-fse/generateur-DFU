@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GAMME_UD_UR_UCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_COMPTEUR" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="int" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRACAFABUDE">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REFERENCE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="NMRSERIE" Type="nchar" MaxLength="20" />
+          <Property Name="DATETIME" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="GAMME_UD_UR_UCModelStoreContainer">
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACAFABUDE" EntityType="Self.TRACAFABUDE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GAMME_UD_UR_UCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_COMPTEUR" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="Int32" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRACAFABUDE">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REFERENCE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NMRSERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="GAMME_UD_UR_UCEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" />
+          <EntitySet Name="TRACAFABUDE" EntityType="Self.TRACAFABUDE" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GAMME_UD_UR_UCModelStoreContainer" CdmEntityContainer="GAMME_UD_UR_UCEntities1">
+          <EntitySetMapping Name="COMPTEUR">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.COMPTEUR">
+              <MappingFragment StoreEntitySet="COMPTEUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CODE_COMPTEUR" ColumnName="CODE_COMPTEUR" />
+                <ScalarProperty Name="LBL_COMPTEUR" ColumnName="LBL_COMPTEUR" />
+                <ScalarProperty Name="NEXT_NUM_CHRONO" ColumnName="NEXT_NUM_CHRONO" />
+                <ScalarProperty Name="LONGUEUR_COMPTEUR" ColumnName="LONGUEUR_COMPTEUR" />
+                <ScalarProperty Name="TYPE_COMPTEUR" ColumnName="TYPE_COMPTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACAFABUDE">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.TRACAFABUDE">
+              <MappingFragment StoreEntitySet="TRACAFABUDE">
+                <ScalarProperty Name="INDEXREF" ColumnName="INDEXREF" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="NMRSERIE" ColumnName="NMRSERIE" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

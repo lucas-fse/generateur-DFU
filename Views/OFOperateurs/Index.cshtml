@@ -1,0 +1,35 @@
+﻿@model GenerateurDFUSafir.Models.GestionTraitementOFs
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Gestion des ordres de fabrication en production";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<h1 class="jumbotron">Gestion des Aléas et des temps de production</h1>
+<div class="operateurs  ">
+    @foreach (var item in Model.DataOperateurs)
+    {
+        <div class="operateur">
+            <a href="@Url.Action("Edit", "OFOperateurs", new { id = item.ID })">
+                <div class="flex">
+                    <img class="imageoperateur grid" src=@Html.DisplayFor(model => item.Photo) height=255 width=154 title=@Html.DisplayFor(model => item.Nom) />
+                    <div class=" ofoperateur ">
+                        <h4>Status des OF en cours</h4>
+                        <ul class="elementof">
+                            @foreach (var of in item.OfEncours)
+                            {
+                                <li>
+                                    @Html.DisplayFor(model => of.NMROF) @Html.DisplayFor(model => of.STATUSTYPE)
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <p class="nomoperetaur">@Html.DisplayFor(model => item.Prenom)</p>
+            </a>
+        </div>
+    }
+</div>
+
+

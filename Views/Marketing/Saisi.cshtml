@@ -1,0 +1,247 @@
+﻿@model GenerateurDFUSafir.Models.SaisiModel
+@{
+    ViewBag.Title = "Saisi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<head>
+
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edition  : @Model.NomPrenom</h4>
+
+        <hr />
+
+        <div>
+            <table>
+                <tr>
+                    <td style="background-color:#ffffff" width="100"></td>
+                    @for (int i = 1; i < 32; i++)
+                    {
+                        <td style="background-color:#ffe694" width="30" align="center">@i</td>
+                    }
+                </tr>
+                @foreach (var month in Model.jourComplet)
+                {
+                    <tr>
+                        <td style="background-color:#ffffff" width="100" height="10">@month.Key</td>
+                        @foreach (var jour in month.Value)
+                        {
+                            int tmp = @jour.cellspan * 30;
+                            string tmp2 = tmp.ToString() + "px";
+                            <td colspan="@jour.cellspan.ToString()" style="background-color:@jour.GetColorWeek" height="10">
+                                <input @jour.getHidden style="background-color:@jour.GetColorWeek;width:@tmp2;border-style:hidden; color:@jour.GetColorWeekT" type="submit" value="@jour.getComplet" name="submitButton" />
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+        <div>
+            <br>
+            <span margin="10"><font size="5">Semaine : @Model.SemaineEnCours </font></span><font size="5">
+                <br />
+                <span>Total horaire : </span>
+                <span id="totalheures" margin="10"></span>
+            </font><span> heure(s)</span>
+            <br>
+            <span>total à saisir : 38.5 heures </span>
+        </div>
+        @Html.HiddenFor(model => model.SemaineEnCours)
+        <div>
+            <table id="tab">
+                <tr>
+                    <td id="vide"></td>
+                    <td align="center"><output id="SommeLundi"> </output></td>
+                    <td align="center"><output id="SommeMardi"> </output></td>
+                    <td align="center"><output id="SommeMercredi"></output></td>
+                    <td align="center"><output id="SommeJeudi"></output></td>
+                    <td align="center"><output id="SommeVendredi"></output></td>
+                    <td align="center"><output id="SommeSamedi"></output></td>
+                    <td align="center"><output id="SommeDimanche"></output></td>
+                </tr>
+                <tr>
+                    <td align="center"></td>
+                    <td align="center">L</td>
+                    <td align="center">M</td>
+                    <td align="center">M</td>
+                    <td align="center">J</td>
+                    <td align="center">V</td>
+                    <td align="center">S</td>
+                    <td align="center">D</td>
+                </tr>
+
+                @for (int i = 0; i < Model.SemaineARemplir.Count(); i++)
+                {
+                    <tr>
+                        <td style="background-color:#ffffff" width="300">
+                            <div>@Model.SemaineARemplir[i].SOUSPROJET.NomSousProjet  @Model.SemaineARemplir[i].SOUSPROJET.TitreSousProjet</div>
+                            @Html.HiddenFor(model => model.SemaineARemplir[i].SOUSPROJET_ID)
+                            @Html.HiddenFor(model => model.SemaineARemplir[i].Semaine)
+                            @Html.HiddenFor(model => model.SemaineARemplir[i].Annee)
+                        </td>
+                        <td style="background-color: #ffe694;font-weight: normal;" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days1, new { type = "number", min = "0", step = "0.1", value = "0", @htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days2, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days3, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days4, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days5, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days6, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="background-color:#ffe694" width="60" align="center" onchange="calculSommeByDay()">@Html.EditorFor(model => model.SemaineARemplir[i].Days7, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => Model.ADDNewSSprojet,
+                                new SelectList(Model.ProjetSuppl, "Value", "Text", 0),
+                                new { @class = "form-control", onchange = @"submit();" })
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" name="submitButton" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function calculSommeByDay() {
+
+            var nbLignes = document.getElementById("tab").rows.length;
+            var SommeLundi = 0;
+            var SommeMardi = 0;
+            var SommeMercredi = 0;
+            var SommeJeudi = 0;
+            var SommeVendredi = 0;
+            var SommeSamedi = 0;
+            var SommeDimanche = 0;
+
+            for (i = 0; i < nbLignes - 3; i++) {
+
+                var d1 = document.getElementById("SemaineARemplir_" + i + "__Days1");
+                if (parseFloat(d1.value.replace(/,/g, '.')) != 0) {
+                    d1.style.fontWeight = 'bold';
+                    d1.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d1.style.fontWeight = 'normal';
+                    d1.style.backgroundColor = "white";
+                }
+                var d2 = document.getElementById("SemaineARemplir_" + i + "__Days2");
+                if (parseFloat(d2.value.replace(/,/g, '.')) != 0) {
+                    d2.style.fontWeight = 'bold';
+                    d2.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d2.style.fontWeight = 'normal';
+                    d2.style.backgroundColor = "white";
+                }
+                var d3 = document.getElementById("SemaineARemplir_" + i + "__Days3");
+                if (parseFloat(d3.value.replace(/,/g, '.')) != 0) {
+                    d3.style.fontWeight = 'bold';
+                    d3.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d3.style.fontWeight = 'normal';
+                    d3.style.backgroundColor = "white";
+                }
+                var d4 = document.getElementById("SemaineARemplir_" + i + "__Days4");
+                if (parseFloat(d4.value.replace(/,/g, '.')) != 0) {
+                    d4.style.fontWeight = 'bold';
+                    d4.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d4.style.fontWeight = 'normal';
+                    d4.style.backgroundColor = "white";
+                }
+                var d5 = document.getElementById("SemaineARemplir_" + i + "__Days5");
+                if (parseFloat(d5.value.replace(/,/g, '.')) != 0) {
+                    d5.style.fontWeight = 'bold';
+                    d5.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d5.style.fontWeight = 'normal';
+                    d5.style.backgroundColor = "white";
+                }
+                var d6 = document.getElementById("SemaineARemplir_" + i + "__Days6");
+                if (parseFloat(d6.value.replace(/,/g, '.')) != 0) {
+                    d6.style.fontWeight = 'bold';
+                    d6.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d6.style.fontWeight = 'normal';
+                    d6.style.backgroundColor = "white";
+                }
+                var d7 = document.getElementById("SemaineARemplir_" + i + "__Days7");
+                if (parseFloat(d7.value.replace(/,/g, '.')) != 0) {
+                    d7.style.fontWeight = 'bold';
+                    d7.style.backgroundColor = "lightgreen";
+                }
+                else {
+                    d7.style.fontWeight = 'normal';
+                    d7.style.backgroundColor = "white";
+                }
+
+            }
+
+            for (i = 0; i < nbLignes - 3; i++) {
+
+                SommeLundi = SommeLundi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days1").value.replace(/,/g, '.'));
+                SommeMardi = SommeMardi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days2").value.replace(/,/g, '.'));
+                SommeMercredi = SommeMercredi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days3").value.replace(/,/g, '.'));
+                SommeJeudi = SommeJeudi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days4").value.replace(/,/g, '.'));
+                SommeVendredi = SommeVendredi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days5").value.replace(/,/g, '.'));
+                SommeSamedi = SommeSamedi + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days6").value.replace(/,/g, '.'));
+                SommeDimanche = SommeDimanche + parseFloat(document.getElementById("SemaineARemplir_" + i + "__Days7").value.replace(/,/g, '.'));
+            }
+            document.getElementById('SommeLundi').value = SommeLundi.toFixed(1);
+            document.getElementById('SommeMardi').value = SommeMardi.toFixed(1);
+            document.getElementById('SommeMercredi').value = SommeMercredi.toFixed(1);
+            document.getElementById('SommeJeudi').value = SommeJeudi.toFixed(1);
+            document.getElementById('SommeVendredi').value = SommeVendredi.toFixed(1);
+            document.getElementById('SommeSamedi').value = SommeSamedi.toFixed(1);
+            document.getElementById('SommeDimanche').value = SommeDimanche.toFixed(1);
+            arrondi = SommeLundi * 10;
+            arrondi = Math.round(arrondi);
+            SommeLundi = arrondi / 10;
+            arrondi = SommeMardi * 10;
+            arrondi = Math.round(arrondi);
+            SommeMardi = arrondi / 10;
+            arrondi = SommeMercredi * 10;
+            arrondi = Math.round(arrondi);
+            SommeMercredi = arrondi / 10;
+            arrondi = SommeJeudi * 10;
+            arrondi = Math.round(arrondi);
+            SommeJeudi = arrondi / 10;
+            arrondi = SommeVendredi * 10;
+            arrondi = Math.round(arrondi);
+            SommeVendredi = arrondi / 10;
+            arrondi = SommeSamedi * 10;
+            arrondi = Math.round(arrondi);
+            SommeSamedi = arrondi / 10;
+            arrondi = SommeDimanche * 10;
+            arrondi = Math.round(arrondi);
+            SommeDimanche = arrondi / 10;
+            document.getElementById('totalheures').textContent = (SommeLundi + SommeMardi + SommeMercredi + SommeJeudi + SommeVendredi + SommeSamedi + SommeDimanche).toFixed(1);
+        }
+        window.onload = calculSommeByDay;
+    </script>
+}
+
+

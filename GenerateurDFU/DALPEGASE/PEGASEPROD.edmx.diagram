@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b1cacd08c274d7293196bbc6f2f7633" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MO" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MT" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.ORDRE_FABRICATION" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.PACK_INSTALLE" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.SIM" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MO_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MT_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_PACK_INSTALLE_ID_OF" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_SIM_ID_PACK_INSTALLE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,467 @@
+.body-content {
+    margin: 0 auto;
+    width: 75%;
+}
+
+.body-content footer{
+    float: left;
+}
+
+
+
+/* ----------------------- Debut entete -----------------------*/
+#bandeau {
+    flex-direction: row; /*Mise des elements en ligne*/
+    justify-content: space-between; /*element espacer entre eux*/
+    align-items: center;
+    background: white;
+}
+
+    #bandeau .flexChild:first-child {
+        align-self: flex-start;
+    }
+
+#logo {
+    width: 150px;
+    height: auto;
+}
+
+#refNomQualite {
+    font-size: 1em;
+}
+
+/* ----------------------- Fin entete -----------------------*/
+
+body {
+    width: 100%;
+    text-align: center;
+    font-family: arial;
+    margin: 0 auto; /*permet un centrage de l'element*/
+    /*background-image: url('../Images/background_grey.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
+    overflow:auto;
+    background-size: 100% 100%;*/
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#blockain { /*Block principale */
+    margin: 0 auto;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+
+/* ------------Block a droite et a gauche representant la partie client-------------- */
+
+    .client { /* Blocks principales */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 170px;
+        height: 360px;
+        background: #696969;
+        color: white;
+        padding-bottom: 5px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; /*Ombre autour des blocks clients*/
+    }
+
+    .client h2 {
+        font-weight: bold; /*Mise en gras */
+        font-size: 3em;
+        margin: 0 auto;
+    }
+
+    .standardBlock { /* Sous Block dans les blocks client */
+        display : table;
+        width: 150px;
+        height: 75px;
+        border: 1px solid black;
+        background: white;
+        text-align: center;
+        margin-left: 9px;
+        margin-right: 9px;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        color: black;
+    }
+
+    .standardBlock p{ /*Mise au mileu des textes de standardBlock*/
+        display : table-cell;
+        vertical-align : middle;
+    }
+
+/* ------------ Fin Block a droite et a gauche representant la partie client-------------- */
+
+/* ------------- Block du milieu ----------------------------------------------------------*/
+
+    #middle {
+        display: flex;
+        flex-direction: column; /*les elements du block sont mis en colone*/
+        justify-content: flex-start;
+    }
+
+    /*-----Partie en haut du block du milieu----*/
+    #middle h1 {
+        margin: 0px;
+        color: #FF6600;
+        font-size: 2em;
+    }
+
+    #Big-arrow { /*Grande fleche en haut du block middle */
+        display: flex;
+        flex-direction: row;
+        height: 80px
+    }
+
+    #GrandRectangle { /*Rectangle du block Big-arrow*/
+        width: 100%;
+        height: 50px;
+        margin-top: 15px;
+        font-size : 16px;
+    }
+
+    #GrandRectangle p { /* Configuration du texte dans le rectangle du block big-arrow*/
+        display: table-cell;
+        vertical-align: middle;
+        background-color: #FF6600;
+        color: white;
+        text-decoration: none;
+        font-weight: bold; /*Mise en gras */
+    }
+
+    #Grand-triangle-topleft { /*Triangle sur la partie superieur a droite du rectangle du block big arrow*/
+        width: 0;
+        height: 0;
+        border-top: 40px solid #FF6600;
+        border-right: 40px solid transparent;
+    }
+
+    #Grand-triangle-bottomleft { /*Triangle sur la partie inferieur a droite du rectangle du block big arrow*/
+        width: 0;
+        height: 0;
+        border-bottom: 40px solid #FF6600;
+        border-right: 40px solid transparent;
+    }
+
+#topUP { /*Block contenant les div clickable separe par des doubles fleches */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    background: #D3D3D3;
+    padding-left: 4%;
+    padding-right: 4%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+    #top { /*Block contenant les div clickable separe par des doubles fleches */
+        display: flex;
+        margin-top:0%;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        background: #D3D3D3;
+        padding-left: 4%;
+        padding-right: 4%;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    }
+
+    #double_fleche { /* Image Double fleche dans le block top*/
+        margin-top: 3%;
+        width: 120px;
+        height: 40px;
+    }
+
+    .standardBlockTop { /*Sous block du block top contenant des liens clickable*/
+        display: table;
+        width: 130px;
+        height: 40px;
+        border: 1px solid black; /*Bordure mis autout du block*/
+        background: white;
+        text-align: center;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .standardBlockTop a { /*configuration des liens clickable des block standardBlockTop*/
+        width: 160px;
+        display: table-cell;
+        vertical-align: middle;
+        color: #FF6600;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .standardBlockTop a:hover { /*configuration des liens clickable des block standardBlocTop lorsque la souris passes dessus*/
+        background: #FF6600;
+        color: white;
+    }
+/*-----Fin Partie en haut du block du milieu----*/
+
+
+
+
+/*-----Partie au centre du block du milieu----*/
+
+    #fleche_haut_direction_bas { /* Block contenant la Fleche en dessous du block top en direction du bas */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+    #fleche_direction_bas { /*Image de fleche dans le block fleche_haut_direction_bas*/
+        height: 100px;
+        width: 100px;
+    }
+
+
+    #ListProcessus { /*Block contenant la liste des processus clickable sous forme de fleche */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; /*Permer de ranger les elements a la ligne si la taille ne correspond pas*/
+        justify-content: center;
+        margin: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .triangle-topright { /*Triangle a enlever  sur la partie superieur a gauche des rectangles du block ListProcessus*/
+        width: 0;
+        height: 0;
+        border-top: 25px solid #FF6600;
+        border-left: 25px solid transparent;
+    }
+
+    .triangle-bottomright { /*Triangle a enlever  sur la partie superieur a gauche des rectangles du block ListProcessus*/
+        width: 0;
+        height: 0;
+        border-bottom: 25px solid #FF6600;
+        border-left: 25px solid transparent;
+    }
+
+    .rectangle { /*Rectangles du block ListProcessus*/
+        display: table;
+        width: 200px;
+        height: 50px;
+        background: #FF6600;
+        text-align: center;
+    }
+
+    .rectangle a { /*Configuration des liens clickable dans le rectangle du block ListProcessus*/
+        display: table-cell;
+        vertical-align: middle;
+        background-color: #FF6600;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .rectangle a:hover { /*Configuration des liens clickable dans le rectangle du block ListProcessus lorsque la souris passe dessus*/
+        font-size: 1.5em;
+    }
+
+
+    .arrow /* conteneur de la fleche */ {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+    }
+
+    .triangle-topleft { /*Triangle sur la partie superieur a droite des rectangle du block ListProcessus*/
+        width: 0;
+        height: 0;
+        border-top: 25px solid #FF6600;
+        border-right: 25px solid transparent;
+    }
+
+    .triangle-bottomleft { /*Triangle sur la partie superieur a droite des rectangle du block ListProcessus*/
+        width: 0;
+        height: 0;
+        border-bottom: 25px solid #FF6600;
+        border-right: 25px solid transparent;
+    }
+
+/*-----Fin Partie au centre du block du milieu----*/
+
+
+
+
+
+/*-----Partie en bas du block du milieu----*/
+
+    #fleche_bas_direction_haut { /* Block contenant les Fleches en dessous du block ListProcessus en direction du haut */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 8%;
+        width: 55%;
+        margin-bottom: 0%;
+        margin-left: 23%;
+}
+
+    #fleche_bas_direction_haut img { /*Images de fleche dans le block fleche_bas_direction_haut*/
+        position: relative; /*les images changent leur taille selon la taille de la page*/
+        width: 20%;
+        height: 100%;
+    }
+
+    #bottom { /*Block en bas du block middle*/
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-left: 3%;
+        margin-right: 3%;
+        background: #696969;
+        color: white;
+    }
+
+
+    .standardBlockBot { /*Sous block du block bottom contenant des liens clickable*/
+        display: table;
+        width: 160px;
+        height: 75px;
+        border: 1px solid black;
+        background: white;
+        text-align: center;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: black;
+    }
+
+    .standardBlockBot a { /*configuration des liens clickable des block standardBlockBot*/
+        display: table-cell;
+        vertical-align: middle;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .standardBlockBot a:hover { /*configuration des liens clickable des block standardBlockBot lorsque la souris passe dessus*/
+        background: #FF6600;
+        color: white;
+    }
+
+/*-----Fin Partie en bas du block du milieu----*/
+
+
+/* -------------Fin du Block du milieu -----------------------------------------------------*/
+
+
+
+/*--------------Reconfiguration du css selon la taille de page --------------------------------------------------*/
+@media all and (max-width: 1400px) { /*Lorsque la largeur est inferieur a 1400px*/
+
+    .standardBlockBot { /*Modification des tailles des sous block standardBlockBot*/
+        width: 200px;
+    }
+
+    #fleche_bas_direction_haut { /*Le block fleche_bas_direction_haut place les elements aux centres*/
+        justify-content: center;
+    }
+
+    #fleche_bas_direction_haut img { /*Les images fleches du block fleche_bas_direction_haut ont une taille fixe*/
+        position: relative;
+        width: 100px;
+        height: 70px;
+    }
+
+    #ListProcessus { /*reduite la distance entre ListProcessus et ses blocks voisins*/
+        margin: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    #bottom { /* Block bottom avec une nouvelle taille et un nouvelle emplacement fixe*/
+        /*position: absolute; /*position fixe*/
+        top: 700px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    .client {
+        margin-bottom: 250px;
+    }
+}
+
+@media all and (max-width: 1200px) { /*Lorsque la largeur est inferieur a 1120px*/
+    #bottom { /* Block bottom avec un nouvelle emplacement fixe*/
+        top: 800px;
+    }
+}
+
+
+@media all and (max-width: 1080px) { /*Lorsque la largeur est inferieur a 1080px*/
+    #bottom { /* Block bottom avec un nouvelle emplacement fixe*/
+        top: 950px;
+    }
+
+    #bandeau {
+        flex-direction: column-reverse;
+        margin-bottom: 1em;
+    }
+
+    #bandeau .flexChild:first-child {
+        align-self: initial;
+    }
+
+    .client { /*Rend les blocks clients invisible*/
+        display: none;
+    }
+
+    #topUP { /*Decalage vers le bas du block top*/
+        margin-top: 10%;
+    }
+    #top { /*Decalage vers le bas du block top*/
+        margin-top: 00%;
+    }
+
+
+    #double_fleche { /*Modification taille de la double fleche dans le block top*/
+        margin-top: 3%;
+        width: 60px;
+        height: 20px;
+    }
+
+    .standardBlockTop { /*Modification de la taille des standardBlockTop*/
+        width: 80px;
+        height: 20px;
+    }
+
+    .standardBlockTop a { /*Modification de la taille des liens clickable de standardBlockTop*/
+        width: 80px;
+    }
+}
+
+@media all and (max-width: 550px) {
+
+    #Grand-triangle-topleft { /*Modification du Triangle sur la partie superieur a droite du rectangle du block big arrow*/
+        border-top: 50px solid #FF6600;
+        border-right: 50px solid transparent;
+    }
+
+    #Grand-triangle-bottomleft { /*Modification du Triangle sur la partie inferieur a droite du rectangle du block big arrow*/
+        border-bottom: 50px solid #FF6600;
+        border-right: 50px solid transparent;
+    }
+}
+/*-------------- Fin Reconfiguration du css selon la taille de page --------------------------------------------------*/

@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@800&family=Chivo+Mono:wght@800&display=swap');
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+
+    background-color: #222222;
+    overflow: hidden;
+}
+
+.main {
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+    width: 110vw;
+    height: 100vh;
+
+    transform: translateX(-5vw);
+    background-color: black;
+
+    overflow: hidden;
+
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 10px;
+    width: 25%;
+    flex-grow: 1;
+    margin: 0 6px;
+    background-color: #FF640088;
+
+    height: 150%;
+    transform: translateY(-20%) rotate(10deg) ;
+    transition: 0.5s;
+    cursor: pointer;
+
+    overflow: hidden;
+    opacity: 100%;
+
+
+}
+
+.section:nth-child(2n) {
+    background-color: #8F8F8F88;
+}
+
+.section-open:nth-child(2n+1) {
+    background-color: #FF640077;
+}
+
+.section-open:nth-child(2n) {
+
+    background-color: #8F8F8F77;
+}
+
+.section-open {
+    width: 60%;
+    flex-grow: 3;
+}
+
+.section:nth-child(2n) > h1 {
+    margin-bottom: 70px;
+}
+
+.infossup {
+
+    opacity: 0%;
+    transition: 0.5s;
+
+    z-index: 5;
+
+    min-width: 500px;
+    max-width: 500px;
+
+    color: white;
+    text-align: justify;
+    font-weight: bold;
+
+    font-size: 14pt;
+
+}
+
+.subtitle {
+    align-self: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24pt;
+    font-variant: small-caps;
+    color: #ffffffee;
+}
+
+.section-open .infossup {
+    display: block;
+    opacity: 100%;
+
+}
+
+.infossup .title {
+    color: white;
+    font-weight: 800;
+    font-variant: small-caps;
+}
+
+.subinfos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-variant: small-caps;
+    border-bottom: 1px solid #ffffff55;
+    font-weight: lighter;
+}
+
+.value {
+    font-size: 25pt;
+    font-family: 'Azeret Mono', monospace;
+    font-variant-numeric: slashed-zero;
+}
+
+.content {
+    width: 80%;
+    height: 50vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+
+}
+
+
+
+.section > * {
+    transform: rotate(-10deg) translateY(20%);
+}
+
+.section img {
+
+    position: absolute;
+    width: 250px;
+    opacity: 20%;
+    fill: white;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+
+}
+
+.content h1 {
+    opacity: 95%;
+    margin: 0;
+    font-size: 55pt;
+    font-weight: 800;
+    text-align: center;
+    color: white;
+    font-family: 'Azeret Mono', monospace;
+    font-variant-numeric: slashed-zero;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.section:nth-child(2n) img {
+    margin-bottom: 100px ;
+}
+
+.section:nth-child(2n+1) img {
+    margin-top: 100px ;
+}
+
+
+
+.goal-box {
+    width: 500px;
+    height: 30px;
+    background: none;
+    border: 3px solid white;
+    opacity: 80%;
+    padding: 3px;
+}
+
+.goal {
+    display: flex;
+    align-self: center;
+    width: 0%;
+    max-width: 0%;
+    height: 20px;
+    transform: translate(-1px, -1px);
+    border: none;
+    background-color: white;
+    color: white;
+    transition: 5s;
+}
+
+.section-open .goal {
+    width: 100%;
+    max-width: 490px;
+}
+
+.goal > p {
+    margin-left: 5px;
+    filter: invert();
+    opacity: 80%;
+    white-space: nowrap;
+}
+
+.conductix-logo img{
+    max-width: 100px;
+    max-height: 100px;
+
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    object-fit: cover;
+
+    margin: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .content h1 {
+        font-size: 20pt;
+    }
+
+    .infossup {
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    .goal-box {
+        width: 300px;
+    }
+
+    .value {
+        font-size: 14pt;
+    }
+    
+}
+

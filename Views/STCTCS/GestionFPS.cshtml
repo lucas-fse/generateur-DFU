@@ -1,0 +1,501 @@
+﻿@model GenerateurDFUSafir.Models.FPSEncours
+@{
+    ViewBag.Title = "DashZEN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/GestionFPS.css" rel="stylesheet" />
+    int i = 0;
+}
+
+<h2>DashZEN Bidir</h2>
+
+@using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td style="width:300px">
+                <div style="display: inline">
+                    @Html.DropDownListFor(m => m.NameSTC, // Store selected value in Model.DefaultStcId
+                     new SelectList(Model.ListOperateursSTC, "Value", "Text", Model.DefaultStcId),
+                     new { @class = "form-control", onchange = @"submit();" })
+                </div>
+            </td>
+            <td style="width:300px">
+                <div style="display: inline">
+                    @Html.DropDownListFor(m => m.NameTCS, // Store selected value in Model.DefaultStcId
+                     new SelectList(Model.ListOperateursTCS, "Value", "Text", Model.DefaultStcId),
+                     new { @class = "form-control", onchange = @"submit();" })
+                </div>
+            </td>
+            <td style="width:300px">
+                <div style="display: inline;margin:30px">
+                    @Html.DropDownListFor(m => Model.StatusViewFps, // Store selected value in Model.DefaultStcId
+                    new SelectList(Model.ListViewStatusFPS, "Value", "Text", Model.StatusViewFps),
+                    new { @class = "form-control", onchange = @"submit();" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <h4>
+                    FPS @Html.DisplayFor(model => Model.ListViewStatusFPS.ElementAt(0).Text)
+                </h4>
+            </td>
+        </tr>
+    </table>
+}
+<div style="overflow:auto; height:900px;">
+    <table id="fpstable" class="table">
+        <thead id="tableFPS">
+            <tr>
+                <th id="colCmd" class="col-id-no fixed-header">
+                    <div class="box"><div><h4>Nmr Cmd </h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div></div>
+                 </th>
+                <th id="colfps">
+                    <div class="box"><div><h4>FPS </h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div></div>
+                </th>
+                <th>
+                    <h4>Plastron</h4>
+                </th>
+                <th>
+                    <h4>STC</h4>
+                </th>
+                <td>
+                    <h4>Temps <br />estimé de<br />réalisation</h4>
+                </td>
+                <th id="colraison">
+                    <div class="box">
+                        <div><h4>Raison<br />sociale</h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div>
+                    </div>
+                </th>
+
+                <th>
+                    <div style="width: 120px;">
+                        <div><h5>St:Date Cmd<br /></h5></div>
+                        <div>
+                            <h5>Cl:Date Client<br /></h5>
+                        </div>
+                        <div>
+                            <h5>Ex:Date Expe<br /></h5>
+                        </div>
+                        <div><h5>Us:Date stc<br /></h5></div>
+                    </div>
+                </th>
+
+                <!--<th>
+                    <h4>Date<br />demandée<br />(départ usine)</h4>
+                </th> -->
+                <th>
+                    <h4>Erreurs</h4>
+                </th>
+                <th>
+                    <h4>Date Cloture</h4>
+                </th>
+                <th>
+                    <h4>Status<br />Cmd</h4>
+                </th>
+                <th>
+                    <h4>Controle final</h4>
+                </th>
+                <th>
+                    <h4>Status traitement
+                    <br />Commentaire</h4>
+                </th>
+                <th>
+                    @if (Model.disable1)
+                    {
+                        <h4>Ajout Commentaire</h4>
+                    }
+                    else
+                    {
+                        <h4> Commentaire  Test FPS</h4>
+                    }
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var fps in Model.TRACACMDsfiltres)
+            {
+                <tr style="background-color:@fps.CodeCouleurLigne">
+                <td class="col-id-no">
+                    <div style="max-width: 150px;">
+                        <pre>@Html.Label(fps.listcommande)</pre>
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.DisplayFor(model => fps.VAL_FPARAM_0)<br />
+                        @Html.Label("->" + fps.ITEMREF)<br />
+                        @Html.Label("MO :" + fps.CFGFLDALP2)<br />
+                        @Html.Label("MT :" + fps.CFGFLDALP3)<br />
+                        @Html.Label("SIM:" + fps.CFGFLDALP4)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 80px;">
+                        @Html.DisplayFor(model => fps.PLASTRON)
+                    </div>
+                </td>
+                <td>
+                    @using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                        <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                        <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                        <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                        <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                        <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                        <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                        <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                        <div style="width: 90px;">
+                            @if (Model.disable1 && fps.StatusFPS != 4)
+                            {
+                                @Html.DropDownListFor(m => Model.FormTRACACMD.STCEnChargeInt, // Store selected value in Model.DefaultStcId
+                                           new SelectList(Model.ListOperateursSTC, "Value", "Text", fps.STCEnChargeInt),
+                                           new { @class = "form-control", onchange = @"submit();" })
+                            }
+                            else
+                            {
+                                @Html.Label(fps.STcEnCharge);
+                            }
+                        </div>
+                    }
+                    TCS-> @Html.Label(fps.TCSORIG)
+                </td>
+                <td style="background-color:@fps.ErreurTempsCouleurCase;">
+                    <div style="width: 110px;">
+                        @using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                            <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                            <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                            <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                            <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                            <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                            <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                            <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                            if (Model.disable1 && fps.StatusFPS != 4)
+                            {
+                                @Html.DropDownListFor(m => Model.FormTRACACMD.DelaiEstimation, // Store selected value in Model.DefaultStcId
+                                          new SelectList(Model.ListDelaiFPS, "Value", "Text", fps.DelaiEstimation),
+                                          new { @class = "form-control", onchange = @"submit();" })
+                            }
+                            else
+                            {
+                                @Html.Label(fps.DelaiFpsString);
+                            }
+                        }
+                    </div>
+                </td>
+                <td>
+                    <div>
+
+                        @if (!String.IsNullOrWhiteSpace(fps.NomTech) || !String.IsNullOrWhiteSpace(fps.TelTech) || !String.IsNullOrWhiteSpace(fps.MobTech) || !String.IsNullOrWhiteSpace(fps.MailTech))
+                        {
+                            <details>
+                                <summary>@fps.NomClient.Replace('.', ' ')</summary>
+                                Contact : @fps.NomTech <br />
+                                Tél Entr: @fps.TelTech <br />
+                                Tél Mob : @fps.MobTech <br />
+                                Email   : @fps.MailTech
+                            </details>
+                        }
+                        else
+                        {
+                                @fps.NomClient.Replace('.', ' ')
+                        }<br />
+                        @fps.BPCORD 
+                    </div>
+                </td>
+                <td>
+                    <div>@Html.Label("St:" + ((DateTime)fps.CREDAT_0).ToShortDateString())</div>
+                    <div>
+                        @Html.Label("Cl:" + ((DateTime)fps.DEMDLVDAT_0).ToShortDateString())
+                    </div>
+                    <div>
+                        @Html.Label("Ex:" + ((DateTime)fps.SHIDAT).ToShortDateString())
+                    </div>
+                    <div>
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                                <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                                <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                                <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                                <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                                <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                                <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                                <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                                @Html.TextBoxFor(model => Model.FormTRACACMD.test,
+                               new
+                                    {
+                                        @type = "date",
+                                        @class = "form-control datepicker",
+                                   @Value = Model.TRACACMDsfiltres[@i].test.ToString("yyyy-MM-dd"),
+                                   @onchange = "submit();"
+                                    })
+                            }
+                        }
+                        else
+                        {
+                            @Html.Label("Us:" + ((DateTime)fps.test).ToString("dd/MM/yyyy"));
+                        }
+                    </div>
+
+                </td>                
+                @if (fps.StatusFPS == 4 )
+                {
+                <td style="background-color:@fps.ErreurStringCouleur">
+                    <div>
+                        @Html.Label(fps.ErreurString.ToString(), new { @style = "margin-top:0px;display:inline-block;white-space: pre-wrap;" })
+                    </div>
+                </td>
+                }
+                else 
+                {
+                    <td style="background-color:@fps.ErreurStringCouleur">
+                        <div>
+                            @Html.Label(fps.ErreurString.ToString(), new { @style = "margin-top:0px;display:inline-block;white-space: pre-wrap;" })
+                        </div>
+                    </td>
+                }                    
+                <td>
+                    @Html.Label(fps.ReturnDateClotureForDisplay)
+                </td>
+                <td>
+                    <div style="width: 100px;">
+                        @using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                            <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                            <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                            <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                            <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                            <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                            <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                            <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                            if (Model.disable1)
+                            {
+                                @Html.DropDownListFor(m => Model.FormTRACACMD.StatusFPSnullable, // Store selected value in Model.DefaultStcId
+                                                new SelectList(Model.ListStatusFPS, "Value", "Text", fps.StatusFPS),
+                                                new { @class = "form-control", onchange = @"submit();" })
+                            }
+                            else
+                            {
+                                @Html.Label(fps.StatusFpsString)
+                            }
+                        }
+                    </div>
+                </td>
+                <td>
+                    @Html.Label(fps.ZFPCONTROL_0)
+                </td>
+                <td>
+                    <div>
+                        @using (Html.BeginForm("EditStatus", "STCTCS"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                            <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                            <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                            <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                            <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                            <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                            <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                            <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                            if (Model.disable1)
+                            {
+                                @Html.DropDownListFor(m => Model.FormTRACACMD.StatusNullable, // Store selected value in Model.DefaultStcId
+                                                     new SelectList(fps.ListStatus, "Value", "Text", fps.GestionStatus),
+                                                     new { @class = "form-control", onchange = @"submit();" })
+                            }
+                            else
+                            {
+                                @Html.Label(fps.GestionstatusString)
+                            }
+                        }
+                    </div>
+                    <div style="max-width: 300px;">
+                        <pre>@Html.DisplayFor(model => fps.Commentaire)</pre>
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="NameSTC" value="@Model.NameSTC" idstc="@Model.NameSTC" />
+                                <input type="hidden" name="NameTCS" value="@Model.NameTCS" idtcs="@Model.NameTCS" />
+                                <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+                                <input type="hidden" name="FormTRACACMD.IndexCMD" value="@fps.IndexCMD" />
+                                <input type="hidden" name="FormTRACACMD.VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                                <input type="hidden" name="FormTRACACMD.SOHNUM" value="@fps.SOHNUM" />
+                                <input type="hidden" name="FormTRACACMD.SOPLIN" value="@fps.SOPLIN" />
+                                <input type="hidden" name="FormTRACACMD.Listindex" value="@fps.Listindex" />
+                                @Html.DropDownListFor(m => Model.FormTRACACMD.AjoutCommentaire, // Store selected value in Model.DefaultStcId
+                                                    new SelectList(Model.ListCommentaireFiche, "Value", "Text", fps.AjoutCommentaire),
+                                                    new { @class = "form-control", onchange = @"submit();" })
+                            }
+
+                        }
+
+                        else
+                        {
+                            @Html.Label(fps.ZCOMCONT_0)
+                        }
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            <button class="BttnNew" id="BttnNewCommentaire" onclick="AddCommentaire('PopUpAddCommentaire',@fps.IndexCMD,@fps.Commentairehtml)"></button>
+                        }
+                    </div>
+                </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+<div id="fondTransparent"></div>
+<div id="PopUpAddCommentaire">
+    @using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="AddCommentaire" value="" id="AddCommentaire" />
+        <input type="hidden" name="NameSTC" value="@Model.NameSTC" />
+        <input type="hidden" name="NameTCS" value="@Model.NameTCS" />
+        <input type="hidden" name="StatusViewFps" value="@Model.StatusViewFps" />
+        <input type="hidden" name="FormTRACACMD.IndexCMD" value="" id="PopUpAddCommentaireindexcmd" />
+
+        <div class="bandeau">
+            <h2>Modifier le commentaire</h2>
+            <h3>longueur maximum de 500 charactéres</h3>
+        </div>
+        <div id="ArretOFBody">
+            <div id="AjoutCommentaireSpe" class="GrisClair oublie" style=" width:100%;height:100%">
+                <textarea id="CommentaireSpe" name="CommentaireSpe" maxlength="500" style="max-width:1000px; width:100%;font-size:20px; height:250px;"></textarea>
+            </div>
+            <div class="ValidationBttn GrisClair">
+                <input id="Valider" type="submit" value="Valider" />
+                <input id="Annuler" type="button" value="Annuler" onclick="AnnulerPopUp('PopUpAddCommentaire')" />
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    function AddCommentaire(id,indexcmd,commentaire) {
+
+        console.log('coucou');
+        document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+        document.getElementById(id).style.bottom = "0px";
+        document.getElementById(id).style.height = "450px";
+        document.getElementById("fondTransparent").style.opacity = 1;
+        document.getElementById("fondTransparent").style.pointerEvents = "all";
+        document.getElementById("PopUpAddCommentaireindexcmd").value = indexcmd;
+        document.getElementById("CommentaireSpe").value = commentaire;
+    }
+    function AnnulerPopUp(id) {
+
+        document.getElementById("fondTransparent").style.opacity = 0;
+        document.getElementById("fondTransparent").style.pointerEvents = "none";
+        document.getElementById(id).style.transform = "translate(-50%, -50%) scale(0)";
+    }
+    function callChangefunc(val, status) {
+        window.location.href = "/STCTCS/GestionFPS/" + val;
+    }
+    function SetTime(value) {
+        window.location.href = "/STCTCS/GestionFPS/" + value;
+    }
+
+    function sortTable(f, n) {
+        var rows = $('#fpstable tbody  tr').get();
+        rows.sort(function (a, b) {
+
+            var A = getVal(a);
+            var B = getVal(b);
+
+            if (A < B) {
+                return -1 * f;
+            }
+            if (A > B) {
+                return 1 * f;
+            }
+            return 0;
+        });
+
+        function getVal(elm) {
+            
+            var v = $(elm).children('td').eq(n).text().toUpperCase().trim();
+            console.log(v);
+            if ($.isNumeric(v)) {
+                v = parseInt(v, 10);
+            }
+            return v;
+        }
+
+        $.each(rows, function (index, row) {
+            var color;
+            if (index % 3 == 0) { color = '#F4A460'; }
+            else if (index % 3 == 1) { color = '#FFE4C4'; }
+            else { color = '#00FFFF'; }
+            row.style.backgroundColor = color;
+            $('#fpstable').children('tbody').append(row);
+        });
+
+    }
+
+    var f_cmd = 1;
+    var f_fps = 1;
+    var f_client = 1;
+
+    $('#colCmd').click(function () {
+        f_cmd *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_cmd, n);
+    });
+    $("#colfps").click(function () {
+        f_fps *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_fps, n);
+    });
+    $("#colraison").click(function () {
+        f_client *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_client, n);
+    });
+
+    redirect(); //Appel de la fonction
+
+    //Code de la Fonction
+    function redirect() {
+        var strinchemin = location.href.substring(0, location.href.lastIndexOf("/") + 1);
+        //var Viewname = location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length);
+        //strinchemin += "ReloadTimer?id=" + Viewname;
+        console.log(location.href);
+        @if (Model.RechargementCourt)
+        {
+            <text>
+                setTimeout("document.location = \'" + location.href + "'", 3000); // 5 min
+            </text>
+        }
+        else
+        {
+            <text>
+                setTimeout("document.location = \'" + location.href + "'", 300000); // 5 min
+            </text>
+        }
+        //setTimeout("document.location = 'production/Test/production'" , 6000); //6s
+        }
+
+</script>

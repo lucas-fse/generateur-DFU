@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+	<groupe valeur="GENE" libelle="Gestion générique">
+		<sougroupe valeur="dataprodnok" libelle="Données de production NOK" couleur="#FFDDCC">
+			<alea valeur="1001" libelle="Erreur de saisie"/>
+			<alea valeur="1002" libelle="Erreur sur OF"/>
+			<alea valeur="1003" libelle="Fiche de paramétrage incorrecte"/>
+			<alea valeur="1004" libelle="Erreur de gamme de fabrication"/>
+			<alea valeur="1005" libelle="Gamme de fabrication inexistante"/>
+			<alea valeur="1006" libelle="Fiche de plastron NOK"/>
+			<alea valeur="1007" libelle="Commande impossible"/>
+		</sougroupe>	
+		<sougroupe valeur="outilnok" libelle="Outillage NOK" couleur="#FFEECC">
+			<alea valeur="1008" libelle="Outil inadapté"/>
+			<alea valeur="1009" libelle="Outil manquant"/>
+			<alea valeur="1010" libelle="Erreur moyen de test "/>
+			<alea valeur="1011" libelle="Erreur moyen de programmation"/>
+		</sougroupe>
+		<sougroupe valeur="piecenok" libelle="Pièce NOK" couleur="#FFFFCC">
+			<alea valeur="1012" libelle="Problème carte électronique"/>
+			<alea valeur="1013" libelle="Problème Pièce mécanique"/>
+			<alea valeur="1014" libelle="Plastron incorrect"/>
+			<alea valeur="1015" libelle="Pièce manquante"/>
+		</sougroupe>
+		<sougroupe valeur="montagenok" libelle="Montage NOK" couleur="#FFBBDD">
+			<alea valeur="1016" libelle="Erreur assemblage"/>
+			<alea valeur="1017" libelle="Problème étiquette"/>
+			<alea valeur="1018" libelle="Mauvaise pièce utilisée"/>
+			<alea valeur="1019" libelle="Qualité Gravure NOK"/>
+		</sougroupe>
+		<sougroupe valeur="operationhorsof" libelle="Opération Hors OF" couleur="#FFEEDD">
+			<alea valeur="1020" libelle="Perçage"/>
+			<alea valeur="1021" libelle="Contrôle final"/>
+			<alea valeur="1022" libelle="Intervention Technicien"/>
+			<alea valeur="1023" libelle="Modif Composant Carte"/>
+		</sougroupe>
+		<sougroupe valeur="animation" libelle="Animation" couleur="#FFBBFF">
+			<alea valeur="1033" libelle="Intervention animatrice"/>
+			<alea valeur="1024" libelle="Chantiers 5S"/>
+			<alea valeur="1025" libelle="Formation"/>
+			<alea valeur="1026" libelle="Réunion"/>
+			<alea valeur="1027" libelle="QRQC"/> 
+			
+		</sougroupe>
+		<sougroupe valeur="pause" libelle="Pause" couleur="#FFEEEE">
+			<alea valeur="1028" libelle="Pause 10min"/>
+			<alea valeur="1029" libelle="Pause midi"/>
+			<alea valeur="1031" libelle="Pause defini"/>
+			<alea valeur="1032" libelle="Reunion defini"/>
+		</sougroupe>	
+		<sougroupe valeur="tempsmasque" libelle="Temps masqué" couleur="#FFFFEE">
+			<alea valeur="1030" libelle="Temps masqué"/>
+		</sougroupe>		
+	</groupe>
+	<groupe valeur="BIDIR" libelle="Produit de la gamme bidirectionnelle">
+	</groupe>
+	<groupe valeur="UDUC" libelle="Produit de la gamme monodirectionnelle">
+	</groupe>
+	<groupe valeur="URRS" libelle="Produit de la gamme UR ou RS">
+	</groupe>
+	<groupe valeur="ORION" libelle="Produit de la gamme ORION">
+	</groupe>
+	<groupe valeur="TEST" libelle="Gestion des tests">
+	</groupe>
+	<groupe valeur="LASER" libelle="Gestion de la gravure laser">
+	</groupe>
+	<groupe valeur="ATEX" libelle="Produit ATEX">
+	</groupe>
+	<groupe valeur="ACCE" libelle="Accesoires de gamme">
+	</groupe>
+</Root>

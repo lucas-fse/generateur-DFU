@@ -1,0 +1,45 @@
+﻿@model GenerateurDFUSafir.Models.EtiquetteLogistique
+@{
+    ViewBag.Title = "Outil de production";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <!---<link href="~/Content/gammeUD.css" rel="stylesheet" />-->
+    <link href="~/Content/form.css" rel="stylesheet" />
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="Imprim-etiquette">
+        <div class="frm-box">
+            <h2 class="frm-title">PrintZEN</h2>
+            <h2 class="frm-title">Gestion de la fabrication des étiquettes RSL (accessoires)</h2>
+            <p class="frm-description">Exemple d'étiquette :</p>
+            <img src="~/image/etiquettelogistique.png" height="100" class="frm-etiquette" />
+
+            <div>
+                @if (Model.OFdeIDList.Count() > 0)
+                {
+                    <p class="frm-description" style="margin-top:10px;">OF déjà en cours: </p>
+                }
+                @foreach (var of in Model.OFdeIDList)
+                {
+                    <button type="submit" class="frm-button action-button buttonF cat-OF-button" value="@of" name="submitButton">@of</button>
+                }
+            </div>
+            <p class="frm-description">Entrez le numéro d'OF à imprimer :</p>
+            @*
+        @Html.EditorFor(model => model.Itmeref)*@
+            <div class="frm-group">
+                <input type="text" name="numOF" id="numOF" value="@Model.Itmeref" class="frm-input" />
+            </div>
+            <div class="frm-button-box">
+                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
+                <button name="submitButton" type="submit" id="frm-submit Valider" class="frm-button action-button buttonF" value="">VALIDER</button>
+            </div>
+        </div>
+            </div>
+            <div id="DetailAmelioration">
+            </div>
+        }
+

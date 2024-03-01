@@ -1,0 +1,277 @@
+﻿.cercle {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    background: orange;
+    font-size: 40px;
+}
+
+.main-table {
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-size: 0.9em;
+    align-self: center;
+    border-radius: 3px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.name-table {
+    text-align: center;
+    padding: 1rem;
+    color: black;
+    align-items: center;
+    display: flex;
+    align-content: center;
+    white-space: nowrap;
+    max-width: 10px;
+}
+
+.last-table {
+    border-bottom-left-radius: 10px;
+    border-bottom: none;
+}
+
+.date-picker {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+
+.name-table:hover {
+    cursor: pointer;
+    color: #F05B18;
+    font-weight: bold;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.tel-table {
+    font-weight: 800;
+    color: #FF6915;
+}
+
+th, td {
+    /*padding: 4px 0px;*/
+    text-align: center;
+    border-bottom: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    width: 15%;
+}
+
+.frm-select {
+    padding: 4px 0px;
+    text-align: center;
+    border: none;
+    background-color: #f9f9f9;
+}
+
+.frm-option {
+    text-align: left;
+}
+
+.form-control {
+    text-decoration: none;
+    border: none;
+    -webkit-appearance: none;
+    background: none;
+    transition: none;
+    -webkit-transition: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 0px 0px;
+}
+
+
+th:first-child {
+    border-top-left-radius: 3px;
+}
+
+th:last-child {
+    border-top-right-radius: 3px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+th {
+    background-color: #ff6400;
+    font-weight: bold;
+    border-right: none;
+    border-radius: 0px;
+    color: white;
+    padding: 4px 0px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+form {
+    display: flex;
+}
+
+.fleches-right {
+    font-size: 4em;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.fleches-left {
+    font-size: 4em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.fleches:hover {
+    cursor: pointer;
+    filter: brightness(110%);
+}
+
+
+@media all and (max-width: 790px) {
+    .name-table {
+        padding: 0;
+        width: 15%;
+    }
+
+    .main-table {
+        width: 90%;
+    }
+}
+
+.bloc-btn {
+    margin: 20px;
+    margin-left: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    padding-top: 65px;
+}
+
+.option-buttons {
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #F9F9F9;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border: none;
+    border-left: 4px solid #F26222;
+    transition: 0.2s;
+    max-width: 90vw;
+    justify-content: flex-start;
+    height: 50px;
+    font-weight: 700;
+    font-size: 25px;
+    color: #F26222;
+    text-align: left;
+    padding-left: 20px;
+    width: 350px;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: #F26222;
+    padding-top: 8px;
+}
+
+    .option-buttons:hover, a:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+    }
+
+.tab-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.tableau-global {
+    width: 70%;
+}
+
+.disabled {
+   background-color : red;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: transparent;
+    opacity: 1;
+}
+
+#edit-tableau {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+input[type="date"]::-webkit-datetime-edit {
+    color: #2c3e50;
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(100%);
+    border: none;
+    border-radius: 0px;
+}
+
+.planning{
+    /*On met l'icone du boutton de date sans fond et avec le logo de calendrier en blanc et centré*/
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.action-button {
+    align-items: center;
+    display: flex;
+}
+
+.datenumsemaine{
+    display: flex;
+    flex-direction: row;
+}
+
+#numsemaine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 2em;
+    font-weight: 700;
+    color: #F26222;
+    font-variant: small-caps;
+}
+
+#stylesemaine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

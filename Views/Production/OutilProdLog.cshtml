@@ -1,0 +1,35 @@
+﻿@model GenerateurDFUSafir.Models.EtiquetteLogistique
+@{
+    ViewBag.Title = "OutilProdLog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OutilProdLog</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "Form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="visuel">
+
+        <img src="~/image/etiquettelogistique.png" height="100" />
+    </div>
+    <div id="etiquette">
+        <p class="Des">Réference :</p>
+        @Html.EditorFor(model => model.Itmeref)
+        <p class="Des">Quantité :</p>
+        @Html.EditorFor(model => model.Qtr)
+        <p class="Des">Lot :</p>
+        @Html.EditorFor(model => model.Lot)
+
+        <div id="PopUpButton">
+            <button type="submit" value="Niveau" id="Valider" name="submitButton" class="buttonF" onclick="location.href='@Url.Action("OutilProdLog", "Production", new { et1 = Model })'"> Valider </button>
+
+        </div>
+    </div>
+
+    <div id="DetailAmelioration">
+
+    </div>
+
+}
+

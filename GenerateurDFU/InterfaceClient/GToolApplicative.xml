@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GToolApplicative</name>
+    </assembly>
+    <members>
+        <member name="T:GToolApplicative.ApplicativeManager">
+            <summary>
+             Applicative manager par defaut pour un projet
+            </summary>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.String,System.String)">
+            <summary>
+            Vérifier si la valeur (string) passée en paramêtre est null ou vide dans ce cas
+            on lance une applicative Exception avec la clé du message passé en paramêtre
+            </summary>
+            <param name="pValeur">pValeur in</param>
+            <param name="pMessage">pMessage message</param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.Object,System.String)">
+            <summary>
+            Vérifier si la valeur (object) passée en paramêtre est null ou vide dans ce cas
+            on lance une applicative Exception avec la clé du message passé en paramêtre
+            </summary>
+            <param name="pValeur"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.DateTime,System.String)">
+            <summary>
+            Vérifier si la valeur (datetime) passée en paramêtre est null ou égale à lavaleur minimum d'un datetime dans ce cas
+            on lance une applicative Exception avec la clé du message passé en paramêtre
+            </summary>
+            <param name="pValeur"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.Int32,System.String)">
+            <summary>
+            </summary>
+            <param name="pValeur"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pValeur"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideVideNull(System.Single,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pValeur"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideInt32(System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="pSaisie"></param>
+            <param name="pMessage"></param>
+        </member>
+        <member name="M:GToolApplicative.ApplicativeManager.ValideInt64(System.String,System.String)">
+            <summary>
+            Valide si la chaine de caracteres est bien en Int64
+            </summary>
+            <param name="pSaisie"></param>
+            <param name="pMessage"></param>
+            <exception cref="T:GToolBase.ApplicativeException">erreur lors du parse en Int64</exception>
+        </member>
+        <member name="T:GToolApplicative.Controlleur.Controlleur">
+            <summary>
+            Controlleur base class
+            </summary>
+        </member>
+        <member name="M:GToolApplicative.Controlleur.Controlleur.Init">
+            <summary>
+            Inits this instance.
+            </summary>
+        </member>
+        <member name="M:GToolApplicative.Controlleur.Controlleur.creerForm">
+            <summary>
+            Creer la form.
+            </summary>
+        </member>
+        <member name="T:GToolApplicative.LibelleMessage">
+            <summary>
+            classe contenant un ensemble de constante utiliser par les composants (droit/ville)
+            ces constantes doivent etre déclaré dans le fichier de ressource des messages
+            </summary>
+        </member>
+        <member name="T:GToolApplicative.ManagerGenerique`2">
+            <summary>
+            Manager d'entité générique
+            </summary>
+            <typeparam name="ObjetEntreprise">Poco Entreprise</typeparam>
+            <typeparam name="DaoSpecific">Le Dao Associé</typeparam>
+        </member>
+    </members>
+</doc>

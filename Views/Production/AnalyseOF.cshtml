@@ -1,0 +1,107 @@
+﻿@model GenerateurDFUSafir.Models.InfoOf
+
+@{
+    ViewBag.Title = "AnalyseOF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listedes OF par ordre de priorité</h2>
+
+
+<table class="table">
+    <tr>
+        <td>
+            <h3>NmrOF</h3>
+        </td>
+        <td>
+            <h3>Article</h3>
+        </td>
+        <td>
+            <h3>Description</h3>
+        </td>
+        <td>
+            <h3>Status</h3>
+        </td>
+        <td>
+            <h3>Allocation</h3>
+        </td>
+        <td>
+            <h3>Autre</h3>
+        </td>
+        <td>
+            <h3>Certif</h3>
+        </td>
+        <td>
+            <h3>Test</h3>
+        </td>
+        <td>
+            <h3>Date de début OF</h3>
+        </td>
+        <td>
+            <h3>Date Livraison<br /> commande</h3>
+        </td>
+        <td>
+            <h3>MRP</h3>
+        </td>
+        <td>
+            <h3>Nmr Cmd</h3>
+        </td>
+        <td>
+            <h3>Quantité</h3>
+        </td>
+
+    </tr>
+    @foreach (var item in Model.ListOfprod)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(model => item.NmrOF)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Article)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Designation)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.StatusOf)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.SituationAllocation)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.ServiceAutre)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Certif)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Test)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.DateOFString)
+    </td>
+    <td style="background-color:@item.BackgroundColor">
+        @Html.DisplayFor(model => item.DateLivraisonString)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.MessMRp)
+    </td>
+    <td>
+        @foreach (var cmd in item.ListCmd)
+        {
+            <p>@cmd</p>
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.QtrOf)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.QtrNecessaire)
+    </td>
+
+</tr>
+    }
+</table>
+

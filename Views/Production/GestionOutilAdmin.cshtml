@@ -1,0 +1,126 @@
+﻿@model GenerateurDFUSafir.Models.DataOperateurProd
+@{
+    ViewBag.Title = "GestionOutilAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/GOA.css" rel="stylesheet" />
+}
+
+<h2>Outils génériques</h2>
+
+<div class="container-content">
+
+    <div class="tools-list" id="infoFRC">
+        @if (Model.Animateur)
+        {
+            <div class="boxCounter" onclick="location.href = '@Url.Action("SuppressionOFBidir", "Production", new { id = Model.ID })'">
+                <div class="thumbnailCounter">
+                    <img src="~/image/hourglass.png" id="sablier" alt="sablier">
+                </div>
+                <div class="counterContent">
+                    <h3>Suppression OF BIDIR</h3>
+                </div>
+            </div>
+            <div class="boxCounter" onclick="location.href = '@Url.Action("SuppressionOfKepler", "Production", new { id = Model.ID })'">
+                <div class="thumbnailCounter">
+                    <img src="~/image/SuppBDD.png" id="sablier" alt="supervision">
+                </div>
+                <div class="counterContent">
+                    <h3>Impression et Suppression OF Kepler/UDR</h3>
+                </div>
+            </div>
+
+            <div class="boxCounter" onclick="location.href = '@Url.Action("GestionOP", "Generique", new { id = Model.ID })'">
+                <div class="thumbnailCounter">
+                    <img src="~/image/Court.png" id="sablier" alt="supervision">
+                </div>
+                <div class="counterContent">
+                    <h3>Gestion des opérateurs</h3>
+                </div>
+            </div>
+        }
+        <div class="boxCounter" onclick="location.href = '@Url.Action("DeclaNonConform", "Production", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/dnc-icon.png" id="sablier" alt="sablier">
+            </div>
+            <div class="counterContent">
+                <h3>Déclaration non conformité</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("index", "GammeUD", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/gammud.png" id="sablier" alt="sablier">
+            </div>
+            <div class="counterContent">
+                <h3>Gestion de la fabrication de la gamme UD</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("PackControle", "Controle", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/qualite.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Contrôle finale</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("ControleQualite", "Controle", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/qualite Plus.png" id="sablier" alt="qualite">
+            </div>
+            <div class="counterContent">
+                <h3>Controle Qualité</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("AfficheControles", "Controle", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/supervision.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Historique des Controles Qualité</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("SuppressionControleFinal", "Controle", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/SuppBDD.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Suppression d'un contrôle final</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("OutilProdLog", "Production", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/etiquettelogistique.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Etiquette Logistique RQL</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("OutilProd", "Production", new { id = Model.ID })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/etiquettelogistique.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Etiquette Production RSL</h3>
+            </div>
+        </div>
+        <div class="boxCounter" onclick="location.href = '@Url.Action("OutilProdBac", "Production", new { IDop = Model.ID,bac ="" })'">
+            <div class="thumbnailCounter">
+                <img src="~/image/Bacbleu.png" id="sablier" alt="supervision">
+            </div>
+            <div class="counterContent">
+                <h3>Etiquette Bac Production </h3>
+            </div>
+        </div>
+    </div>
+ </div>
+    <script type="text/javascript">
+        function AfficherSupressionOF() {
+            var afficher = document.querySelector('.SUPPOF');
+            if (afficher.hidden == true) {
+                afficher.hidden = false;
+            }
+            else {
+                afficher.hidden = true;
+            }
+        }
+    </script>
+

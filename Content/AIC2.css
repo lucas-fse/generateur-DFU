@@ -1,0 +1,692 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+	font-family: 'Roboto';
+	margin: 0 auto;
+}
+
+@media all and (min-width: 1080px) {
+	body {
+		width: 75%;
+	}
+}
+
+
+h2 {
+	text-align: center;
+	font-size: 25px;
+	margin: 0;
+}
+
+@media all and (min-width: 1200px) {
+	#aleas-qrqc-title {
+		
+	}
+}
+
+#topInfos {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 80px;
+}
+
+.container {
+	padding-left: 5px;
+	padding-right: 0;
+}
+
+.body-content {
+	/* permet de gerer les conflits avec les autres css car il y avait une marge gauche qui décalé le site */
+	margin-left: 0;
+	width: 100%;
+	/* permet aussi de gerer les conflits car la largeur ne prenait pas 100% */
+}
+
+#logo {
+	width: 350px;
+}
+
+#logoBackGround {
+	width: 75%;
+	max-width: 600px;
+	position: absolute;
+	left: 50%;
+	top: 55%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	opacity: 0.15;
+}
+
+#topInfos {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+@media all and (max-width: 1080px) {
+	#topInfos {
+		flex-direction: column;
+	}
+	#clock,
+	#topInfos {
+		position: initial;
+	}
+	#clock {
+		margin-bottom: 16px;
+	}
+}
+
+/* ----------- debut gestion des titres des tableaux -------*/
+
+.tableContainer {
+	position: relative;
+}
+.absoluteTitle {
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	top: -25px;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+}
+
+#gestion-aleas-title {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#topTablesContainer {
+	margin-top: 25px; /* pour ne pas superposer les titres sur le bandeau */
+}
+
+.titleLowForResolution {
+	display: none;
+	margin: 0;
+}
+
+@media all and (max-width: 1080px) {
+	.absoluteTitle {
+		display: none;
+	}
+
+	#topTablesContainer {
+		margin-top: 0;
+	}
+	
+	.titleLowForResolution {
+		display: block;
+		font-weight: bold;
+		font-size: 20px;
+		text-align: center;
+	}
+
+}
+/* ----------- debut gestion des titres des tableaux -------*/
+
+/* ---------------------------------------------------- Style tableau -------------------------------------------------------------*/
+/* code conteneur de tableaux */
+#topTablesContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+#tablesLeftContainer {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#tablesLeftContainer .tableContainer:first-child {
+	margin-bottom: 0;
+}
+
+#tableRightContainer {
+	width: 50%;
+}
+
+table textarea {
+
+	max-height: 150px;
+	box-sizing: initial;
+}
+
+
+/* code générique */
+.tableContainer {
+	border: 2px solid grey;
+	width: 99%;
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+	margin-bottom: 10px;
+}
+
+.tableContainer table {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+table tr {
+	border-bottom: 1px solid #d1d1d1;
+}
+
+table tr td:last-child,
+table tr td:first-child {
+	border-right: 0;
+}
+
+table tr:first-child,
+table tr:last-child {
+	border-bottom: none;
+}
+
+@media all and (max-width: 1080px) {
+	#topTablesContainer {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	#tablesLeftContainer {
+		width: 100%;
+	}
+	#tableRightContainer {
+		width: 100%;
+	}
+	table {
+		width: 85%;
+		margin: 0 auto;
+	}
+}
+
+@media all and (max-width: 480px) {
+	table {
+		width: 100%;
+	}
+}
+
+table td,
+table th {
+	box-sizing: border-box;
+	border-collapse: collapse;
+}
+
+table th {
+	font-weight: bold;
+	text-align: center;
+}
+
+table tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+table tr:nth-child(odd) {
+	background-color: #E0E0E0;
+}
+
+
+/* --------------------------------- debut style 3 tableaux du haut -----------------------------*/
+
+
+/* ------------ debut style 2 tableaux a gauche --------------*/
+
+
+/* debut tableau 1 */
+
+#OFs-counter-table tr:first-child th {
+	color: white;
+	text-align: center;
+}
+
+#OFs-counter-table tr th {
+	text-align: left;
+}
+
+#OFs-counter-table tr:first-child {
+	background-color: rgb(250, 120, 0);
+}
+
+#OFs-counter-table tr:first-child th {
+	padding: 5px;
+}
+
+#OFs-counter-table td {
+	text-align: center;
+	padding: 5px 0px;
+}
+
+@media all and (max-width: 1080px) {
+	.tableContainer {
+		width: 100%;
+	}
+}
+
+
+/* fin tableau 1 */
+
+
+/* debut tableau 2 */
+
+@media all and (min-width: 1080px) {
+	#tablesLeftContainer .tableContainer:last-child {
+		margin-top: 15px;
+	}
+}
+
+#AleasQrqc tr:first-child {
+	background-color: rgb(250, 120, 0);
+}
+
+#AleasQrqc tr:first-child th {
+	color: white;
+	padding: 5px 0px;
+	text-align: center;
+}
+
+#AleasQrqc tr th {
+	text-align: left;
+}
+
+#AleasQrqc td {
+	text-align: center;
+	padding: 5px 0px;
+}
+
+
+/* fin tableau 2 */
+
+
+/* ------------ fin style 2 tableaux a gauche --------------*/
+
+
+/* ------------ debut style tableau à droite --------------*/
+
+#communicationTable tr:first-child {
+	background-color: rgb(250, 120, 0);
+	color: white;
+}
+
+#communicationTable tr:first-child th {
+	padding: 5px;
+	padding-left: 15px;
+	text-align: left;
+}
+
+#communicationTable td {
+	text-align: center;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+
+#communicationTable textarea {
+	width: 60%;
+}
+
+.edit {
+	margin-right: 10%;
+	cursor: pointer;
+	font-weight: bold;
+	border: 1px solid grey;
+	background-color: white;
+	border-radius: 5px;
+	padding: 2.5px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+#communicationTable tr:last-child td {
+	
+}
+
+
+#communicationTable tr:nth-child(odd) textarea[disabled], #communicationTable tr:nth-child(odd) textarea[beforesendform="false"] {
+	background-color: #E0E0E0;
+	border: none;
+}
+
+
+#communicationTable tr:nth-child(even) textarea[disabled], #communicationTable tr:nth-child(even) textarea[beforesendform="false"] {
+	background-color: #f7f7f7;
+	border: none;
+}
+
+/*
+#bottomTab tr:nth-child(odd) [beforesendform="false"] {
+	background-color: #E0E0E0 !important;
+	border: none !important;
+}
+*/
+
+/* ------------ fin style tableau à droite --------------*/
+
+
+/* --------------------------------- fin style 3 tableaux du haut -----------------------------*/
+
+
+/* --------------------------------- debut grand tableau du bas -----------------------------*/
+
+
+/* ---------------------- debut style formulaire ----------------------*/
+
+#topTablesContainer textarea[disabled], #topTablesContainer input[disabled] {
+	text-align: center;
+}
+
+table textarea[disabled] {
+	overflow-x: hidden;
+}
+
+#communicationTable textarea[disabled] {
+	text-align: left;
+}
+
+#submitButton {
+	padding: 10px;
+	font-weight: bold;
+	display: block;
+	margin: 10px auto;
+	color: white;
+	background-color: rgb(250, 120, 0);
+}
+
+input[type=number],
+textarea {
+	max-width: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	resize: none;
+}
+
+textarea {
+	
+}
+
+
+/* ---------------------- fin style formulaire ----------------------*/
+
+
+#bottomTab input[disabled], #bottomTab textarea[disabled], #bottomTab input[beforesendform="false"], #bottomTab textarea[beforesendform="false"] {
+	border: none;
+}
+
+
+#bottomTab tr:nth-child(odd) input[disabled], #bottomTab tr:nth-child(odd) textarea[disabled],
+#bottomTab tr:nth-child(odd) [beforesendform="false"], #bottomTab tr:nth-child(odd) textarea[beforesendform="false"] {
+	background-color: #E0E0E0;
+}
+
+#bottomTab tr:nth-child(even) input[disabled], #bottomTab tr:nth-child(even) textarea[disabled],
+#bottomTab tr:nth-child(even) input[beforesendform="false"], #bottomTab tr:nth-child(even) textarea[beforesendform="false"] {
+	background-color: #f7f7f7;
+}
+
+#bottomTab input[disabled] + .slider, #bottomTab input[beforesendform="false"] + .slider {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.flexTd {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.editLine {
+	font-weight: bold;
+	border: 1px solid grey;
+	background-color: white;
+	border-radius: 5px;
+	padding: 2.5px 10px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+	max-width: fit-content;
+}
+
+@media all and (max-width: 1200px) {
+	.editLine {
+		margin: 5px 0;
+	}
+}
+
+.editLine img {
+	margin-left: 3px;
+}
+
+#bottomTab {
+	width: 100%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border: 2px solid grey;
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media all and (min-width: 1200px) {
+	#bottomTab td:first-child {
+		padding-left: 5px;
+	}
+}
+
+#bottomTab tr:nth-of-type(odd) {
+	background: #E0E0E0;
+}
+
+#bottomTab th {
+	background: rgb(250, 120, 0);
+	color: white;
+	text-align: center;
+}
+
+#bottomTab td,
+#bottomTab th {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+@media only all and (max-width: 1200px) {
+	#bottomTab {
+		width: 100%;
+		border: none;
+		box-shadow: none;
+	}
+	#bottomTab,
+	#bottomTab thead,
+	#bottomTab tbody,
+	#bottomTab th,
+	#bottomTab td,
+	#bottomTab tr {
+		display: block;
+	}
+	#bottomTab thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+		#bottomTab tr {
+			border: 2px solid grey;
+			margin-bottom: 10px;
+			box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+		}
+	#bottomTab td {
+		border: none;
+		position: relative;
+		padding-left: 50%;
+		border-top: 1px solid grey;
+	}
+
+	#bottomTab td:first-child {
+		border-top: none;
+	}
+
+
+	#bottomTab td:before {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: 0px;
+		left: 0px;
+		width: 45%;
+		height: 100%;
+		padding-right: 10px;
+		white-space: nowrap;
+		content: attr(data-column);
+		background-color: rgb(250, 120, 0);
+		color: white;
+		font-weight: bold;
+	
+		border-right: 2px solid grey;
+		box-sizing: border-box;
+	}
+
+	   #bottomTab td:first-child:before {
+		   border-top: none;
+	   }
+
+		#bottomTab td,
+		#bottomTab th {
+			padding-top: 2px;
+			padding-bottom: 2px;
+		}
+		#bottomTab td {
+			text-align: left;
+		}
+
+		#bottomTab #goshtTd {
+			display: none;
+		}	
+}
+
+/*  */
+@media all and (min-width: 1200px) {
+
+
+	#bottomTab textarea[disabled], #bottomTab textarea[beforesendform="false"] {
+		text-align: center;
+	}
+	#bottomTab input[disabled][type="text"], #bottomTab input[type="date"][disabled], #bottomTab input[type="checkbox"][disabled] {
+		text-align: center;
+	}
+
+	#bottomTab input[beforesendform="false"][type="text"], #bottomTab input[type="date"][beforesendform="false"], #bottomTab input[type="checkbox"][beforesendform="false"] {
+		text-align: center;
+	}
+
+
+
+
+}
+
+#bottomTab textarea {
+	width: 90%;
+}
+
+#bottomTab input[type="text"] {
+	width: 60%;
+	margin: 0 auto;
+}
+
+#bottomTab tr td:last-child input[type="text"]
+{
+	margin: initial;
+}
+
+
+@media all and (min-width: 1200px) {
+	#bottomTab input[type="date"],
+	input[type="checkbox"] {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+
+
+	#bottomTab td {
+		vertical-align: top;
+	}
+
+	/* --------------------------------- fin grand tableau du bas -----------------------------*/
+
+	/* toggle */
+
+	/* The switch - the box around the slider */
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 19px;
+	}
+
+		/* Hide default HTML checkbox */
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+	/* The slider */
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #d9534f; /* not checked */
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 17px;
+			width: 17px;
+			top: 1px;
+			left: 1px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+	input:checked + .slider {
+		background-color: #5cb85c; /* checked */
+	}
+
+	input:focus + .slider {
+		box-shadow: 0 0 1px #2196F3;
+	}
+
+	input:checked + .slider:before {
+		transform: translateX(21px);
+	}
+
+	/* Rounded sliders */
+	.slider.round {
+		border-radius: 25px;
+	}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
+
+/* ---- debut ajout nouvelle ligne formulaire ----*/
+
+
+
+/* ---- fin ajout nouvelle ligne formulaire ----*/

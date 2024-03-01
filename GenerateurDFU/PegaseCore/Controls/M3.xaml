@@ -1,0 +1,93 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:JAY_WpfCore_Converters="clr-namespace:JAY.WpfCore.Converters;assembly=WpfCore" x:Class="JAY.PegaseCore.Controls.M3" 
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" Width="550" Height="550">
+	<UserControl.Resources>
+	
+		<JAY_WpfCore_Converters:ConvertBoolToVisibility x:Key="ConvertBoolToVisibility"/>
+	
+		<Style x:Key="AcceleroButtonStyle" TargetType="{x:Type ToggleButton}">
+			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+			<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Grid x:Name="grid" Margin="0" Cursor="Hand">
+							<Image x:Name="Fond" Source="GSensor.png" Margin="0"/>
+							<Image x:Name="Check" Source="Validation.png" Margin="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Bottom" Width="35"/>
+							<Image x:Name="UnCheck" Source="Delete_tiny.png" Margin="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Bottom" Width="35"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsKeyboardFocused" Value="true"/>
+							<Trigger Property="IsChecked" Value="true">
+								<Setter Property="Visibility" TargetName="UnCheck" Value="Hidden"/>
+								<Setter Property="Visibility" TargetName="Check" Value="Visible"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="False">
+								<Setter Property="Visibility" TargetName="Check" Value="Hidden"/>
+								<Setter Property="Visibility" TargetName="UnCheck" Value="Visible"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="#ADADAD"/>
+								<Setter Property="Visibility" TargetName="UnCheck" Value="Hidden"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+	</UserControl.Resources>
+    <Grid>
+    	<Image x:Name="Moka3" Source="pack://siteoforigin:,,,/Affichage/View/M3J.png" Margin="0,152.667,8,0" />
+    	<Rectangle x:Name="MaskEcran" Fill="#FFF4F4F5" Height="56" Margin="236.666,205.333,248.001,0" VerticalAlignment="Top"/>
+    	<Grid x:Name="B2Face" Visibility="{Binding Mask32Visibility, Mode=OneWay}">
+            <ToggleButton x:Name="M" Content="M" HorizontalAlignment="Right" Margin="0,206.789,169.95,0" VerticalAlignment="Top" Width="30" Height="30" Style="{Binding ToggleStyleBP, Mode=OneWay}" IsChecked="{Binding EtatBtnMarche, Mode=TwoWay}"/>
+            <ToggleButton x:Name="N1" Content="N1" Margin="191.884,251.621,0,0" Style="{Binding ToggleStyleToggle, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatBtnNav1, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+            <ToggleButton x:Name="N2" Content="N2" HorizontalAlignment="Right" Margin="0,252.955,203.285,0" Width="30" Style="{Binding ToggleStyleToggle, Mode=OneWay}" IsChecked="{Binding EtatBtnNav2, Mode=TwoWay}" Height="30" VerticalAlignment="Top"/>
+    		<ToggleButton x:Name="F1" Content="F1" Margin="191.884,220.956,0,0" Style="{Binding ToggleStyleBP, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatBtn01, Mode=TwoWay}" Height="30" VerticalAlignment="Top"/>
+    		<ToggleButton x:Name="F2" Content="F2" HorizontalAlignment="Right" Margin="0,221.623,203.285,0" VerticalAlignment="Top" Width="30" Height="30" Style="{Binding ToggleStyleBP, Mode=OneWay}" IsChecked="{Binding EtatBtn02, Mode=TwoWay}"/>
+    		<ToggleButton x:Name="F3" Content="F3" Margin="191.884,189.622,0,0" VerticalAlignment="Top" Style="{Binding ToggleStyleBP, Mode=OneWay}" Height="30" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatBtn03, Mode=TwoWay}"/>
+    		<ToggleButton x:Name="F4" Content="F4" Margin="0,189.622,203.285,0" VerticalAlignment="Top" Height="30" Style="{Binding ToggleStyleBP, Mode=OneWay}" IsChecked="{Binding EtatBtn04, Mode=TwoWay}" HorizontalAlignment="Right" Width="30"/>
+    		<ToggleButton x:Name="A1" Content="A1" Margin="0,431,127,0" Style="{Binding ToggleStyleToggle1, Mode=OneWay}" HorizontalAlignment="Right" Width="30" IsChecked="{Binding EtatToggle01, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A2" Content="A2" Margin="0,430.961,162.123,0" Style="{Binding ToggleStyleToggle2, Mode=OneWay}" HorizontalAlignment="Right" Width="30" IsChecked="{Binding EtatToggle02, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A3" Content="A3" Margin="0,430.961,203.285,0" Style="{Binding ToggleStyleToggle3, Mode=OneWay}" HorizontalAlignment="Right" Width="30" IsChecked="{Binding EtatToggle03, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A6" Content="A6" Margin="193.885,430.961,0,0" Style="{Binding ToggleStyleToggle6, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatToggle06, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A7" Content="A7" Margin="152.542,430.961,0,0" Style="{Binding ToggleStyleToggle7, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatToggle07}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A8" Content="A8" Margin="111.21,430.961,0,0" Style="{Binding ToggleStyleToggle8, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatToggle08, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="A11" Content="A11" Margin="0,321.627,226.791,0" Style="{Binding ToggleStyleToggle11, Mode=OneWay}" IsChecked="{Binding EtatToggle11, Mode=TwoWay}" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Width="30"/>
+    		<ToggleButton x:Name="A12" Content="A12" Margin="216.542,321.627,0,0" Style="{Binding ToggleStyleToggle12, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatToggle12, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="V2" Content="V2" Margin="143.884,286.287,0,0" Style="{Binding ToggleStyleToggle, Mode=OneWay}" HorizontalAlignment="Left" Width="30" IsChecked="{Binding EtatBtnJoystick02, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    		<ToggleButton x:Name="V1" Content="V1" Margin="0,286.287,152.123,0" Style="{Binding ToggleStyleToggle, Mode=OneWay}" HorizontalAlignment="Right" Width="30" IsChecked="{Binding EtatBtnJoystick01, Mode=TwoWay}" VerticalAlignment="Top" Height="30"/>
+    	</Grid>
+    	<Grid x:Name="B2Front" Margin="0,8,8,0" Visibility="{Binding AuxVisibility, Mode=OneWay}" Height="144.667" VerticalAlignment="Top" HorizontalAlignment="Right" Width="242">
+    		<Image x:Name="Moka2LeftSide" Margin="8" Source="pack://siteoforigin:,,,/Affichage/View/M_2J_3J_6B.png"/>
+    		<Rectangle x:Name="Cadre" Stroke="Black" StrokeThickness="5" RadiusX="10" RadiusY="10" d:IsLocked="True"/>
+            <ToggleButton x:Name="Aux1" Content="A13" Margin="120,60,92,54.667" Style="{Binding ToggleStyleToggle, Mode=OneWay}" IsChecked="{Binding EtatBtnAuxiliaire03, Mode=TwoWay}"/>
+            
+    	</Grid>
+    	<Grid x:Name="Mask16" Visibility="{Binding Mask16Visibility, Mode=OneWay}">
+    		<ToggleButton x:Name="Axe01" Content="E / W" Margin="0,385.294,126.79,0" Style="{Binding ToggleButtonStyleAxe}" HorizontalAlignment="Right" Width="85" IsChecked="{Binding EtatOrganeAxe01, Mode=TwoWay}" VerticalAlignment="Top" Height="23" Foreground="Black"/>
+    		<ToggleButton x:Name="Axe02" Content="N / S" Margin="0,314.294,97.79,0" Style="{Binding ToggleButtonStyleAxeV}" HorizontalAlignment="Right" Width="25" IsChecked="{Binding EtatOrganeAxe02, Mode=TwoWay}" VerticalAlignment="Top" Height="94"/>
+    		<ToggleButton x:Name="Axe03" Content="E / W" Margin="100.21,385.294,0,0" Style="{Binding ToggleButtonStyleAxe}" HorizontalAlignment="Left" Width="85" IsChecked="{Binding EtatOrganeAxe03, Mode=TwoWay}" VerticalAlignment="Top" Height="23"/>
+    		<ToggleButton x:Name="Axe04" Content="N / S" Margin="71.21,314.294,0,0" Style="{Binding ToggleButtonStyleAxeV}" HorizontalAlignment="Left" Width="25" IsChecked="{Binding EtatOrganeAxe04, Mode=TwoWay}" VerticalAlignment="Top" Height="94"/>
+    		<ToggleButton x:Name="Axe05" Content="E / W" Margin="228.21,431.294,236.79,0" Style="{Binding ToggleButtonStyleAxe}" IsChecked="{Binding EtatOrganeAxe05, Mode=TwoWay}" VerticalAlignment="Top" Height="23"/>
+    		<ToggleButton x:Name="Axe06" Content="N / S" Margin="260.545,337.294,264.455,0" Style="{Binding ToggleButtonStyleAxeV}" IsChecked="{Binding EtatOrganeAxe06, Mode=TwoWay}" VerticalAlignment="Top" Height="94"/>
+    	</Grid>
+    	<Grid x:Name="Accelerometre" Height="125" VerticalAlignment="Top" Margin="8,8,0,0" Width="125" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment" Visibility="{Binding IsEtatAccelerometre, Converter={StaticResource ConvertBoolToVisibility}, Mode=OneWay}">
+    		<Rectangle x:Name="CadreAccelero" Stroke="Black" StrokeThickness="5" RadiusX="10" RadiusY="10"/>
+    		<ToggleButton x:Name="AcceleroButton" Content="F2" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="90" Height="90" Style="{DynamicResource AcceleroButtonStyle}" IsChecked="{Binding EtatAccelerometre, Mode=TwoWay}"/>
+    	</Grid>
+            
+    </Grid>
+</UserControl>

@@ -1,0 +1,2592 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GToolBase</name>
+    </assembly>
+    <members>
+        <member name="T:GToolBase.Adapter.AdapterAndRulesBase`1">
+            <summary>
+            cette classe est la classe de base des Adapterpermet d'exposer des propriétés des objets entreprises (poco) au travers d'une nouvelle structure suportant INotifyPropertyChanged, et pouvant etre etendu
+            Cette classe implemente egallement iDataErrorIngo, et utilise le singleton du moteur de regle GestionRegle.
+            nb le singleton doit etre remplis de part ailleur.
+            </summary>
+            <typeparam name="TObjetEntreprise">Objet entreprise qui est ré-exposé</typeparam>
+        </member>
+        <member name="P:GToolBase.Adapter.AdapterAndRulesBase`1.System#ComponentModel#IDataErrorInfo#Item(System.String)">
+            <summary>
+            cette methode permet de calculer un message à partir du nom de la propriete. il utilise la valeur de cette derniere pour la valider
+            cette methode est appler via l'interface IdataErrorInfo
+            </summary>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Adapter.AdapterAndRulesBase`1.IDataErrorInfo_this(System.String)">
+            <summary>
+            cette methode permet de calculer un message à partir du nom de la propriete. il utilise la valeur de cette derniere pour la valider
+            </summary>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.Adapter.AdapterAndRulesBase`1.Error">
+            <summary>
+            a quoi ca sert ?. et surtout qui appel en WPF 3.5 ! question posé le 01/12/2010
+            </summary>
+        </member>
+        <member name="T:GToolBase.Adapter.AdpaterBase`1">
+            <summary>
+            cette classe est la classe de base des Adapterpermet d'exposer des propriété des objets entreprises (poco) au travers d'une nouvelle structure suportant INotifyPropertyChanged, et pouvant etre etandu
+            </summary>
+            <typeparam name="TObjetEntreprise"></typeparam>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.Vue.Bvue`1"/> class.
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.Vue.Bvue`1"/> class.
+            </summary>
+            <param name="objet">The objet.</param>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.SetInternalObject(`0)">
+            <summary>
+            Affecte un objet de type &lt;ObjetEntreprise&gt; à l'objet inerne reference
+            </summary>
+            <param name="pObjetEntreprise"></param>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.AfterSetInternalObject">
+            <summary>
+            permet de lancer une action apres avoir affetuer un objet internal
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.GetInternalObject">
+            <summary>
+             retourne l'objet interne de type &lt;ObjetEntreprise&gt; référence dans la vue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Adapter.AdpaterBase`1.BeforeGetInternalObject">
+            <summary>
+            permet de raliser un traitement avant de recupere l'objet internal
+            </summary>
+        </member>
+        <member name="T:GToolBase.Adapter.ListHelper`2">
+            <summary>
+            classe permettant de créer des listes d'objet implement IBvue de TObjetEntreprise a partir d'objet TObjetEntreprise
+            </summary>
+            <typeparam name="TypeVue">class "adapter"</typeparam>
+            <typeparam name="TObjetEntreprise">classe entreprise/poco</typeparam>
+        </member>
+        <member name="M:GToolBase.Adapter.ListHelper`2.GetListeVues(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            fournit une liste type de TypeVue à partir d'une collection de TObjetEntreprise
+            </summary>
+            <param name="ListOrigine">Liste d'objets métier</param>
+            <returns>retourne une observable collection</returns>
+        </member>
+        <member name="M:GToolBase.Adapter.ListHelper`2.GetObservableCollectionVues(System.Collections.Generic.IEnumerable{`1},System.Boolean)">
+            <summary>
+            obtient une obervable collection a partie d'objet metier
+            </summary>
+            <param name="ListOrigine">Liste d'objets métier</param>
+            <param name="ElementVide">Veux t on un element vide en tete de liste ? (pour combobox)</param>
+            <returns>retourne une observable collection</returns>
+        </member>
+        <member name="M:GToolBase.Adapter.ListHelper`2.GetObservableCollectionVues(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            obtient une obervable collection a partie d'objet metier
+            </summary>
+            <param name="ListOrigine">Liste d'objets métier</param>        
+            <returns>retourne une observable collection</returns>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.ClasseEquivalent">
+            <summary>
+            attribut permettant de faire correspondre un nom de classe à un type adpater
+            L'objectif est de permettre au moteur de regle de determiner la classe servant de référence pour le calcul de la regle.
+            </summary>
+        </member>
+        <member name="F:GToolBase.Adapter.Rules.ClasseEquivalent.classeName">
+            <summary>
+            nom de la classe
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.ClasseEquivalent.#ctor(System.String)">
+            <summary>
+            constructeur unique. cette classe sans l'attribut classeName n'a aucun interet
+            </summary>
+            <param name="pClasseName"></param>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.GestionRegles">
+            <summary>
+            cette classe permet la gestion de regle de validation pour des classe et propriété.
+            Elle utilise les classe RegleClasse et ReglePropriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.GestionRegles.Singleton">
+            <summary>
+            Singleton du moteur pour un acces facile
+            </summary>
+        </member>
+        <member name="F:GToolBase.Adapter.Rules.GestionRegles.LstRegle">
+            <summary>
+            liste des regle pour les classes
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.GestionRegles.DictClasse">
+            <summary>
+            dictionnaire des regle par classe
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.sample">
+            <summary>
+            code exemple afin de rpoduire des fichiers
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.EnleveRegleSecteurStationBonTravail">
+            <summary>
+            enleve les regles sur secteur et station sur le BT
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.RajouteRegleSecteurStationBonTravail">
+            <summary>
+            rajoute les regles sur secteur et station sur le BT
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.GetNewGestionRegles(System.Reflection.Assembly,System.String,System.String)">
+            <summary>
+            charge depuis une assembly deux fichiers contenant des regle l'un nommer automatique et l'autre manuel.
+            le fichier manuel vient 'overrider' les données du fichier automatique
+            </summary>
+            <param name="assemblyChargement">Assembly ou se trouve les fichiers de regles</param>
+            <param name="fichierAuto">chemin du fichier generer dans l'assembly</param>
+            <param name="fichierManuel">chemin du fichier manuel dans l'assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.GetError(System.Object,System.String)">
+            <summary>
+            calcul un message "warniong/erreur à partir d'un objet et d'une propriété
+            </summary>
+            <param name="pObject"></param>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.ValideClass(System.Object,System.Boolean)">
+            <summary>
+            Valide l'ensemble des propriéte d'une classe de type adapter ou metier
+            </summary>
+            <param name="PObject"></param>
+            <param name="ErrorOnly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.GestionRegles.EvalueRegle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.GestionRegles.EvalueRegle.TraiteNonNullDemander">
+            <summary>
+            
+            </summary>
+            <returns>si faux ne pas passer les autres validation</returns>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.PropertyEquivalent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GToolBase.Adapter.Rules.PropertyEquivalent.classeName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GToolBase.Adapter.Rules.PropertyEquivalent.propertyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.PropertyEquivalent.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pPropertyName"></param>
+        </member>
+        <member name="M:GToolBase.Adapter.Rules.PropertyEquivalent.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pClasseName"></param>
+            <param name="pPropertyName"></param>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.RegleClasse">
+            <summary>
+            Classe permettant le staocj=kage de regle metier s'appliquant au classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleClasse.TypeClasse">
+            <summary>
+            Type de la classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleClasse.Propriete">
+            <summary>
+            Liste des propriétés de la classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleClasse.DictPropriete">
+            <summary>
+            dictionaire permettant d'acceder aux regles sur les propriété en les interrogeant par le nom des propriétés
+            </summary>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.RegleMessage">
+            <summary>
+            cette classe permet de remonter une trace fonctionnel des validation
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleMessage.PropertyLabel">
+            <summary>
+            Label de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleMessage.Message">
+            <summary>
+            message donner à l'utilisateur
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleMessage.PropertyName">
+            <summary>
+            Nom de la propriété sur lequel une erreur ou un warning à été levé
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.RegleMessage.IsError">
+            <summary>
+            si vrai Erreur, si false Warning
+            </summary>
+        </member>
+        <member name="T:GToolBase.Adapter.Rules.ReglePropriete">
+            <summary>
+            permet de decrire les regles que doit repecter une propriété 
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.NomPropriete">
+            <summary>
+            Nom de la propriété
+            </summary>
+        </member>
+        <member name="F:GToolBase.Adapter.Rules.ReglePropriete.libellePropriete">
+            <summary>
+            libelle de la propriete
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.LibellePropriete">
+            <summary>
+            libelle de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.EstObligatoire">
+            <summary>
+            Indique si la propriété est obligatoire
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.EpressionReguliere">
+            <summary>
+            Expression reguliere permettant de valider la propriete
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.MessageSiEpressionReguliereFausse">
+            <summary>
+            Message à afficher si l'expressionn reguliere n'est pas respecté
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.Longueur">
+            <summary>
+            Longueur de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.ValeurMin">
+            <summary>
+            Valeur minimale de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Adapter.Rules.ReglePropriete.ValeurMax">
+            <summary>
+            Valeur maximale de la propriété
+            </summary>
+        </member>
+        <member name="T:GToolBase.List.BasicIdentifiedItemComparer`1">
+            <summary>
+            Classe de base pour la comparaison de tri des éléments IIdentifiedItem
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BasicIdentifiedItemComparer`1.#ctor">
+            <summary>
+            Constructeur vide
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BasicIdentifiedItemComparer`1.Compare(`0,`0)">
+            <summary>
+            Compare 2 IIdentifiedItem par leur ID
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.List.BasicGuidItemComparer`1">
+            <summary>
+            Classe de base pour la comparaison de tri des éléments IIdentifiedItem
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BasicGuidItemComparer`1.#ctor">
+            <summary>
+            Constructeur vide
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BasicGuidItemComparer`1.Compare(`0,`0)">
+            <summary>
+            Compare 2 IIdentifiedItem par leur ID
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.List.BindingListHelper`2">
+            <summary>
+            Helper pour créer une BindingList
+            </summary>
+            <typeparam name="TypeVue"></typeparam>
+            <typeparam name="ObjetEntreprise"></typeparam>
+        </member>
+        <member name="M:GToolBase.List.BindingListHelper`2.GetBindingListItemSortableVues(System.Collections.Generic.ICollection{`1})">
+            <summary>
+            ???
+            </summary>
+            <param name="ListOrigine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListHelper`2.GetBindingListItemSortableVues(System.Collections.Generic.IList{`1})">
+            <summary>
+            ???
+            </summary>
+            <param name="ListOrigine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListHelper`2.GetBindingListItemSortableVues(System.Collections.IList)">
+            <summary>
+            ???
+            </summary>
+            <param name="ListOrigine"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.List.BindingListItemLink">
+            <summary>
+            Lien entre 2 collection
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.AddParent(System.ComponentModel.IBindingList)">
+            <summary>
+            Ajoute un parent dans la source
+            </summary>
+            <param name="coll"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.RemoveParent(System.ComponentModel.IBindingList)">
+            <summary>
+            Retire un parent
+            </summary>
+            <param name="coll"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.SetParent(System.ComponentModel.IBindingList)">
+            <summary>
+            Supprime le ou les parents actuels 
+            et 
+            spécifie le nouveau parent
+            </summary>
+            <param name="coll"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.SetParent(System.Int32,System.ComponentModel.IBindingList)">
+            <summary>
+            spécifie le nouveau parent pour l'index
+            </summary>
+            <param name="index">l'index</param>
+            <param name="coll">la collection parente</param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.DisconnectParent">
+            <summary>
+            Déconnecte le ou les parents
+            </summary>
+        </member>
+        <member name="E:GToolBase.List.BindingListItemLink.ListChange">
+            <summary>
+            La binding liste change
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.AddFilter(System.IComparable)">
+            <summary>
+            Ajout d'un filter
+            </summary>
+            <param name="Comparer"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.RemoveFilter(System.IComparable)">
+            <summary>
+            Supression d'un filtre
+            </summary>
+            <param name="Comparer"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.RemoveAllFilter">
+            <summary>
+            Raz des filtres
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.DoFilterChange">
+            <summary>
+            Permet d'indiquer qu'un filtre à changé
+            Et ainsi de faire un reset sur la liste chainée
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemLink.Dispose">
+            <summary>
+            Nettoyage
+            </summary>
+        </member>
+        <member name="T:GToolBase.List.IBindingList`1">
+            <summary>
+            Interface de gestion des listes Binding generique
+            </summary>
+            <typeparam name="T">Object de la liste</typeparam>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Add(`0[])">
+            <summary>
+            Ajout d'un element
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="P:GToolBase.List.IBindingList`1.Item(System.Int64)">
+            <summary>
+            Recherche un objet par id
+            </summary>
+            <param name="id">Id de l'objet</param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.IBindingList`1.Item(System.Guid)">
+            <summary>
+            Recherche un objet par guid
+            </summary>
+            <param name="guid">le guid de l'objet</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Tri de la liste avec un comparer
+            </summary>
+            <param name="comparer">la classe de comparaison</param>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Sort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)">
+            <summary>
+            Tri de la liste sur une propriété
+            </summary>
+            <param name="property">la propriété</param>
+            <param name="direction">le direction du tri</param>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Sort(System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            Tri de la liste sur une propriété
+            </summary>
+            <param name="propertyName"></param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Contains(System.Guid)">
+            <summary>
+            Retourne si la liste contient un item avec la valeur Guid
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.IBindingList`1.Contains(System.Int64)">
+            <summary>
+            Retourne si la liste contient un item avec l'id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.List.CreateFactory`1">
+            <summary>
+            Low typed Factory (item is object)
+            </summary>
+            <typeparam name="IItem"></typeparam>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.List.BindingListItemSortable`1">
+            <summary>
+            BindingList with Int64entifiedItem with one signature
+            </summary>
+            <typeparam name="IItem">Child Item ex:Model Object linked with Business Synchrone Object</typeparam>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor">
+            <summary>
+            Constructeur de base (important)
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(`0[])">
+            <summary>
+            Constructeur à partir d'un array (liste copiée)
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.Collections.Generic.IList{`0})">
+            <summary>
+            Constructeur à partir d'une liste
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.Collections.Generic.ICollection{`0})">
+            <summary>
+            Constructeur à partir d'une liste
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.ComponentModel.IBindingList,System.IComparable[])">
+            <summary>
+            Create the collection with link and filter
+            </summary>
+            <param name="coll"></param>
+            <param name="filters"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.ComponentModel.IBindingList,System.IComparable[],GToolBase.List.CreateFactory{`0})">
+            <summary>
+            Ctr par liaison et filtres
+            </summary>
+            <param name="coll"></param>
+            <param name="filters"></param>
+            <param name="factory"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.ComponentModel.IBindingList,System.Boolean)">
+            <summary>
+            Protected constructor for copy
+            </summary>
+            <param name="coll"></param>
+            <param name="linked">False pour cloner, true pour lier</param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.#ctor(System.ComponentModel.IBindingList,System.ComponentModel.IBindingList,System.Boolean)">
+            <summary>
+            Création d'une liste supportant 2 listes en entrée
+            </summary>
+            <param name="coll1"></param>
+            /// <param name="coll2"></param>
+            <param name="connected">False pour cloner, true pour lier</param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.internalExists(`0)">
+            <summary>
+            Return true is object is known in the collection
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.internalExists(System.Int64)">
+            <summary>
+            Return true is object is known in the collection
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.internalExists(System.Guid)">
+            <summary>
+            Return true is object is known in the collection
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Contains(System.Guid)">
+            <summary>
+            indique si la collection contient un item avec le guid
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Contains(System.Int64)">
+            <summary>
+            indique si la collection contient un item avec l'id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.Item(System.Int64)">
+            <summary>
+            Recherche d'un item par son identifiant
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.Item(System.Guid)">
+            <summary>
+            Recherche d'un item par son identifiant guid
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.Item(System.Int32)">
+            <summary>
+            Forced Override prevent IndexOutOfRangeException return null else
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.AddNewCore">
+            <summary>
+            surcharge BindingList AddNewCore non supporté
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.ClearItems">
+            <summary>
+            surcharge BindingList ClearItems
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.CurrentItem">
+            <summary>
+            L'item changeant
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.InsertItem(System.Int32,`0)">
+            <summary>
+            Surcharge d'insertion
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.RemoveItem(System.Int32)">
+            <summary>
+            Surcharge de suppression par index
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.RemoveItem(`0)">
+            <summary>
+            Surcharge de suppression par objet
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.AddItem(`0)">
+            <summary>
+            Ajout d'un IItem item
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SupportsChangeNotificationCore">
+            <summary>
+            Surcharge de BindingList SupportsChangeNotificationCore
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SyncRoot">
+            <summary>
+            Synchronisation de la liste
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SupportsSearchingCore">
+            <summary>
+            Surcharge
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+            IBindingList Find Surcharge
+            </summary>
+            <param name="prop"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.FindCore(System.String,System.Object)">
+            <summary>
+            IBindingList Find Surcharge
+            </summary>
+            <param name="propName"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.FindBasic(System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+            Basic search method
+            </summary>
+            <param name="prop"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.FindWithPredicate(System.Predicate{`0},System.Object)">
+            <summary>
+            Methode evoluer de recherche
+            </summary>
+            <param name="propPredicate"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.GetPredicate(System.String,System.Object)">
+            <summary>
+            Surcharge pour obtenir un Predicate pour faire les recherche non basic
+            Par défaut c'est retourner le Predicate pour un Id ou Int64
+            </summary>
+            <param name="propName">Nom de la propriété</param>
+            <param name="key">valeur de comparaison</param>
+            <returns></returns>
+        </member>
+        <member name="F:GToolBase.List.BindingListItemSortable`1.m_PredicateIdValue">
+            <summary>
+             Comparison value
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.EqualIdentifierPredicate(`0)">
+            <summary>
+            Return if item have Id and with the same value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Find(System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+            Find in the collection
+            </summary>
+            <param name="prop"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Find(System.String,System.Object)">
+            <summary>
+            Find index in the collection
+            </summary>
+            <param name="propName"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Find(System.Object)">
+            <summary>
+            Recherche l'element en se basant sur le fait qu'il s'agit soit d'un Id, d'un Int64 soit d'un Int64entifiedItem
+            </summary>
+            <param name="key">Int64 ou Int64entifiedItem</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Dispose">
+            <summary>
+            Disposition de la collection
+            </summary>
+        </member>
+        <member name="E:GToolBase.List.BindingListItemSortable`1.Disposed">
+            <summary>
+            La collection est dispose.
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.SetResetPending">
+            <summary>
+            Set the list in Reset context
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.ClearResetContext">
+            <summary>
+            Clear the Reset context
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.IsResetPending">
+            <summary>
+            Return Reset context
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnListChanged(System.ComponentModel.ListChangedEventArgs)">
+            <summary>
+            Protect Fire event from Thread Exception
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnItemChanged(`0)">
+            <summary>
+            Send item change
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.DataSource">
+            <summary>
+            Permet de modifier les liens entre source de données initiales et cette liste.
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.UpdateForResetOrAdd(GToolBase.Interface.IBindingListItem)">
+            <summary>
+            Reset or Add Event
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.UpdateListForUpdate(GToolBase.Interface.IBindingListItem)">
+            <summary>
+            Update Event
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SupportsSortingCore">
+            <summary>
+            Surcharge
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.IsSortedCore">
+            <summary>
+            Surcharge
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SortDirectionCore">
+            <summary>
+            Return the sort Direction
+            </summary>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.SortPropertyCore">
+            <summary>
+            Return the Sort Property
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.RemoveSort">
+            <summary>
+            Remove Sort information
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.RemoveSortCore">
+            <summary>
+            Apply Remove Sort internaly.
+            Must be call if override this methode
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)">
+            <summary>
+            Apply Sort
+            </summary>
+            <param name="property"></param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.ApplySortCore(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            ApplySortCore(sortComparer)
+            This methode is used to apply the comparer
+            </summary>
+            <param name="sortComparer"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            User 
+            </summary>
+            <param name="comparer"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Sort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)">
+            <summary>
+            
+            </summary>
+            <param name="property"></param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Sort(System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            
+            </summary>
+            <param name="propertyName"></param>
+            <param name="direction"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.GetSpecificPropertyComparer(System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            Base Constructor for IComparer
+            Return PropertyComparer"IItem"
+            </summary>
+            <param name="propertyName">Name of the public property</param>
+            <param name="direction">Ascending or Descending</param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.BindingListItemSortable`1.RaisesItemChangedEvents">
+            <summary>
+            Specify BindingList fire events
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnReset">
+            <summary>
+            Call OnListChanged for ListChangedType.Reset
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnChanged(`0)">
+            <summary>
+            Call OnListChanged for ListChangedType.ItemChanged
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnAdded(`0)">
+            <summary>
+            Call OnListChanged for ListChangedType.ItemAdded
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.OnMoved(System.Int32,System.Int32)">
+            <summary>
+            Un item c'est déplacé et à changé.
+            </summary>
+            <param name="newIndex"></param>
+            <param name="oldIndex"></param>
+        </member>
+        <member name="E:GToolBase.List.BindingListItemSortable`1.ListChanged">
+            <summary>
+            Surcharge
+            </summary>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.op_Implicit(GToolBase.List.BindingListItemSortable{`0})~`0[]">
+            <summary>
+            Permet de transmettre un tableau
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Add(`0[])">
+            <summary>
+            Ajoute un ensemble
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:GToolBase.List.BindingListItemSortable`1.Add(System.Collections.Generic.IList{`0})">
+            <summary>
+            Ajoute un ensemble d'item
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:GToolBase.List.FilterList.DoFilterChange">
+            <summary>
+            Permet d'indiquer qu'un filtre à changé
+            Et ainsi de faire un reset sur la liste chainée
+            </summary>
+        </member>
+        <member name="T:GToolBase.List.IBindingListItemLinkCompliant">
+            <summary>
+            Utilisé pour les liens entre collections
+            </summary>
+        </member>
+        <member name="T:GToolBase.List.PropertyComparer`1">
+            <summary>
+            Generic comparer
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:GToolBase.List.PropertyComparer`1.#ctor(System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            Ctr for just one Property compare + Id comparer
+            </summary>
+            <param name="sortProperty"></param>
+            <param name="sortDirection"></param>
+        </member>
+        <member name="M:GToolBase.List.PropertyComparer`1.Compare(`0,`0)">
+            <summary>
+            Implement the compare methode based on property reflexion
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.List.PropertyComparer`1.SortDirection">
+            <summary>
+            Surgate of Sorted implementation.
+            Give the direction
+            </summary>
+        </member>
+        <member name="T:GToolBase.Cache.GtoolCacheList`2">
+            <summary>
+            
+            
+            
+            exemple de parametrage 
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TObject"></typeparam>
+        </member>
+        <member name="M:GToolBase.Cache.GtoolCache`2.#ctor(System.Int64,GToolBase.Cache.GtoolCache{`0,`1}.SignatureManager4Load)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.Cache.GtoolCache`2"/> class.
+            </summary>
+            <param name="pdelay">The pdelay in seconds.</param>
+            <param name="pSignatureManager4Load">The p signature manager4 load.</param>
+        </member>
+        <member name="T:GToolBase.Configuration.ExternalConfig.MyNameValueCollection">
+            <summary>
+            MyNameValueCollection représente une Collection dans un fichier de configuration (App.Config)
+            Cette classe classe équivaut à un NameValueCollection
+            
+            </summary>
+            <example>
+            Fichier de configuration à lire :
+               &lt;configuration&gt;
+                 &lt;configSections&gt;
+                   &lt;sectionGroup name=&quot;SCIL&quot;&gt;
+                     &lt;section name=&quot;COMMON&quot; type=&quot;GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase&quot;/&gt;
+                 &lt;/configSections&gt;
+                 &lt;SCIL&gt;
+                   &lt;COMMON&gt;
+                     &lt;add key=&quot;MODE_INJECT&quot; value=&quot;BDD&quot;/&gt;
+                   &lt;/COMMON&gt;
+                 &lt;/SCIL&gt;
+               &lt;/configuration&gt;
+            
+            
+            Lecture :
+            // Ouverture du fichier de config passé en paramètre : pFilePath
+            System.Configuration.Configuration config = null;
+            {
+              ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+              configFileMap.ExeConfigFilename = pFilePath;
+              config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+              // Pour lecture du fichier d'origine de l'appli avec cette méthode, utiliser :
+              // ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            }
+            
+            // Ouverture de la section
+            ConfigurationSection cs = config.GetSection("SCIL/COMMON");
+            if (cs == null)
+            {
+              log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+            }
+            else
+            {
+              MyNameValueCollectionSection section = cs as MyNameValueCollectionSection;
+              if (section == null)
+              {
+                 log.Error("Section SCIL/COMMON d'un type non compatible avec le chargement de config par Fichier, utiliser le type de section : \"GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase\"");
+              }
+              else
+              {
+                 MyNameValueCollection nvc = section.Settings;
+                 if (nvc == null)
+                 {
+                    // Ne devrait pas arriver ?
+                    log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+                 }
+                 else
+                 {
+                       _Common.MODE_INJECT = (MODE_INJECT_Enum)Enum.Parse(typeof(MODE_INJECT_Enum), nvc["MODE_INJECT"]);
+                 }
+              }
+            }
+            
+            Possibilité de modifier un fichier de config via cette méthode.
+            </example>
+        </member>
+        <member name="M:GToolBase.Configuration.ExternalConfig.MyNameValueCollection.CreateNewElement">
+            <summary>
+            Cree un nouvel element
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:GToolBase.Configuration.ExternalConfig.MyNameValueCollection.AllKeys">
+            <summary>
+            Renvoie toutes les clefs contenues dans la collection
+            </summary>
+        </member>
+        <member name="P:GToolBase.Configuration.ExternalConfig.MyNameValueCollection.Item(System.String)">
+            <summary>
+            Récupère un item via une clef
+            </summary>
+            <param name="key">clef de l'item voulu</param>
+            <returns>l'Item si présent, null sinon</returns>
+        </member>
+        <member name="T:GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection">
+            <summary>
+            MyNameValueCollectionSection représente une Section dans un fichier de configuration (App.Config)
+            Cette classe est utile pour la lecture d'un fichier de config qui serait différent de celui de l'application en cours.
+            
+            </summary>
+            <example>
+            Fichier de configuration à lire :
+               &lt;configuration&gt;
+                 &lt;configSections&gt;
+                   &lt;sectionGroup name=&quot;SCIL&quot;&gt;
+                     &lt;section name=&quot;COMMON&quot; type=&quot;GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase&quot;/&gt;
+                 &lt;/configSections&gt;
+                 &lt;SCIL&gt;
+                   &lt;COMMON&gt;
+                     &lt;add key=&quot;MODE_INJECT&quot; value=&quot;BDD&quot;/&gt;
+                   &lt;/COMMON&gt;
+                 &lt;/SCIL&gt;
+               &lt;/configuration&gt;
+            
+            
+            Lecture :
+            // Ouverture du fichier de config passé en paramètre : pFilePath
+            System.Configuration.Configuration config = null;
+            {
+              ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+              configFileMap.ExeConfigFilename = pFilePath;
+              config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+              // Pour lecture du fichier d'origine de l'appli avec cette méthode, utiliser :
+              // ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            }
+            
+            // Ouverture de la section
+            ConfigurationSection cs = config.GetSection("SCIL/COMMON");
+            if (cs == null)
+            {
+              log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+            }
+            else
+            {
+              MyNameValueCollectionSection section = cs as MyNameValueCollectionSection;
+              if (section == null)
+              {
+                 log.Error("Section SCIL/COMMON d'un type non compatible avec le chargement de config par Fichier, utiliser le type de section : \"GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase\"");
+              }
+              else
+              {
+                 MyNameValueCollection nvc = section.Settings;
+                 if (nvc == null)
+                 {
+                    // Ne devrait pas arriver ?
+                    log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+                 }
+                 else
+                 {
+                       _Common.MODE_INJECT = (MODE_INJECT_Enum)Enum.Parse(typeof(MODE_INJECT_Enum), nvc["MODE_INJECT"]);
+                 }
+              }
+            }
+            
+            Possibilité de modifier un fichier de config via cette méthode.
+            </example>
+        </member>
+        <member name="P:GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection.Settings">
+            <summary>
+            Pour récuperer le MyNameValueCollection qui contient les items de la config
+            </summary>
+        </member>
+        <member name="T:GToolBase.Configuration.ExternalConfig.MyNameValueItem">
+            <summary>
+            MyNameValueItem représente un élément dans un fichier de configuration (App.Config)
+            Cette classe représente le plus petit élément dans le fichier de configuration.
+            C'est elle qui est contenu dans les sections
+            
+            </summary>
+            <example>
+            Fichier de configuration à lire :
+               &lt;configuration&gt;
+                 &lt;configSections&gt;
+                   &lt;sectionGroup name=&quot;SCIL&quot;&gt;
+                     &lt;section name=&quot;COMMON&quot; type=&quot;GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase&quot;/&gt;
+                 &lt;/configSections&gt;
+                 &lt;SCIL&gt;
+                   &lt;COMMON&gt;
+                     &lt;add key=&quot;MODE_INJECT&quot; value=&quot;BDD&quot;/&gt;
+                   &lt;/COMMON&gt;
+                 &lt;/SCIL&gt;
+               &lt;/configuration&gt;
+            
+            
+            Lecture :
+            // Ouverture du fichier de config passé en paramètre : pFilePath
+            System.Configuration.Configuration config = null;
+            {
+              ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+              configFileMap.ExeConfigFilename = pFilePath;
+              config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+              // Pour lecture du fichier d'origine de l'appli avec cette méthode, utiliser :
+              // ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            }
+            
+            // Ouverture de la section
+            ConfigurationSection cs = config.GetSection("SCIL/COMMON");
+            if (cs == null)
+            {
+              log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+            }
+            else
+            {
+              MyNameValueCollectionSection section = cs as MyNameValueCollectionSection;
+              if (section == null)
+              {
+                 log.Error("Section SCIL/COMMON d'un type non compatible avec le chargement de config par Fichier, utiliser le type de section : \"GToolBase.Configuration.ExternalConfig.MyNameValueCollectionSection,GToolBase\"");
+              }
+              else
+              {
+                 MyNameValueCollection nvc = section.Settings;
+                 if (nvc == null)
+                 {
+                    // Ne devrait pas arriver ?
+                    log.Error("Section SCIL/COMMON manquante dans le fichier de configuration");
+                 }
+                 else
+                 {
+                       _Common.MODE_INJECT = (MODE_INJECT_Enum)Enum.Parse(typeof(MODE_INJECT_Enum), nvc["MODE_INJECT"]);
+                 }
+              }
+            }
+            
+            Possibilité de modifier un fichier de config via cette méthode.
+            </example>
+        </member>
+        <member name="M:GToolBase.Configuration.ExternalConfig.MyNameValueItem.#ctor">
+            <summary>
+            Constructeur
+            </summary>
+        </member>
+        <member name="P:GToolBase.Configuration.ExternalConfig.MyNameValueItem.Key">
+            <summary>
+            Clef de l'item
+            </summary>
+        </member>
+        <member name="P:GToolBase.Configuration.ExternalConfig.MyNameValueItem.Value">
+            <summary>
+            Valeur de l'item
+            </summary>
+        </member>
+        <member name="M:GToolBase.Configuration.ExternalConfig.MyNameValueItem.Equals(System.Object)">
+            <summary>
+            Méthode de comparaison de Deux Items, compare par rapport à la clef
+            </summary>
+            <param name="compareTo">Autre Item à comparer</param>
+            <returns>vrai si clef égale</returns>
+        </member>
+        <member name="M:GToolBase.Configuration.ExternalConfig.MyNameValueItem.Equals(GToolBase.Configuration.ExternalConfig.MyNameValueItem)">
+            <summary>
+            Méthode de comparaison de Deux Items, compare par rapport à la clef
+            </summary>
+            <param name="other">Autre Item à comparer</param>
+            <returns>vrai si clef égale</returns>
+        </member>
+        <member name="T:GToolBase.Event.UnregisterCallback`1">
+            <summary>
+            Delegate permettant de réaliser le désabonnement (suppression de la liste d'abonnement)
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="eventHandler"></param>
+        </member>
+        <member name="T:GToolBase.Event.UnregisterCallback">
+            <summary>
+            Delegate permettant de réaliser le désabonnement (suppression de la liste d'abonnement)
+            </summary>
+            <param name="eventHandler"></param>
+        </member>
+        <member name="T:GToolBase.Event.IWeakEventHandlerBase">
+            <summary>
+            Interface de manipulation
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.IWeakEventHandlerBase.Unregister">
+            <summary>
+            Permet d'effectuer tel qu'enregistré lors de la construction du WeakHandler
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.IWeakEventHandlerBase.IsSame(System.Object)">
+            <summary>
+            Comparaison entre IWeakEventHandler&lt;E&gt; et EventHandler&lt;E&gt;
+            permet de retrouver le WeakHandler pour le désabonnement manuel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Event.IWeakEventHandler">
+            <summary>
+            Interface de manipulation
+            </summary>
+        </member>
+        <member name="P:GToolBase.Event.IWeakEventHandler.Handler">
+            <summary>
+            Permet de retrouver le Handler
+            </summary>
+        </member>
+        <member name="T:GToolBase.Event.IWeakEventHandler`1">
+            <summary>
+            Interface de manipulation
+            </summary>
+            <typeparam name="E"></typeparam>
+        </member>
+        <member name="P:GToolBase.Event.IWeakEventHandler`1.Handler">
+            <summary>
+            Permet de retrouver le Handler
+            </summary>
+        </member>
+        <member name="T:GToolBase.Event.WeakEventHandler`2">
+            <summary>
+            WeakHandler permettant de gérer implicitement le cycle de vie des abonnements
+            
+            </summary>
+            <typeparam name="T">Type de la classe cible, retrouver par réflexion dans la classe "Utility"</typeparam>
+            <typeparam name="E">Type EventArgs ou hérité de</typeparam>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`2.IsSame(System.Object)">
+            <summary>
+            Permet de comparer ce WeakHandler avec un Handler plus classique
+            </summary>
+            <param name="eventHandler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`2.Unregister">
+            <summary>
+            Effectue le dé-enregistrement
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`2.#ctor(System.EventHandler{`1},GToolBase.Event.UnregisterCallback{`1})">
+            <summary>
+            Constructeur
+            </summary>
+            <param name="eventHandler"></param>
+            <param name="unregister"></param>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`2.Invoke(System.Object,`1)">
+            <summary>
+            Invoke remplace l'Handler de base
+            Réalise l'appele réelle vers l'abonnée 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:GToolBase.Event.WeakEventHandler`2.Handler">
+            <summary>
+            Permet d'obtenir l'Handler originel
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`2.op_Implicit(GToolBase.Event.WeakEventHandler{`0,`1})~System.EventHandler{`1}">
+            <summary>
+            Operateur de cast implicite
+            </summary>
+            <param name="weh"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Event.WeakEventHandler`1">
+            <summary>
+            WeakHandler permettant de gérer implicitement le cycle de vie des abonnements
+            
+            </summary>
+            <typeparam name="T">Type de la classe cible, retrouver par réflexion dans la classe "Utility"</typeparam>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`1.IsSame(System.Object)">
+            <summary>
+            Permet de comparer ce WeakHandler avec un Handler plus classique
+            </summary>
+            <param name="eventHandler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`1.Unregister">
+            <summary>
+            Effectue le dé-enregistrement
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`1.#ctor(System.EventHandler,GToolBase.Event.UnregisterCallback)">
+            <summary>
+            Constructeur
+            </summary>
+            <param name="eventHandler"></param>
+            <param name="unregister"></param>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`1.Invoke(System.Object,System.EventArgs)">
+            <summary>
+            Invoke remplace l'Handler de base
+            Réalise l'appele réelle vers l'abonnée 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:GToolBase.Event.WeakEventHandler`1.Handler">
+            <summary>
+            Permet d'obtenir l'Handler originel
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandler`1.op_Implicit(GToolBase.Event.WeakEventHandler{`0})~System.EventHandler">
+            <summary>
+            Operateur de cast implicite
+            </summary>
+            <param name="weh"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Event.WeakEventHandlerUtility">
+            <summary>
+            Classe utilitaire pour utiliser les weakHandler
+            </summary>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.MakeHandler``1(System.EventHandler{``0},GToolBase.Event.UnregisterCallback{``0})">
+            <summary>
+            provider.MyEvent += EventHandlerUtils.MakeWeak&lt;EventArgs&gt;(MyWeakEventHandler,\n
+            delegate(EventHandler&lt;EventArgs&gt; eh)\n
+             {\n
+               provider.MyEvent -= eh;\n
+             });
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="eventHandler"></param>
+            <param name="unregister"></param>
+            <returns></returns>
+            <code>
+            ![CDATA[
+            provider.MyEvent += EventHandlerUtils.MakeWeak&lt;EventArgs&gt;(MyWeakEventHandler,\n
+            delegate(EventHandler&lt;EventArgs&gt; eh)\n
+             {\n
+               provider.MyEvent -= eh;\n
+             });
+            ]]
+            </code>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.MakeHandlerArgs(System.EventHandler,GToolBase.Event.UnregisterCallback)">
+            <summary>
+            Constructeur de l'argument
+            </summary>
+            <param name="eventHandler"></param>
+            <param name="unregister"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.MakeHandlerAndUnregister``1(System.EventHandler{``0},System.EventHandler{``0})">
+            <summary>
+            provider.MyEvent += EventHandlerUtils.MakeWeak&lt;EventArgs&gt;(MyWeakEventHandler,
+            delegate(EventHandler&lt;EventArgs&gt; eh)\n
+             {\n
+               provider.MyEvent -= eh;\n
+             });
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="eventHandler"></param>
+            <param name="realUnregister"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.MakeHandlerAndUnregisterArgs(System.EventHandler,System.EventHandler)">
+            <summary>
+            Constructeur du Handler avec le désenregistrement
+            </summary>
+            <param name="eventHandler"></param>
+            <param name="realUnregister"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.UnAbo``1(System.EventHandler{``0},System.EventHandler{``0})">
+            <summary>
+            Permet de supprimer le WeakHandler de l'Handler en se basant sur l'EventHandler classique.
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="list"></param>
+            <param name="eventHandler"></param>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.UnAbo``1(System.Delegate[],System.EventHandler{``0})">
+            <summary>
+            Permet de supprimer le WeakHandler de la liste d'Handler (Delegate) en se basant sur l'EventHandler classique.
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="list"></param>
+            <param name="eventHandler"></param>
+        </member>
+        <member name="M:GToolBase.Event.WeakEventHandlerUtility.UnAboArgs(System.EventHandler,System.EventHandler)">
+            <summary>
+            Permet de supprimer le WeakHandler de la liste d'Handler (Delegate) en se basant sur l'EventHandler classique.
+            </summary>
+            <param name="evt"></param>
+            <param name="eventHandler"></param>
+        </member>
+        <member name="T:GToolBase.Interface.IChangingItem">
+            <summary>
+            Interface permettant de définir l'unicité d'un objet (métier/bVue/etc...) en se basant sur son ID
+            et supportant INotifyPropertyChanged pour détecter les changements de l'objet
+            INotifyPropertyChanged est utilisé par les BindingLists chainées
+            </summary>
+            <seealso cref="T:GToolBase.Interface.IIdentifiedItem"/>
+            <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>
+        </member>
+        <member name="T:GToolBase.Interface.IBindingListItem">
+            <summary>
+            Un element pouvant être dans une SorteableBindingList
+            </summary>
+        </member>
+        <member name="T:GToolBase.Interface.IIdentifiedItem">
+            <summary>
+            Interface permettant de définir l'unicité d'un objet (métier/bVue/etc...) en se basant sur son ID
+            </summary>
+        </member>
+        <member name="P:GToolBase.Interface.IIdentifiedItem.Id">
+            <summary>
+            Identifiant d'unicité d'un objet
+            </summary>
+        </member>
+        <member name="T:GToolBase.Interface.IGuidItem">
+            <summary>
+            Interface permettant de définir l'unicité d'un objet (métier/bVue/etc...) en se basant sur son ID
+            </summary>
+        </member>
+        <member name="P:GToolBase.Interface.IGuidItem.Guid">
+            <summary>
+            Identifiant d'unicité d'un objet
+            </summary>
+        </member>
+        <member name="T:GToolBase.Interface.IPersistUtil">
+            <summary>
+            Interface de ...
+            </summary>
+        </member>
+        <member name="M:GToolBase.Interface.IPersistUtil.BeginTrans(System.String)">
+            <summary>
+            Commence la transaction "nom"
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolBase.Interface.IPersistUtil.CommitTrans(System.String)">
+            <summary>
+            Valide la transaction "nom"
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="M:GToolBase.Interface.IPersistUtil.RoolbackTrans(System.String)">
+            <summary>
+            Annule la transaction "nom"
+            </summary>
+            <param name="Nom"></param>
+        </member>
+        <member name="T:GToolBase.ApplicativeConfirmation">
+            <summary>
+            La classe ApplicativeConfirmation represente un type d'exception particulier :
+             -Elle represente une question qui peut passer à travers les couche sous forme d'exception
+             -Elle est initalisé au travers d'une clef qui est "traduite" dans le fichier de ressource du projet final
+             -La cle doit etre unique à tous les projets d'une solution. utiliser une syntaxe "Nomclasse".unMessageSansBlanc
+             -Elle prend en charge une serie de parametre qui seront lié au message utilisateur lors de l'affichage de {1} à {N} N étant la nième position dans le tableau de parametre
+             -Le fichier de ressource etant fourni par l'application appelante, ce fichier peut etre interne ou externe aux exe/dll (pour cela le fixer dans la classe Util ou celle-ci)
+            </summary>
+        </member>
+        <member name="M:GToolBase.ApplicativeConfirmation.SetRessourceManager(System.Resources.ResourceManager)">
+            <summary>
+             methode permettant de fournir le fichier de ressource pour les messages de l'application.
+             ce fichier est commun aux classes util,ApplicativeException,ApplicativeConfirmation 
+            </summary>
+            <param name="pRM"></param>
+        </member>
+        <member name="M:GToolBase.ApplicativeConfirmation.#ctor">
+            <summary>
+             constructeur par defaut
+            </summary>
+        </member>
+        <member name="M:GToolBase.ApplicativeConfirmation.#ctor(System.String)">
+            <summary>
+             constructeur acceptant une cle en entrée
+            </summary>
+            <param name="cle">clé qui sera recherché dans le fichier de ressource</param>
+        </member>
+        <member name="M:GToolBase.ApplicativeConfirmation.#ctor(System.String,System.Object[])">
+            <summary>
+             consttrcuteur acceptant une clé et des parametres
+            </summary>
+            <param name="cle">clé qui sera recherché dans le fichier de ressource</param>
+            <param name="parametres">paramètres qui seront fusionnés à la chaine récupéré du fichier ressource</param>
+        </member>
+        <member name="P:GToolBase.ApplicativeConfirmation.CleMessage">
+            <summary>
+             accesseur sur la clé du message
+            </summary>
+        </member>
+        <member name="P:GToolBase.ApplicativeConfirmation.Parametres">
+            <summary>
+             acesseur sur les paramètres du message
+            </summary>
+        </member>
+        <member name="P:GToolBase.ApplicativeConfirmation.NumeroConfirmation">
+            <summary>
+             valeur de la reponse (Messagebox)
+            </summary>
+        </member>
+        <member name="P:GToolBase.ApplicativeConfirmation.Message">
+            <summary>
+             Message deduit de la clé et du fichier de ressource
+            </summary>
+        </member>
+        <member name="T:GToolBase.ApplicativeException">
+            <summary>
+            La classe ApplicativeException represente un type d'exception fonctionnel particulier :
+             -Elle represente une Exception fonctionnel
+            - Il n'est pas necessaire de la catcher dans les couches à l'exception de la couche de plus haut niveau (IHM dans le cas d'un projet winform, dans la couche contenant les asp dans une appli web)
+             -Elle est initalisé au travers d'une clef qui est "traduite" dans le fichier de ressource du projet final
+             -La cle doit etre unique à tous les projets d'une solution. utiliser une syntaxe "Nomclasse".unMessageSansBlanc
+             -Elle prend en charge une serie de parametre qui seront lié au message utilisateur lors de l'affichage de {1} à {N} N étant la nième position dans le tableau de parametre
+             -Le fichier de ressource etant fourni par l'application appelante, ce fichier peut etre interne ou externe aux exe/dll (pour cela le fixer dans la classe Util ou celle-ci)
+            </summary>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.SetRessourceManager(System.Resources.ResourceManager)">
+            <summary>
+             methode permettant de fournir le fichier de ressource pour les messages de l'application.
+             ce fichier est commun aux classes util,ApplicativeException,ApplicativeConfirmation 
+            </summary>
+            <param name="pRM"></param>
+        </member>
+        <member name="F:GToolBase.ApplicativeException._innerLocalException">
+            <summary>
+            Inner Base Execption 
+            </summary>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.#ctor">
+            <summary>
+             constructeur Vide (valide de bien saisir une cle avant de l'utiliser...
+            </summary>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.#ctor(System.String)">
+            <summary>
+            constructeur avec cle
+            </summary>
+            <param name="cle"></param>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.#ctor(System.Exception,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.ApplicativeException"/> class.
+            </summary>
+            <param name="ex">The ex.</param>
+            <param name="cle">The cle.</param>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.#ctor(System.String,System.Object[])">
+            <summary>
+             constructeur avec cle + parametres à fusionner aux messages.
+            </summary>
+            <param name="cle">clé qui sera recherché dans le fichier de ressource</param>
+            <param name="parametres">paramètres qui seront fusionnés à la chaine récupéré du fichier ressource</param>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.#ctor(System.Exception,System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.ApplicativeException"/> class.
+            </summary>
+            <param name="ex">The ex.</param>
+            <param name="cle">The cle.</param>
+            <param name="parametres">The parametres.</param>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.GetApplicativeException(System.String,System.String,System.Object[])">
+            <summary>
+             constructeur avec cle + parametres à fusionner aux messages.
+            </summary>
+            <param name="cle">clé qui sera recherché dans le fichier de ressource</param>
+            <param name="pmessage">message par defaut</param>
+            <param name="parametres">paramètres qui seront fusionnés à la chaine récupéré du fichier ressource</param>
+        </member>
+        <!-- Commentaire XML incorrect pour le membre "M:GToolBase.ApplicativeException.#ctor(System.Exception,System.String,System.String,System.Object[])" -->
+        <member name="P:GToolBase.ApplicativeException.CleMessage">
+            <summary>
+            acesseaur pour la cle du message
+            </summary>
+        </member>
+        <member name="P:GToolBase.ApplicativeException.Parametres">
+            <summary>
+             acesseur des parametre à fusionner dans le message
+            </summary>
+        </member>
+        <member name="P:GToolBase.ApplicativeException.Message">
+            <summary>
+             message resultant du fichier ressource (il est fusionner avec les parametres s'il y à lieu)
+            </summary>
+            
+        </member>
+        <member name="M:GToolBase.ApplicativeException.setMessage(System.String)">
+            <summary>
+            cette fonction ne doit utilisé que dans des cas valider par l'erchitecte de votre projet
+            </summary>
+            <param name="pmessage"></param>
+        </member>
+        <member name="M:GToolBase.ApplicativeException.GetBaseException">
+            <summary>
+            When overridden in a derived class, returns the <see cref="T:System.Exception"/> that is the root cause of one or more subsequent exceptions.
+            </summary>
+            <returns>
+            The first exception thrown in a chain of exceptions. If the <see cref="P:System.Exception.InnerException"/> property of the current exception is a null reference (Nothing in Visual Basic), this property returns the current exception.
+            </returns>
+        </member>
+        <member name="P:GToolBase.Rules.AppliquerRegle.NePasValider">
+            <summary>
+            Indique si la propriété est obligatoire
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.AppliquerRegle.NomProprieteValider">
+            <summary>
+            Nom de la propriété de type booleen, disant s'il faut valider ou non.
+            si pas de proriété on valide, sauf si le booleen NepasValider =True;
+            </summary>
+        </member>
+        <member name="T:GToolBase.Rules.ClasseEquivalent">
+            <summary>
+            attribut permettant de faire correspondre un nom de classe à un type adpater
+            L'objectif est de permettre au moteur de regle de determiner la classe servant de référence pour le calcul de la regle.
+            </summary>
+        </member>
+        <member name="F:GToolBase.Rules.ClasseEquivalent.classeName">
+            <summary>
+            nom de la classe
+            </summary>
+        </member>
+        <member name="M:GToolBase.Rules.ClasseEquivalent.#ctor(System.String)">
+            <summary>
+            constructeur unique. cette classe sans l'attribut classeName n'a aucun interet
+            </summary>
+            <param name="pClasseName"></param>
+        </member>
+        <member name="T:GToolBase.Rules.GestionRegles">
+            <summary>
+            cette classe permet la gestion de regle de validation pour des classe et propriété.
+            Elle utilise les classe RegleClasse et ReglePropriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.GestionRegles.Singleton">
+            <summary>
+            Singleton du moteur pour un acces facile
+            </summary>
+        </member>
+        <member name="F:GToolBase.Rules.GestionRegles.LstRegle">
+            <summary>
+            Liste des règles pour les classes
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.GestionRegles.DictClasse">
+            <summary>
+            dictionnaire des regle par classe
+            </summary>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.Sample">
+            <summary>
+            code exemple afin de rpoduire des fichiers
+            </summary>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.GetNewGestionRegles(System.Reflection.Assembly,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            charge depuis une assembly deux fichiers contenant des regle l'un nommer automatique et l'autre manuel.
+            le fichier manuel vient 'overrider' les données du fichier automatique
+            </summary>
+            <param name="assemblyChargement">Assembly ou se trouve les fichiers de regles</param>
+            <param name="fichierAuto">chemin du fichier generer dans l'assembly</param>
+            <param name="fichierManuel">chemin du fichier manuel dans l'assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.GetError(System.Object,System.String)">
+            <summary>
+            calcul un message "warniong/erreur à partir d'un objet et d'une propriété
+            </summary>
+            <param name="pObject"></param>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.ValideClass(System.Object,System.Boolean,System.String)">
+            <summary>
+            Valide l'ensemble des propriéte d'une classe de type adapter ou metier
+            </summary>
+            <param name="pObject"></param>
+            <param name="errorOnly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.GetError(System.Object,System.Type,System.Reflection.PropertyInfo,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pObject"></param>
+            <param name="pClasse">classe</param>
+            <param name="pProperty">nom de la prioriété</param>
+            <param name="ErrorOnly">bool=Oui si on ne tient pas compte des warning</param>
+            <param name="contexte">Contexte permet de mieux localise le message. le contexte est bien souvant le nom fonvtionnel de l'objet donc un code, ou un libelle l'id ne donnant pas beaucoup de précision à l'utilisateur</param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Rules.GestionRegles.EvalueRegle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GToolBase.Rules.GestionRegles.EvalueRegle.TraiteNonNullDemander(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <returns>si faux ne pas passer les autres validation</returns>
+        </member>
+        <member name="T:GToolBase.Rules.PropertyEquivalent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GToolBase.Rules.PropertyEquivalent.classeName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GToolBase.Rules.PropertyEquivalent.propertyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GToolBase.Rules.PropertyEquivalent.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pPropertyName"></param>
+        </member>
+        <member name="M:GToolBase.Rules.PropertyEquivalent.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pClasseName"></param>
+            <param name="pPropertyName"></param>
+        </member>
+        <member name="T:GToolBase.Rules.RegleClasse">
+            <summary>
+            Classe permettant le staocj=kage de regle metier s'appliquant au classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleClasse.TypeClasse">
+            <summary>
+            Type de la classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleClasse.Propriete">
+            <summary>
+            Liste des propriétés de la classe
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleClasse.DictPropriete">
+            <summary>
+            dictionaire permettant d'acceder aux regles sur les propriété en les interrogeant par le nom des propriétés
+            </summary>
+        </member>
+        <member name="T:GToolBase.Rules.RegleMessage">
+            <summary>
+            cette classe permet de remonter une trace fonctionnel des validation
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleMessage.PropertyLabel">
+            <summary>
+            Label de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleMessage.Message">
+            <summary>
+            message donner à l'utilisateur
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleMessage.PropertyName">
+            <summary>
+            Nom de la propriété sur lequel une erreur ou un warning à été levé
+            Note si on veut cibler un élément d'une liste on note Liste[index] ou index est l'entier représentant la position dans la liste.
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.RegleMessage.IsError">
+            <summary>
+            si vrai Erreur, si false Warning
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.AppliquerRegle">
+            <summary>
+            Nom de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.NomPropriete">
+            <summary>
+            Nom de la propriété
+            </summary>
+        </member>
+        <member name="F:GToolBase.Rules.ReglePropriete.libellePropriete">
+            <summary>
+            libelle de la propriete
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.LibellePropriete">
+            <summary>
+            libelle de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.EstObligatoire">
+            <summary>
+            Indique si la propriété est obligatoire
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.EpressionReguliere">
+            <summary>
+            Expression reguliere permettant de valider la propriete
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.MessageSiEpressionReguliereFausse">
+            <summary>
+            Message à afficher si l'expressionn reguliere n'est pas respecté
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.Longueur">
+            <summary>
+            Longueur de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.ValeurMin">
+            <summary>
+            Valeur minimale de la propriété
+            </summary>
+        </member>
+        <member name="P:GToolBase.Rules.ReglePropriete.ValeurMax">
+            <summary>
+            Valeur maximale de la propriété
+            </summary>
+        </member>
+        <member name="T:GToolBase.CacheAttribute.CacheDependAttribute">
+            <summary>
+            Indique que cette classe peut être mise en cache
+            </summary>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttribute.#ctor">
+            <summary>
+            Constructeur par défaut
+            </summary>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttribute.#ctor(System.String)">
+            <summary>
+            Constructeur spécifiant une region
+            </summary>
+            <param name="region"></param>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttribute.#ctor(System.Int32)">
+            <summary>
+            Constructeur spécifiant une durée
+            </summary>
+            <param name="expiration"></param>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttribute.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructeur spécifiant une region et une durée
+            </summary>
+            <param name="region"></param>
+            <param name="expiration"></param>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttribute.Region">
+            <summary>
+            Nom de la région
+            </summary>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttribute.Expiration">
+            <summary>
+            Durée de l'expiration
+            </summary>
+        </member>
+        <member name="T:GToolBase.CacheAttribute.CacheDependAttributeValidator">
+            <summary>
+            Valideur pour le cache
+            </summary>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttributeValidator.requieredCache(System.Type)">
+            <summary>
+            ???
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            ???
+            </summary>
+            <param name="region"></param>
+            <param name="expiration"></param>
+            <param name="isCaching"></param>
+        </member>
+        <member name="M:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.#ctor(System.String,System.Int32)">
+            <summary>
+            ???
+            </summary>
+            <param name="region"></param>
+            <param name="expiration"></param>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.IsCaching">
+            <summary>
+            Est en cache
+            </summary>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.Region">
+            <summary>
+            Nom de la région
+            </summary>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.Expiration">
+            <summary>
+            Durée avant expiration
+            </summary>
+        </member>
+        <member name="F:GToolBase.CacheAttribute.CacheDependAttributeValidator.CacheInfo.Empty">
+            <summary>
+            Par defaut
+            </summary>
+        </member>
+        <member name="T:GToolBase.Cryptage">
+            <summary>
+            Classe permet de crypter/décrypter un string selon un codage tripleDES.
+            </summary>
+        </member>
+        <member name="F:GToolBase.Cryptage.des">
+            <summary>
+            Crypto Provider
+            </summary>
+        </member>
+        <member name="M:GToolBase.Cryptage.#ctor">
+            <summary>
+            constructeur par defaut
+            </summary>
+        </member>
+        <member name="M:GToolBase.Cryptage.#ctor(System.String)">
+            <summary>
+            constructeur demandant une clé privée
+            </summary>
+            <param name="privateKey">Clé privé qui sera utilisé pour le cryptage/Décryptage </param>
+        </member>
+        <member name="M:GToolBase.Cryptage.Encrypt(System.String)">
+            <summary>
+            crypte une chain en claire
+            </summary>
+            <param name="inputText">Texte à convertir</param>
+            <returns>texte converti</returns>
+        </member>
+        <member name="M:GToolBase.Cryptage.Decrypt(System.String)">
+            <summary>
+            decode une chaine : converti une chaine code, en texte en claire (lisible)
+            </summary>
+            <param name="inputText">texte crypté</param>
+            <returns>texte Decrypté</returns>
+        </member>
+        <member name="M:GToolBase.Cryptage.Dispose">
+            <summary>
+            Libération des ressources
+            </summary>
+        </member>
+        <member name="M:GToolBase.Cryptage.getMd5Hash(System.String)">
+            <summary>
+            calcul le Md5 d'un string
+            </summary>
+            <param name="input">un string</param>
+            <returns>md5 de la string</returns>
+        </member>
+        <member name="M:GToolBase.Cryptage.verifyMd5Hash(System.String,System.String)">
+            <summary>
+            Valide l'encodage MD5 d'un string
+            </summary>
+            <param name="input">un string</param>
+            <param name="hash">le MD5 de la string ci-dessus</param>
+            <returns>vrai si ok, sinon false</returns>
+        </member>
+        <member name="M:GToolBase.Tools.FileEncoding.GetEncodingFile(System.String)">
+            <summary>
+            Permet de tester l'encodage utilisé pour le fichier texte dont le chemin est fourni
+            <param name="pathFile">Nom et Chemin du fichier</param>
+            <returns>Encodage du Fichier</returns>
+            </summary>
+        </member>
+        <member name="T:GToolBase.Tool.Factory">
+            <summary>
+            Factory Abstraite
+            </summary>
+        </member>
+        <member name="T:GToolBase.Tool.Factory.CreateInstance`1">
+            <summary>
+            Comment obtenir la factory
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.#ctor">
+            <summary>
+            Le constructeur par héritage de la factory
+            </summary>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Le constructeur par héritage cette fois l'assembly est spécifié.
+            </summary>
+            <param name="assembly">l'assembly contenu les classes récherchées</param>
+        </member>
+        <member name="F:GToolBase.Tool.Factory._Assembly">
+            <summary>
+            L'assembly de recherche pour l'instance
+            </summary>
+        </member>
+        <member name="F:GToolBase.Tool.Factory._IsConfigured">
+            <summary>
+            La factory est'elle configurée
+            </summary>
+        </member>
+        <member name="P:GToolBase.Tool.Factory.IsConfigured">
+            <summary>
+            Initialisation Ok
+            </summary>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.Instance``1(GToolBase.Tool.Factory.CreateInstance{``0})">
+            <summary>
+            Get the singleton instance of the factory
+            </summary>
+            <param name="constructor">the delegate in charge of instanciation</param>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.FindAndCreateInstance``1">
+            <summary>
+            Find the (first) class implementing the interface and return a instance.
+            </summary>
+            <typeparam name="IServicexxx"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.FindTypeWithInterface(System.Type)">
+            <summary>
+            Find the (first) type class implementing the interface and return a instance.
+            </summary>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Tool.Factory.PostInstanceCreation(System.Type,System.Object)">
+            <summary>
+            Utiliser pour faire une personnalisation après construction de l'objet
+            </summary>
+            <param name="type">Le Type demandé</param>
+            <param name="obj">L'objet instancié</param>
+        </member>
+        <member name="T:GToolBase.Tool.Factory.TypeDictionnary">
+            <summary>
+            La collection de gestion du cache
+            </summary>
+        </member>
+        <member name="T:GToolBase.Liste.EasySort`1">
+            <summary>
+             Cette classe permet de faire des trie "generique" sur des objets à partir du nom d'un acesseur
+            </summary>
+            <example> 
+             exemple : class toto
+            {
+                private string _Nom;
+                public string Nom
+                {
+                    get {return _Nom;}
+                }
+                public void toto (string pNom)
+                {
+                    _Nom = pNom;
+                }
+                public string toto()
+                {
+                    return _Nom;
+                }
+               
+            }
+            cette classe est triable sur _Nom, Nom et toto. 
+            La classe recherche en fait le champ _Nom puis la méthode "_Nom" (ok s'arrete)
+            La classe recherche en fait le champ Nom (non ok) puis la méthode "Nom" (non ok) puis la methode "get_Nom" (ok)
+            La classe recherche en fait le champ toto (non ok) puis la méthode "toto" (ok s'arrete)
+            
+            mode d'emploie :
+            
+             Utiliser les methodes statics TriList, qui constitue par ailleur des exemples
+                public static void TriList(List&lt;TypeATrier&gt; ListeATrier, string Col2Sort1, bool pAsc1, string Col2Sort2, bool pAsc2)
+               {
+                   if (ListeATrier == null)
+                       return;
+                   if (ListeATrier.Count == 0)
+                       return;
+                   TypeATrier objetaTrier = ListeATrier[0];
+                   EasySort&lt;TypeATrier&gt; test = null;
+                   test = new EasySort&lt;TypeATrier&gt;(Col2Sort1, pAsc1, Col2Sort2, pAsc2, objetaTrier);
+                   ListeATrier.Sort(test);
+               }
+            </example> 
+            <typeparam name="TypeATrier">type que la classe devra trie</typeparam>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.#ctor">
+            <summary>
+            Interdire 
+            </summary>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.#ctor(System.String,System.Boolean,System.String,System.Boolean,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+             constructeur 
+            </summary>
+            <param name="pNomProperty1"></param>
+            <param name="pAsc1"></param>
+            <param name="pNomProperty2"></param>
+            <param name="pAsc2"></param>
+            <param name="pNomProperty3"></param>
+            <param name="pAsc3"></param>
+            <param name="pNomProperty4"></param>
+            <param name="pAsc4"></param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.Compare(`0,`0)">
+            <summary>
+            methode implementant Icomparer
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.Comparer1Col(`0,`0)">
+            <summary>
+            algo pour le trie sur une seule colonne
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.Comparer2Col(`0,`0)">
+            <summary>
+            algo pour le trie sur deux colonnes
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.Comparer3Col(`0,`0)">
+            <summary>
+            algo pour le trie sur trois colonnes
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.Comparer4Col(`0,`0)">
+            <summary>
+            algo pour le trie sur quatre colonnes
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String)">
+            <summary>
+            trie la liste "ListeATrier", selon le nom "Col2Sort", en ascendant. 
+            Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.Boolean)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="pAsc">trie Ascendant si true</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.String)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="pAsc1">trie Ascendant si true</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc2">trie Ascendant si true</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.String,System.String)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="Col2Sort3">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.Boolean,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="pAsc1">trie Ascendant si true</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc2">trie Ascendant si true</param>
+            <param name="Col2Sort3">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc3">trie Ascendant si true</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.String,System.String,System.String)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="Col2Sort3">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="Col2Sort4">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySort`1.TriList(System.Collections.Generic.List{`0},System.String,System.Boolean,System.String,System.Boolean,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            trie la liste "ListeATrier"
+            </summary>
+            <param name="ListeATrier">Liste à trier</param>
+            <param name="Col2Sort1">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode.</param>
+            <param name="pAsc1">trie Ascendant si true</param>
+            <param name="Col2Sort2">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc2">trie Ascendant si true</param>
+            <param name="Col2Sort3">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc3">trie Ascendant si true</param>
+            <param name="Col2Sort4">Ce nom doit représenté un champ (même privée), un ascesseur ou une methode. il peut etre null</param>
+            <param name="pAsc4">trie Ascendant si true</param>
+        </member>
+        <member name="T:GToolBase.Liste.EasySortObject`1">
+            <summary>
+             Cette classe permet de faire des trie "generique" sur des objets à partir du nom d'un acesseur
+             exemple : class toto
+            {
+                private string _Nom;
+                public string Nom
+                {
+                    get {return _Nom;}
+                }
+                public toto (string pNom)
+                {
+                    _Nom = pNom;
+                }
+            }
+            cette classe est triable sur Nom. 
+            La classe recherche en fait la methode "get_" + propriété.
+            
+            mode d'emploie :
+            
+             ilist Maliste = new arrayList();
+             
+             for (int i=0;i&lt;10;i++)
+                Maliste.add(new toto( "Le Nom = " + i.tostring()); 
+             toto unToto = new toto("");
+             EasySort&lt;toto&gt;  MonTri = new EasySort&lt;toto&gt;("Nom",unToto,true);
+             Maliste.sort(MonTri);
+                
+             }
+            </summary>
+            <typeparam name="TypeATrier">type que la classe devra trier</typeparam>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject`1.#ctor(System.String,`0,System.Boolean)">
+            <summary>
+            constructeur par defaut
+            </summary>
+            <param name="pNomProperty">nom d'un acesseur</param>
+            <param name="pObject"></param>
+            <param name="pAsc"></param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject`1.Compare(System.Object,System.Object)">
+            <summary>
+            methode implementant Icomparer
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject2col`1.#ctor(System.String,System.String,`0,System.Boolean)">
+            <summary>
+            constructeur par defaut
+            </summary>
+            <param name="pNomProperty1">nom d'un accesseur</param>
+            <param name="pNomProperty2">nom d'un accesseur</param>
+            <param name="pObject"></param>
+            <param name="pAsc"></param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject2col`1.Compare(System.Object,System.Object)">
+            <summary>
+            methode implementant Icomparer
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject2col`1.TriList(System.Collections.ArrayList,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ListeATrier"></param>
+            <param name="Col2Sort"></param>
+        </member>
+        <member name="M:GToolBase.Liste.EasySortObject2col`1.TriList(System.Collections.ArrayList,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="ListeATrier"></param>
+            <param name="NewCol2Sort"></param>
+            <param name="Ascendant"></param>
+        </member>
+        <member name="T:GToolBase.StringSerializer`1">
+            <summary>
+             serialize un objet dans un string (facile pour des ToStringVerbeux!!!)
+            </summary>
+            <typeparam name="TypeEntreprise"></typeparam>
+        </member>
+        <member name="M:GToolBase.StringSerializer`1.Serialize(`0)">
+            <summary>
+             obtention d'un string xml a partir de l'objet
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.StringSerializer`1.Serialize(`0,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="o"></param>
+            <param name="bsansNamespace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.StringSerializer`1.Deserialize(System.String)">
+            <summary>
+             obtention d'un objet à partir d'un XML de l'objet
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.Util">
+            <summary>
+            Description résumée de Util.
+            </summary>
+        </member>
+        <member name="F:GToolBase.Util.cultureInfoToUse">
+            <summary>
+            Variable permettant de définir explicitement la culture info à utiliser. Qui n'est pas forcément celle de l'OS
+            </summary>
+        </member>
+        <member name="M:GToolBase.Util.SetRessourceManager(System.Resources.ResourceManager)">
+            <summary>
+             methode permettant de fournir le fichier de ressource pour les message de l'application.
+             exemple d'utilisation :
+                initialisation depuis un projet winform incluant le fichier de ressource :
+            
+                initialisation depuis un projet web compile
+            
+            
+                initialisation depuis un projet web non compile
+            </summary>
+            <param name="pRM"></param>
+        </member>
+        <member name="M:GToolBase.Util.SetRessourceManagerOverwrite(System.Resources.ResourceManager)">
+            <summary>
+            Sets the ressource manager overwrite.
+            </summary>
+            <param name="pRM">The p RM.</param>
+        </member>
+        <member name="M:GToolBase.Util.SetRessourceManager(System.Resources.ResourceManager,System.Collections.Generic.Dictionary{System.String,System.Resources.ResourceManager})">
+            <summary>
+            Permet de gérer le ResourceManager permettant les traduction
+            </summary>
+            <param name="pRM"></param>
+            <param name="pDictRm"></param>
+        </member>
+        <member name="M:GToolBase.Util.#ctor">
+            <summary>
+            Constructeur vide
+            </summary>
+        </member>
+        <member name="M:GToolBase.Util.FormatMessage(System.String)">
+            <summary>
+            Donne la message a partir d'une clef
+            </summary>
+            <param name="CleMessage">la clef</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Util.FormatMessage(System.String,System.Object[])">
+            <summary>
+            Donne la message a partir d'une clef et de paramètres
+            </summary>
+            <param name="CleMessage">la clef</param>
+            <param name="Parametres">les paramètres</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Util.FormatMessage(System.String,System.String,System.Object[])">
+            <summary>
+            Donne la message a partir d'une clef et de paramètres
+            ou le MessageNonLocalise
+            </summary>
+            <param name="CleMessage">La clef</param>
+            <param name="pMessageNonLocalise">Le message par defaut</param>
+            <param name="Parametres">les parametres</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Util.initMultilangue(System.String)">
+            <summary>
+            Initialise le fonctionnement multilingue des ressources
+            </summary>
+            <param name="Section"></param>
+        </member>
+        <member name="T:GToolBase.Vue.Bvue`1">
+            <summary>
+             Cette classe permet de faire des vues sur des objets
+             L'objectif est de pouvoir mapper (afficher dans un datagrid, une combo...) des propriétés des sous objets.
+            </summary>
+            <typeparam name="ObjetEntreprise"></typeparam>
+        </member>
+        <member name="M:GToolBase.Vue.Bvue`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.Vue.Bvue`1"/> class.
+            </summary>
+        </member>
+        <member name="M:GToolBase.Vue.Bvue`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.Vue.Bvue`1"/> class.
+            </summary>
+            <param name="objet">The objet.</param>
+        </member>
+        <member name="M:GToolBase.Vue.Bvue`1.SetInternalObject(`0)">
+            <summary>
+            Affecte un objet de type &lt;ObjetEntreprise&gt; à l'objet inerne reference
+            </summary>
+            <param name="pObjetEntreprise"></param>
+        </member>
+        <member name="M:GToolBase.Vue.Bvue`1.GetInternalObject">
+            <summary>
+             retourne l'objet interne de type &lt;ObjetEntreprise&gt; référence dans la vue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Vue.ListHelper`1.GetList(System.Collections.Generic.IList{`0})">
+            <summary>
+            tente de récuperer au meix un List
+            </summary>
+            <param name="LstIn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Vue.ListHelper`1.GetListEntiere(System.Collections.IList)">
+            <summary>
+             retourn null si LstIn est null ou si un element de la liste LstIn n'est pas de Type T
+             sinon revoie une List de T
+            </summary>
+            <param name="LstIn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.Vue.ListHelper`1.GetListTFromListO(System.Collections.IList)">
+            <summary>
+             retourne un liste contennt tous les objets de type T
+            </summary>
+            <param name="LstIn"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GToolBase.XML.DocSchemaValidator">
+            <summary>
+            classe ayant pour objectif de valider des fichier XML en fonction d'un fichier XSD
+            </summary>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GToolBase.XML.DocSchemaValidator"/> class.
+            </summary>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.ValidateSchema(System.String)">
+            <summary>
+            Validates the schema.
+            </summary>
+            <param name="schemaFile">The schema file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.ValidateDocument(System.String)">
+            <summary>
+            Validates the document.
+            </summary>
+            <param name="xmldoc">The xmldoc.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.ValidateDocumentWithSchema(System.String,System.String)">
+            <summary>
+            Validates the document with schema.
+            </summary>
+            <param name="xdoc">The xdoc.</param>
+            <param name="schema">The schema.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.ValidateDocumentWithSchema(System.String,System.IO.Stream)">
+            <summary>
+            Methode permettant la validation d'un fichier XML
+            </summary>
+            <param name="xdoc">nom du document XML a valider (chemin inclus)</param>
+            <param name="schema">flux du Schema pour validation</param>
+            <returns>Vrai, ou ApplicationException avec les erreurs dans le message</returns>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.ValidateDocumentWithSchema(System.IO.MemoryStream,System.IO.Stream)">
+            <summary>
+            Methode permettant la validation d'un fichier XML
+            </summary>
+            <param name="xmlStream">flux du document XML a valider</param>
+            <param name="xsdStream">flux du Schema pour validation</param>
+        </member>
+        <member name="M:GToolBase.XML.DocSchemaValidator.settings_ValidationEventHandler(System.Object,System.Xml.Schema.ValidationEventArgs)">
+            <summary>
+            Handles the ValidationEventHandler event of the settings control.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.Xml.Schema.ValidationEventArgs"/> instance containing the event data.</param>
+        </member>
+    </members>
+</doc>

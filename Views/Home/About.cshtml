@@ -1,0 +1,43 @@
+﻿@model GenerateurDFUSafir.Models.AndroidAppList
+
+@{
+    ViewBag.Title = "About...";
+}
+
+<style>
+
+    .downloadbtn {
+        display: flex;
+        width: 400px;
+        justify-content: space-between;
+        font-size: 13pt;
+        align-items: center;
+    }
+
+    .downloadbtn a {
+        font-weight: bold;
+    }
+
+</style>
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Outil de gestion multiservices OptiZEN</p>
+<ul>
+    <li>Gestion des KPI de la production ProductZEN</li>
+    <li>Outil de contrôle des Fiches de paramétrage ControlZEN</li>
+    <li>Gestion des KPI des STC PrécoZEN</li>
+    <li>Gestion des ordres de fabrications PlaniZEN</li>
+    <li>Edition des étiquettes des produits PrintZEN</li>
+    <li>Déclaration des non conformités PncZEN</li>
+    <li>Déclaration des aléas de production BugZEN</li>
+    <li>Présentation du système qualité SMI</li>
+</ul>
+
+<h1>Applications Android <img src="~/image/android.png"</h1>
+
+@foreach(var a in Model.AppList)
+{
+    <p class="downloadbtn">@a.LIBELLE : <a target="_blank" href="@a.LIEN">Télécharger</a></p>
+}

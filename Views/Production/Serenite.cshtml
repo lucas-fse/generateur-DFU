@@ -1,0 +1,280 @@
+﻿@model GenerateurDFUSafir.Models.InfoSerenite
+@{
+    ViewBag.Title = "Serenite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/Serenite.css" rel="stylesheet" />
+    var cpt1 = 0;
+    var cpt2 = 0;
+    var cpt3 = 0;
+    var cpt4 = 0;
+    var cpt5 = 0;
+    for (int i = Model.listSalarie.Count; i > 0; i--)
+    {
+        if (i % 5 == 0)
+        {
+            cpt1++;
+        }
+        else if (i % 5 == 1)
+        {
+            cpt2++;
+        }
+        else if (i % 5 == 2)
+        {
+            cpt3++;
+        }
+        else if (i % 5 == 3)
+        {
+            cpt4++;
+        }
+        else if (i % 5 == 4)
+        {
+            cpt5++;
+        }
+    }
+    var taille1 = cpt1;
+    var taille2 = taille1 + cpt2;
+    var taille3 = taille2 + cpt3;
+    var taille4 = taille3 + cpt4;
+    var taille5 = taille4 + cpt5;
+    var MarginLogistique = "20px";
+    var MarginEncadrement = "20px";
+    if (cpt4 > 4)
+    {
+        MarginLogistique = "180px";
+    }
+    if (cpt5 > 4)
+    {
+        MarginEncadrement = "180px";
+    }
+}
+
+@for (int i = 0; i < Model.listSalarie.Count; i++)
+{
+    if (Model.listSalarie[i].humeurDuJour != null)
+    {
+        <style type="text/css">
+                #Salarie_@i{
+                    opacity : 1;
+                }
+        </style>
+    }
+}
+
+<img id="FondEcran" src="../image/swirl.png" alt="">
+
+<div id="fondTransparent"></div>
+<div id="topInfos">
+    <h2>Votes de Sérénité</h2>
+</div>
+<div id="SereniteDiv">
+
+    <div id="mono" class="EquipeDiv">
+        @for (int i = 0; i < taille1; i++)
+        {
+            if (cpt1 > 3 && i < 1)
+            {
+                <style type="text/css">
+                    #mono {
+                        width: 500px;
+                        margin-bottom: 100px;
+                    }
+                </style>
+                <div class="hexagon" style="margin-left : 180px; min-width : 90px" id="Salarie_@i">
+                    <div class="hexagon-in1">
+                        <div class="hexagon-in2"
+                             style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid  @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                             onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="hexagon" id="Salarie_@i">
+                        <div class="hexagon-in1">
+                            <div class="hexagon-in2"
+                                 style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                 onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                            </div>
+                        </div>
+                    }
+                }
+    </div>
+
+    <div id="bidir" class="EquipeDiv">
+        @for (int i = taille1; i < taille2; i++)
+        {
+            if (cpt2 > 3 && i < taille1 + 1)
+            {
+                <style type="text/css">
+                    #bidir {
+                        width: 500px;
+                        margin-bottom: 100px;
+                    }
+                </style>
+                <div class="hexagon" style="margin-left: 180px; min-width: 90px" id="Salarie_@i">
+                    <div class="hexagon-in1">
+                        <div class="hexagon-in2"
+                             style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                             onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="hexagon" id="Salarie_@i">
+                        <div class="hexagon-in1">
+                            <div class="hexagon-in2"
+                                 style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                 onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                            </div>
+                        </div>
+                    }
+                }
+    </div>
+
+    <div id="sav" class="EquipeDiv">
+        @for (int i = taille2; i < taille3; i++)
+        {
+            if (cpt3 > 3 && i < taille2 + 1)
+            {
+                <style type="text/css">
+                    #sav {
+                        width: 500px;
+                        margin-bottom: 100px;
+                    }
+                </style>
+                <div class="hexagon" style="margin-left: 180px; min-width: 90px " id="Salarie_@i">
+                    <div class="hexagon-in1">
+                        <div class="hexagon-in2"
+                             style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                             onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="hexagon" id="Salarie_@i">
+                        <div class="hexagon-in1">
+                            <div class="hexagon-in2"
+                                 style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                 onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                            </div>
+                        </div>
+
+                    }
+                }
+    </div>
+
+    <div id="logistique" class="EquipeDiv">
+        <div class="FirstLogistique" id="Salarie_@taille3">
+            <div class="hexagon-in1">
+                <div class="hexagon-in2"
+                     style="background-image : url(@Model.listSalarie[taille3].Image); color : @Model.listSalarie[taille3].getCouleur(); border : 5px solid @Model.listSalarie[taille3].getCouleur();border-right : 5px solid @Model.listSalarie[taille3].getCouleur2(); "
+                     onclick="OuvrirDiv('@Model.listSalarie[taille3].humeurDuJour', '@Model.listSalarie[taille3].Id')"><p>@Model.listSalarie[taille3].Name</p></div>
+                </div>
+            </div>
+
+            @for (int i = taille3 + 1; i < taille4; i++)
+            {
+                if (cpt4 > 3 && i == taille3 + 3)
+                {
+                    <style type="text/css">
+                        #logistique {
+                            width: 500px;
+                            margin-bottom: 100px;
+                        }
+
+                        .FirstLogistique {
+                            margin-left: 23%;
+                            margin-right: 20%;
+                        }
+                    </style>
+
+                    <div class="hexagon" style="margin-left: @MarginLogistique; min-width: 90px;" id="Salarie_@i">
+                        <div class="hexagon-in1">
+                            <div class="hexagon-in2"
+                                 style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                 onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="hexagon" id="Salarie_@i">
+                            <div class="hexagon-in1">
+                                <div class="hexagon-in2"
+                                     style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                     onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                                </div>
+                            </div>
+                        }
+                    }
+        </div>
+
+        <div id="encadrement" class="EquipeDiv">
+            <div class="FirstEncadrement" id="Salarie_@taille4">
+                <div class="hexagon-in1">
+                    <div class="hexagon-in2"
+                         style="background-image : url(@Model.listSalarie[taille4].Image); color : @Model.listSalarie[taille4].getCouleur(); border : 5px solid @Model.listSalarie[taille4].getCouleur();border-right : 5px solid @Model.listSalarie[taille4].getCouleur2(); "
+                         onclick="OuvrirDiv('@Model.listSalarie[taille4].humeurDuJour', '@Model.listSalarie[taille4].Id')"><p>@Model.listSalarie[taille4].Name</p></div>
+                    </div>
+                </div>
+
+                @for (int i = taille4 + 1; i < taille5; i++)
+                {
+                    if (cpt5 > 3 && i == taille4 + 3)
+                    {
+                        <style type="text/css">
+                            #encadrement {
+                                width: 500px;
+                            }
+
+                            .FirstEncadrement {
+                                margin-left: 23%;
+                                margin-right: 20%;
+                            }
+                        </style>
+                        <div class="hexagon" style="margin-left: @MarginEncadrement;  min-width: 90px" id="Salarie_@i">
+                            <div class="hexagon-in1">
+                                <div class="hexagon-in2"
+                                     style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                     onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="hexagon" id="Salarie_@i">
+                                <div class="hexagon-in1">
+                                    <div class="hexagon-in2"
+                                         style="background-image : url(@Model.listSalarie[i].Image); color : @Model.listSalarie[i].getCouleur(); border : 5px solid @Model.listSalarie[i].getCouleur();border-right : 5px solid @Model.listSalarie[i].getCouleur2(); "
+                                         onclick="OuvrirDiv('@Model.listSalarie[i].humeurDuJour', '@Model.listSalarie[i].Id')"><p>@Model.listSalarie[i].Name</p></div>
+                                    </div>
+                                </div>
+                            }
+                        }
+            </div>
+
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "Form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div id="humeur">
+                    <input type="submit" value="1" name="submitButton" style="background-image: url('../image/PasContentDuTout.png');">
+                    <input type="submit" value="2" name="submitButton" style="background-image: url('../image/PasContent.png');">
+                    <input type="submit" value="3" name="submitButton" style="background-image: url('../image/Moyen.png');">
+                    <input type="submit" value="4" name="submitButton" style="background-image: url('../image/Content.png');">
+                    <input type="submit" value="5" name="submitButton" style="background-image: url('../image/TresContent.png');">
+                    <input type="text" value="" name="IdSalarie" style="display : none" id="IdSalarie">
+                    <img src="~/image/croix.png" id="croix" alt="" style="cursor : pointer;" onclick="OuvrirDiv()">
+                </div>
+            }
+
+        </div>
+
+        <script src="~/Scripts/Serenite.js" charset="utf-8"></script>
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/clock.js" charset="utf-8"></script>
+        <script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+            @*non utilise car on recharge cette page par defaut*@
+           

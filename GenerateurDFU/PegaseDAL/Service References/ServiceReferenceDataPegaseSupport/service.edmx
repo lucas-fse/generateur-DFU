@@ -1,0 +1,27 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+    <Schema Namespace="TestWCF2" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="PegaseSupportEntities" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="SimPROJECT" EntityType="TestWCF2.SimPROJECT" />
+      </EntityContainer>
+      <EntityType Name="SimPROJECT">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="IdProject" Type="Edm.Int32" Nullable="true" />
+        <Property Name="Version" Type="Edm.Int32" Nullable="true" />
+        <Property Name="Evolution" Type="Edm.String" Nullable="true" MaxLength="10" Unicode="true" FixedLength="false" />
+        <Property Name="NomIDialog" Type="Edm.String" Nullable="true" MaxLength="100" Unicode="true" FixedLength="false" />
+        <Property Name="Obsolete" Type="Edm.Boolean" Nullable="true" />
+        <Property Name="IdMT" Type="Edm.String" Nullable="true" MaxLength="10" Unicode="true" FixedLength="false" />
+        <Property Name="IdMO" Type="Edm.String" Nullable="true" MaxLength="10" Unicode="true" FixedLength="false" />
+        <Property Name="IdSIM" Type="Edm.String" Nullable="true" MaxLength="10" Unicode="true" FixedLength="false" />
+        <Property Name="Date" Type="Edm.DateTime" Nullable="true" />
+        <Property Name="MOType" Type="Edm.String" Nullable="true" MaxLength="30" Unicode="true" FixedLength="false" />
+        <Property Name="MTType" Type="Edm.String" Nullable="true" MaxLength="30" Unicode="true" FixedLength="false" />
+        <Property Name="FileContent" Type="Edm.Binary" Nullable="true" MaxLength="Max" FixedLength="false" />
+      </EntityType>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

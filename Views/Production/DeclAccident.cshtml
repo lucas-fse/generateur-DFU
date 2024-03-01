@@ -1,0 +1,155 @@
+﻿@model GenerateurDFUSafir.Models.SECU_PROD
+@{
+    ViewBag.Title = "Accident";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/form.css" rel="stylesheet" />
+    <link href="~/Content/DeclAccident.css" rel="stylesheet" />
+}
+
+@using (Html.BeginForm("Securite", "Production", FormMethod.Post, new { id = "MiddleBlock", onsubmit = "ValiderPopUp()", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="frm-box">
+        <div class="frm-title">
+            <h1 class="main-title">Déclarer un Accident</h1>
+        </div>
+        <div class="frm-row" id="Nom">
+            <div class="frm-group">
+                <label>Nom</label>
+                <input type="text" class="frm-input frm-required" id="SaisieVictime" name="SaisieVictime" />
+            </div>
+            <div class="frm-group" id="Date">
+                <label>Date</label>
+                <input type="date" class="frm-input" id="SaisieDate" value="@Model.DateAnglaise" max="@Model.DateAnglaise" name="SaisieDate" />
+            </div>
+            <input type="text" style="display : none;" value="" id="SaisieNiveau" name="SaisieNiveau" />
+        </div>
+        <div class="frm-row">
+            <div class="frm-group">
+                <label>Type d'accident</label>
+                <select class="frm-select" id="list1" name="TypeAccident">
+                    <option value="6">Accident Grave</option>
+                    <option value="5">Accident Déclaré</option>
+                    <option value="4">Soins Benins</option>
+                    <option value="3">Presque Accident</option>
+                    <option value="2">Situations Dangereuses</option>
+                    <option value="1">Actes Dangereux</option>
+                </select>
+            </div>
+            <div class="frm-group">
+                <label>Gravité Potentielle</label>
+                <select class="frm-select" id="list2" name="Gravite">
+                    <option value="" input="">-- Sélectionner --</option>
+                    <option value="soin">Soin / Accident Bénin</option>
+                    <option value="handicap">Handicap</option>
+                    <option value="accident">Accident de travail</option>
+                    <option value="deces">Décès</option>
+                </select>
+            </div>
+        </div>
+        <div class="frm-group">
+            <label>Entrez ce que vous avez observé</label>
+            <textarea class="frm-input frm-required" id="SaisieDescription" name="SaisieDescription" form="MiddleBlock"></textarea>
+        </div>
+        <div class="frm-group">
+            <label>Entrez ce que vous avez fait</label>
+            <textarea class="frm-input" id="SaisieDescription2" name="SaisieDescription2" form="MiddleBlock"></textarea>
+        </div>
+        <!---------------------------------------------------------------------------->
+        <div class="frm-group photo-pc" id="FormContenantWebcam">
+            <div id="FormContenantPhotoProfil" class="frm-group">
+                <!---<label>Prendre une photo de l'accident</label>-->
+                <div id="ChangeppMenu">
+                    <button id="ChangeppCamera" class="frm-action" type="button" onclick="Changepp()">
+                        <i class="fa-solid fa-camera" style="color: #f26222;"></i>
+                        PRENDRE UNE PHOTO
+                    </button>
+                </div>
+            </div>
+            <div id="WebcamOn">
+                <div id="Contenant-video" style="position: relative; margin-right: 10px;">
+                    <div style="z-index: 1; text-align: initial;">
+                        <video id="video" autoplay muted playsinline></video>
+                    </div>
+                </div>
+
+                <canvas id="canvas" hidden></canvas>
+                <img src="" id="photo" alt="photo" style="display: none; position: relative; margin-right: 10px;">
+                <input value="" name="srcImg" id="srcImg" type="hidden">
+                <canvas id="canvas" hidden></canvas>
+
+                <div id="WebcamMenu">
+                    <label>Video source: </label>
+                    <div class="select">
+                        <label for="videoSource"></label><select id="videoSource"></select>
+                    </div>
+                    <button id="PrendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="previewPhoto()">
+                        <i class='fa-solid fa-camera' style='color: #f26222;'></i>
+                        Prendre photo
+                    </button>
+
+                    <button id="EmptyButtonPhoto" class="FormppBtn" type="button" style="display:none">---</button>
+
+                    <button id="ReprendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="ReprendrePhoto()">
+                        <i class="fa-solid fa-rotate-left" style="color: #f26222;"></i>
+                        Reprendre photo
+                    </button>
+
+                    <button id="AnnulerButtonPhoto" class="FormppBtn frm-action" type="button" onclick="AnnulerChangepp()">
+                        <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!---------------------------------------------------------------------------->
+        <div class="frm-group" id="AccidentPicture">
+            <!--<label>Ajouter une image de l'accident</label>-->
+            @*On met le bouton pour ajouter une image et on lui donne l'id "preview" pour qu'il utilise le script javascript et affiche l'image*@
+            <img id="blah" src="#preview" alt="" />
+            <!--<input value="" name="srcImport" id="srcImport" type="hidden"> -->
+            <div class="alignement-fonctions">
+                <label for="preview" class="frm-action" id="button-image" onclick="importImage()">
+                    <i class="fa-solid fa-plus" style="color: #f26222;"></i>
+                    AJOUTER UNE IMAGE
+                </label>
+                <label for="" class="frm-action" id="annulation-image" onclick="cancelImage()" style="display: none;">
+                    <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                    ANNULER L'IMAGE
+                </label>
+                <input class="frm-action" value="" type="file" name="ImageAccident" id="preview" accept="image/jpeg, image/jpg" />
+            </div>
+        </div>
+        <div class="frm-button-box">
+            <button type="button" onclick="" id="frm-back" class="frm-button">ANNULER</button>
+            <button type="submit" value="Niveau" id="frm-submit" name="submitButton" class="frm-button action-button" disabled> VALIDER </button>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/Accident.js" charset="utf-8"></script>
+<script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewImage.js"></script>
+<script>
+    const inputElement = document.getElementById("image-upload");
+
+    inputElement.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const imgElement = document.createElement("img");
+            imgElement.src = e.target.result;
+            document.body.appendChild(imgElement);
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+<script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+<script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewWebcam.js"></script>
+<script type="text/javascript" src="~/Scripts/form.js"></script>
+<script>CheckList()</script>

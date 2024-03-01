@@ -1,0 +1,12 @@
+-- Script Date: 17/06/2014 18:17  - ErikEJ.SqlCeScripting version 3.5.2.38
+CREATE TABLE [ProjectDetail] (
+  [Id] int IDENTITY (1,1) NOT NULL
+, [IdProject] int NOT NULL
+, [Version] int NOT NULL
+, [Evolution] nvarchar(10) NOT NULL
+, [NomIDialog] nvarchar(100) NOT NULL
+, [Obsolete] bit NOT NULL
+);
+GO
+ALTER TABLE [ProjectDetail] ADD CONSTRAINT [PK_ProjectDetail] PRIMARY KEY ([Id]);
+GO

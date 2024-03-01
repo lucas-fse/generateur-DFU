@@ -1,0 +1,172 @@
+﻿@model GenerateurDFUSafir.Models.Qualite
+@{
+    ViewBag.Title = "Qualite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/Qualité.css" rel="stylesheet" />
+    Int16 i = 0;
+    bool first = false;
+}
+
+
+
+<h2>Qualite</h2>
+
+<body>
+
+    <!-- header -->
+
+    <header>
+        <div id="bandeau" class="flexContainer">  <!-- flex blox -->
+            <div class="flexChild">
+                <span id="refNomQualite">@Model.RefVersion</span>
+            </div>
+            <div class="flexChild">
+                <h1>@Model.Nom</h1>
+            </div>
+            <div class="flexChild">
+                <img src="~/image/logo.png" id="logo" alt="">
+            </div>
+        </div>
+    </header>
+
+
+    <!-- fin header -->
+
+    <div id="blockain">
+        <!--bloc principale-->
+        <!-- Block client gauche -->
+        <div id="left" class="flexContainer">
+            <div class="client">  <!--classe client representant les block de droite et gauche -->
+                <h2>Clients</h2>
+
+                <div class="standardBlock"> <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Contexte entreprise</p>
+                </div>
+
+                <div class="standardBlock"> <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Attentes et exigences</p>
+                </div>
+
+                <div class="standardBlock">  <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Attentes et besoins des parties intéréssées</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Fin Block client gauche -->
+        <!-- Block milieu-->
+        <div id="middle" class="flexContainer">
+            <h1>Notre mission</h1>
+            <div id="Big-arrow">
+                <!-- Div de la fleche de direction droite en haut de la page -->
+                <div id="GrandRectangle" class="rectangle"><p>Proposer des solutions de radiocommandes et adaptable à l'industrie</p></div> <!-- Construction d'un rectangle clickable contenant du texte -->
+                <div>
+                    <div id="Grand-triangle-bottomleft"></div> <!-- Construction d'un triangle representant la partie inferieur de la fleche a droite du rectangle -->
+                    <div id="Grand-triangle-topleft" class="triangle-topleft"></div> <!-- Construction d'un triangle representant la partie superieur de la fleche a droite du rectangle -->
+                </div>
+            </div>
+
+            <div id="topUP">
+                <!-- Div representant le block en dessous de Big-arrow -->
+                
+                   
+                    <div class="standardBlockTop">
+                        <!--Div clickable -->
+                        <a href="@Url.Action("Activite", "Qualite", new { id = Model.ProcessusTop.First().IDProcessus })">@Html.DisplayFor(model => Model.ProcessusTop.First().NomProcessus)</a>
+                    </div>
+                
+            </div>
+            <div id="top">
+                <!-- Div representant le block en dessous de Big-arrow -->
+                
+                @foreach (var processus in Model.ProcessusTop)
+                {
+                    i++;
+                    if (first)
+                    {
+
+                    <div class="standardBlockTop">
+                        <!--Div clickable -->
+                        <a href="@Url.Action("Activite", "Qualite", new { id = processus.IDProcessus })">@Html.DisplayFor(model => processus.NomProcessus)</a>
+                    </div>
+                        if (i < Model.ProcessusTop.Count())
+                        {
+                        <img src="~/image/double_fleche2.png" id="double_fleche" alt="">
+                        }
+                    }
+                    first = true;
+                }
+            </div>
+
+            <div id="fleche_haut_direction_bas">
+                <img src="~/image/fleche_bas.png" id="fleche_direction_bas" alt="">
+            </div>
+
+            <div id="ListProcessus">
+                <!-- Block contenant la liste des Processus-->
+                @foreach (var processus in Model.ProcessusMiddle)
+                {
+                    <div class="arrow">
+                        <!-- class representant les processus-->
+                        <div>
+                            <div class="triangle-topright"></div> <!-- Supression d'un triangle representant la partie superieur du rectangle a gauche-->
+                            <div class="triangle-bottomright"></div> <!-- Supression d'un triangle representant la partie inferieur du rectangle a gauche-->
+                        </div>
+                        <div class="rectangle">
+                            <a href="@Url.Action("Activite", "Qualite", new { id = processus.IDProcessus })">@Html.DisplayFor(model => processus.NomProcessus)</a>
+                        </div><!-- Construction d'un rectangle clickable contenant du texte -->
+
+                        <div>
+                            <div class="triangle-bottomleft"></div> <!-- Construction d'un triangle representant la partie inferieur de la fleche a droite du rectangle -->
+                            <div class="triangle-topleft"></div> <!-- Construction d'un triangle representant la partie superieur de la fleche a droite du rectangle -->
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div id="fleche_bas_direction_haut">
+                <!-- Block contenant les 3 images de fleche en bas de la page en direction du haut  -->
+                <img src="~/image/fleche_haut.png" alt="">
+                <img src="~/image/fleche_haut.png" alt="">
+                <img src="~/image/fleche_haut.png" alt="">
+            </div>
+
+
+            <div id="bottom">
+                <!-- Block contenant les 4 blocks en bas de la page -->
+                @foreach (var processus in Model.ProcessusBottom)
+                {
+                    <div class="standardBlockBot">
+                        <!--Div clickable -->
+                        <a href="@Url.Action("Activite", "Qualite", new { id = processus.IDProcessus })">@Html.DisplayFor(model => processus.NomProcessus)</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Fin Block milieu-->
+
+        <!-- Block Client droite-->
+        <div id="right" class="flexContainer">
+
+            <div class="client">
+                <h2>Clients</h2>
+
+                <div class="standardBlock"> <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Satisfaction de besoins</p>
+                </div>
+                <div class="standardBlock"> <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Produits et services</p>
+                </div>
+                <div class="standardBlock"> <!-- classe standardBlock representant les sous blocks de la classe client -->
+                    <p>Résultat SMI</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fin Block client droite-->
+
+    </div>
+</body>
+

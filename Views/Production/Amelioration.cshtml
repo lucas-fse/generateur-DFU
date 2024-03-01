@@ -1,0 +1,509 @@
+﻿@model GenerateurDFUSafir.Models.InfoAmelioration
+@{
+    ViewBag.Title = "Amelioration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/Amelioration.css" rel="stylesheet" />
+    string Date = DateTime.Now.ToString("dd-MM-yyyy");
+    string DateAnglaise = Date.Substring(6, 4) + Date.Substring(2, 3) + "-" + Date.Substring(0, 2);
+    string NbAmeliorationParSecteur = "";
+    string NbAmeliorationParService = "";
+    string NbAmeliorationParStatus = "";
+    string TitreAmeliorationParSecteur = "";
+    string TitreAmeliorationParService = "";
+    string TitreAmeliorationParStatus = "";
+}
+
+<div id="fondTransparent"></div>
+
+<div id="AmeliorationDiv">
+    <div id="topInfos">
+        <h2>Proposition amélioration</h2>
+    </div>
+
+    <div id="Middle">
+        <div id="DivCases">
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="../image/sablier.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Nb amélioration derniers mois</h3>
+                    <p id="AMcpt1" initvalue="@Model.NbAmeliorationDernierMois" class="ValueCase"><span>0</span></p>
+                </div>
+            </div>
+
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="../image/coupe.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Nb d'améliorations production sur l'année</h3>
+                    <p id="AMcpt2" initvalue="@Model.NbAmeliorationProduction" class="ValueCase"><span>0</span></p>
+                </div>
+            </div>
+
+            <div class="boxCounter" id="SereniteStat">
+                <div class="thumbnailCounter">
+                    <img src="../image/pouce_en_haut.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Nb d'améliorations se sécurité</h3>
+                    <p id="AMcpt3" initvalue="@Model.NbAmeliorationProductionsecurite" class="ValueCase"><span>0</span></p>
+                </div>
+            </div>
+
+            <a href="#0" class="bttn" onclick="OuvrirPopUp()">Nouvelle Proposition</a>
+
+        </div>
+        <div id="Graph">
+            <div id="Graph1">
+                <div class="DivCanvas" id="canvas1">
+                    <canvas id="Graphique"></canvas>
+                </div>
+                <div class="TypeGraph" id="TypeGraph">
+                    <input class="checkbox-tools" type="radio" name="tools" id="tool-1">
+                    @foreach (var item in Model.AmeliorationParSujet)
+                    {
+                        NbAmeliorationParService += (item.Value.Count) + ":";
+                        TitreAmeliorationParService += item.Key + ":";
+                    }
+
+                    <label id="click" class="for-checkbox-tools" for="tool-1" onclick="GraphService(@("'"+NbAmeliorationParService+";"+TitreAmeliorationParService+"'"))">
+                        <i class='uil uil-line-alt'></i>
+                        Par Services
+                    </label>
+                    <br />
+                    <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                    @foreach (var item in Model.AmeliorationParSecteur)
+                    {
+                        NbAmeliorationParSecteur += (item.Value.Count) + ":";
+                        TitreAmeliorationParSecteur += item.Key + ":";
+                    }
+
+                    <label class="for-checkbox-tools" for="tool-2" onclick="GraphSecteur(@("'"+NbAmeliorationParSecteur+";"+TitreAmeliorationParSecteur+"'"))">
+                        <i class='uil uil-vector-square'></i>
+                        Par Secteurs
+                    </label>
+                    <br />
+                    <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
+                    @foreach (var item in Model.AmeliorationParStatus)
+                    {
+                        NbAmeliorationParStatus += (item.Value.Count) + ":";
+                        TitreAmeliorationParStatus += item.Key + ":";
+                    }
+
+                    <label class="for-checkbox-tools" for="tool-3" onclick="GraphStatus(@("'"+NbAmeliorationParStatus+";"+TitreAmeliorationParStatus+"'"))">
+                        <i class='uil uil-ruler'></i>
+                        Par Status
+                    </label>
+                </div>
+
+            </div>
+            <div id="Graph2">
+                <div class="DivCanvas" id="canvas2">
+                    <canvas id="Graphique2"></canvas>
+                </div>
+            </div>
+        </div>
+        <div id="DetailAmelioration"></div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/clock.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Scripts/chart.js"></script>
+    <script type="text/javascript" src="~/Scripts/CountDown.js"></script>
+    <script type="text/javascript" src="~/Scripts/chartNbAmelioration.js"></script>
+    <script type="text/javascript" src="~/Scripts/Proposition.js"></script>
+    <script type="text/javascript">
+            var chartObj1;
+
+	var listeAmeliorationParStatusStrJson = '<p>@Model.ChaineAmeliorationParStatus</p>';
+        listeAmeliorationParStatusStrJson = listeAmeliorationParStatusStrJson.replace(/(\r\n|\n|\r)/gm, "\\n")
+        listeAmeliorationParStatusStrJson = jQuery(listeAmeliorationParStatusStrJson).text();
+        listeAmeliorationParStatusStrJson = listeAmeliorationParStatusStrJson.replace(/\\n/gm, "<br>")
+        var JsonAmeliorationParStatus = JSON.parse(listeAmeliorationParStatusStrJson);
+
+        var listeAmeliorationParSecteurStrJson = '<p>@Model.ChaineAmeliorationParSecteur</p>';
+        listeAmeliorationParSecteurStrJson = listeAmeliorationParSecteurStrJson.replace(/(\r\n|\n|\r)/gm, "\\n")
+        listeAmeliorationParSecteurStrJson = jQuery(listeAmeliorationParSecteurStrJson).text();
+        listeAmeliorationParSecteurStrJson = listeAmeliorationParSecteurStrJson.replace(/\\n/gm, "<br>")
+        var JsonAmeliorationParSecteur = JSON.parse(listeAmeliorationParSecteurStrJson);
+
+        var listeAmeliorationParServiceStrJson = '<p>@Model.ChaineAmeliorationParSujet</p>';
+        listeAmeliorationParServiceStrJson = listeAmeliorationParServiceStrJson.replace(/(\r\n|\n|\r)/gm, "\\n")
+        listeAmeliorationParServiceStrJson = jQuery(listeAmeliorationParServiceStrJson).text();
+        listeAmeliorationParServiceStrJson = listeAmeliorationParServiceStrJson.replace(/\\n/gm, "<br>")
+        var JsonAmeliorationParService = JSON.parse(listeAmeliorationParServiceStrJson);
+
+        var chartElem2 = document.getElementById('Graphique2').getContext('2d');
+        var chartObj2;
+        var listeAmeliorationParMoisStrJson = '<p>@Model.ChaineAccidentParMois</p>';
+        listeAmeliorationParMoisStrJson = listeAmeliorationParMoisStrJson.replace(/(\r\n|\n|\r)/gm, "\\n");
+
+        listeAmeliorationParMoisStrJson = jQuery(listeAmeliorationParMoisStrJson).text();
+        listeAmeliorationParMoisStrJson = listeAmeliorationParMoisStrJson.replace(/\\n/gm, "<br>")
+        var JsonAmeliorationParMois = JSON.parse(listeAmeliorationParMoisStrJson);
+
+
+        var mois = [];
+        var moisValue = [];
+        for (var item in JsonAmeliorationParMois) {
+            mois.push(item);
+            moisValue.push(JsonAmeliorationParMois[item]['True'].length);
+
+        }
+
+        function getNbAmeliorationParMois() {
+            var tab = [];
+            for (var item in JsonAmeliorationParMois) {
+                tab.push(JsonAmeliorationParMois[item]['True'].length + JsonAmeliorationParMois[item]['False'].length)
+            }
+            return tab;
+        }
+
+            document.getElementById("click").click();
+
+            option = {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Qualité',
+                        font: {
+                            size:30
+                        }
+
+                    },
+                    legend: {
+                        display: true
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true, //pour commencer à partir de zero en ordonnée
+                        title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Nombre de Propositions'
+                        },
+                        stacked: false //on veut  pas empiler les barress
+                    },
+                    x: {
+                        stacked: false //on veut pas  empiler les barres
+                        , title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Mois',
+                        }
+                    }
+                },
+
+                animation: {
+                    //  duration: 1250,
+                    //  easing: 'easeOutBounce' // doc animation : https://www.chartjs.org/docs/latest/configuration/animations.html#easing
+
+                },
+                responsive: true //pour que la charte soit responsive
+                , maintainAspectRatio: false
+            }
+
+            data = {
+                labels: mois, //axe (Ox) labels
+                datasets: [{
+                    label: "Nb de suggestions de securites emises", //y label
+                    data: getNbAmeliorationParMois(), //donnes pour chaque barre
+                    backgroundColor: [ //couleurs de fond des barres
+                        '#FF6600',
+                    ],
+                    borderColor: [ //couleurs des bordures des barres
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 0 //épaisseur bordure des barres
+                },
+                {
+                    label: "Nb de suggestions de securites realises", //y label
+                    data: moisValue, //donnes pour chaque barre
+                    backgroundColor: [ //couleurs de fond des barres
+                        '#318ce7',
+                    ],
+                    borderColor: [ //couleurs des bordures des barres
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 0 //épaisseur bordure des barres
+                }
+
+                ]
+            }
+
+            chartObj2 = new Chart(chartElem2, {
+                type: 'bar', //type de graphe
+                data: data,
+                options: option
+            });
+
+            chartObj1 = Chart.getChart(document.getElementById('Graphique'));
+            ClickBarre();
+
+            document.getElementById("TypeGraph").onclick = function () {
+                chartObj1 = Chart.getChart(document.getElementById('Graphique'));
+                console.log(chartObj1);
+                ClickBarre();
+            };
+
+
+            function ClickBarre() {
+                document.getElementById('Graphique').onclick = function (evt1) {
+                    const activePoints = chartObj1.getElementsAtEventForMode(evt1, 'nearest', { intersect: true }, true);
+                    var firstPoint1 = activePoints[0];
+                    var i = 0;
+                    if (document.getElementById("tool-1").checked) {
+                        for (var item in JsonAmeliorationParService) {
+                            if (i == firstPoint1.index) {
+                                AfficherDetail(JsonAmeliorationParService, item)
+                            }
+                            i++;
+                        }
+                    } else if (document.getElementById("tool-2").checked) {
+                        for (var item in JsonAmeliorationParSecteur) {
+                            if (i == firstPoint1.index) {
+                                AfficherDetail(JsonAmeliorationParSecteur, item)
+                            }
+                            i++;
+                        }
+                    } else if (document.getElementById("tool-3").checked) {
+                        for (var item in JsonAmeliorationParStatus) {
+                            if (i == firstPoint1.index) {
+                                AfficherDetail(JsonAmeliorationParStatus, item)
+                            }
+                            i++;
+                        }
+                    }
+                };
+            }
+
+
+            document.getElementById("Graphique2").onclick = function (evt2) {
+                const activePoints = chartObj2.getElementsAtEventForMode(evt2, 'nearest', { intersect: true }, true);
+                var firstPoint2 = activePoints[0];
+                var i = 0;
+                for (var item in JsonAmeliorationParMois) {
+                    if (i == firstPoint2.index) {
+                        if (firstPoint2.datasetIndex == 0) {
+                            AfficherDetailParMois("False", item);
+                        } else {
+                            AfficherDetailParMois("True", item);
+                        }
+                    }
+                    i++;
+                }
+            };
+
+        function AfficherDetail(JsonObj, type) {
+                document.getElementById("DetailAmelioration").innerHTML = "";
+                for (var i = 0; i < JsonObj[type].length; i++) {
+                    var newDiv = document.createElement("div");
+                    newDiv.className = 'DetailA';
+                    var divBandeau = document.createElement("div");
+                    divBandeau.className = 'DivBandeau'
+                    newDiv.appendChild(divBandeau);
+
+                    var text1 = document.createElement("p");
+                    text1.className = 'TexteDetail'
+                    var DivText1 = document.createElement("div");
+                    text1.innerHTML = "L'Amelioration a ete declare le " + JsonObj[type][i].Date.substring(0, 10) + " par " + JsonObj[type][i].Emetteur;
+                    var textService = document.createElement("p");
+                    textService.innerHTML = "Service: " + JsonObj[type][i].Service;
+                    var textSujet = document.createElement("p");
+                    textSujet.innerHTML = "Secteur: " + JsonObj[type][i].SujetString;
+                    var textStatus = document.createElement("p");
+                    textStatus.innerHTML = "Status: " + JsonObj[type][i].StatusString;
+                    var textRealise = document.createElement("p");
+                    if (JsonObj[type][i].realise == true) {
+                        textRealise.innerHTML = "Realise: Oui";
+                    } else {
+                        textRealise.innerHTML = "Realise: Non";
+                    }
+
+                    var infoSups = document.createElement("div");
+                    infoSups.className = 'infoSups';
+                    infoSups.appendChild(textService);
+                    infoSups.appendChild(textSujet);
+                    infoSups.appendChild(textStatus);
+                    infoSups.appendChild(textRealise);
+
+                    DivText1.className = 'TextDateDetail';
+                    newDiv.appendChild(DivText1);
+                    DivText1.appendChild(text1);
+                    DivText1.append(infoSups);
+                    
+
+                    var text2 = document.createElement("label");
+                    var DivText2 = document.createElement("div")
+                    text2.innerHTML = "Proposition: ";
+                    DivText2.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText2);
+                    DivText2.appendChild(text2);
+
+                    var text3 = document.createElement("p");
+                    var DivText3 = document.createElement("div")
+                    text3.innerHTML = JsonObj[type][i].Description;
+                    DivText3.className = 'TextDetail';
+                    newDiv.appendChild(DivText3);
+                    DivText3.appendChild(text3);
+
+                    var text4 = document.createElement("label");
+                    var DivText4 = document.createElement("div")
+                    text4.innerHTML = "Une Solution: ";
+                    DivText4.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText4);
+                    DivText4.appendChild(text4);
+
+                    var text5 = document.createElement("p");
+                    var DivText5 = document.createElement("div")
+                    text5.innerHTML = JsonObj[type][i].Description2;
+                    DivText5.className = 'TextDetail';
+                    newDiv.appendChild(DivText5);
+                    DivText5.appendChild(text5);
+
+                    var text6 = document.createElement("label");
+                    var DivText6 = document.createElement("div")
+                    text6.innerHTML = "Image de l'ameiloration: ";
+                    DivText6.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText6);
+                    DivText6.appendChild(text6);
+
+                    //Si l'image de l'ameiloration n'existe pas (le champ UrlImage est NULL), on l'affiche, sinon on affiche 'Aucune photo prise'
+                    if (JsonObj[type][i].FullUrlImage.length != 0) {
+                    var image = document.createElement("img");
+                    image.setAttribute("src", "/ImageProposition/" + JsonObj[type][i].FullUrlImage);
+                    image.className += "image_box";
+                    var DivImage = document.createElement("div")
+                    DivImage.className = 'ImageDetail';
+                    newDiv.appendChild(DivImage);
+                    DivImage.appendChild(image);
+                    } else {
+                        var text7 = document.createElement("p");
+                        var DivText7 = document.createElement("div")
+                        text7.innerHTML = "Aucune photo prise";
+                        DivText7.className = 'TextDetail';
+                        newDiv.appendChild(DivText7);
+                        DivText7.appendChild(text7);
+                    }
+
+                    document.getElementById('DetailAmelioration').appendChild(newDiv);
+                }
+
+            }
+
+
+            function AfficherDetailParMois(type, mois) {
+                document.getElementById("DetailAmelioration").innerHTML = "";
+                if (type == "True") {
+                    var cpt = JsonAmeliorationParMois[mois][type].length;
+                } else {
+                    var cpt = JsonAmeliorationParMois[mois]["True"].length + JsonAmeliorationParMois[mois]["False"].length;
+                }
+
+                for (var y = 0; y < cpt; y++) {
+                    var i;
+                    if (y >= JsonAmeliorationParMois[mois][type].length) {
+                        type = "True";
+                        i = y - JsonAmeliorationParMois[mois]["False"].length;
+                    } else {
+                        i = y;
+                    }
+                    var newDiv = document.createElement("div");
+                    newDiv.className = 'DetailA';
+                    var divBandeau = document.createElement("div");
+                    divBandeau.className = 'DivBandeau'
+                    newDiv.appendChild(divBandeau);
+
+                    var text1 = document.createElement("p");
+                    text1.className = 'TexteDetail'
+                    var DivText1 = document.createElement("div");
+                    text1.innerHTML = "L'Amelioration a ete declare le " + JsonAmeliorationParMois[mois][type][i].Date.substring(0, 10) + " par " + JsonAmeliorationParMois[mois][type][i].Emetteur;
+                    var textService = document.createElement("p");
+                    textService.innerHTML = "Service: " + JsonAmeliorationParMois[mois][type][i].Service;
+                    var textSujet = document.createElement("p");
+                    textSujet.innerHTML = "Secteur: " + JsonAmeliorationParMois[mois][type][i].SujetString;
+                    var textStatus = document.createElement("p");
+                    textStatus.innerHTML = "Status: " + JsonAmeliorationParMois[mois][type][i].StatusString;
+                    var textRealise = document.createElement("p");
+                    if (type == "True") {
+                        textRealise.innerHTML = "Realise: Oui";
+                    } else {
+                        textRealise.innerHTML = "Realise: Non";
+                    }
+
+                    var infoSups = document.createElement("div");
+                    infoSups.className = 'infoSups';
+                    infoSups.appendChild(textService);
+                    infoSups.appendChild(textSujet);
+                    infoSups.appendChild(textStatus);
+                    infoSups.appendChild(textRealise);
+
+
+                    DivText1.className = 'TextDateDetail';
+                    newDiv.appendChild(DivText1);
+                    DivText1.appendChild(text1);
+                    DivText1.append(infoSups);
+
+                    var text2 = document.createElement("label");
+                    var DivText2 = document.createElement("div")
+                    text2.innerHTML = "Proposition: ";
+                    DivText2.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText2);
+                    DivText2.appendChild(text2);
+
+                    var text3 = document.createElement("p");
+                    var DivText3 = document.createElement("div")
+                    text3.innerHTML = JsonAmeliorationParMois[mois][type][i].Description;
+                    DivText3.className = 'TextDetail';
+                    newDiv.appendChild(DivText3);
+                    DivText3.appendChild(text3);
+
+                    var text4 = document.createElement("label");
+                    var DivText4 = document.createElement("div")
+                    text4.innerHTML = "Une Solution: ";
+                    DivText4.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText4);
+                    DivText4.appendChild(text4);
+
+                    var text5 = document.createElement("p");
+                    var DivText5 = document.createElement("div")
+                    text5.innerHTML = JsonAmeliorationParMois[mois][type][i].Description2;
+                    DivText5.className = 'TextDetail';
+                    newDiv.appendChild(DivText5);
+                    DivText5.appendChild(text5);
+
+                    var text6 = document.createElement("label");
+                    var DivText6 = document.createElement("div")
+                    text6.innerHTML = "Image de l'ameiloration: ";
+                    DivText6.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText6);
+                    DivText6.appendChild(text6);
+
+                    //Si l'image de l'ameiloration n'existe pas (le champ UrlImage est NULL), on l'affiche, sinon on affiche 'Aucune photo prise'
+                    if (JsonAmeliorationParMois[mois][type][i].FullUrlImage.length != 0) {
+                        var image = document.createElement("img");
+                        image.setAttribute("src", "/ImageProposition/" + JsonAmeliorationParMois[mois][type][i].FullUrlImage);
+                        image.className += "image_box";
+                        var DivImage = document.createElement("div")
+                        DivImage.className = 'ImageDetail';
+                        newDiv.appendChild(DivImage);
+                        DivImage.appendChild(image);
+                    } else {
+                        var text7 = document.createElement("p");
+                        var DivText7 = document.createElement("div")
+                        text7.innerHTML = "Aucune photo prise";
+                        DivText7.className = 'TextDetail';
+                        newDiv.appendChild(DivText7);
+                        DivText7.appendChild(text7);
+                    }
+                    
+                    document.getElementById('DetailAmelioration').appendChild(newDiv);
+                }
+            }
+    </script>
+    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+    <script type="text/javascript" src="~/Scripts/form.js"></script>
+</div>

@@ -1,0 +1,67 @@
+﻿@model GenerateurDFUSafir.Models.OrdreFabricationMono
+@{
+    ViewBag.Title = "Gestion Gamme UD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/form.css" rel="stylesheet" />
+    <link href="~/Content/gammeUD.css" rel="stylesheet" />
+
+}
+
+
+
+@using (Html.BeginForm("Index", "GammeUD", FormMethod.Post, new { id = "FormSuppr" }))
+{
+    @Html.AntiForgeryToken()
+
+    <main>
+        <div class="frm-box">
+            <h2 class="frm-title">Fabrication gamme UD</h2>
+            <p class="frm-description">Entrez le numéro d'ordre de fabrication :</p>
+
+            <div class="frm-group">
+                <input type="text" name="TryToOFUD" class="frm-input" value="@ViewBag.input" />
+            </div>
+            <div class="frm-button-box">
+                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
+                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" >VALIDER</button>
+            </div>
+        </div>
+
+        @if(!string.IsNullOrWhiteSpace(ViewBag.erreurs)){
+            <div class="frm-error-message">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                @ViewBag.erreurs
+            </div>         
+        }
+
+        @if (ViewBag.resultView) {
+            <div class="result">
+                <div class="box-conductix infos">
+                    <h2>Informations</h2>
+                    <div class="infos-box">Référence <span class="value">@Model.Item</span></div>
+                    <div class="infos-box">Quantité <input type="number" class="value" value="@Model.Qtr" id="quantite" name="quantite"></div>
+                    <label for="printbutton" id="print" class="neutral-button">
+                        <i class="fa-solid fa-print" ></i> IMPRIMER ÉTIQUETTES
+                        <input style="display: none" type="submit" id="printbutton" name="print">
+                    </label>
+                </div>
+
+                <div class="box-conductix image-view">
+                    <h2>Plan de montage</h2>
+
+                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.imageBytes))" height="500" />
+                </div>
+            </div>
+        }
+
+
+    </main>
+}
+
+<script>
+    const edit_qt_btn = document.querySelector('#edit_qt');
+    const edit_qt_input = document.querySelector('#quantite');
+    const print_btn = document.querySelector('#print');
+</script>
+
+<script src="~/Scripts/form.js"></script>

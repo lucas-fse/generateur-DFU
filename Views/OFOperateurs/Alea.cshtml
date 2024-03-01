@@ -1,0 +1,55 @@
+﻿@model GenerateurDFUSafir.Models.DeclarationAlea
+@{
+    ViewBag.Title = "Alea";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<h2>Déclaration des Aleas de l'ordre de fabrication :  @Html.DisplayFor(model => Model.NmrOF)</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="alea">
+        <!-- deux colonnes 1 groupe 1 pour les codes-->
+        <table class="groupe">
+            <tr>
+                <td></td>
+                <td>
+                    <h3>Groupe d'aléas</h3>
+                </td>
+                <td>
+                    <h3>Code aléas</h3>
+                </td>
+
+                <td>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </td>
+            </tr>
+            @for (int i = 0; i< Model.CodeAlea.Count;i++)
+            {
+                <tr>
+                    <td class="colonnegroupe">
+                            @Html.DisplayFor(model => Model.CodeAlea[i].Groupe)
+                    </td>
+                    <td  class="colonnesousgroupe" bgcolor="@Html.DisplayFor(model => Model.CodeAlea[i].Couleur)">
+                            @Html.DisplayFor(model => Model.CodeAlea[i].SouSGroupe)
+                    </td>
+                    <td class="colonneelement" bgcolor="@Html.DisplayFor(model => Model.CodeAlea[i].Couleur)">
+                        @Html.DisplayFor(model => Model.CodeAlea[i].Code) - @Html.DisplayFor(model => Model.CodeAlea[i].Erreur)
+                    </td>
+                    <td bgcolor="@Html.DisplayFor(model => Model.CodeAlea[i].Couleur)">
+                        @Html.CheckBoxFor(model => Model.CodeAlea[i].ischecked)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+

@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Accueil";
+
+    <link href="~/Content/home-slider.css" rel="stylesheet" />
+}
+
+<div class="main">
+    <div class="section">
+        <div class="content">
+            <div>
+                <p class="infossup subtitle">Cette semaine</p>
+                <h1><span class="counter" id="OtdSemaine">0</span> %</h1>
+
+            </div>
+            <div class="infossup">
+                <div class="goal-box">
+                    <div class="goal" id="ObjectifOtdBar">
+                        <p></p>
+                    </div>
+                </div>
+                <h2 class="title">OTD / OTR</h2>
+                <div class="subinfos"><span><i class="fa-solid fa-truck"></i>  OTD mois </span> <span class="value"><span class="counter" id="OtdMois">0</span> %</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-truck"></i>  OTR semaine </span> <span class="value"><span class="counter" id="OtrSemaine">0</span> %</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-truck"></i>  OTR mois </span> <span class="value"><span class="counter" id="OtrMois">0</span> %</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-truck"></i>  Objectif OTD </span> <span class="value"><span class="counter" id="ObjectifOtd">0</span> %</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-truck"></i>  Objectif OTR </span> <span class="value"><span class="counter" id="ObjectifOtr">0</span> %</span></div>
+
+            </div>
+            <img src="./image/local_shipping.svg">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="content">
+            <img src="./image/docs.svg">
+            <div class="infossup">
+                <h2 class="title">Satisfaction clients</h2>
+                <div class="subinfos"><span><i class="fa-solid fa-face-smile"></i>  Nombre au mois </span> <span class="value"><span class="counter" id="FrcMois">0</span> FRC</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-face-smile"></i>  Objectif FRC </span> <span class="value"><span class="counter" id="ObjectifFrc">0</span></span></div>
+
+                <div class="goal-box">
+                    <div class="goal" id="ObjectifFrcBar">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1><span class="counter" id="FrcAnnee">0</span> FRC</h1>
+                <p class="infossup subtitle">Cette année</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <div class="content">
+            <div>
+                <p class="infossup subtitle">Ce mois</p>
+                <h1><span class="counter" id="CaMois">0</span>€</h1>
+
+            </div>
+            <div class="infossup">
+                <div class="goal-box">
+                    <div class="goal" id="ObjectifCa">
+                        <p></p>
+                    </div>
+                </div>
+                <h2 class="title">Chiffre d'affaires facturé</h2>
+                <div class="subinfos"><span><i class="fa-solid fa-calendar-days"></i>  Mois dernier </span> <span class="value"><span class="counter" id="CaMoisPrec">0</span> €</span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-calendar-days"></i>  Année </span> <span class="value"><span class="counter" id="CaAnnee">0</span> €</span></div>
+
+            </div>
+            <img src="./image/euro.svg">
+        </div>
+
+    </div>
+
+    <div class="section">
+        <div class="content">
+            <img src="./image/health_and_safety.svg">
+            <div class="infossup">
+                <h2 class="title">Sécurité</h2>
+                <div class="subinfos"><span><i class="fa-solid fa-briefcase-medical"></i>  Nombre de soins bénins </span> <span class="value"><span class="counter" id="NbSoinsBenins">0</span></span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-briefcase-medical"></i>  Nombre de presque accidents </span> <span class="value"><span class="counter" id="NbPresqueAccident">0</span></span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-briefcase-medical"></i>  Nombre de situations dangereuses </span> <span class="value"><span class="counter" id="NbSituationDangereuse">0</span></span></div>
+                <div class="subinfos"><span><i class="fa-solid fa-briefcase-medical"></i>  Nombre d'actes dangereux </span> <span class="value"><span class="counter" id="NbActesDangereux">0</span></span></div>
+
+                <div class="goal-box">
+                    <div class="goal" id="ObjectifFrcBar">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1><span class="counter" id="NbJourSansAccident">0</span> J</h1>
+                <p class="infossup subtitle">Jours sans accident</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="conductix-logo">
+    <img src="~/image/swirl.png" />
+</div>
+
+
+<script src="~/Scripts/slider.js"></script>
+<script src="~/Scripts/numcounter.js"></script>

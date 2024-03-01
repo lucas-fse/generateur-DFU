@@ -1,0 +1,107 @@
+﻿@model GenerateurDFUSafir.Models.DataOperateur
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+
+}
+
+@using (Html.BeginForm("EditPost", "OFOperateurs"))
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <div class="traitementofoperateur">
+            <div class="colonne1">
+                <div class="">
+                    <img class="imageoperateur grid" src=@Html.DisplayFor(model => model.Photo) height=255 width=154 title=@Html.DisplayFor(model => model.Nom) />
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                </div>
+                <p class="nomoperetaur">@Html.DisplayFor(model => model.Prenom)</p>
+                <div>
+                    <label for="pet-select">Choisir l'îlot du poste</label>
+                </div>
+                <div>
+                    @Html.DropDownListFor(m => m.Ilotid, // Store selected value in Model.DefaultCountryOfBirthId
+                          new SelectList(Model.ListIlotdispo, "Value", "Text", Model.DefaultIlotid),
+                          new { @class = "form-control", onchange = @"submit();" })
+                </div>
+            </div>
+            <div class="colonne2">
+                <div class="ofademarre">
+                    <div>
+                        <label for="exnmrof">Entrer un numéro d'OF</label>
+                        <input id="nmrof" type="text" name="TryToAddOF">
+                    </div>
+                    <div>
+                        <input type="submit" value="Début de l'OF">
+                    </div>
+                </div>
+                <div class="ofencours">
+                    <h4>Status des OF en cours</h4>
+                    <table class="elementof">
+                        <tr>
+                            <td>Nmr OF</td>
+                            <td>Démarré le</td>
+                            <td>Qtr réel</td>
+                            <td>Aléas</td>
+                            <td>Temps perdu</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @foreach (var of in Model.OfEncours)
+                        {
+                    <tr>
+                        <td>
+                            <input type="hidden" name="OfEncours[@i].NMROF" value="@of.NMROF" />
+                            @Html.DisplayFor(model => of.NMROF) - @Html.DisplayFor(model => of.STATUSTYPE)
+                        </td>
+                        <td>
+                            <input type="button" value="@Html.DisplayFor(model => of.StartAt)" class="btn btn-default" disabled="disabled" />
+                        </td>
+                        <td width="20px">
+                            <input type="text" name="OfEncours[@i].QTRREEL" id="OfEncours[@i].QTRREEL" value="@of.QTRREEL" class="form-control"  @of.Readonly onchange="submit()"/>
+                        </td>
+                        <td>
+                            <input type="button" value="Déclarer des aleas" class="btn btn-default" onclick="location.href='@Url.Action("Alea", "OFOperateurs", new { actionof = "ADD", of = of.NMROF, id = Model.ID })'" />
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => Model.OfEncours[@i].TempsId,
+                         new SelectList(of.ListTempsSuppl, "Value", "Text", of.DefaultTempsId),
+                         new { @class = "form-control", onchange = @"submit();" })
+                        </td>
+                        <td>
+                            <input type="button" value="@Html.DisplayFor(model => of.PauseReprise)" class="btn btn-default" onclick="location.href='@Url.Action("ChangeStatus", "OFOperateurs", new { actionof = "PAUSE", of = of.NMROF, id = Model.ID })'" />
+                        </td>
+                        <td>
+                            <input type="button" value="@Html.DisplayFor(model => of.Arret)" class="btn btn-default" onclick="location.href='@Url.Action("ChangeStatus", "OFOperateurs", new { actionof = "ARRET", of = of.NMROF, id = Model.ID })'" />
+                        </td>
+
+                    </tr>
+                            i++;
+                        }
+                    </table>
+                </div>
+                <div class="ofatraite">
+                    <h4>Status des OFs a traités</h4>
+                    <table class="elementof">
+                        @foreach (var of in Model.OfNontraiteNontraceAff)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => of.NMROF) - @Html.DisplayFor(model => of.STATUSTYPE)
+                                </td>
+                                <td>
+                                    c
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </body>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

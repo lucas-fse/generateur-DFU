@@ -1,0 +1,964 @@
+﻿<!-- a supprimer-->
+@model GenerateurDFUSafir.Models.DataOperateurProd
+@using GenerateurDFUSafir.Models.DAL;
+<!-- a supprimer-->
+@{
+    ViewBag.Title = "gestion OF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/gestionOF.css?13" rel="stylesheet" />
+    <link href="~/Content/of.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+}
+<body>
+    <p id="ouverturepopup" initvalue="@Model.Popup.ToString()" hidden></p>
+    <div id="gestion-OF-container">
+        <div id="topInfos">
+            <div class="">
+                <img src="~/image/logo.png" id="logo" alt="logo">
+            </div>
+        </div>
+        <div id="categorie-OF">
+            <!-- debut barre latérale gauche -->
+            <img src="~/image/swirl.png" id="logoBackGround" />
+            <div id="user">
+                <!-- informations employé -->
+                <div id="user-pic-container">
+                    <img src="@Model.Photo" id="user-pic" />
+                </div>
+                <h2>@Model.Nom</h2>
+                <h3>@Model.Prenom</h3>
+            </div>
+
+            <div id="buttons-container">
+                <!-- bouttons popup OFs non lancés -->
+                @using (Html.BeginForm())
+                {
+                    <input type="hidden" name="inputdemandeparjs" value="" />
+                    <!--<input type="hidden" id="gererPopup" name="endPopPup" value="" />-->
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                    <!--<button type="submit" class="cat-OF-button" value="2" name="cat">Catégorie bidirectionnelle </button>
+        <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
+        <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
+
+                    <button type="submit" class="cat-OF-button" value="1" name="cat">OfZEN</button>
+                    <br />
+                    <button type="submit" class="cat-OF-button" value="5" name="cat">PrintZEN</button>
+                    if (Model.Animateur)
+                    {
+                        <button type="submit" class="cat-OF-button" value="7" name="cat">AffectaZEN</button>
+
+                        <button type="submit" class="cat-OF-button" value="6" name="cat">PlaniZEN</button>
+                    }
+                    <button type="submit" class="cat-OF-button" value="8" name="cat">ToolsZEN</button>
+
+                }
+            </div>
+        </div> <!-- fin barre latérale gauche -->
+        <div id="OF-en-cours">
+            <!-- debut contenu principal -->
+            <div id="top-information">
+                <h1>Liste des OF en cours</h1>
+                @using (Html.BeginForm())
+                {
+                    <label for="searched-OF">Référence de l'OF:</label>
+                    <!--
+                    -->
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                    <input type="search" id="searched-OF" name="searchedOF">
+                    <!--
+                    -->
+                    <button type="submit" name="submitButton" id="submitButton"><img src="~/image/search.png" alt="Alternate Text" width="20" /></button>
+                }
+            </div>
+
+            <div id="OF-liste">
+                <div id="list-header" class="rowGrid">
+                    <div class="col-list-2">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:50%;">Numéro OF</td>
+                                <td>Démarré le </td>
+                            </tr>
+                            <tr><td colspan="2"></td> </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-list-3">Qtr réel</div>
+                    <div class="col-list-4">Aléa</div>
+                    <div class="col-list-5"></div>
+                    <div class="col-list-6"></div>
+                    <div class="col-list-7">Statut</div>
+                </div>
+
+                @for (int i = 0; i < Model.OfEncours.Count; i++)
+                {
+                    if (Model.OfEncours[i].STATUSTYPE.ToUpper().Trim().Equals("INPROGRESS"))
+                    {
+                        <div class="OF-element" id="@Model.OfEncours[i].NMROF">
+                            <!-- element de type OF-element contient les infos d'un l'OF + aléas si il y en a -->
+                            <div class="data-OF rowGrid">
+                                <div data-column="Numéro OF" class="col-list-2">
+                                    @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                    {
+                                        <button onclick="location.href='@Url.Action("OfNumeric", "Production", new { nmrof = Model.OfEncours[i].NMROF, ID = Model.ID })'">
+                                            <table style="width:100%;" onclick="location.href='@Url.Action("OfNumeric", "Production", new { nmrof = Model.OfEncours[i].NMROF })'">
+                                                <tr o>
+                                                    <td style="width:50%;">@Model.OfEncours[i].NMROF</td>
+                                                    <td>@Model.OfEncours[i].StartAt</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="width:100%;"><div class="itemborder"><b>@Model.OfEncours[i].ITEMREF</b></div> @Model.OfEncours[i].MFGDES</td>
+                                                </tr>
+                                            </table>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <table style="width:100%;" onclick="location.href='@Url.Action("OfNumeric", "Production", new { nmrof = Model.OfEncours[i].NMROF })'">
+                                            <tr o>
+                                                <td style="width:50%;">@Model.OfEncours[i].NMROF</td>
+                                                <td>@Model.OfEncours[i].StartAt</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="width:100%;"><div class="itemborder"><b>@Model.OfEncours[i].ITEMREF</b></div> @Model.OfEncours[i].MFGDES</td>
+                                            </tr>
+                                        </table>
+                                    }
+                                </div>
+                                @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                {
+                                    <div data-column="Qtr réel" class="col-list-3">@Model.OfEncours[i].QTRTHEORIQUE</div>
+                                }
+                                else
+                                {
+                                    <div data-column="Qtr réel" class="col-list-3"></div>
+                                }
+                                @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                {
+                                    <div data-column="Aléa" class="col-list-4"><span onclick="OuvrirPopNewAlea('PopUpAlea',@Model.OfEncours[i].ID)" class="add-alea">+</span></div>
+                                }
+                                else
+                                {
+                                    <div data-column="Aléa" class="col-list-4"><span></span></div>
+                                }
+                                <div data-column="&nbsp" class="col-list-5 action-OF">
+                                    <button class="action-button" onclick="location.href='@Url.Action("ChangeStatus", "Production", new { actionof = "PAUSE", idOF = Model.OfEncours[i].ID, idOperateur = Model.ID })'">
+                                        <img width="40" src="~/image/pause.png" class="icon-pps play-icon" />
+                                    </button>
+                                </div>
+                                <div data-column="&nbsp" class="col-list-6 action-OF">
+                                    @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                    {
+                                        <img onclick="OuvrirPopArretOF('PopUpArretOF',@Model.OfEncours[i].ID,@Model.OfEncours[i].QTRTHEORIQUE,@Model.OfEncours[i].EmplacementItem)" width="40" src="~/image/stop.png" class="icon-pps" />
+                                    }
+                                    else
+                                    {
+                                        <div></div>
+                                    }
+                                </div>
+                                <div data-column="Statut" class="col-list-7">
+                                    <img src="~/image/OF-en-cours2.gif" width="40" height="40" /><br />
+                                    en cours
+                                </div>
+                            </div>
+                            <div class="aleas">
+                                @for (int y = 0; y < Model.OfEncours[i].ListAlea.Count; y++)
+                                {
+                                    <div class="alea">
+                                        <div class="alea-content">
+                                            <h4>@Model.OfEncours[i].ListAlea[y].Code - @Model.OfEncours[i].ListAlea[y].Erreur</h4>
+                                            <p> - @Model.OfEncours[i].ListAlea[y].SouSGroupe</p>
+                                        </div>
+                                        @if (Model.OfEncours[i].ALEAS_OF.ToList()[y].StopTime == null)
+                                        {
+                                            <img onclick="OuvrirPopUpArretAlea('confirmation-arret-alea', @Model.OfEncours[i].ID, @Model.OfEncours[i].ALEAS_OF.ToList()[y].ID)" src="~/image/white-stop.png" width="40" height="40" class="icon-pps" />
+                                            <img class="trash" width="40" height="40" src="~/image/trash.png" onclick="OuvrirPopUpDeleteAlea('confirmation-delete-alea', @Model.OfEncours[i].ALEAS_OF.ToList()[y].ID)" />
+                                        }
+                                        else
+                                        {
+                                            <span class="terminated">Terminé</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else if (Model.OfEncours[i].STATUSTYPE.ToUpper().Trim().Equals("ENPAUSE"))
+                    {
+                        <div class="OF-element" id="@Model.OfEncours[i].NMROF">
+                            <!-- element de type OF-element contient les infos d'un l'OF + aléas si il y en a -->
+                            <div class="data-OF rowGrid">
+                                <div data-column="Numéro OF" class="col-list-2">
+                                    @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                    {
+                                        <button onclick="location.href='@Url.Action("OfNumeric", "Production", new { nmrof = Model.OfEncours[i].NMROF, ID = Model.ID })'">
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td style="width:50%;">@Model.OfEncours[i].NMROF</td>
+                                                    <td>@Model.OfEncours[i].StartAt</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="width:100%;"><div class="itemborder"><b>@Model.OfEncours[i].ITEMREF</b></div> @Model.OfEncours[i].MFGDES</td>
+                                                </tr>
+                                            </table>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:50%;">@Model.OfEncours[i].NMROF</td>
+                                                <td>@Model.OfEncours[i].StartAt</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="width:100%;"><div class="itemborder"><b>@Model.OfEncours[i].ITEMREF</b></div> @Model.OfEncours[i].MFGDES</td>
+                                            </tr>
+                                        </table>
+                                    }
+                                </div>
+                                @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                {
+                                    <div data-column="Qtr réel" class="col-list-3">@Model.OfEncours[i].QTRTHEORIQUE</div>
+                                }
+                                else
+                                {
+                                    <div data-column="Qtr réel" class="col-list-3"> </div>
+                                }
+                                @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                {
+                                    <div data-column="Aléa" class="col-list-4"><span onclick="OuvrirPopNewAlea('PopUpAlea',@Model.OfEncours[i].ID)" class="add-alea">+</span><span class="counter-label">Nombre aléas </span> <span onclick="OuvrirPopUp('afficher-alea', @i)" class="icon-alea-counter">@Model.OfEncours[i].ListAlea.Count</span></div>
+                                }
+                                else
+                                {
+                                    <div data-column="Aléa" class="col-list-4"><span> </span><span>  </span> <span> </span></div>
+                                }
+                                <div data-column="&nbsp" class="col-list-5 action-OF">
+                                    <button class="action-button" onclick="location.href='@Url.Action("ChangeStatus", "Production", new { actionof = "REPRISE", idOF = Model.OfEncours[i].ID, idOperateur = Model.ID })'">
+                                        <img width="40" src="~/image/play.png" class="icon-pps play-icon" />
+                                    </button>
+                                </div>
+                                @if (!Model.OfEncours[i].NMROF.ToUpper().Contains("ANIMATION"))
+                                {
+                                    <div data-column="&nbsp" class="col-list-6 action-OF"><img onclick="OuvrirPopArretOF('PopUpArretOF',@Model.OfEncours[i].ID,@Model.OfEncours[i].QTRTHEORIQUE)" width="40" src="~/image/stop.png" class="icon-pps" /></div>
+                                }
+                                else
+                                {
+                                    <div class="col-list-6 action-OF"> </div>
+                                }
+                                <div data-column="Statut" class="col-list-7">
+                                    en pause
+                                </div>
+                            </div>
+                            <div class="aleas">
+
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+        </div> <!-- fin contenu principal -->
+
+    </div>
+    <div id="fondTransparent"></div>
+    <div id="confirmation-delete-alea">
+
+        <div id="confirmation-pic-container">
+            <img src="~/image/questionTag.png" width="75" />
+        </div>
+        <h4>Suppression aléa</h4>
+        <p>Êtes-vous sûr de vouloir supprimer cet aléa ?</p>
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <input type="hidden" id="deleteAleaId" name="deleteAleaId" value="" />
+            <button class="boutton-valider" type="submit">confirmer</button>
+            <button class="boutton-annuler" onclick="AnnulerPopUp('confirmation-delete-alea')">Annuler</button>
+        }
+    </div>
+
+    <div id="confirmation-arret-alea">
+        <div id="confirmation-arret-alea-pic-container">
+            <img src="~/image/questionTag.png" width="75" />
+        </div>
+        <h4>Fin de l'aléa</h4>
+        <p>Êtes-vous sûr de vouloir mettre fin à cet aléa ?</p>
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <input type="hidden" name="arretAleaId" id="arretAleaId" value="" />
+            <input type="hidden" name="arretAleaIdOF" id="arretAleaIdOF" value="" />
+            <button class="boutton-valider" type="submit">confirmer</button><button class="boutton-annuler" onclick="AnnulerPopUp('confirmation-arret-alea')">Annuler</button>
+        }
+    </div>
+
+
+    <div id="afficher-alea">
+        <h4>Liste aléas</h4>
+        <div id="aleas-content"></div>
+        <span class="croix" onclick="AnnulerPopUp('afficher-alea')">&times</span>
+    </div>
+
+
+    <div id="PopUpOF">
+        <div class="bandeau">
+            <div id="choixof">
+                <h2 id="titrechoix">Choix de l'OF</h2>
+            </div>
+            <div id="closechoixof">
+                <button id="closechoix" onclick="AnnulerPopUp('PopUpOF')"><i class="fa-solid fa-x" style="color: #ffffff;"></i></button>
+            </div>
+        </div>
+        
+            <div id="selectOF">
+                <!-- ICI ON FAIT UN FOREACH POUR AFFICHER 3 OFS !-->
+                <div class="of-list">
+
+                    @if(Model.ofAfaire.Count() == 0)
+                    {
+                        <p>Aucun OF n'est disponible à la fabrication. Si vous pensez qu'il s'agit d'une erreur, rapprochez vous de l'animateur du pole.</p>
+                    }
+
+                    @foreach (var of in Model.ofAfaire)
+                    {
+                        <div onClick="window.location.href = '/Production/startOf?ID=@Model.ID&of=@of.numOF'">@Html.Partial("of", of)</div>
+                    }
+
+                </div>        
+            </div>
+        
+    </div>
+
+
+    <div id="PopUpAlea">
+        <div class="bandeau">
+            <h2>Liste des Aléas</h2>
+        </div>
+        <div id="AleaBody">
+            <div id="CategorieSelect">
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-1" checked>
+                <label class="for-checkbox-tools" for="tool-1" onclick="setTimeout(GetCategorieAlea, 10)">
+                    Pièce NOK
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                <label class="for-checkbox-tools" for="tool-2" onclick="setTimeout(GetCategorieAlea, 10)">
+                    Outillage NOK
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
+                <label class="for-checkbox-tools" for="tool-3" onclick="setTimeout(GetCategorieAlea, 10)">
+                    STOCK
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-4">
+                <label class="for-checkbox-tools" for="tool-4" onclick="setTimeout(GetCategorieAlea, 10)">
+                    Données non ok
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-5">
+                <label class="for-checkbox-tools" for="tool-5" onclick="setTimeout(GetCategorieAlea, 10)">
+                    Hors production
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-6">
+                <label class="for-checkbox-tools" for="tool-6" onclick="setTimeout(GetCategorieAlea, 10)">
+                    Animation
+                </label>
+
+            </div>
+            <div id="LeftAlea">
+                @using (Html.BeginForm())
+                {
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                    <input type="hidden" name="IDOF" id="IDOF" value="" />
+                    <div class="alealist">
+                        <h2>Description</h2>
+                        <div id="ListAlea1" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea2" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea3" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea4" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea5" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea6" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea7" style="display: none;" class="ListAlea"></div>
+                        <div id="ListAlea8" style="display: none;" class="ListAlea"></div>
+                    </div>
+                    <div class="ValidationBttn">
+                        <input id="Valider" type="submit" value="Valider" />
+                        <input id="Annuler" type="button" value="Annuler" onclick="AnnulerPopUp('PopUpAlea')" />
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div id="PopUpArretOF">
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="ArretOF" value="" id="ArretOF" />
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <div class="bandeau">
+                <h2>Arret de l'OF - Stockage : <label name ="EmplacementItem" id="EmplacementItem"></label></h2>
+            </div>
+            <div id="ArretOFBody">
+                <div id="AjoutAlea" class="GrisClair oublie">
+                    <div class="RadioBttn">
+                        <h3>Avez-vous eu un/des aléa(s) non déclaré(s) :</h3>
+                        <label class="switch">
+                            <input type="checkbox" name="AleaBttn" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div id="AjoutReunion" class="GrisFonce oublie">
+                    <div class="RadioBttn">
+                        <h3>Avez vous eu une/des réunion(s) pendant que vous traiter cet OF :</h3>
+                        <label class="switch">
+                            <input type="checkbox" name="ReunionBttn" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div id="AjoutPause" class="GrisClair oublie">
+                    <div class="RadioBttn">
+                        <h3>Avez vous eu une/des Pause(s) non déclarée(s) :</h3>
+                        <label class="switch">
+                            <input type="checkbox" name="PauseBttn" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="GrisFonce" id="arretOfIndicateurs">
+                    <p>Quantité demandée: <span id="max-quantite-reelle">10</span></p>
+                    <div>
+                        <p>Quantité réelle:</p>
+                        <input id="quantite-reelle" type="number" value="10" min="0" max="999" name="quantite-reelle" />
+                    </div>
+                </div>
+                <div class="ValidationBttn GrisClair">
+                    <input id="Valider" type="submit" value="Valider" />
+                    <input id="Annuler" type="button" value="Annuler" onclick="AnnulerPopUp('PopUpArretOF')" />
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+
+        var fermerPopUpOF = document.querySelector("#fermerPopUpOF");
+
+        ////fermerPopUpOF.onclick = function () {
+        ////    alert("fds")
+        ////}
+
+
+        window.onload = function () {
+
+            if ('@ViewData["PopUpOf"]' == 'true') {
+                OuvrirPopUp("PopUpOF");
+            } else if ('@ViewData["OfTrouve"]' != "") {
+                var refOf = '@ViewData["OfTrouve"]';
+                var ofRecherche = document.getElementById(refOf);
+                ofRecherche.classList.add('card');
+                window.setTimeout(function () {
+                    ofRecherche.classList.remove('card');
+                }, 10000)
+            }
+        };
+
+
+        var listAleaStrJson = '<p>@Model.DeclarationAlea.listCodeAlea</p>';
+        listAleaStrJson = listAleaStrJson.replace(/(\r\n|\n|\r)/gm, "\\n")
+        listAleaStrJson = jQuery(listAleaStrJson).text();
+        listAleaStrJson = listAleaStrJson.replace(/\\n/gm, "<br>")
+        var JsonListAlea = JSON.parse(listAleaStrJson);
+
+        var listOfEnCours = '<p>@Model.JsonOfEnCours</p>';
+        listOfEnCours = listOfEnCours.replace(/(\r\n|\n|\r)/gm, "\\n")
+        listOfEnCours = jQuery(listOfEnCours).text();
+        listOfEnCours = listOfEnCours.replace(/\\n/gm, "<br>")
+        var JsonOfEnCours = JSON.parse(listOfEnCours);
+
+
+
+        var deleteButtons = document.querySelectorAll(".delete-alea")
+
+        deleteButtons.forEach(
+            (node, index) => {
+                node.onclick = function () {
+                    OuvrirPopUp("confirmation-delete-alea")
+                }
+            }
+        )
+
+        function OuvrirPopUp(id, numOf) {
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+            document.getElementById("fondTransparent").style.opacity = 1;
+            document.getElementById("fondTransparent").style.pointerEvents = "all";
+            if (numOf != null) {
+                displayAleas(numOf);
+            }
+        }
+
+        function AnnulerPopUp(id) {
+
+            document.getElementById("fondTransparent").style.opacity = 0;
+            document.getElementById("fondTransparent").style.pointerEvents = "none";
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(0)";
+        }
+
+        function displayAleas(numOf) {
+            var elem = JsonOfEnCours[numOf];
+            var content = document.querySelector("#aleas-content");
+            content.innerHTML = ""
+            console.log("test")
+
+            elem.ListAlea.forEach(
+                (valeur) => {
+                    var alea = document.createElement('p');
+                    alea.textContent = valeur.Code + ' - ' + valeur.Erreur + ' - ' + valeur.SouSGroupe;
+                    content.appendChild(alea)
+                }
+            )
+        }
+
+        function initDeclarationAlea() {
+            var map = new Map();
+            for (var item of JsonListAlea) {
+                if (map.has(item.SouSGroupe) == false) {
+                    var tab = [];
+                    map.set(item.SouSGroupe, tab);
+                }
+                map.get(item.SouSGroupe).push(item);
+            }
+
+            var indice = 1;
+            for (var value of map.values()) {
+
+                var str = "ListAlea" + indice;
+                var i = 0;
+
+                for (var item of value) {
+                    var newDiv = document.createElement("div");
+                    newDiv.className = 'Alea';
+                    var description = document.createElement("p");
+                    description.innerHTML = item.Erreur;
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = item.Code;
+                    checkbox.id = item.Code;
+                    var label = document.createElement("label");
+                    label.for = item.Code;
+                    newDiv.appendChild(description);
+                    newDiv.appendChild(checkbox);
+                    newDiv.appendChild(label);
+                    if (i % 2 == 0) {
+                        newDiv.className = 'GrisClair Alea';
+                    } else {
+                        newDiv.className = 'GrisFonce Alea';
+                    }
+                    document.getElementById(str).appendChild(newDiv)
+                    i++
+                }
+                indice++;
+            }
+        }
+
+
+        initDeclarationAlea();
+        var TabAlea = document.querySelectorAll(".Alea");
+
+
+        function GetCategorieAlea() {
+            document.getElementById("ListAlea1").style.display = "none";
+            document.getElementById("ListAlea2").style.display = "none";
+            document.getElementById("ListAlea3").style.display = "none";
+            document.getElementById("ListAlea4").style.display = "none";
+            document.getElementById("ListAlea5").style.display = "none";
+            document.getElementById("ListAlea6").style.display = "none";
+            document.getElementById("ListAlea7").style.display = "none";
+            document.getElementById("ListAlea8").style.display = "none";
+
+            if (document.getElementById("tool-1").checked == true) {
+                document.getElementById("ListAlea1").style.display = "block";
+            } else if (document.getElementById("tool-2").checked == true) {
+                document.getElementById("ListAlea2").style.display = "block";
+            } else if (document.getElementById("tool-3").checked == true) {
+                document.getElementById("ListAlea3").style.display = "block";
+            } else if (document.getElementById("tool-4").checked == true) {
+                document.getElementById("ListAlea4").style.display = "block";
+            } else if (document.getElementById("tool-5").checked == true) {
+                document.getElementById("ListAlea5").style.display = "block";
+            } else if (document.getElementById("tool-6").checked == true) {
+                document.getElementById("ListAlea6").style.display = "block";
+            } else if (document.getElementById("tool-7").checked == true) {
+                document.getElementById("ListAlea7").style.display = "block";
+            } else if (document.getElementById("tool-8").checked == true) {
+                document.getElementById("ListAlea8").style.display = "block";
+            }
+
+        }
+
+        GetCategorieAlea();
+
+        TabAlea.forEach(
+            (node, index) => {
+                node.addEventListener("click", function (e) {
+                    node.getElementsByTagName('input')[0].click();
+                })
+            }
+        )
+
+        var tabGroupeAlea = [];
+        var tabGroupeAleaCode = [];
+        for (var item of JsonListAlea) {
+            if (!tabGroupeAlea.includes(item.SouSGroupe)) {
+                tabGroupeAlea.push(item.SouSGroupe);
+                tabGroupeAleaCode.push(item.Code);
+            }
+        }
+
+        var listSelectGroupe = [];
+
+        function AddAlea() {
+            var y = 0;
+            NbAlea = document.getElementsByClassName("NewAlea").length;
+            var newDiv = document.createElement("div");
+            newDiv.className = "NewAlea";
+            var div1 = document.createElement("div");
+            var div2 = document.createElement("div");
+            div2.id = "DivSelectAlea" + NbAlea;
+            var div3 = document.createElement("div");
+            var TextGroupe = document.createElement("p");
+            TextGroupe.innerHTML = "Groupe : ";
+            var TextCode = document.createElement("p");
+            TextCode.innerHTML = "Alea : ";
+            var TextTime = document.createElement("p");
+            TextTime.innerHTML = "Temps : ";
+            var SelectGroupe = document.createElement("select");
+            SelectGroupe.name = "SelectGoupe" + NbAlea;
+            SelectGroupe.id = "SelectGroupe" + NbAlea;
+            SelectGroupe.className = "DivSelectGroupe";
+            for (var item of tabGroupeAlea) {
+                var op = document.createElement("option");
+                op.value = item;
+                op.innerHTML = item
+                SelectGroupe.appendChild(op);
+            }
+            var SelectTime = document.createElement("select");
+            SelectTime.name = "SelectTimeAlea" + NbAlea;
+            SelectTime.id = "SelectTimeAlea" + NbAlea;
+            for (var i = 0; i < 13; i++) {
+                var op = document.createElement("option");
+                op.value = y + "min";
+                op.innerHTML = y + "min";
+                SelectTime.appendChild(op);
+                y += 5;
+            }
+
+
+
+            div1.appendChild(TextGroupe);
+            div1.appendChild(SelectGroupe);
+            div2.appendChild(TextCode);
+            getListAlea(SelectGroupe.value, NbAlea, div2);
+
+            div3.appendChild(TextTime);
+            div3.appendChild(SelectTime);
+            newDiv.appendChild(div1);
+            newDiv.appendChild(div2);
+            newDiv.appendChild(div3);
+            document.getElementById("AjoutAlea").appendChild(newDiv);
+            listSelectGroupe = document.querySelectorAll(".DivSelectGroupe");
+            ClickOnGroupe()
+
+
+            if (document.getElementById("BttnNewAlea") != undefined) {
+                document.getElementById("BttnNewAlea").remove();
+            }
+            var bttn = document.createElement("button");
+            bttn.className = "BttnNew";
+            bttn.id = "BttnNewAlea";
+            bttn.setAttribute("onclick", 'AddAlea()');
+            document.getElementById("AjoutAlea").appendChild(bttn);
+
+            var img = document.createElement("img");
+            img.src = "../../image/croixRouge.png";
+            img.id = 'Alea' + NbAlea;
+            img.setAttribute("onclick", 'RemoveOneDiv(Alea' + NbAlea + ')');
+            newDiv.appendChild(img);
+        }
+
+
+        function getListAlea(groupe, NbAlea, div) {
+
+            if (document.getElementById("SelectAlea" + NbAlea) != undefined) { document.getElementById("SelectAlea" + NbAlea).remove(); }
+            var SelectAlea = document.createElement("select");
+            SelectAlea.name = "SelectAlea" + NbAlea;
+            SelectAlea.id = "SelectAlea" + NbAlea;
+            for (var item of JsonListAlea) {
+                if (item.SouSGroupe == groupe) {
+                    var op = document.createElement("option");
+                    op.value = item.Code;
+                    op.innerHTML = item.Erreur;
+                    SelectAlea.appendChild(op);
+                }
+            }
+            div.appendChild(SelectAlea);
+        }
+
+        function RemoveOneDiv(indice) {
+            indice.parentElement.remove();
+            var str = indice.id.replace(/[0-9]+/g, '');
+            var tab = document.querySelectorAll('.New' + str);
+            if (tab.length == 0) {
+                console.log(document.querySelector('input[name="'+ str + 'Bttn"]'))
+                document.querySelector('input[name="' + str + 'Bttn"]').nextElementSibling.click();
+            }
+        }
+
+        function ClickOnGroupe() {
+            console.log('input');
+            listSelectGroupe.forEach(
+                (node, index) => {
+
+                    var previous = node.value;
+
+                    node.addEventListener("change", function () {
+
+                        if (previous != node.value) {
+                            previous = node.value;
+
+                            getListAlea(previous, index, document.getElementById("DivSelectAlea" + index));
+
+                        }
+                    });
+                    node.addEventListener("click", function () {
+                        if (previous != node.value) {
+                            previous = node.value;
+
+                            getListAlea(previous, index, document.getElementById("DivSelectAlea" + index));
+
+                        }
+                    })
+                }
+            );
+        }
+
+        function AddReunion() {
+            var y = 0;
+            NbReunion = document.getElementsByClassName("NewReunion").length;
+            var newDiv = document.createElement("div");
+            newDiv.className = "NewReunion";
+            var TextTime = document.createElement("p");
+            TextTime.innerHTML = "Temps : ";
+            var SelectTime = document.createElement("select");
+            SelectTime.name = "SelectTimeReunion" + NbReunion;
+            SelectTime.id = "SelectTimeReunion" + NbReunion;
+            for (var i = 0; i < 13; i++) {
+                var op = document.createElement("option");
+                op.value = y + "min";
+                op.innerHTML = y + "min";
+                SelectTime.appendChild(op);
+                y += 5;
+            }
+
+
+            newDiv.appendChild(TextTime);
+            newDiv.appendChild(SelectTime);
+            document.getElementById("AjoutReunion").appendChild(newDiv);
+
+
+            if (document.getElementById("BttnNewReunion") != undefined) {
+                document.getElementById("BttnNewReunion").remove();
+            }
+            var bttn = document.createElement("button");
+            bttn.className = "BttnNew";
+            bttn.id = "BttnNewReunion";
+            bttn.setAttribute("onclick", 'AddReunion()');
+            document.getElementById("AjoutReunion").appendChild(bttn);
+
+            var img = document.createElement("img");
+            img.src = "../../image/croixRouge.png";
+            img.id = 'Reunion' + NbReunion;
+            img.setAttribute("onclick", 'RemoveOneDiv(Reunion' + NbReunion + ')');
+            newDiv.appendChild(img);
+        }
+
+        function AddPause() {
+            var y = 0;
+            NbPause = document.getElementsByClassName("NewPause").length;
+            var newDiv = document.createElement("div");
+            newDiv.className = "NewPause";
+            var TextTime = document.createElement("p");
+            TextTime.innerHTML = "Temps : ";
+            var SelectTime = document.createElement("select");
+            SelectTime.name = "SelectTimePause" + NbPause;
+            SelectTime.id = "SelectTimePause" + NbPause;
+            for (var i = 0; i < 13; i++) {
+                var op = document.createElement("option");
+                op.value = y + "min";
+                op.innerHTML = y + "min";
+                SelectTime.appendChild(op);
+                y += 5;
+            }
+
+
+            newDiv.appendChild(TextTime);
+            newDiv.appendChild(SelectTime);
+            document.getElementById("AjoutPause").appendChild(newDiv);
+
+
+            if (document.getElementById("BttnNewPause") != undefined) {
+                document.getElementById("BttnNewPause").remove();
+            }
+            var bttn = document.createElement("button");
+            bttn.className = "BttnNew";
+            bttn.id = "BttnNewPause";
+            bttn.setAttribute("onclick", 'AddPause()');
+            document.getElementById("AjoutPause").appendChild(bttn);
+
+            var img = document.createElement("img");
+            img.src = "../../image/croixRouge.png";
+            img.id = "Pause" + NbPause;
+            img.setAttribute("onclick", 'RemoveOneDiv(Pause' + NbPause + ')');
+            newDiv.appendChild(img);
+        }
+
+        var switchButtons = document.querySelectorAll('input[type="checkbox"]')
+
+        switchButtons.forEach(
+            node => {
+                node.onclick = function () {
+
+                    if (node.name === "AleaBttn") {
+                        if (node.checked == true) {
+                            AddAlea();
+                        } else {
+                            var tab = document.querySelectorAll(".NewAlea");
+                            for (var item of tab) {
+                                item.remove();
+                            }
+                            document.getElementById("BttnNewAlea").remove();
+                        }
+                    }
+                    else if (node.name === "ReunionBttn") {
+                        if (node.checked == true) {
+                            AddReunion();
+                        } else {
+                            var tab = document.querySelectorAll(".NewReunion");
+                            for (var item of tab) {
+                                item.remove();
+                            }
+                            document.getElementById("BttnNewReunion").remove();
+                        }
+                    } else if (node.name === "PauseBttn") {
+                        if (node.checked == true) {
+                            AddPause();
+                        } else {
+                            var tab = document.querySelectorAll(".NewPause");
+                            for (var item of tab) {
+                                item.remove();
+                            }
+                            document.getElementById("BttnNewPause").remove();
+                        }
+                    }
+                }
+            }
+        )
+
+
+        function lancerOf(id) {
+            var oldElem = document.querySelector('#in-progress-OF');
+            var newElem;
+            var indice = 0;
+
+            var tab = document.querySelectorAll('.OF-element');
+            for (var i = 0; i < tab.length; i++) {
+                if (tab[i].getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-5')[0].firstChild.src == "https://localhost:44369/image/play.png") {
+                    indice += 1;
+                }
+                if (i == id) {
+                    newElem = tab[i];
+                    newElem.getElementsByClassName('aleas')[0].style = 'display : block';
+                    newElem.querySelector(".icon-alea-counter").style.display = "none";
+                    newElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-5')[0].firstChild.src = "../../image/pause.png";
+                    newElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].innerHTML = "";
+                    var imgEnCours = document.createElement('img');
+                    imgEnCours.src = "../../image/OF-en-cours2.gif";
+                    imgEnCours.width = '40';
+                    newElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].appendChild(imgEnCours);
+                    newElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].appendChild(document.createElement('br'));
+                    newElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].innerHTML += "en cours";
+
+                }
+            }
+
+            if (indice != parseInt(@Model.OfEncours.Count)) {
+                oldElem.querySelector(".icon-alea-counter").style.display = "flex";
+                oldElem.getElementsByClassName('aleas')[0].style = 'display : none';
+                oldElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-5')[0].firstChild.src = "../../image/play.png";
+                oldElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].firstChild.remove();
+                oldElem.getElementsByClassName('data-OF')[0].getElementsByClassName('col-list-7')[0].innerHTML = 'en pause';
+                oldElem.id = "";
+                indice+=1
+            }
+
+            if (newElem == oldElem) {
+                newElem.id = "";
+            }else  {
+                newElem.id = "in-progress-OF";
+            }
+        }
+        function submit(form) {
+            document.getElementById(form).submit();
+        }
+        function OuvrirPopNewAlea(id, idOf) {
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+            document.getElementById("fondTransparent").style.opacity = 1;
+            document.getElementById("fondTransparent").style.pointerEvents = "all";
+            document.getElementById("IDOF").setAttribute("value", idOf)
+        }
+        function OuvrirPopArretOF(id,   idOf, qtrreel,emplacement) {
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+            document.getElementById("fondTransparent").style.opacity = 1;
+            document.getElementById("fondTransparent").style.pointerEvents = "all";
+            document.getElementById("ArretOF").setAttribute("value", idOf);
+            document.getElementById("quantite-reelle").setAttribute("max", 999);
+            document.getElementById("quantite-reelle").setAttribute("value", qtrreel);
+            document.getElementById("max-quantite-reelle").innerHTML = qtrreel;
+            document.getElementById("EmplacementItem").innerHTML = emplacement;
+        }
+        function OuvrirPopUpArretAlea(id, idOf, idAlea) {
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+            document.getElementById("fondTransparent").style.opacity = 1;
+            document.getElementById("fondTransparent").style.pointerEvents = "all";
+            document.getElementById("arretAleaIdOF").setAttribute("value", idOf)
+            document.getElementById("arretAleaId").setAttribute("value", idAlea)
+        }
+        function OuvrirPopUpDeleteAlea(id, idAlea) {
+            document.getElementById(id).style.transform = "translate(-50%, -50%) scale(1)";
+            document.getElementById("fondTransparent").style.opacity = 1;
+            document.getElementById("fondTransparent").style.pointerEvents = "all";
+            document.getElementById("deleteAleaId").setAttribute("value", idAlea)
+        }
+        var quantiteRelle = document.getElementById('quantite-reelle');
+
+        quantiteRelle.onchange = function () {
+            var val = parseInt(quantiteRelle.value);
+            var max = 999;
+
+            if (val > max) {
+                quantiteRelle.value = max;
+            }
+        }
+    </script>
+    <script type="text/javascript" src="~/Scripts/reloadOF.js"></script>
+</body>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acef04d5314e4a45a066923c2fba2b09" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.STATUSFPS" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.STATUSRELANCE" Width="1.5" PointX="8.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.DELAIFPS" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.COMMENTAIRE" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.TRACACMD" Width="1.5" PointX="13.875" PointY="0.75" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.TRACACMDMONO" Width="1.5" PointX="10.875" PointY="0.875" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMD_DELAIFPS" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS1" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSFPS1" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSRELANCE" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSRELANCE" />
+        <EntityTypeShape EntityType="PEGASE_CHECKFPSModel.TRACA_CHANGE_GESTIONSTATUS" Width="1.5" PointX="16.125" PointY="4.875" />
+        <AssociationConnector Association="PEGASE_CHECKFPSModel.FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PEGASE_PRODModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_COMPTEUR" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="nvarchar" MaxLength="20" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="int" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="int" />
+          <Property Name="CARACTERE_COMPLETION" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="EVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TYPE_EVENEMENT" Type="smallint" />
+          <Property Name="DATE_REPORT" Type="datetime" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="1024" />
+          <Property Name="MESSAGE_ERREUR" Type="nvarchar" MaxLength="1024" />
+          <Property Name="UTILISATEUR" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FICHE_PACK_TRACABILITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="DATE_DEBUT_VALIDITE" Type="datetime" />
+          <Property Name="DATE_FIN_VALIDITE" Type="datetime" />
+          <Property Name="ACTIF" Type="bit" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="15" />
+          <Property Name="VERSION_STRUCTURE_MAJEUR" Type="smallint" />
+          <Property Name="VERSION_STRUCTURE_MINEUR" Type="smallint" />
+          <Property Name="VERSION_CONFIGURATION_STANDARD" Type="smallint" />
+          <Property Name="VERSION_CONFIGURATION_CLIENT" Type="smallint" />
+          <Property Name="IDIALOG_FICHE_PERSO" Type="varbinary(max)" />
+          <Property Name="NOM_FICHIER" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="FICHE_PERSO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLATION" Type="bigint" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="8" />
+          <Property Name="TYPE_FICHE" Type="int" />
+          <Property Name="DATE_DEBUT" Type="datetime" />
+          <Property Name="DATE_FIN" Type="datetime" />
+          <Property Name="ACTIF" Type="bit" />
+          <Property Name="VERSION_STRUCTURE_MAJEUR" Type="smallint" />
+          <Property Name="VERSION_STRUCTURE_MINEUR" Type="smallint" />
+          <Property Name="VERSION_CONFIGURATION_STANDARD" Type="smallint" />
+          <Property Name="VERSION_CONFIGURATION_CLIENT" Type="smallint" />
+        </EntityType>
+        <EntityType Name="MO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_MO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="nvarchar" MaxLength="5" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="int" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="nvarchar" MaxLength="20" />
+          <Property Name="VERSION_LOGICIELLE" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="MO_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_MO" Type="bigint" />
+          <Property Name="ID_ETAPE_PRODUIT" Type="bigint" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="datetime" />
+          <Property Name="NB_ESSAI" Type="int" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_MT" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="nvarchar" MaxLength="5" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="int" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="nvarchar" MaxLength="16" />
+          <Property Name="VERSION_LOGICIELLE" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="MT_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_MT" Type="bigint" />
+          <Property Name="ID_ETAPE_PRODUIT" Type="bigint" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="datetime" />
+          <Property Name="NB_ESSAI" Type="int" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="NB_PACK" Type="int" Nullable="false" />
+          <Property Name="NB_MO" Type="int" Nullable="false" />
+          <Property Name="NB_MT" Type="int" Nullable="false" />
+          <Property Name="NB_SIM" Type="int" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+          <Property Name="OPTION_MATERIEL_MO" Type="nvarchar" MaxLength="32" />
+          <Property Name="OPTION_MATERIEL_MT" Type="nvarchar" MaxLength="32" />
+          <Property Name="COMMANDE_SYNCHRO" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_OF" Type="bigint" />
+          <Property Name="ID_PACK_ENCOURS" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="10" />
+          <Property Name="NUM_AFFAIRE" Type="nvarchar" MaxLength="20" />
+          <Property Name="ID_CLIENT" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_OF" Type="bigint" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="ID_ETAPE_PACK" Type="bigint" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="datetime" />
+          <Property Name="ID_PRODUIT_APPLICATION" Type="bigint" />
+          <Property Name="TYPE_PRODUIT_APPLICATION" Type="int" />
+          <Property Name="NB_ESSAI" Type="int" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_SIM" Type="nvarchar" MaxLength="16" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="SIM_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SIM" Type="bigint" />
+          <Property Name="ID_ETAPE_APPLICATION" Type="bigint" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="datetime" />
+          <Property Name="NB_ESSAI" Type="int" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="FICHE_PACK_TRACABILITE" Type="Self.FICHE_PACK_TRACABILITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FICHE_PACK_TRACABILITE">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FICHE_PERSO_ID_PACK_INSTALLATION">
+          <End Role="PACK_INSTALLATION" Type="Self.PACK_INSTALLATION" Multiplicity="0..1" />
+          <End Role="FICHE_PERSO" Type="Self.FICHE_PERSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FICHE_PERSO">
+              <PropertyRef Name="ID_PACK_INSTALLATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_ETAPE_ID_MO">
+          <End Role="MO" Type="Self.MO" Multiplicity="0..1" />
+          <End Role="MO_ETAPE" Type="Self.MO_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO_ETAPE">
+              <PropertyRef Name="ID_MO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MO" Type="Self.MO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ETAPE_ID_MT">
+          <End Role="MT" Type="Self.MT" Multiplicity="0..1" />
+          <End Role="MT_ETAPE" Type="Self.MT_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT_ETAPE">
+              <PropertyRef Name="ID_MT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MT" Type="Self.MT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OF_ETAPE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="ORDRE_FABRICATION_ETAPE" Type="Self.ORDRE_FABRICATION_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDRE_FABRICATION_ETAPE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OF_ETAPE_ID_PACK_ENCOURS">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="ORDRE_FABRICATION_ETAPE" Type="Self.ORDRE_FABRICATION_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDRE_FABRICATION_ETAPE">
+              <PropertyRef Name="ID_PACK_ENCOURS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLATION_ID_CLIENT">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLATION" Type="Self.PACK_INSTALLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLATION">
+              <PropertyRef Name="ID_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE_ETAPE" Type="Self.PACK_INSTALLE_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE_ETAPE">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ETAPE_ID_SIM">
+          <End Role="SIM" Type="Self.SIM" Multiplicity="0..1" />
+          <End Role="SIM_ETAPE" Type="Self.SIM_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM_ETAPE">
+              <PropertyRef Name="ID_SIM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="SIM" Type="Self.SIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_PRODModelStoreContainer">
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENEMENT" EntityType="Self.EVENEMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FICHE_PACK_TRACABILITE" EntityType="Self.FICHE_PACK_TRACABILITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FICHE_PERSO" EntityType="Self.FICHE_PERSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MO" EntityType="Self.MO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MO_ETAPE" EntityType="Self.MO_ETAPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MT" EntityType="Self.MT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MT_ETAPE" EntityType="Self.MT_ETAPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="Self.ORDRE_FABRICATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION_ETAPE" EntityType="Self.ORDRE_FABRICATION_ETAPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PACK_INSTALLATION" EntityType="Self.PACK_INSTALLATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PACK_INSTALLE" EntityType="Self.PACK_INSTALLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PACK_INSTALLE_ETAPE" EntityType="Self.PACK_INSTALLE_ETAPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIM" EntityType="Self.SIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIM_ETAPE" EntityType="Self.SIM_ETAPE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE" Association="Self.FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="FICHE_PACK_TRACABILITE" EntitySet="FICHE_PACK_TRACABILITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FICHE_PERSO_ID_PACK_INSTALLATION" Association="Self.FK_FICHE_PERSO_ID_PACK_INSTALLATION">
+            <End Role="PACK_INSTALLATION" EntitySet="PACK_INSTALLATION" />
+            <End Role="FICHE_PERSO" EntitySet="FICHE_PERSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_ETAPE_ID_MO" Association="Self.FK_MO_ETAPE_ID_MO">
+            <End Role="MO" EntitySet="MO" />
+            <End Role="MO_ETAPE" EntitySet="MO_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_ID_PACK_INSTALLE" Association="Self.FK_MO_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MO" EntitySet="MO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ETAPE_ID_MT" Association="Self.FK_MT_ETAPE_ID_MT">
+            <End Role="MT" EntitySet="MT" />
+            <End Role="MT_ETAPE" EntitySet="MT_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ID_PACK_INSTALLE" Association="Self.FK_MT_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MT" EntitySet="MT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OF_ETAPE_ID_OF" Association="Self.FK_OF_ETAPE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="ORDRE_FABRICATION_ETAPE" EntitySet="ORDRE_FABRICATION_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OF_ETAPE_ID_PACK_ENCOURS" Association="Self.FK_OF_ETAPE_ID_PACK_ENCOURS">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="ORDRE_FABRICATION_ETAPE" EntitySet="ORDRE_FABRICATION_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLATION_ID_CLIENT" Association="Self.FK_PACK_INSTALLATION_ID_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="PACK_INSTALLATION" EntitySet="PACK_INSTALLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE" Association="Self.FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="PACK_INSTALLE_ETAPE" EntitySet="PACK_INSTALLE_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ID_OF" Association="Self.FK_PACK_INSTALLE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ETAPE_ID_SIM" Association="Self.FK_SIM_ETAPE_ID_SIM">
+            <End Role="SIM" EntitySet="SIM" />
+            <End Role="SIM_ETAPE" EntitySet="SIM_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ID_PACK_INSTALLE" Association="Self.FK_SIM_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="SIM" EntitySet="SIM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_PRODModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PACK_INSTALLATION" Relationship="Self.FK_PACK_INSTALLATION_ID_CLIENT" FromRole="CLIENT" ToRole="PACK_INSTALLATION" />
+        </EntityType>
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_COMPTEUR" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="Int32" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="Int32" />
+          <Property Name="CARACTERE_COMPLETION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EVENEMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE_EVENEMENT" Type="Int16" />
+          <Property Name="DATE_REPORT" Type="DateTime" Precision="3" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="MESSAGE_ERREUR" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="UTILISATEUR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FICHE_PACK_TRACABILITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="DATE_DEBUT_VALIDITE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_FIN_VALIDITE" Type="DateTime" Precision="3" />
+          <Property Name="ACTIF" Type="Boolean" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION_STRUCTURE_MAJEUR" Type="Int16" />
+          <Property Name="VERSION_STRUCTURE_MINEUR" Type="Int16" />
+          <Property Name="VERSION_CONFIGURATION_STANDARD" Type="Int16" />
+          <Property Name="VERSION_CONFIGURATION_CLIENT" Type="Int16" />
+          <Property Name="IDIALOG_FICHE_PERSO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NOM_FICHIER" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE" FromRole="FICHE_PACK_TRACABILITE" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="FICHE_PERSO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLATION" Type="Int64" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_FICHE" Type="Int32" />
+          <Property Name="DATE_DEBUT" Type="DateTime" Precision="3" />
+          <Property Name="DATE_FIN" Type="DateTime" Precision="3" />
+          <Property Name="ACTIF" Type="Boolean" />
+          <Property Name="VERSION_STRUCTURE_MAJEUR" Type="Int16" />
+          <Property Name="VERSION_STRUCTURE_MINEUR" Type="Int16" />
+          <Property Name="VERSION_CONFIGURATION_STANDARD" Type="Int16" />
+          <Property Name="VERSION_CONFIGURATION_CLIENT" Type="Int16" />
+          <NavigationProperty Name="PACK_INSTALLATION" Relationship="Self.FK_FICHE_PERSO_ID_PACK_INSTALLATION" FromRole="FICHE_PERSO" ToRole="PACK_INSTALLATION" />
+        </EntityType>
+        <EntityType Name="MO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="Int32" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION_LOGICIELLE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MO_ETAPE" Relationship="Self.FK_MO_ETAPE_ID_MO" FromRole="MO" ToRole="MO_ETAPE" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_MO_ID_PACK_INSTALLE" FromRole="MO" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="MO_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_MO" Type="Int64" />
+          <Property Name="ID_ETAPE_PRODUIT" Type="Int64" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="DateTime" Precision="3" />
+          <Property Name="NB_ESSAI" Type="Int32" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="Int64" />
+          <NavigationProperty Name="MO" Relationship="Self.FK_MO_ETAPE_ID_MO" FromRole="MO_ETAPE" ToRole="MO" />
+        </EntityType>
+        <EntityType Name="MT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="Int32" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION_LOGICIELLE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MT_ETAPE" Relationship="Self.FK_MT_ETAPE_ID_MT" FromRole="MT" ToRole="MT_ETAPE" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_MT_ID_PACK_INSTALLE" FromRole="MT" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="MT_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_MT" Type="Int64" />
+          <Property Name="ID_ETAPE_PRODUIT" Type="Int64" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="DateTime" Precision="3" />
+          <Property Name="NB_ESSAI" Type="Int32" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="Int64" />
+          <NavigationProperty Name="MT" Relationship="Self.FK_MT_ETAPE_ID_MT" FromRole="MT_ETAPE" ToRole="MT" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_OF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NB_PACK" Type="Int32" Nullable="false" />
+          <Property Name="NB_MO" Type="Int32" Nullable="false" />
+          <Property Name="NB_MT" Type="Int32" Nullable="false" />
+          <Property Name="NB_SIM" Type="Int32" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <Property Name="OPTION_MATERIEL_MO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OPTION_MATERIEL_MT" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="COMMANDE_SYNCHRO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ORDRE_FABRICATION_ETAPE" Relationship="Self.FK_OF_ETAPE_ID_OF" FromRole="ORDRE_FABRICATION" ToRole="ORDRE_FABRICATION_ETAPE" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_PACK_INSTALLE_ID_OF" FromRole="ORDRE_FABRICATION" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_OF" Type="Int64" />
+          <Property Name="ID_PACK_ENCOURS" Type="Int64" />
+          <NavigationProperty Name="ORDRE_FABRICATION" Relationship="Self.FK_OF_ETAPE_ID_OF" FromRole="ORDRE_FABRICATION_ETAPE" ToRole="ORDRE_FABRICATION" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_OF_ETAPE_ID_PACK_ENCOURS" FromRole="ORDRE_FABRICATION_ETAPE" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_AFFAIRE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ID_CLIENT" Type="Int64" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.FK_PACK_INSTALLATION_ID_CLIENT" FromRole="PACK_INSTALLATION" ToRole="CLIENT" />
+          <NavigationProperty Name="FICHE_PERSO" Relationship="Self.FK_FICHE_PERSO_ID_PACK_INSTALLATION" FromRole="PACK_INSTALLATION" ToRole="FICHE_PERSO" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_OF" Type="Int64" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FICHE_PACK_TRACABILITE" Relationship="Self.FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="FICHE_PACK_TRACABILITE" />
+          <NavigationProperty Name="MO" Relationship="Self.FK_MO_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="MO" />
+          <NavigationProperty Name="MT" Relationship="Self.FK_MT_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="MT" />
+          <NavigationProperty Name="ORDRE_FABRICATION" Relationship="Self.FK_PACK_INSTALLE_ID_OF" FromRole="PACK_INSTALLE" ToRole="ORDRE_FABRICATION" />
+          <NavigationProperty Name="ORDRE_FABRICATION_ETAPE" Relationship="Self.FK_OF_ETAPE_ID_PACK_ENCOURS" FromRole="PACK_INSTALLE" ToRole="ORDRE_FABRICATION_ETAPE" />
+          <NavigationProperty Name="PACK_INSTALLE_ETAPE" Relationship="Self.FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="PACK_INSTALLE_ETAPE" />
+          <NavigationProperty Name="SIM" Relationship="Self.FK_SIM_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="SIM" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="ID_ETAPE_PACK" Type="Int64" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="DateTime" Precision="3" />
+          <Property Name="ID_PRODUIT_APPLICATION" Type="Int64" />
+          <Property Name="TYPE_PRODUIT_APPLICATION" Type="Int32" />
+          <Property Name="NB_ESSAI" Type="Int32" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="Int64" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE_ETAPE" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="SIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_SIM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_SIM_ID_PACK_INSTALLE" FromRole="SIM" ToRole="PACK_INSTALLE" />
+          <NavigationProperty Name="SIM_ETAPE" Relationship="Self.FK_SIM_ETAPE_ID_SIM" FromRole="SIM" ToRole="SIM_ETAPE" />
+        </EntityType>
+        <EntityType Name="SIM_ETAPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SIM" Type="Int64" />
+          <Property Name="ID_ETAPE_APPLICATION" Type="Int64" />
+          <Property Name="DATE_PASSAGE_ETAPE" Type="DateTime" Precision="3" />
+          <Property Name="NB_ESSAI" Type="Int32" />
+          <Property Name="ID_RESULTAT_ESSAI" Type="Int64" />
+          <NavigationProperty Name="SIM" Relationship="Self.FK_SIM_ETAPE_ID_SIM" FromRole="SIM_ETAPE" ToRole="SIM" />
+        </EntityType>
+        <Association Name="FK_PACK_INSTALLATION_ID_CLIENT">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLATION" Type="Self.PACK_INSTALLATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLATION">
+              <PropertyRef Name="ID_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="FICHE_PACK_TRACABILITE" Type="Self.FICHE_PACK_TRACABILITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FICHE_PACK_TRACABILITE">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FICHE_PERSO_ID_PACK_INSTALLATION">
+          <End Role="PACK_INSTALLATION" Type="Self.PACK_INSTALLATION" Multiplicity="0..1" />
+          <End Role="FICHE_PERSO" Type="Self.FICHE_PERSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FICHE_PERSO">
+              <PropertyRef Name="ID_PACK_INSTALLATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_ETAPE_ID_MO">
+          <End Role="MO" Type="Self.MO" Multiplicity="0..1" />
+          <End Role="MO_ETAPE" Type="Self.MO_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO_ETAPE">
+              <PropertyRef Name="ID_MO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MO" Type="Self.MO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ETAPE_ID_MT">
+          <End Role="MT" Type="Self.MT" Multiplicity="0..1" />
+          <End Role="MT_ETAPE" Type="Self.MT_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT_ETAPE">
+              <PropertyRef Name="ID_MT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MT" Type="Self.MT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OF_ETAPE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="ORDRE_FABRICATION_ETAPE" Type="Self.ORDRE_FABRICATION_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDRE_FABRICATION_ETAPE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OF_ETAPE_ID_PACK_ENCOURS">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="ORDRE_FABRICATION_ETAPE" Type="Self.ORDRE_FABRICATION_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDRE_FABRICATION_ETAPE">
+              <PropertyRef Name="ID_PACK_ENCOURS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE_ETAPE" Type="Self.PACK_INSTALLE_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE_ETAPE">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="SIM" Type="Self.SIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ETAPE_ID_SIM">
+          <End Role="SIM" Type="Self.SIM" Multiplicity="0..1" />
+          <End Role="SIM_ETAPE" Type="Self.SIM_ETAPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM_ETAPE">
+              <PropertyRef Name="ID_SIM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_PRODEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENT" EntityType="Self.CLIENT" />
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" />
+          <EntitySet Name="EVENEMENT" EntityType="Self.EVENEMENT" />
+          <EntitySet Name="FICHE_PACK_TRACABILITE" EntityType="Self.FICHE_PACK_TRACABILITE" />
+          <EntitySet Name="FICHE_PERSO" EntityType="Self.FICHE_PERSO" />
+          <EntitySet Name="MO" EntityType="Self.MO" />
+          <EntitySet Name="MO_ETAPE" EntityType="Self.MO_ETAPE" />
+          <EntitySet Name="MT" EntityType="Self.MT" />
+          <EntitySet Name="MT_ETAPE" EntityType="Self.MT_ETAPE" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="Self.ORDRE_FABRICATION" />
+          <EntitySet Name="ORDRE_FABRICATION_ETAPE" EntityType="Self.ORDRE_FABRICATION_ETAPE" />
+          <EntitySet Name="PACK_INSTALLATION" EntityType="Self.PACK_INSTALLATION" />
+          <EntitySet Name="PACK_INSTALLE" EntityType="Self.PACK_INSTALLE" />
+          <EntitySet Name="PACK_INSTALLE_ETAPE" EntityType="Self.PACK_INSTALLE_ETAPE" />
+          <EntitySet Name="SIM" EntityType="Self.SIM" />
+          <EntitySet Name="SIM_ETAPE" EntityType="Self.SIM_ETAPE" />
+          <AssociationSet Name="FK_PACK_INSTALLATION_ID_CLIENT" Association="Self.FK_PACK_INSTALLATION_ID_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="PACK_INSTALLATION" EntitySet="PACK_INSTALLATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE" Association="Self.FK_FICHE_PACK_TRACABILITE_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="FICHE_PACK_TRACABILITE" EntitySet="FICHE_PACK_TRACABILITE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FICHE_PERSO_ID_PACK_INSTALLATION" Association="Self.FK_FICHE_PERSO_ID_PACK_INSTALLATION">
+            <End Role="PACK_INSTALLATION" EntitySet="PACK_INSTALLATION" />
+            <End Role="FICHE_PERSO" EntitySet="FICHE_PERSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_ETAPE_ID_MO" Association="Self.FK_MO_ETAPE_ID_MO">
+            <End Role="MO" EntitySet="MO" />
+            <End Role="MO_ETAPE" EntitySet="MO_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_ID_PACK_INSTALLE" Association="Self.FK_MO_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MO" EntitySet="MO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ETAPE_ID_MT" Association="Self.FK_MT_ETAPE_ID_MT">
+            <End Role="MT" EntitySet="MT" />
+            <End Role="MT_ETAPE" EntitySet="MT_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ID_PACK_INSTALLE" Association="Self.FK_MT_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MT" EntitySet="MT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OF_ETAPE_ID_OF" Association="Self.FK_OF_ETAPE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="ORDRE_FABRICATION_ETAPE" EntitySet="ORDRE_FABRICATION_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ID_OF" Association="Self.FK_PACK_INSTALLE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OF_ETAPE_ID_PACK_ENCOURS" Association="Self.FK_OF_ETAPE_ID_PACK_ENCOURS">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="ORDRE_FABRICATION_ETAPE" EntitySet="ORDRE_FABRICATION_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE" Association="Self.FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="PACK_INSTALLE_ETAPE" EntitySet="PACK_INSTALLE_ETAPE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ID_PACK_INSTALLE" Association="Self.FK_SIM_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="SIM" EntitySet="SIM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ETAPE_ID_SIM" Association="Self.FK_SIM_ETAPE_ID_SIM">
+            <End Role="SIM" EntitySet="SIM" />
+            <End Role="SIM_ETAPE" EntitySet="SIM_ETAPE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_PRODModelStoreContainer" CdmEntityContainer="PEGASE_PRODEntities3">
+          <EntitySetMapping Name="CLIENT">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTEUR">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.COMPTEUR">
+              <MappingFragment StoreEntitySet="COMPTEUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CODE_COMPTEUR" ColumnName="CODE_COMPTEUR" />
+                <ScalarProperty Name="LBL_COMPTEUR" ColumnName="LBL_COMPTEUR" />
+                <ScalarProperty Name="NEXT_NUM_CHRONO" ColumnName="NEXT_NUM_CHRONO" />
+                <ScalarProperty Name="LONGUEUR_COMPTEUR" ColumnName="LONGUEUR_COMPTEUR" />
+                <ScalarProperty Name="TYPE_COMPTEUR" ColumnName="TYPE_COMPTEUR" />
+                <ScalarProperty Name="CARACTERE_COMPLETION" ColumnName="CARACTERE_COMPLETION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENEMENT">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.EVENEMENT">
+              <MappingFragment StoreEntitySet="EVENEMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TYPE_EVENEMENT" ColumnName="TYPE_EVENEMENT" />
+                <ScalarProperty Name="DATE_REPORT" ColumnName="DATE_REPORT" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="MESSAGE_ERREUR" ColumnName="MESSAGE_ERREUR" />
+                <ScalarProperty Name="UTILISATEUR" ColumnName="UTILISATEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FICHE_PACK_TRACABILITE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.FICHE_PACK_TRACABILITE">
+              <MappingFragment StoreEntitySet="FICHE_PACK_TRACABILITE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="DATE_DEBUT_VALIDITE" ColumnName="DATE_DEBUT_VALIDITE" />
+                <ScalarProperty Name="DATE_FIN_VALIDITE" ColumnName="DATE_FIN_VALIDITE" />
+                <ScalarProperty Name="ACTIF" ColumnName="ACTIF" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="VERSION_STRUCTURE_MAJEUR" ColumnName="VERSION_STRUCTURE_MAJEUR" />
+                <ScalarProperty Name="VERSION_STRUCTURE_MINEUR" ColumnName="VERSION_STRUCTURE_MINEUR" />
+                <ScalarProperty Name="VERSION_CONFIGURATION_STANDARD" ColumnName="VERSION_CONFIGURATION_STANDARD" />
+                <ScalarProperty Name="VERSION_CONFIGURATION_CLIENT" ColumnName="VERSION_CONFIGURATION_CLIENT" />
+                <ScalarProperty Name="IDIALOG_FICHE_PERSO" ColumnName="IDIALOG_FICHE_PERSO" />
+                <ScalarProperty Name="NOM_FICHIER" ColumnName="NOM_FICHIER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FICHE_PERSO">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.FICHE_PERSO">
+              <MappingFragment StoreEntitySet="FICHE_PERSO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLATION" ColumnName="ID_PACK_INSTALLATION" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="TYPE_FICHE" ColumnName="TYPE_FICHE" />
+                <ScalarProperty Name="DATE_DEBUT" ColumnName="DATE_DEBUT" />
+                <ScalarProperty Name="DATE_FIN" ColumnName="DATE_FIN" />
+                <ScalarProperty Name="ACTIF" ColumnName="ACTIF" />
+                <ScalarProperty Name="VERSION_STRUCTURE_MAJEUR" ColumnName="VERSION_STRUCTURE_MAJEUR" />
+                <ScalarProperty Name="VERSION_STRUCTURE_MINEUR" ColumnName="VERSION_STRUCTURE_MINEUR" />
+                <ScalarProperty Name="VERSION_CONFIGURATION_STANDARD" ColumnName="VERSION_CONFIGURATION_STANDARD" />
+                <ScalarProperty Name="VERSION_CONFIGURATION_CLIENT" ColumnName="VERSION_CONFIGURATION_CLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MO">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MO">
+              <MappingFragment StoreEntitySet="MO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_MO" ColumnName="NUM_SERIE_MO" />
+                <ScalarProperty Name="CODE_IDENTITE_NATIF" ColumnName="CODE_IDENTITE_NATIF" />
+                <ScalarProperty Name="CODE_IDENTITE_APPRENTISSAGE" ColumnName="CODE_IDENTITE_APPRENTISSAGE" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="CODE_ARTICLE_LOGICIEL" ColumnName="CODE_ARTICLE_LOGICIEL" />
+                <ScalarProperty Name="VERSION_LOGICIELLE" ColumnName="VERSION_LOGICIELLE" />
+                <ScalarProperty Name="DATE_DERNIERE_MAJ" ColumnName="DATE_DERNIERE_MAJ" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MO_ETAPE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MO_ETAPE">
+              <MappingFragment StoreEntitySet="MO_ETAPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_MO" ColumnName="ID_MO" />
+                <ScalarProperty Name="ID_ETAPE_PRODUIT" ColumnName="ID_ETAPE_PRODUIT" />
+                <ScalarProperty Name="DATE_PASSAGE_ETAPE" ColumnName="DATE_PASSAGE_ETAPE" />
+                <ScalarProperty Name="NB_ESSAI" ColumnName="NB_ESSAI" />
+                <ScalarProperty Name="ID_RESULTAT_ESSAI" ColumnName="ID_RESULTAT_ESSAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MT">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MT">
+              <MappingFragment StoreEntitySet="MT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_MT" ColumnName="NUM_SERIE_MT" />
+                <ScalarProperty Name="CODE_IDENTITE_NATIF" ColumnName="CODE_IDENTITE_NATIF" />
+                <ScalarProperty Name="CODE_IDENTITE_APPRENTISSAGE" ColumnName="CODE_IDENTITE_APPRENTISSAGE" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="CODE_ARTICLE_LOGICIEL" ColumnName="CODE_ARTICLE_LOGICIEL" />
+                <ScalarProperty Name="VERSION_LOGICIELLE" ColumnName="VERSION_LOGICIELLE" />
+                <ScalarProperty Name="DATE_DERNIERE_MAJ" ColumnName="DATE_DERNIERE_MAJ" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MT_ETAPE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MT_ETAPE">
+              <MappingFragment StoreEntitySet="MT_ETAPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_MT" ColumnName="ID_MT" />
+                <ScalarProperty Name="ID_ETAPE_PRODUIT" ColumnName="ID_ETAPE_PRODUIT" />
+                <ScalarProperty Name="DATE_PASSAGE_ETAPE" ColumnName="DATE_PASSAGE_ETAPE" />
+                <ScalarProperty Name="NB_ESSAI" ColumnName="NB_ESSAI" />
+                <ScalarProperty Name="ID_RESULTAT_ESSAI" ColumnName="ID_RESULTAT_ESSAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDRE_FABRICATION">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.ORDRE_FABRICATION">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MO" ColumnName="REF_INDUSTRIELLE_MO" />
+                <ScalarProperty Name="REF_COMMERCIALE_MO" ColumnName="REF_COMMERCIALE_MO" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MT" ColumnName="REF_INDUSTRIELLE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_MT" ColumnName="REF_COMMERCIALE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_SIM" ColumnName="REF_COMMERCIALE_SIM" />
+                <ScalarProperty Name="REF_FIRMWARE_MO" ColumnName="REF_FIRMWARE_MO" />
+                <ScalarProperty Name="REF_FIRMWARE_MT" ColumnName="REF_FIRMWARE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="OPTIONS_LOGICIELLES" ColumnName="OPTIONS_LOGICIELLES" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="NB_PACK" ColumnName="NB_PACK" />
+                <ScalarProperty Name="NB_MO" ColumnName="NB_MO" />
+                <ScalarProperty Name="NB_MT" ColumnName="NB_MT" />
+                <ScalarProperty Name="NB_SIM" ColumnName="NB_SIM" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+                <ScalarProperty Name="OPTION_MATERIEL_MO" ColumnName="OPTION_MATERIEL_MO" />
+                <ScalarProperty Name="OPTION_MATERIEL_MT" ColumnName="OPTION_MATERIEL_MT" />
+                <ScalarProperty Name="COMMANDE_SYNCHRO" ColumnName="COMMANDE_SYNCHRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDRE_FABRICATION_ETAPE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.ORDRE_FABRICATION_ETAPE">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION_ETAPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_OF" ColumnName="ID_OF" />
+                <ScalarProperty Name="ID_PACK_ENCOURS" ColumnName="ID_PACK_ENCOURS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACK_INSTALLATION">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.PACK_INSTALLATION">
+              <MappingFragment StoreEntitySet="PACK_INSTALLATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="NUM_AFFAIRE" ColumnName="NUM_AFFAIRE" />
+                <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACK_INSTALLE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.PACK_INSTALLE">
+              <MappingFragment StoreEntitySet="PACK_INSTALLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_OF" ColumnName="ID_OF" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACK_INSTALLE_ETAPE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.PACK_INSTALLE_ETAPE">
+              <MappingFragment StoreEntitySet="PACK_INSTALLE_ETAPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="ID_ETAPE_PACK" ColumnName="ID_ETAPE_PACK" />
+                <ScalarProperty Name="DATE_PASSAGE_ETAPE" ColumnName="DATE_PASSAGE_ETAPE" />
+                <ScalarProperty Name="ID_PRODUIT_APPLICATION" ColumnName="ID_PRODUIT_APPLICATION" />
+                <ScalarProperty Name="TYPE_PRODUIT_APPLICATION" ColumnName="TYPE_PRODUIT_APPLICATION" />
+                <ScalarProperty Name="NB_ESSAI" ColumnName="NB_ESSAI" />
+                <ScalarProperty Name="ID_RESULTAT_ESSAI" ColumnName="ID_RESULTAT_ESSAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIM">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.SIM">
+              <MappingFragment StoreEntitySet="SIM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_SIM" ColumnName="NUM_SERIE_SIM" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIM_ETAPE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.SIM_ETAPE">
+              <MappingFragment StoreEntitySet="SIM_ETAPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_SIM" ColumnName="ID_SIM" />
+                <ScalarProperty Name="ID_ETAPE_APPLICATION" ColumnName="ID_ETAPE_APPLICATION" />
+                <ScalarProperty Name="DATE_PASSAGE_ETAPE" ColumnName="DATE_PASSAGE_ETAPE" />
+                <ScalarProperty Name="NB_ESSAI" ColumnName="NB_ESSAI" />
+                <ScalarProperty Name="ID_RESULTAT_ESSAI" ColumnName="ID_RESULTAT_ESSAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,57 @@
+﻿
+@model GenerateurDFUSafir.Models.RetDInformation
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Recherche et développement";
+    <link href="~/Content/RetD.css" rel="stylesheet" />
+}
+<!---->
+<head>
+    <link rel="stylesheet" href="~/Content/graph.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Scripts/graph.js"></script>
+</head>
+
+<h2>@ViewBag.Title.</h2>
+
+
+<h1 class="jumbotron">Recherche et Développement  - JAY by Conductix</h1>
+<!--<h4>@Html.ActionLink("Ajouter une ligne projet", "Projet")</h4>-->
+<table class="elementuser">
+    <tr>
+        <td>
+            <h3>Utilisateurs </h3>
+        </td>
+        <td>
+            <h3>Status des heures</h3>
+        </td>
+        <td>
+            <h3>Action</h3>
+        </td>
+    </tr>
+    @foreach (var user in Model.DataOperateurs)
+    {
+        <tr>
+            <td>
+                <div class="cercle" alt=@Html.DisplayFor(model => user.NOM) title=@Html.DisplayFor(model => user.PRENOM)>
+                    @Html.DisplayFor(model => user.INITIAL)
+                </div>
+            </td>
+            <td>
+                <div id="regions_div" style="width:100px; height:100px;" class="GaugeChart" titre="%" abscisse="" ordonne1="">
+                    <ul>
+                        <li> :@Html.DisplayFor(model => user.PourcentageComplet):20:90:101</li>
+                    </ul>
+                </div>
+
+            </td>
+            <td>
+                <h4>@Html.ActionLink("Saisie des temps", "Saisi", new { id = user.ID }) </h4>
+                
+                <!--<h4>@Html.ActionLink("Saisie d'un incident", "Incident", new { id = user.ID })</-h4>-->
+            </td>
+        </tr>
+    }
+</table>
+
+

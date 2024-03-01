@@ -1,0 +1,157 @@
+﻿
+details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+}
+
+details {
+    font: 16px "Open Sans", "Arial", sans-serif;
+    
+}
+
+    details > summary {
+        padding: 2px 6px;
+        width: 15em;
+        
+        border: none;
+        box-shadow: 3px 3px 4px black;
+        list-style: none;
+    }
+
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details > p {
+        border-radius: 0 0 10px 10px;
+        background-color: #ddd;
+        padding: 2px 6px;
+        margin: 0;
+        box-shadow: 3px 3px 4px black;
+    }
+
+.infobulle {
+    position: relative; /* les .infobulle deviennent référents */
+    cursor: help;
+    
+}
+
+    /* on génère un élément :after lors du survol et du focus :*/
+
+.infobulle:hover::after,
+.infobulle:focus::after {
+    content: attr(aria-label); /* on affiche aria-label */
+    position: absolute;
+    top: -2.4em;
+    left: 50%;
+    transform: translateX(-50%); /* on centre horizontalement  */
+    z-index: 1; /* pour s'afficher au dessus des éléments en position relative */
+    white-space: nowrap; /* on interdit le retour à la ligne */
+}
+
+#tableFPS{
+    top:0;
+    position:sticky;
+    z-index:20;
+    background-color:#eee;
+}
+.col-id-no {
+    left: 0;
+    position: sticky;
+  
+}
+.fixed-header{
+    z-index:50;
+}
+.caract
+{
+    font-size:12px;
+   
+}
+th:hover {
+    cursor: pointer;
+    background: #AAA;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.box :first-child {
+    align-self: center;
+}
+
+.BttnNew {
+    height: 35px;
+    width: 35px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+    background-image: url("../image/add.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.BttnNew:hover {
+    background-image: url("../image/addHover.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#PopUpAddCommentaire {
+    width: 75%;
+    max-width: 1000px;
+    position: fixed;
+    z-index: 9999;
+    background: white;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    overflow: hidden;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    max-height: 5000px;
+    overflow-y: auto;
+    margin-bottom:0px;
+}
+#PopUpAddCommentaire .bandeau {
+    background: #FF6600;
+    width: 100%;
+    height: 80px;
+    top: 0px;
+    margin: 0;
+    
+    justify-content: flex-start;
+    align-items: center;
+}
+#PopUpAddCommentaire .ValidationBttn {
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: 0;
+}
+#fondTransparent {
+    z-index: 2;
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+#AjoutCommentaireSpe {
+    height: 90px;
+    width: 82%;
+    max-width: 2000px;
+}

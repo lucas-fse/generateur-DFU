@@ -1,0 +1,646 @@
+.body-content { /*Centrage et definition de taille de la page*/
+    z-index: 1;
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 0px;
+    text-align: center;
+}
+
+#FondEcran {
+    position: absolute;
+    opacity: 0.2;
+    z-index: 0;
+    top: 10%;
+    left: 10%;
+}
+
+.body-content footer { /*Configuration footer*/
+    float: left;
+}
+
+#fondTransparent {
+    z-index: 2;
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+#AmeliorationDiv {
+    margin-top: 60px;
+    width: 100%;
+}
+
+#topInfos {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+    #topInfos h2 {
+        font-weight: bold;
+        text-align: start;
+    }
+
+
+
+a.bttn {
+    color: #FF6600;
+    text-decoration: none;
+    -webkit-transition: 0.3s all ease;
+    transition: 0.3s ease all;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+    a.bttn:hover {
+        color: #fff;
+    }
+
+    a.bttn:focus {
+        color: #fff;
+    }
+
+.bttn {
+    font-size: 2em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    width: 95%;
+    height: 120px;
+    font-weight: bold;
+    padding: 14px 0px;
+    border: 3px solid #FF6600;
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .bttn:before {
+        -webkit-transition: 0.5s all ease;
+        transition: 0.5s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        opacity: 0;
+        content: '';
+        background-color: #FF6600;
+        z-index: -2;
+    }
+
+    .bttn:hover:before {
+        -webkit-transition: 0.5s all ease;
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+    .bttn:focus:before {
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+
+#Pop-up {
+    width: 50%;
+    background-color: #C0C0C0;
+    transform: scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 9999;
+    position: fixed;
+    top: 15%;
+    left: 25%;
+    border-radius: 50px;
+    border: 1px solid black;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+    #Pop-up p {
+        margin: 0 auto;
+        margin-top: 30px;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #FF6600;
+        text-align: start;
+    }
+
+.Des {
+    width: 82%;
+}
+
+.PopDiv input {
+    max-width: 1000px;
+    width: 70%;
+}
+
+.PopDiv select {
+    max-width: 1000px;
+    width: 70%;
+    height: 30px;
+}
+
+.PopDiv div {
+    width: 45%;
+}
+
+.PopDiv {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+    .PopDiv div p {
+        width: 70%;
+    }
+
+#SaisieDescription {
+    height: 90px;
+    width: 82%;
+    max-width: 2000px;
+}
+
+#SaisieDescription2 {
+    height: 90px;
+    width: 82%;
+    max-width: 2000px;
+}
+
+#Pop-up button {
+    width: 40%;
+}
+
+#PopUpButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.buttonF {
+    width: 65%;
+    height: 80px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background: #FF6600;
+    color: white;
+    font-size: 1.6em;
+    border: 2px solid black;
+    border-radius: 25px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+#Middle {
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+#DivCases {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.boxCounter {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: stretch;
+    width: 95%;
+    height: 120px;
+    background-color: #fafafa;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+    .boxCounter p h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .boxCounter p {
+        background-color: white;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        border: 1px solid #E0E0E0;
+        text-align: center;
+        font-size: 1.5em;
+        width: 35%;
+        margin: 0 auto;
+        font-weight: bold;
+    }
+
+
+    .boxCounter h3 {
+        border-bottom: 1px solid #E0E0E0;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 1em;
+    }
+
+.thumbnailCounter {
+    width: 30%;
+}
+
+.counterContent {
+    padding-left: 5px; /* pour éviter que le texte soit collé à l'image  */
+    width: 70%;
+}
+
+.imgIndicateur { /* => images responsive */
+    max-width: 100%;
+    height: auto;
+    margin-top: 30%;
+}
+
+.imgIndicateur {
+    width: 50px; /* taille des images sur PC */
+    border-radius: 100%;
+    border: 1px solid #E0E0E0;
+}
+
+.ValueCase {
+    opacity: 0;
+}
+
+
+@media all and (max-width: 450px) {
+    .imgIndicateur {
+        width: 90px; /* taille des images sur smartphone */
+    }
+}
+
+.buttonF:hover {
+    font-size: 1.8em;
+    background: #000080;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+}
+
+
+.checkbox-tools:checked + label,
+.checkbox-tools:not(:checked) + label {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    width: 165px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #ffffff;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+
+.checkbox-tools:not(:checked) + label {
+    background-color: #353746;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-tools:checked + label {
+    background-color: transparent;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-tools:not(:checked) + label:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-tools:checked + label::before,
+.checkbox-tools:not(:checked) + label::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(298deg, #da2c4d, #f8ab37);
+    z-index: -1;
+}
+
+.checkbox-tools:checked + label .uil,
+.checkbox-tools:not(:checked) + label .uil {
+    font-size: 24px;
+    line-height: 24px;
+    display: block;
+    padding-bottom: 10px;
+}
+
+#Graph {
+    width: 70%;
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+#Graph1 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+#Graph2 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.TypeGraph {
+    width: 20%;
+    height: 100%;
+    padding-top: 70px;
+}
+
+.DivCanvas {
+    width: 80%;
+    height: 100%;
+}
+
+#DetailAmelioration {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 70px;
+}
+
+#Graphique {
+    width: 80%;
+}
+
+.DivBandeau {
+    height: 40px;
+    width: 100%;
+    border-radius: 30px 30px 0px 0px;
+    background: #FF6600;
+    border: 1px solid black;
+    border-style: none none solid none;
+}
+
+.DetailA {
+    padding-bottom: 2%;
+    padding-top: 0px;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    vertical-align: middle;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+
+.TextGrasDetail {
+    margin-left: 2%;
+    font-weight: bold;
+    padding-bottom: 10px;
+        width: 100%;
+    display: flex;
+}
+
+.TextDetail {
+    min-width: 100%;
+    text-align: left;
+    margin-right: 2%;
+    padding-bottom: 10px;
+}
+
+.TextGrasDetail p {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 80%;
+}
+
+.TextDetail p {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+    margin-right: 2%;
+    margin-bottom: 0px;
+    width: 100%;
+    height: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.DetailA div p {
+    font-size: 1em;
+}
+
+
+.TextDateDetail {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.infoSups {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.infoSups p {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+.ImageDetail {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+img.image_box {
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+}
+/*-------------------------------------*/
+@media all and (max-width : 1500px) {
+    #DivCases {
+        width: 100%;
+    }
+
+    .boxCounter {
+        width: 280px
+    }
+
+    .bttn {
+        width: 280px;
+        margin: 0 auto;
+    }
+
+    #Graph {
+        width: 100%;
+    }
+}
+
+@media all and (max-width : 1175px) {
+    #Graph1 {
+        flex-direction: column-reverse;
+        margin-top: 100px;
+    }
+
+    #Graph2 {
+        flex-direction: column-reverse;
+    }
+
+    .DivCanvas {
+        min-height: 300px;
+        width: 100%;
+    }
+
+    .TypeGraph {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        height: 100px;
+        padding-top: 0px;
+    }
+}
+
+@media all and (max-width : 1100px) {
+    #DetailAmelioration {
+        padding-top: 90px;
+    }
+}
+
+@media all and (max-width : 907px) {
+    #topInfos h2 {
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    #clock {
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+}
+
+@media all and (max-width : 880px) {
+    #FondEcran {
+        left: 5%;
+        width: 300px;
+    }
+}
+
+@media all and (max-width : 650px) {
+    #Graph {
+        height: 650px;
+    }
+
+    .checkbox-tools:checked + label,
+    .checkbox-tools:not(:checked) + label {
+        font-size: 8px;
+    }
+
+    #DetailAmelioration {
+        padding-top: 90px;
+    }
+}
+
+@media all and (max-width : 520px) {
+    #clock {
+        display: none;
+    }
+
+    .checkbox-tools:checked + label,
+    .checkbox-tools:not(:checked) + label {
+        text-align: start;
+        padding: 5px;
+    }
+
+    #Pop-up {
+        top: 5%;
+        position: absolute;
+    }
+
+    
+    .infoSups {
+        font-size: 1em;
+    }
+
+    .DetailA div p {
+        padding-top: 5px;
+        font-size: 0.7em;
+    }
+}
+
+@media all and (max-width : 370px) {
+    #Pop-up button {
+        width: 85%;
+    }
+}
+
+@media all and (max-width: 880px) {
+    .DetailA {
+        width: 90%;
+    }
+
+    img.image_box {
+        width: 25%;
+    }
+}

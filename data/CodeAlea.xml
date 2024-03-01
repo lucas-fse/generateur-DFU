@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+  <groupe valeur="GENE" libelle="Gestion générique">
+    <sougroupe valeur="piecenok" libelle="Pièce NOK" couleur="#FFFFCC">
+      <alea valeur="1108" libelle="Carte électronique en défaut"/>
+      <alea valeur="1109" libelle="Reprise gravure/découpe"/>
+      <alea valeur="1110" libelle="Pièce mécanique non conforme"/>
+      <alea valeur="1111" libelle="Re test"/>
+      <alea valeur="1112" libelle="Reprise montage"/>
+      <alea valeur="1113" libelle="Reprise après Ctrl Final/"/>
+      <alea valeur="1114" libelle="Reprise manuelle"/>
+    </sougroupe>
+    <sougroupe valeur="outilnok" libelle="Outillage NOK" couleur="#FFEECC">
+      <alea valeur="1101" libelle="Problème d’impression/étiquette"/>
+      <alea valeur="1102" libelle="Problème de réseau"/>
+      <alea valeur="1103" libelle="Problème banc de test"/>
+      <alea valeur="1104" libelle="Nettoyage des contacts"/>
+      <alea valeur="1105" libelle="Outillage inadapté"/>
+      <alea valeur="1106" libelle="Plantage logiciel"/>
+      <alea valeur="1107" libelle="Outil manquant"/>
+    </sougroupe>
+    <sougroupe valeur="stock" libelle="STOCK" couleur="#FFBBDD">
+      <alea valeur="1115" libelle="Piece manquante"/>
+      <alea valeur="1116" libelle="Mauvais emplacement"/>
+      <alea valeur="1117" libelle="Erreur de stock"/>
+    </sougroupe>
+    <sougroupe valeur="données nok" libelle="Données non ok" couleur="#FFDDCC">
+      <alea valeur="1140" libelle="Nomenclature incorrecte"/>
+      <alea valeur="1141" libelle="Informations manquantes sur OF"/>
+      <alea valeur="1142" libelle="Informations manquantes sur gamme"/>
+      <alea valeur="1143" libelle="Fiche de paramétrage incorrecte"/>
+      <alea valeur="1144" libelle="Incohérence Fiche paramétrage / Fiche de plastron"/>
+      <alea valeur="1145" libelle="Incompréhension gamme de fabrication"/>
+      <alea valeur="1146" libelle="Erreur de saisie opérateur/rice"/>
+    </sougroupe>
+    <sougroupe valeur="horsproduction" libelle="Hors production" couleur="#FFEEDD">
+      <alea valeur="1133" libelle="Poste déjà occupé"/>
+      <alea valeur="1134" libelle="Back up"/>
+      <alea valeur="1135" libelle="Opération hors OF"/>
+      <alea valeur="1136" libelle="Interruption service extérieur"/>
+      <alea valeur="1137" libelle="Attente de consignes"/>
+      <alea valeur="1138" libelle="Changement opérateur/rice"/>
+      <alea valeur="1139" libelle="Aide opérateur/rice"/>
+      <alea valeur="1147" libelle="Contrôle Final"/>
+    </sougroupe>
+    <sougroupe valeur="animation" libelle="Animation" couleur="#FFBBFF">
+      <alea valeur="1124" libelle="Pause"/>
+      <alea valeur="1125" libelle="Réunion"/>
+      <alea valeur="1126" libelle="Top 5"/>
+      <alea valeur="1127" libelle="Top 15"/>
+      <alea valeur="1128" libelle="Formation"/>
+      <alea valeur="1129" libelle="QRQC"/>
+      <alea valeur="1130" libelle="5S"/>
+      <alea valeur="1131" libelle="Déclaration/chasse aux risques"/>
+      <alea valeur="1132" libelle="Demande d’amélioration"/>
+    </sougroupe>
+    <sougroupe valeur="pause" libelle="Pause" couleur="#FFEEEE">
+      <alea valeur="1028" libelle="Pause 10min"/>
+      <alea valeur="1029" libelle="Pause midi"/>
+      <alea valeur="1031" libelle="Pause defini"/>
+      <alea valeur="1032" libelle="Reunion defini"/>
+    </sougroupe>
+  </groupe>
+  <groupe valeur="BIDIR" libelle="Produit de la gamme bidirectionnelle">
+  </groupe>
+  <groupe valeur="UDUC" libelle="Produit de la gamme monodirectionnelle">
+  </groupe>
+  <groupe valeur="URRS" libelle="Produit de la gamme UR ou RS">
+  </groupe>
+  <groupe valeur="ORION" libelle="Produit de la gamme ORION">
+  </groupe>
+  <groupe valeur="TEST" libelle="Gestion des tests">
+  </groupe>
+  <groupe valeur="LASER" libelle="Gestion de la gravure laser">
+  </groupe>
+  <groupe valeur="ATEX" libelle="Produit ATEX">
+  </groupe>
+  <groupe valeur="ACCE" libelle="Accesoires de gamme">
+  </groupe>
+</Root>

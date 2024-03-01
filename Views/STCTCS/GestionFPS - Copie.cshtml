@@ -1,0 +1,304 @@
+﻿
+@model GenerateurDFUSafir.Models.FPSEncours
+@{
+    ViewBag.Title = "GestionFPS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/GestionFPS.css" rel="stylesheet" />
+    int i = 0;
+}
+
+<h2>GestionFPS</h2>
+
+
+@using (Html.BeginForm("EditGestionFPS", "STCTCS"))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td style="width:300px">
+                <div style="display: inline">
+                    @Html.DropDownListFor(m => m.NameSTC, // Store selected value in Model.DefaultStcId
+                            new SelectList(Model.ListOperateursSTC, "Value", "Text", Model.DefaultStcId),
+                            new { @class = "form-control", @onchange = "callChangefunc(this.value)" })
+                </div>
+            </td>
+            <td style="width:300px">
+                <div style="display: inline;margin:30px">
+                    @Html.DropDownListFor(m => Model.StatusViewFps, // Store selected value in Model.DefaultStcId
+                                                 new SelectList(Model.ListViewStatusFPS, "Value", "Text", Model.StatusViewFps),
+                                                 new { @class = "form-control", onchange = @"submit();" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <h4>
+                    FPS @Html.DisplayFor(model => Model.ListViewStatusFPS.ElementAt(0).Text)
+                </h4>
+            </td>
+        </tr>
+    </table>
+    <div style="overflow:auto; height:900px;">
+        <table id="fpstable" class="table" >
+            <thead id="tableFPS">
+                <tr>
+                    <th id="colCmd" class="col-id-no fixed-header">
+                        <div class="box"><div><h4>Nmr Cmd </h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div></div>
+
+                    </th>
+                    <th id="colfps">
+                        <div class="box"><div><h4>FPS </h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div></div>
+                    </th>
+                    <th>
+                        <h4>Plastron</h4>
+                    </th>
+                    <th>
+                        <h4>STC</h4>
+                    </th>
+                    <td>
+                        <h4>Temps <br />estimé de<br />réalisation</h4>
+                    </td>
+                    <th id="colraison">
+                        <div class="box">
+                            <div><h4>Raison<br />sociale</h4></div><div><img src="~/image/tri.png" style="height:20px; width:auto;" /></div>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div style="width: 120px;">
+                            <div><h5>St:Date Cmd<br /></h5></div>
+                            <div>
+                                <h5>Cl:Date Client<br /></h5>
+                            </div>
+                            <div>
+                                <h5>Ex:Date Expe<br /></h5>
+                            </div>
+                            <div><h5>Us:Date stc<br /></h5></div>
+                        </div>
+    </th>
+
+    <!--<th>
+        <h4>Date<br />demandée<br />(départ usine)</h4>
+    </th> -->
+    <th>
+        <h4>Erreurs</h4>
+    </th>
+    <th>
+        <h4>Date Cloture</h4>
+    </th>
+    <th>
+        <h4>Status<br />FPS</h4>
+    </th>
+    <th>
+        <h4>Controle final</h4>
+    </th>
+    <th>
+        <h4>Commentaire</h4>
+    </th>
+    <th>
+        @if (Model.disable1)
+        {
+            <h4>Ajout Commentaire</h4>
+        }
+        else
+        {
+            <h4> Commentaire  Test FPS</h4>
+        }
+    </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var fps in Model.TRACACMDsfiltres)
+        {
+            <tr style="background-color:@fps.CodeCouleurLigne">
+                <td class="col-id-no">
+                    <div style="max-width: 150px;">
+                        <pre>@Html.Label(fps.listcommande)</pre>
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        <input type="hidden" name="TRACACMDsfiltres[@i].IndexFPS" value="@fps.IndexCMD" />
+                        <input type="hidden" name="TRACACMDsfiltres[@i].VAL_FPARAM_0" value="@fps.VAL_FPARAM_0" />
+                        <input type="hidden" name="TRACACMDsfiltres[@i].SOHNUM" value="@fps.SOHNUM" />
+                        <input type="hidden" name="TRACACMDsfiltres[@i].SOPLIN" value="@fps.SOPLIN" />
+                        <input type="hidden" name="TRACACMDsfiltres[@i].Listindex" value="@fps.Listindex" />
+                        @Html.DisplayFor(model => fps.VAL_FPARAM_0)<br /><br />
+                        @Html.Label("MO :" + fps.CFGFLDALP2)<br />
+                        @Html.Label("MT :" + fps.CFGFLDALP3)<br />
+                        @Html.Label("SIM:" + fps.CFGFLDALP4)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 80px;">
+                        @Html.DisplayFor(model => fps.PLASTRON)
+                        <div />
+                </td>
+                <td>
+                    <div style="width: 90px;">
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            @Html.DropDownListFor(m => Model.TRACACMDsfiltres[@i].STCEnChargeInt, // Store selected value in Model.DefaultStcId
+                                      new SelectList(Model.ListOperateursSTC, "Value", "Text", fps.STCEnChargeInt),
+                                      new { @class = "form-control", onchange = @"submit();" })
+                        }
+                        else
+                        {
+                            @Html.Label(fps.STcEnCharge);
+                        }
+                    </div>
+                </td>
+                <td style="background-color:@fps.ErreurTempsCouleurCase;">
+                    <div style="width: 110px;">
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            @Html.DropDownListFor(m => Model.TRACACMDsfiltres[@i].DelaiEstimation, // Store selected value in Model.DefaultStcId
+                                 new SelectList(Model.ListDelaiFPS, "Value", "Text", fps.DelaiEstimation),
+                                 new { @class = "form-control", onchange = @"submit();" })
+                        }
+                        else
+                        {
+                            @Html.Label(fps.DelaiFpsString);
+                        }
+                    </div>
+                </td>
+
+
+                <td>
+                    @Html.Label(@fps.NomClient.Replace('.', ' '))
+                </td>
+                <td>
+                    @Html.Label("St:" + ((DateTime)fps.CREDAT_0).ToShortDateString())
+                    @Html.Label("Cl:" + ((DateTime)fps.DEMDLVDAT_0).ToShortDateString())
+                    @Html.Label("Ex:" + ((DateTime)fps.SHIDAT).ToShortDateString())
+                    @if (Model.disable1 && fps.StatusFPS != 4)
+                    {
+                        @Html.TextBoxFor(model => Model.TRACACMDsfiltres[@i].test, new { @type = "date", @class = "form-control datepicker", @Value = Model.TRACACMDsfiltres[@i].test.ToString("yyyy-MM-dd"), @onchange = "submit();" })
+                    }
+                    else
+                    {
+                        @Html.Label("Us:" + ((DateTime)fps.test).ToString("dd/MM/yyyy"));
+                    }
+                </td>
+                <td>
+                    <div style="max-width: 400px;white-space: pre-wrap;">
+                        @Html.Label(fps.ErreurString)
+                       
+                    </div>
+                </td>
+                <td>
+                    @Html.Label(fps.ReturnDateClotureForDisplay)
+                </td>
+                <td>
+                    <div style="width: 100px;">
+                        @if (Model.disable1)
+                        {
+                            @Html.DropDownListFor(m => Model.TRACACMDsfiltres[@i].StatusFPS, // Store selected value in Model.DefaultStcId
+                                      new SelectList(Model.ListStatusFPS, "Value", "Text", fps.StatusFPS),
+                                      new { @class = "form-control", onchange = @"submit();" })
+                        }
+                        else
+                        {
+                            @Html.Label(fps.StatusFpsString)
+                        }
+                    </div>
+                </td>
+                <td>
+                    @Html.Label(fps.ZFPCONTROL_0)
+                </td>
+                <td>
+                    <div style="max-width: 300px;">
+                        <pre>@Html.DisplayFor(model => fps.Commentaire)</pre>
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+                        @if (Model.disable1 && fps.StatusFPS != 4)
+                        {
+                            @Html.DropDownListFor(m => Model.TRACACMDsfiltres[@i].AjoutCommentaire, // Store selected value in Model.DefaultStcId
+                                      new SelectList(Model.ListCommentaireFiche, "Value", "Text", fps.AjoutCommentaire),
+                                      new { @class = "form-control", onchange = @"submit();" })
+
+                        }
+                        else
+                        {
+                            @Html.Label(fps.ZCOMCONT_0)
+                        }
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+    </table>
+    </div>
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    function callChangefunc(val, status) {
+        window.location.href = "/STCTCS/GestionFPS/" + val;
+    }
+    function SetTime(value) {
+        window.location.href = "/STCTCS/GestionFPS/" + value;
+    }
+
+    function sortTable(f, n) {
+        var rows = $('#fpstable tbody  tr').get();
+        rows.sort(function (a, b) {
+
+            var A = getVal(a);
+            var B = getVal(b);
+
+            if (A < B) {
+                return -1 * f;
+            }
+            if (A > B) {
+                return 1 * f;
+            }
+            return 0;
+        });
+
+        function getVal(elm) {
+            var v = $(elm).children('td').eq(n).text().toUpperCase();
+            if ($.isNumeric(v)) {
+                v = parseInt(v, 10);
+            }
+            return v;
+        }
+
+        $.each(rows, function (index, row) {
+            var color;
+            if (index % 3 == 0) { color = '#F4A460'; }
+            else if (index % 3 == 1) { color = '#FFE4C4'; }
+            else { color = '#00FFFF'; }
+            row.style.backgroundColor = color;
+            $('#fpstable').children('tbody').append(row);
+        });
+
+    }
+
+    var f_cmd = 1;
+    var f_fps = 1;
+    var f_client = 1;
+
+    $('#colCmd').click(function () {
+        f_cmd *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_cmd, n);
+    });
+    $("#colfps").click(function () {
+        f_fps *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_fps, n);
+    });
+    $("#colraison").click(function () {
+        f_client *= -1;
+        var n = $(this).prevAll().length;
+        sortTable(f_client, n);
+    });
+
+
+
+</script>

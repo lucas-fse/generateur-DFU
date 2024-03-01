@@ -1,0 +1,299 @@
+body {
+    width: 100%;
+    text-align: center;
+    font-family: arial;
+    margin: 0 auto; /*permet un centrage de l'element*/
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.body-content {
+    margin: 0;
+    width: 75%;
+}
+
+    .body-content footer {
+        float: left;
+    }
+
+#titre {
+    margin: 0;
+}
+
+#bandeau {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 30px 0 5px;
+}
+
+#changeDate {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+
+    width: 35%;
+}
+
+.buttonDate {
+    background-color: #F26222;
+    color: white;
+    border-radius: 1em;
+    border-block-color: #231F20;
+    font-size: 1.5em;
+}
+
+.buttonDate:hover {
+    background-color: #818285;
+    color: white;
+}
+
+#Valider {
+    background-color: #F26222;
+    color: white;
+    border-radius: 1em;
+    border-block-color: #231F20;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+#Valider:hover {
+    background-color: #818285;
+    color: white;
+}
+
+#Tableau {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /*height: 700px;
+    overflow-x: hidden;
+    overflow-y: scroll;*/
+}
+.colonne1 {
+    width: 9%;
+    max-width: 30px;
+}
+#Contenant-TableOp {
+    height: 800px;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    background-color: aquamarine;
+}
+
+#TableOp {
+    background-color: #E6E6E6;
+    width: -webkit-fill-available;
+}
+
+    #TableOp tr th, #TableOp tr td {
+        border: 1px black solid;
+    }
+
+/*En-tête du tableau fix*/
+#Table-Entete {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+/*Largeur des colonnes du tableau des opératrices*/
+#Titre-TableOp {
+
+    padding-left: 5px;
+    height: 30px;
+    font-size: 150%;
+    background-color: #D3D3D3;
+}
+
+.colonne3 {
+   /* width: 1204px;*/
+}
+
+#EnTeteListeOp{
+    border-bottom: 3px black solid;
+    font-size: 100%;
+}
+
+#EnTeteListeOp th {
+    padding: 0 5px;
+}
+
+.TpsTotal {
+    font-size: 120%;
+}
+
+.NomPrenom {
+    padding-left: 10px;
+    text-align: left;
+    font-size: 120%;
+}
+
+/*////////////////////////*/
+/*css container drag and drop*/
+.containerOF {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 120px;
+}
+
+#Contenant-ListeOf {
+    height: 800px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 14%;
+    min-width: 230px;
+    max-width: 230px;
+}
+
+#ListeOf {
+    background-color: #D3D3D3;
+    width: 100%;
+}
+
+#ListeOf tr th, #ListeOf tr td, .of {
+    border: 1px black solid;
+}
+
+#Titre-ListeOf {
+    font-size: 150%;
+    padding-left: 5%;
+    height: 30px;
+}
+
+#ZoneOf {
+    background-color: white;
+}
+
+/*////////////////////////*/
+/*css box drag and drop*/
+.container {
+    width: -webkit-fill-available;
+}
+
+
+.of {
+    display:flex;
+    flex-direction: row;
+    margin: 5px;
+    width: 200px;
+    height: 90px;
+    min-width: 200px;
+    /*background-color: #D3D3D3;*/
+    text-align: left;
+    cursor: move;
+    border: 2px solid black;
+}
+    .of .marge-gauche {
+        width: 20px;
+        max-width:20px;
+        height: 86px;
+        margin-right: 10px;
+        writing-mode: vertical-lr ;
+        text-align: center;
+        font-weight: 600;
+    }
+.corps-droit {
+    flex-direction: column;
+    margin-right: 0px;
+    justify-content: flex-end;
+    width:100%;
+}
+.of .corps-droit .contenant-pastille {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.of .body-of {
+    display: flex;
+    width:100%
+    flex-direction: row;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+}
+.of-alea {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top:5px;
+}
+
+.of .body-of .bottom-of {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+   
+}
+.of .body-of .bottom-of .of-alea {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+.of div p {
+    margin: 0 0 2px;
+    font-size: 100%;
+    
+}
+.of .marge-droite {
+   
+    min-height:55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;    
+}
+        .of .marge-droite .contenant-pastille {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            
+        }
+        .of .marge-droite .pastille {
+            width: 30px;
+            height: 30px;
+            margin: 5px 5px 0 0;
+        }
+    .of.dragging {
+        opacity: .5;
+    }
+
+.oftri {
+    opacity: 0.5;
+}
+
+
+@media screen and (max-width: 1220px) {
+
+    
+    #Titre-TableOp {
+        font-size: 100%;
+    }
+    #EnTeteListeOp th {
+        font-size: 75%;
+    }
+    #Titre-ListeOf {
+        font-size: 100%;
+    }
+}
+
+    #Titre-TableOp {
+        max-width: 75px;
+    }
+
+    .NomPrenom {
+        font-size: 100%;
+    }
+    .TpsTotal {
+        font-size: 100%;
+    }

@@ -1,0 +1,57 @@
+﻿@model GenerateurDFUSafir.Models.TestOutilProduction
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/form.css" />
+
+<style>
+    .console {
+        width: 1000px;
+        height: 500px;
+        background-color: #222;
+        padding: 10px;
+        margin: 10px 0;
+        color: white;
+    }
+</style>
+
+<div class="body-content">
+    <h2>Test de Disponibilité de OptiZEN</h2>
+
+    <button class="frm-button action-button" name="start" id="start">DÉMARRER DIAGNOSTIQUE</button>
+
+    <div>
+        <pre class="console" id="output">
+Chargement...
+    </pre>
+    </div>
+</div>
+
+<script>
+
+    const output = document.querySelector('#output');
+    const start = document.querySelector('#start')
+
+    async function refreshOutput() {
+        const raw = await fetch('/Test/output');
+        const res = await raw.json();
+
+        output.textContent = "";
+
+        for (const l of res) {
+            output.textContent = output.textContent + l + '\n';
+        }
+    }
+
+    start.addEventListener('click', async() => {
+        await fetch('/Test/Start');
+    });
+
+
+    window.onload = () =>
+        setInterval(refreshOutput, 1000);
+
+</script>
+

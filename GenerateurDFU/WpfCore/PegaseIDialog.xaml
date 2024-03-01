@@ -1,0 +1,1534 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:JAY_WpfCore="clr-namespace:JAY.WpfCore" 
+                    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    mc:Ignorable="d">
+    
+    
+    <!-- image ressource-->
+
+
+
+    <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+			<GradientStop Color="#ABADB3" Offset="0.05"/>
+			<GradientStop Color="#E2E3EA" Offset="0.07"/>
+			<GradientStop Color="#E3E9EF" Offset="1"/>
+	</LinearGradientBrush>
+		
+    
+	<!-- Style pour le boite de dialog permettant d'entrer des valeurs en % -->
+	<Style x:Key="TextBoxStylePourcent" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="AllowDrop" Value="true"/>
+			<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+			<Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+			<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type TextBox}">
+						<Grid Height="21.96">
+							<TextBlock Margin="0,0,4,4" TextWrapping="Wrap" Text="%" HorizontalAlignment="Right" Width="10.585"/>
+							<Microsoft_Windows_Themes:ListBoxChrome x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true" d:LayoutOverrides="Height" Margin="0,0,17,0">
+								<ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" d:LayoutOverrides="Height"/>
+							</Microsoft_Windows_Themes:ListBoxChrome>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	
+    <!-- Le style visuel des tooltips -->
+    <Style TargetType="ToolTip" x:Key="{x:Type ToolTip}">
+        <Setter Property="HasDropShadow"  Value="True" />
+        <Setter Property="StaysOpen"  Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid Width="500" Height="Auto">
+                        <Rectangle Fill="#CC2C4581" Stroke="#FF468DFF" StrokeThickness="2" RadiusX="5" RadiusY="5"/>
+                        <TextBlock Height="Auto"
+                                       Foreground="White" Margin="60,5,5,5" 
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                       Text="{TemplateBinding Content}" TextWrapping="Wrap"/>
+                        <Image Width="40" Height="40" Source="Help2.png" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Le style visuel du bouton lorsqu'il a le focus -->
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Gradient de fond pour les boutons -->
+    <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#F3F3F3" Offset="0"/>
+        <GradientStop Color="#EBEBEB" Offset="0.5"/>
+        <GradientStop Color="#DDDDDD" Offset="0.5"/>
+        <GradientStop Color="#CDCDCD" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+
+    <!-- Style pour les boutons de IDialog -->
+    <Style x:Key="ButtonStyleIDialog" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Margin="0">
+                    	<Grid.LayoutTransform>
+                    		<TransformGroup>
+                    			<ScaleTransform ScaleX="1"/>
+                    			<SkewTransform/>
+                    			<RotateTransform/>
+                    			<TranslateTransform/>
+                    		</TransformGroup>
+                    	</Grid.LayoutTransform>
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="8" Color="#FFEDBA9E" ShadowDepth="3"/>
+                        </Grid.Effect>
+                        <Rectangle x:Name="rectangle" Margin="0" RadiusX="5" RadiusY="5" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+                        	<Rectangle.RenderTransform>
+                        		<TransformGroup>
+                        			<ScaleTransform ScaleX="1"/>
+                        			<SkewTransform/>
+                        			<RotateTransform/>
+                        			<TranslateTransform/>
+                        		</TransformGroup>
+                        	</Rectangle.RenderTransform>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.713,0.217" StartPoint="0.72,0.435">
+                                    <GradientStop Color="#ffff6400" Offset="0"/>
+                                    <GradientStop Color="#ffff6400" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="rectangle1" Margin="0" RadiusX="5" RadiusY="5" Height="Auto" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+                        	<Rectangle.RenderTransform>
+                        		<TransformGroup>
+                        			<ScaleTransform ScaleX="1"/>
+                        			<SkewTransform/>
+                        			<RotateTransform/>
+                        			<TranslateTransform/>
+                        		</TransformGroup>
+                        	</Rectangle.RenderTransform>
+                            <Rectangle.Fill>
+                                <RadialGradientBrush Center="0.507,0.848" GradientOrigin="0.507,0.848" RadiusY="0.749" RadiusX="0.749">
+                                    <RadialGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.848" CenterX="0.507" ScaleY="1" ScaleX="1"/>
+                                            <SkewTransform AngleY="0" AngleX="0" CenterY="0.848" CenterX="0.507"/>
+                                            <RotateTransform Angle="-27.71" CenterY="0.848" CenterX="0.507"/>
+                                            <TranslateTransform Y="0"/>
+                                        </TransformGroup>
+                                    </RadialGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFFFD578" Offset="0"/>
+                                    <GradientStop Color="#41FF9800" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Margin="5,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                		<Trigger Property="IsMouseOver" Value="True">
+                			<Setter Property="LayoutTransform" TargetName="grid">
+                				<Setter.Value>
+                					<TransformGroup>
+                						<ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                						<SkewTransform/>
+                						<RotateTransform/>
+                						<TranslateTransform/>
+                					</TransformGroup>
+                				</Setter.Value>
+                			</Setter>
+                			<Setter Property="Cursor" TargetName="grid" Value="Hand"/>
+                			<Setter Property="RenderTransform" TargetName="rectangle">
+                				<Setter.Value>
+                					<TransformGroup>
+                						<ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                						<SkewTransform/>
+                						<RotateTransform/>
+                						<TranslateTransform/>
+                					</TransformGroup>
+                				</Setter.Value>
+                			</Setter>
+                			<Setter Property="RenderTransform" TargetName="rectangle1">
+                				<Setter.Value>
+                					<TransformGroup>
+                						<ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                						<SkewTransform/>
+                						<RotateTransform/>
+                						<TranslateTransform/>
+                					</TransformGroup>
+                				</Setter.Value>
+                			</Setter>
+                		</Trigger>
+                		<Trigger Property="IsKeyboardFocused" Value="true"/>
+                		<Trigger Property="ToggleButton.IsChecked" Value="true"/>
+                		<Trigger Property="IsEnabled" Value="false">
+                			<Setter Property="Opacity" TargetName="grid" Value="0.3"/>
+                		</Trigger>
+                	</ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+	<Style x:Key="GraphicBtnMenuStyle" TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+		<Setter Property="FocusVisualStyle">
+			<Setter.Value>
+				<Style>
+					<Setter Property="Control.Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Background">
+			<Setter.Value>
+				<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+					<GradientStop Color="#FFF3F3F3" Offset="0"/>
+					<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+					<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+					<GradientStop Color="#FFCDCDCD" Offset="1"/>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderBrush" Value="#FF707070"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="ZoomIn">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="ZoomOut">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Grid x:Name="grid" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.RenderTransform>
+						<Grid.LayoutTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.LayoutTransform>
+						<Grid.Effect>
+							<DropShadowEffect Color="DarkOrange" Opacity="0.3" BlurRadius="10"/>
+						</Grid.Effect>
+						<Image x:Name="image" Margin="0" Source="{TemplateBinding ImageBkg}" Stretch="UniformToFill"/>
+						<TextBlock x:Name="textBlock" Margin="0,19,0,20" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" OpacityMask="{TemplateBinding OpacityMask}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" TextAlignment="Center"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<BeginStoryboard Storyboard="{StaticResource ZoomIn}"/>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<BeginStoryboard x:Name="ZoomOut_BeginStoryboard" Storyboard="{StaticResource ZoomOut}"/>
+						</EventTrigger>
+						<Trigger Property="IsKeyboardFocused" Value="True"/>
+						<Trigger Property="ToggleButton.IsChecked" Value="True"/>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFADADAD"/>
+							<Setter Property="Opacity" TargetName="grid" Value="0.3"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="GraphicBtnDicoStyle" TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+		<Setter Property="FocusVisualStyle">
+			<Setter.Value>
+				<Style>
+					<Setter Property="Control.Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Background">
+			<Setter.Value>
+				<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+					<GradientStop Color="#FFF3F3F3" Offset="0"/>
+					<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+					<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+					<GradientStop Color="#FFCDCDCD" Offset="1"/>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderBrush" Value="#FF707070"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="ZoomIn">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="ZoomOut">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Grid x:Name="grid" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.RenderTransform>
+						<Grid.LayoutTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.LayoutTransform>
+						<Image x:Name="image" Margin="0" Source="{TemplateBinding ImageBkg}" Stretch="UniformToFill"/>
+						<TextBlock x:Name="textBlock" Margin="20,52,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" OpacityMask="{TemplateBinding OpacityMask}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" TextAlignment="Left"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<BeginStoryboard Storyboard="{StaticResource ZoomIn}"/>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<BeginStoryboard x:Name="ZoomOut_BeginStoryboard" Storyboard="{StaticResource ZoomOut}"/>
+						</EventTrigger>
+						<Trigger Property="IsKeyboardFocused" Value="True"/>
+						<Trigger Property="ToggleButton.IsChecked" Value="True"/>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFADADAD"/>
+							<Setter Property="Opacity" TargetName="grid" Value="0.4"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<SolidColorBrush x:Key="ListBorder" Color="#828790"/>
+    
+	<Style x:Key="ListViewIconStyle" TargetType="{x:Type ListView}">
+		<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListView}">
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+						<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+							<WrapPanel IsItemsHost="True"/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="GraphicGroupButtonMenuStyle" TargetType="{x:Type JAY_WpfCore:GraphicGroupButton}">
+		<Setter Property="FocusVisualStyle">
+			<Setter.Value>
+				<Style>
+					<Setter Property="Control.Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Background">
+			<Setter.Value>
+				<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+					<GradientStop Color="#00F3F3F3" Offset="0"/>
+					<GradientStop Color="#00EBEBEB" Offset="0.5"/>
+					<GradientStop Color="#00DDDDDD" Offset="0.5"/>
+					<GradientStop Color="#00CDCDCD" Offset="1"/>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderBrush" Value="#FF707070"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type JAY_WpfCore:GraphicGroupButton}">
+					<Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" Margin="0" Cursor="Hand">
+						<Path x:Name="Etiquette" Data="M4.9999995,5.6843419E-14 L104.71,5.6843419E-14 C107.47142,-3.8093987E-07 109.71,2.2385758 109.71,4.9999996 L109.71,5.1220003 109.71,21.121999 109.71,26.121999 104.71,26.121999 4.9999995,26.121999 0,26.121999 0,21.121999 0,5.1220003 0,4.9999996 C0,2.2385758 2.2385762,-3.8093987E-07 4.9999995,5.6843419E-14 z" Margin="7,0,3,6.343" Stretch="Fill" Visibility="Hidden" Width="Auto" Fill="#FF808080"/>
+						<Rectangle x:Name="Selection" Fill="#00646464" Margin="5,0,0,7.878" HorizontalAlignment="Left" Width="2"/>
+						<Rectangle x:Name="Selection2" Fill="#FF646464" Margin="0,0,2,7.878" HorizontalAlignment="Right" Width="1" d:CopyToken="79a50b6e-4f18-4250-9c0c-250a3bff5043" Visibility="Hidden"/>
+						<Rectangle x:Name="UnderLine" Height="3" Margin="7,0,3,6.343" VerticalAlignment="Bottom" Fill="#FF646464"/>
+						<TextBlock x:Name="Text" Margin="9.29,3.093,6,0" TextWrapping="Wrap" Text="{TemplateBinding Content}"  VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Stretch" d:LayoutOverrides="Width"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Visibility" TargetName="UnderLine" Value="Visible"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Normal"/>
+							<Setter Property="Foreground" TargetName="Text" Value="#FFE4A04E"/>
+							<Setter Property="Fill" TargetName="UnderLine" Value="#FF303030"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="False"/>
+								<Condition Property="IsChecked" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter
+						Property="Visibility" TargetName="UnderLine" Value="Hidden"/>
+						</MultiTrigger>
+						<Trigger Property="IsKeyboardFocused" Value="True"/>
+						<Trigger Property="IsChecked" Value="True">
+							<Setter Property="Fill" TargetName="Selection" Value="#FF646464"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Bold"/>
+							<Setter Property="Visibility" TargetName="UnderLine" Value="Visible"/>
+							<Setter Property="Visibility" TargetName="Selection2" Value="Visible"/>
+							<Setter Property="Visibility" TargetName="Etiquette" Value="Visible"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="GraphicBtnInfoStyle" TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+		<Setter Property="FocusVisualStyle">
+			<Setter.Value>
+				<Style>
+					<Setter Property="Control.Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Background">
+			<Setter.Value>
+				<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+					<GradientStop Color="#FFF3F3F3" Offset="0"/>
+					<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+					<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+					<GradientStop Color="#FFCDCDCD" Offset="1"/>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderBrush" Value="#FF707070"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type JAY_WpfCore:GraphicBtn}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="ZoomIn">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+								<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="1.1"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="ZoomOut">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1.1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+									<EasingDoubleKeyFrame.EasingFunction>
+										<CubicEase EasingMode="EaseInOut"/>
+									</EasingDoubleKeyFrame.EasingFunction>
+								</EasingDoubleKeyFrame>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="ButtonOnClick">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Grid x:Name="grid" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.RenderTransform>
+						<Grid.LayoutTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.LayoutTransform>
+						<Grid.Effect>
+							<DropShadowEffect Color="DarkOrange" Opacity="0.3" BlurRadius="10"/>
+						</Grid.Effect>
+						<Image x:Name="image" Margin="0" Source="{TemplateBinding ImageBkg}" Stretch="UniformToFill"/>
+						<TextBlock x:Name="textBlock" Margin="0,19,0,20" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" OpacityMask="{TemplateBinding OpacityMask}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" TextAlignment="Center"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="ButtonBase.Click">
+							<BeginStoryboard x:Name="ButtonOnClick_BeginStoryboard" Storyboard="{StaticResource ButtonOnClick}"/>
+						</EventTrigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" TargetName="grid" Value="0.2"/>
+						</Trigger>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<BeginStoryboard Storyboard="{StaticResource ZoomIn}"/>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<BeginStoryboard x:Name="ZoomOut_BeginStoryboard" Storyboard="{StaticResource ZoomOut}"/>
+						</EventTrigger>
+						<Trigger Property="IsKeyboardFocused" Value="True"/>
+						<Trigger Property="ToggleButton.IsChecked" Value="True"/>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="UserControlMenuStyle" TargetType="{x:Type UserControl}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type UserControl}">
+					<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+						<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" TargetName="contentPresenter" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="ToggleButtonStyleEtiquette" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Ellipse x:Name="ellipse" Margin="0">
+							<Ellipse.Fill>
+								<RadialGradientBrush>
+									<GradientStop Color="White" Offset="0"/>
+									<GradientStop Color="Red" Offset="1"/>
+									<GradientStop Color="#FFFFDEDE" Offset="0.698"/>
+									<GradientStop Color="#FFFF1A1A" Offset="0.822"/>
+								</RadialGradientBrush>
+							</Ellipse.Fill>
+						</Ellipse>
+						<Rectangle x:Name="rectangle" Margin="0" Fill="Red" RenderTransformOrigin="0.5,0.5" Height="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28.753">
+							<Rectangle.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform Angle="-45"/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Rectangle.RenderTransform>
+						</Rectangle>
+						<TextBlock x:Name="textBlock" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="ellipse" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="textBlock" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="textBlock" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Fill" TargetName="ellipse">
+								<Setter.Value>
+									<RadialGradientBrush>
+										<GradientStop Color="White" Offset="0"/>
+										<GradientStop Color="#FF009D11" Offset="1"/>
+										<GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+										<GradientStop Color="#FF24C217" Offset="0.822"/>
+									</RadialGradientBrush>
+								</Setter.Value>
+							</Setter>
+							<Setter Property="Fill" TargetName="rectangle" Value="#00FF0000"/>
+							<Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="textBlock" Value="Bold"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="ToggleButtonStyleEtiquette2" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Ellipse x:Name="ellipse" Margin="0">
+							<Ellipse.Fill>
+								<RadialGradientBrush>
+									<GradientStop Color="White" Offset="0"/>
+									<GradientStop Color="#FF7F7F7F" Offset="1"/>
+									<GradientStop Color="#FF7F7F7F" Offset="0.698"/>
+									<GradientStop Color="#FF7F7F7F" Offset="0.822"/>
+								</RadialGradientBrush>
+							</Ellipse.Fill>
+						</Ellipse>
+						<Rectangle x:Name="rectangle" Margin="0" Fill="#FF7F7F7F" RenderTransformOrigin="0.5,0.5" Height="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28.753">
+							<Rectangle.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform Angle="-45"/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Rectangle.RenderTransform>
+						</Rectangle>
+						<TextBlock x:Name="textBlock" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="ellipse" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="textBlock" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="textBlock" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Fill" TargetName="ellipse">
+								<Setter.Value>
+									<RadialGradientBrush>
+										<GradientStop Color="White" Offset="0"/>
+										<GradientStop Color="#FF009D11" Offset="1"/>
+										<GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+										<GradientStop Color="#FF24C217" Offset="0.822"/>
+									</RadialGradientBrush>
+								</Setter.Value>
+							</Setter>
+							<Setter Property="Fill" TargetName="rectangle" Value="#00FF0000"/>
+							<Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="textBlock" Value="Bold"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="ToggleButtonStyleEtiquetteCheck" TargetType="{x:Type ToggleButton}">
+			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+			<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ToggleButton}">
+						<Grid x:Name="grid" Margin="0" Cursor="Hand">
+							<Ellipse x:Name="ellipse" Margin="0">
+								<Ellipse.Fill>
+									<RadialGradientBrush>
+										<GradientStop Color="White" Offset="0"/>
+										<GradientStop Color="#FFCDF34F" Offset="1"/>
+										<GradientStop Color="#FFFDFFDE" Offset="0.698"/>
+										<GradientStop Color="#FF7CC85B" Offset="0.822"/>
+									</RadialGradientBrush>
+								</Ellipse.Fill>
+							</Ellipse>
+							<Image x:Name="image" Source="Validation.png" Margin="8,8,0,0"/>
+							<TextBlock x:Name="textBlock" Margin="0,3,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsKeyboardFocused" Value="true">
+							</Trigger>
+							<Trigger Property="IsChecked" Value="true">
+								<Setter Property="Fill" TargetName="ellipse">
+									<Setter.Value>
+										<RadialGradientBrush>
+											<GradientStop Color="White" Offset="0"/>
+											<GradientStop Color="#FFFFAF00" Offset="1"/>
+											<GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+											<GradientStop Color="#FFE2C127" Offset="0.822"/>
+										</RadialGradientBrush>
+									</Setter.Value>
+								</Setter>
+								<Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+								<Setter Property="Visibility" TargetName="image" Value="Hidden"/>
+								<Setter Property="FontWeight" TargetName="textBlock" Value="Normal"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="#ADADAD"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+    <!-- ToggleButtonStyleEtiquetteCheckDem -->
+    <Style x:Key="ToggleButtonStyleEtiquetteCheckDem" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid x:Name="grid" Margin="0" Cursor="Hand">
+                        <Ellipse x:Name="ellipse" Margin="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Color="#FFCDF34F" Offset="1"/>
+                                    <GradientStop Color="#FFFDFFDE" Offset="0.698"/>
+                                    <GradientStop Color="#FF7CC85B" Offset="0.822"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Image x:Name="image" Source="ValidationPlus.png" Margin="8,8,0,0"/>
+                        <Image x:Name="image2" Source="Validation.png" Margin="8,8,0,0"/>
+                        <TextBlock x:Name="textBlock" Margin="0,3,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Fill" TargetName="ellipse">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FFFFAF00" Offset="1"/>
+                                        <GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+                                        <GradientStop Color="#FFE2C127" Offset="0.822"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+                            <Setter Property="Visibility" TargetName="image" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="image2" Value="Visible"/>
+                            <Setter Property="FontWeight" TargetName="textBlock" Value="Normal"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="false">
+                            <Setter Property="Fill" TargetName="ellipse">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FFFFAF00" Offset="1"/>
+                                        <GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+                                        <GradientStop Color="#FFE2C127" Offset="0.822"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+                            <Setter Property="Visibility" TargetName="image" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="image2" Value="Hidden"/>
+                            <Setter Property="FontWeight" TargetName="textBlock" Value="Normal"/>
+                        </Trigger>                        
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ToggleButtonStyleEtiquetteCheckPlus" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Ellipse x:Name="ellipse" Margin="0">
+							<Ellipse.Fill>
+								<RadialGradientBrush>
+									<GradientStop Color="White" Offset="0"/>
+									<GradientStop Color="#FFCDF34F" Offset="1"/>
+									<GradientStop Color="#FFFDFFDE" Offset="0.698"/>
+									<GradientStop Color="#FF7CC85B" Offset="0.822"/>
+								</RadialGradientBrush>
+							</Ellipse.Fill>
+						</Ellipse>
+						<Image x:Name="image" Source="ValidationPlus.png" Margin="8,8,0,0"/>
+						<TextBlock x:Name="textBlock" Margin="0,3,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true"/>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Fill" TargetName="ellipse">
+								<Setter.Value>
+									<RadialGradientBrush>
+										<GradientStop Color="White" Offset="0"/>
+										<GradientStop Color="#FFFFAF00" Offset="1"/>
+										<GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+										<GradientStop Color="#FFE2C127" Offset="0.822"/>
+									</RadialGradientBrush>
+								</Setter.Value>
+							</Setter>
+							<Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+							<Setter Property="Visibility" TargetName="image" Value="Hidden"/>
+							<Setter Property="FontWeight" TargetName="textBlock" Value="Normal"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+		
+	<Style x:Key="ToggleButtonStyleAxeV" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Rectangle x:Name="Cadre" Margin="0" Stroke="Red" StrokeThickness="2" Fill="#CCFFD986" />
+						<StackPanel Margin="0" Orientation="Vertical" d:LayoutOverrides="Height" HorizontalAlignment="Center">
+							<TextBlock x:Name="Text" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="20" FontFamily="Arial Black"/>
+							<Grid x:Name="True" Width="20" Height="20" Margin="0" Visibility="Collapsed">
+								<Image Source="Validation.png"/>
+							</Grid>
+							<Grid x:Name="False" Width="20" Height="20" Margin="0">
+								<Rectangle HorizontalAlignment="Right" Margin="0" StrokeThickness="2" Width="20" Height="4" Fill="Red" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+								<Rectangle HorizontalAlignment="Right" Margin="0,8" StrokeThickness="2" Width="20" Height="4" Fill="Red" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="-45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+							</Grid>
+						</StackPanel>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="Cadre" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="Text" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="Text" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" TargetName="Text" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Bold"/>
+							<Setter Property="Visibility" TargetName="True" Value="Visible"/>
+							<Setter Property="Visibility" TargetName="False" Value="Collapsed"/>
+							<Setter Property="Stroke" TargetName="Cadre" Value="#FF009917"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="ToggleButtonStyleAxeV2" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Rectangle x:Name="Cadre" Margin="0" Stroke="#FF7F7F7F" StrokeThickness="2" Fill="#CCFFD986" />
+						<StackPanel Margin="0" Orientation="Vertical" d:LayoutOverrides="Height" HorizontalAlignment="Center">
+							<TextBlock x:Name="Text" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="20" FontFamily="Arial Black"/>
+							<Grid x:Name="True" Width="20" Height="20" Margin="0" Visibility="Visible">
+								<Image Source="ValidationPlus.png"/>
+							</Grid>
+							<Grid x:Name="False" Width="20" Height="20" Margin="0">
+								<Rectangle HorizontalAlignment="Right" Margin="0" StrokeThickness="2" Width="20" Height="4" Fill="#00FFFFFF" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+								<Rectangle HorizontalAlignment="Right" Margin="0,8" StrokeThickness="2" Width="20" Height="4" Fill="#00FFFFFF" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="-45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+							</Grid>
+						</StackPanel>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="Cadre" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="Text" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="Text" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" TargetName="Text" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Bold"/>
+							<Setter Property="Visibility" TargetName="True" Value="Collapsed"/>
+							<Setter Property="Visibility" TargetName="False" Value="Visible"/>
+							<Setter Property="Stroke" TargetName="Cadre" Value="#FF009917"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+		
+	<Style x:Key="ToggleButtonStyleAxe" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Rectangle x:Name="Cadre" Margin="0" Stroke="Red" StrokeThickness="2" Fill="#CCFFD986" />
+						<StackPanel Margin="5,0,0,0" Orientation="Horizontal" d:LayoutOverrides="Height">
+							<TextBlock x:Name="Text" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="20" FontFamily="Arial Black"/>
+							<Grid x:Name="True" Width="20" Height="20" Margin="0" Visibility="Collapsed">
+								<Image Source="Validation.png"/>
+							</Grid>
+							<Grid x:Name="False" Width="20" Height="20" Margin="0">
+								<Rectangle HorizontalAlignment="Right" Margin="0" StrokeThickness="2" Width="20" Height="4" Fill="Red" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+								<Rectangle HorizontalAlignment="Right" Margin="0,8" StrokeThickness="2" Width="20" Height="4" Fill="Red" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="-45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+							</Grid>
+						</StackPanel>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="Cadre" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="Text" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="Text" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" TargetName="Text" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Bold"/>
+							<Setter Property="Visibility" TargetName="True" Value="Visible"/>
+							<Setter Property="Visibility" TargetName="False" Value="Collapsed"/>
+							<Setter Property="Stroke" TargetName="Cadre" Value="#FF009917"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="ToggleButtonStyleAxe2" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid x:Name="grid" Margin="0" Cursor="Hand">
+						<Rectangle x:Name="Cadre" Margin="0" Stroke="#FF7F7F7F" StrokeThickness="2" Fill="#CCFFD986" />
+						<StackPanel Margin="5,0,0,0" Orientation="Horizontal" d:LayoutOverrides="Height">
+							<TextBlock x:Name="Text" Margin="0,0,0,2" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="20" FontFamily="Arial Black"/>
+							<Grid x:Name="True" Width="20" Height="20" Margin="0" Visibility="Visible">
+								<Image Source="ValidationPlus.png"/>
+							</Grid>
+							<Grid x:Name="False" Width="20" Height="20" Margin="0">
+								<Rectangle HorizontalAlignment="Right" Margin="0" StrokeThickness="2" Width="20" Height="4" Fill="#00FFFFFF" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+								<Rectangle HorizontalAlignment="Right" Margin="0,8" StrokeThickness="2" Width="20" Height="4" Fill="#00FFFFFF" RenderTransformOrigin="0.5,0.5">
+									<Rectangle.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform/>
+											<SkewTransform/>
+											<RotateTransform Angle="-45"/>
+											<TranslateTransform/>
+										</TransformGroup>
+									</Rectangle.RenderTransform>
+								</Rectangle>
+							</Grid>
+						</StackPanel>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="Margin" TargetName="grid" Value="0"/>
+							<Setter Property="Margin" TargetName="Cadre" Value="0"/>
+							<Setter Property="VerticalAlignment" TargetName="Text" Value="Center"/>
+							<Setter Property="HorizontalAlignment" TargetName="Text" Value="Center"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" TargetName="Text" Value="Black"/>
+							<Setter Property="FontWeight" TargetName="Text" Value="Bold"/>
+							<Setter Property="Visibility" TargetName="True" Value="Collapsed"/>
+							<Setter Property="Visibility" TargetName="False" Value="Visible"/>
+							<Setter Property="Stroke" TargetName="Cadre" Value="#FF009917"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="#ADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="TabItemFocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Rectangle Margin="3,3,3,1" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
+	<LinearGradientBrush x:Key="TabItemHotBackground" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#EAC8C8C8" Offset="0.15"/>
+        <GradientStop Color="#EAC8C8C8" Offset=".5"/>
+        <GradientStop Color="#EAC8C8C8" Offset=".5"/>
+        <GradientStop Color="#EAC8C8C8" Offset="1"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9"/>
+	<SolidColorBrush x:Key="TabItemHotBorderBrush" Color="#3C7FB1"/>
+	<SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4"/>
+	<SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="#FFC9C7BA"/>
+	<Style x:Key="TabItemiDialogStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource TabItemFocusVisual}"/>
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="Padding" Value="6,1,6,1"/>
+		<Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid SnapsToDevicePixels="true">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="7,7,0,0" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="Content" ContentSource="Header" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemHotBackground}"/>
+						</Trigger>
+						<Trigger Property="IsSelected" Value="true">
+							<Setter Property="Panel.ZIndex" Value="1"/>
+							<Setter Property="Background" TargetName="Bd" Value="#FF646464"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="false"/>
+								<Condition Property="IsMouseOver" Value="true"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemHotBorderBrush}"/>
+						</MultiTrigger>
+						<Trigger Property="TabStripPlacement" Value="Bottom">
+							<Setter Property="BorderThickness" TargetName="Bd" Value="1,0,1,1"/>
+						</Trigger>
+						<Trigger Property="TabStripPlacement" Value="Left">
+							<Setter Property="BorderThickness" TargetName="Bd" Value="1,1,0,1"/>
+						</Trigger>
+						<Trigger Property="TabStripPlacement" Value="Right">
+							<Setter Property="BorderThickness" TargetName="Bd" Value="0,1,1,1"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="true"/>
+								<Condition Property="TabStripPlacement" Value="Top"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Margin" Value="-2,-2,-2,-1"/>
+							<Setter Property="Margin" TargetName="Content" Value="0,0,0,1"/>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="true"/>
+								<Condition Property="TabStripPlacement" Value="Bottom"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Margin" Value="-2,-1,-2,-2"/>
+							<Setter Property="Margin" TargetName="Content" Value="0,1,0,0"/>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="true"/>
+								<Condition Property="TabStripPlacement" Value="Left"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Margin" Value="-2,-2,-1,-2"/>
+							<Setter Property="Margin" TargetName="Content" Value="0,0,1,0"/>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="true"/>
+								<Condition Property="TabStripPlacement" Value="Right"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Margin" Value="-1,-2,-2,-2"/>
+							<Setter Property="Margin" TargetName="Content" Value="1,0,0,0"/>
+						</MultiTrigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemDisabledBackground}"/>
+							<Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemDisabledBorderBrush}"/>
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<SolidColorBrush x:Key="BorderLabel" Color="#FF744C00"/>
+
+    <Style x:Key="AcceleroButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid x:Name="grid" Margin="0" Cursor="Hand">
+                        <Image x:Name="Fond" Source="GSensor.png" Margin="0"/>
+                        <Image x:Name="Check" Source="Validation.png" Margin="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Bottom" Width="35"/>
+                        <Image x:Name="UnCheck" Source="Delete_tiny.png" Margin="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Bottom" Width="35"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Visibility" TargetName="UnCheck" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="Check" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Visibility" TargetName="Check" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="UnCheck" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                            <Setter Property="Visibility" TargetName="UnCheck" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonMOMControlStyle" TargetType="{x:Type ToggleButton}">
+    	<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+    	<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+    	<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+    	<Setter Property="BorderThickness" Value="1"/>
+    	<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+    	<Setter Property="HorizontalContentAlignment" Value="Center"/>
+    	<Setter Property="VerticalContentAlignment" Value="Center"/>
+    	<Setter Property="Padding" Value="1"/>
+    	<Setter Property="Template">
+    		<Setter.Value>
+    			<ControlTemplate TargetType="{x:Type ToggleButton}">
+    				<Grid>
+                        <Ellipse x:Name="rectangle" Fill="#02FFFFFF" Stroke="#00B0B0B0"/>
+    				</Grid>
+    				<ControlTemplate.Triggers>
+    					<Trigger Property="IsMouseOver" Value="True" SourceName="rectangle">
+    						<Setter Property="Fill" TargetName="rectangle" Value="#65497693"/>
+    						<Setter Property="Cursor" TargetName="rectangle" Value="Hand"/>
+                            <Setter Property="Stroke" TargetName="rectangle" Value="#FFB0B0B0"/>
+    						<Setter Property="StrokeThickness" TargetName="rectangle" Value="2"/>
+    					</Trigger>
+    					<Trigger Property="IsKeyboardFocused" Value="true"/>
+    					<Trigger Property="ToggleButton.IsChecked" Value="true">
+    						<Setter Property="Fill" TargetName="rectangle" Value="#194D89FF"/>
+                            <Setter Property="Stroke" TargetName="rectangle" Value="#FFB0B0B0"/>
+    						<Setter Property="StrokeThickness" TargetName="rectangle" Value="3"/>
+    					</Trigger>
+    					<Trigger Property="IsEnabled" Value="false">
+    						<Setter Property="Foreground" Value="#ADADAD"/>
+    					</Trigger>
+    				</ControlTemplate.Triggers>
+    			</ControlTemplate>
+    		</Setter.Value>
+    	</Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonStyleEtiquetteCheckCadenas" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid x:Name="grid" Margin="0" Cursor="Hand">
+                        <Ellipse x:Name="ellipse" Margin="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Color="#FFCDF34F" Offset="1"/>
+                                    <GradientStop Color="#FFFDFFDE" Offset="0.698"/>
+                                    <GradientStop Color="#FF7CC85B" Offset="0.822"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Image x:Name="image" Source="Cadenas.png" Margin="8,8,0,0"/>
+                        
+                        <TextBlock x:Name="textBlock" Margin="0,3,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Fill" TargetName="ellipse">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FFFFAF00" Offset="1"/>
+                                        <GradientStop Color="#FFF4FFDE" Offset="0.698"/>
+                                        <GradientStop Color="#FFE2C127" Offset="0.822"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+                            <Setter Property="Visibility" TargetName="image" Value="Hidden"/>
+                            <Setter Property="FontWeight" TargetName="textBlock" Value="Normal"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <ControlTemplate x:Key="TBErrorTemplate">
+  <DockPanel>
+  	<Grid Width="20" Height="20" Margin="0,0,5,0">
+  		<Ellipse Fill="Red" VerticalAlignment="Stretch"/>
+		<Rectangle Fill="#FFF4F4F5" Margin="2,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="3">
+			<Rectangle.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform Angle="45"/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Rectangle.RenderTransform>
+		</Rectangle>
+		<Rectangle Fill="#FFF4F4F5" Height="3" Margin="2,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+			<Rectangle.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform Angle="-45"/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Rectangle.RenderTransform>
+		</Rectangle>
+  	</Grid>
+    <AdornedElementPlaceholder/>
+  </DockPanel>
+</ControlTemplate>
+
+<Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+  <Style.Triggers>
+    <Trigger Property="Validation.HasError" Value="true">
+      <Setter Property="ToolTip"
+        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+    </Trigger>
+  </Style.Triggers>
+</Style>
+
+</ResourceDictionary>

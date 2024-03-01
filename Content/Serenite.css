@@ -1,0 +1,338 @@
+.body-content { /*Centrage et definition de taille de la page*/
+    z-index : 1;
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 0px;
+    text-align: center;
+}
+
+#FondEcran{
+    position : absolute;
+    opacity : 0.2;
+    z-index : 0;
+    top : 10%;
+    left : 10%;
+}
+
+
+
+.body-content footer { /*Configuration footer*/
+    float: left;
+}
+
+#fondTransparent {
+    z-index: 2;
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+
+
+#SereniteDiv{
+    margin-top : 100px;
+    width : 100%;
+    display : flex;
+    flex-direction :row;
+    flex-wrap : wrap;
+    justify-content : space-around;
+}
+
+#topInfos {
+    position : absolute;
+    margin-top : 60px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+#topInfos h2 {
+    font-weight: bold;
+    text-align: start;
+    font-size: 4em;
+    color: #FF6600
+}
+
+
+.EquipeDiv {
+    margin-top : 100px;
+    width : 400px;
+    height : 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.EquipeDiv p {
+    width: 100%;
+    font-size: 1.6em;
+    position: absolute;
+    margin-top: 175px;
+    font-weight : bold;
+    color : white;
+}
+
+#mono p {
+    margin-top: 164px;
+}
+
+
+#mono {
+    margin-top: 180px;
+    margin-left: -100px;
+}
+
+#logistique{
+    margin-left: 250px;
+    margin-top : -220px;
+}
+
+#sav{
+    margin-top : 220px;
+}
+
+#encadrement {
+    margin-top: -180px;
+    margin-right: 300px;
+    margin-bottom : 100px;
+}
+
+.FirstLogistique {
+    width: 150px;
+    height: 300px;
+    margin: -150px 0 0 20px;
+    overflow: hidden;
+    visibility: hidden;
+    transform: rotate(120deg);
+    cursor: pointer;
+    opacity: 0.7;
+    margin-left: 18%;
+    margin-right: 13%;
+}
+
+.FirstEncadrement {
+    width: 150px;
+    height: 300px;
+    margin: -150px 0 0 20px;
+    overflow: hidden;
+    visibility: hidden;
+    transform: rotate(120deg);
+    cursor: pointer;
+    opacity: 0.7;
+    margin-left: 18%;
+    margin-right: 13%;
+}
+
+
+
+
+
+
+.hexagon {
+    width: 150px;
+    height: 300px;
+    margin: -150px 0 0 20px;
+    overflow: hidden;
+    visibility: hidden;
+    transform: rotate(120deg);
+    cursor: pointer;
+    opacity : 0.7;
+}
+
+.hexagon-in1 {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-60deg);
+}
+
+.hexagon-in2 {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    background: grey;
+    transform: rotate(-60deg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+#humeur {
+    z-index: 2;
+    position: fixed;
+    top: 40%;
+    left: 15%;
+    height: 200px;
+    width: 70%;
+    background: white;
+    display: none;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+#humeur input {
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+    border: none;
+    color:transparent;
+}
+
+
+
+#croix {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    top: 1%;
+    right: 1%;
+}
+
+@media all and (max-width: 1600px) {
+    #mono {
+        margin: 0px;
+        margin-top: 100px;
+    }
+
+    #sav {
+        margin: 0px;
+        margin-top: 100px;
+    }
+
+    #logistique {
+        margin: 0px;
+        margin-top: 100px;
+    }
+
+    #encadrement {
+        margin: 0px;
+        margin-top: 100px;
+        margin-bottom : 100px;
+    }
+
+    #topInfos {
+        display: none;
+    }
+}
+
+@media all and (max-width: 880px) {
+    #PasContent {
+        height: 50px;
+        width: 50px;
+    }
+
+    #Moyen {
+        height: 50px;
+        width: 50px;
+    }
+
+    #Content {
+        height: 50px;
+        width: 50px;
+    }
+    #FondEcran {
+        left: 5%;
+        width : 300px;
+    }
+
+}
+
+@media all and (max-width: 700px) {
+    #humeur {
+        padding-top: 10px;
+        flex-direction: column;
+        height: auto;
+    }
+
+    #humeur input {
+        margin: 10px;
+    }
+
+    .EquipeDiv{
+        min-width : 500px;
+    }
+}
+
+
+    @media all and (max-width: 500px) {
+        #PasContent {
+            height: 45px;
+            width: 45px;
+        }
+
+        #Moyen {
+            height: 45px;
+            width: 45px;
+        }
+
+        #Content {
+            height: 45px;
+            width: 45px;
+        }
+
+        .body-content {
+            width: 90%;
+        }
+
+        .EquipeDiv {
+            width: 90%;
+        }
+
+        #mono {
+            max-width: 320px;
+            min-width: 0px;
+        }
+
+        #bidir {
+            max-width: 320px;
+            min-width : 0px;
+        }
+
+        #sav {
+            max-width: 320px;
+            min-width: 0px;
+        }
+
+        #logistique {
+            max-width: 320px;
+            min-width: 0px;
+        }
+
+        #encadrement {
+            max-width: 320px;
+            min-width: 0px;
+        }
+
+        .hexagon {
+            width: 90px;
+            height: 180px;
+        }
+
+        .FirstLogistique {
+            width: 90px;
+            height: 180px;
+        }
+
+        .FirstEncadrement {
+            width: 90px;
+            height: 180px;
+        }
+    }

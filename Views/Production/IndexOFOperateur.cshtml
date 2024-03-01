@@ -1,0 +1,62 @@
+﻿@model GenerateurDFUSafir.Models.GestionTraitementOFs
+@{
+    ViewBag.Title = "IndexOFOperateur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/IndexOFOperateur.css" rel="stylesheet" />
+    int i = Model.DataOperateurs.Count % 5;
+}
+
+
+
+
+<body onload="init()">
+
+    <img id="FondEcran" src="../image/swirl.png" alt="">
+
+    <div id="fondTransparent"></div>
+
+    <div id="top">
+        <h2 id="title">FabriZEN</h2>
+        <div id="searchOF">
+            @using (Html.BeginForm())
+            {
+                <label for="searched-OF">Référence de l'OF:</label>
+                <!--
+        -->
+                <input type="search" id="searched-OF" name="searched-OF">
+                <!--
+        -->
+                <button type="submit" name="submitButton" id="submitButton"><img src="~/image/search.png" alt="Alternate Text" width="20" /></button>
+            }
+        </div>
+    </div>
+    <div id="BarreSeparation"></div>
+    <div id="ListOperateur">
+        @foreach (var item in @Model.DataOperateurs)
+                {
+                    <div class="Operateur">
+                        <a href="@Url.Action("gestionOf", "Production", new { id = item.ID , popUp = "" })">
+                            <img src="@item.Photo" />
+                            <p>@item.Nom @item.Prenom</p>
+                        </a>
+                    </div>
+
+                }
+            @for (int y = 0; y < @i; y++)
+            {
+                    <div style="width : 300px;">
+
+                    </div>
+            }
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        function init() {
+            document.getElementById("searched-OF").focus()
+        }
+  
+    </script>
+</body>
+

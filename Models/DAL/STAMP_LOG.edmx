@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PEGASE_STAMPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ITEM_LOCALISATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ITEMREF" Type="varchar" MaxLength="20" />
+          <Property Name="Chariot" Type="varchar" MaxLength="20" />
+          <Property Name="QtrByBox" Type="int" />
+          <Property Name="NbBacPourImpression" Type="int" />
+        </EntityType>
+        <EntityType Name="TRACABILITE_BL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NmrOF" Type="nchar" MaxLength="15" />
+          <Property Name="NmrCmd" Type="nchar" MaxLength="15" />
+          <Property Name="NmrPack" Type="nchar" MaxLength="15" />
+          <Property Name="logged" Type="nchar" MaxLength="10" />
+          <Property Name="state" Type="nchar" MaxLength="10" />
+          <Property Name="FirstTimeStart" Type="datetime" />
+          <Property Name="TimeStart" Type="datetime" />
+          <Property Name="TimeEnd" Type="datetime" />
+          <Property Name="NbColis" Type="int" />
+          <Property Name="NbOFBycolis" Type="int" />
+          <Property Name="NbArtByBl" Type="int" />
+          <Property Name="Transporteur" Type="nchar" MaxLength="10" />
+          <Property Name="PaysDest" Type="nchar" MaxLength="10" />
+          <Property Name="TimeSendRequested" Type="datetime" />
+          <Property Name="TimeSendPlan" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_STAMPModelStoreContainer">
+          <EntitySet Name="ITEM_LOCALISATION" EntityType="Self.ITEM_LOCALISATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACABILITE_BL" EntityType="Self.TRACABILITE_BL" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_STAMPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TRACABILITE_BL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NmrOF" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NmrCmd" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NmrPack" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="logged" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FirstTimeStart" Type="DateTime" Precision="3" />
+          <Property Name="TimeStart" Type="DateTime" Precision="3" />
+          <Property Name="TimeEnd" Type="DateTime" Precision="3" />
+          <Property Name="NbColis" Type="Int32" />
+          <Property Name="NbOFBycolis" Type="Int32" />
+          <Property Name="NbArtByBl" Type="Int32" />
+          <Property Name="Transporteur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PaysDest" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TimeSendRequested" Type="DateTime" Precision="3" />
+          <Property Name="TimeSendPlan" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_STAMPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TRACABILITE_BL" EntityType="Self.TRACABILITE_BL" />
+          <EntitySet Name="ITEM_LOCALISATION" EntityType="PEGASE_STAMPModel.ITEM_LOCALISATION" />
+        </EntityContainer>
+        <EntityType Name="ITEM_LOCALISATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ITEMREF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Chariot" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QtrByBox" Type="Int32" />
+          <Property Name="NbBacPourImpression" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_STAMPModelStoreContainer" CdmEntityContainer="PEGASE_STAMPEntities">
+          <EntitySetMapping Name="TRACABILITE_BL">
+            <EntityTypeMapping TypeName="PEGASE_STAMPModel.TRACABILITE_BL">
+              <MappingFragment StoreEntitySet="TRACABILITE_BL">
+                <ScalarProperty Name="TimeSendPlan" ColumnName="TimeSendPlan" />
+                <ScalarProperty Name="TimeSendRequested" ColumnName="TimeSendRequested" />
+                <ScalarProperty Name="PaysDest" ColumnName="PaysDest" />
+                <ScalarProperty Name="Transporteur" ColumnName="Transporteur" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NmrOF" ColumnName="NmrOF" />
+                <ScalarProperty Name="NmrCmd" ColumnName="NmrCmd" />
+                <ScalarProperty Name="NmrPack" ColumnName="NmrPack" />
+                <ScalarProperty Name="logged" ColumnName="logged" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="FirstTimeStart" ColumnName="FirstTimeStart" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="NbColis" ColumnName="NbColis" />
+                <ScalarProperty Name="NbOFBycolis" ColumnName="NbOFBycolis" />
+                <ScalarProperty Name="NbArtByBl" ColumnName="NbArtByBl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEM_LOCALISATION">
+            <EntityTypeMapping TypeName="PEGASE_STAMPModel.ITEM_LOCALISATION">
+              <MappingFragment StoreEntitySet="ITEM_LOCALISATION">
+                <ScalarProperty Name="NbBacPourImpression" ColumnName="NbBacPourImpression" />
+                <ScalarProperty Name="QtrByBox" ColumnName="QtrByBox" />
+                <ScalarProperty Name="Chariot" ColumnName="Chariot" />
+                <ScalarProperty Name="ITEMREF" ColumnName="ITEMREF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,66 @@
+﻿@model GenerateurDFUSafir.Models.InfoDATAQRQC
+@{
+    ViewBag.Title = "ListeQRQC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/ListQRQC.css" rel="stylesheet" />
+}
+<div id="QRQCDiv">
+    <div id="topInfos">
+        <h2>Liste des QRQC</h2>
+        <div id="btnNewQRQC">
+            <a href="@Url.Action("QRQC", "Production", null )">Créer un nouveau QRQC</a>
+        </div>
+    </div>
+
+    <div id="ListeQRQC">
+        <div id="EnTete">
+            <h2>Date Ouverture</h2>
+            <h2 class="Affichage">Date Cloture</h2>
+            <h2 class="Affichage">Date de suivis</h2>
+            <h2>Pilote</h2>
+            <h2>Participants</h2>
+            <h2 class="Affichage">Origine</h2>
+        </div>
+
+        @for (int i = 0; i < Model.ListQRQC.Count; i++)
+        {
+            if (i % 2 == 0)
+            {
+                <div class="QRQC lightgray">
+                    <div class="infoQRQC">
+                        <h2>@Model.ListQRQC[i].DateOuvertureString</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].DateClotureString</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].DateSuivisString</h2>
+                        <h2>@Model.ListQRQC[i].Pilote</h2>
+                        <h2>@Model.ListQRQC[i].Participants</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].Origine</h2>
+                    </div>
+                    <div class="AccesQRQC">
+                        <a href="@Url.Action("QRQC", "Production", new {id =@Model.ListQRQC[i].ID  })">Acces QRQC</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="QRQC gainsboro">
+                    <div class="infoQRQC">
+                        <h2>@Model.ListQRQC[i].DateOuvertureString</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].DateClotureString</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].DateSuivisString</h2>
+                        <h2>@Model.ListQRQC[i].Pilote</h2>
+                        <h2>@Model.ListQRQC[i].Participants</h2>
+                        <h2 class="Affichage">@Model.ListQRQC[i].Origine</h2>
+                    </div>
+                    <div class="AccesQRQC">
+                        <a href="@Url.Action("QRQC", "Production", new {id =@Model.ListQRQC[i].ID  })">Acces QRQC</a>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/clock.js" charset="utf-8"></script>
+</div>
+

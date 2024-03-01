@@ -1,0 +1,95 @@
+﻿@model GenerateurDFUSafir.Models.AddSousProjet
+@{
+    ViewBag.Title = "Projet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+
+</head>
+<h1 class="jumbotron">Recherche et Développement  - JAY by Conductix</h1>
+<div>
+    @Html.HiddenFor(model => model.view.NomSousProjet, htmlAttributes: new { @id = "nomsousprojetinit" })
+    @Html.HiddenFor(model => model.view.Service, htmlAttributes: new { @id = "nomServiceinit" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal"><h4>Edition  :</h4></div>
+        <br />
+        <br />
+        <div>
+            @Html.DropDownListFor(model => Model.ADDNewSSprojet,
+                                    new SelectList(Model.ProjetSuppl, "Value", "Text", 0),
+                                    new { @class = "form-control", onchange = @"submit();" })
+        </div>
+        <div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.view.NomSousProjet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.view.NomSousProjet, new { htmlAttributes = new { @class = "form-control", @id = "nomsousprojet", @onchange = "Checkaddsave()" } })
+                    @Html.ValidationMessageFor(model => model.view.NomSousProjet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.view.TitreSousProjet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.view.TitreSousProjet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.view.TitreSousProjet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.view.Service, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.view.Service, new { htmlAttributes = new { @class = "form-control" } })
+                    <h2 class="text-danger"></h2>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.view.DateFinProjet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.view.DateFinProjet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.view.DateFinProjet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.view.Affichage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.view.Affichage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.view.Affichage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">Code Validation </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CodeValidation, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-offset-2 col-md-10">
+
+                    <input type="submit" value="Save" id="buttonsaveadd" name="submitButton" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function Checkaddsave() {
+            var saisie = document.getElementById('nomsousprojet').value; 
+            //document.getElementById('buttonsaveadd').value = saisie;
+            var test = document.getElementById('nomsousprojetinit').value;
+            if (test != saisie)
+            {
+                document.getElementById('buttonsaveadd').value="Add projet"
+            }
+            else {
+                document.getElementById('buttonsaveadd').value = "Save projet"
+            }            
+        }
+        window.onload = Checkaddsave;
+    </script>
+}

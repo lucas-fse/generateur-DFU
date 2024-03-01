@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+  <groupe valeur="BIDIR" libelle="Gamme Bidirectionnelle">
+    <sougroupe valeur="erreurs" libelle="Erreurs compil fiches" couleur="#FF0000">
+      <alea valeur="9999" libelle="Pas d'erreur sur la commande"/>
+      <alea valeur="0" libelle="Commande en attente et date non recalée"/>
+      <alea valeur="1002" libelle="La référence prevoi un plastron Aucune référence de plastron n'est renseigné"/>
+      <alea valeur="1010" libelle="Le plastron renseigné alors que référence MO sans plastron"/>
+      <alea valeur="1011" libelle="Une fiche de parametrage est obligatoire pour les MOM"/>
+      <alea valeur="1012" libelle="Répertoire fichier plastron non trouvé"/>
+      <alea valeur="1013" libelle="Fichier plastron/percage non trouvé"/>
+      <alea valeur="1014" libelle="Référence du plastron mal formaté"/>
+      <alea valeur="1015" libelle="Plan de percage obligatoire"/>
+      <alea valeur="1029" libelle="Fiche FPS avec IR avec matériel sans IR"/>
+      <alea valeur="1001" libelle="La réference MO ne match pas problème d'indus"/>
+      <alea valeur="1041" libelle="Le module hms du nemo n'est pas compatible avec la fiche"/>
+      <alea valeur="1042" libelle="La référence MT ne match pas (problème d'indus)"/>
+      <alea valeur="1051" libelle="Option logicielle ir non conforme avec la fiche"/>
+      <alea valeur="1052" libelle="IR sim non conforme avec le mode ir de la fps (mode3)"/>
+      <alea valeur="1053" libelle="IR sim non conforme avec le mode ir de la fps (mode32)"/>
+      <alea valeur="1054" libelle="Fiche FPS avec commande synchro sans SIM commandesynchro"/>
+	    <alea valeur="1055" libelle="Caractéristique cmd synchro invalide"/>  
+      <alea valeur="1080" libelle="référence MO de la fiche n'est pas renseignée"/>
+      <alea valeur="1081" libelle="référence MT de la fiche n'est pas renseignée"/>
+      <alea valeur="1082" libelle="référence sim de la fiche n'est pas renseignée"/>
+      <alea valeur="1083" libelle="référence du MO n'est pas compatible avec le ref MO de la fiche"/>
+      <alea valeur="1084" libelle="référence du MT n'est pas compatible avec le ref MT de la fiche"/>
+      <alea valeur="1085" libelle="La référence de la fiche n'est pas conforme"/>
+      <alea valeur="1086" libelle="La fiche n\'est pas compilée"/>
+      <alea valeur="1087" libelle="Le firmware n'est pas autorisé"/>
+      <alea valeur="1088" libelle="Fiche FPARAM non trouvée ou mal nommée"/>
+      <alea valeur="1089" libelle="Fiche FPARAM comporte un problème technique"/>
+      <alea valeur="1090" libelle="Erreur liaison filaire MO"/>
+      <alea valeur="1091" libelle="Erreur liaison filaire MT"/>
+      <alea valeur="1092" libelle="Fiche déjà fabriquée avec un plastron différent"/>
+      <alea valeur="1093" libelle="V246 interdit pour Pika et Moka Tagger une version différente"/>
+      <alea valeur="1094" libelle="Le nombre de modes d'exploitation est incohérent"/>
+    </sougroupe>
+    <sougroupe valeur="Warnning" libelle="Warnning compil fiches" couleur="#0000FF">
+      <alea valeur="1109" libelle="Warning: fiche sans IR avec matériel avec IR"/>
+      <alea valeur="1101" libelle="Warning: la référence MO est presente alors que le pack ne prevoi pas de fabrication de MO"/>
+      <alea valeur="1102" libelle="Warning: la référence MT est presente alors que le pack ne prevoi pas de fabrication de MO"/>
+      <alea valeur="1110" libelle="Warning: sim synchro sans fonction activé"/>
+      <alea valeur="1108" libelle="Warning: sim avec ir fiche sans ir"/>
+    </sougroupe>
+  </groupe>
+
+  <groupe valeur="MONO" libelle="Gamme monodirectionnelle">
+    <sougroupe valeur="erreurs" libelle="Erreurs mono" couleur="#FF0000">
+	  <alea valeur="2001" libelle="Code-id(s) invalide()s"/>
+      <alea valeur="2002" libelle="Chemin d'accés FPARAM invalide"/>
+      <alea valeur="2003" libelle="Fichier FPARAM non trouvé"/>
+      <alea valeur="2004" libelle="Nom FPARAM invalide"/>
+	  <alea valeur="2005" libelle="NmrClé ou rasso invalide"/>
+    </sougroupe>
+  </groupe>
+
+  <groupe valeur="MONOTBD" libelle="Gamme monodirectionnelle">
+	<sousgroupe valeur="erreurs" libelle="Erreurs mono" couleur="#FF0000">
+		<alea valeur="3001" libelle="Pack UD UC UR"/>
+		<alea valeur="3002" libelle="Emetteur Seul"/>
+		<alea valeur="3004" libelle="UDE sans clé"/>
+		<alea valeur="3003" libelle="Récepteur prédéfini"/>
+		<alea valeur="3005" libelle="Récepteur paramétrable"/>
+		<alea valeur="3006" libelle="URE standard sans clé"/>
+		<alea valeur="3007" libelle="URE avec CONF_BTS sans clé"/>
+		<alea valeur="3008" libelle="URR avec complément, clé et CONF_BTS"/>
+		<alea valeur="3009" libelle="Clé UD UR programmée"/>
+		<alea valeur="3010" libelle=""/>
+		<alea valeur="3011" libelle="Référence ne devrait pas être vendu"/>
+		<alea valeur="3012" libelle="Clé vierge"/>
+		<alea valeur="3013" libelle="CM UDR"/>
+		<alea valeur="3014" libelle="CM UDR pont couplés"/>
+		<alea valeur="3015" libelle="CM UCR"/>
+		<alea valeur="3016" libelle="CM URR"/>
+		<alea valeur="3020" libelle="CODE ID impossible"/>
+		<alea valeur="3021" libelle="Complément de référence manquant ou invalide"/>
+		<alea valeur="3022" libelle="R_ASSO impossible"/>
+		<alea valeur="3023" libelle="CONF_BTS impossible"/>
+		<alea valeur="3024" libelle="CODE ID invalide"/>
+		<alea valeur="3025" libelle="R_asso invalide pour le produit"/>
+		<alea valeur="3026" libelle="Fiche de perso invalide"/>
+		<alea valeur="3027" libelle="RASSOTX invalide"/>
+		<alea valeur="3028" libelle="Emetteur associé invalide"/>
+		<alea valeur="3029" libelle="Référence émetteur manquante"/>
+		<alea valeur="3030" libelle="CONF_BTS invalide ou manquante"/>
+		<alea valeur="3031" libelle="CODE ID ne correspond pas avec le numéro de cle"/>
+		<alea valeur="3032" libelle="Fperso ou Complément de référence( 1 seule)"/>
+		<alea valeur="3033" libelle="Fperso mal nommée"/>
+		<alea valeur="3034" libelle="FPERSO incompatible "/>
+		<alea valeur="3035" libelle="Fperso invalide incompatible R_ASSO"/>
+		<alea valeur="3036" libelle="Complément de référence différent du complément de la FPERSO"/>
+		<alea valeur="3037" libelle=" Ensemble avec FPERSO obligatoire"/>
+		<alea valeur="3038" libelle="Codeid non trouvé"/>
+		<alea valeur="3039" libelle="CPLTCLE invalide ou manquante"/>
+		<alea valeur="3040" libelle="Produit sans paramètres"/>
+		<alea valeur="3041" libelle="Canaux invalides"/>
+		<alea valeur="3042" libelle="RASSORX invalide"/>
+ 	</sousgroupe>
+  </groupe>
+  <groupe valeur="ADRESSE" libelle="Adresse">
+	<sousgroupe valeur="erreurs" libelle="Erreurs mono" couleur="#FF0000">
+		<alea valeur="4001" libelle="Téléphone manquant"/>
+		<alea valeur="4002" libelle="Email manquant"/>
+		<alea valeur="4003" libelle="Adresse mal formatée"/>
+		<alea valeur="4004" libelle="Adresse mal organisée"/>
+		<alea valeur="4005" libelle="Nom de contact manquant"/>
+		<alea valeur="4006" libelle="Transporteur incorrect"/>
+
+		<alea valeur="9998" libelle="Référence non controlée 1"/>
+		<alea valeur="9997" libelle="Référence non controlée 2"/>
+	</sousgroupe>
+  </groupe>
+  
+  
+</Root>

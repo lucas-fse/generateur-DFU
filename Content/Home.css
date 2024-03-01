@@ -1,0 +1,226 @@
+    .body-content { /*Centrage et definition de taille de la page*/
+        margin: 0 auto;
+        width: 85%;
+        margin-top : 25px;
+        text-align:center;
+        z-index:10;
+    }
+
+    .body-content footer {
+        float: left;
+    }
+
+#CategorieTop {
+    margin: 0 auto;
+    height: 200px;
+    width: 950px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    background: #D3D3D3;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+    #HomeDiv{ /* Block principale contenant tout le elements de la page*/
+      display: flex;
+      flex-direction: row;
+      flex-wrap : wrap;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+
+    #HomeText{ /*Text de presentation en haut de la page*/
+        width : 100%;
+        font-size:3em;
+        margin-bottom : 50px;
+    }
+
+    #logo{ /*Div contenant l'image logo*/
+        width : 100%;
+        height : 75px;
+    }
+
+    #logo img{ /*Modification dimension de l'image logo*/
+        width:150px;
+        float : right;
+    }
+
+
+    #KPIBox { /*Div KPI en haut de la page*/
+        width: 65%;
+        margin-left: 17.5%;
+        margin-right: 17.5%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 50px;
+    }
+
+
+    #KPIBox div { /*Configuration des image de la div KPI*/
+        width: 120px;
+        height: 120px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        background-size: 40% 40%;
+        background-repeat: no-repeat;
+        background-position: 10% 90%;
+        border: 2px solid black;
+        border-radius : 25px;
+    }
+
+    #KPIBox div p { /*Configuration des image de la div KPI*/
+        vertical-align : middle;
+        height : 40px;
+        color: black;
+        font-weight:bold;
+    }
+
+    #nb_situation_dangereuse img {
+        height: 25%;
+        width: 25%;
+        float : right;
+        margin-right : 12px;
+    }
+
+    .ValueKPI {
+        text-align : center;
+        opacity : 0;
+        margin-top: 25px;
+        font-size: 2em;
+    }
+
+    .TypeKPI {
+        text-align: end;
+        margin-right: 12px;
+        font-size: 1.4em;
+    }
+
+    #CA .TypeKPI{
+        margin-right : 24px;
+    }
+
+    #OTR {
+        background-image: url('../image/OTR.png');
+    }
+
+    #CA {
+        background-image: url('../image/euro1.png');
+    }
+
+    #nb_FRC {
+        background-image: url('../image/FRC.png');
+    }
+
+    #nb_situation_dangereuse {
+        background-image: url('../image/securite.png');
+    }
+
+#Categories {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 100px auto;
+    margin-top:0px;
+    
+}
+
+
+    .CatDiv { /*Block contenant une categorie*/
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 450px;
+        height: auto;
+        justify-content: space-between;
+        margin: 0px auto;
+        margin-top : 50px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background: #D3D3D3;
+        border-radius: 30px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    }
+
+    .CatDiv h3 { /*Titre du block contenant une categorie*/
+        width: 100%;
+        margin: 0px;
+        margin-top: 5px;
+    }
+
+    .Sous-block { /*Sous-block d'un block de categorie contenant le lien clickable*/
+        margin: 15px;
+        margin-bottom: 0px;
+        border-radius: 25px;
+    }
+
+
+    .Sous-block a { /*Configuration des liens clickable*/
+        background: white;
+        border-radius: 25px;
+    }
+
+    #icone {/*Configuration image clickable de la div sous-block dans la div jumbotron*/
+        width: 100px;
+        height: 100px;
+    }
+
+    @media all and (max-width: 720px) { /*Lorsque le ta largeur de la page est inferieur a 720 px*/
+        .body-content { /*Augmentation de la taille de la page*/
+            width: 95%;
+        }
+
+        #KPIBox { /*Augmentation de la taille de KPIBox*/
+            width: 560px;
+            margin: 0 auto;
+        }
+
+        #Categories {
+            width : 500px;
+        }
+
+        .CatDiv {
+            width: 350px;
+            justify-content: space-around;
+            margin-top: 60px;
+        }
+        
+    }
+
+@media all and (max-width: 720px) {
+    .body-content { /*Augmentation de la taille de la page*/
+        width: 100%;
+        margin : 0 auto;
+    }
+
+    .CatDiv{
+        width : 95%;
+    }
+
+}
+@media all and (max-width: 1110px) {
+    #CategorieTop {
+        width: 450px;
+    }
+    #FondEcran {
+        left: 5%;
+        width: 300px;
+    }
+}
+#FondEcran {
+    position: absolute;
+    opacity: 0.1;
+    z-index: -10;
+    top: 20%;
+    left: 10%;
+}    

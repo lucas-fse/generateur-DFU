@@ -1,0 +1,136 @@
+﻿textarea.frm-input {
+    height: 120px;
+    padding-top: 5px;
+}
+
+#button-image, #ChangeppCamera {
+    align-items: center;
+    margin: 0 auto;
+}
+
+.frm-action {
+    min-width: 200px;
+    color: #F26222;
+    font-weight: 800;
+    background-color: white;
+    text-align: center;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#AmeilorationPicture {
+    flex-direction: row;
+}
+
+#FormContenantPhotoProfil {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#FormContenantWebcam {
+    margin: 0 auto;
+}
+
+#FormContenantWebcam h3 {
+    text-align: left;
+    margin-left: 30px;
+}
+
+#FormPhotoProfil {
+    height: 250px;
+    width: 220px;
+    margin: 5%;
+    border-radius: 4em;
+    border: 2px solid;
+}
+
+#ChangeppMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#PrendreButtonPhoto, ReprendreButtonPhoto, AnnulerButtonPhoto {
+    margin-top: 10px;
+}
+
+#WebcamOn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: absolute;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 10%;
+}
+
+#video {
+    position: initial;
+}
+
+#WebcamMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#FormContenantPhotoProfil > label {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#preview {
+    display: none;
+}
+
+#button-image, #ChangeppCamera {
+    align-items: center;
+    margin: 0 auto;
+}
+
+#ChangeppMenu {
+    align-items: center;
+    margin: 0 auto;
+}
+
+.alignement-fonctions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.frm-box {
+    padding: 0px 30px;
+}
+
+@media all and (max-width: 880px) {
+    .photo-pc {
+        display: none;
+    }
+
+    textarea.frm-input {
+        height: 80px;
+        padding-top: 5px;
+    }
+
+    .main-title {
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    #AccidentPicture {
+        padding-right: 10px;
+    }
+
+    .frm-group {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+}

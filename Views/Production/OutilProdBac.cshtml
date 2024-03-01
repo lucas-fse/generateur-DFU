@@ -1,0 +1,111 @@
+﻿@model GenerateurDFUSafir.Models.DAL.ITEM_LOCALISATION
+@{
+    ViewBag.Title = "Gestion des bac de production";
+    <link rel="stylesheet" href="~/Content/form.css" />
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "Form" }))
+{
+    @Html.AntiForgeryToken()
+<div class="SUPPOF">
+    <input type="hidden" name="IDOp" id="IDOp" value="@Model.idop" />
+    <div class="frm-box">
+        <h2 class="frm-title">Gestion des bacs de production</h2>
+        <div class="visuel">
+            <img src="~/image/BacBleu.png" height="100" />
+        </div>
+        <div id="etiquette">
+
+            <div class="frm-group">
+                <label for="refPiece">Référence de la pièce</label>
+                <input type="text" name="refPiece" class="frm-input frm-required" id="ref" list="articlesList" />
+                <datalist id="articlesList">
+                </datalist>
+            </div>
+            <div class="frm-group ">
+                <label for="nbPiece">Chariot de stockage</label>
+                <input type="text" id="chariotpos" name="chariotpos" class="frm-input frm-required" />
+            </div>
+            <div class="frm-group ">
+                <label for="nbPiece">référence base</label>
+                <input type="text" id="IdRef" name="IdRef" value="@Model.ID" class="frm-input frm-required" disabled />
+                <input type="hidden" name="IdRef" id="IdRef-d" value="@Model.ID" />
+            </div>
+            <div class="frm-group mini">
+                <label for="nbPiece">Quantité par bac</label>
+                <input type="number" id="nbPiece" name="nbPiece" class="frm-input frm-required" min="0" max="999" value="0" />
+            </div>
+
+            <div class="frm-button-box">
+                <input type="button" value="Annuler" id="frm-back" class="frm-button" />
+                <button id="frm-submit" class="frm-button action-button">Imprimer/créer</button>
+            </div>
+        </div>
+
+        <div id="DetailAmelioration">
+
+        </div>
+
+
+    </div>
+</div>
+}
+<script>
+    
+    const refInput = document.querySelector("#ref");
+    let previousQuery = "";
+    refInput.addEventListener("keyup", (e) => {
+        const query = e.target.value;
+
+        if (query.length > 0 && query != previousQuery) {
+            previousQuery = query;
+            findArticles(query);
+        }
+    });
+    async function findArticles(query) {
+        
+        const raw = await fetch("/Production/SearchBacControle?itemref=" + query.toUpperCase());
+        const datas = await raw.json();
+
+        const list = document.querySelector("#articlesList");
+        const refInput = document.querySelector("#ref");
+        const localisationInput = document.querySelector("#localisationArticle");
+        const chariotpositem = document.querySelector("#chariotpos");
+        const IdRefitem = document.querySelector("#IdRef");
+        const IdRefitemd = document.querySelector("#IdRef-d");
+        const nbPieceitem = document.querySelector("#nbPiece");
+
+        // On regarde si on a trouvé un bon numéro
+        if (datas.filter(i => i.ITEMREF === query).length === 1) {
+            console.log('couca');
+            chariotpositem.value = datas[0].Chariot.toUpperCase();
+            IdRefitem.value = datas[0].ID;
+            IdRefitemd.value = datas[0].ID;
+            if (datas[0].QtrByBox === 0) {
+                nbPieceitem.value = 'non définie';
+            }
+            else {
+                nbPieceitem.value = datas[0].QtrByBox;
+            }
+        }
+        else {
+            
+           // nom.value = "";
+            list.removeEventListener("mousedown", handleMouseDown, false);
+            list.innerHTML = "";
+            datas.forEach(item => {
+                console.log('couc');
+                let article = document.createElement("option");
+                article.textContent = item.Chariot;
+                article.setAttribute('value', item.ITEMREF);
+                list.appendChild(article);                
+            });
+            //list.addEventListener("mousedown", handleMouseDown,false)
+        }
+    }
+    function handleMouseDown() {
+        console.log('click function');
+    }
+</script>

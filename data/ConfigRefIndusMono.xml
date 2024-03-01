@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+
+  <!-- definition des boitiers MOB -->
+  <Refproduit valeur="UDE" Libelle="UDE" optionchamp="Ref UDE" optionMaskDebut="0" optionMaskTaille="3" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="true">
+		<Produit Libelle="UDE" optionMaskDebut="0" optionMaskTaille="9" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="UDE 6BP" valeur="UDE....00" ConductixA="" imageG="UDE6.png" imageD=""  CarteHard=""  Commentaire="" hardBp="6">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UDE 8BP" valeur="UDE.....0" ConductixA="" imageG="UDE8.png" imageD=""  CarteHard="" Commentaire="" hardBp="8">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UDE 10BP" valeur="UDE......" ConductixA="" imageG="UDE10.png" imageD=""  CarteHard="" Commentaire="" hardBp="10">
+				<Fichier nom=""/>
+			</Variante>			
+		</Produit>
+		<Produit Libelle="FREQUENCE" optionMaskDebut="3" optionMaskTaille="1" isdfu="false" pty="0" ptxD="0" ptxG="0"  Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="FREQ433" valeur="4" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+			 <Variante Libelle="FREQ433" valeur="2" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+		    <Variante Libelle="FREQ433" valeur="0" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="5" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="3" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="1" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="M" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="A" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="C" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="P" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="B" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="D" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>			
+			<Variante Libelle="FREQ911" valeur="R" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ911" valeur="E" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ911 - InfraRouge" valeur="T" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ911 - InfraRouge" valeur="F" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="8">
+			</Variante>	
+			
+		</Produit>
+		<Produit Libelle="BPLIGNE1" optionMaskDebut="4" optionMaskTaille="1" isdfu="false" pty="518" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F1" bp2="F2">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0"  >
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="5242880" >
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="8388608">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="10485760">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="12582912">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="15728640">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="15728640">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="12582912">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="13631488">
+			</Variante>						
+		</Produit>
+		<Produit Libelle="BPLIGNE2" optionMaskDebut="5" optionMaskTaille="1" isdfu="false" pty="635" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F3" bp2="F4">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="327680">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="524288">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="655360">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="786432">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="983040">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="983040">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="786432">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="851968">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE3" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="752" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F5" bp2="F6">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="20480">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="32768">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="40960">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="49152">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="61440">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="61440">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="49152">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="53248">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE4" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="869" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F7" bp2="F8">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="1280">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="2048">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="2560">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="3072">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="3840">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="3840">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="3072">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="3328">
+			</Variante>	
+		</Produit>
+		<Produit Libelle="BPLIGNE5" optionMaskDebut="8" optionMaskTaille="1" isdfu="false" pty="986" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F9" bp2="F10">
+		
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="80">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="128">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="160">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="192">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="240">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="240">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="192">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="208">
+			</Variante>										
+		</Produit>		
+		<Produit Libelle="BPLIGNE6" optionMaskDebut="9" optionMaskTaille="1" isdfu="false" pty="110" ptxG="155" ptxD="300"  Refimage="HG" AfficherNomOption="No" DigitOptionnel="true">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire="">
+			</Variante>
+			<Variante Libelle="ABUS" valeur="A" Conductix="" imageG="ABUS.png" imageD="VIDE.png" CarteHard="VIDE.png" Commentaire="">
+			</Variante>
+			<Variante Libelle="CMI" valeur="C" Conductix="" imageG="CMI.png" imageD="VIDE.png" CarteHard="VIDE.png" Commentaire="">
+			</Variante>
+							
+		</Produit>		
+	
+	</Refproduit>
+ <Refproduit valeur="UCE" Libelle="UCE" optionchamp="Ref UCE" optionMaskDebut="0" optionMaskTaille="3" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="true">
+		<Produit Libelle="UCE" optionMaskDebut="0" optionMaskTaille="9" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="UCE 6BP" valeur="UCE....00" ConductixA="" imageG="UCE.png" imageD=""  CarteHard=""  Commentaire="" hardBp="6">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UCE 8BP" valeur="UCE.....0" ConductixA="" imageG="UCE8.png" imageD=""  CarteHard="" Commentaire="" hardBp="8">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UCE 10BP" valeur="UCE......" ConductixA="" imageG="UCE10.png" imageD=""  CarteHard="" Commentaire="" hardBp="10">
+				<Fichier nom=""/>
+			</Variante>			
+		</Produit>
+		<Produit Libelle="FREQUENCE" optionMaskDebut="3" optionMaskTaille="1" isdfu="false" pty="0" ptxD="0" ptxG="0"  Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="FREQ433" valeur="4" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+			 <Variante Libelle="FREQ433" valeur="2" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+		    <Variante Libelle="FREQ433" valeur="0" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="5" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="3" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="1" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="M" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="A" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="C" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="P" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="B" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="D" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>			
+			<Variante Libelle="FREQ911" valeur="R" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ911" valeur="E" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ911 - InfraRouge" valeur="T" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ911 - InfraRouge" valeur="F" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="8">
+			</Variante>	
+			
+		</Produit>
+		<Produit Libelle="BPLIGNE1" optionMaskDebut="4" optionMaskTaille="1" isdfu="false" pty="518" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F1" bp2="F2">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0"  >
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="5242880" >
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="8388608">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="10485760">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="12582912">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="15728640">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="15728640">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="12582912">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="13631488">
+			</Variante>						
+		</Produit>
+		<Produit Libelle="BPLIGNE2" optionMaskDebut="5" optionMaskTaille="1" isdfu="false" pty="635" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F3" bp2="F4">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="327680">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="524288">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="655360">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="786432">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="983040">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="983040">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="786432">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="851968">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE3" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="752" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F5" bp2="F6">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="20480">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="32768">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="40960">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="49152">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="61440">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="61440">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="49152">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="53248">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE4" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="869" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F7" bp2="F8">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="1280">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="2048">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="2560">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="3072">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="3840">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="3840">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="3072">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="3328">
+			</Variante>	
+		</Produit>
+		<Produit Libelle="BPLIGNE5" optionMaskDebut="8" optionMaskTaille="1" isdfu="false" pty="986" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F9" bp2="F10">
+		
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="80">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="128">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="160">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="192">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="240">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="240">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="192">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="208">
+			</Variante>										
+		</Produit>
+	</Refproduit>
+
+ <Refproduit valeur="ADE" Libelle="ADE" optionchamp="Ref ADE" optionMaskDebut="0" optionMaskTaille="3" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="true">
+		<Produit Libelle="ADE" optionMaskDebut="0" optionMaskTaille="9" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="ADE 6BP" valeur="ADE....00" ConductixA="" imageG="ADE6.png" imageD=""  CarteHard=""  Commentaire="" hardBp="6">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="ADE 8BP" valeur="ADE.....0" ConductixA="" imageG="ADE8.png" imageD=""  CarteHard="" Commentaire="" hardBp="8">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="ADE 10BP" valeur="ADE......" ConductixA="" imageG="ADE10.png" imageD=""  CarteHard="" Commentaire="" hardBp="10">
+				<Fichier nom=""/>
+			</Variante>			
+		</Produit>
+		<Produit Libelle="FREQUENCE" optionMaskDebut="3" optionMaskTaille="1" isdfu="false" pty="0" ptxD="0" ptxG="0"  Refimage="HG" AfficherNomOption="Yes">
+			<Variante Libelle="FREQ433" valeur="4" Conductix="1" controlhardware="" imageG="" imageD="FacSSInfraRouge.png" CarteHard="" Commentaire="" hardFreg="0" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ433 - InfraRouge" valeur="5" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="M" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ869 - InfraRouge" valeur="P" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8">
+			</Variante>
+			<Variante Libelle="FREQ911" valeur="R" Conductix="1" controlhardware="" imageG="FacSSInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0">
+			</Variante>
+			<Variante Libelle="FREQ911 - InfraRouge" valeur="T" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="1">
+			</Variante>			
+		</Produit>
+		<Produit Libelle="BPLIGNE1" optionMaskDebut="4" optionMaskTaille="1" isdfu="false" pty="518" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F1" bp2="F2">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0"  >
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="5242880" >
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="8388608">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="10485760">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="13631488">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="12582912">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="14680064">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="15728640">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="15728640">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="12582912">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="13631488">
+			</Variante>						
+		</Produit>
+		<Produit Libelle="BPLIGNE2" optionMaskDebut="5" optionMaskTaille="1" isdfu="false" pty="635" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F3" bp2="F4">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="327680">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="524288">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="655360">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="851968">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="786432">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="917504">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="983040">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="983040">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="786432">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="851968">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE3" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="752" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F5" bp2="F6">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="20480">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="32768">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="40960">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="53248">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="49152">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="57344">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="61440">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="61440">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="49152">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="53248">
+			</Variante>							
+		</Produit>
+		<Produit Libelle="BPLIGNE4" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="869" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F7" bp2="F8">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="1280">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="2048">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="2560">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="3328">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="3072">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="3584">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="3840">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="3840">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="3072">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="3328">
+			</Variante>	
+		</Produit>
+		<Produit Libelle="BPLIGNE5" optionMaskDebut="8" optionMaskTaille="1" isdfu="false" pty="986" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" bp1="F9" bp2="F10">
+		
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="" Commentaire=""  RConfBoutons="0" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSVGauche.png" imageD="BPSVDroite.png" CarteHard="E19051.png" Commentaire="" RConfBoutons="3" typetest="SVSV" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDVGauche.png" imageD="BPDVDroite.png" CarteHard="E19101.png" Commentaire=""  RConfBoutons="3" typetest="DVDV" ConfigEmet="80">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSVGauche.png" imageD="COM_2Droite.png" CarteHard="E19073.png" Commentaire=""  RConfBoutons="1" typetest="SVCOM2" ConfigEmet="128">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSVGauche.png" imageD="COM_3Droite.png" CarteHard="E19073.png" Commentaire="Suppr ergo droit"  RConfBoutons="1" typetest="SVCOM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="E19063.png" Commentaire=""  RConfBoutons="0" typetest="COM2COM2" ConfigEmet="160">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo droit"  RConfBoutons="0" typetest="COM2COM3" ConfigEmet="208">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="E19063.png" Commentaire="Suppr Ergo gauche-droit "  RConfBoutons="0" typetest="COM3COM3" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSVGauche.png" imageD="COM_3RDroite.png" CarteHard="E19073R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="1" typetest="SVCOM3R" ConfigEmet="192">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM2COM3R" ConfigEmet="224">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="E19063R.png" Commentaire="Suppr Ergo gauche , Suppr Bille, Ergo droit, Ajout ressort"  RConfBoutons="0" typetest="COM3COM3R" ConfigEmet="240">
+			</Variante> 
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="E19063RR.png" Commentaire="Suppr Bille et Ergo gauche et droit, Ajout ressort"  RConfBoutons="0" typetest="COM3RCOM3R" ConfigEmet="240">
+			</Variante>
+			<Variante Libelle="OPT - OPT" valeur="C" Conductix="" imageG="OBTGauche.png" imageD="OBTDroite.png" CarteHard="E19291.png" Commentaire=""  RConfBoutons="0" typetest="VIDEVIDE" ConfigEmet="0">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSVGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="1" typetest="SVBPTR" ConfigEmet="192">
+			</Variante>	
+			<Variante Libelle="COM2 - BPTR" valeur="E" Conductix="" imageG="COM_2SPEGauche.png" imageD="BPTR.png" CarteHard="E23610.png" Commentaire="Ajout BPTR"  RConfBoutons="0" typetest="COM2BPTR" ConfigEmet="208">
+			</Variante>										
+		</Produit>		
+  </Refproduit>
+ <Refproduit valeur="UDR" Libelle="UDR" optionchamp="Ref UDR" optionMaskDebut="0" optionMaskTaille="3" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="UDR" optionMaskDebut="0" optionMaskTaille="8" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="HG" AfficherNomOption="Yes">
+      <Variante Libelle="UDR" valeur="UDR....." ConductixA="" imageG="UDR.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+
+    </Produit>
+    <Produit Libelle="FREQUENCE" optionMaskDebut="3" optionMaskTaille="1" isdfu="false" pty="930" ptxD="0" ptxG="400"  Refimage="HG" AfficherNomOption="Yes">
+      <Variante Libelle="FREQ433" valeur="0" Conductix="1" controlhardware="" imageG="" imageD="" CarteHard="" Commentaire="" hardFreg="0" hardOption="0" masqueOption="00">
+      </Variante>
+      <Variante Libelle="FREQ433 - InfraRouge" valeur="1" Conductix="1" controlhardware="" imageG="MTInfraRouge.png" imageD=""  CarteHard="" Commentaire=""  hardFreg="0" hardOption="8" masqueOption="01">
+      </Variante>
+      <Variante Libelle="FREQ869" valeur="A" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="0" masqueOption="00">
+      </Variante>
+      <Variante Libelle="FREQ869 - InfraRouge" valeur="B" Conductix="1" controlhardware="" imageG="FacInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="1" hardOption="8" masqueOption="01">
+      </Variante>
+      <Variante Libelle="FREQ911" valeur="E" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="0" masqueOption="00">
+      </Variante>
+      <Variante Libelle="FREQ911 - InfraRouge" valeur="F" Conductix="1" controlhardware="" imageG="MTInfraRouge.png" imageD=""  CarteHard="" Commentaire="" hardFreg="2" hardOption="8"  masqueOption="01">
+      </Variante>
+    </Produit>
+    <Produit Libelle="NBCARTE" optionMaskDebut="4" optionMaskTaille="1" isdfu="false" pty="935" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" >
+      <Variante Libelle="1 Carte RELAIS" valeur="A" Conductix="" imageG="CARTERELAI1.png" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="" OpCarte="1">
+      </Variante>
+      <Variante Libelle="2 Carte RELAIS" valeur="B" Conductix="" imageG="CARTERELAI2.png" imageD="" CarteHard="" Commentaire="" RConfBoutons="" typetest="" OpCarte="2">
+      </Variante>
+      <Variante Libelle="3 Carte RELAIS" valeur="C" Conductix="" imageG="CARTERELAI3.png" imageD="" CarteHard="" Commentaire=""  RConfBoutons="" typetest="" OpCarte="3">
+      </Variante>
+    </Produit>
+    <Produit Libelle="TENSION" optionMaskDebut="5" optionMaskTaille="1" isdfu="false" pty="930" ptxG="50" ptxD="300"  Refimage="HG" AfficherNomOption="No" >
+      <Variante Libelle="12-24 VDC" valeur="4" Conductix="" imageG="Tension1224.png" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" hardTension="12VDC;24VDC"  RefArticle="D22816">
+      </Variante>
+      <Variante Libelle="24-48VAC" valeur="A" Conductix="" imageG="Tension2448.png" imageD="" CarteHard="" Commentaire="" RConfBoutons="" typetest="" hardTension="24VAC;48VAC" RefArticle="D22828">
+      </Variante>
+      <Variante Libelle="115-230VAC" valeur="B" Conductix="" imageG="Tension115230.png" imageD="" CarteHard="" Commentaire=""  RConfBoutons="" typetest="" hardTension="110VAC;230VAC" RefArticle="D22838">
+      </Variante>
+    </Produit>
+    <Produit Libelle="REFSTANDARD" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="752" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" >
+      <Variante Libelle="VIDE" valeur="0" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="">
+	  </Variante>
+	  <Variante Libelle="REF1" valeur="1" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="" RefEmmetteurStandard="UDE1222D0">
+      </Variante>
+	  <Variante Libelle="REF2" valeur="2" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="" RefEmmetteurStandard="UDE122220">
+      </Variante>
+	  <Variante Libelle="REF4" valeur="4" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="" RefEmmetteurStandard="UDE122222">
+      </Variante>
+	  <Variante Libelle="REF5" valeur="5" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="" RefEmmetteurStandard="UDE122217">
+      </Variante>
+
+    </Produit>
+    <Produit Libelle="STANDARD" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="869" ptxG="50" ptxD="300"  Refimage="" AfficherNomOption="No" >
+      <Variante Libelle="STANDARD" valeur="0" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="00">
+      </Variante>
+      <Variante Libelle="ASSOTXRX" valeur="6" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="20">
+      </Variante>
+      <Variante Libelle="ROAMING" valeur="7" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="80">
+      </Variante>
+    </Produit>
+  </Refproduit>
+<Refproduit valeur="PR0124" Libelle="PR0124" optionchamp="Ref PR0124" optionMaskDebut="0" optionMaskTaille="6" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="PR0124" optionMaskDebut="0" optionMaskTaille="6" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="HG" AfficherNomOption="Yes">
+      <Variante Libelle="UDR" valeur="PR0124.." ConductixA="" imageG="PR0124.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+
+    </Produit>
+    <Produit Libelle="TENSION" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="635" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" >
+      <Variante Libelle="12-24 VDC" valeur="4" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" hardTension="12VDC;24VDC" RefArticle="PR01244">
+      </Variante>
+      <Variante Libelle="24-48VAC" valeur="A" Conductix="" imageG="" imageD="" CarteHard="" Commentaire="" RConfBoutons="" typetest="" hardTension="24VAC;48VAC" RefArticle="PR0124A">
+      </Variante>
+      <Variante Libelle="115-230VAC" valeur="B" Conductix="" imageG="" imageD="" CarteHard="" Commentaire=""  RConfBoutons="" typetest="" hardTension="110VAC;230VAC" RefArticle="PR0124B">
+      </Variante>
+    </Produit>
+    <Produit Libelle="ZERO" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="752" ptxG="50" ptxD="300"  Refimage="BG" AfficherNomOption="No" >
+      <Variante Libelle="VIDE" valeur="0" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="">
+      </Variante>
+
+    </Produit>
+    <Produit Libelle="STANDARD" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="869" ptxG="50" ptxD="300"  Refimage="" AfficherNomOption="No" >
+      <Variante Libelle="STANDARD" valeur="0" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="00">
+      </Variante>
+      <Variante Libelle="PITCHCATCH" valeur="5" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="20">
+      </Variante>
+      <Variante Libelle="PONTCOUPLE" valeur="3" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="10">
+      </Variante>
+      <Variante Libelle="ASSOTXRX" valeur="6" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="20">
+      </Variante>
+      <Variante Libelle="ROAMING" valeur="7" Conductix="" imageG="" imageD=""  CarteHard="" Commentaire=""  RConfBoutons="0" masqueOption="80">
+      </Variante>
+    </Produit>
+  </Refproduit>
+<Refproduit valeur="D22816" Libelle="D22816" optionchamp="" optionMaskDebut="0" optionMaskTaille="6" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="D22816" optionMaskDebut="0" optionMaskTaille="6" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="" AfficherNomOption="Yes">
+      <Variante Libelle="D22816" valeur="D22816" ConductixA="" imageG="D22816.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+    </Produit>
+ </Refproduit>
+ <Refproduit valeur="D22828" Libelle="D22828" optionchamp="" optionMaskDebut="0" optionMaskTaille="6" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="D22828" optionMaskDebut="0" optionMaskTaille="6" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="" AfficherNomOption="Yes">
+      <Variante Libelle="D22828" valeur="D22828" ConductixA="" imageG="D22828.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+    </Produit>
+ </Refproduit>
+ <Refproduit valeur="D22838" Libelle="D22838" optionchamp="" optionMaskDebut="0" optionMaskTaille="6" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="D22838" optionMaskDebut="0" optionMaskTaille="6" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="" AfficherNomOption="Yes">
+      <Variante Libelle="D22838" valeur="D22838" ConductixA="" imageG="D22838.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+    </Produit>
+ </Refproduit>
+ <Refproduit valeur="UDWE23" Libelle="UDWE23" optionchamp="" optionMaskDebut="0" optionMaskTaille="6" imgmo1="" imgmo2="" docproduit="" dfuproduit="" imprimerRapport="false">
+    <Produit Libelle="UDWE23" optionMaskDebut="0" optionMaskTaille="6" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0" Refimage="" AfficherNomOption="Yes">
+      <Variante Libelle="UDWE23" valeur="UDWE23" ConductixA="" imageG="UDWE23.png" imageD=""  CarteHard=""  Commentaire="" >
+        <Fichier nom=""/>
+      </Variante>
+    </Produit>
+ </Refproduit>
+</Root>

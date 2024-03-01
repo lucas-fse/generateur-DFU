@@ -1,0 +1,242 @@
+﻿@model GenerateurDFUSafir.Models.InfoLogistique
+@{
+    ViewBag.Title = "Logistique";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <head>
+        <link rel="stylesheet" href="~/Content/graph.css">
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/Scripts/graph.js"></script>
+    </head>
+
+    <body>
+        <h1>Logistique</h1>
+
+
+        
+        <h3 class="jumbotron" style="max-width:800px"  >Temps de traitement des BLs de logistique</h3>
+        <table>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre de bon de livraison par jour" ordonne="Nb bl">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementBlTraiteDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre de bon de livraison par semaine" ordonne="Nb bl">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementBlTraiteDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre de bon de livraison par mois" ordonne="Nb bl">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementBlTraiteDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre d'article par jour" ordonne="Nb Art">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementArtTraiteDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre d'article par semaine" ordonne="Nb Art">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementArtTraiteDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Nombre d'article par mois" ordonne="Nb Art">
+                        <ul>
+                            @foreach (var pays in @Model.NbTraitementArtTraiteDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingBLDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingBLDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingBLDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingArtDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingArtDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps attente avant colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPickingArtDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingBLDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingBLDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/bl">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingBLDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingArtDernier7Jours)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingArtDernier4Sem)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 350px;" class="graphArrayChart" titre="Temps de colisage" ordonne="sec/art">
+                        <ul>
+                            @foreach (var pays in @Model.TempsTraitementPackingArtDernier12Mois)
+                            {
+                                <li>@pays.Value:@pays.Key:</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div id="regions_div" style="width: 1100px; height: 350px;" class="ComboChart" titre="OTD/OTR" abscisse="Week" ordonne1="OTD %" ordonne2="OTR %">
+                        <ul>
+                            @foreach (var semaine in @Model.IndicateurPerWeek.Reverse())
+                            {
+                                <li>@semaine.Key:@semaine.Value.OTD:@semaine.Value.OTR:100:@semaine.Value.NbArt</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 240px;" class="GaugeChart" titre="OTD" abscisse="Week" ordonne1="OTD%">
+                        <ul>
+                            <li>OTD:@Model.OTDByWeek:98:98:101</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="regions_div" style="width: 400px; height: 240px;" class="GaugeChart" titre="OTD" abscisse="Week" ordonne1="OTD%">
+                        <ul>
+                            <li>OTR:@Model.OTRByWeek:80:90:100</li>
+                            
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+

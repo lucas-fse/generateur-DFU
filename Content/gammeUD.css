@@ -1,0 +1,92 @@
+﻿body {
+}
+.Gamme {
+    max-width: 1200 px;
+    border: 5px solid rgb(111,41,97);
+    border-radius: .5em;
+    padding: 10px;
+    justify-content: start;
+    align-content: start;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(22rem,1fr));
+    grid-gap: 1.6rem;
+    padding: 1.6rem 3.2rem;
+    
+}
+.OFS{
+    font-weight:bold;
+}
+.visuel{
+    vertical-align: top;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+
+.infos {
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px;
+}
+
+.box-conductix h2 {
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+    font-variant: small-caps;
+    font-size: 14pt;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.infos-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14pt;
+    padding: 2px;
+}
+.infos-box:nth-child(2n) {
+    background-color: #00000008;
+}
+
+.infos a {
+    align-self: flex-end;
+}
+
+.image-view {
+    margin: 10px;
+    width: 400px;
+    padding: 10px;
+}
+.image-view img {
+    width: 100%;
+}
+
+.result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+}
+
+#quantite {
+    max-width: 50px;
+    height: 25px;
+    text-align: right;
+    padding: 0px;
+}
+
+#print {
+    align-self: end;
+}

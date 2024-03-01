@@ -1,0 +1,257 @@
+﻿body {
+    width: 99%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+p {
+    margin: 0 auto;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+label {
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+
+#main-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 2em;
+    font-weight: 700;
+    color: #F26222;
+    font-variant: small-caps;
+}
+
+#containers {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    margin: 0 auto;
+}
+
+.nom-pole {
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #F26222;
+    text-align: center;
+    transform-origin: bottom left;
+    transform: rotate(-90deg) translate(-100%, -20%);
+    width: fit-content;
+    white-space: nowrap;
+    text-align: left;
+    display: flex;
+}
+
+.column-pole {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    min-width: 30vw;
+    max-width: 30vw;
+    max-height : 100%;
+    min-height : 100%;
+    padding: 0 30px;
+    margin-top: -15px;
+}
+
+.pole {
+    display: flex;
+    flex-direction: column;
+}
+
+.column-pole .box-conductix {
+    width: 100%;
+}
+
+.frm-select {
+    text-decoration: none;
+    border: none;
+    background: none;
+    padding: 10px;
+    padding-top: 5px;
+    text-align: left;
+    font-weight: 700;
+}
+
+#infos-pole {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+
+#affect-opes {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90vw;
+    padding: 0px 30px;
+}
+
+.zone-pole {
+    height: 450px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 3px;
+    align-content: flex-start;
+}
+
+.preview {
+    width: 100px;
+    height: 100px;
+    background-color: #818285;
+    border-radius: 50%;
+    color: white;
+    margin-top: 10px;
+    opacity: 0.5;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#img-ope {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border: 1px solid #F26222;
+    border-radius: 50%;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 150px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#nom-prenom {
+    display: flex;
+    flex-direction: row;
+}
+
+#prenom {
+    margin-right: 0px;
+    margin-left: 5px;
+}
+
+.frm-action {
+    min-width: 200px;
+    color: #F26222;
+    font-weight: 800;
+    background-color: white;
+    text-align: center;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.moving {
+    position: fixed;
+    transform: translate(-50%, -60%);
+    z-index: 10;
+}
+
+.img {
+    background-color: #ff640055;
+}
+
+.moving .img {
+    box-shadow: 0px 0px 6px 6px #00000044;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.saveLoading {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+    .saveLoading > i {
+        margin: 5px;
+    }
+
+
+.fleches {
+    font-size: 4em;
+}
+
+    .fleches:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+    }
+
+.div-fleches {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#fleche-droite {
+    margin-right: 30px;
+}
+
+#fleche-gauche {
+    margin-left: 30px;
+}
+
+.poles {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 90vw;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+    .poles::-webkit-scrollbar {
+        display: none;
+    }
+
+#star {
+    display: flex;
+    align-items: center;
+}
+
+
+/*Un media qui s'affiche quand width < 2170 */
+@media (max-width: 1800px) {
+    #img-ope {
+        margin-top: 5px;
+    }
+
+    #user-card {
+        height: 130px;
+    }
+
+    .zone-pole {
+        height: 400px;
+    }
+
+    #fleche-gauche {
+        margin-left: 20px;
+    }
+
+    #fleche-droite {
+        margin-right: 20px;
+    }
+}

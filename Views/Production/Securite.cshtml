@@ -1,0 +1,629 @@
+﻿@model GenerateurDFUSafir.Models.SECU_PROD
+@{
+    ViewBag.Title = "Accident";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/Accident.css" rel="stylesheet" />
+}
+<body>
+    @for (int i = 1; i <= Model.CouleurCaseParJour.Count(); i++)
+    {
+        if (Model.CouleurCaseParJour[i] != "")
+        {
+            <style type="text/css">
+        #Case_@i{
+            background : @Model.CouleurCaseParJour[i];
+            color : white;
+        }
+            </style>
+        }
+    }
+    @if (Model.CouleurCaseParJour[Model.Day] != "#22b14c" && Model.CouleurCaseParJour[Model.Day] != "")
+    {
+        <style type="text/css">
+        #Case_@Model.Day.ToString(){
+            background : @Model.CouleurCaseParJour[Model.Day];
+            color : white;
+        }
+        </style>
+    }
+
+
+    <style type="text/css">
+    #greenCross{
+        background-image : url("@Model.CrossColor");
+    }
+    </style>
+
+
+
+    <div id="fondTransparent"></div>
+
+
+    <div id="AccidentDiv">
+        <div id="DivCases">
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="../image/sablier.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Nombre de Jours sans accidents</h3>
+                    <p id="cpt1" initvalue="@Model.NbJourSansAccident"><span>0</span></p>
+                </div>
+            </div>
+
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="../image/coupe.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Record de Jours sans accidents</h3>
+                    <p id="cpt2" initvalue="@Model.RecordSansAccident"><span>0</span></p>
+                </div>
+            </div>
+
+            <div class="boxCounter" id="SereniteStat">
+                <div class="thumbnailCounter">
+                    <img src="/image/pouce_en_haut.png" alt="" class="imgIndicateur">
+                </div>
+                <div class="counterContent">
+                    <h3>Moyenne des notes positives</h3>
+                    <p id="cpt3" initvalue="@Model.NbHumeurPositivestring"><span>- -%</span></p>
+                </div>
+            </div>
+
+            <div class="boxCounter" id="SereniteLien">
+                <a href="..\Production\serenite">Page de sérénité</a>
+            </div>
+        </div>
+
+
+        <div id="greenCross">
+            @if (@Model.ListAccidentDuMois.Count == 31)
+            {
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left "></div>
+                    <div class="greenCrossCase topleft"></div>
+                    <div class="greenCrossCase" runat="server" id="Case_1" color="@Model.CouleurCaseParJour[1]">1</div>
+                    <div class="greenCrossCase topright" runat="server" id="Case_2" color="@Model.CouleurCaseParJour[2]">2</div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase top"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 3; i <= 5; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i" color="@Model.CouleurCaseParJour[i]">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase top"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase topleft" runat="server" id="Case_6" color="@Model.CouleurCaseParJour[6]">6</div>
+                    @for (int i = 7; i <= 11; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i" color="@Model.CouleurCaseParJour[i]">@i</div>
+                    }
+                    <div class="greenCrossCase topright" runat="server" id="Case_12" color="@Model.CouleurCaseParJour[12]">12</div>
+                </div>
+                <div class="greenCrossRow">
+                    @for (int i = 13; i <= 19; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i" color="@Model.CouleurCaseParJour[i]">@i</div>
+                    }
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase bottomleft" runat="server" id="Case_20" color="@Model.CouleurCaseParJour[20]">20</div>
+                    @for (int i = 21; i <= 25; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i" color="@Model.CouleurCaseParJour[i]">@i</div>
+                    }
+                    <div class="greenCrossCase bottomright" runat="server" id="Case_26" color="@Model.CouleurCaseParJour[26]">26</div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 27; i <= 29; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i" color="@Model.CouleurCaseParJour[i]">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left"></div>
+                    <div class="greenCrossCase bottomleft" id="Case_30" color="@Model.CouleurCaseParJour[30]">30</div>
+                    <div class="greenCrossCase" id="Case_31" color="@Model.CouleurCaseParJour[31]">31</div>
+                    <div class="greenCrossCase bottomright"></div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+            }
+            else if (@Model.ListAccidentDuMois.Count == 30)
+            {
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left "></div>
+                    <div class="greenCrossCase topleft"></div>
+                    <div class="greenCrossCase" runat="server" id="Case_1">1</div>
+                    <div class="greenCrossCase topright" runat="server" id="Case_2">2</div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase top"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 3; i <= 5; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase top"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase topleft" runat="server" id="Case_6">6</div>
+                    @for (int i = 7; i <= 11; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase topright" runat="server" id="Case_12">12</div>
+                </div>
+                <div class="greenCrossRow">
+                    @for (int i = 13; i <= 19; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase bottomleft" runat="server" id="Case_20">20</div>
+                    @for (int i = 21; i <= 25; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase bottomright" runat="server" id="Case_26">26</div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 27; i <= 29; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left"></div>
+                    <div class="greenCrossCase bottomleft" id="Case_30">30</div>
+                    <div class="greenCrossCase"></div>
+                    <div class="greenCrossCase bottomright"></div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+            }
+            else if (@Model.ListAccidentDuMois.Count == 29)
+            {
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left "></div>
+                    <div class="greenCrossCase topleft"></div>
+                    <div class="greenCrossCase"></div>
+                    <div class="greenCrossCase topright" runat="server" id="Case_1">1</div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase top"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 2; i <= 4; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase top"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase topleft" runat="server" id="Case_5">5</div>
+                    @for (int i = 6; i <= 10; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase topright" runat="server" id="Case_11">11</div>
+                </div>
+                <div class="greenCrossRow">
+                    @for (int i = 12; i <= 18; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase bottomleft" runat="server" id="Case_19">19</div>
+                    @for (int i = 20; i <= 24; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase bottomright" runat="server" id="Case_25">25</div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 26; i <= 28; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left"></div>
+                    <div class="greenCrossCase bottomleft" id="Case_29">29</div>
+                    <div class="greenCrossCase"></div>
+                    <div class="greenCrossCase bottomright"></div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+            }
+            else
+            {
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left "></div>
+                    <div class="greenCrossCase topleft"></div>
+                    <div class="greenCrossCase"></div>
+                    <div class="greenCrossCase topright" runat="server" id="Case_1">1</div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase top"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 2; i <= 4; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase top"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase topleft" runat="server" id="Case_5">5</div>
+                    @for (int i = 6; i <= 10; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase topright" runat="server" id="Case_11">11</div>
+                </div>
+                <div class="greenCrossRow">
+                    @for (int i = 12; i <= 18; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase bottomleft" runat="server" id="Case_19">19</div>
+                    @for (int i = 20; i <= 24; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase bottomright" runat="server" id="Case_25">25</div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                    @for (int i = 26; i <= 28; i++)
+                    {
+                        <div class="greenCrossCase" id="Case_@i">@i</div>
+                    }
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase bottom"></div>
+                </div>
+                <div class="greenCrossRow">
+                    <div class="greenCrossCase hiddenCase"></div>
+                    <div class="greenCrossCase hiddenCase left"></div>
+                    <div class="greenCrossCase bottomleft"></div>
+                    <div class="greenCrossCase"></div>
+                    <div class="greenCrossCase bottomright"></div>
+                    <div class="greenCrossCase hiddenCase right"></div>
+                    <div class="greenCrossCase hiddenCase"></div>
+                </div>
+            }
+
+        </div>
+
+        <div id="Smiley">
+            <div id="b1div">
+                <button type="button" id="b1" class="button" onclick="AfficheSmileyContent()"></button>
+                <p>Pas d'accident à signaler</p>
+            </div>
+            <div id="b2div">
+                <button type="button" id="b2" class="button" onclick="AfficheSmileyPasContent()"></button>
+                <p>Signaler un accident</p>
+            </div>
+
+            <div class="humeur" id="content">
+                <p>Encore un jour sans accident</p>
+                <img src="~/image/emoji_content.png" alt="">
+                <p>Bravo</p>
+            </div>
+
+            <div class="humeur" id="pasContent">
+                <p>Il y a eu un accident la veille</p>
+                <img src="~/image/emoji_pas_content.png" alt="">
+                <p>Faisons en sorte que cela ne se reproduise plus</p>
+            </div>
+        </div>
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "MiddleBlock", onsubmit = "ValiderPopUp()" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="Total_Pyramide">
+                <div id="TotalAccident">
+                    <div id="Total7"><p>Year</p></div>
+                    <div id="Total6">
+                        @if (@Model.TotalAccidentParType[6] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[6]</p>
+                        }
+                    </div>
+                    <div id="Total5">
+                        @if (@Model.TotalAccidentParType[5] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[5]</p>
+                        }
+                    </div>
+                    <div id="Total4">
+                        @if (@Model.TotalAccidentParType[4] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[4]</p>
+                        }
+                    </div>
+                    <div id="Total3">
+                        @if (@Model.TotalAccidentParType[3] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[3]</p>
+                        }
+                    </div>
+                    <div id="Total2">
+                        @if (@Model.TotalAccidentParType[2] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[2]</p>
+                        }
+                    </div>
+                    <div id="Total1">
+                        @if (@Model.TotalAccidentParType[1] != 0)
+                        {
+                            <p>@Model.TotalAccidentParType[1]</p>
+                        }
+                    </div>
+                </div>
+                <div id="Pyramide">
+                    <button class="niveau" id="Niveau6" type="button" onclick="OuvrirPopUp('6')"><p>Accident Grave</p></button>
+                    <button class="niveau" id="Niveau5" type="button" onclick="OuvrirPopUp('5')"><p>Accidents declarés</p></button>
+                    <button class="niveau" id="Niveau4" type="button" onclick="OuvrirPopUp('4')">Soins benins</button>
+                    <button class="niveau" id="Niveau3" type="button" onclick="OuvrirPopUp('3')">Presque accident</button>
+                    <button class="niveau" id="Niveau2" type="button" onclick="OuvrirPopUp('2')">Situations dangereuses</button>
+                    <button class="niveau" id="Niveau1" type="button" onclick="OuvrirPopUp('1')">Actes dangeureux</button>
+                </div>
+            </div>
+            <div id="Tableau">
+                <div id="ligne7" class="ligne">
+                    <div><p>J</p></div>
+                    <div><p>F</p></div>
+                    <div><p>M</p></div>
+                    <div><p>A</p></div>
+                    <div><p>M</p></div>
+                    <div><p>J</p></div>
+                    <div><p>J</p></div>
+                    <div><p>A</p></div>
+                    <div><p>S</p></div>
+                    <div><p>O</p></div>
+                    <div><p>N</p></div>
+                    <div><p>D</p></div>
+                </div>
+                <div id="ligne6" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau6_@i" type="submit" value="Niveau6_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau6_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[6].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(6,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[6].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[6].Count
+                            }
+                        </button>
+                    }
+                </div>
+                <div id="ligne5" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau5_@i" type="submit" value="Niveau5_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau5_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[5].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(5,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[5].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[5].Count
+                            }
+                        </button>
+                    }
+                </div>
+                <div id="ligne4" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau4_@i" type="submit" value="Niveau4_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau4_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[4].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(4,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[4].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[4].Count
+                            }
+                        </button>
+                    }
+                </div>
+                <div id="ligne3" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau3_@i" type="submit" value="Niveau3_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau3_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[3].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(3,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[3].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[3].Count
+                            }
+                        </button>
+                    }
+                </div>
+                <div id="ligne2" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau2_@i" type="submit" value="Niveau2_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau2_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[2].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(2,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[2].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[2].Count
+                            }
+                        </button>
+                    }
+                </div>
+                <div id="ligne1" class="ligne">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        @*<button class="buttonTableau" id="CaseTableau1_@i" type="submit" value="Niveau1_@Model.DefinirDate(Convert.ToString(@i))" onclick="OuvrirPopUp('CaseTableau1_@i')" name="submitButton">@Model.InfoAccident.AccidentsParMois[@i].ListAccident[1].Count</button>*@
+                        <button class="buttonTableau" type="button" onclick="AfficherDetail(1,@i)">
+                            @if (@Model.AccidentsParMois[@i].ListAccident[1].Count != 0)
+                            {
+                                @Model.AccidentsParMois[@i].ListAccident[1].Count
+                            }
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+        <div id="DetailAccident">
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+    <script type="text/javascript" src="~/Scripts/ViewImage.js"></script>
+    <script>
+        const inputElement = document.getElementById("image-upload");
+
+        inputElement.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const imgElement = document.createElement("img");
+                imgElement.src = e.target.result;
+                document.body.appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var listeAccidentParMoisStrJson = '<p>@Model.listAccidentsParMois</p>';
+        //listeAccidentParMoisStrJson = listeAccidentParMoisStrJson.replace(/(\r\n|\n|\r)/gm, "\\n");
+        listeAccidentParMoisStrJson = toLiteral(listeAccidentParMoisStrJson);
+
+        console.log(listeAccidentParMoisStrJson);
+        listeAccidentParMoisStrJson = jQuery(listeAccidentParMoisStrJson).text();
+        listeAccidentParMoisStrJson = listeAccidentParMoisStrJson.replace(/\\n/gm, "<br>")
+        var listeAccidentParMoisObjJson = JSON.parse(listeAccidentParMoisStrJson);
+
+
+
+        function AfficherDetail(type, mois) {
+
+            document.getElementById("DetailAccident").innerHTML = "";
+            console.log("mois",mois,"type",type);
+                for (var i = 0; i < listeAccidentParMoisObjJson[mois].ListAccident[type].length; i++)
+                {
+                    console.log("i", i);
+                    var newDiv = document.createElement("div");
+                    newDiv.className = 'DetailA';
+
+                    var divBandeau = document.createElement("div");
+                    divBandeau.className = 'DivBandeau'
+                    newDiv.appendChild(divBandeau);
+
+                    var text1 = document.createElement("p");
+                    var DivText1 = document.createElement("div")
+
+                    text1.innerHTML = "Une déclaration a été faite le " + listeAccidentParMoisObjJson[mois].ListAccident[type][i].DateString + " par " + listeAccidentParMoisObjJson[mois].ListAccident[type][i].Victime + "de type: " + listeAccidentParMoisObjJson[mois].ListAccident[type][i].TypeString;
+
+                    DivText1.className = 'TextDateDetail';
+                    newDiv.appendChild(DivText1);
+                    DivText1.appendChild(text1);
+
+                    var text2 = document.createElement("label");
+                    var DivText2 = document.createElement("div")
+                    text2.innerHTML = "Observations: ";
+                    DivText2.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText2);
+                    DivText2.appendChild(text2);
+
+                    var text3 = document.createElement("p");
+                    var DivText3 = document.createElement("div")
+                    text3.innerHTML = listeAccidentParMoisObjJson[mois].ListAccident[type][i].Description;
+                    DivText3.className = 'TextDetail';
+                    newDiv.appendChild(DivText3);
+                    DivText3.appendChild(text3);
+
+                    var text4 = document.createElement("label");
+                    var DivText4 = document.createElement("div")
+                    text4.innerHTML = "Action immediate: ";
+                    DivText4.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText4);
+                    DivText4.appendChild(text4);
+
+                    var text5 = document.createElement("p");
+                    var DivText5 = document.createElement("div")
+                    text5.innerHTML = listeAccidentParMoisObjJson[mois].ListAccident[type][i].Description2;
+                    DivText5.className = 'TextDetail';
+                    newDiv.appendChild(DivText5);
+                    DivText5.appendChild(text5);
+
+                    var text6 = document.createElement("label");
+                    var DivText6 = document.createElement("div")
+                    text6.innerHTML = "Image de l'accident: ";
+                    DivText6.className = 'TextGrasDetail';
+                    newDiv.appendChild(DivText6);
+                    DivText6.appendChild(text6);
+
+                    //Si l'image de l'accident n'existe pas (le champ UrlImage est NULL), on l'affiche, sinon on affiche 'Aucune photo prise'
+                    if (listeAccidentParMoisObjJson[mois].ListAccident[type][i].FullUrlImage.length != 0) {
+                        var image = document.createElement("img");
+                        image.setAttribute("src", "/ImageAccident/" + listeAccidentParMoisObjJson[mois].ListAccident[type][i].FullUrlImage.split('\\')[1]);
+                        image.className += "image_box";
+                        var DivImage = document.createElement("div")
+                        DivImage.className = 'ImageDetail';
+                        newDiv.appendChild(DivImage);
+                        DivImage.appendChild(image);
+                    } else {
+                        var text7 = document.createElement("p");
+                        var DivText7 = document.createElement("div")
+                        text7.innerHTML = "Aucune photo de l'accident prise.";
+                        DivText7.className = 'TextDetail';
+                        newDiv.appendChild(DivText7);
+                        DivText7.appendChild(text7);
+                    }
+
+                    document.getElementById('DetailAccident').appendChild(newDiv);
+                }
+
+            }
+        function toLiteral(str) {
+            var dict = { '\b': 'b', '\t': 't', '\n': 'n', '\v': 'v', '\f': 'f', '\r': 'r' };
+            return str.replace(/([\\'"\b\t\n\v\f\r])/g, function ($0, $1) {
+                return '\\' + (dict[$1] || $1);
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+    <script src="~/Scripts/Accident.js" charset="utf-8"></script>
+</body>
+
+

@@ -1,0 +1,595 @@
+﻿@model GenerateurDFUSafir.Models.GestionSTCOperateur
+@using System.Globalization;
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/graph.css" />
+    <link rel="stylesheet" href="~/Content/STCTCS.css" />
+    <link rel="stylesheet" href="~/Content/form.css" />
+}
+
+
+<div class="tab-buttons">
+    <div class="tableau-global">
+        <div class="date-picker" id="Date">
+            <div class="datenumsemaine">
+                <label id="stylesemaine" class="frm-button action-button" style="width: 50px; min-width: 50px;">
+                    <input name="datesemaine" type="date" class="planning" id="datesemaine"/>
+                </label>
+                @{
+                    DateTime now = DateTime.Now;
+                    Calendar calendar = CultureInfo.CurrentCulture.Calendar;
+                    int currentWeek = calendar.GetWeekOfYear(now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+                    int semaineAffichee = currentWeek + Model.nbJours;
+
+                }
+                <p id="numsemaine">Semaine @semaineAffichee</p>
+            </div>
+            <button type="button" class="frm-button action-button" style="width: 50px; min-width: 50px;" id="edit-tableau" onclick="toggleSelects()"><i class="fa-solid fa-pen-to-square"></i></button>
+        </div>
+        @using (Html.BeginForm("IndexPost", "STCTCS"))
+        {
+            @Html.AntiForgeryToken()
+            <div>
+
+            </div>
+            <div class="fleches-left">
+                <i class="fa-solid fa-arrow-left fleches" id="gauche" style="color: #ff6400;" onclick=""></i>
+            </div>
+            @Html.HiddenFor(model => model.nbJours)
+            @Html.HiddenFor(model => model.Jour1)
+            @Html.HiddenFor(model => model.ListDataOperateurs)
+
+
+    <table class="main-table">
+        <tr>
+            <th>Noms</th>
+            @for (DateTime day = Model.Jour1; day <= Model.Jour5; day = day.AddDays(1))
+            {
+                <th>@day.ToString("ddd dd/MM/yyyy")</th>
+            }
+        </tr>
+
+
+        @for (int i = 0; i < Model.ListDataOperateurs.Count; i++)
+        {
+           
+            @Html.HiddenFor(model => Model.ListPLANNING_OPERATEUR[i].ID)
+            @Html.HiddenFor(model => Model.ListPLANNING_OPERATEUR[i].ID_STC)
+            @Html.HiddenFor(model => Model.ListPLANNING_OPERATEUR[i].Annee)
+            @Html.HiddenFor(model => Model.ListPLANNING_OPERATEUR[i].Semaine)
+
+            <tr>
+                <td rowspan="2" class=""><a href="@Url.Action("GestionSTC", "STCTCS", new { id = Model.ListPLANNING_OPERATEUR[i].ID_STC })" class="name-table">@Model.ListDataOperateurs[i].Prenom @Model.ListDataOperateurs[i].Nom</a></td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].LundiMatin,
+                           new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].LundiMatin),
+                           new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].MardiMatin,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].MardiMatin),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].MercrediMatin,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].MercrediMatin),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].JeudiMatin,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].JeudiMatin),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].VendrediMatin,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].VendrediMatin),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].LundiApresmidi,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].LundiApresmidi),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].MardiApresmidi,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].MardiApresmidi),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].MercrediApresmidi,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].MercrediApresmidi),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].JeudiApresmidi,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].JeudiApresmidi),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+                <td>
+                    <div style="display: inline">
+                        @Html.DropDownListFor(m => Model.ListPLANNING_OPERATEUR[i].VendrediApresmidi,
+       new SelectList(Model.Planning_status, "Value", "Text", Model.ListPLANNING_OPERATEUR[i].VendrediApresmidi),
+       new { @class = "form-control", @id = "dropdown", onchange = @"submit();", disabled = "disabled" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+            <div class="fleches-right">
+                <i class="fa-solid fa-arrow-right fleches" id="droite" style="color: #ff6400;" onclick=""></i>
+            </div>
+        }
+    </div>
+    <div class="bloc-btn">
+        <a class="option-buttons" href="/STCTCS/GestionCmd">DashZEN Commande</a>
+        <a class="option-buttons" href="/STCTCS/GestionFPS">DashZEN Bidir</a>
+        <a class="option-buttons" href="/STCTCS/GestionMono">DashZEN Mono</a>
+    </div>
+</div>
+
+
+<div class="transparent-background"></div>
+
+<main class="graph-list">
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Flux offre semaine</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="flux_offre_semaine"></canvas>
+    </div>
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Evolution offre</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="evolution_offre_semaine"></canvas>
+    </div>
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Commande en cours</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="commande_en_cours"></canvas>
+    </div>
+
+
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Flux commande semaine</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="flux_commande_semaine"></canvas>
+    </div>
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Evolution commande semaine</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="evolution_commande_semaines"></canvas>
+    </div>
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Flux à traiter entrée</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="flux_atraiter_entree"></canvas>
+    </div>
+
+    <div class="box-conductix graph-box">
+        <div class="header">
+            <h3>Flux en cours relance</h3>
+            <i class="fa-solid fa-expand fullscreen-btn"></i>
+        </div>
+        <canvas id="flux_en_cours_relance"></canvas>
+    </div>
+
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // script qui met la date du jour au format dd/mm/yyyy dans le champ date au chargement de la page
+    // A TERMINER !
+    document.getElementById("datesemaine").valueAsDate = new Date();
+
+</script>
+
+<script>
+
+    function toggleSelects() {
+        if (selectsEnabled) {
+            disableSelects();
+        } else {
+            enableSelects();
+        }
+    }
+
+    function enableSelects() {
+        var selects = document.getElementsByTagName("select");
+        for (var i = 0; i < selects.length; i++) {
+            selects[i].removeAttribute("disabled");
+        }
+        document.getElementById("edit-tableau").style.filter = "grayscale(0%)";
+        localStorage.setItem("selectsEnabled", "true");
+        selectsEnabled = true;
+    }
+    // Check if the selects were enabled before and enable them if they were
+    if (localStorage.getItem("selectsEnabled") === "true") {
+        enableSelects();
+    } else {
+        disableSelects();
+    }
+
+    function disableSelects() {
+        var selects = document.getElementsByTagName("select");
+        for (var i = 0; i < selects.length; i++) {
+            selects[i].setAttribute("disabled", "disabled");
+        }
+        localStorage.setItem("selectsEnabled", "false");
+        //on change la background color du bouton avec l'id "edit-tableau"
+        document.getElementById("edit-tableau").style.filter = "grayscale(70%)";
+
+
+        // Store the state of the selects in the variable
+        selectsEnabled = false;
+    }
+</script>
+
+<script>
+    const btn_fullscreen = document.querySelectorAll('.fullscreen-btn');
+    const bg = document.querySelector('.transparent-background');
+
+    btn_fullscreen.forEach(i => {
+        i.addEventListener('click', (e) => {
+            const box = e.target.parentElement?.parentElement;
+            if (box) {
+
+                if (box.classList.contains('fullscreen')) {
+                    bg.style.display = 'none';
+                }
+                else {
+                    bg.style.display = 'block';
+                }
+                box.classList.toggle('fullscreen');
+
+            }
+        });
+    });
+
+</script>
+
+<script>
+    var dateControl = document.querySelector('input[type="date"]');
+    dateControl.value = 'YYYY-MM-DD';
+
+
+</script>
+
+<script>
+
+
+    const fluxOffreSemaineCanva = document.querySelector('#flux_offre_semaine');
+    const commandeEnCoursCanva = document.querySelector('#commande_en_cours');
+    const evolutionOffreCanva = document.querySelector('#evolution_offre_semaine');
+
+
+    new Chart(fluxOffreSemaineCanva, {
+        type: 'bar',
+        options: {
+            scales: {
+                unit: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    stacked: true
+                },
+
+
+                ca: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    }
+                }
+
+            }
+        },
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.fluxOffreSemaine.ListStc ))),
+
+            datasets: [
+                {
+                    label: "Atex",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxOffreSemaine.Atex))),
+                    backgroundColor: ['rgb(255, 192, 0)'],
+                    yAxisID: 'unit',
+                    stack: 'Stack 0',
+                },
+                {
+                    label: "Normal",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxOffreSemaine.NbOffres))),
+                    backgroundColor: ['#FF6400'],
+                    yAxisID: 'unit',
+                    stack: 'Stack 0',
+                },
+                {
+                    label: "Chiffre d'affaire",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxOffreSemaine.Ca))),
+                    backgroundColor: ['#8F8F8F'],
+                    yAxisID: 'ca',
+                    stack: 'Stack 1',
+                }
+
+            ]
+        },
+
+    });
+
+
+
+    new Chart(evolutionOffreCanva, {
+        type: 'line',
+
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.evolutionOffreStc.NumSemaines))),
+
+            datasets: [
+
+                @foreach (KeyValuePair<String, List<double>> data in Model.evolutionOffreStc.datas) {
+
+                        @(Html.Raw("{ label: '" + @data.Key + "', data: " + Html.Raw(Json.Encode(data.Value)) + ", fill: false, tension: 0.1 },"));
+                 }
+            ]
+        }
+    });
+
+    new Chart(commandeEnCoursCanva, {
+        type: 'doughnut',
+        options: {
+            plugins: {
+                legend: {
+                    position: 'top',
+
+                    labels: {
+                        boxWidth: 10,
+                        boxHeight: 10,
+                    }
+
+                }
+            }
+        },
+        data: {
+            labels: ["A traiter entrer", "Attente valid fiche param", "Attente valid fiche plastron"],
+
+            datasets: [
+                {
+                    data: @(Html.Raw(Json.Encode(Model.commandeEnCours.nbCommandes))),
+                    backgroundColor: ['#FF6400', "#8F8F8F", "rgb(255, 192, 0)"]
+                },
+            ]
+        }
+    });
+
+
+    new Chart(document.querySelector('#flux_commande_semaine'), {
+        type: 'bar',
+        options: {
+            scales: {
+                unit: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+
+                ca: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    }
+                }
+
+            }
+        },
+        data: {
+            labels: ['ENTREE', 'EN COURS', 'TERMINE'],
+
+            datasets: [
+                {
+                    label: "Normal",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxCommandeSemaine.nb))),
+                    backgroundColor: ['#FF6400'],
+                    yAxisID: 'unit'
+                },
+                {
+                    label: "Chiffre d'affaire",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxCommandeSemaine.ca))),
+                    backgroundColor: ['#8F8F8F'],
+                    yAxisID: 'ca'
+                }
+            ]
+        },
+
+    });
+
+
+    new Chart(document.querySelector('#evolution_commande_semaines'), {
+        type: 'line',
+
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.evolutionCommandeGraph.NumSemaines))),
+
+            datasets: [
+
+                @foreach (KeyValuePair<String, List<double>> data in Model.evolutionCommandeGraph.datas) {
+
+                        @(Html.Raw("{ label: '" + @data.Key + "', data: " + Html.Raw(Json.Encode(data.Value)) + ", fill: false, tension: 0.1 },"));
+                 }
+            ]
+        }
+    });
+
+    new Chart(document.querySelector('#flux_atraiter_entree'), {
+        type: 'bar',
+        options: {
+            scales: {
+                unit: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+
+                ca: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    }
+                }
+
+            }
+        },
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.fluxATraiterEntree.datas.Keys))),
+
+            datasets: [
+                {
+                    label: "Normal",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxATraiterEntree.datas.Values))),
+                    backgroundColor: ['#FF6400'],
+                    yAxisID: 'unit'
+                },
+            ]
+        },
+
+    });
+
+    new Chart(document.querySelector('#flux_en_cours_relance'), {
+        type: 'bar',
+        options: {
+            scales: {
+                unit: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+
+                unit2: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    }
+                }
+
+            }
+        },
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.fluxEnCoursRelance.datas.Keys))),
+
+            datasets: [
+                {
+                    label: "Attente valid fiche param",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxEnCoursRelance.datas.Values.Select(i => i[0])))),
+                    backgroundColor: ['#FF6400'],
+                    yAxisID: 'unit'
+                },
+                {
+                    label: "Attente valid fiche plastron",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxEnCoursRelance.datas.Values.Select(i => i[1])))),
+                    backgroundColor: ['#8F8F8F'],
+                    yAxisID: 'unit2'
+                }
+            ]
+        },
+
+    });
+
+
+</script>
+
+<script>
+    var activities = document.querySelectorAll(".form-control");
+
+    activities.forEach(function (activity) {
+        if (activity.value == "4") {
+            activity.style.color = "#ff6400";
+            activity.style.fontWeight = "bold";
+        }
+    });
+    var nbJours = @Model.nbJours;
+    //var nbJours = document.getElementsByTagName("nbJours");
+    //console.log(nbJours);
+    document.getElementById("droite").onclick = function () {
+        nbJours = nbJours + 1;
+        window.location.href = '?nbJours=' + nbJours;
+
+    }
+
+    document.getElementById("gauche").onclick = function () {
+        nbJours = nbJours - 1;
+        window.location.href = '?nbJours=' + nbJours;
+
+    }
+
+    const datepicker = document.querySelector("#datesemaine");
+
+    Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    };
+
+    datepicker.addEventListener('change', e => {
+        // On détermine le numéro de semaine
+        const date = new Date(datepicker.value);
+        const currentDate = new Date(Date.now());
+        const decal = date.getWeek() - currentDate.getWeek();
+
+        window.location.href = '?nbJours=' + decal;
+    })
+
+
+</script>
+
+
+
+

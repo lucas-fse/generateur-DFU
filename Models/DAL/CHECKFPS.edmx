@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PEGASE_CHECKFPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COMMENTAIRE">
+          <Key>
+            <PropertyRef Name="IndexCom" />
+          </Key>
+          <Property Name="IndexCom" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DELAIFPS">
+          <Key>
+            <PropertyRef Name="indexDELAI" />
+          </Key>
+          <Property Name="indexDELAI" Type="smallint" Nullable="false" />
+          <Property Name="Value" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Temps" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATUSFPS">
+          <Key>
+            <PropertyRef Name="IndexSTATUSFPS" />
+          </Key>
+          <Property Name="IndexSTATUSFPS" Type="smallint" Nullable="false" />
+          <Property Name="Value" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATUSRELANCE">
+          <Key>
+            <PropertyRef Name="IndexRELANCE" />
+          </Key>
+          <Property Name="IndexRELANCE" Type="smallint" Nullable="false" />
+          <Property Name="Relance" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Actif" Type="bit" />
+        </EntityType>
+        <EntityType Name="TRACA_CHANGE_GESTIONSTATUS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_TRACACMD" Type="bigint" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="STC" Type="nchar" MaxLength="10" />
+          <Property Name="ErreurStatusList" Type="nchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TRACACMD">
+          <Key>
+            <PropertyRef Name="IndexCMD" />
+          </Key>
+          <Property Name="IndexCMD" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SOHNUM" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="SOPLIN" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="STAT" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="BPCORD" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="BPAADD" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="CFGFLDALP2" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="CFGFLDALP3" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="CFGFLDALP4" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="VAL_FPARAM_0" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="ZFPS" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="PLASTRON" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="SYNCHRO" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="ZVERSION" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="ERRFICHE" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateVerif" Type="datetime" />
+          <Property Name="CREDAT_0" Type="datetime" />
+          <Property Name="SHIDAT" Type="datetime" />
+          <Property Name="EXTDLVDAT" Type="datetime" />
+          <Property Name="DEMDLVDAT_0" Type="datetime" />
+          <Property Name="ORDDAT_0" Type="datetime" />
+          <Property Name="STCORIG" Type="nchar" MaxLength="10" />
+          <Property Name="REFFICHE" Type="bigint" />
+          <Property Name="IsMOInside" Type="bit" Nullable="false" />
+          <Property Name="TempsRealiseFPSHeure" Type="int" />
+          <Property Name="NomClient" Type="nchar" MaxLength="20" />
+          <Property Name="StatusFPS" Type="smallint" Nullable="false" />
+          <Property Name="StatusPlastron" Type="smallint" Nullable="false" />
+          <Property Name="DelaiEstimation" Type="smallint" />
+          <Property Name="DateCloture" Type="date" />
+          <Property Name="Relance" Type="smallint" Nullable="false" />
+          <Property Name="Commentaire" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateEffectiveClient" Type="date" />
+          <Property Name="STcEnCharge" Type="nchar" MaxLength="10" />
+          <Property Name="ZFPCONTROL_0" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ZCOMCONT_0" Type="nchar" MaxLength="250" />
+          <Property Name="QTY" Type="smallint" />
+          <Property Name="TCSORIG" Type="nchar" MaxLength="10" />
+          <Property Name="ITEMREF" Type="nvarchar" MaxLength="20" />
+          <Property Name="NomTech" Type="nchar" MaxLength="40" />
+          <Property Name="TelTech" Type="nchar" MaxLength="20" />
+          <Property Name="MobTech" Type="nchar" MaxLength="20" />
+          <Property Name="MailTech" Type="nchar" MaxLength="50" />
+          <Property Name="GestionStatus" Type="smallint" />
+          <Property Name="CmdRecurrente" Type="bit" />
+        </EntityType>
+        <EntityType Name="TRACACMDMONO">
+          <Key>
+            <PropertyRef Name="IndexCmd" />
+          </Key>
+          <Property Name="IndexCmd" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SOHNUM" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="SOPLIN" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="STAT" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="BPCORD" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="BPAADD" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="STCORIG" Type="nchar" MaxLength="10" />
+          <Property Name="STATUSFPS" Type="smallint" Nullable="false" />
+          <Property Name="DateVerif" Type="datetime" />
+          <Property Name="CREDAT_0" Type="datetime" />
+          <Property Name="SHIDAT" Type="datetime" />
+          <Property Name="EXTDLVDAT_0" Type="datetime" />
+          <Property Name="DEMDLVDAT_0" Type="datetime" />
+          <Property Name="ORDDDAT_0" Type="datetime" />
+          <Property Name="NomClient" Type="nchar" MaxLength="20" />
+          <Property Name="DateCloture" Type="date" />
+          <Property Name="Commentaire" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateEffectiveClient" Type="date" />
+          <Property Name="STcEnCharge" Type="nchar" MaxLength="10" />
+          <Property Name="ZFPCONTROL_0" Type="nvarchar" MaxLength="15" />
+          <Property Name="ZCOMCONT_0" Type="nchar" MaxLength="250" />
+          <Property Name="QTY" Type="smallint" />
+          <Property Name="PRODUIT" Type="nchar" MaxLength="20" />
+          <Property Name="VAL_FPARAM_0" Type="nchar" MaxLength="20" />
+          <Property Name="CODE_IDs" Type="nchar" MaxLength="50" />
+          <Property Name="CPLREF" Type="nchar" MaxLength="10" />
+          <Property Name="RASSOTX" Type="nchar" MaxLength="20" />
+          <Property Name="RASSORX" Type="nchar" MaxLength="20" />
+          <Property Name="CONF_BTS" Type="nchar" MaxLength="20" />
+          <Property Name="NMR_CLE" Type="nchar" MaxLength="20" />
+          <Property Name="CPLTCLE" Type="nchar" MaxLength="20" />
+          <Property Name="CANAL1" Type="nchar" MaxLength="10" />
+          <Property Name="CANAL2" Type="nchar" MaxLength="10" />
+          <Property Name="APASS" Type="nchar" MaxLength="10" />
+          <Property Name="ERRFICHE" Type="varchar(max)" />
+          <Property Name="TYPEANALYSE" Type="nchar" MaxLength="10" />
+          <Property Name="TCSORIG" Type="nchar" MaxLength="10" />
+          <Property Name="GestionStatus" Type="smallint" />
+        </EntityType>
+        <Association Name="FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD">
+          <End Role="TRACACMD" Type="Self.TRACACMD" Multiplicity="1" />
+          <End Role="TRACA_CHANGE_GESTIONSTATUS" Type="Self.TRACA_CHANGE_GESTIONSTATUS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRACACMD">
+              <PropertyRef Name="IndexCMD" />
+            </Principal>
+            <Dependent Role="TRACA_CHANGE_GESTIONSTATUS">
+              <PropertyRef Name="ID_TRACACMD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_DELAIFPS">
+          <End Role="DELAIFPS" Type="Self.DELAIFPS" Multiplicity="0..1" />
+          <End Role="TRACACMD" Type="Self.TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DELAIFPS">
+              <PropertyRef Name="indexDELAI" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="DelaiEstimation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSFPS">
+          <End Role="STATUSFPS" Type="Self.STATUSFPS" Multiplicity="1" />
+          <End Role="TRACACMD" Type="Self.TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="StatusFPS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSFPS1">
+          <End Role="STATUSFPS" Type="Self.STATUSFPS" Multiplicity="1" />
+          <End Role="TRACACMD" Type="Self.TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="StatusPlastron" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSRELANCE">
+          <End Role="STATUSRELANCE" Type="Self.STATUSRELANCE" Multiplicity="0..1" />
+          <End Role="TRACACMD" Type="Self.TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSRELANCE">
+              <PropertyRef Name="IndexRELANCE" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="GestionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMDMONO_STATUSFPS1">
+          <End Role="STATUSFPS" Type="Self.STATUSFPS" Multiplicity="1" />
+          <End Role="TRACACMDMONO" Type="Self.TRACACMDMONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMDMONO">
+              <PropertyRef Name="STATUSFPS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMDMONO_STATUSRELANCE">
+          <End Role="STATUSRELANCE" Type="Self.STATUSRELANCE" Multiplicity="0..1" />
+          <End Role="TRACACMDMONO" Type="Self.TRACACMDMONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSRELANCE">
+              <PropertyRef Name="IndexRELANCE" />
+            </Principal>
+            <Dependent Role="TRACACMDMONO">
+              <PropertyRef Name="GestionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_CHECKFPSModelStoreContainer">
+          <EntitySet Name="COMMENTAIRE" EntityType="Self.COMMENTAIRE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DELAIFPS" EntityType="Self.DELAIFPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUSFPS" EntityType="Self.STATUSFPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUSRELANCE" EntityType="Self.STATUSRELANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACA_CHANGE_GESTIONSTATUS" EntityType="Self.TRACA_CHANGE_GESTIONSTATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACACMD" EntityType="Self.TRACACMD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACACMDMONO" EntityType="Self.TRACACMDMONO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD" Association="Self.FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD">
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+            <End Role="TRACA_CHANGE_GESTIONSTATUS" EntitySet="TRACA_CHANGE_GESTIONSTATUS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_DELAIFPS" Association="Self.FK_TRACACMD_DELAIFPS">
+            <End Role="DELAIFPS" EntitySet="DELAIFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSFPS" Association="Self.FK_TRACACMD_STATUSFPS">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSFPS1" Association="Self.FK_TRACACMD_STATUSFPS1">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSRELANCE" Association="Self.FK_TRACACMD_STATUSRELANCE">
+            <End Role="STATUSRELANCE" EntitySet="STATUSRELANCE" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMDMONO_STATUSFPS1" Association="Self.FK_TRACACMDMONO_STATUSFPS1">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMDMONO" EntitySet="TRACACMDMONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMDMONO_STATUSRELANCE" Association="Self.FK_TRACACMDMONO_STATUSRELANCE">
+            <End Role="STATUSRELANCE" EntitySet="STATUSRELANCE" />
+            <End Role="TRACACMDMONO" EntitySet="TRACACMDMONO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_CHECKFPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="STATUSFPS">
+          <Key>
+            <PropertyRef Name="IndexSTATUSFPS" />
+          </Key>
+          <Property Name="Value" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IndexSTATUSFPS" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="TRACACMD" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS" FromRole="STATUSFPS" ToRole="TRACACMD" />
+          <NavigationProperty Name="TRACACMD1" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS1" FromRole="STATUSFPS" ToRole="TRACACMD" />
+          <NavigationProperty Name="TRACACMDMONO" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSFPS1" FromRole="STATUSFPS" ToRole="TRACACMDMONO" />
+          </EntityType>
+        <EntityType Name="STATUSRELANCE">
+          <Key>
+            <PropertyRef Name="IndexRELANCE" />
+          </Key>
+          <Property Name="Relance" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IndexRELANCE" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="TRACACMD" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSRELANCE" FromRole="STATUSRELANCE" ToRole="TRACACMD" />
+          <NavigationProperty Name="TRACACMDMONO" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSRELANCE" FromRole="STATUSRELANCE" ToRole="TRACACMDMONO" />
+          <Property Name="Actif" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_CHECKFPSEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="STATUSFPS" EntityType="Self.STATUSFPS" />
+          <EntitySet Name="STATUSRELANCE" EntityType="Self.STATUSRELANCE" />
+          <EntitySet Name="DELAIFPS" EntityType="PEGASE_CHECKFPSModel.DELAIFPS" />
+          <EntitySet Name="COMMENTAIRE" EntityType="PEGASE_CHECKFPSModel.COMMENTAIRE" />
+          <EntitySet Name="TRACACMD" EntityType="PEGASE_CHECKFPSModel.TRACACMD" />
+          <EntitySet Name="TRACACMDMONO" EntityType="PEGASE_CHECKFPSModel.TRACACMDMONO" />
+          <AssociationSet Name="FK_TRACACMD_DELAIFPS" Association="PEGASE_CHECKFPSModel.FK_TRACACMD_DELAIFPS">
+            <End Role="DELAIFPS" EntitySet="DELAIFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSFPS" Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSFPS1" Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS1">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMDMONO_STATUSFPS1" Association="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSFPS1">
+            <End Role="STATUSFPS" EntitySet="STATUSFPS" />
+            <End Role="TRACACMDMONO" EntitySet="TRACACMDMONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMD_STATUSRELANCE" Association="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSRELANCE">
+            <End Role="STATUSRELANCE" EntitySet="STATUSRELANCE" />
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRACACMDMONO_STATUSRELANCE" Association="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSRELANCE">
+            <End Role="STATUSRELANCE" EntitySet="STATUSRELANCE" />
+            <End Role="TRACACMDMONO" EntitySet="TRACACMDMONO" />
+          </AssociationSet>
+          <EntitySet Name="TRACA_CHANGE_GESTIONSTATUS" EntityType="PEGASE_CHECKFPSModel.TRACA_CHANGE_GESTIONSTATUS" />
+          <AssociationSet Name="FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD" Association="PEGASE_CHECKFPSModel.FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD">
+            <End Role="TRACACMD" EntitySet="TRACACMD" />
+            <End Role="TRACA_CHANGE_GESTIONSTATUS" EntitySet="TRACA_CHANGE_GESTIONSTATUS" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DELAIFPS">
+          <Key>
+            <PropertyRef Name="indexDELAI" />
+          </Key>
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Temps" Type="Int32" Nullable="false" />
+          <Property Name="indexDELAI" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="TRACACMD" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_DELAIFPS" FromRole="DELAIFPS" ToRole="TRACACMD" />
+        </EntityType>
+        <EntityType Name="COMMENTAIRE">
+          <Key>
+            <PropertyRef Name="IndexCom" />
+          </Key>
+          <Property Name="IndexCom" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TRACACMD">
+          <Key>
+            <PropertyRef Name="IndexCMD" />
+          </Key>
+          <Property Name="IndexCMD" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SOHNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SOPLIN" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="STAT" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="BPCORD" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="BPAADD" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CFGFLDALP2" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CFGFLDALP3" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CFGFLDALP4" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="VAL_FPARAM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ZFPS" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="PLASTRON" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SYNCHRO" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="ZVERSION" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ERRFICHE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateVerif" Type="DateTime" Precision="3" />
+          <Property Name="CREDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="SHIDAT" Type="DateTime" Precision="3" />
+          <Property Name="EXTDLVDAT" Type="DateTime" Precision="3" />
+          <Property Name="DEMDLVDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="ORDDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="STCORIG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="REFFICHE" Type="Int64" />
+          <Property Name="IsMOInside" Type="Boolean" Nullable="false" />
+          <Property Name="TempsRealiseFPSHeure" Type="Int32" />
+          <Property Name="NomClient" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="StatusFPS" Type="Int16" Nullable="false" />
+          <Property Name="StatusPlastron" Type="Int16" Nullable="false" />
+          <Property Name="DelaiEstimation" Type="Int16" />
+          <Property Name="DateCloture" Type="DateTime" Precision="0" />
+          <Property Name="Relance" Type="Int16" Nullable="false" />
+          <Property Name="Commentaire" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateEffectiveClient" Type="DateTime" Precision="0" />
+          <Property Name="STcEnCharge" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ZFPCONTROL_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ZCOMCONT_0" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="QTY" Type="Int16" />
+          <Property Name="TCSORIG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ITEMREF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NomTech" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="TelTech" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MobTech" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MailTech" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="GestionStatus" Type="Int16" />
+          <NavigationProperty Name="DELAIFPS" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_DELAIFPS" FromRole="TRACACMD" ToRole="DELAIFPS" />
+          <NavigationProperty Name="STATUSFPS1" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS" FromRole="TRACACMD" ToRole="STATUSFPS" />
+          <NavigationProperty Name="STATUSFPS2" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSFPS1" FromRole="TRACACMD" ToRole="STATUSFPS" />
+          <NavigationProperty Name="STATUSRELANCE" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMD_STATUSRELANCE" FromRole="TRACACMD" ToRole="STATUSRELANCE" />
+          <NavigationProperty Name="TRACA_CHANGE_GESTIONSTATUS" Relationship="PEGASE_CHECKFPSModel.FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD" FromRole="TRACACMD" ToRole="TRACA_CHANGE_GESTIONSTATUS" />
+          <Property Name="CmdRecurrente" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TRACACMDMONO">
+          <Key>
+            <PropertyRef Name="IndexCmd" />
+          </Key>
+          <Property Name="IndexCmd" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SOHNUM" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SOPLIN" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="STAT" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="BPCORD" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="BPAADD" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="STCORIG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="STATUSFPS" Type="Int16" Nullable="false" />
+          <Property Name="DateVerif" Type="DateTime" Precision="3" />
+          <Property Name="CREDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="SHIDAT" Type="DateTime" Precision="3" />
+          <Property Name="EXTDLVDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="DEMDLVDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="ORDDDAT_0" Type="DateTime" Precision="3" />
+          <Property Name="NomClient" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DateCloture" Type="DateTime" Precision="0" />
+          <Property Name="Commentaire" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateEffectiveClient" Type="DateTime" Precision="0" />
+          <Property Name="STcEnCharge" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ZFPCONTROL_0" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ZCOMCONT_0" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="QTY" Type="Int16" />
+          <Property Name="PRODUIT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="VAL_FPARAM_0" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CODE_IDs" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CPLREF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RASSOTX" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="RASSORX" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CONF_BTS" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NMR_CLE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CPLTCLE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CANAL1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CANAL2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="APASS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ERRFICHE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TYPEANALYSE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TCSORIG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GestionStatus" Type="Int16" />
+          <NavigationProperty Name="STATUSFPS1" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSFPS1" FromRole="TRACACMDMONO" ToRole="STATUSFPS" />
+          <NavigationProperty Name="STATUSRELANCE" Relationship="PEGASE_CHECKFPSModel.FK_TRACACMDMONO_STATUSRELANCE" FromRole="TRACACMDMONO" ToRole="STATUSRELANCE" />
+        </EntityType>
+        <Association Name="FK_TRACACMD_DELAIFPS">
+          <End Type="PEGASE_CHECKFPSModel.DELAIFPS" Role="DELAIFPS" Multiplicity="0..1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMD" Role="TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DELAIFPS">
+              <PropertyRef Name="indexDELAI" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="DelaiEstimation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSFPS">
+          <End Type="PEGASE_CHECKFPSModel.STATUSFPS" Role="STATUSFPS" Multiplicity="1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMD" Role="TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="StatusFPS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSFPS1">
+          <End Type="PEGASE_CHECKFPSModel.STATUSFPS" Role="STATUSFPS" Multiplicity="1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMD" Role="TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="StatusPlastron" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMDMONO_STATUSFPS1">
+          <End Type="PEGASE_CHECKFPSModel.STATUSFPS" Role="STATUSFPS" Multiplicity="1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMDMONO" Role="TRACACMDMONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSFPS">
+              <PropertyRef Name="IndexSTATUSFPS" />
+            </Principal>
+            <Dependent Role="TRACACMDMONO">
+              <PropertyRef Name="STATUSFPS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMD_STATUSRELANCE">
+          <End Type="PEGASE_CHECKFPSModel.STATUSRELANCE" Role="STATUSRELANCE" Multiplicity="0..1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMD" Role="TRACACMD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSRELANCE">
+              <PropertyRef Name="IndexRELANCE" />
+            </Principal>
+            <Dependent Role="TRACACMD">
+              <PropertyRef Name="GestionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRACACMDMONO_STATUSRELANCE">
+          <End Type="PEGASE_CHECKFPSModel.STATUSRELANCE" Role="STATUSRELANCE" Multiplicity="0..1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACACMDMONO" Role="TRACACMDMONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSRELANCE">
+              <PropertyRef Name="IndexRELANCE" />
+            </Principal>
+            <Dependent Role="TRACACMDMONO">
+              <PropertyRef Name="GestionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TRACA_CHANGE_GESTIONSTATUS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_TRACACMD" Type="Int64" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="STC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TRACACMD" Relationship="PEGASE_CHECKFPSModel.FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD" FromRole="TRACA_CHANGE_GESTIONSTATUS" ToRole="TRACACMD" />
+          <Property Name="ErreurStatusList" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_TRACA_CHANGE_GESTIONSTATUS_TRACACMD">
+          <End Type="PEGASE_CHECKFPSModel.TRACACMD" Role="TRACACMD" Multiplicity="1" />
+          <End Type="PEGASE_CHECKFPSModel.TRACA_CHANGE_GESTIONSTATUS" Role="TRACA_CHANGE_GESTIONSTATUS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRACACMD">
+              <PropertyRef Name="IndexCMD" />
+            </Principal>
+            <Dependent Role="TRACA_CHANGE_GESTIONSTATUS">
+              <PropertyRef Name="ID_TRACACMD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_CHECKFPSModelStoreContainer" CdmEntityContainer="PEGASE_CHECKFPSEntities1">
+          <EntitySetMapping Name="STATUSFPS">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.STATUSFPS">
+              <MappingFragment StoreEntitySet="STATUSFPS">
+                <ScalarProperty Name="IndexSTATUSFPS" ColumnName="IndexSTATUSFPS" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUSRELANCE">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.STATUSRELANCE">
+              <MappingFragment StoreEntitySet="STATUSRELANCE">
+                <ScalarProperty Name="Actif" ColumnName="Actif" />
+                <ScalarProperty Name="IndexRELANCE" ColumnName="IndexRELANCE" />
+                <ScalarProperty Name="Relance" ColumnName="Relance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DELAIFPS">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.DELAIFPS">
+              <MappingFragment StoreEntitySet="DELAIFPS">
+                <ScalarProperty Name="indexDELAI" ColumnName="indexDELAI" />
+                <ScalarProperty Name="Temps" ColumnName="Temps" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENTAIRE">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.COMMENTAIRE">
+              <MappingFragment StoreEntitySet="COMMENTAIRE">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IndexCom" ColumnName="IndexCom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACACMD">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.TRACACMD">
+              <MappingFragment StoreEntitySet="TRACACMD">
+                <ScalarProperty Name="CmdRecurrente" ColumnName="CmdRecurrente" />
+                <ScalarProperty Name="GestionStatus" ColumnName="GestionStatus" />
+                <ScalarProperty Name="MailTech" ColumnName="MailTech" />
+                <ScalarProperty Name="MobTech" ColumnName="MobTech" />
+                <ScalarProperty Name="TelTech" ColumnName="TelTech" />
+                <ScalarProperty Name="NomTech" ColumnName="NomTech" />
+                <ScalarProperty Name="ITEMREF" ColumnName="ITEMREF" />
+                <ScalarProperty Name="TCSORIG" ColumnName="TCSORIG" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ZCOMCONT_0" ColumnName="ZCOMCONT_0" />
+                <ScalarProperty Name="ZFPCONTROL_0" ColumnName="ZFPCONTROL_0" />
+                <ScalarProperty Name="STcEnCharge" ColumnName="STcEnCharge" />
+                <ScalarProperty Name="DateEffectiveClient" ColumnName="DateEffectiveClient" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Relance" ColumnName="Relance" />
+                <ScalarProperty Name="DateCloture" ColumnName="DateCloture" />
+                <ScalarProperty Name="DelaiEstimation" ColumnName="DelaiEstimation" />
+                <ScalarProperty Name="StatusPlastron" ColumnName="StatusPlastron" />
+                <ScalarProperty Name="StatusFPS" ColumnName="StatusFPS" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="TempsRealiseFPSHeure" ColumnName="TempsRealiseFPSHeure" />
+                <ScalarProperty Name="IsMOInside" ColumnName="IsMOInside" />
+                <ScalarProperty Name="REFFICHE" ColumnName="REFFICHE" />
+                <ScalarProperty Name="STCORIG" ColumnName="STCORIG" />
+                <ScalarProperty Name="ORDDAT_0" ColumnName="ORDDAT_0" />
+                <ScalarProperty Name="DEMDLVDAT_0" ColumnName="DEMDLVDAT_0" />
+                <ScalarProperty Name="EXTDLVDAT" ColumnName="EXTDLVDAT" />
+                <ScalarProperty Name="SHIDAT" ColumnName="SHIDAT" />
+                <ScalarProperty Name="CREDAT_0" ColumnName="CREDAT_0" />
+                <ScalarProperty Name="DateVerif" ColumnName="DateVerif" />
+                <ScalarProperty Name="ERRFICHE" ColumnName="ERRFICHE" />
+                <ScalarProperty Name="ZVERSION" ColumnName="ZVERSION" />
+                <ScalarProperty Name="SYNCHRO" ColumnName="SYNCHRO" />
+                <ScalarProperty Name="PLASTRON" ColumnName="PLASTRON" />
+                <ScalarProperty Name="ZFPS" ColumnName="ZFPS" />
+                <ScalarProperty Name="VAL_FPARAM_0" ColumnName="VAL_FPARAM_0" />
+                <ScalarProperty Name="CFGFLDALP4" ColumnName="CFGFLDALP4" />
+                <ScalarProperty Name="CFGFLDALP3" ColumnName="CFGFLDALP3" />
+                <ScalarProperty Name="CFGFLDALP2" ColumnName="CFGFLDALP2" />
+                <ScalarProperty Name="BPAADD" ColumnName="BPAADD" />
+                <ScalarProperty Name="BPCORD" ColumnName="BPCORD" />
+                <ScalarProperty Name="STAT" ColumnName="STAT" />
+                <ScalarProperty Name="SOPLIN" ColumnName="SOPLIN" />
+                <ScalarProperty Name="SOHNUM" ColumnName="SOHNUM" />
+                <ScalarProperty Name="IndexCMD" ColumnName="IndexCMD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACACMDMONO">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.TRACACMDMONO">
+              <MappingFragment StoreEntitySet="TRACACMDMONO">
+                <ScalarProperty Name="GestionStatus" ColumnName="GestionStatus" />
+                <ScalarProperty Name="TCSORIG" ColumnName="TCSORIG" />
+                <ScalarProperty Name="TYPEANALYSE" ColumnName="TYPEANALYSE" />
+                <ScalarProperty Name="ERRFICHE" ColumnName="ERRFICHE" />
+                <ScalarProperty Name="APASS" ColumnName="APASS" />
+                <ScalarProperty Name="CANAL2" ColumnName="CANAL2" />
+                <ScalarProperty Name="CANAL1" ColumnName="CANAL1" />
+                <ScalarProperty Name="CPLTCLE" ColumnName="CPLTCLE" />
+                <ScalarProperty Name="NMR_CLE" ColumnName="NMR_CLE" />
+                <ScalarProperty Name="CONF_BTS" ColumnName="CONF_BTS" />
+                <ScalarProperty Name="RASSORX" ColumnName="RASSORX" />
+                <ScalarProperty Name="RASSOTX" ColumnName="RASSOTX" />
+                <ScalarProperty Name="CPLREF" ColumnName="CPLREF" />
+                <ScalarProperty Name="CODE_IDs" ColumnName="CODE_IDs" />
+                <ScalarProperty Name="VAL_FPARAM_0" ColumnName="VAL_FPARAM_0" />
+                <ScalarProperty Name="PRODUIT" ColumnName="PRODUIT" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ZCOMCONT_0" ColumnName="ZCOMCONT_0" />
+                <ScalarProperty Name="ZFPCONTROL_0" ColumnName="ZFPCONTROL_0" />
+                <ScalarProperty Name="STcEnCharge" ColumnName="STcEnCharge" />
+                <ScalarProperty Name="DateEffectiveClient" ColumnName="DateEffectiveClient" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="DateCloture" ColumnName="DateCloture" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="ORDDDAT_0" ColumnName="ORDDDAT_0" />
+                <ScalarProperty Name="DEMDLVDAT_0" ColumnName="DEMDLVDAT_0" />
+                <ScalarProperty Name="EXTDLVDAT_0" ColumnName="EXTDLVDAT_0" />
+                <ScalarProperty Name="SHIDAT" ColumnName="SHIDAT" />
+                <ScalarProperty Name="CREDAT_0" ColumnName="CREDAT_0" />
+                <ScalarProperty Name="DateVerif" ColumnName="DateVerif" />
+                <ScalarProperty Name="STATUSFPS" ColumnName="STATUSFPS" />
+                <ScalarProperty Name="STCORIG" ColumnName="STCORIG" />
+                <ScalarProperty Name="BPAADD" ColumnName="BPAADD" />
+                <ScalarProperty Name="BPCORD" ColumnName="BPCORD" />
+                <ScalarProperty Name="STAT" ColumnName="STAT" />
+                <ScalarProperty Name="SOPLIN" ColumnName="SOPLIN" />
+                <ScalarProperty Name="SOHNUM" ColumnName="SOHNUM" />
+                <ScalarProperty Name="IndexCmd" ColumnName="IndexCmd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACA_CHANGE_GESTIONSTATUS">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.TRACA_CHANGE_GESTIONSTATUS">
+              <MappingFragment StoreEntitySet="TRACA_CHANGE_GESTIONSTATUS">
+                <ScalarProperty Name="ErreurStatusList" ColumnName="ErreurStatusList" />
+                <ScalarProperty Name="STC" ColumnName="STC" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="ID_TRACACMD" ColumnName="ID_TRACACMD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

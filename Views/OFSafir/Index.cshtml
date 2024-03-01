@@ -1,0 +1,84 @@
+﻿@model IEnumerable<GenerateurDFUSafir.Models.OrdreFabricationBiDir>
+@{
+    ViewBag.Title = "Supervision";
+}
+<h2>@ViewBag.Title.</h2>
+
+
+<h1 class="jumbotron">Liste des ordres de fabrications de la gamme bidirectionnelles</h1>
+
+<table class="table">
+    <tr>
+        <td>
+            <h3>Status</h3>
+        </td>
+        <td>
+            <h3>OF</h3>
+        </td>
+        <td>
+            <h3>Livraison</h3>
+        </td>
+        <td>
+            <h3>Qtr Pack</h3>
+        </td>
+        <td>
+            <h3>Ref Pack</h3>
+        </td>
+        <td>
+            <h3>Ref MO</h3>
+        </td>
+        <td>
+            <h3>REF MT</h3>
+        </td>
+        <td>
+            <h3>Ref SIM</h3>
+        </td>
+        <td>
+            <h3>Genéré</h3>
+        </td>
+        <td>
+            <h3></h3>
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <img src=@Html.DisplayFor(model => item.StatusImg) height=35 width=35 alt=@Html.DisplayFor(model => item.InfoBulle) title=@Html.DisplayFor(model => item.InfoBulle) />
+    </td>
+    <td >
+        @Html.DisplayFor(model => item.Nmr)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.DateLivraisonAff)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Qtr)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.RefComPack)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.RefIndusMO)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.RefIndusMT)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.RefComSim)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.DataGenerated)
+    </td>
+    <td>
+        @if (!string.IsNullOrWhiteSpace(item.Nmr))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Nmr })
+        } |
+        @if (!string.IsNullOrWhiteSpace(item.Nmr))
+        { @Html.ActionLink("Reinitialisation", "Reinitialisation", new { id = item.Nmr })
+        }
+    </td>
+</tr>
+    }
+</table>

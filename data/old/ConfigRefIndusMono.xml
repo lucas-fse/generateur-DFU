@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+
+	<!-- definition des boitiers MOB -->
+	<Refproduit valeur="UDE" Libelle="UDE" optionchamp="Ref UDE" optionMaskDebut="0" optionMaskTaille="3" imgmo1="" imgmo2="" docproduit="" dfuproduit="">
+		<Produit Libelle="UDE" optionMaskDebut="0" optionMaskTaille="9" docproduit="" isdfu="true" pty="0" ptxD="0" ptxG="0">
+			<Variante Libelle="UDE 6BP" valeur="UDE....00" ConductixA="" imageG="UDE6.png" imageD=""  CarteHard="">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UDE 8BP" valeur="UDE.....0" ConductixA="" imageG="UDE8.png" imageD=""  CarteHard="">
+				<Fichier nom=""/>
+			</Variante>
+			<Variante Libelle="UDE 10BP" valeur="UDE......" ConductixA="" imageG="UDE10.png" imageD=""  CarteHard="">
+				<Fichier nom=""/>
+			</Variante>
+		</Produit>
+		<Produit Libelle="FREQUENCE" optionMaskDebut="3" optionMaskTaille="1" isdfu="false" pty="0" ptxD="0" ptxG="0">
+			<Variante Libelle="FREQ433" valeur="4" Conductix="1" controlhardware="" imageG="" imageD="" CarteHard="">
+			</Variante>
+			<Variante Libelle="FREQ433 + InfraRouge" valeur="5" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="">
+			</Variante>
+			<Variante Libelle="FREQ869" valeur="M" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="">
+			</Variante>
+			<Variante Libelle="FREQ869 + InfraRouge" valeur="P" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="">
+			</Variante>
+			<Variante Libelle="FREQ911" valeur="R" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="">
+			</Variante>
+			<Variante Libelle="FREQ911 + InfraRouge" valeur="T" Conductix="1" controlhardware="" imageG="" imageD=""  CarteHard="">
+			</Variante>			
+		</Produit>
+		<Produit Libelle="BPLIGNE1" optionMaskDebut="4" optionMaskTaille="1" isdfu="false" pty="428" ptxD="198" ptxG="50">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSV.png" imageD="BPSV.png" CarteHard="CARTE1">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDV.png" imageD="BPDV.png" CarteHard="CARTE2">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSV.png" imageD="COM_2Droite.png" CarteHard="CARTE3">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSV.png" imageD="COM_3Droite.png" CarteHard="CARTE4">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="CARTE5">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE6">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE7">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSV.png" imageD="COM3RDroite.png" CarteHard="CARTE8">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTE9">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEA">
+			</Variante>
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEB">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSV.png" imageD="BPDV.png" CarteHard="CARTED">
+			</Variante>		
+		</Produit>
+		<Produit Libelle="BPLIGNE2" optionMaskDebut="5" optionMaskTaille="1" isdfu="false" pty="545" ptxD="198" ptxG="50">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSV.png" imageD="BPSV.png" CarteHard="CARTE1">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDV.png" imageD="BPDV.png" CarteHard="CARTE2">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSV.png" imageD="COM_2Droite.png" CarteHard="CARTE3">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSV.png" imageD="COM_3Droite.png" CarteHard="CARTE4">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="CARTE5">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE6">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE7">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSV.png" imageD="COM3RDroite.png" CarteHard="CARTE8">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTE9">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEA">
+			</Variante>
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEB">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSV.png" imageD="BPDV.png" CarteHard="CARTED">
+			</Variante>
+		</Produit>
+		<Produit Libelle="BPLIGNE3" optionMaskDebut="6" optionMaskTaille="1" isdfu="false" pty="663" ptxD="198" ptxG="50">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSV.png" imageD="BPSV.png" CarteHard="CARTE1">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDV.png" imageD="BPDV.png" CarteHard="CARTE2">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSV.png" imageD="COM_2Droite.png" CarteHard="CARTE3">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSV.png" imageD="COM_3Droite.png" CarteHard="CARTE4">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="CARTE5">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE6">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE7">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSV.png" imageD="COM3RDroite.png" CarteHard="CARTE8">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTE9">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEA">
+			</Variante>
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEB">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSV.png" imageD="BPDV.png" CarteHard="CARTED">
+			</Variante>	
+		</Produit>
+		<Produit Libelle="BPLIGNE4" optionMaskDebut="7" optionMaskTaille="1" isdfu="false" pty="780" ptxD="198" ptxG="50">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSV.png" imageD="BPSV.png" CarteHard="CARTE1">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDV.png" imageD="BPDV.png" CarteHard="CARTE2">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSV.png" imageD="COM_2Droite.png" CarteHard="CARTE3">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSV.png" imageD="COM_3Droite.png" CarteHard="CARTE4">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="CARTE5">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE6">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE7">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSV.png" imageD="COM3RDroite.png" CarteHard="CARTE8">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTE9">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEA">
+			</Variante>
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEB">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSV.png" imageD="BPDV.png" CarteHard="CARTED">
+			</Variante>		
+		</Produit>
+		<Produit Libelle="BPLIGNE5" optionMaskDebut="8" optionMaskTaille="1" isdfu="false" pty="898" ptxD="198" ptxG="50">
+			<Variante Libelle="VIDE" valeur="0" Conductix="" imageG="VIDE.png" imageD="VIDE.png"  CarteHard="">
+			</Variante>
+			<Variante Libelle="BPSV- BPSV" valeur="1" Conductix="" imageG="BPSV.png" imageD="BPSV.png" CarteHard="CARTE1">
+			</Variante>
+			<Variante Libelle="BPDV - BPDV" valeur="2" Conductix="" imageG="BPDV.png" imageD="BPDV.png" CarteHard="CARTE2">
+			</Variante>
+			<Variante Libelle="BPSV - COM2" valeur="3" Conductix="" imageG="BPSV.png" imageD="COM_2Droite.png" CarteHard="CARTE3">
+			</Variante>
+			<Variante Libelle="BPSV - COM3" valeur="4" Conductix="" imageG="BPSV.png" imageD="COM_3Droite.png" CarteHard="CARTE4">
+			</Variante>
+			<Variante Libelle="2COM2" valeur="5" Conductix="" imageG="COM_2Gauche.png" imageD="COM_2Droite.png" CarteHard="CARTE5">
+			</Variante>
+			<Variante Libelle="COM2 - COM3" valeur="6" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE6">
+			</Variante>
+			<Variante Libelle="2COM3" valeur="7" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3Droite.png" CarteHard="CARTE7">
+			</Variante>
+			<Variante Libelle="BPSV - COM3R" valeur="8" Conductix="" imageG="BPSV.png" imageD="COM3RDroite.png" CarteHard="CARTE8">
+			</Variante>
+			<Variante Libelle="COM2 - COM3R" valeur="9" Conductix="" imageG="COM_2Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTE9">
+			</Variante>
+			<Variante Libelle="COM3 - COM3R" valeur="A" Conductix="" imageG="COM_3Gauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEA">
+			</Variante>
+			<Variante Libelle="COM3R - COM3R" valeur="B" Conductix="" imageG="COM_3RGauche.png" imageD="COM_3RDroite.png" CarteHard="CARTEB">
+			</Variante>
+			<Variante Libelle="BPSV - BPTR" valeur="D" Conductix="" imageG="BPSV.png" imageD="BPDV.png" CarteHard="CARTED">
+			</Variante>
+		</Produit>
+	</Refproduit>
+
+</Root>

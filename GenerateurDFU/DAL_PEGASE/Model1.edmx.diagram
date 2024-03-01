@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b6cde5c55ca49acb3a2c6cb1ef894f6" Name="Diagram1">
+        <EntityTypeShape EntityType="PEGASE_PRODModel.COMPTEUR" Width="1.5" PointX="0.875" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MO" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MO_ETAPE" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MT" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.MT_ETAPE" Width="1.5" PointX="7.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.ORDRE_FABRICATION" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.ORDRE_FABRICATION_ETAPE" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.PACK_INSTALLATION" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.PACK_INSTALLE" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.PACK_INSTALLE_ETAPE" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.SIM" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PEGASE_PRODModel.SIM_ETAPE" Width="1.5" PointX="7.5" PointY="18.375" IsExpanded="true" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MO_ETAPE_ID_MO" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MO_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MT_ETAPE_ID_MT" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_MT_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_OF_ETAPE_ID_OF" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_PACK_INSTALLE_ID_OF" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_OF_ETAPE_ID_PACK_ENCOURS" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_PACK_INSTALLE_ETAPE_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_SIM_ID_PACK_INSTALLE" ManuallyRouted="false" />
+        <AssociationConnector Association="PEGASE_PRODModel.FK_SIM_ETAPE_ID_SIM" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

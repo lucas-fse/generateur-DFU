@@ -1,0 +1,113 @@
+﻿@model GenerateurDFUSafir.Models.TracaPackOPE
+
+@{
+    ViewBag.Title = "SuppressionOfKepler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <link href="~/Content/form.css" rel="stylesheet" />
+    <link href="~/Content/gammeUD.css" rel="stylesheet" />
+
+
+}
+
+<style>
+    .infos {
+        min-width: 800px
+    }
+
+    .list-elem tr,td,th {
+        border: none;
+        padding: 3px;
+    }
+
+    .list-elem tr:nth-child(2n+1) {
+        background-color: #00000008;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    tr:has(.clickable:hover) {
+        background-color: #FF640055;
+    }
+</style>
+
+@using (Html.BeginForm("SuppressionOfKepler", "Production", FormMethod.Post, new { id = "FormSuppr" }))
+{
+    @Html.AntiForgeryToken()
+    <input hidden name="IDOPE" id="IDOPE" value="@Model.IDOpe" />
+    <main>
+        <div class="frm-box">
+            <h2 class="frm-title">Suppression OF Kepler/UDR</h2>
+            <p class="frm-description">Entrez le numéro d'ordre de fabrication :</p>
+
+            <div class="frm-row">
+                <div class="frm-group">
+                    <label for="numof">Numéro d'OF</label>
+                    <input type="text" name="numof" class="frm-input frm-required" />
+                </div>
+                <div class="frm-group mini">
+                    <label for="numordre">Nmr Ordre</label>
+                    <input type="number" name="numordre" class="frm-input frm-required" min="1" max="99" value="1" />
+                </div>
+            </div>
+
+            <div class="frm-button-box">
+                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
+                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" disabled>VALIDER</button>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.erreurs))
+        {
+            <div class="frm-error-message">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                @ViewBag.erreurs
+            </div>
+        }
+
+        @if (ViewBag.resultView)
+        {
+            <div class="result">
+                <div class="box-conductix infos">
+                    <h2>Liste des éléments</h2>
+
+                    <table class="list-elem">
+                        <tr>
+                            <th>ID</th>
+                            <th>GAMME</th>
+                            <th>NmrOF</th>
+                            <th>NMR SER.</th>
+                            <th>C1</th>
+                            <th>C2</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var ligne in Model.tracaPacks)
+                        {
+                            
+                    <tr>
+                        <td>@ligne.ID</td>
+                        <td>@ligne.TypeGamme</td>
+                        <td>@ligne.NmrOf</td>
+                        <td>@ligne.NmrOrder</td>
+                        <td>@ligne.Caract1</td>
+                        <td>@ligne.Caract2</td>
+                        <td class="clickable" onclick="window.location.href = '@Url.Action("SupprLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-trash"></i></td>
+                        <td class="clickable" onclick="window.location.href = '@Url.Action("ImpressionLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-print"></i></td>
+                    </tr>
+                            
+                        }
+                     </table>
+                </div>
+            </div>
+        }
+
+
+    </main>
+}
+
+<script src="~/Scripts/form.js"></script>
+
+

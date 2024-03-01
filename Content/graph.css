@@ -1,0 +1,125 @@
+﻿#graph {
+            position: relative;
+            width: 660px;
+            height: 216px;
+            margin: 8px;
+            padding: 0;
+       
+}
+
+ 
+
+    #graph ul {
+            position: absolute;
+            top: 0;
+            left: 32px;
+            width: 600px;
+            height: 200px;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+       
+}
+
+    #graph li {
+            position: absolute;
+            list-style: none;
+            background: lightblue;
+            width: 40px;
+            text-align: center;
+            border: 1px solid black;
+            visibility: hidden;
+       
+}
+
+.graph-list {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+
+    margin-top: 50px;
+}
+
+
+.graph-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    padding-bottom: 50px;
+    margin: 20px;
+    transform: scale(1);
+    cursor: pointer;
+    width: 500px;
+    height: 350px;
+}
+
+.graph-box .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.graph-box .header i {
+    font-size: 25pt;
+    opacity: 50%;
+}
+
+.graph-box .header h3 {
+    margin: 0px;
+    font-weight: bold;
+    font-variant: small-caps;
+    opacity: 80%;
+    font-size: 15pt;
+}
+
+
+.graph-box i:hover {
+    opacity: 100%;
+}
+
+.graph-box canvas {
+    flex-grow: 1;
+}
+
+.fullscreen {
+    position: fixed;
+    width: 80vw;
+    height: 80%;
+    left: 50%;
+    top: 70px;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation-name: openGraph;
+    animation-duration: 0.5s;
+}
+
+.transparent-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 50%;
+    z-index: 5;
+}
+
+@media all and (max-width: 700px) {
+    .fullscreen-btn {
+        visibility: hidden;
+    }
+}
+
+@keyframes openGraph {
+    from {
+        transform: translateX(-50%) scale(0)
+    }
+
+    to {
+        transform: translateX(-50%) scale(1)
+    }
+}

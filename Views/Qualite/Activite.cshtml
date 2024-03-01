@@ -1,0 +1,106 @@
+﻿@model GenerateurDFUSafir.Models.Processus
+@{
+    ViewBag.Title = "Qualite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>Activités</title>
+    <link rel="stylesheet" href="~/Content/activiteStyle.css">
+    <script src="~/Scripts/wrap.js" charset="utf-8"></script>
+</head>
+
+<h2>@ViewBag.Title.</h2>
+
+<header>
+    <div class="centered">
+        <div id="bandeau" class="flexContainer">
+            <div class="flexChild">
+                <span id="refNomProcessus"> @Html.DisplayFor(model => Model.RefProcessus) </span> <br />
+            </div>
+            <div class="flexChild">
+                <h1><img src="~/image/logo.png" id="logo" alt=""></h1>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="centered">
+    <div id="topActivityContent" class="flexContainer">
+        <div class="flexChild">
+            <h2>Processus </h2>
+        </div>
+        <div class="flexChild">
+            <p>
+                @Html.DisplayFor(model => Model.NomProcessus)
+            </p>
+        </div>
+        <div class="flexChild">
+            <p>
+                <span>Mission:</span> @Html.DisplayFor(model => Model.Mission)
+            </p>
+        </div>
+    </div>
+    <div id="middleActivityContent" class="flexContainer">
+        <!-- debut middleActivityContent -->
+        <div id="inputData" class="flexChild">
+            <h3>@Html.DisplayFor(model => Model.nomDataInput)</h3>
+            <ul>
+                <!-- va contenir la liste des données en entrée -->
+                @foreach (var entree in Model.DataInput) //On a affiche chaque donnée en entrée
+                {
+                    <li><img src="~/image/rightArrow.png" alt=""> @Html.DisplayFor(model => entree) </li>
+                }
+            </ul>
+        </div>
+        <div id="activitiesContainer" class="flexChild">
+            <ul>
+                <!-- va contenir la liste des activitées -->
+                @foreach (var activite in Model.ListActivite)
+                {
+                    <li class="activity">
+                        <!-- activité -->
+                        <div class="arrow">
+                            <div>
+                                <div class="triangle-topright"></div>
+                                <div class="triangle-bottomright"></div>
+                            </div>
+                            <div class="rectangle"><a href="@Url.Action("Liens", "Qualite", new { id = activite.IDActivite })"> @Html.DisplayFor(model => activite.Nom)  </a></div> <!-- contient le nom de l'activité -->
+                            <div>
+                                <div class="triangle-bottomleft"></div>
+                                <div class="triangle-topleft"></div>
+                            </div>
+
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div id="outputData" class="flexChild">
+            <h3> @Html.DisplayFor(model => Model.nomDataOutput)</h3>
+            <ul>
+                <!-- va contenir la liste des données en sortie -->
+                @foreach (var sortie in Model.DataOutput) //On a affiche chaque donnée en entrée
+                {
+                    <li><img src="~/image/rightArrow.png" alt="">  @Html.DisplayFor(model => sortie) </li>
+                }
+            </ul>
+        </div>
+    </div> <!-- fin middleActivityContent -->
+    <div id="bottomActivityContent" class="flexContainer">
+        <!-- debut bottom activity content -->
+        @foreach (var bottomBox in Model.BottomBox)
+        {
+            <div class="flexChild bottomBox">
+                <h4> @Html.DisplayFor(model => bottomBox.Nom) </h4> <!-- on affiche le nom de la bottomBox -->
+                <ul>
+                    <!-- contient la liste des actions associée à la bottomBox-->
+                    @foreach (var action in bottomBox.ListAction)
+                    {
+                        <li>@Html.DisplayFor(model => action)  </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div> <!-- fin bottom activity content -->
+</main>

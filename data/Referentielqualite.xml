@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+	<Qualite valeur="Cartographie des processus" RefVersion="V02 Date de mise à jour : 23/09/21" >
+		<Processus idprocess = "process1" type="ProcessusTop"  NomProcessus="Piloter" RefProcessus="FP_PIL_V02 Date de mise à jour : 24/05/21" mission = "Piloter l’entreprise en définissant une stratégie en cohérence avec les besoins des clients et les attentes du groupe">
+			<Activite idprocess="activite1A" Libelle="Définir la stratégie" >
+				<Fichier type="Procedure" nom="P_PIL_01_Définir la stratégie" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Piloter\P_PIL_01_Définir la stratégie_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_PIL_01_Tableau de Bord CODIR_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Piloter\MO_PIL_01_Tableau de Bord CODIR_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite1B" Libelle="Fixer les objectifs" >
+				<Fichier type="Procedure" nom="P_PIL_01_Définir la stratégie" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Piloter\P_PIL_01_Définir la stratégie_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_PIL_01_Tableau de Bord CODIR_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Piloter\MO_PIL_01_Tableau de Bord CODIR_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite1C" Libelle="Mettre à disposition les moyens et les ressources" >
+				<Fichier type="Procedure" nom="P_PIL_01_Définir la stratégie" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Piloter\P_PIL_01_Définir la stratégie_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_PIL_01_Tableau de Bord CODIR_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Piloter\MO_PIL_01_Tableau de Bord CODIR_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite1D" Libelle="Communiquer" >
+				<Fichier type="Procedure" nom="P_PIL_01_Définir la stratégie" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Piloter\P_PIL_01_Définir la stratégie_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_PIL_01_Tableau de Bord CODIR_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Piloter\MO_PIL_01_Tableau de Bord CODIR_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite1E" Libelle="Décider" >
+				<Fichier type="Procedure" nom="P_PIL_01_Définir la stratégie" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Piloter\P_PIL_01_Définir la stratégie_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_PIL_01_Tableau de Bord CODIR_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Piloter\MO_PIL_01_Tableau de Bord CODIR_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Besoins du marché/clients" />
+				<item nom="Résultats Entreprise" />
+				<item nom="Indicateurs des processus" />
+				<item nom="People review" />
+				<item nom="Demande GO/NO GO" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Stratégie entreprise" />
+				<item nom="Objectifs" />
+				<item nom="Budgets avec une projection sur la rentabilité" />
+				<item nom="Revue de Direction" />
+				<item nom="GPEC" />
+				<item nom="Décision GO ou NO GO" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients" />
+				<item nom="Groupe" />
+				<item nom="Tous les employés" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Tableau de Bord CODIR" />
+				<item nom="EBIT" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Inadéquation entre les moyens et les objectifs" />
+				<item nom="Pas d’appropriation des objectifs par l’ensemble des collaborateurs" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Développement de nouveaux business" />
+				<item nom="Maintenir l’implication et la motivation des collaborateurs en donnant un cap, une vision" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process2" type="ProcessusTop"  NomProcessus="Améliorer" RefProcessus="FP_AME_V01 Date de mise à jour : 24/05/21" mission ="Assurer l’efficacité et l’amélioration continue du système de management QSE en cohérence avec la stratégie de l’entreprise">
+			<Activite idprocess="activite2A" Libelle="Mesurer / Surveiller" >
+				<Fichier type="Procedure" nom="P_AME_03_Audits Internes_V03" Date="23/09/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Améliorer\P_AME_03_Audits Internes_V03.pdf"/>
+				<Fichier type="Procedure" nom="P_AME_05_Evaluation et amélioration du système qualité_V02" Date="23/09/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Améliorer\P_AME_05_Evaluation et amélioration du système qualité_V02.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite2B" Libelle="Corriger / Prévenir" >
+				<Fichier type="Procedure" nom="P_AME_02_Traitement des non conformités_V02" Date="23/09/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Améliorer\P_AME_02_Traitement des non conformités_V02.pdf"/>
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="FQ_01_8D_Report JAY Electronique_V02" Date="20/05/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Améliorer\FQ_01_8D_Report JAY Electronique_V02.xlsx"/>
+				<Fichier type="Formulaire" nom="MASTER QRQC FRENCH -ENGLISH-V02" Date="16/07/20" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Améliorer\MASTER QRQC FRENCH -ENGLISH-V02.xlsx"/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite2C" Libelle="Maitriser la documentation" >
+				<Fichier type="Procedure" nom="P_AME_01_Architecture et maitrise des documents_V02" Date="23/09/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Améliorer\P_AME_01_Architecture et maitrise des documents_V02.pdf"/>
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="Gestion des enregistrements qualité - V02 - Février 2014" Date="01/02/14" chemin="\\Jaysvrfiles\societe\QUALITE\5. DOCUMENTS\Processus Améliorer\Gestion des enregistrements qualité - V02 - Février 2014.pdf"/>
+				<Fichier type="Document" nom="QRQC Training-V05" Date="01/06/20" chemin="\\Jaysvrfiles\societe\QUALITE\5. DOCUMENTS\Processus Améliorer\QRQC Training-V05.pdf"/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie entreprise" />
+				<item nom="Audits internes et externes" />
+				<item nom="Réclamations Clients" />
+				<item nom="Satisfaction clients" />
+				<item nom="Non conformités Production" />
+				<item nom="Accidents, soins bénins" />
+				<item nom="Réglementation / Normes" />
+				<item nom="Idées d’amélioration" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="SMQ à jour" />
+				<item nom="Revue de direction" />
+				<item nom="Planning d’audits" />
+				<item nom="Formations" />
+				<item nom="Plan d’actions Entreprise" />
+				<item nom="Indicateurs QSE" />
+				<item nom="DUER" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients" />
+				<item nom="Groupe" />
+				<item nom="Organismes de certification" />
+				<item nom="Tous les employés" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Nombre de FRC" />
+				<item nom="Nombre d’accidents / Jours d’arrêt" />
+				<item nom="Coût de la non qualité" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Difficultés à traiter les causes racines" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Développement de la culture Sécurité" />
+				<item nom="Gestion de l’environnement" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process3" type="ProcessusMiddle"  NomProcessus="Elaborer l'offre" RefProcessus="FP_ELA_V02 Date de mise à jour : 04/11/21" mission = "Définir et gérer l’offre produits + services qui réponde aux besoins des clients ciblés par la stratégie d’entreprise">
+			<Activite idprocess="activite3A" Libelle="Assurer la veille" >
+				<Fichier type="Procedure" nom="P_ELA_01_Spécifier les développements_V02" Date="19/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Elaborer l'offre\P_ELA_01_Spécifier les développements_V02.pdf"/>
+				<Fichier type="Procedure" nom="P_ELA_02_Promouvoir l'offre_V01" Date="26/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Elaborer l'offre\P_ELA_02_Promouvoir l'offre_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite3B" Libelle="Animer la connaissance marchés" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite3C" Libelle="Spécifier les développements" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>			
+			<Activite idprocess="activite3D" Libelle="Promouvoir l'offre" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>	
+			<Activite idprocess="activite3E" Libelle="Gérer le cycle de vie" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>		
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Règlementation / normes" />
+				<item nom="Etudes de marché" />
+				<item nom="Remontées marché / clients" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Orientations stratégiques par marché / application / canal de distribution" />
+				<item nom="Synthèses marchés / applications" />
+				<item nom="Cahiers des charges fonctionnels, fiches Go/NoGo" />
+ 				<item nom="Outils d’aide à la vente" />
+				<item nom="Supports de communication" />
+				<item nom="Etudes de rentabilité d’affaires spéciales" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients, prospects" />
+				<item nom="Commerce (SMO + Jay)" />
+				<item nom="RD + laboratoires partenaires" />
+				<item nom="Direction groupe + Jay" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="à définir" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Moyens accrus de concurrents intégrées à des groupes puissants" />
+				<item nom="Emergence de solutions alternatives" />
+				<item nom="Manque de certifications / homologations nécessaires" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Synergies groupe" />
+				<item nom="Demande mondiale de sécurité au-delà des exigences règlementaires" />
+				<item nom="Automatisation croissante des machines et procédés" />
+			</BotommBox>		
+		</Processus>
+		<Processus idprocess = "process4" type="ProcessusMiddle"  NomProcessus="Développer" RefProcessus="FP_DEV_V02 Date de mise à jour : 18 aout 21" mission = "Concevoir le produit, Industrialiser la fabrication, Assurer une veille normative, Gérer les certifications, Métrologie">
+			<Activite idprocess="activite4A" Libelle="Concevoir et industrialiser le produit" >
+				<Fichier type="Procedure" nom="P_DEV_01_conception et modification produits_V03" Date="01/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Développer\P_DEV_01_conception et modification produits_V03.pdf"/>
+				<Fichier type="Procedure" nom="P_DEV_10_Identification et gestion des articles_V02" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Développer\P_DEV_10_Identification et gestion des articles_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_02_Extension gamme bidirectionnelle_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_02_Extension gamme bidirectionnelle_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_04_Installation Sage X3_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_04_Installation Sage X3_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_05_Gestion des évolutions dans X3_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_05_Gestion des évolutions dans X3_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_06_Suivi création articles dans X3_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_06_Suivi création articles dans X3_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_07_ PM Quick guide_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_07_ PM Quick guide_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_08_gestion version X3_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_08_gestion version X3_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_09_création d'un fournisseur_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_09_création d'un fournisseur_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_10_saisie commande SG_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_10_saisie commande SG_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_11_création d'une réception_V02" Date="13/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_11_création d'une réception_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_12_Documentation projet_V02" Date="19/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_12_Documentation projet_V02.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_13_Jalons projets_V01" Date="04/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_13_Jalons projets_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_DEV_14_GONOGO_V02" Date="05/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Développer\MO_DEV_14_GONOGO_V02.pdf"/>
+				<Fichier type="Formulaire" nom="FOR_DEV_01_modèle de DEM_V03" Date="04/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Développer\FOR_DEV_01_modèle de DEM_V03.dotx"/>
+				<Fichier type="Formulaire" nom="FOR_DEV_02_Jalons projets_V01" Date="07/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Développer\FOR_DEV_02_Jalons projets_V01.xlsx"/>
+				<Fichier type="Formulaire" nom="FOR_DEV_03-Ordre de modification_V01" Date="04/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Développer\FOR_DEV_03-Ordre de modification_V01.dotx"/>
+				<Fichier type="Formulaire" nom="FOR_DEV_04-Synthèse-GO-NOGO_V01" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Développer\FOR_DEV_04-Synthèse-GO-NOGO_V01.pptx"/>
+				<Fichier type="Formulaire" nom="FOR_DEV_05-modèle résumé avancement DEM_V01" Date="15/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\4. FORMULAIRES\Processus Développer\FOR_DEV_05-modèle résumé avancement DEM_V01.pptx"/>
+				<Fichier type="Document" nom="DOC_DEV_01_Référentiel Industriel_V01" Date="15/09/21" chemin="\\Jaysvrfiles\societe\QUALITE\5. DOCUMENTS\Processus Développer\DOC_DEV_01_Référentiel Industriel_V01.pdf"/>
+				<Fichier type="Document" nom="DOC_DEV_02_Présentation_Référentiel_DEV_V01" Date="24/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\5. DOCUMENTS\Processus Développer\DOC_DEV_02_Présentation_Référentiel_DEV_V01.pdf"/>
+			</Activite>
+			<Activite idprocess="activite4B" Libelle="Assurer la veille normative et gérer les certifications" >
+				<Fichier type="Procedure" nom="P_DEV_07_Veille normative et réglementaire_V03" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Développer\P_DEV_07_Veille normative et réglementaire_V03.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite4C" Libelle="Maintenir les instruments de mesure" >
+				<Fichier type="Procedure" nom="P_DEV_08_Moyens de fabrication, d'essai et de contrôle_V02" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Développer\P_DEV_08_Moyens de fabrication, d'essai et de contrôle_V02.pdf"/>
+				<Fichier type="Procedure" nom="P_DEV_09_Vérification et Maintenance périodique_V02" Date="06/10/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Développer\P_DEV_09_Vérification et Maintenance périodique_V02.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite4D" Libelle="Gérer les modifications" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite4E" Libelle="Assurer la veille technologique" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Besoins du marché/clients" />
+				<item nom="CDC Marketing" />
+				<item nom="Formulaire DEM" />
+				<item nom="Publication Normes / JOUE" />
+				<item nom="Réclamations clients" />
+				<item nom="Retours SAV" />
+				<item nom="APS production" />
+				<item nom="Budget" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="BOM, spec technique, dossier de fabrication" />
+				<item nom="Certifications et rapport de test." />
+				<item nom="Notice d’installation et d’utilisation + Formation" />
+				<item nom="Configurateur produit" />
+				<item nom="Logiciel embarqué" />
+				<item nom="Logiciel applicatif client et prod" />
+				<item nom="Gammes de Contrôle, montage et tests" />
+				<item nom="Moyens des test et outillages" />
+				<item nom="BIT : Bulletin d’information technique" />
+				<item nom="Suivi Métrologie / Suivi normatif" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients / Marketing" />
+				<item nom="Fournisseurs et Sous-traitants" />
+				<item nom="Organisme de certification" />
+				<item nom="Laboratoire de tests" />
+				<item nom="Production / SAV" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="FRC traitées (12 mois glissant)" />
+				<item nom="analyses 2nd niveau de pannes" />
+				<item nom="Flux de modifications et projets" />
+				<item nom="tenue des délais sur projets clés" />
+				<item nom="Dépenses réelles vs budget" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Changement normatif et réglementaire impactant" />
+				<item nom="Turn over" />
+				<item nom="Compétences uniques" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Amélioration de nos guide-lines de conceptions (retours APS, FRC…)" />
+				<item nom="Synergie groupe CxW" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process5" type="ProcessusMiddle"  NomProcessus="Vendre" RefProcessus="FP_VEN_V03 Date de mise à jour : 24/05/21" mission ="Assurer le développement commercial dans le cadre de la stratégie d’entreprise">
+			<Activite idprocess="activite5A" Libelle="Préconiser les solutions et réaliser l'offre" >
+				<Fichier type="Procedure" nom="P_VEN_04_Gestion des affaires ATEX_V03" Date="24/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Vendre\P_VEN_04_Gestion des affaires ATEX_V03.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite5B" Libelle="Gérer les commandes et le recouvrement" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Besoins des clients" />
+				<item nom="Exigences réglementaires" />
+				<item nom="Politique commerciale" />
+				<item nom="Documentations commerciales et techniques" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Devis (CA et nb, relances)" />
+				<item nom="Commandes (CA, cdes en attente)" />
+				<item nom="Chiffres d’affaires" />
+				<item nom="FRC" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients, prospects" />
+				<item nom="Commerciaux Jay et SMO" />
+				<item nom="Production" />
+				<item nom="Logistique" />
+				<item nom="Finance" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Devis (CA et nb, relances)" />
+				<item nom="Commandes (CA, cdes en attente)" />
+				<item nom="Chiffres d’affaires" />
+				<item nom="FRC" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Perte d’intérêt des SMO à l’offre JAY" />
+				<item nom="Perte d’info liée aux 2 SI (SMO France et Jay)" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Harmoniser et automatiser pratiques en vue de croissance d’activité" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process6" type="ProcessusMiddle"  NomProcessus="Produire" RefProcessus="FP_PRO_V01 Date de mise à jour : 24/05/21" mission ="Garantir de manière efficiente un livrable au niveau des attentes de nos clients en terme de délai et de qualité de fabrication.">
+			<Activite idprocess="activite6A" Libelle="Ordonnancer et Planifier" >
+				<Fichier type="Procedure" nom="P_PLAN_02_Planification_V01" Date="15/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_PLAN_02_Planification_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite6B" Libelle="Approvisionner et stocker" >
+				<Fichier type="Procedure" nom="P_FAB_03_Contrôle d'entrée_V02" Date="30/03/18" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_FAB_03_Contrôle d'entrée_V02.pdf"/>
+				<Fichier type="Procedure" nom="P_PLAN_01_Gestion des approvisionnements_V01" Date="15/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_PLAN_01_Gestion des approvisionnements_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite6C" Libelle="Assembler et tester" >
+				<Fichier type="Procedure" nom="P_FAB_01_Fabrication_V01" Date="26/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_FAB_01_Fabrication_V01.pdf"/>
+				<Fichier type="Procedure" nom="P_FAB_02_Maitrise de la qualité en Production_V01" Date="26/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_FAB_02_Maitrise de la qualité en Production_V01.pdf"/>
+				<Fichier type="Procedure" nom="P_FAB_04_Contrôle final_V01" Date="26/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_FAB_04_Contrôle final_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite6D" Libelle="Emballer et expédier" >
+				<Fichier type="Procedure" nom="P_LOG_01_Maitrise de la logistique_V01" Date="" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Produire\P_LOG_01_Maitrise de la logistique_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Besoins du marché/clients" />
+				<item nom="Commandes clients" />
+				<item nom="Prévisions" />
+				<item nom="Gammes de montage" />
+				<item nom="AR Sous traitants / fournisseurs" />
+				<item nom="Transporteurs" />
+				<item nom="Remontées terrain" />
+				<item nom="Normes d’emballage" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="OF" />
+				<item nom="Sous ensembles" />
+				<item nom="Produits finis" />
+				<item nom="Commandes fournisseurs" />
+				<item nom="Indicateurs de pilotage" />
+				<item nom="Stock matière" />
+				<item nom="Liasse documentaire livraison" />
+				<item nom="Empowerment des collaborateurs" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients" />
+				<item nom="Fournisseurs/Sous-traitants" />
+				<item nom="Tous les employés" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="OTD/OTR" />
+				<item nom="APS" />
+				<item nom="ITO (rotation de stock)" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Process manuels/visuels" />
+				<item nom="Surface disponible limitée" />
+				<item nom="Départ compétence unique" />
+				<item nom="Arrêts maladie suite TMS" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Refonte zone assemblage gamme BiDirectionnelle" />
+				<item nom="Digitalisation et automatisation des process" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process7" type="ProcessusMiddle"  NomProcessus="Maintenir" RefProcessus="FP_MAI_V01 Date de mise à jour : 24/05/21" mission ="Garantir le maintien en condition opérationnelle en accompagnant nos clients dans la mise en oeuvre et la réparation de nos produits et nos services.">
+			<Activite idprocess="activite7A" Libelle="Réparer / transformer les produits" >
+				<Fichier type="Procedure" nom="P_SAV_01_Maitrise de l'après-vente_V01" Date="31/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Maintenir\P_SAV_01_Maitrise de l'après-vente_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_SAV_01_Traitement des réparations_V01" Date="01/05/17" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Maintenir\MO_SAV_01_Traitement des réparations_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_SAV_02_Création bon de retour_V01" Date="03/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Maintenir\MO_SAV_02_Création bon de retour_V01.pdf"/>
+				<Fichier type="Modeope" nom="MO_SAV_03_Emplacements SAV_V01" Date="01/05/17" chemin="\\Jaysvrfiles\societe\QUALITE\3. MODES OPERATOIRES\Processus Maintenir\MO_SAV_03_Emplacements SAV_V01.pdf"/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite7B" Libelle="Assurer le support aux clients" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite7C" Libelle="Gérer le stock de prêt et les retours" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite7D" Libelle="Former" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite7E" Libelle="Auditer les stations-service" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Besoins du marché/clients" />
+				<item nom="Réclamations clients" />
+				<item nom="Bons de retour (RMA)" />
+				<item nom="Produits défectueux" />
+				<item nom="Appels/Mails clients" />
+				<item nom="Commandes clients" />
+				<item nom="Demande de prêt" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Produits réparés" />
+				<item nom="Produits transformés" />
+				<item nom="Devis d’interventions" />
+				<item nom="Interventions sur site" />
+				<item nom="Assistance mise en service" />
+				<item nom="Certificat de formation" />
+				<item nom="Rapport d’audits" />
+				<item nom="Matériel de prêt" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Clients/Prospects" />
+				<item nom="Partenaires/Stations-service" />
+				<item nom="SAV" />
+				<item nom="STC" />
+				<item nom="SMO" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Délais de traitement SAV" />
+				<item nom="Taux de retour Sous Garantie" />
+				<item nom="Suivi des Stations-Service" />
+				<item nom="Suivi des formations" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Intégration SMO et répartition du CA avec les Stations-service" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Développement de nouveaux marchés via l’apport des SMO Conductix" />
+			</BotommBox>
+		</Processus>	
+		<Processus idprocess = "process8" type="ProcessusBottom"  NomProcessus="Maitriser les ressources humaines" RefProcessus="FP_MRH_V02 Date de mise à jour : 22/11/21" mission = "Développer et maintenir les compétences du personnel et positionner la bonne personne à la bonne place.">
+			<Activite idprocess="activite8A" Libelle="Recruter" >
+				<Fichier type="Procedure" nom="P_MRH_01_Former_V01" Date="22/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Maitriser les ressources Humaines\P_MRH_01_Former_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite8B" Libelle="Former" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite8B" Libelle="Gérer le personnel" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Besoins Collaborateurs" />
+				<item nom="Stratégie du site" />
+				<item nom="Contraintes règlementaires" />
+				<item nom="Entretiens individuels annuels et professionnels" />
+				<item nom="Budget" />
+				<item nom="Besoin en recrutement" />
+				<item nom="Stratégie RH" />
+				<item nom="Politique RH de la division RH" />
+				<item nom="Obligations légales" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Personnel qualifié au poste" />
+				<item nom="Candidat confirmé contractuellement" />
+				<item nom="Arrêt de la relation contractuelle" />
+				<item nom="Entretiens réalisés dans le respect des délais" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Groupe / Division" />
+				<item nom="DRH" />
+				<item nom="RRH" />
+				<item nom="Managers / CODIR" />
+				<item nom="Tous les employés" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Avancée du plan de développement des compétences (en nombre d’actions)" />
+				<item nom="Evaluation des formations" />
+				<item nom="Taux absentéisme" />
+				<item nom="Avancement plan de recrutement" />
+				<item nom="Recrutement qualitatif à 3 mois" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Risque de perte de savoirs et de compétences dû aux départs de personne seule détentrice d’une compétence" />
+				<item nom="Recrudescence des risques psychosociaux" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Attirer les talents dans notre entreprise et accroitre notre attractivité" />
+				<item nom="Personnel adapté aux besoins clients ouvrant de nouvelles opportunités" />
+			</BotommBox>
+		</Processus>		
+		<Processus idprocess = "process9" type="ProcessusBottom"  NomProcessus="Gérer l'information" RefProcessus="FP_GIN_V01 Date de mise à jour : 24/05/21" mission ="Maintenir l’infrastructure et les applications de gestion afin de permettre le suivi et le développement de l’activité de l’entreprise">
+			<Activite idprocess="activite9A" Libelle="Evaluer et mettre en place une solution applicative" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite9B" Libelle="Assurer la maintenance et l'amélioration des outils" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite9C" Libelle="Assurer le support" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie IT groupe" />
+				<item nom="Besoins des employés (Cahiers de charge)" />
+				<item nom="Evolutions applicatives" />
+				<item nom="RGPD" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Solutions applicatives" />
+				<item nom="Sauvegarde du SI" />
+				<item nom="Outils adaptés et mis à jour" />
+				<item nom="Support des utilisateurs" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Prestataires externes" />
+				<item nom="Employés" />
+				<item nom="IT Groupe" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Nb de demandes internes ERP" />
+				<item nom="Tickets chez les prestataires" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Perte d’information" />
+				<item nom="Attaque virus" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Mettre en place un système des tickets en interne" />
+				<item nom="Migration vers ERP Groupe" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process10" type="ProcessusBottom"  NomProcessus="Acheter" RefProcessus="FP_ACH_V04 Date de mise à jour : 24/05/21" mission="Acheter les composants et les services nécessaires à la fabrication des produits et au fonctionnement de l’entreprise">
+			<Activite idprocess="activite10A" Libelle="Rechercher sélectionner et qualifier les fournisseurs" >
+				<Fichier type="Procedure" nom="P_ACH_01_Achats_V01" Date="26/07/17" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Acheter\P_ACH_01_Achats_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite10B" Libelle="Suivre la performance" >
+				<Fichier type="Procedure" nom="P_ACH_02_Performance fournisseur_V01" Date="18/11/21" chemin="\\Jaysvrfiles\societe\QUALITE\2. PROCEDURES\Processus Acheter\P_ACH_02_Performance fournisseur_V01.pdf"/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite10C" Libelle="Gérer les enregistrements et les données ERP" >
+				<Fichier type="Procedure" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<DataInput nom="Données d’entrée">
+				<item nom="Stratégie groupe" />
+				<item nom="Stratégie entreprise" />
+				<item nom="Spécifications techniques" />
+				<item nom="Contexte et données du marché" />
+				<item nom="Demandes de consultations" />
+				<item nom="Données fournisseurs" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Performance des fournisseurs" />
+				<item nom="Résultat de consultation" />
+				<item nom="Fiche article" />
+				<item nom="Fiche fournisseur" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="RD" />
+				<item nom="Fournisseurs" />
+				<item nom="Production" />
+				<item nom="Direction" />
+				<item nom="Marketing et Commerce" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Note performance fournisseur" />
+				<item nom="Saving" />
+				<item nom="FRC Achats" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Rupture approvisionnement" />
+				<item nom="Mauvaise stratégie achat" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Améliorer les leviers de négociation" />
+				<item nom="Partenariat" />
+			</BotommBox>
+		</Processus>
+		<Processus idprocess = "process11" type="ProcessusBottom"  NomProcessus="Maitiser les ressources financières" RefProcessus="FP_MRF_V01 Date de mise à jour : 24/05/21" mission ="Garantir une bonne gestion financière de l'entreprise, tant sur des aspects règlementaires que sur le développement de la performance">
+			<Activite idprocess="activite11A" Libelle="Construire le budget / Définir les objectifs" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite11B" Libelle="Cloturer les comptes" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite11C" Libelle="Construire et reporter les états financiers" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite11D" Libelle="Contrôler et optimiser la performance" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite11E" Libelle="Etablir les déclarations fiscales" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>
+			<Activite idprocess="activite11F" Libelle="Gérer les audits ou contrôles" >
+				<Fichier type="Processus" nom="" Date="" chemin=""/>
+				<Fichier type="Modeope" nom="" Date="" chemin=""/>
+				<Fichier type="Formulaire" nom="" Date="" chemin=""/>
+				<Fichier type="Document" nom="" Date="" chemin=""/>
+			</Activite>	
+			<DataInput nom="Données d’entrée">
+				<item nom="Réglementation comptable, fiscale et sociale" />
+				<item nom="Données transactionnelles(mouvement logistique, facturaction,…)" />
+				<item nom="Stratégie du groupe" />
+				<item nom="Procédures et règles internes de gestion" />
+				<item nom="Input des managers/de la direction sur des sujets spécifiques" />
+			</DataInput>
+			<DataOutput nom="Données de sortie">
+				<item nom="Budget mensualisé et chargé dans l’outil de reporting" />
+				<item nom="Bilan et compte de résultats fiables" />
+				<item nom="Liasse fiscale" />
+				<item nom="Business review" />
+				<item nom="Déclaration fiscale" />
+				<item nom="Comptes audités" />
+				<item nom="Rapport d’audit" />
+			</DataOutput>
+			<BotommBox nom="Parties intéressées:">
+				<item nom="Groupe" />
+				<item nom="Managers" />
+				<item nom="Auditeurs et commissaires" />
+				<item nom="Tous les employés" />
+			</BotommBox>
+			<BotommBox nom="Indicateurs de pilotage:">
+				<item nom="Niveau de BFR vs budget" />
+				<item nom="Niveau d’EBIT vs Budget" />
+				<item nom="Rapport d’audit des commissaires aux compte" />
+			</BotommBox>
+			<BotommBox nom="Risques :">
+				<item nom="Extorsion de fonds (tromperies, fraudes, cyber-attaques…)" />
+				<item nom="Non-conformités fiscales" />
+			</BotommBox>
+			<BotommBox nom="Opportunités :">
+				<item nom="Apporter un soutien aux managers" />
+				<item nom="Digitalisation de la fonction finance" />
+			</BotommBox>
+		</Processus>			
+	</Qualite>
+</Root>

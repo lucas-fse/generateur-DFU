@@ -1,0 +1,130 @@
+﻿
+@model GenerateurDFUSafir.Models.DataOperateurProd
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/form.css" />
+}
+
+@using (Html.BeginForm("DeclaNonConform", "Production", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="SUPPOF">
+
+        <div class="frm-box">
+            <h2 class="frm-title">Déclaration de non conformitée</h2>
+
+            <input type="hidden" name="ID" id="ID" value="@Model.ID" />
+            <input type="hidden" name="OF" id="OF" value="MANUEL" />
+            <p class="frm-description">Entrez les informations demandées pour déclarer une pièce non conforme :</p>
+
+            <div class="frm-row">
+                <div class="frm-group">
+                    <label for="refPiece">Référence de la pièce</label>
+                    <input type="text" name="refPiece" class="frm-input frm-required" id="ref" list="articlesList" />
+                    <datalist id="articlesList">
+                    </datalist>
+                </div>
+                <div class="frm-group mini">
+                    <label for="nbPiece">Quantité</label>
+                    <input type="number" name="nbPiece" class="frm-input frm-required" min="1" value="1" />
+                </div>
+            </div>
+
+            <div class="frm-group">
+                <input type="text" id="nomArticle" class="frm-input" placeholder="Nom de l'article" disabled />
+                <input type="hidden" name="nomArticle" id="nomArticle-d" />
+            </div>
+
+            <div style="max-height: 15px; margin: 5px; display: flex; align-items: center" class="localisation">
+                <img style="max-height: inherit; margin: 3px; opacity: 70%" src="~/image/localisation-icon.png" />
+                <span style="font-weight: bold" id="localisationArticle">LOCALISATION</span>
+            </div>
+
+            <div class="frm-group">
+                <label for="description">Description de la non conformité</label>
+                <textarea name="description" class="frm-input frm-required" id="descriptionNC"></textarea>
+            </div>
+
+            <div class="frm-button-box">
+                <input type="button" value="ANNULER" id="frm-back" class="frm-button" />
+                <button id="frm-submit" class="frm-button action-button" disabled>DÉCLARER</button>
+            </div>
+        </div>
+     </div>
+}
+
+<script src="~/Scripts/form.js"></script>
+
+<script>
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+    const numOf = urlParams.get('of');
+
+    console.log(ref);
+
+    const refInput = document.querySelector("#ref");
+    const ofInput = document.querySelector("#OF");
+
+    if (ref) {
+        refInput.value = ref;
+        findArticles(refInput.value);
+    }
+
+    if (numOf) {
+        ofInput.value = numOf;
+    } 
+
+    let previousQuery = "";
+
+    refInput.addEventListener("keyup", (e) => {
+        const query = e.target.value;
+
+        if (query.length > 0 && query != previousQuery) {
+            previousQuery = query;
+            findArticles(query);
+        }
+    });
+
+    
+
+    async function findArticles(query) {
+        const raw = await fetch("/Production/SearchArticles?query=" + query.toUpperCase());
+        const datas = await raw.json();
+
+        const list = document.querySelector("#articlesList");
+        const nom = document.querySelector("#nomArticle");
+        const nomD = document.querySelector("#nomArticle-d");
+        const refInput = document.querySelector("#ref");
+        const localisationInput = document.querySelector("#localisationArticle");
+
+
+        // On regarde si on a trouvé un bon numéro
+        if (datas.filter(i => i.Itemref === query).length === 1) {
+            nom.value = datas[0].Description.toUpperCase()
+            nomD.value = datas[0].Description.toUpperCase();
+
+            localisationInput.textContent = ((datas[0].Localisation != " ") ? datas[0].Localisation : "LOCALISATION INCONNUE");
+
+            frmView.removeError('#ref');
+        }
+
+        else {
+            nom.value = "";
+            localisationInput.textContent = "LOCALISATION"
+            list.innerHTML = "";
+
+            datas.forEach(item => {
+                let article = document.createElement("option");
+                article.textContent = item.Description;
+                article.setAttribute('value', item.Itemref);
+                list.appendChild(article);
+            });
+
+            frmView.addError('#ref');
+        }
+    }
+
+</script>

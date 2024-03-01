@@ -1,0 +1,100 @@
+﻿@model GenerateurDFUSafir.Models.InfoKPI
+@{
+    ViewBag.Title = "OTD/OTR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/OTD_OTR.css" rel="stylesheet" />
+    string Date = DateTime.Now.Date.ToString();
+}
+<body>
+    <img src="~/image/swirl2.png" id="logoBackGround" />
+    <div id="topInfos">
+        <div class="">
+            <img src="~/image/logo.png" id="logo" alt="logo">
+        </div>
+        <div id="animation">
+            <div id="ligne-1-animation">
+                @for (int i = 0; i < (Model.ListOperateur.Count() + 1) / 2; i++)
+                {                    
+                    <img src=@(".."+ Model.ListOperateur[i]) alt="user" id="@("user"+i.ToString())" class="prodPic">
+                }
+            </div>
+            <div id="ligne-2-animation">
+                @for (int i = (Model.ListOperateur.Count() + 1) / 2; i < Model.ListOperateur.Count(); i++)
+                {
+                    <img src=@(".." +Model.ListOperateur[i]) alt="user" id="@("user"+i.ToString())" class="prodPic">
+                }
+            </div>
+        </div>
+    </div>
+    <div id="topInfos">
+    </div>
+    <div id="OtdOtr">
+        <div id="counters">
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="~/image/OTD1.png" id="otdYear" alt="OTD hebdomadaire">
+                </div>
+                <div class="counterContent">
+                    <h3>OTD Mensuel %</h3>
+                    <p id="cpt1" initvalue="@Model.OTDHebdomadaire"><span class="ValueKPI">0</span></p> <!-- 1er compteur -->
+                </div>
+            </div>
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="~/image/OTD1.png" id="otdMonth" alt="otd annuel">
+                </div>
+                <div class="counterContent">
+                    <h3>OTD annuel %</h3>
+                    <p id="cpt2" initvalue="@Model.OTDAnnuel"><span class="ValueKPI">0</span></p> <!-- 4e compteur -->
+                </div>
+            </div>
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="~/image/OTR1.png" id="otrYear" alt="OTR hebdomadaire">
+                </div>
+                <div class="counterContent">
+                    <h3>OTR Mensuel %</h3>
+                    <p id="cpt3" initvalue="@Model.OTRHebdomadaire"><span class="ValueKPI">0</span></p> <!-- 2e compteur -->
+                </div>
+            </div>
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="~/image/OTR1.png" id="otrMonth" alt="OTR annuel">
+                </div>
+                <div class="counterContent">
+                    <h3>OTR annuel %</h3>
+                    <p id="cpt4" initvalue="@Model.OTRAnnuel"><span class="ValueKPI">0</span></p> <!-- 3e compteur -->
+                </div>
+            </div>
+
+        </div>
+        <div id="DataKPIProd">
+            <ul>
+                
+                @foreach (var kpi in @Model.Dicokpi.Reverse())
+                {
+
+                    string ss = "";
+                <li>
+                    @for (int i = 0; i < kpi.Value.Value.Length ; i++)
+                    {
+                        ss += kpi.Value.Value[i] + ":";
+
+                    }
+                    @(ss = kpi.Value.Name +":"+kpi.Value.backgroundColor+":"+kpi.Value.borderColor+":" + ss + kpi.Value.Type+":" + kpi.Value.Id + ":" )
+                    
+                </li>
+                }
+            </ul>
+        </div>
+        <div id="chartNbFrcParService-container">
+            <canvas id="chartNbFrcParService"></canvas>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/compteur.js"></script>
+    <script type="text/javascript" src="~/Scripts/move.js"></script>
+    <script type="text/javascript" src="~/Scripts/chart.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/clock.js"></script>
+    <script type="text/javascript" src="~/Scripts/chartOtdOtr.js"></script>
+</body>

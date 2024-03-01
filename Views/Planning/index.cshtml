@@ -1,0 +1,343 @@
+﻿@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/form.css" />
+
+<h2>Planning de la société</h2>
+
+<style>
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    main {
+        display: flex;
+        align-items: baseline;
+        margin: 0 auto;
+        width: 70%;
+        min-width: 800px;
+    }
+
+    table {
+        align-self: start;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header > div {
+        width: 33%;
+    }
+
+    .search {
+        margin: 10px;
+        max-width: 300px;
+        min-width: 0;
+        width: 300px;
+    }
+
+    #date {
+        background-color: #ff640011;
+        width: fit-content;
+        padding: 3px;
+        border-radius: 4px;
+        font-weight: 800;
+        color: #ff6400;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #date_info {
+        margin: 0px 5px;
+    }
+
+    #div-date {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .fleches {
+        font-size: 2em;
+        display: flex;
+        padding: 10px;
+    }
+
+    .fleches:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+    }
+
+    .services-list {
+        display: flex;
+        max-width: 300px;
+        flex-wrap: wrap;
+    }
+
+    .badge-choice {
+        min-width: 70px;
+        padding: 5px;
+        border: 2px solid black;
+        margin: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .badge-choice.selected {
+        border-color: #FF6400;
+        background-color: #FF6400;
+        color: white;
+    }
+
+    #datesemaine {
+        /*On met l'icone du boutton de date sans fond et avec le logo de calendrier en blanc et centré*/
+        background-color: #ff640000;
+        border: none;
+        color: #ffffff00;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    #stylesemaine {
+        display: flex;
+        justify-content: center;
+        max-width: 50px;
+        margin: 0;
+        align-items: center;
+        background-color: #ffffff00;
+        border-color: #ffffff00
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        filter: invert(44%) sepia(87%) saturate(3244%) hue-rotate(2deg) brightness(106%) contrast(105%);
+        border: none;
+        border-radius: 0px;
+    }
+</style>
+
+<div class="body-content">
+    
+    <div class="header">
+        <div></div>
+    </div>
+
+    <main>
+        <aside>
+            <div id="div-date">
+                <i class="fa-solid fa-chevron-left fleches" id="del_sem_btn" style="color: #ff6400;"></i>
+
+                <div id="date">
+                    <label id="stylesemaine" class="frm-button" style="width: 50px; min-width: 50px;">
+                        <input name="datesemaine" type="date" class="planning" id="datesemaine" />
+                    </label>
+                    <p id="date_info">Sem. --</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-right fleches" id="add_sem_btn" style="color: #ff6400;"></i>
+            </div>
+
+            <div>
+                <div class="frm-group search">
+                    <label for="query">Rechercher par Nom/Prénom</label>
+                    <input type="text" name="query" class="frm-input" id="queryname" />
+                </div>
+            </div>
+            <div class="frm-group">
+                <label>Filtrer par services</label>
+                <div class="services-list" id="services-list">
+             </div> 
+
+            </div>
+        </aside>
+
+        <table class="table-conductix">
+
+
+            <tr id="date-header">
+                <th>NOM Prénom</th>
+            </tr>
+
+            <tbody id="datas">
+            </tbody>
+
+        </table>
+    </main>
+</div>
+
+
+<script>
+
+    // Calcul du numéro de semaine
+
+    let services_list = [];
+    let filtres = [];
+
+    const currentdate = new Date();
+    const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+    let numsemaine = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+
+    const add_btn = document.querySelector('#add_sem_btn');
+    const del_btn = document.querySelector('#del_sem_btn');
+
+    add_btn.addEventListener('click', () => {
+        numsemaine += 1;
+        updateDatasTable(numsemaine, queryname.value);
+    });
+
+    del_btn.addEventListener('click', () => {
+        numsemaine -= 1;
+        updateDatasTable(numsemaine, queryname.value);
+    });
+
+    const date_field = document.querySelector("#date_info");
+
+    const datastable = document.querySelector('#datas');
+    const dateheader = document.querySelector('#date-header');
+    const queryname = document.querySelector('#queryname');
+    const services_field = document.querySelector('#services-list');
+
+    let lock = false;
+
+    queryname.addEventListener('keyup', async () => {
+        if (lock) return;
+        document.querySelectorAll('.selected').forEach(i => i.classList.remove('selected'));
+        filtres = [];
+
+        lock = true;
+        await updateDatasTable(numsemaine, queryname.value);
+        lock = false;
+    });
+
+    function getDateFromWeekNumber(weekNumber, year) {
+        // Calculez le nombre de millisecondes dans une semaine (7 jours)
+        const millisecondsInWeek = 7 * 24 * 60 * 60 * 1000;
+
+        // Calculez le nombre de millisecondes jusqu'au début de l'année spécifiée
+        const startDateOfYear = new Date(year, 0, 1);
+        const millisecondsToStartDate = startDateOfYear.getTime();
+
+        // Calculez le nombre de millisecondes à ajouter pour atteindre la semaine spécifiée
+        const millisecondsToAdd = (weekNumber - 1) * millisecondsInWeek;
+
+        // Calculez la date en ajoutant les millisecondes nécessaires à la date de début de l'année
+        const targetDate = new Date(millisecondsToStartDate + millisecondsToAdd);
+
+        // Décalez la date en fonction du décalage horaire local (pour obtenir la date locale correcte)
+        targetDate.setHours(0, 0, 0, 0);
+
+        // Pour récupérer le jour de la semaine (1 = lundi, ..., 7 = dimanche)
+        // vous pouvez utiliser targetDate.getDay();
+
+        return targetDate;
+    }
+
+    async function updateDatasTable(numsemaine, query = "") {
+
+        date_field.innerHTML = "Sem. " + numsemaine;
+
+        dateheader.innerHTML = "<th width='10%'>NOM Prénom</th>";
+
+        const now = new Date();
+
+        let debutsem = getDateFromWeekNumber(numsemaine, now.getFullYear());
+        debutsem.setDate(debutsem.getDate() + 1);
+
+        for (let i = 0; i < 5; i++) {
+            const th = document.createElement('th');
+            th.innerHTML = new Date(debutsem).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' }).toUpperCase();
+            dateheader.appendChild(th);
+
+            debutsem = new Date(debutsem).setDate(new Date(debutsem).getDate() + 1);
+        }
+
+
+        const raw = await fetch(`/Planning/getPlanningSocieteApi?numsemaine=${numsemaine}&filtre=${filtres}`);
+        const datas = await raw.json();
+
+        datastable.innerHTML = "";
+
+
+        console.log(datas);
+
+        if (services_list.length == 0) {
+            services_list = datas.Services;
+            services_field.innerHTML = "";
+
+            for (let s of services_list) {
+                const b = document.createElement('div');
+                b.classList.add('badge-choice');
+                b.textContent = s;
+                b.addEventListener('click', (e) => {
+                    if (!filtres.includes(e.currentTarget.textContent)) {
+                        filtres.push(e.currentTarget.textContent);
+                    }
+                    else {
+                        filtres = filtres.filter(i => i != e.currentTarget.textContent);
+                    }
+                    e.currentTarget.classList.toggle('selected');
+                    updateDatasTable(numsemaine);
+
+                });
+                services_field.append(b);
+            }
+        }
+
+        for (const op of datas.Planning.filter(i => filtres.length == 0 && (i.Nom.toLowerCase().startsWith(query.toLowerCase()) || i.Prenom.toLowerCase().startsWith(query.toLowerCase())) || filtres.length > 0 && filtres.includes(i.Service))) {
+            const trmatin = document.createElement('tr');
+            const trapmidi = document.createElement('tr');
+
+            const tdnom = document.createElement('td');
+            tdnom.setAttribute('rowSpan', 2);
+            tdnom.innerHTML = "<b>" + op.Nom + " " + op.Prenom + "</b><br><i>" + op.Service + "</i>";
+
+            trmatin.appendChild(tdnom);
+
+            for (let i = 0; i < 5; i++) {
+                const tdm = document.createElement('td');
+                const tda = document.createElement('td');
+
+                tdm.innerHTML = datas.KeyValues[op.Matin[i] - 1];
+                tda.innerHTML = datas.KeyValues[op.ApresMidi[i] - 1];
+
+                trmatin.appendChild(tdm);
+                trapmidi.appendChild(tda);
+            }
+
+            datastable.appendChild(trmatin);
+            datastable.appendChild(trapmidi);
+        }
+    }
+
+    updateDatasTable(numsemaine);
+
+    const datepicker = document.querySelector("#datesemaine");
+
+    Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    };
+
+    datepicker.addEventListener('change', e => {
+        // On détermine le numéro de semaine
+        const date = new Date(datepicker.value);
+
+        updateDatasTable(date.getWeek());
+    })
+
+</script>

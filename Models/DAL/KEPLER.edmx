@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GAMME_KEPLERModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CODE_COMPTEUR" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="nvarchar" MaxLength="20" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="int" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="int" />
+          <Property Name="CARACTERE_COMPLETION" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="MOMT">
+          <Key>
+            <PropertyRef Name="IDMOMT" />
+          </Key>
+          <Property Name="IDMOMT" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ORDRE_FABRICATION" Type="bigint" Nullable="false" />
+          <Property Name="REF_COM" Type="nchar" MaxLength="20" />
+          <Property Name="CODEID" Type="nchar" MaxLength="10" />
+          <Property Name="NMR_SERIE" Type="nchar" MaxLength="20" />
+          <Property Name="NMR_SERIE_HARD" Type="nchar" MaxLength="20" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+          <Property Name="IsMO" Type="bit" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIAL_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIAL_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIAL_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="NB_PACK" Type="int" Nullable="false" />
+          <Property Name="NB_MT" Type="int" Nullable="false" />
+          <Property Name="NB_MO" Type="int" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+          <Property Name="NMRORDRE" Type="int" />
+        </EntityType>
+        <EntityType Name="TRACA_ETAPE_FAB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" />
+          <Property Name="NMR_ORDRE" Type="bigint" />
+          <Property Name="TIME" Type="datetime" />
+          <Property Name="ACTION" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARAMS1" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARAMS2" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARAMS3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_MOMT_ORDRE_FABRICATION">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="1" />
+          <End Role="MOMT" Type="Self.MOMT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MOMT">
+              <PropertyRef Name="ID_ORDRE_FABRICATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GAMME_KEPLERModelStoreContainer">
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOMT" EntityType="Self.MOMT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="Self.ORDRE_FABRICATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACA_ETAPE_FAB" EntityType="Self.TRACA_ETAPE_FAB" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MOMT_ORDRE_FABRICATION" Association="Self.FK_MOMT_ORDRE_FABRICATION">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="MOMT" EntitySet="MOMT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GAMME_KEPLERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="COMPTEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CODE_COMPTEUR" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LBL_COMPTEUR" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NEXT_NUM_CHRONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LONGUEUR_COMPTEUR" Type="Int32" Nullable="false" />
+          <Property Name="TYPE_COMPTEUR" Type="Int32" />
+          <Property Name="CARACTERE_COMPLETION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MOMT">
+          <Key>
+            <PropertyRef Name="IDMOMT" />
+          </Key>
+          <Property Name="IDMOMT" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ORDRE_FABRICATION" Type="Int64" Nullable="false" />
+          <Property Name="REF_COM" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CODEID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NMR_SERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NMR_SERIE_HARD" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <Property Name="IsMO" Type="Boolean" />
+          <NavigationProperty Name="ORDRE_FABRICATION" Relationship="Self.FK_MOMT_ORDRE_FABRICATION" FromRole="MOMT" ToRole="ORDRE_FABRICATION" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_KEPLER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_OF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIAL_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIAL_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIAL_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NB_PACK" Type="Int32" Nullable="false" />
+          <Property Name="NB_MT" Type="Int32" Nullable="false" />
+          <Property Name="NB_MO" Type="Int32" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MOMT" Relationship="Self.FK_MOMT_ORDRE_FABRICATION" FromRole="ORDRE_FABRICATION" ToRole="MOMT" />
+          <Property Name="NMRORDRE" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_MOMT_ORDRE_FABRICATION">
+          <End Role="ORDRE_FABRICATION" Type="GAMME_KEPLERModel.ORDRE_FABRICATION_KEPLER" Multiplicity="1" />
+          <End Role="MOMT" Type="Self.MOMT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MOMT">
+              <PropertyRef Name="ID_ORDRE_FABRICATION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GAMME_KEPLEREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COMPTEUR" EntityType="Self.COMPTEUR" />
+          <EntitySet Name="MOMT" EntityType="Self.MOMT" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="GAMME_KEPLERModel.ORDRE_FABRICATION_KEPLER" />
+          <AssociationSet Name="FK_MOMT_ORDRE_FABRICATION" Association="Self.FK_MOMT_ORDRE_FABRICATION">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="MOMT" EntitySet="MOMT" />
+          </AssociationSet>
+          <EntitySet Name="TRACA_ETAPE_FAB" EntityType="GAMME_KEPLERModel.TRACA_ETAPE_FAB" />
+        </EntityContainer>
+        <EntityType Name="TRACA_ETAPE_FAB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_OF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NMR_ORDRE" Type="Int64" />
+          <Property Name="TIME" Type="DateTime" Precision="3" />
+          <Property Name="ACTION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARAMS1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARAMS2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARAMS3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GAMME_KEPLERModelStoreContainer" CdmEntityContainer="GAMME_KEPLEREntities">
+          <EntitySetMapping Name="COMPTEUR">
+            <EntityTypeMapping TypeName="GAMME_KEPLERModel.COMPTEUR">
+              <MappingFragment StoreEntitySet="COMPTEUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CODE_COMPTEUR" ColumnName="CODE_COMPTEUR" />
+                <ScalarProperty Name="LBL_COMPTEUR" ColumnName="LBL_COMPTEUR" />
+                <ScalarProperty Name="NEXT_NUM_CHRONO" ColumnName="NEXT_NUM_CHRONO" />
+                <ScalarProperty Name="LONGUEUR_COMPTEUR" ColumnName="LONGUEUR_COMPTEUR" />
+                <ScalarProperty Name="TYPE_COMPTEUR" ColumnName="TYPE_COMPTEUR" />
+                <ScalarProperty Name="CARACTERE_COMPLETION" ColumnName="CARACTERE_COMPLETION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOMT">
+            <EntityTypeMapping TypeName="GAMME_KEPLERModel.MOMT">
+              <MappingFragment StoreEntitySet="MOMT">
+                <ScalarProperty Name="IDMOMT" ColumnName="IDMOMT" />
+                <ScalarProperty Name="ID_ORDRE_FABRICATION" ColumnName="ID_ORDRE_FABRICATION" />
+                <ScalarProperty Name="REF_COM" ColumnName="REF_COM" />
+                <ScalarProperty Name="CODEID" ColumnName="CODEID" />
+                <ScalarProperty Name="NMR_SERIE" ColumnName="NMR_SERIE" />
+                <ScalarProperty Name="NMR_SERIE_HARD" ColumnName="NMR_SERIE_HARD" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+                <ScalarProperty Name="IsMO" ColumnName="IsMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDRE_FABRICATION">
+            <EntityTypeMapping TypeName="GAMME_KEPLERModel.ORDRE_FABRICATION_KEPLER">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION">
+                <ScalarProperty Name="NMRORDRE" ColumnName="NMRORDRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="REF_COMMERCIAL_PACK" ColumnName="REF_COMMERCIAL_PACK" />
+                <ScalarProperty Name="REF_COMMERCIAL_MT" ColumnName="REF_COMMERCIAL_MT" />
+                <ScalarProperty Name="REF_COMMERCIAL_MO" ColumnName="REF_COMMERCIAL_MO" />
+                <ScalarProperty Name="REF_FIRMWARE_MO" ColumnName="REF_FIRMWARE_MO" />
+                <ScalarProperty Name="REF_FIRMWARE_MT" ColumnName="REF_FIRMWARE_MT" />
+                <ScalarProperty Name="NB_PACK" ColumnName="NB_PACK" />
+                <ScalarProperty Name="NB_MT" ColumnName="NB_MT" />
+                <ScalarProperty Name="NB_MO" ColumnName="NB_MO" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACA_ETAPE_FAB">
+            <EntityTypeMapping TypeName="GAMME_KEPLERModel.TRACA_ETAPE_FAB">
+              <MappingFragment StoreEntitySet="TRACA_ETAPE_FAB">
+                <ScalarProperty Name="PARAMS3" ColumnName="PARAMS3" />
+                <ScalarProperty Name="PARAMS2" ColumnName="PARAMS2" />
+                <ScalarProperty Name="PARAMS1" ColumnName="PARAMS1" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
+                <ScalarProperty Name="NMR_ORDRE" ColumnName="NMR_ORDRE" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

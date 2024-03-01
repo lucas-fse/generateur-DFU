@@ -1,0 +1,39 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:JAY.PegaseCore.ControlsVM"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:JAY_WpfCore_Converters="clr-namespace:JAY.WpfCore.Converters;assembly=WpfCore" 
+        xmlns:JAY="clr-namespace:JAY;assembly=LanguageModule" 
+        mc:Ignorable="d" 
+        x:Class="JAY.PegaseCore.Controls.EditMasquesView"
+        Title="{Binding NomFenetreEditMasque}" Height="615" Width="565" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <JAY:ConvertLanguage x:Key="ConvertLanguage"/>
+        <JAY_WpfCore_Converters:ConvertBoolToBold x:Key="ConvertBoolToBold"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:EditMasquesViewModel x:Name="ViewModelEditMasques"/>
+    </Window.DataContext>
+    <Grid x:Name="Root">
+        <Rectangle x:Name="Fond" Margin="0,0,0,0" Height="90" VerticalAlignment="Top" Grid.ColumnSpan="3">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="1,1">
+                    <GradientStop Color="#FFB0B0B0" Offset="0"/>
+                    <GradientStop Color="#FF808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Fill="#FFFF6400" Margin="0,90,0,0"  Height="5" VerticalAlignment="Top" Grid.ColumnSpan="3">
+        </Rectangle> <StackPanel Height="25.28" Margin="8,8,8,0" Orientation="Horizontal" VerticalAlignment="Top">
+            <TextBlock x:Name="MOName" Margin="0,0,8,4" TextWrapping="Wrap" Text="{Binding MOName, Mode=OneWay}" FontWeight="Bold" FontSize="16" d:LayoutOverrides="Height"/>
+            <Button x:Name="SelectAll" Content="{Binding LibelSelectAll, ConverterParameter=TEXT, Converter={StaticResource ConvertLanguage}, Mode=OneWay}" Margin="0,0,8,0.28" Style="{DynamicResource ButtonStyleIDialog}" Command="{Binding CommandSelectAll, Mode=OneWay}" Width="135"/>
+            <Button x:Name="DeselectAll" Content="{Binding LibelDeSelectAll, ConverterParameter=TEXT, Converter={StaticResource ConvertLanguage}, Mode=OneWay}" Margin="0,0.28,8,0" Style="{DynamicResource ButtonStyleIDialog}" Command="{Binding CommandDeselectAll, Mode=OneWay}" Width="135"/>
+            <Button x:Name="Aide" Content="?" Margin="0,0,8,0" Style="{DynamicResource ButtonStyleIDialog}" Command="{Binding CommandAide, Mode=OneWay}" Width="35" Visibility="{Binding IsVisibleAide, Mode=OneWay}"/>
+        </StackPanel>
+        <ContentPresenter Margin="8,33,1,0" Height="550" VerticalAlignment="Top" Width="550" Content="{Binding CurrentView, Mode=OneWay}"/>
+        <Button x:Name="OK" Content="OK" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="50" Style="{DynamicResource ButtonStyleIDialog}" Height="25" Click="OK_Click" />
+        <ComboBox x:Name="liste" Height="23" Width="70" ItemsSource="{Binding Mode=TwoWay, Path=ListVariables}" SelectedIndex="{Binding Path=CurrentVariable, Mode=TwoWay}" Visibility="{Binding Path=Isliste, Mode=TwoWay}"  Margin="450,118,23,435" />
+    </Grid>
+</Window>

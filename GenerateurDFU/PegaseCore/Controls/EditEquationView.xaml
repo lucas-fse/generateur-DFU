@@ -1,0 +1,67 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:PegaseCore="clr-namespace:JAY.PegaseCore"
+             xmlns:JAY="clr-namespace:JAY;assembly=LanguageModule"
+             x:Class="JAY.PegaseCore.EditEquationView"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="792">
+    <UserControl.Resources>
+    	<JAY:ConvertLanguage x:Key="ConvertLanguage"/>
+    	<PegaseCore:ConvTypeFormule2Enable x:Key="ConvTypeFormule2Enable"/>
+        <PegaseCore:ConvEquationState2Color x:Key="ConvEquationState2Color"/>
+        <PegaseCore:ConvFormuleState2Color x:Key="ConvFormuleState2Color"/>
+        <HierarchicalDataTemplate DataType="{x:Type PegaseCore:Formule}" ItemsSource="{Binding Equations}">
+            <Grid x:Name="Fond" Width="600" Margin="0,0,0,10">
+        		<Rectangle Fill="{Binding EtatFormule, Converter={StaticResource ConvFormuleState2Color}, Mode=OneWay}" RadiusY="10.5" RadiusX="10.5">
+        			<Rectangle.Effect>
+        				<DropShadowEffect BlurRadius="10" Opacity="0.5"/>
+        			</Rectangle.Effect>
+        		</Rectangle>
+            	<Grid Margin="5" d:LayoutOverrides="Width, Height">
+            		<StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,0,0,5">
+            			<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20,0,0,2">
+            				<TextBlock Text="{Binding LibelFunction, ConverterParameter=TEXT, Converter={StaticResource ConvertLanguage}, Mode=OneWay}" Margin="0,0,5,0" FontSize="16"/>
+            				<TextBox x:Name="NomFonction" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Fonction}" d:LayoutOverrides="Height" ToolTip="Nom de la fonction" Margin="0,0,5,0" FontWeight="Bold" FontSize="16" BorderBrush="{x:Null}" Background="#B2FFFFFF" MaxLength="30" IsEnabled="{Binding FormuleType, Converter={StaticResource ConvTypeFormule2Enable}, Mode=OneWay}"/>
+            				<TextBlock HorizontalAlignment="Stretch" Margin="0,0,5,0" TextWrapping="Wrap" Text="-&gt;" VerticalAlignment="Stretch" FontSize="16"/>
+            				<TextBox x:Name="MnemoPhysique" HorizontalAlignment="Stretch" Margin="0" TextWrapping="Wrap" Text="{Binding MnemoLogiquePhy, Mode=TwoWay}" VerticalAlignment="Stretch" ToolTip="Organe physique" FontSize="16" BorderBrush="{x:Null}" Background="#B2FFFFFF" IsEnabled="{Binding FormuleType, Converter={StaticResource ConvTypeFormule2Enable}, Mode=OneWay}"/>
+            			</StackPanel>
+            			<TextBox x:Name="Fonctionnement" Margin="0,0,0,5" TextWrapping="Wrap" Text="{Binding Fonctionnement, Mode=TwoWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#B2FFFFFF" BorderBrush="{x:Null}" Foreground="#FF245D76" MaxLength="30" IsEnabled="{Binding FormuleType, Converter={StaticResource ConvTypeFormule2Enable}, Mode=OneWay}"/>
+                        <TextBox x:Name="CommentaireFormule" Margin="0,0,0,2" TextWrapping="Wrap" Text="{Binding Commandes, Mode=TwoWay}" d:LayoutOverrides="Width" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Background="#B2FFFFFF" MaxLength="255" IsEnabled="{Binding FormuleType, Converter={StaticResource ConvTypeFormule2Enable}}"/>
+            		</StackPanel>
+            	</Grid>
+        	</Grid>
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate DataType="{x:Type PegaseCore:Equation}">
+            <StackPanel Margin="25,0,0,0" Orientation="Horizontal" Height="21.96">
+        		<Ellipse Fill="{Binding EtatEquation, Converter={StaticResource ConvEquationState2Color}, Mode=OneWay}" Margin="0,0,5,0" Height="15" Width="15" VerticalAlignment="Center" HorizontalAlignment="Left" d:LayoutOverrides="Width">
+        			<Ellipse.Effect>
+        				<DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+        			</Ellipse.Effect>
+        		</Ellipse>
+        		<TextBox Text="{Binding TextEquation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Margin="0,0,5,0" VerticalAlignment="Center" d:LayoutOverrides="HorizontalAlignment" MinWidth="300" IsEnabled="{Binding FormuleParent.FormuleType, Converter={StaticResource ConvTypeFormule2Enable}, Mode=OneWay}"/>
+        		<TextBlock TextWrapping="Wrap" Text="{Binding TextErreur, Mode=OneWay}" VerticalAlignment="Center"/>
+        	</StackPanel>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <TreeView x:Name="Equations" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" SelectedItemChanged="Equations_SelectedItemChanged" >
+        	<TreeView.ItemContainerStyle>
+        		<Style TargetType="{x:Type TreeViewItem}">
+            		<!-- We have to select the item which is right-clicked on -->
+            		<EventSetter Event="UIElement.PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown"/>
+        		</Style>	
+			</TreeView.ItemContainerStyle>
+        	<TreeView.ContextMenu>
+        		<ContextMenu AllowDrop="True">
+        			<MenuItem Header="Ajouter" Click="Ajouter_Click"/>
+        			<MenuItem Header="Supprimer" Click="Supprimer_Click"/>
+        			<MenuItem Header="Déplacer vers le haut" Click="MoveUp_Click"/>
+        			<MenuItem Header="Déplacer vers le bas" Click="MoveDown_Click"/>
+        		</ContextMenu>
+        	</TreeView.ContextMenu>
+        </TreeView>
+    </Grid>
+</UserControl>

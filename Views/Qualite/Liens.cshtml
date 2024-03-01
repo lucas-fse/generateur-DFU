@@ -1,0 +1,122 @@
+﻿@model GenerateurDFUSafir.Models.Activite
+@{
+    ViewBag.Title = "Qualite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>Activités</title>
+    <link rel="stylesheet" href="~/Content/DynamicDropDownMenu.css">
+    <script src="~/Scripts/wrap.js" charset="utf-8"></script>
+    <script src="~/Scripts/openNewTab.js" charset="utf-8"></script>
+</head>
+
+<h2>@ViewBag.Title.</h2>
+<!-- --><div class="clear"></div>
+<header>
+    <div id="bandeau" class="flexContainer">
+        <div class="flexChlid">
+            <h2> @Html.DisplayFor(model => Model.Nom) </h2>
+        </div>
+        <div class="flexChlid">
+            <h1><img src="~/image/logo.png" id="logo" alt=""></h1>
+        </div>
+    </div>
+</header>
+<main class="centered">
+    <nav class="menu-procedure bottomMenu">
+        <!-- debut menu liste des procédures -->
+        <div class="menu_selected-item-procedure">Procédures (@Model.ListProcedure.Count.ToString())</div>
+        <input type="checkbox" class="menu_arrow-procedure menu_arrow-invert-procedure" name="menu_arrow-procedure" id="menu_arrow-procedure" />
+        <label for="menu_arrow-procedure"></label>
+        <div class="menu_options-procedure">
+            <ul>
+                @foreach (var procedure in Model.ListProcedure) //On a affiche chaque donnée en entrée
+                {
+                    if (procedure.TypePdf.Equals(true))
+                    {
+                        <li> <a href="@Html.DisplayFor(model => procedure.Directory)" target="_blank" > @Html.DisplayFor(model => procedure.nom) <img src="~/image/pdf1-removebg.png" width="30px" /></a> </li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Html.DisplayFor(model => procedure.Directory)" download> @Html.DisplayFor(model => procedure.nom) <img src="~/image/download.png"  /></a> </li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </nav> <!-- fin menu liste des procédures -->
+
+
+
+    <nav class="menu-mode-operatoire bottomMenu">
+        <!-- debut menu liste des modes opératoires -->
+        <div class="menu_selected-item-mode-operatoire">Modes opératoires (@Model.ListModeOpe.Count.ToString()) </div>
+        <input type="checkbox" class="menu_arrow-mode-operatoire menu_arrow-invert-mode-operatoire" name="menu_arrow-mode-operatoire" id="menu_arrow-mode-operatoire" />
+        <label for="menu_arrow-mode-operatoire"></label>
+        <div class="menu_options-mode-operatoire">
+            <ul>
+                @foreach (var modeOpe in Model.ListModeOpe) //On a affiche chaque donnée en entrée
+                {
+                    if (modeOpe.TypePdf.Equals(true))
+                    {
+                        <li><a href="#" onclick="openInNewTab('@Html.DisplayFor(model => modeOpe.Directory)')"> @Html.DisplayFor(model => modeOpe.nom) <img src="~/image/pdf1-removebg.png" width="30px" alt=""></a> </li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Html.DisplayFor(model => modeOpe.Directory)" download> @Html.DisplayFor(model => modeOpe.nom) <img src="~/image/download.png" /></a> </li>
+                    }
+                }
+            </ul>
+        </div>
+    </nav> <!-- fin menu liste des modes opératoires -->
+
+
+    <nav class="menu-formulaire bottomMenu">
+        <!-- debut menu liste des formulaires -->
+        <div class="menu_selected-item-formulaire">Formulaires(@Model.ListFormulaire.Count.ToString())</div>
+        <input type="checkbox" class="menu_arrow-formulaire menu_arrow-invert-formulaire" name="menu_arrow-formulaire" id="menu_arrow-formulaire" />
+        <label for="menu_arrow-formulaire"></label>
+        <div class="menu_options-formulaire">
+            <ul>
+                @foreach (var formulaire in Model.ListFormulaire) //On a affiche chaque donnée en entrée
+                {
+                    if (formulaire.TypePdf.Equals(true))
+                    {
+                        <li><a href="#" onclick="openInNewTab('@Html.DisplayFor(model => formulaire.Directory)')"> @Html.DisplayFor(model => formulaire.nom) <img src="~/image/pdf1-removebg.png" width="30px" alt=""></a> </li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Html.DisplayFor(model => formulaire.Directory)" download> @Html.DisplayFor(model => formulaire.nom) <img src="~/image/download.png" /></a> </li>
+                    }
+                }
+            </ul>
+        </div>
+    </nav> <!-- fin menu liste des formulaires -->
+
+    <nav class="menu-documents">
+        <!-- debut menu liste des documents -->
+        <div class="menu_selected-item-documents">Documents (@Model.ListDocument.Count.ToString())</div>
+        <input type="checkbox" class="menu_arrow-documents menu_arrow-invert-documents" name="menu_arrow-documents" id="menu_arrow-documents" />
+        <label for="menu_arrow-documents"></label>
+        <div class="menu_options-documents">
+            <ul>
+                @foreach (var document in Model.ListDocument) //On a affiche chaque donnée en entrée
+                {
+                    if (document.TypePdf.Equals(true))
+                    {
+                        <li><a href="#" onclick="openInNewTab('@Html.DisplayFor(model => document.Directory)')"> @Html.DisplayFor(model => document.nom) <img src="~/image/pdf1-removebg.png" width="30px" alt=""></a> </li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Html.DisplayFor(model => document.Directory)" download> @Html.DisplayFor(model => document.nom) <img src="~/image/download.png" /></a> </li>
+                    }
+                }
+            </ul>
+        </div>
+    </nav> <!-- fin menu liste des documents -->
+
+</main>
+
+

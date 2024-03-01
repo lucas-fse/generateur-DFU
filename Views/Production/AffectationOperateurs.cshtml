@@ -1,0 +1,165 @@
+﻿@model GenerateurDFUSafir.Models.InfoSerenite
+@using GenerateurDFUSafir.Models;
+@using GenerateurDFUSafir.Models.DAL;
+@{
+    ViewBag.Title = "AffectationOperateurs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var j = 0;
+}
+<head>
+    <link rel="stylesheet" href="~/Content/AffectationOperateur.css">
+</head>
+
+<header>
+    <div class="saveLoading">
+        ENREGISTREMENT TERMINÉ
+    </div>
+</header>
+
+<h2 id="main-title">Affectation aux Poles</h2>
+
+<div id="containers">
+    <div class="div-fleches" id="fleche-gauche">
+        <i class="fa-solid fa-chevron-left fleches" style="color: #ff6400;"></i>
+    </div>
+    <div class="poles">
+        @foreach (POLES p in Model.listPoles)
+        {
+            <div class="column-pole">
+                <p class="nom-pole">POLE @p.libelle</p>
+                <div class="box-conductix">
+                    <div>
+                        <div>
+                            @using (Html.BeginForm("ChangeAnimatrice", "Production", FormMethod.Post))
+                            {
+                                <input value = "@p.ID" name = "IDPOLE" id = "IDPOLE" type = "hidden" >
+                                      @Html.DropDownListFor(t => p.Animateur, // Store selected value in Model.DefaultStcId
+                                              new SelectList(Model.ListAnimateurProd, "Value", "Text", p.Animateur),
+                                              new { @class = "form-control", onchange = @"submit();" })
+                            }
+                           
+                        </div>
+                        <div class="dragarea zone-pole" value="@p.ID">
+                            @foreach (var op in Model.listSalarie.Where(i => i.Pole == @p.ID))
+                            {
+                                <div id="user-card" class="draggable" value="@op.Id">
+                                    <div class="img" id="img-ope" style="background-image: url( @op.Image ); background-size: cover; background-position: center;" alt="image de @op.Nom"></div>
+                                    <div id="nom-prenom">
+                                        @if (op.Animateur)
+                                        {
+                                            <i class="fa-solid fa-star" id="star" style="color: #ffc800;"></i>
+                                        }
+                                        <!---Prénom-->
+                                        @if (@op.Name.Length > 7)
+                                        {
+                                            <p id="prenom">@op.Name.Substring(0, 7).</p>
+                                        }
+                                        else
+                                        {
+                                            <p id="prenom">@op.Name</p>
+                                        }
+                                        <p>@op.Nom[0].</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="div-fleches" id="fleche-droite">
+        <i class="fa-solid fa-chevron-right fleches" style="color: #ff6400;"></i>
+    </div>
+</div>
+
+<div id="affect-opes">
+    <div id="zone-default">
+        <p class="nom-pole">NON ATTRIBUÉ</p>
+        <div id="zone-default" class="dragarea zone-pole box-conductix" value="0">
+            @foreach (var op in Model.listSalarie.Where(i => i.Pole == 0))
+            {
+                <div id="user-card" class="draggable" value="@op.Id">
+                    <div class="img" id="img-ope" style="background-image: url( @op.Image ); background-size: cover; background-position: center;" alt="image de @op.Nom"></div>
+                    <div id="nom-prenom">
+                        @if (op.Animateur)
+                        {
+                            <i class="fa-solid fa-star" id="star" style="color: #ffc800;"></i>
+                        }
+                        <!---Prénom-->
+                        @if (@op.Name.Length > 7)
+                        {
+                            <p id="prenom">@op.Name.Substring(0, 7).</p>
+                        }
+                        else
+                        {
+                            <p id="prenom">@op.Name</p>
+                        }
+                        <p>@op.Nom[0].</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="preview" style="display:none;"></div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/draganddrop.js"></script>
+
+<script>
+    
+    function goPlannif() {
+        window.location.href = "/Production/Planificationof";
+    }
+
+    document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-check\"></i>ENREGISTREMENT TERMINÉ";
+
+    setCallback(async (op, pole) => {
+        if (pole != null) {
+            console.log("test");
+            document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-spinner fa-spin\"></i>ENREGISTREMENT EN COURS";
+            await fetch('/Production/AffectationOperateurs/' + op + "?idPole=" + pole, { method: 'POST' });
+
+            setTimeout(() => document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-check\"></i>ENREGISTREMENT TERMINÉ", 2000);
+        }
+    });
+
+    const fD = document.querySelector('#fleche-droite');
+    const fG = document.querySelector('#fleche-gauche');
+
+    fG.style.filter = 'grayscale(100%)';
+
+    const scrollDiv = document.querySelector('.poles');
+
+    const elemWidth = document.querySelector('.column-pole').getBoundingClientRect().width;
+
+    fD.addEventListener('click', (e) => {
+        scrollDiv.scrollBy(elemWidth, 0);
+
+        changeScrollButton(elemWidth);
+    });
+
+    fG.addEventListener('click', (e) => {
+        scrollDiv.scrollBy(-elemWidth, 0);
+
+        changeScrollButton(-elemWidth);
+    });
+
+    const changeScrollButton = (offset) => {
+        if (scrollDiv.scrollLeft + offset > scrollDiv.scrollWidth - 3 * elemWidth - 10) {
+            fD.style.filter = 'grayscale(100%)';
+        }
+        else {
+            fD.style.filter = 'grayscale(0%)';
+        }
+
+        if (scrollDiv.scrollLeft + offset < 10) {
+            fG.style.filter = 'grayscale(100%)';
+        }
+        else {
+            fG.style.filter = 'grayscale(0%)';
+        }
+    }
+</script>

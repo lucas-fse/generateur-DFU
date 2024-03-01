@@ -1,0 +1,647 @@
+/* ------------------------------------  reset css ------------------------------------*/
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Arial';
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.clear {
+	clear: both;
+}
+
+
+@media all and (min-width: 1080px) {
+
+	footer {
+		width: 75%;
+		margin: 0 auto;
+	}
+
+	hr {
+		width: 75%;
+		margin: 0 auto;
+	}
+}
+
+.bottomMenu {
+	border-bottom: 2px solid black;
+}
+
+.body-content { /* permet de gerer les conflits avec les autres css car il y avait une marge gauche qui décalé le site */
+	margin-left: 0;
+	width: 100%; /* permet aussi de gerer les conflits car la largeur ne prenait pas 100% */
+}
+
+#logo { /* logo dans le bandeau */
+	width: 200px;
+	height: auto;
+}
+
+.flexContainer { /* éléments contenant les flex items */
+	display: flex;
+}
+
+#bandeau {
+	margin-top: 16px;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+@media all and (max-width: 1080px) {
+	#bandeau {
+		margin-top: 16px;
+		flex-direction: column-reverse;
+		justify-content: initial;
+		align-items: center;
+	}
+
+	.centered {
+		margin: 0;
+		width: 100%;
+	}
+}
+
+
+#bandeau .flexChlid:first-child {
+	margin-right: 25px;
+}
+
+
+/* On eleve ce comportement sur tablette
+  => le site prendra toute la largeur de la page
+*/
+@media all and (max-width: 1080px) {
+	.centered {
+		width: 100%;
+		margin: initial;
+	}
+}
+
+
+/* --------------------------------------------header --------------------------------------------------*/
+
+/* bandeau */
+
+#bandeau {
+	text-align: center;
+}
+
+
+#refNomProcessus {
+	font-size: 18px;
+}
+
+/* ------------------------------------  main  ------------------------------------*/
+
+main h2 {
+	text-align: center;
+	font-weight: normal;
+	font-size: 32px;
+}
+
+main {
+	margin-bottom: 16px;
+}
+
+
+/* ------------------------------------  menu liste des procedures ------------------------------------*/
+.menu-procedure {
+	padding-top: 16px;
+	background-color: #FF6600;
+	position: relative;
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.menu_selected-item-procedure {
+	padding-bottom: 20px;
+	padding-left: 20px;
+	display: inline-block;
+	width: auto;
+	color: white;
+	user-select: none;
+	-webkit-user-drag: none;
+	cursor: pointer;
+	transition: color 0.2s ease-in-out;
+	font-size: 20px;
+}
+
+.menu_arrow-procedure {
+	display: none;
+}
+
+	.menu_arrow-procedure + label {
+		margin-right: 16px;
+		display: inline-block;
+		position: relative;
+		padding: 16px;
+		float: right;
+		cursor: pointer;
+	}
+
+		.menu_arrow-procedure + label::before, .menu_arrow-procedure + label::after {
+			content: "";
+			background: white;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			height: 0.25rem;
+			width: calc(50.5% + .1858em);
+			margin: auto;
+			transition: transform 0.4s cubic-bezier(0.8, 0.2, 0.5, 0.1), background 0.2s ease-in-out;
+		}
+
+		.menu_arrow-procedure + label::before {
+			left: 0;
+			border-radius: 0.5rem 0 0 0.5rem;
+		}
+
+		.menu_arrow-procedure + label::after {
+			right: 0;
+			border-radius: 0 0.5rem 0.5rem 0;
+		}
+
+	.menu_arrow-procedure label:hover::before, .menu_arrow-procedure label:hover::after {
+		background: white;
+	}
+
+.menu_arrow-invert-procedure + label::before {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-procedure + label::after {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-procedure:checked + label::before {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-procedure:checked + label::after {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-procedure:checked + label + .menu_options-procedure {
+	opacity: 1;
+	pointer-events: all;
+	position: static;
+}
+
+.menu_options-procedure {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+	.menu_options-procedure li {
+		background-color: rgb(130, 130, 130);
+		/* padding: 20px 36px; */
+		color: black;
+		border-bottom: 1px solid rgb(60, 60, 60);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+		.menu_options-procedure li:last-child {
+			border-bottom: none;
+		}
+
+
+		.menu_options-procedure li:hover {
+			/*  padding: 20px 36px; */
+			color: white;
+			background-color: rgb(90, 90, 90);
+		}
+
+		.menu_options-procedure li a {
+			text-decoration: none;
+			color: black;
+			display: block;
+			padding: 20px 36px;
+		}
+
+			.menu_options-procedure li a:hover {
+				color: white;
+			}
+
+		.menu_options-procedure li:hover a {
+			padding: 20px 36px;
+		}
+
+		.menu_options-procedure li:last-child a {
+			padding-bottom: 21px;
+		}
+
+/* ------------------------------------  menu liste des modes operatoires ------------------------------------*/
+
+.menu-mode-operatoire {
+	padding-top: 16px;
+	background-color: #FF6600;
+	position: relative;
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.menu_selected-item-mode-operatoire {
+	padding-bottom: 20px;
+	padding-left: 20px;
+	display: inline-block;
+	width: auto;
+	color: white;
+	user-select: none;
+	-webkit-user-drag: none;
+	transition: color 0.2s ease-in-out;
+	font-size: 20px;
+}
+
+.menu_arrow-mode-operatoire {
+	display: none;
+}
+
+	.menu_arrow-mode-operatoire + label {
+		margin-right: 16px;
+		display: inline-block;
+		position: relative;
+		padding: 16px;
+		float: right;
+		cursor: pointer;
+	}
+
+		.menu_arrow-mode-operatoire + label::before, .menu_arrow-mode-operatoire + label::after {
+			content: "";
+			background: white;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			height: 0.25rem;
+			width: calc(50.5% + .1858em);
+			margin: auto;
+			transition: transform 0.4s cubic-bezier(0.8, 0.2, 0.5, 0.1), background 0.2s ease-in-out;
+		}
+
+		.menu_arrow-mode-operatoire + label::before {
+			left: 0;
+			border-radius: 0.5rem 0 0 0.5rem;
+		}
+
+		.menu_arrow-mode-operatoire + label::after {
+			right: 0;
+			border-radius: 0 0.5rem 0.5rem 0;
+		}
+
+	.menu_arrow-mode-operatoire label:hover::before, .menu_arrow-mode-operatoire label:hover::after {
+		background: white;
+	}
+
+.menu_arrow-invert-mode-operatoire + label::before {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-mode-operatoire + label::after {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-mode-operatoire:checked + label::before {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-mode-operatoire:checked + label::after {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-mode-operatoire:checked + label + .menu_options-mode-operatoire {
+	opacity: 1;
+	pointer-events: all;
+	position: static;
+}
+
+.menu_options-mode-operatoire {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+	.menu_options-mode-operatoire li {
+		background-color: rgb(130, 130, 130);
+		z-index: 100;
+		color: black;
+		border-bottom: 1px solid rgb(60, 60, 60);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+		.menu_options-mode-operatoire li:last-child {
+			border-bottom: none;
+		}
+
+		.menu_options-mode-operatoire li:hover {
+			color: white;
+			background-color: rgb(90, 90, 90);
+		}
+
+		.menu_options-mode-operatoire li a {
+			text-decoration: none;
+			color: black;
+			display: block;
+			padding: 20px 36px;
+		}
+
+			.menu_options-mode-operatoire li a:hover {
+				color: white;
+			}
+
+		.menu_options-mode-operatoire li:hover a {
+			padding: 20px 36px;
+		}
+
+		.menu_options-mode-operatoire li:last-child a {
+			padding-bottom: 21px;
+		}
+
+
+/* ------------------------------------  menu liste des formulaires  ------------------------------------*/
+
+
+.menu-formulaire {
+	padding-top: 16px;
+	background-color: #FF6600;
+	position: relative;
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.menu_selected-item-formulaire {
+	padding-bottom: 20px;
+	padding-left: 20px;
+	display: inline-block;
+	width: auto;
+	color: white;
+	user-select: none;
+	-webkit-user-drag: none;
+	cursor: pointer;
+	transition: color 0.2s ease-in-out;
+	font-size: 20px;
+}
+
+.menu_arrow-formulaire {
+	display: none;
+}
+
+	.menu_arrow-formulaire + label {
+		margin-right: 16px;
+		display: inline-block;
+		position: relative;
+		padding: 16px;
+		float: right;
+		cursor: pointer;
+	}
+
+		.menu_arrow-formulaire + label::before, .menu_arrow-formulaire + label::after {
+			content: "";
+			background: white;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			height: 0.25rem;
+			width: calc(50.5% + .1858em);
+			margin: auto;
+			transition: transform 0.4s cubic-bezier(0.8, 0.2, 0.5, 0.1), background 0.2s ease-in-out;
+		}
+
+		.menu_arrow-formulaire + label::before {
+			left: 0;
+			border-radius: 0.5rem 0 0 0.5rem;
+		}
+
+		.menu_arrow-formulaire + label::after {
+			right: 0;
+			border-radius: 0 0.5rem 0.5rem 0;
+		}
+
+	.menu_arrow-formulaire label:hover::before, .menu_arrow-formulaire label:hover::after {
+		background: white;
+	}
+
+.menu_arrow-invert-formulaire + label::before {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-formulaire + label::after {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-formulaire:checked + label::before {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-formulaire:checked + label::after {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-formulaire:checked + label + .menu_options-formulaire {
+	opacity: 1;
+	pointer-events: all;
+	position: static;
+}
+
+.menu_options-formulaire {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+	.menu_options-formulaire li {
+		background-color: rgb(130, 130, 130);
+		z-index: 100;
+		color: black;
+		border-bottom: 1px solid rgb(60, 60, 60);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+		.menu_options-formulaire li:last-child {
+			border-bottom: none;
+		}
+
+		.menu_options-formulaire li:hover {
+			color: white;
+			background-color: rgb(90, 90, 90);
+		}
+
+
+	.menu_options-formulaire a {
+		text-decoration: none;
+		color: black;
+		display: block;
+		padding: 20px 36px;
+	}
+
+	.menu_options-formulaire li:hover a {
+		padding: 20px 36px;
+	}
+
+	.menu_options-formulaire li:last-child a {
+		padding-bottom: 21px;
+	}
+
+	.menu_options-formulaire li a:hover {
+		color: white;
+	}
+
+
+
+/* ------------------------------------  menu liste des documents ------------------------------------*/
+
+.menu-documents {
+	padding-top: 16px;
+	background-color: #FF6600;
+	position: relative;
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.menu_selected-item-documents {
+	padding-bottom: 20px;
+	padding-left: 20px;
+	display: inline-block;
+	width: auto;
+	color: white;
+	user-select: none;
+	-webkit-user-drag: none;
+	cursor: pointer;
+	transition: color 0.2s ease-in-out;
+	font-size: 20px;
+}
+
+.menu_arrow-documents {
+	display: none;
+}
+
+	.menu_arrow-documents + label {
+		margin-right: 16px;
+		display: inline-block;
+		position: relative;
+		padding: 16px;
+		float: right;
+		cursor: pointer;
+	}
+
+		.menu_arrow-documents + label::before, .menu_arrow-documents + label::after {
+			content: "";
+			background: white;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			height: 0.25rem;
+			width: calc(50.5% + .1858em);
+			margin: auto;
+			transition: transform 0.4s cubic-bezier(0.8, 0.2, 0.5, 0.1), background 0.2s ease-in-out;
+		}
+
+		.menu_arrow-documents + label::before {
+			left: 0;
+			border-radius: 0.5rem 0 0 0.5rem;
+		}
+
+		.menu_arrow-documents + label::after {
+			right: 0;
+			border-radius: 0 0.5rem 0.5rem 0;
+		}
+
+	.menu_arrow-documents label:hover::before, .menu_arrow-documents label:hover::after {
+		background: white;
+	}
+
+.menu_arrow-invert-documents + label::before {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-documents + label::after {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-documents:checked + label::before {
+	transform: rotate(-40deg);
+}
+
+.menu_arrow-invert-documents:checked + label::after {
+	transform: rotate(40deg);
+}
+
+.menu_arrow-invert-documents:checked + label + .menu_options-documents {
+	opacity: 1;
+	pointer-events: all;
+	position: static;
+}
+
+.menu_options-documents {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+	.menu_options-documents li {
+		background-color: rgb(130, 130, 130);
+		z-index: 100;
+		color: black;
+		border-bottom: 1px solid rgb(60, 60, 60);
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+		.menu_options-documents li:last-child {
+			border-bottom: none;
+		}
+
+		.menu_options-documents li:hover {
+			color: white;
+			background-color: rgb(90, 90, 90);
+		}
+
+
+	.menu_options-documents a {
+		text-decoration: none;
+		color: black;
+		display: block;
+		padding: 20px 36px;
+	}
+
+	.menu_options-documents li:hover a {
+		padding: 20px 36px;
+	}
+
+	.menu_options-documents li a:hover {
+		color: white;
+	}
+
+	.menu_options-documents li:last-child a {
+		padding-bottom: 21px;
+	}

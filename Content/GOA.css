@@ -1,0 +1,65 @@
+﻿.boxCounter {
+    width: 200px;
+    padding: 5px 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+.thumbnailCounter {
+    width: 30%;
+}
+.counterContent {
+    width: 70%;
+    flex-wrap: wrap;
+}
+
+.counterContent > h3 {
+    font-size: 14pt;
+}
+
+.container-content {
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+.tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+
+#sablier, #trophee, #euro, #alea { /* => images responsive */
+    max-width: 100%;
+    height: auto;
+}
+
+#euro, #alea {
+    border-radius: 100%;
+}
+
+#alea {
+    border: 2px solid grey;
+    box-sizing: border-box;
+}
+.enSavoirPlusPic {
+    margin: 0;
+    width: 100%;
+}
+.textareaOF {
+    vertical-align: middle;
+    font-size: 2rem;
+    resize: none;
+}

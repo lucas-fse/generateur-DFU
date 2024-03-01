@@ -1,0 +1,212 @@
+﻿@model GenerateurDFUSafir.Models.PlanificationOf
+@{
+    ViewBag.Title = "PlanificationtOf";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/PlanificationOf.css">
+    <script src="~/Scripts/drag-drop2.js" defer></script>
+</head>
+
+<body>
+    <div id"main">
+        <h2 id="titre">@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+
+        @*Bandeau de la page - les boutons ne sont pas encore fonctionnel*@
+
+        <div id="bandeau">
+            <h4 id="Pôle">Mono-Directionnel</h4>
+            @{ String now = DateTime.Today.ToShortDateString(); }
+            <h4 id="date">@now</h4>
+                <button class="buttonDate">+1 Jour</button>
+                <button class="buttonDate">-1 Jour</button>
+                <button id="Valider" onclick="SauvegardePlanification()">Sauvegarder</button>
+        </div>
+
+        @*
+            Zone centrale de la page, partagé en deux tableaux
+            Le premier liste les opératrices, leur charges total de travail et la zone de répartition des of
+
+            Le second liste les of à répartir
+        *@
+
+        <div id="Tableau">
+
+            @*
+                HTML - Premier tableau
+                La liste d'opératrice se base sur une requête faite à la fin du modèle
+                La requête récupère tout les employés de la base avec l'attribut "PROD"
+                Il y a donc des opérateurs de l'expédition, du SAV, etc... et pas de
+                différence entre le service mono et bidir !
+            *@
+
+            <div id="Contenant-TableOp">
+                <table id="TableOp">
+
+                    @*
+                        HTML - En-tête du tableau
+                    *@
+
+                    <thead id="Table-Entete">
+                        <tr>
+                            <th colspan="2" id="Titre-TableOp" class="colonne1">Liste Opératrices</th>
+                            <th class="colonne3"></th>
+                        </tr>
+                        <tr id="EnTeteListeOp">
+                            <th>Tps total</th>
+                            <th>NOM <br/> Prenom</th>
+                            <th class="colonne3">Attribution</th>
+                        </tr>
+                    </thead>
+
+                    @*
+                        HTML - Corps du tableau
+                        foreach sur la liste d'opérateur récupérer dans le model
+
+                        la méthode pour calculer te temps opératoir total est encore à définir
+                    *@
+
+                    <tbody>
+                        @foreach (var op in Model.ModelListeOp.Operateurs)
+                        {
+                            <tr class="LigneOp" id="@op.NOM">
+                                <td class="TpsTotal">0.00</td>
+                                <td class="NomPrenom">@op.NOM<br />@op.PRENOM</td>
+                                <td id="ListeOfOpe"class="containerOF colonne3" idoperateur="@op.ID">                                    
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="Contenant-ListeOf">
+                <table id="ListeOf">
+                    <tr>
+                        <th id="Titre-ListeOf">Liste OF</th>
+                    </tr>
+                    <tr id="ZoneOf">
+                        <td id="ContainerListeOF">
+                            @foreach (var of in Model.ListOfprod)
+                            {
+                                @*
+                                    Ici les tests donnent des valeurs aléatoirement pour voir le résultat visuellement
+                                    Ils sont donc à refaire une fois que le modèle le permettra
+                                *@
+
+                                @*Test pour connaitre l'état de l'of complet ou incomplet*@
+                                var EtatOf = of.SituationAllocationInt;
+
+                                @*
+                                    Switch avec deux cas possible - of complète ou incomplète
+                                    Dans chaque case est construit la même of, seul la couleur du fond change
+
+                                    A l'intérieur des deux case, deux autres tests sont fait avec des switch
+                                    pour connaitre le poste de l'of et si c'est un of ATEX, SAV, test STC ou test RD
+
+                                    
+                                    Il faut donc ajouter au modèle :
+                                        - le poste de l'of
+                                        - son numéro d'AR
+                                        - si l'of est lié à un aléa ou non
+                                        - l'information ATEX, SAV, etc...
+                                        - le temps opératoir de l'of
+                                *@
+                                switch (EtatOf)
+                                {
+                                    case 3:
+                                        <div id="@of.NmrOF"  traca="@of.NmrOF" class="of @of.NmrOF" style="background-color: #FBCEB1" draggable="true" inprogress="false"  OfPlanifie="false" temps="@of.TempsOF">
+                                           
+                                            <div class="marge-gauche" style="background-color: #B9D9EB">@of.Poste1</div>
+                                            
+                                            <div class="body-of">
+                                                <div>
+                                                    <p>@of.NmrOF/@of.CmdOrigineString</p>
+                                                    <div class="bottom-of">
+                                                        <div>
+                                                            <p>@of.Article</p>
+                                                            <p>@of.DateOF.ToString().Remove(10, 9)</p>
+                                                        </div>
+                                                        <img src="../image/alea.png" alt="Alea" class="of-alea" />
+                                                    </div>
+                                                </div>
+                                                <div class="marge-droite">
+                                                    <div class="contenant-pastille">
+                                                        @{ switch (of.InfoOFIcone)
+                                                            {
+                                                                case 1:
+                                                                    <img class="pastille" src="../image/logo_OF/ATEX.png" alt="Atex" />
+                                                                    break;
+                                                                case 2:
+                                                                    <img class="pastille" src="../image/logo_OF/SAV.png" alt="SAV" />
+                                                                    break;
+                                                                case 3:
+                                                                    <img class="pastille" src="../image/logo_OF/Test_RD.png" alt="Test RD" />
+                                                                    break;
+                                                                case 4:
+                                                                    <img class="pastille" src="../image/logo_OF/Test_STC.png" alt="Test STC" />
+                                                                    break;
+                                                                case 5:
+                                                                    <img class="pastille" src="../image/logo_OF/UL.png" alt="UL" />
+                                                                    break;
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <p>Qte: @of.QtrOf</p>
+                                                    <p class="tpsop" value="@of.TempsOF">@of.TempsOperatoireTotalString</p>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    break;
+
+                                    default:
+
+                                        <div id="@of.NmrOF" traca="@of.NmrOF" class="of @of.NmrOF" style="background-color: #D0F0C0" draggable="true"  Inprogress="false" OfPlanifie="false" temps="@of.TempsOF">
+
+                                            <div class="marge-gauche" style="background-color: #B9D9EB">@of.Poste1</div>
+
+                                            <div class="body-of">
+                                                <div>
+                                                    <p>@of.NmrOF/@of.CmdOrigineString</p>
+                                                    <p>@of.Article</p>
+                                                    <p>@of.DateOF.ToString().Remove(10, 9)</p>
+                                                </div>
+                                                <div class="marge-droite">
+                                                    <div class="contenant-pastille">
+                                                        @{ switch (of.InfoOFIcone)
+                                                            {
+                                                                case 1:
+                                                                    <img class="pastille" src="../image/logo_OF/ATEX.png" alt="Atex" />
+                                                                    break;
+                                                                case 2:
+                                                                    <img class="pastille" src="../image/logo_OF/SAV.png" alt="SAV" />
+                                                                    break;
+                                                                case 3:
+                                                                    <img class="pastille" src="../image/logo_OF/Test_RD.png" alt="Test RD" />
+                                                                    break;
+                                                                case 4:
+                                                                    <img class="pastille" src="../image/logo_OF/Test_STC.png" alt="Test STC" />
+                                                                    break;
+                                                                case 5:
+                                                                    <img class="pastille" src="../image/logo_OF/UL.png" alt="UL" />
+                                                                    break;
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <p>Qte: @of.QtrOf</p>
+                                                    <p class="tpsop" value="@of.TempsOF">@of.TempsOperatoireTotalString</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        break;
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div> 
+</body>

@@ -1,0 +1,31 @@
+﻿@model GenerateurDFUSafir.Models.GestionOutilAdmin
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/form.css" />
+
+}
+
+
+
+@using (Html.BeginForm("SuppressionOFBidir", "Production", FormMethod.Post, new { id = "FormSuppr" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="SUPPOF">
+        <div class="frm-box">
+            <h2 class="frm-title">Suppression OF Bidirectionnel</h2>
+            <p class="frm-description">Entrez le numéro d'ordre de fabrication a supprimer :</p>
+
+            <div class="frm-group">
+                <input type="text" name="numOF" class="frm-input" />
+            </div>
+            <input type="hidden" name="ID" id="ID" value="@Model.ID" />
+            <div class="frm-button-box">
+                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
+                <button type="submit" id="frm-submit" class="frm-button action-button">VALIDER</button>
+            </div>
+        </div>
+
+    </div>
+}
+
+<script src="~/Scripts/form.js"></script>

@@ -1,0 +1,246 @@
+﻿@model GenerateurDFUSafir.Models.InfoAIC2
+@{
+    ViewBag.Title = "Qualite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/AIC2.css" rel="stylesheet" />
+}
+
+<body>
+    <img src="~/image/swirl2.png" id="logoBackGround" />
+
+    <div id="topInfos">
+        <div class="">
+            <img src="~/image/logo.png" id="logo" alt="logo">
+        </div>
+        <h1>@Model.NomDuPole</h1>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div id="topTablesContainer">
+            <!-- contient les 3 tableaux du haut -->
+            <div id="tablesLeftContainer">
+                <!-- deux premiers tableaux à gauche -->
+                <h3 class="titleLowForResolution">Nombre d'OF par gamme</h3>
+                <div class="tableContainer">
+                    <h3 class="absoluteTitle">Nombre d'OF par gamme</h3>
+                    <table id="OFs-counter-table">
+                        <tr>
+                            <th></th>
+                            <th scope="col">Lundi</th>
+                            <th scope="col">Mardi</th>
+                            <th scope="col">Mercredi</th>
+                            <th scope="col">Jeudi</th>
+                            <th scope="col">Vendredi</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">OFs Advanced C</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].NbBidir != 0)
+                                {
+                                    <td>@Html.DisplayFor(model => Model.infosDeLaSemaine[i + 1].NbBidir)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th scope="row">OFs Mono</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].NbMono != 0)
+                                {
+                                    <td>@Html.DisplayFor(model => Model.infosDeLaSemaine[i + 1].NbMono)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                        <tr id="totaux">
+                            <th scope="row">Test</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].NbTest != 0)
+                                {
+                                    <td>@Model.infosDeLaSemaine[i + 1].NbTest</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th scope="row">Total</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].total != 0)
+                                {
+                                    <td>@Html.DisplayFor(model => Model.infosDeLaSemaine[i + 1].total)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                    </table>
+                </div>
+                <h3 class="titleLowForResolution">Nombre aléas et QRQC</h3>
+                <div class="tableContainer">
+                    <h3 class="absoluteTitle">Nombre aléas et QRQC</h3>
+                    <table id="AleasQrqc">
+                        <tr>
+                            <th></th>
+                            <th scope="col">Lundi</th>
+                            <th scope="col">Mardi</th>
+                            <th scope="col">Mercredi</th>
+                            <th scope="col">Jeudi</th>
+                            <th scope="col">Vendredi</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">ALEAS</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].NbAleas != 0)
+                                {
+                                    <td>@Html.DisplayFor(model => Model.infosDeLaSemaine[i + 1].NbAleas)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th scope="row">QRQC</th>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (Model.infosDeLaSemaine[i + 1].NbQrqc != 0)
+                                {
+                                    <td>@Html.DisplayFor(model => Model.infosDeLaSemaine[i + 1].NbQrqc)</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="tableRightContainer">
+                <h3 class="titleLowForResolution">Outil gestion de communication équipe</h3>
+                <div class="tableContainer">
+                    <h4 class="absoluteTitle">Outil gestion de communication équipe</h4>
+                    <table id="communicationTable">
+                        <tr>
+                            <th scope="col">Communication equipe</th>
+                        </tr>
+
+                        @foreach (var communication in Model.Communication)
+                        {
+                            <tr>
+                                <td>
+                                    <textarea beforeSendForm="true" name=@String.Concat("COMMUNICATION",communication.Key) disabled>@communication.Value</textarea>
+                                    <label class="switch">
+                                        <input type="checkbox" beforeSendForm="true" disabled name=@String.Concat("CHECKBOXCOMMUNICATION",communication.Key) />
+                                        <span class="slider round"></span>
+                                    </label> <!-- checked -->                                
+                                    <span class="editLine">Editer</span>
+                                </td>
+                               
+                            </tr>
+                            
+                        }
+                        <tr>
+                            <td><textarea id="newCom" name="INPUTCOM"></textarea></td>
+                        </tr>
+                    </table>
+                </div>
+            </div> <!--  tableau à droite -->
+        </div>
+        <h2 id="gestion-aleas-title">Gestion des aléas :</h2>
+        <input type="number" value="@Model.PoleDemande.ToString()" name="ID+" hidden />
+        <table id="bottomTab">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description Aléas</th>
+                    <th>Action en cours</th>
+                    <th>Acteur</th>
+                    <th>Date de résolution souhaitée</th>
+                    <th>Soldé</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var ligne in Model.FormRow)
+                {
+
+                    <tr>
+                        <td data-column="Date">
+                            <input type="number" value="@Html.DisplayFor(model => ligne.IDString)" name=@String.Concat("LIGNE",ligne.IDString) hidden />
+                            <input type="date" value="@Html.DisplayFor(model => ligne.DateString)" beforeSendForm="true" disabled name=@String.Concat("DATE",ligne.IDString) />
+                        </td>
+                        <td data-column="Description">
+                            <textarea disabled beforeSendForm="true" name=@String.Concat("DESCRIPTION",ligne.IDString)>@Html.DisplayFor(model => ligne.Description)</textarea>
+                        </td>
+                        <td data-column="Action">
+                            <textarea disabled beforeSendForm="true" name=@String.Concat("DESCRIPTIONBIS",ligne.IDString)>@Html.DisplayFor(model => ligne.Description2)</textarea>
+                        </td>
+                        <td data-column="Acteur">
+                            <textarea disabled beforeSendForm="true" name=@String.Concat("ACTEUR",ligne.IDString)>@Html.DisplayFor(model => ligne.Acteur)</textarea>
+                        </td>
+                        <td data-column="Date résolution souhaitée">
+                            <input type="date" value=" @Html.DisplayFor(model => ligne.DateResolutionString)" beforeSendForm="true" disabled name=@String.Concat("DATERESOLUTION",ligne.IDString) />
+                        </td>
+                        <td data-column="Soldé">
+                            <label class="switch">
+                                <input type="checkbox" beforeSendForm="true" disabled name=@String.Concat("CHECKBOX",ligne.IDString) />
+                                <span class="slider round"></span>
+                            </label> <!-- checked -->
+                        </td>
+                        <td class="flexTd">
+                            <span class="editLine">Editer</span>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td data-column="Date">
+                        <input type="number" value="NEWLIGNE" name="NEWLIGNE" hidden />
+
+                        <input type="date" name="NEWDATE" value="@Model.DateDuJourString" />
+                    </td>
+                    <td data-column="Description Aléas">
+                        <textarea name="NEWDESCRIPTION"></textarea>
+                    </td>
+                    <td data-column="Action en cours">
+                        <textarea name="NEWDESCRIPTIONBIS"></textarea>
+                    </td>
+                    <td data-column="Acteur"> <textarea name="NEWACTEUR"></textarea> </td>
+                    <td data-column="Date de résolution souhaitée"> <input type="date" name="NEWDATERESOLUTION" /> </td>
+                    <td data-column="Soldé">
+                        <label class="switch">
+                            <input type="checkbox" name="NEWCHECKBOX" />
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td id="goshtTd"></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Sauvegarder" name="submitButton" class="btn btn-default" id="submitButton" />
+    }
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/clock.js"></script>
+    <script type="text/javascript" src="~/Scripts/AIC2.js"></script>
+    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+</body>

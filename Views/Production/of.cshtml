@@ -1,0 +1,114 @@
+﻿@model GenerateurDFUSafir.Models.OFView
+@using System.Security.Cryptography;
+
+<link rel="stylesheet" href="~/Content/of.css" />
+
+
+@{
+
+    MD5 md5 = MD5.Create();
+
+    // Cette méthode permet de générer une couleur à partir d'une chaine de caractère.
+    string colorHash(string str)
+    {
+        byte[] a = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(str));
+        string R = ((a[0] + a[1] + a[2] + a[3] + a[4] + a[5]) %225).ToString("X");
+        string G = ((a[6] + a[7] + a[8] + a[9] + a[10]) % 225).ToString("X");
+        string B = ((a[11] + a[12] + a[13] + a[14] + a[15]) % 225).ToString("X");
+
+        if (R.Length < 2) R = "0" + R;
+        if (G.Length < 2) G = "0" + G;
+        if (B.Length < 2) B = "0" + B;
+
+        return "#" + R + G + B;
+    }
+
+
+
+}
+
+
+<div class="of-box box-conductix draggable @((Model.etat == 2) ? "encours" : "")" value="@Model.numOF" duree="@Model.duree" zone="@Model.poste.Trim()" autoplace style="border-color: @Model.couleur; filter: @(Model.rupture ? "brightness(80%)" : "none")">
+    <div class="header-title">
+        <div>@if (!String.IsNullOrWhiteSpace(Model.numCommande))
+        { <span style="background-color: @(colorHash(Model.numCommande))" class="of-name">@Model.numCommande</span>  }<span style="font-weight: bold">@Model.numOF</span></div>
+        <div>@Model.refIndu - @Model.poste</div>
+    </div>
+
+    <div class="middle-infos">
+        <div class="date-info" style="color: @Model.couleur; background-color: @(Model.couleur)11 ">
+            @if (Model.stock)
+            {
+                <i class="fa-solid fa-box-open"></i> <span>@(((DateTime) Model.dateExpe).ToString("dd/MM"))</span>
+            }
+            else
+            {
+                if (Model.dateExpe < DateTime.Now)
+                {
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                }
+                else
+                {
+                    <i class="fa-solid fa-calendar-days"></i>
+                }
+                <span>@(((DateTime) Model.dateExpe).ToString("dd/MM"))</span>
+            }
+        </div>
+        <div class="spec-infos">
+
+            @{ switch (Model.specs)
+
+                {
+
+                    case 1:
+
+                        <img class="pastille" src="../image/logo_OF/ATEX.png" alt="Atex" />
+
+                        break;
+
+                    case 2:
+
+                        <img class="pastille" src="../image/logo_OF/SAV.png" alt="SAV" />
+
+                        break;
+
+                    case 3:
+
+                        <img class="pastille" src="../image/logo_OF/Test_RD.png" alt="Test RD" />
+
+                        break;
+
+                    case 4:
+
+                        <img class="pastille" src="../image/logo_OF/Test_STC.png" alt="Test STC" />
+
+                        break;
+
+                    case 5:
+
+                        <img class="pastille" src="../image/logo_OF/UL.png" alt="UL" />
+
+                        break;
+
+                }
+
+            }
+
+        </div> 
+    </div>
+
+    <div class="bottom-infos">
+        <div class="delay-info">
+            @{
+                double minutes = Math.Round(Model.duree % 60);
+                String minutes_str = ((minutes < 10) ? "0" : "") + minutes;
+            }
+            <i class="fa-regular fa-clock"></i> @(Math.Floor(Model.duree / 60))h@(minutes_str)
+        </div>
+        <div class="quantite">
+            X<span class="value">@Model.quantite</span>
+        </div>
+    </div>
+</div>
+
+

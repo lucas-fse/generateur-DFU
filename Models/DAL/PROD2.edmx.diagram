@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5aebba06eae1446499b199501912da97" Name="Diagram1" ZoomLevel="31" >
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.ACCIDENT" Width="1.5" PointX="15.75" PointY="12.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.ACTIONIMMEDIATE" Width="1.5" PointX="8" PointY="13.625" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.AIC_EQUIPE" Width="1.5" PointX="16" PointY="6.125" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.AIC_POLE" Width="1.5" PointX="13.75" PointY="8" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.AIC_PROD" Width="1.5" PointX="16" PointY="9.625" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.ALEAS_OF" Width="1.5" PointX="13" PointY="1.625" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.ALEAS_OF_DETAILS" Width="1.5" PointX="15.25" PointY="2.125" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.AMELIORATION" Width="1.5" PointX="15.75" PointY="16.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.DATA_GENERIQUE" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.FRC" Width="1.5" PointX="10.75" PointY="17.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.KPI_CA" Width="1.5" PointX="17.75" PointY="12.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.KPI_PROD" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.KPI_STC" Width="1.5" PointX="3" PointY="15.875" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.NON_CONFORMITE" Width="1.5" PointX="6" PointY="17.125" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.NON_DETECTION" Width="1.5" PointX="8" PointY="7.375" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.OCCURRENCE" Width="1.5" PointX="8" PointY="1.5" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.OF_PROD_TRAITE" Width="1.5" PointX="10.75" PointY="1" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.OPERATEURS" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.ORDRE_FABRICATION_GENERE" Width="1.5" PointX="17.75" PointY="15.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PLANIF_OF" Width="1.5" PointX="18.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PLANIFICATION_OF" Width="1.5" PointX="18.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PLANNING_OPERATEUR" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PLANNING_VALUE" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.POLES" Width="1.5" PointX="3" PointY="26.25" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.POSTES" Width="1.5" PointX="5.25" PointY="26.375" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.QRQC" Width="1.5" PointX="5.75" PointY="6.875" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.QUESTIONS_QRQC" Width="1.5" PointX="8" PointY="9.875" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.SERENITE" Width="1.5" PointX="3" PointY="23.375" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.SOLUTION_DURABLE" Width="1.5" PointX="8" PointY="4.125" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.SOUSPROJET" Width="1.5" PointX="8.75" PointY="17.5" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.STATUS_PNC" Width="1.5" PointX="3.75" PointY="30.125" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.SUIVI_OFFRE" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TEMPS_SAISI" Width="1.5" PointX="11" PointY="8.875" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TEMPS_SEMAINE" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TEST_OF" Width="1.5" PointX="10.75" PointY="13.875" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TEST_OPERATION" Width="1.5" PointX="13" PointY="14" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TRACABILITE" Width="1.5" PointX="19.75" PointY="12.75" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_ACTIONIMMEDIATE_QRQC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_AIC_EQUIPE_AIC_POLE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_AIC_PROD_AIC_POLE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_ALEAS_OF_DETAILS_ALEAS_OF" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_ALEAS_OF_OF_PROD_TRAITE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_KPI_STC_OPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_NON_CONFORMITE_OPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_NON_CONFORMITE_STATUS_PNC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_NON_DETECTION_QRQC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_OCCURRENCE_QRQC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_OPERATEURSTEMPS_SEMAINE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_OPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_POLES_OPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_SERENITE_OPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_TEMPS_SAISIOPERATEURS" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE1" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE10" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE11" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE12" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE13" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE2" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE3" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE4" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE5" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE6" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE7" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE8" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_PLANNING_OPERATEUR_PLANNING_VALUE9" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_POSTES_POLES" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_Questions_QRQC_QRQC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_SOLUTION_DURABLE_QRQC" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_TEMPS_SAISI_SOUSPROJET" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_TEST_OPERATION_TEST_OF" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.CONTROLE_QUALITE" Width="1.5" PointX="3" PointY="33.5" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TYPE_ANOMALIE" Width="1.5" PointX="0.75" PointY="34.5" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.TYPE_CAUSE" Width="1.5" PointX="20.375" PointY="15.875" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,65 @@
+﻿@model GenerateurDFUSafir.Models.OrdreFabricationMono
+@{
+    ViewBag.Title = "CodeId";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/gammeUD.css" rel="stylesheet" />
+}
+
+<h2>CodeId</h2>
+
+
+
+
+<h2>Gestion de la fabrication de la gamme UD</h2>
+
+<body>
+    @using (Html.BeginForm("CodeId", "GammeUD"))
+    {
+        <div class="Gamme">
+
+            <div class="saisie">
+                <div class="ofademarre">
+
+                    <div>
+                        <label for="exnmrof">Entrer un numéro d'OF</label>
+                    </div>
+                    <div>
+                        <input id="nmrof" type="text" name="TryToOFUD" value="@Html.DisplayFor(model => model.NmrOF)">
+                    </div>
+                    <div>
+                        <input type="submit" value="Valider" />
+                    </div>
+                    <br />
+
+                    <div>
+                        <p class="OFS"> @Html.DisplayFor(model => model.NmrOFAff)</p>
+                    </div>
+                    <div>
+                        <p class="OFS"> @Html.DisplayFor(model => model.ItemAff)</p>
+                    </div>
+                    <div>
+                        <p class="OFS"> @Html.DisplayFor(model => model.QtrAff)</p>
+                    </div>
+                    <div>
+                        <p class="OFS"> @Html.DisplayFor(model => model.CodeIDAff)</p>
+                    </div>
+                    <div>
+                        @if (Model.ISGenerernewCodeButton)
+                        {
+                            <input type="submit" value="Générer Code ID" class="btn btn-default" onclick="location.href='@Url.Action("GenererCodeId", "GammeUD", new { of = Model.NmrOF })'" />
+                        }
+                        else
+                        {
+                            <p class="OFS"> @Html.DisplayFor(model => model.Erreuranalyse)</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="visuel">
+                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.imageBytes))" height="500" />
+            </div>
+        </div>
+    }
+</body>
+

@@ -1,0 +1,374 @@
+﻿@model GenerateurDFUSafir.Models.FRC_PROD
+@{
+    ViewBag.Title = "Qualite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/FRC.css" rel="stylesheet" />
+    <link href="~/Content/form.css" rel="stylesheet" />
+}
+
+<body>
+    <img src="~/image/swirl2.png" id="logoBackGround" />
+    <div id="topInfos">
+        <div class="">
+            <img src="~/image/logo.png" id="logo" alt="logo">
+        </div>
+        <div id="animation">
+            <div id="ligne-1-animation">
+                @for (int i = 0; i < (Model.ListOperateur.Count() + 1) / 2; i++)
+                {
+                    <img src=@(".."+ Model.ListOperateur[i]) alt="user" id="@("user"+i.ToString())" class="prodPic">
+                }
+            </div>
+            <div id="ligne-2-animation">
+                @for (int i = (Model.ListOperateur.Count() + 1) / 2; i < Model.ListOperateur.Count(); i++)
+                {
+                    <img src=@(".." +Model.ListOperateur[i]) alt="user" id="@("user"+i.ToString())" class="prodPic">
+                }
+            </div>
+        </div>
+    </div>
+
+    <div id="topBanner">
+        <div id="subtopInfos">
+            <time id="TodayDate">
+                <div id="mois">@Model.DateDuJourMois</div>
+                <div id="numJour">@Model.DateDuJourJour</div>
+                <div id="jour">@Model.DateDuJour2</div>
+            </time>
+
+            <!-- debut popup 1 : FRC non traités -->
+            <div id="popupFRC">
+                <button data-modal-target="#modal" id="frc-non-traite-popup" class="button6">FRC non traitées (@Model.NombreFrcNonTraitees)</button>
+                <div class="modal-2" id="modal">
+                    <div class="modal-header-2">
+                        <div class="title">Gestion FRC non traitées</div>
+                        <button data-close-button class="close-button">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- formulaire pour gérer les frc non traitees -->
+                        @using (Html.BeginForm())
+                        {
+                            foreach (var frcNonTraitee in Model.ListFrcNonTraitees) //on parcout les frc non traitees du jour en question
+                            {
+                                <div class="frc-non-traitee-box">
+                                    <p><span class="frc-non-traitee-bold">Description :</span>@Html.DisplayFor(model => frcNonTraitee.Description)</p>
+                                    <p><span class="frc-non-traitee-bold">Commentaire :</span>@Html.DisplayFor(model => frcNonTraitee.Commentaire)</p>
+                                    <p><span class="frc-non-traitee-bold">Action :</span>@Html.DisplayFor(model => frcNonTraitee.Action)</p>
+                                    <p><span class="frc-non-traitee-bold">date :</span> @Html.DisplayFor(model => frcNonTraitee.DatetimeString)</p>
+
+                                    <label class="switch">
+                                        <input type="checkbox" name=@Html.DisplayFor(model => frcNonTraitee.ID)>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            }
+                            <br />
+                            <input type="submit" value="valider" name="submitButton" class="btn btn-default" id="submitButton" />
+                        }
+                    </div>
+                </div>
+                <div id="overlay"></div>
+            </div>
+        </div>
+    </div>
+    <!-- fin popup -->
+
+    <div class="container-content">
+
+        <div id="infoFRC">
+
+            <div class="boxCounter">
+                <div class="thumbnailCounter">
+                    <img src="~/image/hourglass.png" id="sablier" alt="sablier">
+                </div>
+                <div class="counterContent">
+                    <h3>Nombre de jour sans FRC en cours</h3>
+                    <p id="cpt1" initvalue=@Html.DisplayFor(model => Model.JourSansFRC)><span class="ValueKPI">0</span></p> <!-- 1er compteur -->
+                </div>
+            </div>
+
+            <div class="boxCounter">
+                <!-- flex container -->
+                <div class="thumbnailCounter">
+                    <!-- flex item -->
+                    <img src="~/image/trophy.png" id="trophee" alt="trophee">
+                </div>
+                <!--
+                -->
+                <div class="counterContent">
+                    <!-- flex item -->
+                    <h3>Record du nombre de jour sans FRC</h3>
+                    <p id="cpt2" initvalue=@Html.DisplayFor(model => Model.RecordSansFRC)><span class="ValueKPI">0</span></p> <!-- 2e compteur -->
+                </div>
+            </div>
+
+            <div class="boxCounter">
+                <!-- flex container -->
+                <div class="thumbnailCounter">
+                    <!-- flex item -->
+                    <img src="~/image/euro2.png" id="euro" alt="trophee">
+                </div>
+                <!--
+                -->
+                <div class="counterContent">
+                    <!-- flex item -->
+                    <h3>Cout de rebut annuel</h3>
+                    <p id="cpt3" initvalue=@Html.DisplayFor(model => Model.CoutRebutAnnuel)><span class="ValueKPI">0€</span></p> <!-- 3e compteur -->
+                </div>
+            </div>
+
+            <div class="boxCounter">
+                <!-- flex container -->
+                <div class="thumbnailCounter">
+                    <!-- flex item -->
+                    <img src="~/image/alea.png" id="alea" alt="trophee">
+                </div>
+                <!--
+                -->
+                <div class="counterContent">
+                    <!-- flex item -->
+                    <h3>Quantité d'APS</h3>
+                    <p id="cpt4" initvalue=@Html.DisplayFor(model => Model.QuantiteAPS)><span class="ValueKPI">0</span></p> <!-- 4e compteur -->
+                </div>
+            </div>
+        </div>
+
+        <div id="Q-Cross">
+            <!-- 8 lignes x 9 colonnes -->
+            <div class="Q-CrossRow">
+                <!-- ligne 1 -->
+                <div class="Q-CrossCase left top bottom right arrondi-hg bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[0].Couleurstring)">1</div>
+
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <div class="Q-CrossCase top bottom right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[i].Couleurstring)">
+                        @(i+1)
+                    </div>
+                }
+
+                <div class="Q-CrossCase top bottom right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[5].Couleurstring)">6</div>
+                <div class="Q-CrossCase top bottom right arrondi-hd bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[6].Couleurstring)">7</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 2 -->
+                <div class="Q-CrossCase left bottom right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[7].Couleurstring)">8</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase right"></div>
+                <div class="Q-CrossCase right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[8].Couleurstring)">9</div>
+                <div class="Q-CrossCase">-</div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 3 -->
+                <div class="Q-CrossCase left right bottom bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[9].Couleurstring)">10</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase right"></div>
+                <div class="Q-CrossCase top right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[10].Couleurstring)">11</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 4 -->
+                <div class="Q-CrossCase left right bottom bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[11].Couleurstring)">12</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase right"></div>
+                <div class="Q-CrossCase top right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[12].Couleurstring)">13</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 5 -->
+                <div class="Q-CrossCase left right bottom bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[13].Couleurstring)">14</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase right"></div>
+                <div class="Q-CrossCase top right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[14].Couleurstring)">15</div>
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 6 -->
+                <div class="Q-CrossCase left right bottom bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[15].Couleurstring)">16</div>
+                <div class="Q-CrossCase bottom"></div>
+                <div class="Q-CrossCase bottom"></div>
+                <div class="Q-CrossCase bottom"></div>
+                <div class="Q-CrossCase bottom"></div>
+                <div class="Q-CrossCase right bottom"></div>
+                <div class="Q-CrossCase top bottom right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[16].Couleurstring)">17</div>
+                <div class="Q-CrossCase "></div>
+                <!--
+                -->
+                <div class="Q-CrossCase"></div>
+                <!--
+                -->
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 7 -->
+
+                <div class="Q-CrossCase left right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[17].Couleurstring)">18</div>
+                <div class="Q-CrossCase bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[18].Couleurstring)">19</div>
+                <div class="Q-CrossCase left right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[19].Couleurstring)">20</div>
+
+                @for (int i = 20; i <= 23; i++)
+                {
+                    <div class="Q-CrossCase right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[i].Couleurstring)">@(i+1)</div>
+                }
+
+                <div class="Q-CrossCase"></div>
+                <div class="Q-CrossCase"></div>
+            </div>
+            <div class="Q-CrossRow">
+                <!-- ligne 8 -->
+                <div class="Q-CrossCase top"></div>
+                <div class="Q-CrossCase top"></div>
+                <div class="Q-CrossCase left top right bottom arrondi-bg bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[24].Couleurstring)">25</div>
+
+                @for (int i = 25; i <= 29; i++)
+                {
+
+
+                    if (Model.CasesQcross[i].Visible.Equals(false))
+                    {
+                        <div class="Q-CrossCase right top bottom bg-case jour-inexistant  )"></div>
+                    }
+                    else
+                    {
+                        <div class="Q-CrossCase right top bottom bg-case  cliquable @Html.DisplayFor(model => Model.CasesQcross[i].Couleurstring)">@(i+1)</div>
+                    }
+
+                }
+                @if (Model.CasesQcross[30].Visible.Equals(false)) //on test si il y a une instance de définie ou non
+                {
+                    <div class="Q-CrossCase top right bottom arrondi-bd arrondi-hd-bd bg-case jour-inexistant  )"></div> //pas d'instance donc case noire => le jour n'est pas présent dans le mois courant
+                }
+                else
+                {
+                    <div class="Q-CrossCase top right bottom arrondi-bd arrondi-hd-bd bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[30].Couleurstring)"> 31 </div>//une instance donc on recupere la couleur de la case
+                }
+            </div>
+        </div>
+        <div>
+            <h2>RACCOURCIS</h2>
+            <a href="/Controle/AfficheControles" target="_blank"><button class="frm-button action-button">CONTRÔLE QUALITÉ</button></a>
+        </div>
+    </div>
+    <div id="frc-traitees"></div>
+    <div id="chartDataFrcParService1" legend="true">
+        <ul>
+            @foreach (var frc in Model.DataFrcParService)
+            {
+                <li>@frc.Key:@frc.Value.backgroundColor:@frc.Value.borderColor:@frc.Value.Data[0]:@frc.Value.Data[1]:@frc.Value.Data[2]:@frc.Value.Data[3]:@frc.Value.Data[4]:@frc.Value.Data[5]:@frc.Value.Data[6]:@frc.Value.Data[7]:@frc.Value.Data[8]:@frc.Value.Data[9]:@frc.Value.Data[10]:@frc.Value.Data[11]:@frc.Value.Type:</li>
+            }
+        </ul>
+    </div>
+    <div>
+        <div id="chartNbFrcParService-container">
+            <canvas id="chartNbFrcParService"></canvas>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="~/Scripts/compteur.js"></script>
+    <script type="text/javascript" src="~/Scripts/move.js"></script>
+    <script type="text/javascript" src="~/Scripts/popup.js"></script>
+    <script type="text/javascript" src="~/Scripts/chart.js"></script>
+    <script type="text/javascript" src="~/Scripts/chartNbFrcParService.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/clock.js"></script>
+    <script type="text/javascript">
+var frc; //objet js qui contient toutes la liste des FRC du mois courant
+
+        const nbFrcNonTraitees = @Model.NombreFrcNonTraitees;
+        const cases = document.querySelectorAll('.Q-CrossCase.cliquable.rouge') //cases cliquable
+
+        cases.forEach(qCrossCase => {
+            qCrossCase.addEventListener('click', () => {
+                var jour = parseInt(qCrossCase.textContent)
+                afficherFRC(jour)
+            })
+        })
+
+        function afficherFRC(jour) {
+            document.getElementById('frc-traitees').style.transform = "scale(1)"
+            document.getElementById('frc-traitees').style.height = "initial"
+                var nbFRC = 0;
+                //var frcContent = document.getElementById('popupListeFRC-modal-body') //là où on va écrire les FRC
+                var frcContent = document.getElementById('frc-traitees') //là où on va écrire les FRC
+                var infoNbFRC = document.createElement('h3')
+                var croix = document.createElement("span")
+                croix.id = "croix"
+
+                croix.innerHTML = '&times'
+                frcContent.innerHTML = ""
+                var textFRC = "";
+
+                frcContent.appendChild(infoNbFRC)
+                frcContent.appendChild(croix)
+
+                frc.forEach(
+                    (frcCourant, index) => {
+
+                        if (frcCourant.jourDeclare == jour) {
+                            nbFRC++;
+                            var divFrc = document.createElement("div");
+                            divFrc.classList.add('FRC-Q-Cross-Box')
+
+                           // var infoNbFRC = document.createElement('h3')
+                            var titre = document.createElement("p")
+                            var description = document.createElement("p")
+                            var action = document.createElement("p")
+
+
+                            infoNbFRC.id = "frc-traitees-titre"
+
+                            titre.innerHTML = '<span class="label-frc-box">Description :</span> ' + frcCourant.Descriptions
+                            description.innerHTML = '<span class="label-frc-box">Commentaire :</span> ' + frcCourant.Commentaires
+                            action.innerHTML = '<span class="label-frc-box">Action :</span> ' + frcCourant.Actions
+                            infoNbFRC.innerHTML = 'Nombre de FRC traitees (<span id="nombre-FRC-traitees"></span>) - ' + frcCourant.DatetimeString;
+                            croix.innerHTML = '&times'
+
+                            //frcContent.appendChild(infoNbFRC)
+                            divFrc.appendChild(titre)
+                            divFrc.appendChild(description)
+                            divFrc.appendChild(action)
+
+                            frcContent.appendChild(divFrc)
+                        }
+                    }
+                );
+
+
+                spanNbFrc = document.getElementById('nombre-FRC-traitees').textContent = nbFRC;
+                document.getElementById("croix").addEventListener('click', () => {
+                document.getElementById('frc-traitees').style.transform = "scale(0)"
+                document.getElementById('frc-traitees').style.height = "0px"
+
+                })
+            }
+
+        function getFRC() {
+                  var frcJSON = '<p>@Html.DisplayFor(model => Model.listeFrcMoisCourantJSON)</p>';
+                   frcJSON = frcJSON.replace(/(\r\n|\n|\r)/gm, "\\n")
+                   frcJSON = jQuery(frcJSON).text(); //transforme les HTML entities en text pur, pour pouvoir parser le JSON
+                   frcJSON = frcJSON.replace(/\\n/gm, "<br>")
+                   frc = JSON.parse(frcJSON);
+                   lancerAnimations()
+            }
+            window.onload = getFRC;
+
+
+    </script>
+    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+</body>

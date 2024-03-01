@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PEGASE_PRODModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_MO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="nvarchar" MaxLength="5" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="int" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="nvarchar" MaxLength="20" />
+          <Property Name="VERSION_LOGICIELLE" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="MT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_MT" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="nvarchar" MaxLength="5" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="int" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="nvarchar" MaxLength="16" />
+          <Property Name="VERSION_LOGICIELLE" Type="nvarchar" MaxLength="20" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="NB_PACK" Type="int" Nullable="false" />
+          <Property Name="NB_MO" Type="int" Nullable="false" />
+          <Property Name="NB_MT" Type="int" Nullable="false" />
+          <Property Name="NB_SIM" Type="int" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+          <Property Name="OPTION_MATERIEL_MO" Type="nvarchar" MaxLength="32" />
+          <Property Name="OPTION_MATERIEL_MT" Type="nvarchar" MaxLength="32" />
+          <Property Name="COMMANDE_SYNCHRO" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_OF" Type="bigint" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="DATE_PROGRAMMATION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACK_INSTALLE" Type="bigint" />
+          <Property Name="NUM_SERIE_SIM" Type="nvarchar" MaxLength="16" />
+          <Property Name="DATE_FABRICATION" Type="datetime" />
+          <Property Name="REF_INDUSTRIELLE" Type="nvarchar" MaxLength="32" />
+          <Property Name="NUM_ORDRE" Type="int" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <Association Name="FK_MO_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MO" Type="Self.MO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MT" Type="Self.MT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="SIM" Type="Self.SIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_PRODModelStoreContainer">
+          <EntitySet Name="MO" EntityType="Self.MO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MT" EntityType="Self.MT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="Self.ORDRE_FABRICATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PACK_INSTALLE" EntityType="Self.PACK_INSTALLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIM" EntityType="Self.SIM" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MO_ID_PACK_INSTALLE" Association="Self.FK_MO_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MO" EntitySet="MO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ID_PACK_INSTALLE" Association="Self.FK_MT_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MT" EntitySet="MT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ID_OF" Association="Self.FK_PACK_INSTALLE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ID_PACK_INSTALLE" Association="Self.FK_SIM_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="SIM" EntitySet="SIM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_PRODModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="Int32" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION_LOGICIELLE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_MO_ID_PACK_INSTALLE" FromRole="MO" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="MT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODE_IDENTITE_NATIF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_IDENTITE_APPRENTISSAGE" Type="Int32" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="CODE_ARTICLE_LOGICIEL" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION_LOGICIELLE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_DERNIERE_MAJ" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_MT_ID_PACK_INSTALLE" FromRole="MT" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_OF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NB_PACK" Type="Int32" Nullable="false" />
+          <Property Name="NB_MO" Type="Int32" Nullable="false" />
+          <Property Name="NB_MT" Type="Int32" Nullable="false" />
+          <Property Name="NB_SIM" Type="Int32" Nullable="false" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <Property Name="OPTION_MATERIEL_MO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OPTION_MATERIEL_MT" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="COMMANDE_SYNCHRO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_PACK_INSTALLE_ID_OF" FromRole="ORDRE_FABRICATION" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <EntityType Name="PACK_INSTALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_OF" Type="Int64" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="DATE_PROGRAMMATION" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MO" Relationship="Self.FK_MO_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="MO" />
+          <NavigationProperty Name="MT" Relationship="Self.FK_MT_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="MT" />
+          <NavigationProperty Name="ORDRE_FABRICATION" Relationship="Self.FK_PACK_INSTALLE_ID_OF" FromRole="PACK_INSTALLE" ToRole="ORDRE_FABRICATION" />
+          <NavigationProperty Name="SIM" Relationship="Self.FK_SIM_ID_PACK_INSTALLE" FromRole="PACK_INSTALLE" ToRole="SIM" />
+        </EntityType>
+        <EntityType Name="SIM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACK_INSTALLE" Type="Int64" />
+          <Property Name="NUM_SERIE_SIM" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_FABRICATION" Type="DateTime" Precision="3" />
+          <Property Name="REF_INDUSTRIELLE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_ORDRE" Type="Int32" />
+          <Property Name="NUM_SERIE_CARTE_TEST" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PACK_INSTALLE" Relationship="Self.FK_SIM_ID_PACK_INSTALLE" FromRole="SIM" ToRole="PACK_INSTALLE" />
+        </EntityType>
+        <Association Name="FK_MO_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MO" Type="Self.MO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MO">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="MT" Type="Self.MT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MT">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACK_INSTALLE_ID_OF">
+          <End Role="ORDRE_FABRICATION" Type="Self.ORDRE_FABRICATION" Multiplicity="0..1" />
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDRE_FABRICATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PACK_INSTALLE">
+              <PropertyRef Name="ID_OF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIM_ID_PACK_INSTALLE">
+          <End Role="PACK_INSTALLE" Type="Self.PACK_INSTALLE" Multiplicity="0..1" />
+          <End Role="SIM" Type="Self.SIM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACK_INSTALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIM">
+              <PropertyRef Name="ID_PACK_INSTALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PEGASE_PRODEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MO" EntityType="Self.MO" />
+          <EntitySet Name="MT" EntityType="Self.MT" />
+          <EntitySet Name="ORDRE_FABRICATION" EntityType="Self.ORDRE_FABRICATION" />
+          <EntitySet Name="PACK_INSTALLE" EntityType="Self.PACK_INSTALLE" />
+          <EntitySet Name="SIM" EntityType="Self.SIM" />
+          <AssociationSet Name="FK_MO_ID_PACK_INSTALLE" Association="Self.FK_MO_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MO" EntitySet="MO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_ID_PACK_INSTALLE" Association="Self.FK_MT_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="MT" EntitySet="MT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACK_INSTALLE_ID_OF" Association="Self.FK_PACK_INSTALLE_ID_OF">
+            <End Role="ORDRE_FABRICATION" EntitySet="ORDRE_FABRICATION" />
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIM_ID_PACK_INSTALLE" Association="Self.FK_SIM_ID_PACK_INSTALLE">
+            <End Role="PACK_INSTALLE" EntitySet="PACK_INSTALLE" />
+            <End Role="SIM" EntitySet="SIM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_PRODModelStoreContainer" CdmEntityContainer="PEGASE_PRODEntities">
+          <EntitySetMapping Name="MO">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MO">
+              <MappingFragment StoreEntitySet="MO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_MO" ColumnName="NUM_SERIE_MO" />
+                <ScalarProperty Name="CODE_IDENTITE_NATIF" ColumnName="CODE_IDENTITE_NATIF" />
+                <ScalarProperty Name="CODE_IDENTITE_APPRENTISSAGE" ColumnName="CODE_IDENTITE_APPRENTISSAGE" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="CODE_ARTICLE_LOGICIEL" ColumnName="CODE_ARTICLE_LOGICIEL" />
+                <ScalarProperty Name="VERSION_LOGICIELLE" ColumnName="VERSION_LOGICIELLE" />
+                <ScalarProperty Name="DATE_DERNIERE_MAJ" ColumnName="DATE_DERNIERE_MAJ" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MT">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.MT">
+              <MappingFragment StoreEntitySet="MT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_MT" ColumnName="NUM_SERIE_MT" />
+                <ScalarProperty Name="CODE_IDENTITE_NATIF" ColumnName="CODE_IDENTITE_NATIF" />
+                <ScalarProperty Name="CODE_IDENTITE_APPRENTISSAGE" ColumnName="CODE_IDENTITE_APPRENTISSAGE" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="CODE_ARTICLE_LOGICIEL" ColumnName="CODE_ARTICLE_LOGICIEL" />
+                <ScalarProperty Name="VERSION_LOGICIELLE" ColumnName="VERSION_LOGICIELLE" />
+                <ScalarProperty Name="DATE_DERNIERE_MAJ" ColumnName="DATE_DERNIERE_MAJ" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDRE_FABRICATION">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.ORDRE_FABRICATION">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MO" ColumnName="REF_INDUSTRIELLE_MO" />
+                <ScalarProperty Name="REF_COMMERCIALE_MO" ColumnName="REF_COMMERCIALE_MO" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MT" ColumnName="REF_INDUSTRIELLE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_MT" ColumnName="REF_COMMERCIALE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_SIM" ColumnName="REF_COMMERCIALE_SIM" />
+                <ScalarProperty Name="REF_FIRMWARE_MO" ColumnName="REF_FIRMWARE_MO" />
+                <ScalarProperty Name="REF_FIRMWARE_MT" ColumnName="REF_FIRMWARE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="OPTIONS_LOGICIELLES" ColumnName="OPTIONS_LOGICIELLES" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="NB_PACK" ColumnName="NB_PACK" />
+                <ScalarProperty Name="NB_MO" ColumnName="NB_MO" />
+                <ScalarProperty Name="NB_MT" ColumnName="NB_MT" />
+                <ScalarProperty Name="NB_SIM" ColumnName="NB_SIM" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+                <ScalarProperty Name="OPTION_MATERIEL_MO" ColumnName="OPTION_MATERIEL_MO" />
+                <ScalarProperty Name="OPTION_MATERIEL_MT" ColumnName="OPTION_MATERIEL_MT" />
+                <ScalarProperty Name="COMMANDE_SYNCHRO" ColumnName="COMMANDE_SYNCHRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACK_INSTALLE">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.PACK_INSTALLE">
+              <MappingFragment StoreEntitySet="PACK_INSTALLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_OF" ColumnName="ID_OF" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="DATE_PROGRAMMATION" ColumnName="DATE_PROGRAMMATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIM">
+            <EntityTypeMapping TypeName="PEGASE_PRODModel.SIM">
+              <MappingFragment StoreEntitySet="SIM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_PACK_INSTALLE" ColumnName="ID_PACK_INSTALLE" />
+                <ScalarProperty Name="NUM_SERIE_SIM" ColumnName="NUM_SERIE_SIM" />
+                <ScalarProperty Name="DATE_FABRICATION" ColumnName="DATE_FABRICATION" />
+                <ScalarProperty Name="REF_INDUSTRIELLE" ColumnName="REF_INDUSTRIELLE" />
+                <ScalarProperty Name="NUM_ORDRE" ColumnName="NUM_ORDRE" />
+                <ScalarProperty Name="NUM_SERIE_CARTE_TEST" ColumnName="NUM_SERIE_CARTE_TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

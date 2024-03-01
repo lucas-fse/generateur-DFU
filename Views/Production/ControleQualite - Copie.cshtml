@@ -1,0 +1,276 @@
+﻿@model GenerateurDFUSafir.Models.ControleQualite
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/DeclAccident.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/form.css" />
+}
+
+@using (Html.BeginForm("ControleQualite", "Production", FormMethod.Post, new { id = "Form", onsubmit = "ValiderPopUp()", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="frm-box">
+    <div class="frm-title">
+        <h2 class="frm-title">Effectuer un Contrôle Qualité</h2>
+        <p class="frm-description">Entrez les informations demandées pour effectuer votre contrôle qualité :</p>
+    </div>
+    <div class="frm-row" id="RefOF">
+        <div class="frm-group">
+            <label>Saisir un Numéro OF</label>
+            <input type="text" name="refPiece" class="frm-input frm-required" id="refPiece" list="OfList" />
+            <datalist id="OfList">
+            </datalist>
+        </div>
+    </div>
+    <div class="frm-row" id="InfosOF">
+        <div class="frm-group">
+            <input type="text" id="nomArticle" class="frm-input" placeholder="Référence Industrielle" disabled />
+            <input type="hidden" name="nomArticle" id="nomArticle-d" />
+        </div>
+        <div class="frm-group">
+            <input type="text" id="nomDescription" class="frm-input" placeholder="Description Reference" disabled />
+            <input type="hidden" name="nomDescription" id="nomDescription-d" />
+        </div>
+    </div>
+    <div class="frm-row">
+        <div class="frm-group">
+            <label>Statut du contrôle qualité</label>
+            <select class="frm-select" id="list1" name="TypeConforme">
+                <option value="1">Conforme</option>
+                <option value="0">Non Conforme</option>
+            </select>
+        </div>
+    </div>
+    <div class="frm-row">
+        <div class="frm-group">
+            <label>Type d'anomalie</label>
+            <select class="frm-select" id="list1" name="Anomalie">
+                <option value="" input="">-- Sélectionner --</option>
+                @foreach (var an in Model.ListAnomalie)
+                {
+                    <option value=@an.Value>@an.Text</option>
+                }
+            </select>
+        </div>
+        <div class="frm-group">
+            <label>Cause potentielle</label>
+            <select class="frm-select" id="list2" name="Cause">
+                <option value="" input="">-- Sélectionner --</option>
+                @foreach (var an in Model.ListCause)
+                {
+                    <option value = @an.Value >@an.Text</option>
+                }                
+            </select>
+        </div>
+    </div>
+    <div class="frm-group">
+        <label>Détails du contrôle qualité</label>
+        <textarea class="frm-input frm-required" id="SaisieDescription" name="SaisieDescription" form="Form"></textarea>
+    </div>
+    <!---------------------------------------------------------------------------->
+    <div class="frm-group photo-pc" id="FormContenantWebcam">
+        <div id="FormContenantPhotoProfil" class="frm-group">
+            <!---<label>Prendre une photo de l'accident</label>-->
+            <div id="ChangeppMenu">
+                <button id="ChangeppCamera" class="frm-action" type="button" onclick="Changepp()">
+                    <i class="fa-solid fa-camera" style="color: #f26222;"></i>
+                    PRENDRE UNE PHOTO
+                </button>
+            </div>
+        </div>
+        <div id="WebcamOn">
+            <div id="Contenant-video" style="position: relative; margin-right: 10px;">
+                <div style="z-index: 1; text-align: initial;">
+                    <video id="video" autoplay muted playsinline></video>
+                </div>
+            </div>
+
+            <canvas id="canvas" hidden></canvas>
+            <img src="" id="photo" alt="photo" style="display: none; position: relative; margin-right: 10px;">
+            <input value="" name="srcImg" id="srcImg" type="hidden">
+            <canvas id="canvas" hidden></canvas>
+
+            <div id="WebcamMenu">
+                <label>Video source: </label>
+                <div class="select">
+                    <label for="videoSource"></label><select id="videoSource"></select>
+                </div>
+                <button id="PrendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="previewPhoto()">
+                    <i class='fa-solid fa-camera' style='color: #f26222;'></i>
+                    Prendre photo
+                </button>
+
+                <button id="EmptyButtonPhoto" class="FormppBtn" type="button" style="display:none">---</button>
+
+                <button id="ReprendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="ReprendrePhoto()">
+                    <i class="fa-solid fa-rotate-left" style="color: #f26222;"></i>
+                    Reprendre photo
+                </button>
+
+                <button id="AnnulerButtonPhoto" class="FormppBtn frm-action" type="button" onclick="AnnulerChangepp()">
+                    <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------->
+    <div class="frm-group" id="AccidentPicture">
+        <!--<label>Ajouter une image de l'accident</label>-->
+        @*On met le bouton pour ajouter une image et on lui donne l'id "preview" pour qu'il utilise le script javascript et affiche l'image*@
+        <img id="blah" src="#preview" alt="" />
+        <!--<input value="" name="srcImport" id="srcImport" type="hidden"> -->
+        <div class="alignement-fonctions">
+            <label for="preview" class="frm-action" id="button-image" onclick="importImage()">
+                <i class="fa-solid fa-plus" style="color: #f26222;"></i>
+                AJOUTER UNE IMAGE
+            </label>
+            <label for="" class="frm-action" id="annulation-image" onclick="cancelImage()" style="display: none;">
+                <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                ANNULER L'IMAGE
+            </label>
+            <input class="frm-action" value="" type="file" name="ImageControle" id="preview" accept="image/jpeg, image/jpg" />
+        </div>
+    </div>
+    <div class="frm-button-box">
+        <button type="button" onclick="" id="frm-back" class="frm-button">ANNULER</button>
+        <button type="submit" value="Niveau" id="frm-submit" name="submitButton" class="frm-button action-button" disabled> VALIDER </button>
+    </div>
+</div>
+}
+
+<script src="~/Scripts/Accident.js" charset="utf-8"></script>
+<script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewImage.js"></script>
+<script>
+    const inputElement = document.getElementById("image-upload");
+
+    inputElement.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const imgElement = document.createElement("img");
+            imgElement.src = e.target.result;
+            document.body.appendChild(imgElement);
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+<script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+<script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewWebcam.js"></script>
+<script type="text/javascript" src="~/Scripts/form.js"></script>
+
+<script>
+    // Fonction pour récupérer les informations de l'OF en fonction du numéro saisi
+    function getOFInfo() {
+        var numOF = document.getElementById('refPiece').value;
+
+
+        const list = document.querySelector('#OfList');
+        
+        if (numOF !== "" && numOF.length>4) {
+            // Effectuer une requête AJAX pour récupérer les informations de l'OF
+            fetch("/Production/SearchOfControle?nmrof=" + numOF)
+                .then(response => response.json())
+                .then(data => {
+
+                    list.innerHTML = "";
+                    console.log('couc');
+                    if (data.filter(i => i.NumOf.length ===8 ).length === 1) {
+                        const nom = document.querySelector("#nomArticle");
+                        const nomD = document.querySelector("#nomArticle-d");
+                        const desc = document.querySelector("#nomDescription");
+                        const descD = document.querySelector("#nomDescription-d");
+                        nom.value = data[0].ItemRef.toUpperCase();
+                        desc.value = data[0].ItemDescript.toUpperCase();
+                        nomD.value = data[0].ItemRef.toUpperCase();
+                        descD.value = data[0].ItemDescript.toUpperCase();
+
+                    }
+                    else {
+
+
+                        data.forEach(item => {
+                            let article = document.createElement("option");
+                            article.textContent = item.ItemRef;
+                            article.setAttribute('value', item.NumOf);
+                            list.appendChild(article);
+                        });
+                    }
+                   
+                })
+                .catch(error => {
+                    console.error('Une erreur s\'est produite:', error);
+                });
+        }
+    }
+
+    // Écouter les changements dans le champ "Numéro OF" et appeler la fonction getOFInfo()
+    document.getElementById('refPiece').addEventListener('keyup', getOFInfo);
+</script>
+
+
+<!---
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+    const numOf = urlParams.get('of');
+
+    const refInput = document.querySelector("#ref");
+
+    if (ref) {
+        refInput.value = ref;
+        findArticles(refInput.value);
+    }
+
+    let previousQuery = "";
+
+    refInput.addEventListener("keyup", (e) => {
+        const query = e.target.value;
+
+        if (query.length > 0 && query != previousQuery) {
+            previousQuery = query;
+            findArticles(query);
+        }
+    });
+
+
+
+    async function findArticles(query) {
+        const raw = await fetch("/Production/SearchOfControle?query=" + query.toUpperCase());
+        const datas = await raw.json();
+
+        const list = document.querySelector("#OfList");
+        const refInput = document.querySelector("#ref");
+
+        // On regarde si on a trouvé un bon numéro
+        if (datas.filter(i => i.Itemref === query).length === 1) {
+            nom.value = datas[0].Description.toUpperCase()
+            nomD.value = datas[0].Description.toUpperCase();
+
+            frmView.removeError('#ref');
+        }
+
+        else {
+            nom.value = "";
+            list.innerHTML = "";
+
+            datas.forEach(item => {
+                let ofs = document.createElement("option");
+                ofs.textContent = item.Itemref;
+                ofs.setAttribute('value', item.Itemref);
+                list.appendChild(ofs);
+            });
+
+            frmView.addError('#ref');
+        }
+    }
+
+</script>
+-->

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root version ="1.0">
+  <groupe valeur="TEST" libelle="Test présence serveur">
+    <sougroupe valeur="ping" libelle="Ping des serveurs">
+      <test methode="Ping" valeur="1" value1="JAYSVRIISINT" commentaire="serveur iis" value2=""/>
+      <test methode="Ping" valeur="2" value1="JAYSVRPEGASE2" commentaire="serveur sql" value2=""/>
+      <test methode="Ping" valeur="3" value1="JAYSVRZ2" commentaire="serveur x3" value2=""/>
+    </sougroupe>
+    <sougroupe valeur="TestReadDataBase" libelle="Test connection bases de donnéees">
+      <test methode="TestReadDataBase" valeur="1" commentaire="Lecture JAYSVRZ2 X3 table x160" value1="data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;" value2="[x160].[CLTPROD].[MFGHEAD]"/>
+      <test methode="TestReadDataBase" valeur="2" commentaire="Lecture JAYSVRPEGASE2 base GAMME_KEPLER" value1="data source=JAYSVRPEGASE2\;initial catalog=GAMME_KEPLER;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[GAMME_KEPLER].[dbo].[ORDRE_FABRICATION]"/>
+	  <test methode="TestReadDataBase" valeur="3" commentaire="Lecture JAYSVRPEGASE2 base GAMME_UD_UR_UC" value1="data source=JAYSVRPEGASE2\;initial catalog=GAMME_UD_UR_UC;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[GAMME_UD_UR_UC].[dbo].[TRACA_PROGRAMMATION]"/>
+	  <test methode="TestReadDataBase" valeur="4" commentaire="Lecture JAYSVRPEGASE2 base PEGASE_CHECKFPS" value1="data source=JAYSVRPEGASE2\;initial catalog=PEGASE_CHECKFPS;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[PEGASE_CHECKFPS].[dbo].[TRACACMD]"/>
+	  <test methode="TestReadDataBase" valeur="5" commentaire="Lecture JAYSVRPEGASE2 base PEGASE_PROD" value1="data source=JAYSVRPEGASE2\;initial catalog=PEGASE_PROD;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[PEGASE_PROD].[dbo].[ORDRE_FABRICATION]"/>
+	  <test methode="TestReadDataBase" valeur="6" commentaire="Lecture JAYSVRPEGASE2 base PEGASE_PROD2" value1="data source=JAYSVRPEGASE2\;initial catalog=PEGASE_PROD2;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[PEGASE_PROD2].[dbo].[OPERATEURS]"/>
+	  <test methode="TestReadDataBase" valeur="7" commentaire="Lecture JAYSVRPEGASE2 base PEGASE_STAMP" value1="data source=JAYSVRPEGASE2\;initial catalog=PEGASE_STAMP;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[PEGASE_STAMP].[dbo].[SCAN_REF]"/>
+	  <test methode="TestReadDataBase" valeur="8" commentaire="Lecture JAYSVRPEGASE2 base PEGASE_GENERIQUE" value1="data source=JAYSVRPEGASE2\;initial catalog=PEGASE_GENERIQUE;persist security info=True;user id=sa;password=sql_2008;MultipleActiveResultSets=True;" value2="[PEGASE_GENERIQUE].[dbo].[LIENS_OUTILS]"/>
+	</sougroupe>
+	<sougroupe valeur="Impression"  libelle="Test d'impression étiquette">
+      <test methode="Impression" valeur="1" value1="scrutation" commentaire="test imprimante scrutation blanche. A verifie si imprimé" value2=""/>
+	  <test methode="Impression" valeur="2" value1="scrutation_bis" commentaire="test imprimante scrutation argenté. A verifie si imprimé" value2=""/>
+      <test methode="Impression" valeur="3" value1="scrutation2" commentaire="test imprimante scrutation2 argenté. A verifie si imprimé" value2=""/>
+      <test methode="Impression" valeur="4" value1="scrutation2_bis" commentaire="test imprimante scrutation2 blanche. A verifie si imprimé " value2=""/>
+      <test methode="Impression" valeur="5" value1="logistique" commentaire="Logistique1. A verifie si imprimé" value2="192.168.1.69"/>
+	  <test methode="Impression" valeur="6" value1="logistique2" commentaire="Logistique2. A verifie si imprimé" value2="\\JAY137.JAYELECTRONIQUE.ORG\ZDesigner GK420d"/>
+    </sougroupe>
+    </groupe>
+</Root>

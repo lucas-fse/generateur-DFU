@@ -1,0 +1,73 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:JAY.Affichage.ViewModel"
+        xmlns:JAY_Converters="clr-namespace:JAY.Converters" 
+        mc:Ignorable="d"
+        x:Class="JAY.Affichage.View.CalibrAxeAnaView"
+        Title="Calibrate Analog axis" 
+        Height="400" 
+        Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<JAY_Converters:ColorCourbe x:Key="ColorCourbe1"/>
+		<JAY_Converters:ColorCourbe x:Key="ColorCourbe"/>
+	</Window.Resources>
+    <Window.DataContext>
+        <vm:CalibrateAxisViewModel x:Name="CalibrateAxisViewModel"/>
+    </Window.DataContext>
+    <Grid>
+    	<Rectangle x:Name="Fond" d:IsLocked="True">
+    		<Rectangle.Fill>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="DarkOrange" Offset="1"/>
+    				<GradientStop Color="White"/>
+    				<GradientStop Color="#FFFFEA65" Offset="0.3"/>
+    			</LinearGradientBrush>
+    		</Rectangle.Fill>
+    	</Rectangle>
+    	<Rectangle x:Name="FondGraph" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="250" Fill="White" d:IsLocked="True"/>
+    	<Path x:Name="AxeOrdonnee" Data="M193,57 L198,304" HorizontalAlignment="Center" Margin="0" Stretch="Fill" Width="2" Stroke="#FFB8B8B8" StrokeThickness="2" Height="250" VerticalAlignment="Center"/>
+    	<Path x:Name="AxeAbscisse" Data="M193,57 L198,304" Fill="White" HorizontalAlignment="Center" Margin="0" Stretch="Fill" Width="2" Stroke="#FFB8B8B8" StrokeThickness="2" Height="250" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+    		<Path.RenderTransform>
+    			<TransformGroup>
+    				<ScaleTransform/>
+    				<SkewTransform/>
+    				<RotateTransform Angle="90"/>
+    				<TranslateTransform/>
+    			</TransformGroup>
+    		</Path.RenderTransform>
+    	</Path>
+    	<Path Data="M216,179 L315,57" Fill="White" HorizontalAlignment="Right" Height="122.04" Margin="0,61,71.41,0" Stretch="Fill" Stroke="Black" StrokeThickness="2" VerticalAlignment="Top" Width="101.75"/>
+    	<Path Data="M168,180 L67,304" Fill="White" HorizontalAlignment="Left" Margin="72,0,0,61" Stretch="Fill" Stroke="{Binding IsCourbePositive, Converter={StaticResource ColorCourbe}, Mode=OneWay}" StrokeThickness="2" Width="102" Height="121.75" VerticalAlignment="Bottom"/>
+    	<Path Data="M66,58 L166,180" Fill="White" HorizontalAlignment="Left" Height="122" Margin="72,61,0,0" Stretch="Fill" Stroke="{Binding IsCourbePositive, ConverterParameter=Positif, Converter={StaticResource ColorCourbe}, Mode=OneWay}" StrokeThickness="2" VerticalAlignment="Top" Width="102.25"/>
+    	<Rectangle x:Name="ZoneNeutre" Fill="White" Margin="0" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="10"/>
+    	<TextBlock x:Name="MaxAxeNegatif" HorizontalAlignment="Left" Margin="36.79,172.04,0,174" TextWrapping="Wrap" Text="-100" d:LayoutOverrides="Height"/>
+    	<TextBlock x:Name="MaxAxePositif" HorizontalAlignment="Right" Margin="0,172.04,39.79,174" TextWrapping="Wrap" Text="+100" d:LayoutOverrides="Height"/>
+    	<StackPanel x:Name="ConteneurZeroSortie" HorizontalAlignment="Right" Margin="0,188,152.265,0" VerticalAlignment="Top" Orientation="Horizontal" Visibility="Hidden">
+    		<TextBlock x:Name="ZeroSortie" HorizontalAlignment="Right" Margin="0,0,5,0" TextWrapping="Wrap" Text="{Binding ValZero, Mode=OneWay}" d:LayoutOverrides="Height" Visibility="{Binding NonVRefVisibility, Mode=OneWay}"/>
+    		<TextBlock x:Name="Unit3" TextWrapping="Wrap" Text="{Binding Unite, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    	</StackPanel>
+    	<StackPanel x:Name="ConteneurMaxSortie" Margin="0,40,0,0" VerticalAlignment="Top" d:LayoutOverrides="Width" Orientation="Horizontal" HorizontalAlignment="Center">
+        
+    		<TextBox x:Name="MaxSortie" TextWrapping="Wrap" Text="{Binding BorneMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    		<TextBlock x:Name="Unit1" TextWrapping="Wrap" Text="{Binding Unite, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+    	</StackPanel>
+    	<StackPanel x:Name="ConteneurMinSortie" Margin="0,173.02,0,40.04" Orientation="Horizontal" d:LayoutOverrides="Width" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding IsCourbeNegativeVisibility, Mode=OneWay}">
+    		<TextBox x:Name="MinSortie" TextWrapping="Wrap" Text="{Binding BorneMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    		<TextBlock x:Name="Unit2" TextWrapping="Wrap" Text="{Binding Unite, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    	</StackPanel>
+    	<StackPanel x:Name="ConteneurMinSortieCP" Margin="217,0,0,159" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="{Binding IsCourbePositiveVisibility, Mode=OneWay}">
+    		<TextBox x:Name="MinSortie1" TextWrapping="Wrap" Text="{Binding BorneMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    		<TextBlock x:Name="Unit4" TextWrapping="Wrap" Text="{Binding Unite, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+    	</StackPanel>
+    	<Button x:Name="Btn_OK" Content="OK" HorizontalAlignment="Right" Height="23.04" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="46.41" Style="{DynamicResource ButtonStyleIDialog}" Click="Btn_OK_Click"/>
+    	<RadioButton x:Name="CourbePositive" HorizontalAlignment="Left" Margin="34.29,114.5,0,0" VerticalAlignment="Top" IsChecked="{Binding IsCourbePositive, Mode=TwoWay}"/>
+    	<RadioButton x:Name="CourbeNegative" HorizontalAlignment="Left" Margin="34.29,0,0,115.54" VerticalAlignment="Bottom" IsChecked="{Binding IsCourbeNegative, Mode=OneWay}"/>
+    	<TextBlock TextWrapping="Wrap" Text="VRef" VerticalAlignment="Bottom" Margin="0,0,0,41.04" d:LayoutOverrides="Width" HorizontalAlignment="Center" Visibility="Hidden"/>
+    	<TextBlock TextWrapping="Wrap" Text="VRef" VerticalAlignment="Top" Margin="0,41.04,0,0" d:LayoutOverrides="Width" HorizontalAlignment="Center" Visibility="Hidden"/>
+        
+    </Grid>
+</Window>

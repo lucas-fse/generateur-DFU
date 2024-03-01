@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PEGASE_CHECKFPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Fiches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumFiche" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RefMT" Type="nvarchar" MaxLength="30" />
+          <Property Name="RefMO" Type="nvarchar" MaxLength="30" />
+          <Property Name="RefSIM" Type="nvarchar" MaxLength="30" />
+          <Property Name="IsCompiled" Type="bit" Nullable="false" />
+          <Property Name="VerIDialog" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateMiseADispo" Type="datetime" />
+          <Property Name="DateLastCompile" Type="datetime" />
+          <Property Name="VersionFiche" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDComplement" Type="int" />
+          <Property Name="PresenceIR" Type="nvarchar" MaxLength="10" />
+          <Property Name="TypeFiche" Type="int" />
+          <Property Name="OptionIR" Type="int" />
+          <Property Name="OptionExploit" Type="int" />
+          <Property Name="AnyBus" Type="int" />
+          <Property Name="CodeClient" Type="nchar" MaxLength="10" />
+          <Property Name="RaisonSociale" Type="nchar" MaxLength="35" />
+          <Property Name="NomClient" Type="nchar" MaxLength="35" />
+          <Property Name="DateMAJ" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Indice" Type="nchar" MaxLength="5" />
+          <Property Name="TypeSynchro" Type="int" />
+          <Property Name="ErrorCheck" Type="int" />
+          <Property Name="DateCheck" Type="datetime" />
+          <Property Name="MTdebit" Type="int" />
+          <Property Name="MOdebit" Type="int" />
+          <Property Name="D30110" Type="smallint" />
+          <Property Name="D30120" Type="smallint" />
+          <Property Name="D30130" Type="smallint" />
+          <Property Name="D30140" Type="smallint" />
+          <Property Name="D30150" Type="smallint" />
+          <Property Name="D30330" Type="smallint" />
+          <Property Name="D30480" Type="smallint" />
+          <Property Name="D30400A" Type="smallint" />
+          <Property Name="D30430A" Type="smallint" />
+          <Property Name="D30440A" Type="smallint" />
+          <Property Name="D30450A" Type="smallint" />
+          <Property Name="D30460A" Type="smallint" />
+          <Property Name="D30470A" Type="smallint" />
+          <Property Name="D30840A" Type="smallint" />
+          <Property Name="D30490A" Type="smallint" />
+          <Property Name="LiaisonFilaire" Type="int" />
+          <Property Name="D30220A" Type="smallint" />
+        </EntityType>
+        <EntityType Name="SuiviMAJ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastMAJ" Type="datetime" />
+          <Property Name="Error" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_CHECKFPSModelStoreContainer">
+          <EntitySet Name="Fiches" EntityType="Self.Fiches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuiviMAJ" EntityType="Self.SuiviMAJ" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_CHECKFPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Fiches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumFiche" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RefMT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RefMO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RefSIM" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompiled" Type="Boolean" Nullable="false" />
+          <Property Name="VerIDialog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateMiseADispo" Type="DateTime" Precision="3" />
+          <Property Name="DateLastCompile" Type="DateTime" Precision="3" />
+          <Property Name="VersionFiche" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDComplement" Type="Int32" />
+          <Property Name="PresenceIR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TypeFiche" Type="Int32" />
+          <Property Name="OptionIR" Type="Int32" />
+          <Property Name="OptionExploit" Type="Int32" />
+          <Property Name="AnyBus" Type="Int32" />
+          <Property Name="CodeClient" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RaisonSociale" Type="String" MaxLength="35" FixedLength="true" Unicode="true" />
+          <Property Name="NomClient" Type="String" MaxLength="35" FixedLength="true" Unicode="true" />
+          <Property Name="DateMAJ" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Indice" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="TypeSynchro" Type="Int32" />
+          <Property Name="ErrorCheck" Type="Int32" />
+          <Property Name="DateCheck" Type="DateTime" Precision="3" />
+          <Property Name="MTdebit" Type="Int32" />
+          <Property Name="MOdebit" Type="Int32" />
+          <Property Name="D30110" Type="Int16" />
+          <Property Name="D30120" Type="Int16" />
+          <Property Name="D30130" Type="Int16" />
+          <Property Name="D30140" Type="Int16" />
+          <Property Name="D30150" Type="Int16" />
+          <Property Name="D30330" Type="Int16" />
+          <Property Name="D30480" Type="Int16" />
+          <Property Name="D30400A" Type="Int16" />
+          <Property Name="D30430A" Type="Int16" />
+          <Property Name="D30440A" Type="Int16" />
+          <Property Name="D30450A" Type="Int16" />
+          <Property Name="D30460A" Type="Int16" />
+          <Property Name="D30470A" Type="Int16" />
+          <Property Name="D30840A" Type="Int16" />
+          <Property Name="D30490A" Type="Int16" />
+          <Property Name="LiaisonFilaire" Type="Int32" />
+          <Property Name="D30220A" Type="Int16" />
+        </EntityType>
+        <EntityType Name="SuiviMAJ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastMAJ" Type="DateTime" Precision="3" />
+          <Property Name="Error" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_CHECKFPSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Fiches" EntityType="Self.Fiches" />
+          <EntitySet Name="SuiviMAJ" EntityType="Self.SuiviMAJ" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_CHECKFPSModelStoreContainer" CdmEntityContainer="PEGASE_CHECKFPSEntities">
+          <EntitySetMapping Name="Fiches">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.Fiches">
+              <MappingFragment StoreEntitySet="Fiches">
+                <ScalarProperty Name="D30220A" ColumnName="D30220A" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NumFiche" ColumnName="NumFiche" />
+                <ScalarProperty Name="RefMT" ColumnName="RefMT" />
+                <ScalarProperty Name="RefMO" ColumnName="RefMO" />
+                <ScalarProperty Name="RefSIM" ColumnName="RefSIM" />
+                <ScalarProperty Name="IsCompiled" ColumnName="IsCompiled" />
+                <ScalarProperty Name="VerIDialog" ColumnName="VerIDialog" />
+                <ScalarProperty Name="DateMiseADispo" ColumnName="DateMiseADispo" />
+                <ScalarProperty Name="DateLastCompile" ColumnName="DateLastCompile" />
+                <ScalarProperty Name="VersionFiche" ColumnName="VersionFiche" />
+                <ScalarProperty Name="IDComplement" ColumnName="IDComplement" />
+                <ScalarProperty Name="PresenceIR" ColumnName="PresenceIR" />
+                <ScalarProperty Name="TypeFiche" ColumnName="TypeFiche" />
+                <ScalarProperty Name="OptionIR" ColumnName="OptionIR" />
+                <ScalarProperty Name="OptionExploit" ColumnName="OptionExploit" />
+                <ScalarProperty Name="AnyBus" ColumnName="AnyBus" />
+                <ScalarProperty Name="CodeClient" ColumnName="CodeClient" />
+                <ScalarProperty Name="RaisonSociale" ColumnName="RaisonSociale" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="DateMAJ" ColumnName="DateMAJ" />
+                <ScalarProperty Name="Indice" ColumnName="Indice" />
+                <ScalarProperty Name="TypeSynchro" ColumnName="TypeSynchro" />
+                <ScalarProperty Name="ErrorCheck" ColumnName="ErrorCheck" />
+                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
+                <ScalarProperty Name="MTdebit" ColumnName="MTdebit" />
+                <ScalarProperty Name="MOdebit" ColumnName="MOdebit" />
+                <ScalarProperty Name="D30110" ColumnName="D30110" />
+                <ScalarProperty Name="D30120" ColumnName="D30120" />
+                <ScalarProperty Name="D30130" ColumnName="D30130" />
+                <ScalarProperty Name="D30140" ColumnName="D30140" />
+                <ScalarProperty Name="D30150" ColumnName="D30150" />
+                <ScalarProperty Name="D30330" ColumnName="D30330" />
+                <ScalarProperty Name="D30480" ColumnName="D30480" />
+                <ScalarProperty Name="D30400A" ColumnName="D30400A" />
+                <ScalarProperty Name="D30430A" ColumnName="D30430A" />
+                <ScalarProperty Name="D30440A" ColumnName="D30440A" />
+                <ScalarProperty Name="D30450A" ColumnName="D30450A" />
+                <ScalarProperty Name="D30460A" ColumnName="D30460A" />
+                <ScalarProperty Name="D30470A" ColumnName="D30470A" />
+                <ScalarProperty Name="D30840A" ColumnName="D30840A" />
+                <ScalarProperty Name="D30490A" ColumnName="D30490A" />
+                <ScalarProperty Name="LiaisonFilaire" ColumnName="LiaisonFilaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuiviMAJ">
+            <EntityTypeMapping TypeName="PEGASE_CHECKFPSModel.SuiviMAJ">
+              <MappingFragment StoreEntitySet="SuiviMAJ">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LastMAJ" ColumnName="LastMAJ" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

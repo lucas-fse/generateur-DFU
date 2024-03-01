@@ -1,0 +1,194 @@
+﻿<!-- a supprimer-->
+@model GenerateurDFUSafir.Models.DataOperateursSTC
+<!-- a supprimer-->
+
+@{
+    ViewBag.Title = "GestionSTC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/gestionstc.css" rel="stylesheet" />
+
+<main class="global-stc">
+    <div class="profile-list">
+        <div class="profil-box">
+            <div class="img-box">
+                <!--<i class="fa-solid fa-plus icon-photo" style="color: #ff6400;"></i>-->
+                <img src="@Model.Photo" class="imageoperateur" />
+            </div>
+            <div class="nom-prenom">
+                <label id="nom">@Model.Nom</label>
+                <label id="prenom">@Model.Prenom</label>
+            </div>
+        </div>
+        <div class="bloc-btn">
+            <a class="option-buttons" href="/STCTCS/GestionCmd/@Model.ID">Gestion CMD</a>
+            <a class="option-buttons" href="/STCTCS/GestionFPS/@Model.ID">Gestion FPS</a>
+            <a class="option-buttons" href="/STCTCS/GestionMono/@Model.ID">Gestion Mono</a>
+        </div>
+    </div>
+    <div class="graph-list">
+        <div class="box-conductix graph-box">
+            <div class="header">
+                <h3>Flux commande semaine</h3>
+                <i class="fa-solid fa-expand fullscreen-btn"></i>
+            </div>
+            <canvas id="flux_commande_semaine"></canvas>
+        </div>
+
+        <div class="box-conductix graph-box">
+            <div class="header">
+                <h3>Encours commande</h3>
+                <i class="fa-solid fa-expand fullscreen-btn"></i>
+            </div>
+            <canvas id="commande_en_cours"></canvas>
+        </div>
+
+        <div class="box-conductix graph-box">
+            <div class="header">
+                <h3>Evolution commande semaine</h3>
+                <i class="fa-solid fa-expand fullscreen-btn"></i>
+            </div>
+            <canvas id="evolution_commande_semaines"></canvas>
+        </div>
+    </div>
+    <div class="transparent-background"></div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+// script de mise en plein ecran
+    const btn_fullscreen = document.querySelectorAll('.fullscreen-btn');
+    const bg = document.querySelector('.transparent-background');
+
+    btn_fullscreen.forEach(i => {
+        i.addEventListener('click', (e) => {
+            const box = e.target.parentElement?.parentElement;
+            if (box) {
+
+                if (box.classList.contains('fullscreen')) {
+                    bg.style.display = 'none';
+                }
+                else {
+                    bg.style.display = 'block';
+                }
+                box.classList.toggle('fullscreen');
+
+            }
+        });
+    });
+
+</script>
+
+<script>
+    // graplique flux cmd semaine
+    new Chart(document.querySelector('#flux_commande_semaine'), {
+        type: 'bar',
+        options: {
+            scales: {
+                unit: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+
+                ca: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    }
+                }
+
+            }
+        },
+        data: {
+            labels: ['ENTREE', 'EN COURS', 'TERMINE'],
+
+            datasets: [
+                {
+                    label: "Normal",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxCommande.nb))),
+                    backgroundColor: ['#FF6400'],
+                    yAxisID: 'unit'
+                },
+                {
+                    label: "Chiffre d'affaire",
+                    data:  @(Html.Raw(Json.Encode(Model.fluxCommande.ca))),
+                    backgroundColor: ['#8F8F8F'],
+                    yAxisID: 'ca'
+                }
+            ]
+        },
+
+    });
+
+
+    new Chart(document.querySelector('#commande_en_cours'), {
+        type: 'doughnut',
+        options: {
+            plugins: {
+                legend: {
+                    position: 'top',
+
+                    labels: {
+                        boxWidth: 10,
+                        boxHeight: 10,
+                    }
+
+                }
+            }
+        },
+        data: {
+            labels: ["A traiter entrer", "Attente valid fiche param", "Attente valid fiche plastron"],
+
+            datasets: [
+                {
+                    data: @(Html.Raw(Json.Encode(Model.commandeEnCours.nbCommandes))),
+                    backgroundColor: ['#FF6400', "#8F8F8F", "rgb(255, 192, 0)"]
+                },
+            ]
+        }
+    });
+
+    new Chart(document.querySelector('#evolution_commande_semaines'), {
+        type: 'line',
+
+        data: {
+            labels: @(Html.Raw(Json.Encode(Model.evolutionCommande.NumSemaines))),
+
+            datasets: [
+                {
+                    label: 'Entree',
+                    data: @Html.Raw(Json.Encode(Model.evolutionCommande.datasEntree)),
+                    borderColor: ['#FF6400'],
+                    fill: false,
+                    tension: 0.1
+                },
+                {
+                    label: 'Encours',
+                    data: @Html.Raw(Json.Encode(Model.evolutionCommande.datasEncours)),
+                    borderColor: ['#8F8F8F'],
+                    fill: false,
+                    tension: 0.1
+                },
+                {
+                    label: 'Termine',
+                    data: @Html.Raw(Json.Encode(Model.evolutionCommande.datasTermine)),
+                    borderColor: ['rgb(255, 192, 0)'],
+                    fill: false,
+                    tension: 0.1
+                },
+
+            ]
+        }
+    });
+
+
+</script>
+
+<script src="~/Scripts/graph.js"></script>

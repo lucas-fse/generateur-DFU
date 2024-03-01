@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* a mettre dans content */
+
+/*
+  faire en sorte que les colonnes inputData et outputData sont de taille Fixe même si on reduit la taille de l'écran
+*/
+
+.body-content { /* permet de gerer les conflits avec les autres css car il y avait une marge gauche qui décalé le site */
+    margin-left: 0;
+    width: 100%; /* permet aussi de gerer les conflits car la largeur ne prenait pas 100% */
+}
+
+body {
+    font-size: 16px;
+    font-family: arial;
+}
+
+#logo { /* logo dans le bandeau */
+    width: 200px;
+    height: auto;
+}
+
+.flexContainer { /* éléments contenant les flex items */
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.centered {
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* On eleve ce comportement sur tablette
+  => le site prendra toute la largeur de la page
+*/
+@media all and (max-width: 1080px) {
+    .centered {
+        width: initial;
+        margin: initial;
+    }
+}
+
+/* -------------------------------- header -------------------------------- */
+
+/* bandeau */
+
+#bandeau {
+    flex-direction: row; /* => axe principal horizontal (une ligne) */
+    justify-content: space-between; /* => dispostion des éléments sur l'axe principal */
+    align-items: center; /* alignement des éléments sur l'axe secondaire */
+}
+
+    #bandeau .flexChild:first-child {
+        align-self: flex-start; /*gere l'aligement de cet élément sur l'axe secondaire */
+    }
+
+/* on eleve ce comportement sur tablette */
+@media all and (max-width: 1080px) {
+    #bandeau {
+        flex-direction: column-reverse;
+        margin-bottom: 16px;
+    }
+
+        #bandeau .flexChild:first-child {
+            align-self: initial; /* eneleve le decalage sur l'axe verticale */
+        }
+}
+
+#refNomProcessus {
+    font-size: 18px;
+}
+
+/* -------------------------------- main --------------------------------*/
+
+#topActivityContent h2 {
+    font-size: 36px;
+    font-family: 'Arial';
+    margin: 0;
+}
+
+#topActivityContent p {
+    margin: 0;
+}
+
+#topActivityContent {
+    justify-content: space-between;
+    text-align: center;
+    flex-direction: row;
+    align-items: baseline;
+    align-items: stretch;
+    margin-bottom: 16px;
+}
+
+    #topActivityContent .flexChild {
+        padding: 16px 32px;
+    }
+
+        #topActivityContent .flexChild:first-child, #topActivityContent .flexChild:nth-child(2) {
+            margin-right: 8px;
+        }
+
+        #topActivityContent .flexChild:nth-child(2), #topActivityContent .flexChild:nth-child(3) {
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        }
+
+    #topActivityContent span {
+        color: #FF6600;
+        font-weight: bold;
+    }
+
+    #topActivityContent .flexChild:nth-child(2) {
+        color: black;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+@media all and (max-width: 1080px) /* on change la disposition de topActivityContent sur tablette */
+{
+    #topActivityContent {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: baseline;
+    }
+
+        #topActivityContent .flexChild:last-child {
+            flex-basis: 100%;
+        }
+
+        #topActivityContent .flexChild:first-child /* on change le comportement */ {
+            width: initial;
+        }
+
+        #topActivityContent .flexChild:nth-child(2) {
+            box-shadow: initial;
+        }
+}
+
+/* middle activity content */
+
+#middleActivityContent {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
+    #middleActivityContent .flexChild:nth-child(odd) {
+        width: 300px;
+    }
+
+    #middleActivityContent ul, #middleActivityContent li {
+        padding: 0;
+        margin: 0;
+    }
+
+#inputData h3, #outputData h3 {
+    text-align: center;
+    background-color: #606060;
+    padding: 8px 16px;
+    margin: 0;
+    color: white;
+}
+
+#inputData, #outputData {
+    /* ombre 2 */
+    border: 2px solid #606060;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+    #inputData li img, #outputData li img {
+        margin-left: 3px;
+        margin-right: 5px;
+    }
+
+@media all and (max-width: 1080px) /* on change la disposition de topActivityContent sur tablette */
+{
+    #middleActivityContent {
+        flex-direction: column;
+        justify-content: initial;
+        align-items: initial;
+        flex-shrink: initial;
+    }
+
+        #middleActivityContent .flexChild:nth-child(odd) {
+            width: initial;
+        }
+
+        #middleActivityContent .flexChild:nth-child(2) {
+            align-self: center;
+        }
+
+        #middleActivityContent #inputData {
+            margin-bottom: 8px;
+        }
+
+        #middleActivityContent #inputData, #middleActivityContent #outputData {
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+}
+
+/* -------------------------------- bottomActivityContent -------------------------------- */
+
+#bottomActivityContent {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+    #bottomActivityContent ul li {
+        padding-left: 15px;
+    }
+
+    #bottomActivityContent ul {
+        list-style: inside;
+        display: block;
+    }
+
+
+
+    #bottomActivityContent ul, #bottomActivityContent li {
+        margin: 0;
+        padding: 0;
+    }
+
+    #bottomActivityContent h4 {
+        margin: 0;
+        text-align: center;
+        background-color: #606060;
+        color: white;
+        padding: 12px 0px;
+    }
+
+    #bottomActivityContent .flexChild {
+        margin-top: 5px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        justify-content: center;
+        /* padding: 20px 0px; */
+        font-family: Arial;
+        min-width: 250px;
+        max-width: 250px;
+        margin-bottom: 8px;
+    }
+
+@media all and (max-width: 1080px) /* on surcharge pour le mode tablette */
+{
+    #bottomActivityContent {
+        flex-direction: column;
+        flex-wrap: initial;
+    }
+
+        #bottomActivityContent .flexChild {
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            padding-left: 16px;
+            margin-bottom: 0px;
+            margin-top: 8px;
+            padding: 0;
+            min-width: initial;
+            max-width: initial;
+        }
+
+            #bottomActivityContent .flexChild:last-child {
+                margin-bottom: 8px;
+            }
+}
+
+/* formes géométriques  */
+.triangle-topright {
+    width: 0;
+    height: 0;
+    border-top: 25px solid #FF6600;
+    border-left: 25px solid transparent;
+}
+
+.triangle-bottomright {
+    width: 0;
+    height: 0;
+    border-bottom: 25px solid #FF6600;
+    border-left: 25px solid transparent;
+}
+
+.rectangle {
+    display: table;
+    width: 250px;
+    height: 50px;
+    background: #FF6600;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .rectangle a {
+        display: table-cell;
+        vertical-align: middle;
+        background-color: #FF6600;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+        .rectangle a:hover {
+            font-size: 18px;
+        }
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 50px solid #FF6600;
+    border-bottom: 25px solid transparent;
+}
+
+.arrow /* conteneur de la fleche */ {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+
+.triangle-topleft {
+    width: 0;
+    height: 0;
+    border-top: 25px solid #FF6600;
+    border-right: 25px solid transparent;
+}
+
+.triangle-bottomleft {
+    width: 0;
+    height: 0;
+    border-bottom: 25px solid #FF6600;
+    border-right: 25px solid transparent;
+}
+
+@media all and (min-width: 1080px) {
+    #bottomActivityContent .wrapped {
+        margin: 0 auto;
+    }
+}
+
+@media all and (min-width: 1080px) {
+
+    footer {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    hr {
+        width: 75%;
+        margin: 0 auto;
+    }
+}

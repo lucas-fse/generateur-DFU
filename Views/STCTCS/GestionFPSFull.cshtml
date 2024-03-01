@@ -1,0 +1,301 @@
+﻿
+@model GenerateurDFUSafir.Models.FPSEncours
+@{
+    ViewBag.Title = "DashZEN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/GestionFPS.css" rel="stylesheet" />
+    int i = 0;
+}
+
+<h2>FullDashZEN</h2>
+<div style="overflow:auto; height:900px;">
+    <table id="fpstable" class="table">
+        <thead id="tableFPS">
+            <tr>
+                <th id="colCmd" class="col-id-no fixed-header">
+                    <div class="box"><div><h4>Nmr Cmd </h4></div></div>
+                </th>
+
+                <th>
+                    <div><h4>FPS </h4></div>
+                </th>
+                <th>
+                    <div><h4>item </h4></div>
+                </th>
+                <th>
+                    <div><h4>MO </h4></div>
+                </th>
+                <th>
+                    <div><h4>MT </h4></div>
+                </th>
+                <th>
+                    <div><h4>SIM </h4></div>
+                </th>
+                <th>
+                    <h4>Plastron</h4>
+                </th>
+                <th>
+                    <h4>STC</h4>
+                </th>
+                <th>
+                    <h4>TCS</h4>
+                </th>
+                <td>
+                    <h4>Temps <br />estimé de<br />réalisation Min</h4>
+                </td>
+                <th id="colraison">
+                    <div class="box">
+                        <div><h4>Raison<br />sociale</h4></div>
+                    </div>
+                </th>
+                <th>
+                    Contact :
+                </th>
+                <th>
+                    Tél Entr:
+                </th>
+                <th>
+                    Tél Mob:
+                </th>
+                <th>
+                    Email:
+                </th>
+                <th>
+
+                    <div><h5>Contact Tech<br /></h5></div>
+                </th>
+                <th>
+
+                    <div><h5>St:Date Cmd<br /></h5></div>
+                </th>
+                <th>
+                    <div>
+                        <h5>Cl:Date Client<br /></h5>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <h5>Ex:Date Expe<br /></h5>
+                    </div>
+                </th>
+                <th>
+                    <div><h5>Us:Date stc<br /></h5></div>
+
+                </th>
+                <th>
+                    <h4>Erreurs</h4>
+                </th>
+                <th>
+                    <h4>Date Cloture</h4>
+                </th>
+                <th>
+                    <h4>Status<br />Cmd</h4>
+                </th>
+                <th>
+                    <h4>Controle final</h4>
+                </th>
+                <th>
+                    <h4>
+                        Status traitement
+                        <br />Commentaire
+                    </h4>
+                </th>
+                <th>
+                    <h4> Commentaire  Test FPS</h4>
+                </th>
+                <th>
+                    <h4> Commentaire  Manuel</h4>
+                </th>
+                <th>
+                    <h4> LastUpdate</h4>
+                </th>
+                <th>
+                    <h4>LastStatus</h4>
+                </th>
+                <th>
+                    <h4>LastSTC</h4>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fps in Model.TRACACMDsfiltres)
+            {
+            <tr style="background-color:@fps.CodeCouleurLigne">
+                <td class="col-id-no">
+                    <div style="max-width: 150px;">
+                        <pre>@Html.Label(fps.listcommande)</pre>
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.DisplayFor(model => fps.VAL_FPARAM_0)
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.Label("->" + fps.ITEMREF)
+
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.Label("MO :" + fps.CFGFLDALP2)
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.Label("MT :" + fps.CFGFLDALP3)
+                    </div>
+                </td>
+                <td class="caract">
+                    <div style="width: 150px;">
+                        @Html.Label("SIM:" + fps.CFGFLDALP4)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 80px;">
+                        @Html.DisplayFor(model => fps.PLASTRON)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 90px;">
+                        @Html.Label(fps.STcEnCharge)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 90px;">
+                        @Html.Label(fps.TCSORIG)
+                    </div>
+
+                </td>
+                <td style="background-color:@fps.ErreurTempsCouleurCase;">
+                    <div style="width: 110px;">
+                        @if (fps.DELAIFPS != null && fps.DELAIFPS.Value != null)
+                        {
+                            @Html.Label(fps.DELAIFPS.Temps.ToString());
+                        }
+                        else
+                        {
+                            @Html.Label("0");
+                        }
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @fps.NomClient.Replace('.', ' ')
+                        @fps.BPCORD
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @fps.NomTech
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @fps.TelTech
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @fps.MobTech
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @fps.MailTech
+                    </div>
+                </td>
+                <td>
+                    @if (fps.ContactTech)
+                    {
+                        @Html.Label("Dispo")
+                    }
+                </td>
+                <td>
+                    <div>@Html.Label("St:" + ((DateTime)fps.CREDAT_0).ToShortDateString())</div>
+                </td>
+                <td>
+                    <div>
+                        @Html.Label("Cl:" + ((DateTime)fps.DEMDLVDAT_0).ToShortDateString())
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.Label("Ex:" + ((DateTime)fps.SHIDAT).ToShortDateString())
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.Label("Us:" + ((DateTime)fps.test).ToString("dd/MM/yyyy"));
+                    </div>
+                </td>
+
+                <td style="background-color:@fps.ErreurStringCouleur">
+                    <div>
+                        @Html.Label(fps.ErreurString.ToString(), new { @style = "margin-top:0px;display:inline-block;white-space: pre-wrap;" })
+                    </div>
+                </td>
+
+                <td>
+                    @Html.Label(fps.ReturnDateClotureForDisplay)
+                </td>
+                <td>
+                    <div style="width: 100px;">
+                        @Html.Label(fps.StatusFpsString)
+                    </div>
+                </td>
+                <td>
+                    @Html.Label(fps.ZFPCONTROL_0)
+                </td>
+                <td>
+                    <div>
+                        @Html.Label(fps.GestionstatusString)
+                    </div>
+                </td>
+                <td>
+                    <div style="max-width: 300px;">
+                        <pre>@Html.DisplayFor(model => fps.Commentaire)</pre>
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+
+                        @Html.Label(fps.ZCOMCONT_0)
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+                        @if (fps.LastTraca != null && fps.LastTraca.DateTime != null)
+                        {
+                            @Html.Label(((DateTime)fps.LastTraca.DateTime).ToString("dd/MM/yy"))
+                        }
+                        else
+                        { @Html.Label("NULL")}
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+                        @if (fps.LastTraca != null && fps.LastTraca.Status != null)
+                        {
+                            @Html.Label(fps.LastTraca.Status.ToString())
+                        }
+                        else
+                        { @Html.Label("NULL")}
+                    </div>
+                </td>
+                <td>
+                    <div style="width: 110px;">
+                        @if (fps.LastTraca != null && fps.LastTraca.STC != null)
+                        {
+                            @Html.Label(fps.LastTraca.STC)
+                        }
+                        else
+                        { @Html.Label("NULL")}
+                    </div>
+                </td>
+            </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>

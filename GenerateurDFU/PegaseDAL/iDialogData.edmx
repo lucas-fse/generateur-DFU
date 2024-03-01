@@ -1,0 +1,172 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<!-- EF Runtime content -->
+<edmx:Runtime>
+<!-- SSDL content -->
+<edmx:StorageModels>
+<Schema Namespace="iDialogDataModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="iDialogDataModelStoreContainer">
+    <EntitySet Name="ProjectDetail" EntityType="iDialogDataModel.Store.ProjectDetail" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="iDialogDataModel.Store.Projects" store:Type="Tables" />
+    <EntitySet Name="SIMProject" EntityType="iDialogDataModel.Store.SIMProject" store:Type="Tables" />
+  </EntityContainer>
+  <EntityType Name="ProjectDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IdProject" Type="int" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
+    <Property Name="Evolution" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="NomIDialog" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Obsolete" Type="bit" Nullable="false" />
+    <Property Name="DateCreation" Type="datetime" />
+    <Property Name="Hash" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MOType" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="MTType" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="UserProjectName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="SIMProject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Hash" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="IdProject" Type="int" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
+    <Property Name="Evolution" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="NomIDialog" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Obsolete" Type="bit" Nullable="false" />
+    <Property Name="IdMT" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="IdMO" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="IdSIM" Type="nvarchar" MaxLength="10" />
+    <Property Name="MOType" Type="nvarchar" MaxLength="30" />
+    <Property Name="MTType" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+</Schema>
+</edmx:StorageModels>
+<!-- CSDL content -->
+<edmx:ConceptualModels>
+<Schema Namespace="iDialogDataModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="iDialogDataEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="ProjectDetail" EntityType="iDialogDataModel.ProjectDetail" />
+    <EntitySet Name="Projects" EntityType="iDialogDataModel.Projects" />
+    <EntitySet Name="SIMProject" EntityType="iDialogDataModel.SIMProject" />
+  </EntityContainer>
+  <EntityType Name="ProjectDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProject" Type="Int32" Nullable="false" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
+    <Property Name="Evolution" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="NomIDialog" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreation" Type="DateTime" />
+    <Property Name="Hash" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MOType" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="MTType" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="UserProjectName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SIMProject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Hash" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="IdProject" Type="Int32" Nullable="false" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
+    <Property Name="Evolution" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="NomIDialog" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+    <Property Name="IdMT" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="IdMO" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" />
+    <Property Name="IdSIM" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="MOType" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="MTType" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+  </EntityType>
+</Schema>
+</edmx:ConceptualModels>
+<!-- C-S mapping content -->
+<edmx:Mappings>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="iDialogDataModelStoreContainer" CdmEntityContainer="iDialogDataEntities">
+    <EntitySetMapping Name="ProjectDetail">
+      <EntityTypeMapping TypeName="iDialogDataModel.ProjectDetail">
+        <MappingFragment StoreEntitySet="ProjectDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Evolution" ColumnName="Evolution" />
+          <ScalarProperty Name="NomIDialog" ColumnName="NomIDialog" />
+          <ScalarProperty Name="Obsolete" ColumnName="Obsolete" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="iDialogDataModel.Projects">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="MOType" ColumnName="MOType" />
+          <ScalarProperty Name="MTType" ColumnName="MTType" />
+          <ScalarProperty Name="UserProjectName" ColumnName="UserProjectName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIMProject">
+      <EntityTypeMapping TypeName="iDialogDataModel.SIMProject">
+        <MappingFragment StoreEntitySet="SIMProject">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+          <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Evolution" ColumnName="Evolution" />
+          <ScalarProperty Name="NomIDialog" ColumnName="NomIDialog" />
+          <ScalarProperty Name="Obsolete" ColumnName="Obsolete" />
+          <ScalarProperty Name="IdMT" ColumnName="IdMT" />
+          <ScalarProperty Name="IdMO" ColumnName="IdMO" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="IdSIM" ColumnName="IdSIM" />
+          <ScalarProperty Name="MOType" ColumnName="MOType" />
+          <ScalarProperty Name="MTType" ColumnName="MTType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
+</edmx:Mappings>
+</edmx:Runtime>
+<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+<Connection><DesignerInfoPropertySet><DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /></DesignerInfoPropertySet></Connection>
+<edmx:Options><DesignerInfoPropertySet><DesignerProperty Name="ValidateOnBuild" Value="True" /><DesignerProperty Name="EnablePluralization" Value="False" /><DesignerProperty Name="IncludeForeignKeysInModel" Value="True" /><DesignerProperty Name="UseLegacyProvider" Value="False" /><DesignerProperty Name="CodeGenerationStrategy" Value="None" /></DesignerInfoPropertySet></edmx:Options>
+<edmx:Diagrams >
+      <Diagram DiagramId="e69a4357bd184c94888012ef48ee83eb" Name="Diagram1">
+        <EntityTypeShape EntityType="iDialogDataModel.ProjectDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iDialogDataModel.Projects" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iDialogDataModel.SIMProject" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+</edmx:Designer></edmx:Edmx>

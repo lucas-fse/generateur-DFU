@@ -1,0 +1,13 @@
+
+#chartNbFrcParService {
+    aspect-ratio: 1.7 / 1;
+    
+    height: 600px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1080px) {
+  #chartNbFrcParService-container {
+    
+  }
+}

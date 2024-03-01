@@ -1,0 +1,10 @@
+-- Script Date: 17/06/2014 18:11  - ErikEJ.SqlCeScripting version 3.5.2.38
+CREATE TABLE [Projects] (
+  [Id] int IDENTITY (1,1) NOT NULL
+, [ProjectName] nvarchar(100) NOT NULL
+, [MOType] nvarchar(10) NOT NULL
+, [MTType] nvarchar(10) NOT NULL
+);
+GO
+ALTER TABLE [Projects] ADD CONSTRAINT [PK_Projects] PRIMARY KEY ([Id]);
+GO

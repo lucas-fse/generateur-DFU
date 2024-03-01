@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PEGASE_PROD2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="OF_PROD_TRAITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMROF" Type="varchar" MaxLength="20" />
+          <Property Name="STARTTIME" Type="datetime" />
+          <Property Name="ENDTIME" Type="datetime" />
+          <Property Name="STATUSTYPE" Type="nchar" MaxLength="10" />
+          <Property Name="QTRTHEORIQUE" Type="int" />
+          <Property Name="Alea" Type="varchar" MaxLength="200" />
+          <Property Name="OPERATEUR" Type="bigint" />
+          <Property Name="ILOT" Type="varchar" MaxLength="10" />
+          <Property Name="ITEMREF" Type="varchar" MaxLength="30" />
+          <Property Name="QTRREEL" Type="int" />
+          <Property Name="TEMPSTHEORIQUE" Type="float" />
+          <Property Name="ISALIVE" Type="bit" Nullable="false" />
+          <Property Name="TEMPSSUPPL" Type="float" Nullable="false" />
+          <Property Name="MFGDES" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="OPERATEURS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ANNIVERSAIRE" Type="datetime" />
+          <Property Name="POSTE" Type="nvarchar" MaxLength="5" />
+          <Property Name="NOM" Type="nvarchar" MaxLength="40" />
+          <Property Name="PRENOM" Type="nvarchar" MaxLength="40" />
+          <Property Name="SERVICE" Type="nchar" MaxLength="5" />
+          <Property Name="INITIAL" Type="nchar" MaxLength="4" />
+          <Property Name="PRESTAT" Type="bit" />
+          <Property Name="FINCONTRAT" Type="datetime" />
+          <Property Name="ANIMATEUR" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDRE_FABRICATION_GENERE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUM_OF" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_LIGNE_CLIENT" Type="nchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MO" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FIRMWARE_MT" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="nvarchar" MaxLength="20" />
+          <Property Name="REF_FICHE_PERSO" Type="nvarchar" MaxLength="20" />
+          <Property Name="NUM_SERIE_PACK" Type="nvarchar" MaxLength="20" />
+          <Property Name="NB_PACK" Type="int" />
+          <Property Name="NB_MO" Type="int" />
+          <Property Name="NB_MT" Type="int" />
+          <Property Name="NB_SIM" Type="int" />
+          <Property Name="DATE_GENERATION" Type="datetime" />
+          <Property Name="OPTION_MATERIEL_MO" Type="nvarchar" MaxLength="32" />
+          <Property Name="OPTION_MATERIEL_MT" Type="nvarchar" MaxLength="32" />
+          <Property Name="COMMANDE_SYNCHRO" Type="nvarchar" MaxLength="32" />
+          <Property Name="GENERE" Type="bit" />
+          <Property Name="MARCHE" Type="nchar" MaxLength="1" />
+          <Property Name="MODIF_MANUEL" Type="bit" Nullable="false" />
+          <Property Name="VERSION_LOG" Type="nvarchar" MaxLength="30" />
+          <Property Name="FABRIQUE" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_PROD2ModelStoreContainer">
+          <EntitySet Name="OF_PROD_TRAITE" EntityType="Self.OF_PROD_TRAITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OPERATEURS" EntityType="Self.OPERATEURS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="Self.ORDRE_FABRICATION_GENERE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PEGASE_PROD2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ORDRE_FABRICATION_GENERE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="NUM_OF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NUM_COMMANDE_CLIENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_INDUSTRIELLE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_SIM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FIRMWARE_MT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_COMMERCIALE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONS_LOGICIELLES" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REF_FICHE_PERSO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_SERIE_PACK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NB_PACK" Type="Int32" />
+          <Property Name="NB_MO" Type="Int32" />
+          <Property Name="NB_MT" Type="Int32" />
+          <Property Name="NB_SIM" Type="Int32" />
+          <Property Name="DATE_GENERATION" Type="DateTime" Precision="3" />
+          <Property Name="OPTION_MATERIEL_MO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OPTION_MATERIEL_MT" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="COMMANDE_SYNCHRO" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="GENERE" Type="Boolean" />
+          <Property Name="MARCHE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MODIF_MANUEL" Type="Boolean" Nullable="false" />
+          <Property Name="VERSION_LOG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_LIGNE_CLIENT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="FABRIQUE" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="PEGASE_PROD2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="Self.ORDRE_FABRICATION_GENERE" />
+          <EntitySet Name="OF_PROD_TRAITE" EntityType="PEGASE_PROD2Model.OF_PROD_TRAITE" />
+          <EntitySet Name="OPERATEURS" EntityType="PEGASE_PROD2Model.OPERATEURS" />
+        </EntityContainer>
+        <EntityType Name="OF_PROD_TRAITE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMROF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STARTTIME" Type="DateTime" Precision="3" />
+          <Property Name="ENDTIME" Type="DateTime" Precision="3" />
+          <Property Name="STATUSTYPE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="QTRTHEORIQUE" Type="Int32" />
+          <Property Name="Alea" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OPERATEUR" Type="Int64" />
+          <Property Name="ILOT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMREF" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="QTRREEL" Type="Int32" />
+          <Property Name="TEMPSTHEORIQUE" Type="Double" />
+          <Property Name="ISALIVE" Type="Boolean" Nullable="false" />
+          <Property Name="TEMPSSUPPL" Type="Double" Nullable="false" />
+          <Property Name="MFGDES" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OPERATEURS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ANNIVERSAIRE" Type="DateTime" Precision="3" />
+          <Property Name="POSTE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="NOM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="PRENOM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SERVICE" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="INITIAL" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="PRESTAT" Type="Boolean" />
+          <Property Name="FINCONTRAT" Type="DateTime" Precision="3" />
+          <Property Name="ANIMATEUR" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PEGASE_PROD2ModelStoreContainer" CdmEntityContainer="PEGASE_PROD2Entities">
+          <EntitySetMapping Name="ORDRE_FABRICATION_GENERE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.ORDRE_FABRICATION_GENERE">
+              <MappingFragment StoreEntitySet="ORDRE_FABRICATION_GENERE">
+                <ScalarProperty Name="FABRIQUE" ColumnName="FABRIQUE" />
+                <ScalarProperty Name="NUM_LIGNE_CLIENT" ColumnName="NUM_LIGNE_CLIENT" />
+                <ScalarProperty Name="VERSION_LOG" ColumnName="VERSION_LOG" />
+                <ScalarProperty Name="MODIF_MANUEL" ColumnName="MODIF_MANUEL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUM_OF" ColumnName="NUM_OF" />
+                <ScalarProperty Name="NUM_COMMANDE_CLIENT" ColumnName="NUM_COMMANDE_CLIENT" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MO" ColumnName="REF_INDUSTRIELLE_MO" />
+                <ScalarProperty Name="REF_COMMERCIALE_MO" ColumnName="REF_COMMERCIALE_MO" />
+                <ScalarProperty Name="REF_INDUSTRIELLE_MT" ColumnName="REF_INDUSTRIELLE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_MT" ColumnName="REF_COMMERCIALE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_SIM" ColumnName="REF_COMMERCIALE_SIM" />
+                <ScalarProperty Name="REF_FIRMWARE_MO" ColumnName="REF_FIRMWARE_MO" />
+                <ScalarProperty Name="REF_FIRMWARE_MT" ColumnName="REF_FIRMWARE_MT" />
+                <ScalarProperty Name="REF_COMMERCIALE_PACK" ColumnName="REF_COMMERCIALE_PACK" />
+                <ScalarProperty Name="OPTIONS_LOGICIELLES" ColumnName="OPTIONS_LOGICIELLES" />
+                <ScalarProperty Name="REF_FICHE_PERSO" ColumnName="REF_FICHE_PERSO" />
+                <ScalarProperty Name="NUM_SERIE_PACK" ColumnName="NUM_SERIE_PACK" />
+                <ScalarProperty Name="NB_PACK" ColumnName="NB_PACK" />
+                <ScalarProperty Name="NB_MO" ColumnName="NB_MO" />
+                <ScalarProperty Name="NB_MT" ColumnName="NB_MT" />
+                <ScalarProperty Name="NB_SIM" ColumnName="NB_SIM" />
+                <ScalarProperty Name="DATE_GENERATION" ColumnName="DATE_GENERATION" />
+                <ScalarProperty Name="OPTION_MATERIEL_MO" ColumnName="OPTION_MATERIEL_MO" />
+                <ScalarProperty Name="OPTION_MATERIEL_MT" ColumnName="OPTION_MATERIEL_MT" />
+                <ScalarProperty Name="COMMANDE_SYNCHRO" ColumnName="COMMANDE_SYNCHRO" />
+                <ScalarProperty Name="GENERE" ColumnName="GENERE" />
+                <ScalarProperty Name="MARCHE" ColumnName="MARCHE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OF_PROD_TRAITE">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OF_PROD_TRAITE">
+              <MappingFragment StoreEntitySet="OF_PROD_TRAITE">
+                <ScalarProperty Name="MFGDES" ColumnName="MFGDES" />
+                <ScalarProperty Name="TEMPSSUPPL" ColumnName="TEMPSSUPPL" />
+                <ScalarProperty Name="ISALIVE" ColumnName="ISALIVE" />
+                <ScalarProperty Name="TEMPSTHEORIQUE" ColumnName="TEMPSTHEORIQUE" />
+                <ScalarProperty Name="QTRREEL" ColumnName="QTRREEL" />
+                <ScalarProperty Name="ITEMREF" ColumnName="ITEMREF" />
+                <ScalarProperty Name="ILOT" ColumnName="ILOT" />
+                <ScalarProperty Name="OPERATEUR" ColumnName="OPERATEUR" />
+                <ScalarProperty Name="Alea" ColumnName="Alea" />
+                <ScalarProperty Name="QTRTHEORIQUE" ColumnName="QTRTHEORIQUE" />
+                <ScalarProperty Name="STATUSTYPE" ColumnName="STATUSTYPE" />
+                <ScalarProperty Name="ENDTIME" ColumnName="ENDTIME" />
+                <ScalarProperty Name="STARTTIME" ColumnName="STARTTIME" />
+                <ScalarProperty Name="NMROF" ColumnName="NMROF" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OPERATEURS">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS">
+              <MappingFragment StoreEntitySet="OPERATEURS">
+                <ScalarProperty Name="ANIMATEUR" ColumnName="ANIMATEUR" />
+                <ScalarProperty Name="FINCONTRAT" ColumnName="FINCONTRAT" />
+                <ScalarProperty Name="PRESTAT" ColumnName="PRESTAT" />
+                <ScalarProperty Name="INITIAL" ColumnName="INITIAL" />
+                <ScalarProperty Name="SERVICE" ColumnName="SERVICE" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="POSTE" ColumnName="POSTE" />
+                <ScalarProperty Name="ANNIVERSAIRE" ColumnName="ANNIVERSAIRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

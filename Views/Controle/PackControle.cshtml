@@ -1,0 +1,912 @@
+﻿@model GenerateurDFUSafir.Models.OldOF
+
+@{
+    ViewBag.Title = "PackControle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/form.css" />
+
+<style>
+
+    .content {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0 auto;
+        width: 800px;
+        max-width: 90vw;
+    }
+
+    .articles-list {
+        margin-left: 30px;
+    }
+
+    .pack {
+        margin: 30px 10px;
+    }
+
+    .pack-header {
+        font-size: 25pt;
+        font-weight: bold;
+        border-left: 3px solid #FF6400;
+        background-color: #EFEFEF;
+    }
+
+    .articles-list {
+        font-size: 20pt;
+        border-left: 3px solid #FF6400;
+        
+    }
+
+    .article-desc {
+        font-weight: bold;
+    }
+
+    .article-ref {
+        font-weight: 100;
+        color: #FF6400;
+    }
+
+    .article {
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-wrap: wrap;
+    }
+
+    .articles-list .article:nth-child(2n) {
+        background-color: #EFEFEF;
+    }
+
+    .article-icon {
+        display: block;
+        border: 1px solid #C0C0C0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin: 10px;
+    }
+
+    .article-icon.checked {
+        border: 1px solid green;
+        background-color: green;
+    }
+
+    .articles-list .article.checked {
+        background-color: #00aa2244;
+    }
+
+    .checked {
+        background-color: #00aa2244;
+    }
+
+    .error {
+        animation: 0.5s ease error-vibrate;
+    }
+
+    .bravo {
+        animation: 0.5s ease bravo-vibrate;
+    }
+
+    header {
+        width: 800px;
+        max-width: 90vw;
+        margin: 0 auto;
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .progressbar-out {
+        width: 300px;
+        height: 30px;
+        border: 2px solid #FF6400;
+        margin-left: 20px;
+    }
+
+    .progressbar-in {
+        width: 0%;
+        max-width: 97%;
+        height: 20px;
+        margin: 3px;
+        background-color: #FF6400;
+        transition: 1s;
+    }
+
+    #numof {
+        font-size: 22pt;
+        font-weight: bold;
+    }
+
+    .help {
+        width: fit-content;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 14pt;
+        border: 2px solid #97c0c2;
+        border-radius: 5px;
+        margin: 10px auto;
+    }
+
+    .info-prog {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .info-prog > .value {
+        font-weight: 800;
+        font-size: 17pt;
+    }
+
+    @@keyframes error-vibrate {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        25% {
+            transform: translate(-10px, 0);
+        }
+
+        50% {
+            transform: translate(10px, 0);
+        }
+
+        75% {
+            transform: translate(-10px, 0);
+        }
+
+        100% {
+            transform: translate(0px, 0);
+        }
+    }
+
+    @@keyframes bravo-vibrate {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(1.05);
+        }
+
+        50% {
+            transform: scale(0.9);
+        }
+
+        75% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @@keyframes focus-animation {
+        0% {
+            background-color: #00000000;
+        }
+
+        50% {
+            background-color: #00000044;
+        }
+
+        100% {
+            background-color: #00000000;
+        }
+    }
+
+
+
+    dialog {
+        width: 500px;
+        border: 1px solid #C0C0C0;
+        box-shadow: 0 0 20px 5px #AAAAAA;
+        border-radius: 5px;
+        padding: 20px;
+
+    }
+
+    dialog h2 {
+        font-variant: small-caps;
+        font-weight: bold;
+    }
+
+    dialog p {
+        font-size: 14pt;
+    }
+
+    dialog > input {
+        width: 100%;
+    }
+
+    dialog .btn-box {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px 0;
+    }
+
+    dialog::backdrop {
+        background-color: #00000055;
+    }
+
+    dialog .error {
+        color: orangered;
+    }
+
+    .debug {
+        color: #C0C0C0;
+        text-align: center;
+    }
+    .frm-action {
+        min-width: 200px;
+        color: #F26222;
+        font-weight: 800;
+        background-color: white;
+        border: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .emplacement {
+        font-size: 16pt;
+        font-weight: 100;
+    }
+
+    #content {
+
+    }
+
+    .main {
+        display: flex;
+        align-items: baseline;
+        padding: 20px;
+    }
+
+    aside {
+        width: 550px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    aside button {
+        text-align: left;
+    }
+
+    .focus-pack {
+        animation: 1s ease infinite focus-animation;
+        
+    }
+
+    .operateur_name {
+        font-size: 16pt;
+        margin-left: 5px;
+    }
+
+    iframe {
+        width: 550px;
+        height: 800px;
+        border: none;
+        overflow: hidden;
+    }
+
+
+    .tools {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nomenclature {
+        margin-left: 0px;
+    }
+
+    .nomenclature .article {
+        font-size: 12pt;
+    }
+
+    .infos-of {
+        width: 400px;
+        padding: 10px;
+        border: 1px solid black;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+  
+    .infos-of p {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        text-align: right;
+    }
+
+    body {
+        overflow-y: scroll;
+    }
+
+    .oldof {
+        width: 300px;
+        margin: 10px 0;
+        border: 1px solid black;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .oldof p {
+        padding: 10px;
+        margin: 0;
+        font-weight: bold;
+    }
+
+</style>
+
+<main class="main">
+    <aside>
+        <div class="infos-of" id="infos-of">
+        </div>
+        <div class="choix-liste">
+            <button class="frm-action" id="btn_listeaservir">LISTE A SERVIR</button>
+            <button class="frm-action" id="btn_listemat">MATIERE VALORISATION</button>
+
+        </div>
+        <div class="nomenclature articles-list" id="list-nomenclature">
+
+        </div>
+    </aside>
+    <div class="content">
+        <header><div><span id="numof">FXXXXXXX</span><div class="emplacement" id="emplacement">...</div></div><div class="info-prog"><span class="value" id="valueprog"></span><div class="progressbar-out"><div class="progressbar-in" id="bar"></div></div></div></header>
+        <main id="content">
+        </main>
+        <div class="help">
+            <i class="fa-solid fa-circle-info"></i> <span id="help"></span>
+        </div>
+        <div class="debug"></div>
+    </div>
+    <aside>
+        <h2 class="operateur_name"><i class="fa-solid fa-user"></i> @ViewBag.operateur</h2>
+
+        <div class="tools">
+            <button class="frm-action" id="btn_suppr_controle"><i class="fa-solid fa-trash"></i> SUPPRIMER CONTRÔLE OF</button>
+            <button class="frm-action" onclick="window.location.reload()"><i class="fa-solid fa-arrows-rotate"></i> NOUVEAU CONTRÔLE</button>
+            <button class="frm-action" id="btn_controle_qualite"><i class="fa-solid fa-thumbs-up"></i> AJOUTER UN CONTRÔLE QUALITÉ</button>
+            <button class="frm-action" id="btn_cloture"><i class="fa-solid fa-clipboard-check"></i> CLOTURER PARTIELLEMENT UN OF</button>
+            <button class="frm-action" id="btn_nomencl"><i class="fa-solid fa-clipboard-list"></i> DÉTAIL NOMENCLATURE</button>
+
+        </div>
+
+        <div class="oldof">
+            @foreach (var i in Model.ListOldOF)
+            {
+                <p style="background-color: @(i.StatusOf >= 4 ? "#7eed9b" : "#f7aa6a")">@i.NmrOf - @i.StatusOfString</p>
+            }
+        </div>
+    </aside>
+</main>
+
+<dialog id="quantite_dialog">
+    <h2>Saisie des quantités</h2>
+    <p>Veuillez saisir la quantité contrôlé.</p>
+    <div class="frm-group">
+        <p class="error" id="error_dialog"></p>
+
+        <input type="number" class="frm-input" />
+    </div>
+    <div class="frm-button-box">
+        <button class="frm-button action-button" id="frm-submit">VALIDER</button>
+    </div>
+</dialog>
+
+<dialog id="error_dial">
+    <h2>Erreur</h2>
+
+    <p id="error_txt">L'OF scanné n'existe pas ou plus</p>
+    
+    <div class="frm-button-box">
+        <button id="close_error2" class="frm-button action-button">FERMER</button>
+    </div>
+</dialog>
+
+<dialog id="sold_dial">
+    <h2>CLOTURE PARTIELLE</h2>
+
+    <p>Souhaitez vous rentrer une quantité partielle ou clôturer complètement l'OF ?</p>
+
+    <div class="frm-button-box">
+        <button id="sold_of_ligne" class="frm-button action-button">CLÔTURE PARTIELLE</button>
+        <button id="sold_of_complet" class="frm-button action-button">CLÔTURE COMPLETE</button>
+    </div>
+</dialog>
+
+<script src="~/Scripts/ScanControl.js"></script>
+<script src="~/Scripts/Beep.js"></script>
+
+<script>
+    setHelp("Scannez le code barre de l'OF à contrôler !");
+
+    const quantite_dialog = document.querySelector('#quantite_dialog');
+    const suppr_controle_btn = document.querySelector('#suppr_controle');
+
+    //document.querySelector('.tools').style.display = 'none';
+
+    const error_dialog = document.querySelector('#error_dial');
+
+    function displayError(txt) {
+        document.querySelector('#error_txt').textContent = txt;
+        error_dialog.showModal();
+        
+    }
+
+    document.querySelector('#close_error2').addEventListener('click', () => {
+        error_dialog.close();
+    });
+
+
+    ScanControl.addOnScanListener((code) => {
+        document.querySelector('.debug').textContent = code;
+    });
+
+    let n = 1;
+    let OF = null;
+
+    const operateur = Number.parseInt(window.location.pathname.split('/').splice(-1)[0]);
+
+    document.querySelector('#btn_controle_qualite').addEventListener('click', () => {
+        window.open('/Controle/ControleQualite/' + operateur, '_blank');
+    });
+
+    document.querySelector('#btn_nomencl').addEventListener('click', () => {
+        window.open('/Production/OfNumeric/' + operateur + '?nmrof=' + OF, '_blank');
+    });
+
+
+    document.querySelector('#btn_listeaservir').addEventListener('click', () => {
+        if (OF != null) {
+            showListeAServir(listAServir);
+        }
+    });
+
+    document.querySelector('#btn_listemat').addEventListener('click', () => {
+        if (OF != null) {
+            showListeMatiere(listMat);
+        }
+    });
+
+    document.querySelector('#btn_suppr_controle').addEventListener('click', () => {
+        //window.location.href = '/Controle/SuppressionControleFinal/' + operateur;
+		window.open('/Controle/SuppressionControleFinal/'+operateur, '_blank');
+    });
+
+    document.querySelector('#btn_cloture').addEventListener('click', () => {
+        document.querySelector('#sold_dial').showModal();
+    });
+
+    document.querySelector('#sold_of_ligne').addEventListener('click', () => {
+        soldOf(n, 2);
+        document.querySelector('#sold_dial').close();
+    });
+
+    document.querySelector('#sold_of_complet').addEventListener('click', () => {
+        soldOf(n, 1);
+        document.querySelector('#sold_dial').close();
+    });
+
+    // Tableau contenant tout les codes valide scannés
+    let validation = [];
+
+    const package = {
+
+    }
+
+    let listAServir = [];
+    let listMat = [];
+
+    const infosCpt = {};
+
+    async function soldOf(qtr, mode = 1) {
+        await fetch('/Controle/SoldOF?nmrof=' + OF + '&quantite=' + qtr + "&mode=" + mode);
+
+        setHelp("OF Complet, bravo, vous avez tout contrôlé :) Scannez un nouvel OF pour démarrer un nouveau contrôle !", '#00ff00');
+        document.querySelector('#content').style.display = 'none';
+        OF = null;
+    }
+
+    // On initialise le package avec les données de l'OF
+    async function initPackage(rawscan) {
+        document.querySelector('#content').style.display = 'block';
+
+
+        const raw = await fetch('/Controle/getPack?rawscan=' + rawscan);
+        const datas = await raw.json();
+
+
+
+        if (datas.Pack.NumOf == null) {
+            displayError("Numéro d'OF incorrect !");
+            OF = null;
+            throw "Une erreur est survenue";
+        }
+        else if (datas.Pack.QTr == datas.N) {
+
+            displayError("Cet OF a déjà été contrôlé !");
+            OF = null;
+            throw "Une erreur est survenue"; 
+
+        }
+        else {
+            OF = datas.Pack.NumOf;
+            document.querySelector('.tools').style.display = 'flex';
+
+            document.querySelector('#numof').textContent = OF;
+            document.querySelector('#emplacement').innerHTML = "<i class='fa-solid fa-location-dot'></i>  " + datas.Pack.Emplacement;
+            document.querySelector('#bar').style.width = '0%';
+
+            package.quantite = datas.Pack.QTr;
+            n = datas.N;
+
+            document.querySelector('#valueprog').textContent = n + ' sur ' + datas.Pack.QTr;
+
+            listAServir = datas.Nom.ofProdModelInfo.listeAServirs;
+            listMat = datas.Nom.ofProdModelInfo.listMatieresValorisation;
+            showListeAServir(listAServir);
+
+            infosCpt.plastron = datas.Nom.ofProdModelInfo.PLASTRON;
+            infosCpt.commentaire = datas.Nom.ofProdModelInfo.ComTeteOF + "- " + datas.Nom.ofProdModelInfo.CommentaireOperatoire;
+			infosCpt.codeid = datas.Nom.ofProdModelInfo.CodeIDOf;
+            infosCpt.nom_client = datas.Nom.ofProdModelInfo.OFRaisonSociale;
+            infosCpt.numcommande = datas.Nom.ofProdModelInfo.OFAr;
+
+            showInfos(infosCpt);
+
+            package.numof = datas.Pack.NumOf;
+            package.ref = datas.Pack.ItemRef;
+            package.desc = datas.Pack.ItemDescript;
+            package.valid = false;
+            package.RawCode = null;
+            package.serial = (datas.Pack.TypeSuivie == 2),
+            package.highlight = false;
+
+            package.articles = [];
+            validation = datas.AlreadyScan;
+
+            for (const art of datas.Pack.ListArticle) {
+                for (let i = 0; i < Math.max(art.QTr, 1); i++) {
+                    package.articles.push({
+                        ref: art.ItemRef,
+                        desc: art.ItemDescript,
+                        quantite: 1,
+                        checked: false,
+                        RawCode: null,
+                        serial: (art.TypeSuivie == 2)
+                    });
+                }
+            }
+        }
+    }
+
+    function setHelp(txt, color = '#c7fcff') {
+        const elem = document.querySelector('#help');
+        elem.textContent = txt;
+        document.querySelector('.help').style.backgroundColor = color;
+    }
+
+
+    ScanControl.addOnCodeScannedListener((art, raw) => {
+        if (OF != null)
+            checkArticle(art.ref, raw, art.serial);
+        else {
+            initPackage(raw).then(() => {
+                //checkArticle(art.ref, raw, art.serial);
+                showDatas();
+                setHelp("Veuillez scanner les différents articles.");
+
+            }).catch(e => { });
+        }
+    });
+
+    ScanControl.addOnOFScannedListener((rawcode) => {
+        if (OF == null) {
+            initPackage(rawcode).then(() => {
+                showDatas();
+                setHelp("Veuillez scanner les différents articles.");
+
+            }).catch(e => { });
+        }
+    });
+
+    function showInfos(cpt) {
+        const div = document.querySelector('#infos-of');
+
+        div.innerHTML = "<p><b>Commande: </b>" + cpt.numcommande + "</p>";
+        div.innerHTML += "<p><b>Client: </b>" + cpt.nom_client + "</p>";
+        div.innerHTML += "<p><b>Plastron: </b>" + cpt.plastron + "</p>";
+		div.innerHTML += "<p><b>CodeID: </b>" + cpt.codeid + "</p>";
+        div.innerHTML += "<p><b>Commentaire: </b>" + cpt.commentaire + "</p>";
+
+
+    }
+
+
+    // Fonction de validation d'un pack
+    async function validPack(increment = true) {
+        // On envoie les infos au serveur
+
+
+        const datas = [];
+
+        for (const art of package.articles) {
+            datas.push({
+                RawScan: art.RawCode,
+                ItemRef : art.ref,
+                NumOf: package.numof,
+                NumPack: n,
+                Quantite: art.quantite,
+                Operateur: operateur
+            });
+        }
+
+        // On regarde s'il s'agit d'un pack sérialisable
+        if (!package.serial && package.articles.length == 0) {
+            // On demande la quantité contrôlé
+
+            const input = document.querySelector('dialog input');
+            input.value = ''; // On vide le champ de saisie
+            quantite_dialog.showModal();
+
+            const btn = document.querySelector('#frm-submit');
+
+            input.addEventListener('keyup', e => {
+                if (input.value != package.quantite) {
+                    document.querySelector('#error_dialog').innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> La quantité est différente de celle attendue.';
+                }
+                else {
+                    document.querySelector('#error_dialog').innerHTML = '';
+
+                }
+            });
+
+            
+
+            const res = await new Promise((resolve, reject) => {
+                btn.addEventListener('click', e => {
+                    resolve(input.value);
+                });
+                input.addEventListener('keydown', e => {
+                    if (e.key == 'Enter') {
+                        e.stopPropagation();
+                        resolve(input.value);
+                    }
+                });
+            });
+
+            quantite_dialog.close();
+
+
+            const qtr = Number.parseInt(res);
+            package.quantite = qtr;
+
+            datas.push({
+                RawScan: package.RawCode,
+                ItemRef: package.ref,
+                NumOf: package.numof,
+                NumPack: n,
+                Quantite: package.quantite,
+                Operateur: operateur,
+                IsPack: true
+            });
+
+            n = qtr-1;
+        }
+        else {
+            datas.push({
+                RawScan: package.RawCode,
+                NumOf: package.numof,
+                ItemRef: package.ref,
+                NumPack: n,
+                Quantite: 1,
+                Operateur: operateur,
+                IsPack: true
+            });
+        }
+        
+
+        await fetch('/Controle/SavePack', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "Application/Json"
+            },
+            body: JSON.stringify(datas)
+        });
+
+        // On récupère la nouvelle liste des articles déjà scanné
+        const raw = await fetch('/Controle/getPack?rawscan=' + OF);
+        const v = await raw.json();
+
+        validation = v.AlreadyScan;
+
+        if(increment) n++;
+        document.querySelector('#valueprog').textContent = (n) + ' sur ' + package.quantite;
+
+
+        if (n >= package.quantite) {
+            setHelp("OF Complet, bravo, vous avez tout contrôlé :) Scannez un nouvel OF pour démarrer un nouveau contrôle !", '#00ff00');
+            document.querySelector('#content').style.display = 'none';
+            OF = null;
+            const progressbar = document.querySelector('#bar');
+            progressbar.style.width = '100%';
+            soldOf(package.quantite);
+        }
+        else {
+            package.valid = false;
+            package.articles.forEach(i => i.checked = false);
+            showDatas();
+        }
+    }
+
+    function savePackValidation() {
+
+    }
+
+    function checkArticle(ref, raw, serial = null) {
+        const disp = package.articles.filter(i => !i.checked);
+
+        if (validation.includes(raw)) {
+            console.log("test");
+            document.querySelector('#content').classList.add('error');
+            setTimeout(() => { document.querySelector('#content').classList.remove('error') }, 500);
+            beep(1000, 100, 100);
+        }
+        else {
+
+            if (!package.valid) {
+                if (ref == package.ref && (package.serial && serial || !package.serial)) {
+                    package.valid = true;
+                    package.RawCode = raw;
+                    //document.querySelector('#content').classList.add('bravo');
+                    //setTimeout(() => { document.querySelector('#content').classList.remove('bravo') }, 500);
+                    //setTimeout(validPack, 500);
+                }
+                else {
+                    document.querySelector('#content').classList.add('error');
+                    setTimeout(() => { document.querySelector('#content').classList.remove('error') }, 500);
+                    beep(1000, 100, 100);
+                }
+            }
+            else {
+
+                const art = disp.find(i => i.ref == ref);
+
+                if (art && (art.serial && serial || !art.serial)) {
+                    art.checked = true;
+                    art.RawCode = raw;
+                    validation.push(raw);
+                }
+                else {
+                    document.querySelector('#content').classList.add('error');
+                    setTimeout(() => { document.querySelector('#content').classList.remove('error') }, 500);
+                    beep(1000, 100, 100);
+                }
+            }
+
+            if (package.valid && (package.articles.length == 0 || package.articles.filter(i => !i.checked).length == 0)) {
+                document.querySelector('#content').classList.add('bravo');
+                setTimeout(() => { document.querySelector('#content').classList.remove('bravo') }, 500);
+                setTimeout(validPack, 500);
+            }
+            showDatas();
+        }
+
+    }
+
+    function showDatas() {
+
+        const div = document.querySelector('#content');
+
+        div.innerHTML = "";
+        matchCode.forEach(i => i.c = false);
+
+        const progressbar = document.querySelector('#bar');
+        progressbar.style.width = ((n-1) / package.quantite * 100) + '%'
+
+        const p = showPack(package);
+        div.appendChild(p);
+    }
+
+    function showListeAServir(list) {
+        const contain = document.querySelector('#list-nomenclature');
+        contain.innerHTML = "";
+
+        for (const art of list) {
+            const div = document.createElement('div');
+            div.classList.add('article');
+            const color = (art.LSQtr > 1) ? "red" : "black";
+
+            div.innerHTML = "<i>" + art.LSFamilleTech + "&nbsp;</i><b style='color: " + color + "'>" + art.LSQtr + "x&nbsp;</b> " + art.LSArticle + " - " + art.LSDescription;
+
+            contain.appendChild(div);
+        }
+
+    }
+
+    function showListeMatiere(list) {
+        const contain = document.querySelector('#list-nomenclature');
+        contain.innerHTML = "";
+
+        for (const art of list) {
+            const div = document.createElement('div');
+            div.classList.add('article');
+            const color = (art.ValQtr > 1) ? "red" : "black";
+
+            div.innerHTML = "<b style='color: " + color + "'>" + art.ValQtr + "x&nbsp;</b>" + art.ValArticle + " - " + art.ValDescription;
+
+            contain.appendChild(div);
+        }
+
+    }
+
+
+    function showPack(pack) {
+        const div = document.createElement('div');
+        div.classList.add('pack');
+
+        const header = document.createElement('div');
+        header.classList.add('pack-header');
+
+        const header_content = showArticle({ ref: pack.ref, desc: pack.desc }, pack.valid);
+        if (pack.highlight) header_content.classList.add('focus-pack');
+        if (pack.valid) header_content.classList.add('checked');
+
+        header.appendChild(header_content);
+
+        const articles_list = document.createElement('div');
+        articles_list.classList.add('articles-list');
+
+        for (const art of pack.articles) {
+            const a = showArticle(art);
+            articles_list.appendChild(a);
+
+        }
+
+        div.appendChild(header);
+        div.appendChild(articles_list);
+
+        return div;
+    }
+
+    function showArticle(article, checked = false) {
+
+        const div = document.createElement('div');
+        div.classList.add('article');
+
+        const icon = document.createElement('span');
+        icon.classList.add('article-icon');
+
+        if (article.checked || checked) {
+            icon.classList.add('checked');
+            div.classList.add('checked');
+        }
+
+
+        const item_desc = document.createElement('span');
+        item_desc.classList.add('article-desc');
+        item_desc.textContent = article.desc;
+
+        const item_ref = document.createElement('span');
+        item_ref.classList.add('article-ref');
+        item_ref.innerHTML = '&nbsp;' + article.ref;
+
+        div.appendChild(icon);
+        div.appendChild(item_desc);
+        div.appendChild(item_ref);
+
+        return div;
+    }
+
+    (async () => {
+
+    })();
+</script>
+

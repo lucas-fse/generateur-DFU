@@ -1,0 +1,417 @@
+﻿@model GenerateurDFUSafir.Models.PlanificationOf
+@using GenerateurDFUSafir.Models;
+@using GenerateurDFUSafir.Models.DAL;
+@{
+    ViewBag.Title = "PlanificationOf";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/PlanificationOf.css">
+    <link rel="stylesheet" href="~/Content/form.css" />
+
+    @{
+        string a = "@uvarov.frontend";
+    }
+
+    <link href="https://cdn.jsdelivr.net/npm/@a/vanilla-calendar/build/vanilla-calendar.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@a/vanilla-calendar/build/themes/light.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@a/vanilla-calendar/build/themes/dark.min.css" rel="stylesheet">
+    <!-- Plugin JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@a/vanilla-calendar/build/vanilla-calendar.min.js"></script>
+</head>
+
+
+<div class="bandeau-top">
+    <div class="selection-pole">
+        <select id="selecteur-pole" class="select-pole">
+            @foreach (POLES p in Model.ListPoles)
+            {
+                <option value="@p.ID">Pôle @p.libelle</option>
+            }
+        </select>
+    </div>
+    <div class="place-title">
+        <h2 class="main-title">PlaniZEN</h2>
+    </div>
+    <div style="flex: 1;">
+    </div>
+</div>
+
+<!--- Zone centrale de la page, qui contient la liste des postes sur la partie gauche et la liste des of sur la partie droite -->
+<div class="bloc-central">
+    <div class="liste-poles scrollable-y">
+
+        @foreach (POSTES p in Model.ListPostes)
+        {
+            <div class="infos-postes" id="p-@p.libelle.Trim().Replace("/", "")">
+                <p class="nom-postes" style="color: @p.couleur">@p.libelle</p>
+
+                <div class="stats-poste">
+                    <div style="padding: 5px; border-radius: 3px; background-color: @(p.couleur)09">
+                        <div id="align-logo" style="color: @p.couleur"><i class="fa-regular fa-clock"></i><p id="duree_charge">1h37</p></div>
+                        <!--<div id="align-logo" style="color: @p.couleur"><i class="fa-regular fa-copy"></i><p>12</p></div> -->
+                        <div id="align-logo" style="color: @p.couleur"><i class="fa-solid fa-user"></i><p>@Model.listOp[p]</p></div>
+                    </div>
+                </div>
+                <div class="dragarea zone-pole" id="@p.libelle.Trim().Replace("/", "")" zone="@p.libelle.Trim()">
+                    @{
+                        var ofs_poste = Model.ListOfPlan.Where(i => i.poste.Equals(p.libelle.Trim()));
+                        int c = 0;
+                        foreach (OFView of in ofs_poste)
+                        {
+                            @Html.Partial("of", of);
+                        }
+                    }
+                </div>
+
+            </div>
+        }
+    </div>
+
+    <div class="dragarea dragarea-colonne zone-defaut" value="0" trash>
+        @foreach (OFView of in Model.ListOf)
+        {
+            @Html.Partial("of", of)
+        }
+    </div>
+</div>
+
+<div class="info-bar">
+    <div class="bar-stats" style="flex: 1;">
+        <i class="fa-solid fa-user" style="color: #ff6400;"></i>
+        <p style="margin-right: 50px">@Model.nbPersPole personnes sont sur ce pôle</p>
+
+        <i class="fa-solid fa-clock" style="color: #ff6400;"></i>
+        <p id="delay_global">---</p>
+    </div>
+    <div id="div-date">
+        <i class="fa-solid fa-chevron-left fleches" id="del_day_btn" style="color: #ff6400;"></i>
+        <div id="date">
+            <i class="fa-solid fa-calendar-days"></i>
+            <p id="date_info">---</p>
+        </div>
+        
+        <i class="fa-solid fa-chevron-right fleches" id="add_day_btn" style="color: #ff6400;"></i>
+    </div>
+    <div id="sauvegarder">
+        <button type="submit" class="frm-button action-button" id="save_btn" disabled>SAUVEGARDER</button>
+    </div>
+</div>
+
+<div class="preview box-conductix of-box"></div>
+<div class="background-popup"></div>
+
+<div id="calendrier" class="box-conductix calendrier" style="display: none">
+</div>
+
+<div class="popup-nomenclature" style="display: none">
+
+    <div class="header">
+        <h2 id="nomenclature-title">...</h2>
+        <i class="fa-solid fa-xmark close_btn" id="close_popup"></i>
+    </div>
+
+    <div class="items-list">
+        
+    </div>
+</div>
+
+<p><br /></p>
+<p><br /></p>
+
+<p><br /></p>
+
+
+
+<script>
+
+    
+
+    //On récupère l'évenement du changment du selecteur de pôle
+    const selecteur_pole = document.querySelector('#selecteur-pole');
+    selecteur_pole.addEventListener('change', (e) => {
+        const pole = e.target.value;
+        window.location.href = "?pole=" + pole;
+    });
+
+    //au chargement de la page, si ?Pole=2 est dans l'url, on sélectionne le pôle bidir
+    const urlParams2 = new URLSearchParams(window.location.search);
+    const pole2 = urlParams2.get('pole') || 1;
+    const selecteur_pole2 = document.querySelector('#selecteur-pole > option[value="' + pole2 + '"]');
+    selecteur_pole2?.setAttribute('selected', 'selected');
+
+</script>
+
+<script type="text/javascript" src="~/Scripts/draganddrop.js"></script>
+
+<script>
+    let isSave = true;
+    let lastEvent = Date.now();
+
+    setInterval(() => {
+        if (isSave && Date.now() - lastEvent > 10000) {
+            window.location.reload();
+        }
+    }, 60000);
+
+    window.addEventListener('mousemove', () => {
+        lastEvent = Date.now();
+    });
+    window.addEventListener('touchmove', () => {
+        lastEvent = Date.now();
+    });
+
+
+    // On récupère le pole actuel et la date
+    const urlParams = new URLSearchParams(window.location.search);
+    const pole = urlParams.get('pole') || 1;
+
+    const date = new Date(urlParams.get('date') || Date.now());
+
+    const now = new Date();
+
+    if (date.getTime() < new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()) {
+        disableDragAndDrop();
+
+        document.querySelector('.zone-defaut').style.display = 'none';
+    }
+
+    const date_info = document.querySelector('#date_info');
+    const calend = document.querySelector('.calendrier');
+    date_info.textContent = date.toLocaleDateString();
+
+    date_info.addEventListener('click', e => {
+        if (!calend.classList.contains('showCalendar')) {
+            calend.classList.add('showCalendar');
+            calend.style.display = 'block';
+        }
+        else {
+            calend.classList.remove('showCalendar');
+            calend.style.display = 'none';
+
+        }
+    });
+
+    const addDayBtn = document.querySelector('#add_day_btn');
+    const delDayBtn = document.querySelector('#del_day_btn');
+
+    const calendar = new VanillaCalendar('#calendrier', {
+        actions: {
+            clickDay(event, dates) {
+                window.location.href = "?pole=" + pole + "&date=" + dates[0];
+            },
+        },
+    });
+
+    calendar.init();
+
+    function changeDate(d) {
+        const nextDate = new Date(urlParams.get('date') || Date.now());
+        nextDate.setDate(nextDate.getDate() + d);
+
+        window.location.href = "?pole=" + pole + "&date=" + nextDate.toLocaleDateString('fr-CA');
+    }
+
+    addDayBtn.addEventListener('click', (e) => {
+        changeDate(1);
+    });
+
+    delDayBtn.addEventListener('click', (e) => {
+        changeDate(-1);
+    });
+
+    const list_of = document.querySelectorAll('.of-box');
+    const list_poles = document.querySelector('.liste-poles');
+    const first_pole = document.querySelector('.zone-pole');
+
+    list_of.forEach(i => {
+        /*i.addEventListener('mousedown', e => {
+            scrollToPole(e);
+
+        });
+
+        i.addEventListener('touchstart', e => {
+
+            scrollToPole(e);
+
+        });*/
+
+        i.addEventListener('click', e => {
+            showPopup(e.currentTarget.getAttribute('value'));
+        });
+
+    });
+
+    function scrollToPole(e) {
+        const pole_target_id = e.getAttribute('zone');
+        const pole_target = document.querySelector('.dragarea[zone="' + pole_target_id + '"]');
+        pole_target.classList.add('pole-highlight');
+        setTimeout(() => pole_target.classList.remove('pole-highlight'), 1000);
+
+        const pos = pole_target.getBoundingClientRect();
+        const pos_first = first_pole.getBoundingClientRect();
+        const pos_poles = list_poles.getBoundingClientRect();
+
+        if (pos.top > pos_poles.height || pos.top < 100) {
+
+            list_poles.scrollTo(0, pos.top - pos_first.top);
+        }
+    }
+
+    setStartDragEvent((e) => {
+        scrollToPole(e);
+    });
+
+    const save_btn = document.querySelector('#save_btn');
+
+    save_btn.addEventListener('click', () => {
+        save_btn.innerHTML = '<div style="font-size: 16pt"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+        savePlanif();
+        setTimeout(() => {
+            save_btn.innerHTML = 'SAUVEGARDER';
+            document.querySelector('#save_btn').disabled = true;
+        }, 2000);
+    });
+
+
+    async function savePlanif() {
+        const postes = document.querySelectorAll('.zone-pole');
+
+        const datas = [];
+        const descript = "";
+
+        // On récupère tout les ofs planifiés
+        postes.forEach(i => {
+            const elems = Array.from(i.children);
+            let count = 1;
+
+            const ofs = elems.filter(h => h.classList.contains('of-box') && !h.classList.contains('preview'));
+
+            ofs.forEach(j => {
+                datas.push({ numOf: j.getAttribute('value'), rang: count });
+                count++;
+            });
+        });
+
+        console.log(datas);
+        const date_to_save = new Date(urlParams.get('date') || Date.now());
+
+
+        // On envoi au serveur
+        const res = await fetch('/Production/SavePlanifOf?pole=' + pole + "&date=" + date_to_save.toLocaleDateString('fr-CA'), {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "Application/Json"
+            },
+
+            body: JSON.stringify(datas)
+        });
+
+        isSave = true;
+    }
+
+    // On empêche la fermeture intempestive
+    window.addEventListener('beforeunload', function (e) {
+        if (!isSave) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+
+
+
+    // gestion de l'affichage des durées des postes
+    const list_postes = document.querySelectorAll('.zone-pole');
+
+    function refreshDelay() {
+
+        let total_global = 0.0;
+
+        list_postes.forEach(p => {
+            const duree_field = document.querySelector("#p-" + p.id).querySelector('#duree_charge');
+            const ofs = Array.from(p.children).filter(h => h.classList.contains('of-box') && !h.classList.contains('preview'));
+
+            let total = 0.0;
+            ofs.forEach(i => {
+                total += Math.round(Number.parseFloat(i.getAttribute('duree').replace(',', '.')));
+            })
+            //                double minutes = Math.Round((Model.duree - Math.Floor(Model.duree / 1)) * 60);
+
+            total_global += total;
+            const total_str = Math.floor(total / 60) + "h" + Math.round(total % 60);
+
+            duree_field.textContent = total_str;
+
+        });
+
+        const total_global_str = Math.floor(total_global / 60) + "h" + Math.round(total_global % 60);
+
+        document.querySelector('#delay_global').textContent = total_global_str;
+    }
+
+    refreshDelay();
+
+    setDragAndDropEvent(() => {
+        refreshDelay();
+        document.querySelector('#save_btn').disabled = false;
+        isSave = false;
+    });
+
+</script>
+
+<script>
+
+    // Script pour la popup des nomenclatures
+    const popup = document.querySelector('.popup-nomenclature');
+    const bg_popup = document.querySelector('.background-popup');
+
+    popup.style.display = 'none';
+    bg_popup.style.display = 'none';
+
+    async function showPopup(numof) {
+        popup.style.display = 'block';
+        bg_popup.style.display = 'block';
+
+        const title = document.querySelector('#nomenclature-title');
+
+        const items_list = document.querySelector('.items-list');
+        items_list.innerHTML = '<div style="font-size: 32pt; margin-top: 20%"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+        title.textContent = "Chargement...";
+
+
+        const rawRes = await fetch("/production/ApiGetNomenclature?numof=" + numof);
+        const res = await rawRes.json();
+
+        title.textContent = numof + " - " + res.list.length + " article(s) - " + res.desc;
+        items_list.innerHTML = "";
+
+
+        console.log(res);
+
+        for (let res_i of res.list) {
+
+            const item = document.createElement('div');
+            item.classList.add('item');
+
+            const etat = res_i.ProblemeAlloc ? '<div class="etat rupture-item">RUPTURE</div>' : '<div class="etat en-stock">EN STOCK</div>';
+
+            item.innerHTML = `<div class="header"><div class="reference">${res_i.LSArticle}</div><div class="quantite">${res_i.LSqtrByarticle.trim()}</div>${etat}</div >
+                            ${res_i.LSDescription}`;
+
+            items_list.appendChild(item);
+        }
+    }
+
+    const closeBtn = document.querySelector("#close_popup");
+
+    closeBtn.addEventListener('click', (e) => {
+        hidePopup();
+    });
+
+    function hidePopup() {
+        popup.style.display = 'none';
+        bg_popup.style.display = 'none';
+    }
+
+</script>

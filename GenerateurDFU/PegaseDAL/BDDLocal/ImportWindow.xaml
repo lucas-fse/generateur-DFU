@@ -1,0 +1,28 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:JAY.DAL.BDDLocal"
+	x:Class="JAY.DAL.ImportWindow"
+	Width="499" 
+    Height="172"
+    Closing="Window_Closing">
+
+    <Window.DataContext>
+        <vm:ViewModelImportWindow x:Name="ViewModelImportWindow"/>
+    </Window.DataContext>
+    
+	<Grid x:Name="LayoutRoot">
+		<Rectangle x:Name="Fond" Margin="0">
+			<Rectangle.Fill>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="DarkOrange" Offset="1"/>
+					<GradientStop Color="White"/>
+					<GradientStop Color="#FFFFEA65" Offset="0.3"/>
+				</LinearGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		<Image x:Name="Icon" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="8,8,0,0" Source="icone edialog 100x100.png"/>
+		<TextBlock x:Name="Title" HorizontalAlignment="Left" Margin="112,8,0,57" TextWrapping="Wrap" Text="{Binding Title, Mode=OneWay}" FontSize="20" FontWeight="Bold" Width="363"/>
+		<ProgressBar Margin="121,0,8,26" Height="27" VerticalAlignment="Bottom" Maximum="{Binding MaxProgressValue, Mode=OneWay}" Minimum="{Binding MinProgressValue, Mode=OneWay}" Value="{Binding Progress, Mode=OneWay}" />
+	</Grid>
+</Window>

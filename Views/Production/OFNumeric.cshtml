@@ -1,0 +1,665 @@
+﻿@model GenerateurDFUSafir.Models.OfProdModelInfo
+@{
+    ViewBag.Title = "OFNumeric";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/OFNumeric.css">
+</head>
+
+<body>
+    <div id"main" style="max-width: 534px;">
+        <h2 id="titre">@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+
+        <div id="topbandeau">
+            <table id="Article">
+                <tr>
+                    @{
+                        if (string.IsNullOrWhiteSpace(Model.OFNmr))
+                        {
+                            <th id="OFnum" onclick="PopUp()"><u>Numéro OF</u></th>
+                        }
+                        else
+                        {
+                            <th id="OFnum" onclick="PopUp()"><u>@Model.OFNmr</u></th>
+                        }
+                    }
+                    @{
+                        if (string.IsNullOrWhiteSpace(Model.OFItmDescrip1))
+                        {
+                            <td class="ItemDesc">Item Description</td>
+                        }
+                        else
+                        {
+                            <td class="ItemDesc">@Model.OFItmDescrip1</td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{
+                        if (string.IsNullOrWhiteSpace(Model.OFNmr))
+                        {
+                            <th id="ItemRef"></th>
+                        }
+                        else
+                        {
+                            <th id="ItemRef">@Model.OFItmref</th>
+                        }
+                    }
+                    @{
+                        if (string.IsNullOrWhiteSpace(Model.OFItmDescrip2))
+                        {
+                            <td class="ItemDesc"></td>
+                        }
+                        else
+                        {
+                            <td class="ItemDesc">@Model.OFItmDescrip2</td>
+                        }
+                    }
+
+                </tr>
+            </table>
+            <div id="ItemQtr" style="position: relative;">
+                <p style="position: absolute; left: -30px; top: -5px;">Qtr :</p>
+                <p>@Model.OFQtr</p>
+            </div>
+            <div>
+                <button id="buttonRetour" onclick="location.href='@Url.Action("gestionof", "production", new { id = Model.ID })'">Retour</button>
+            </div>
+        </div>
+
+        <table id="bandeauClient">
+            <tr>
+                <td id="OFRaisonSociale">Raison Social : <b>@Model.OFRaisonSociale</b></td>
+                <td id="OFAr">N°AR : <b>@Model.OFAr</b></td>
+                <td id="DateDebut">Date début : <b>@Model.OFDebut.ToShortDateString()</b></td>
+            </tr>
+        </table>
+
+        <table id="bandeauArticle">
+            <tr>
+                <td colspan="1">Poste : <b>@Model.POSTE1</b></td>
+                <td colspan="1">Désignation : <b>@Model.Design1</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:left;">@Model.CodeIDOf<br> Commentaire : @Model.ComTeteOF - @Model.CommentaireOperatoire </td>
+            </tr>
+        </table>
+        <div id="contenant-button-test">
+            <div id="contenant-buttonChange">
+                <button id="buttonAServir" class="buttonChange" onclick="SwitchToListeServir()">Liste à servir</button>
+                @{ if (Model.constituantsPacks.Count != 0)
+                    {
+                        <button id="buttonConstituant" class="buttonChange" onclick="SwitchToListeConstituant()" style="opacity: 0.5;">Constituant du pack</button>
+                    }
+                }
+                @{ if (Model.listMatieresValorisation.Count != 0)
+                    {
+                        <button id="buttonMatieresValorisation" class="buttonChange" onclick="SwitchToListeMatieresValorisation()" style="opacity: 0.5;">Matieres Valorisation</button>
+                    }
+                }
+            </div>
+            @{
+
+                if (string.IsNullOrWhiteSpace(Model.Test))
+                {
+                    <h4>.</h4>
+                }
+                else
+                {
+                    <h4>@Model.Test</h4>
+                }
+            }
+        </div>
+
+        @{ if (string.IsNullOrWhiteSpace(Model.StcCommentaire))
+            {
+                <p>.</p>
+            }
+            else
+            {
+
+                <p id="comm" style="text-align:left;">@Model.StcCommentaire</p>
+            }
+        }
+
+        <div id="Contenant-ListeServir">
+            <table id="ListeServir">
+                <tr id="ListeServirEntete">
+                    <th colspan="1" id="tab-Article" class="ListeServirEnteteth">Article</th>
+                    <th colspan="2" id="tab-QtrBesoin" class="ListeServirEnteteth">Qtr</th>
+                    <th colspan="3" id="tab-Designation" class="ListeServirEnteteth">Désignation</th>
+                    <th colspan="2" id="tab-EmplaceStock" class="ListeServirEnteteth">Emplacement stock</th>
+
+                </tr>
+                <tr id="ListeServirEnteteBis">
+                    <th colspan="2" id="tab-FamilleTech" class="ListeServirEnteteth">Fam-Tech</th>
+                    <th colspan="1" id="tab-QtrPack" class="ListeServirEnteteth" style="color: gray;">(par Art)</th>
+                    <th colspan="1" id="tab-Version" class="ListeServirEnteteth">Version</th>
+                    <th colspan="2" id="tab-Lot" class="ListeServirEnteteth">Lot</th>
+                    <th colspan="2" id="tab-EmplaceComp" class="ListeServirEnteteth">Emplacement Compl. (Article - site)</th>
+
+                </tr>
+                @foreach (var item in Model.listeAServirs)
+                {
+            <tr class="@Model.OFNmr@item.LSArticle LigneItem MenuContextDecl" id="@Model.OFNmr@item.LSArticle" valueitem="@item.LSArticle" valuedesc="@item.LSDescription" valueof="@Model.OFNmr" onclick="Check('@Model.OFNmr@item.LSArticle')" style="background-color: #E6E6E6;">
+                @{ if (string.IsNullOrWhiteSpace(item.LSArticle))
+                    {
+                        <td colspan="1" class="toptd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="1" class="toptd">@item.LSArticle</td>
+                    }
+                    if (string.IsNullOrWhiteSpace(item.LSQtr.ToString()))
+                    {
+                        <td colspan="2" class="toptd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="2" class="toptd"><span class="@(@item.LSQtrAlloue > 1 ? "highlight" : "")">@item.LSQtrAlloue</span></td>
+                    }
+                    if (string.IsNullOrWhiteSpace(item.LSDescription))
+                    {
+                        <td colspan="3" class="toptd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="3" class="toptd">@item.LSDescription</td>
+                    }
+
+                    if (string.IsNullOrWhiteSpace(item.LSLocalisation))
+                    {
+                        <td colspan="2" class="toptd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="2" class="toptd">@item.LSLocalisation</td>
+                    }
+
+
+                }
+            </tr>
+            <tr class="@Model.OFNmr@item.LSArticle LigneItemBis MenuContextDecl" id="@Model.OFNmr@item.LSArticle" valueitem="@item.LSArticle" valuedesc="@item.LSDescription" valueof="@Model.OFNmr" onclick="Check('@Model.OFNmr@item.LSArticle')" style="background-color: #E6E6E6;">
+                @{ if (string.IsNullOrWhiteSpace(item.LSFamilleTech))
+                    {
+                        <td colspan="2" class="bottd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="2" class="bottd">@item.LSFamilleTech</td>
+                    }
+                    if (string.IsNullOrWhiteSpace(item.LSqtrByarticle))
+                    {
+                        <td colspan="1" class="bottd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="1" id="Tab-QtrByArticle" class="bottd"><span class="@(item.LSqtrByarticle.CompareTo("x1") > 0 ? "highlight" : "")">(@item.LSqtrByarticle)</span></td>
+                    }
+                    if (string.IsNullOrWhiteSpace(item.LSVersion))
+                    {
+                        <td colspan="1" class="bottd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="1" class="bottd">@item.LSVersion</td>
+                    }
+
+                    if (string.IsNullOrWhiteSpace(item.LSLot))
+                    {
+                        <td colspan="2" class="bottd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="2" class="bottd">@item.LSLot</td>
+                    }
+
+                    if (string.IsNullOrWhiteSpace(item.LSLocalisationCompl1))
+                    {
+                        <td colspan="2" class="bottd">.</td>
+                    }
+                    else
+                    {
+                        <td colspan="2" class="bottd">@item.LSLocalisationCompl1</td>
+                    }
+
+
+                }
+            </tr>
+                }
+            </table>
+        </div>
+
+        @{ if (Model.constituantsPacks.Count != 0)
+            {
+
+
+                <div id="Contenant-ListeConstituant">
+                    <table id="ListeConstituant">
+
+                        <tr id="ListeConstituantEntete">
+                            <th colspan="1" id="tab-Type" class="ListeConstituantEnteteth">Type</th>
+                            <th colspan="1" id="tab-Qtr" class="ListeConstituantEnteteth">Quantité</th>
+                            <th colspan="2" id="tab-Ref" class="ListeConstituantEnteteth">Ref Produit</th>                            
+                            <th colspan="4" id="tab-Designation" class="ListeConstituantEnteteth">Désignation</th>
+                            <th colspan="2" id="tab-Localisation" class="ListeConstituantEnteteth">Localisation</th>
+                        </tr>
+
+                        @foreach (var item in Model.constituantsPacks)
+                        {
+
+                    <tr class="@Model.OFNmr@item.PackRefProduit LigneListeConstituant" id="@item.PackRefProduit" onclick="Check('@Model.OFNmr@item.PackRefProduit')" style="background-color: #E6E6E6;">
+                        @{ if (string.IsNullOrWhiteSpace(item.PackType))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd">@item.PackType</td>
+                            }
+                            if (string.IsNullOrWhiteSpace(item.PackQtr.ToString()))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+
+                              <td colspan="1" class="toptd"><span class="@(item.PackQtr > 1 ? "highlight" : "")">@item.PackQtr</span></td>
+                                
+                            }
+                            if (string.IsNullOrWhiteSpace(item.PackRefProduit))
+                            {
+                                <td colspan="2" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="2" class="toptd">@item.PackRefProduit</td>
+                            }
+
+
+
+                            if (string.IsNullOrWhiteSpace(item.PackDescription))
+                            {
+                                <td colspan="4" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="4" class="toptd">@item.PackDescription</td>
+                            }
+
+                            if (string.IsNullOrWhiteSpace(item.PackLocalisation))
+                            {
+                                <td colspan="2" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="2" class="toptd">@item.PackLocalisation</td>
+                            }
+                        }
+                    </tr>
+                        }
+                    </table>
+                </div>
+            }
+        }
+
+        @{ if (Model.listMatieresValorisation.Count != 0)
+            {
+
+
+                <div id="Contenant-ListMatieresValorisation">
+                    <table id="ListMatieresValorisation">
+                                <tr id="listMatieresValorisationEntete">
+                                    <th colspan="1" id="tabVal-Art" class="ListMatieresValorisationEnteteth">Article</th>
+                                    <th colspan="1" id="tabVal-Qtr" class="ListMatieresValorisationEnteteth">Qtr unit.</th>
+                                    <th colspan="1" id="tabVal-QtrArt" class="ListMatieresValorisationEnteteth">Qtr / Article</th>
+                                    <th colspan="3" id="tabVal-Description" class="ListMatieresValorisationEnteteth">Désignation</th>
+                                    <th colspan="2" id="tabVal-Comm" class="ListMatieresValorisationEnteteth">Commentaire</th>
+                                    <th colspan="1" id="tabVal-Loc" class="ListMatieresValorisationEnteteth">Localisation</th>
+                                    <th colspan="1" id="tabVal-Empl" class="ListMatieresValorisationEnteteth">Empl.</th>
+                                    <th colspan="2" id="tabVal-EmplComp" class="ListMatieresValorisationEnteteth">Empl. complémentaire</th>
+                                </tr>
+
+                        @foreach (var item in Model.listMatieresValorisation)
+                        {
+
+                    <tr class="@Model.OFNmr@item.ValArticle LigneListMatieresValorisation" onclick="Check('@Model.OFNmr@item.ValArticle')" style="background-color: #E6E6E6;">
+                        @{ if (string.IsNullOrWhiteSpace(item.ValArticle))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd">@item.ValArticle</td>
+                            }
+                            if (string.IsNullOrWhiteSpace(item.ValQtr.ToString()))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd"><span class="@(item.ValQtr > 1 ? "highlight" : "")">@item.ValQtr</span></td>
+                            }
+
+                            if (string.IsNullOrWhiteSpace(item.ValQtrArt.ToString()))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd"><span class="@(item.ValQtrArt.CompareTo("x1") > 0 ? "highlight" : "")">@item.ValQtrArt</span></td>
+                            }
+                            if (string.IsNullOrWhiteSpace(item.ValDescription))
+                            {
+                                <td colspan="3" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="3" class="toptd">@item.ValDescription</td>
+                            }
+
+
+
+                            if (string.IsNullOrWhiteSpace(item.ValCommentaire))
+                            {
+                                <td colspan="2" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="2" class="toptd">@item.ValCommentaire</td>
+                            }
+
+                            if (string.IsNullOrWhiteSpace(item.ValLoc))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd">@item.ValLoc</td>
+                            }
+
+                            if (string.IsNullOrWhiteSpace(item.ValEmplacement))
+                            {
+                                <td colspan="1" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="1" class="toptd">@item.ValEmplacement</td>
+                            }
+
+                            if (string.IsNullOrWhiteSpace(item.ValEmplCompl))
+                            {
+                                <td colspan="2" class="toptd">.</td>
+                            }
+                            else
+                            {
+                                <td colspan="2" class="toptd">@item.ValEmplCompl</td>
+                            }
+                        }
+                    </tr>
+                        }
+                    </table>
+                </div>
+            }
+        }
+
+
+        <div id="Pop-up">
+            <div id="fondTransparent"></div>
+
+            <div id="PopUpInfoOF">
+                <button id="close-PopUpInfoOF" onclick="AnnulerPopUp()">X</button>
+                <h2>Information complémentaire</h2>
+                <div id="PopUpListeInfo">
+                    <p>Numéro client : @Model.OFClient</p>
+                    <p>TCS : @Model.OFTCS</p>
+                    <p>Date expédition : @Model.OFExpedition.ToShortDateString()</p>
+                    <p>Temps opératoire : @Model.TempsOperatoire</p>
+                    @foreach (var car in Model.ListCaract)
+                    {
+                        <p>@car.AText : @car.YcartecVal</p>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+        <div class="Menu-click-droit">
+            <button class="btn bouton1">Déclaré NC</button>
+        </div>
+
+        <div class="PopUpDelareNC" id="PopUpDelareNC">
+            @using (Html.BeginForm("TestForm", null, FormMethod.Post, new { id = "FormNC" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" name="DeclareNC" value="" id="DeclareNC" />
+                <input type="hidden" name="DeclareNCDescript" value="" id="DeclareNCDescript" />
+                <input type="hidden" name ="DeclareNCOF" value = "" id="DeclareNCOF" />
+                <input type="hidden" name="ID" value="@Model.ID" />
+                <input type="hidden" name="NmrOF" value="@Model.OFNmr" />
+                <div class="bandeau">
+                    <h2>Déclaration <br /> de Non Conformité - Test</h2>
+                </div>
+                <div id="ArretOFBody">
+                    <div id="descriptionNC" class="GrisClair oublie">
+                        <div class="RadioBttn">
+                            <h3 id="ItemNC"></h3>
+                        </div>
+                    </div>
+                    <div class="AutreNC">
+                        <div id="AutreNCT" style="font-size:16px;">Si autre référence:<input class="CheckAutreRef" type="checkbox" name="AleaBttn" id="AleaBttn"/><textarea hidden rows="1" class="autretextboxNC" id="autreNC" name="autreNC"  maxlength="15" res></textarea></div>
+                    </div>
+                    <div class="GrisFonce" id="NCIndicateurs">
+                        <div class="quantite" id="quantite">
+                            <div> Qtr :<input id="quantite-reelle" type="number" value="1" min="0" max="999" name="quantite-reelle" /></div>
+                        </div>
+                    </div>
+                    <div class="commentaireNC" >
+                        <h4>Description de la NC</h4>
+                        <textarea class="commentaireNC" id="commentaireNCT" name="commentaireNCT" maxlength="100"></textarea>
+                    </div>
+                    <div class="ValidationBttn GrisClair">
+                        <input id="Valider" type="submit" value="Valider" onclick="SubmitFormPopup()"/>
+                        <input id="Annuler" type="button" value="Annuler" onclick="AnnulerPopUpNC('PopUpDelareNC')" />
+                    </div>
+                </div>
+            }
+        </div>
+        
+    </div>   
+
+</body>
+
+<script type="text/javascript">
+    const menuperso = document.querySelector('.Menu-click-droit');
+    const menupopup = document.querySelector('.PopUpDelareNC');
+    const b1 = document.querySelector('.bouton1');
+
+    let ncRef = "";
+
+    b1.addEventListener('click', (e) => {
+        menuperso.style.display = "none";
+        window.location.href = "/Production/DeclaNonConform/" + @Model.ID + "?ref=" + ncRef + "&of=@Model.OFNmr";
+    })
+    function SubmitFormPopup() {
+        document.getElementById("Valider").disabled = true;
+        document.getElementById("fondTransparent").style.opacity = 0;
+        document.getElementById("fondTransparent").style.pointerEvents = "none";
+        document.getElementById('PopUpDelareNC').style.transform = "translate(-50%, -50%) scale(0)";
+        document.forms["FormNC"].submit();
+
+    }
+    function ContextMenu(x,y, id, of) {
+
+        menuperso.style.display = "block";
+        menuperso.style.top = y+"px";
+        menuperso.style.left = "210px"; // position horizontale fixe
+
+        ncRef = id;
+    }
+    function AnnulerPopUpNC(id) {
+        console.log('annuler popup');
+        document.getElementById("fondTransparent").style.opacity = 0;
+        document.getElementById("fondTransparent").style.pointerEvents = "none";
+        document.getElementById('PopUpDelareNC').style.transform = "translate(-50%, -50%) scale(0)";
+
+    }
+
+
+    window.onload = function () {
+        var elems1 = document.getElementsByClassName('MenuContextDecl');
+        for (let cpt = 0; cpt < elems1.length; cpt++) {
+            console.log(elems1[cpt].getAttribute('valueitem'));
+
+            elems1[cpt].addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                ContextMenu(e.clientX, e.clientY, elems1[cpt].getAttribute('valueitem'), elems1[cpt].getAttribute('valuedesc'), elems1[cpt].getAttribute('valueof') );
+            });
+            elems1[cpt].style.backgroundColor = LoadColor(elems1[cpt].getAttribute('id'));
+        }
+
+        var elems2 = document.getElementsByClassName('LigneItemBis');
+        for (let cpt = 0; cpt < elems2.length; cpt++) {
+
+            elems2[cpt].style.backgroundColor = LoadColor(elems2[cpt].getAttribute('id'));
+        }
+
+        var elems3 = document.getElementsByClassName('LigneListeConstituant');
+        for (let cpt = 0; cpt < elems3.length; cpt++) {
+
+            elems3[cpt].style.backgroundColor = LoadColor(elems3[cpt].getAttribute('id'));
+        }
+
+    }
+
+    function SwitchToListeServir() {
+        if (document.getElementById("Contenant-ListeConstituant") != null) {
+            document.getElementById("Contenant-ListeConstituant").style.position = "absolute";
+            document.getElementById("Contenant-ListeConstituant").style.display = "none";
+
+            document.getElementById("buttonConstituant").style.opacity = 0.5;
+        }
+
+        if (document.getElementById("Contenant-ListMatieresValorisation") != null) {
+            document.getElementById("Contenant-ListMatieresValorisation").style.position = "absolute";
+            document.getElementById("Contenant-ListMatieresValorisation").style.display = "none";
+
+            document.getElementById("buttonMatieresValorisation").style.opacity = 0.5;
+        }
+
+        document.getElementById("Contenant-ListeServir").style.position = "relative";
+        document.getElementById("Contenant-ListeServir").style.display = "block";
+
+        document.getElementById("buttonAServir").style.opacity = 1;
+
+
+    }
+
+    function SwitchToListeConstituant() {
+        document.getElementById("Contenant-ListeServir").style.position = "absolute";
+        document.getElementById("Contenant-ListeServir").style.display = "none";
+
+        if (document.getElementById("Contenant-ListMatieresValorisation") != null) {
+            document.getElementById("Contenant-ListMatieresValorisation").style.position = "absolute";
+            document.getElementById("Contenant-ListMatieresValorisation").style.display = "none";
+
+            document.getElementById("buttonMatieresValorisation").style.opacity = 0.5;
+        }
+
+        document.getElementById("Contenant-ListeConstituant").style.position = "relative";
+        document.getElementById("Contenant-ListeConstituant").style.display = "block";
+
+        document.getElementById("buttonAServir").style.opacity = 0.5;
+        document.getElementById("buttonConstituant").style.opacity = 1;
+
+    }
+
+    function SwitchToListeMatieresValorisation() {
+        if (document.getElementById("Contenant-ListeConstituant") != null) {
+            document.getElementById("Contenant-ListeConstituant").style.position = "absolute";
+            document.getElementById("Contenant-ListeConstituant").style.display = "none";
+
+            document.getElementById("buttonConstituant").style.opacity = 0.5;
+        }
+
+        document.getElementById("Contenant-ListeServir").style.position = "absolute";
+        document.getElementById("Contenant-ListeServir").style.display = "none";
+
+        document.getElementById("Contenant-ListMatieresValorisation").style.position = "relative";
+        document.getElementById("Contenant-ListMatieresValorisation").style.display = "block";
+
+        document.getElementById("buttonAServir").style.opacity = 0.5;
+        document.getElementById("buttonMatieresValorisation").style.opacity = 1;
+
+    }
+
+    function Check(id) {
+
+        if (menuperso.style.display == "none") {
+        var rows = document.getElementsByClassName(id);
+        console.log('rows.length:', rows.length);
+        var bool = false;
+        var color = '';
+            for (let i = 0; i < rows.length; i++) {
+
+                if (rows[i].style.backgroundColor === "rgb(230, 230, 230)") {
+                    rows[i].style.backgroundColor = "#46CD37";
+                    color = '#46CD37';
+                    console.log("check");
+                } else if (rows[i].style.backgroundColor === "rgb(70, 205, 55)") {
+                    rows[i].style.backgroundColor = "#EFDA52";
+                    color = '#EFDA52';
+                    console.log("warning");
+                } else {
+                    rows[i].style.backgroundColor = "#E6E6E6";
+                    color = '#E6E6E6';
+                    console.log("un-check");
+                }
+                if (!bool) {
+                    bool = true;
+                    setColor(id, color);
+                }
+            }
+        }
+        menuperso.style.display = "none";
+    }
+    function LoadColor(id) {
+        var rows = document.getElementsByClassName(id);
+        console.log('onload:', id);
+        var color = LoadColorId(id);
+        for (let i = 0; i < rows.length; i++) {
+
+            rows[i].style.backgroundColor = color;
+        }
+    }
+    function  LoadColorId(id) {
+        if (localStorage.getItem(id)) {
+            return localStorage.getItem(id);
+        }
+        else {
+            return '#E6E6E6';
+        }
+    }
+    function setColor(id,color) {
+        localStorage.setItem(id, color);
+    }
+    function PopUp() {
+
+        document.getElementById("fondTransparent").style.opacity = 1;
+        document.getElementById("fondTransparent").style.pointerEvents = "all";
+        document.getElementById("Pop-up").style.display = "block";
+
+    }
+
+    function AnnulerPopUp() {
+
+        document.getElementById("fondTransparent").style.opacity = 0;
+        document.getElementById("fondTransparent").style.pointerEvents = "none";
+        document.getElementById("Pop-up").style.display = "none";
+
+    }
+
+</script>

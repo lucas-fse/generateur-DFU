@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GAMME_UD_UR_UCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TRACA_PROGRAMMATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OF_DateTime" Type="datetime" />
+          <Property Name="OF_Commande" Type="nchar" MaxLength="30" />
+          <Property Name="OF_NmrOF" Type="nchar" MaxLength="20" />
+          <Property Name="OF_Nmrordre" Type="int" />
+          <Property Name="OF_Quantite" Type="int" />
+          <Property Name="OF_RefProduit" Type="nchar" MaxLength="30" />
+          <Property Name="OF_Cplref" Type="nchar" MaxLength="10" />
+          <Property Name="OF_Fperso" Type="nchar" MaxLength="30" />
+          <Property Name="OF_CodeID" Type="nchar" MaxLength="50" />
+          <Property Name="OF_RassoRX" Type="nchar" MaxLength="20" />
+          <Property Name="OF_RassoTX" Type="nchar" MaxLength="20" />
+          <Property Name="OF_CONF_BTS" Type="nchar" MaxLength="10" />
+          <Property Name="OF_Cle" Type="nchar" MaxLength="10" />
+          <Property Name="OF_APASS" Type="nchar" MaxLength="10" />
+          <Property Name="OF_Canal1" Type="nchar" MaxLength="10" />
+          <Property Name="OF_Canal2" Type="nchar" MaxLength="10" />
+          <Property Name="OF_CplCle" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TRACACODEID">
+          <Key>
+            <PropertyRef Name="INDEXCODEID" />
+          </Key>
+          <Property Name="INDEXCODEID" Type="bigint" Nullable="false" />
+          <Property Name="NMROF" Type="nchar" MaxLength="20" />
+          <Property Name="DATETIME" Type="datetime" />
+          <Property Name="CODEID" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TRACAFABUDE">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REFERENCE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="NMRSERIE" Type="nchar" MaxLength="20" />
+          <Property Name="DATETIME" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TRACAFABUDR">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REFERENCE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="NMRSERIE" Type="nchar" MaxLength="20" />
+          <Property Name="DATETIME" Type="datetime" />
+          <Property Name="QTROF" Type="smallint" />
+          <Property Name="CODEID" Type="nchar" MaxLength="10" />
+          <Property Name="NMRCLE" Type="nchar" MaxLength="10" />
+          <Property Name="ISCLE" Type="bit" />
+          <Property Name="ISMT" Type="bit" />
+        </EntityType>
+        <EntityType Name="UDE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMR_CLE" Type="bigint" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="nchar" MaxLength="20" />
+          <Property Name="DOSSIER" Type="nchar" MaxLength="10" />
+          <Property Name="VERSION" Type="smallint" />
+          <Property Name="COMMENTAIRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="CODE_ID" Type="bigint" />
+          <Property Name="CODE_ID2" Type="bigint" />
+          <Property Name="REFERENCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MASQUE_BP" Type="nchar" MaxLength="20" />
+          <Property Name="TEMPS_HM" Type="nchar" MaxLength="10" />
+          <Property Name="GAMME_FREQ" Type="smallint" />
+          <Property Name="CANAL" Type="smallint" />
+          <Property Name="OPTION1" Type="smallint" />
+          <Property Name="DATE_PROG" Type="datetime" />
+          <Property Name="DATE" Type="nchar" MaxLength="10" />
+          <Property Name="Erreur" Type="nvarchar" MaxLength="50" />
+          <Property Name="COMPL_REF" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="UDR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_ID" Type="int" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_PROG" Type="datetime" />
+          <Property Name="NMR_CMD" Type="nchar" MaxLength="20" />
+          <Property Name="NOM_CLIENT" Type="nchar" MaxLength="20" />
+          <Property Name="CODE_CLIENT" Type="nchar" MaxLength="10" />
+          <Property Name="COMMENTAIRE" Type="nchar" MaxLength="50" />
+          <Property Name="DOSSIER" Type="nchar" MaxLength="10" />
+          <Property Name="VERSION" Type="smallint" />
+          <Property Name="COMMENTAIRE2" Type="nchar" MaxLength="50" />
+          <Property Name="REFERENCE" Type="nchar" MaxLength="20" />
+          <Property Name="COMPL_REF" Type="nchar" MaxLength="10" />
+          <Property Name="FPERSO" Type="nchar" MaxLength="20" />
+          <Property Name="GAMME_FREQ" Type="smallint" />
+          <Property Name="CANAL" Type="smallint" />
+          <Property Name="CANALPC" Type="smallint" />
+          <Property Name="ARRET_PASSIF" Type="smallint" />
+          <Property Name="REF_ASSO" Type="nchar" MaxLength="20" />
+          <Property Name="COMPL_REF_ASSO" Type="nchar" MaxLength="10" />
+          <Property Name="DATE" Type="nchar" MaxLength="10" />
+          <Property Name="Erreur" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="URE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMR_CLE" Type="bigint" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="nchar" MaxLength="20" />
+          <Property Name="DOSSIER" Type="nchar" MaxLength="10" />
+          <Property Name="VERSION" Type="smallint" />
+          <Property Name="COMMENTAIRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="CODE_ID" Type="bigint" />
+          <Property Name="CODE_ID2" Type="bigint" />
+          <Property Name="REFERENCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MASQUE_BP" Type="nchar" MaxLength="20" />
+          <Property Name="TEMPS_HM" Type="nchar" MaxLength="10" />
+          <Property Name="GAMME_FREQ" Type="smallint" />
+          <Property Name="CANAL" Type="smallint" />
+          <Property Name="OPTION1" Type="smallint" />
+          <Property Name="DATE_PROG" Type="datetime" />
+          <Property Name="DATE" Type="nchar" MaxLength="10" />
+          <Property Name="Erreur" Type="nvarchar" MaxLength="50" />
+          <Property Name="COMPL_REF" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="URR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_ID" Type="int" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_PROG" Type="datetime" />
+          <Property Name="NMR_CMD" Type="nchar" MaxLength="20" />
+          <Property Name="NOM_CLIENT" Type="nchar" MaxLength="20" />
+          <Property Name="CODE_CLIENT" Type="nchar" MaxLength="10" />
+          <Property Name="COMMENTAIRE" Type="nchar" MaxLength="50" />
+          <Property Name="DOSSIER" Type="nchar" MaxLength="10" />
+          <Property Name="VERSION" Type="smallint" />
+          <Property Name="COMMENTAIRE2" Type="nchar" MaxLength="50" />
+          <Property Name="REFERENCE" Type="nchar" MaxLength="20" />
+          <Property Name="COMPL_REF" Type="nchar" MaxLength="10" />
+          <Property Name="FPERSO" Type="nchar" MaxLength="20" />
+          <Property Name="GAMME_FREQ" Type="smallint" />
+          <Property Name="CANAL" Type="smallint" />
+          <Property Name="CANALPC" Type="smallint" />
+          <Property Name="ARRET_PASSIF" Type="smallint" />
+          <Property Name="REF_ASSO" Type="nchar" MaxLength="20" />
+          <Property Name="COMPL_REF_ASSO" Type="nchar" MaxLength="10" />
+          <Property Name="DATE" Type="nchar" MaxLength="10" />
+          <Property Name="Erreur" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="GAMME_UD_UR_UCModelStoreContainer">
+          <EntitySet Name="TRACA_PROGRAMMATION" EntityType="Self.TRACA_PROGRAMMATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACACODEID" EntityType="Self.TRACACODEID" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACAFABUDE" EntityType="Self.TRACAFABUDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRACAFABUDR" EntityType="Self.TRACAFABUDR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDE" EntityType="Self.UDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDR" EntityType="Self.UDR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URE" EntityType="Self.URE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URR" EntityType="Self.URR" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GAMME_UD_UR_UCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TRACAFABUDE">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REFERENCE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NMRSERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="GAMME_UD_UR_UCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TRACAFABUDE" EntityType="Self.TRACAFABUDE" />
+          <EntitySet Name="TRACACODEID" EntityType="GAMME_UD_UR_UCModel.TRACACODEID" />
+          <EntitySet Name="TRACA_PROGRAMMATION" EntityType="GAMME_UD_UR_UCModel.TRACA_PROGRAMMATION" />
+          <EntitySet Name="TRACAFABUDR" EntityType="GAMME_UD_UR_UCModel.TRACAFABUDR" />
+          <EntitySet Name="UDE" EntityType="GAMME_UD_UR_UCModel.UDE" />
+          <EntitySet Name="UDR" EntityType="GAMME_UD_UR_UCModel.UDR" />
+          <EntitySet Name="URE" EntityType="GAMME_UD_UR_UCModel.URE" />
+          <EntitySet Name="URR" EntityType="GAMME_UD_UR_UCModel.URR" />
+        </EntityContainer>
+        <EntityType Name="TRACACODEID">
+          <Key>
+            <PropertyRef Name="INDEXCODEID" />
+          </Key>
+          <Property Name="INDEXCODEID" Type="Int64" Nullable="false" />
+          <Property Name="NMROF" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+          <Property Name="CODEID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TRACA_PROGRAMMATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OF_DateTime" Type="DateTime" Precision="3" />
+          <Property Name="OF_Commande" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="OF_NmrOF" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Nmrordre" Type="Int32" />
+          <Property Name="OF_Quantite" Type="Int32" />
+          <Property Name="OF_RefProduit" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Cplref" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Fperso" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="OF_CodeID" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="OF_RassoRX" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="OF_RassoTX" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="OF_CONF_BTS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Cle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_APASS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Canal1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_Canal2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OF_CplCle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TRACAFABUDR">
+          <Key>
+            <PropertyRef Name="INDEXREF" />
+          </Key>
+          <Property Name="INDEXREF" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REFERENCE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NMRSERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+          <Property Name="QTROF" Type="Int16" />
+          <Property Name="CODEID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NMRCLE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ISCLE" Type="Boolean" />
+          <Property Name="ISMT" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UDE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMR_CLE" Type="Int64" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DOSSIER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="VERSION" Type="Int16" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_ID" Type="Int64" />
+          <Property Name="CODE_ID2" Type="Int64" />
+          <Property Name="REFERENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MASQUE_BP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEMPS_HM" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GAMME_FREQ" Type="Int16" />
+          <Property Name="CANAL" Type="Int16" />
+          <Property Name="OPTION1" Type="Int16" />
+          <Property Name="DATE_PROG" Type="DateTime" Precision="3" />
+          <Property Name="DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Erreur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMPL_REF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UDR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_ID" Type="Int32" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATE_PROG" Type="DateTime" Precision="3" />
+          <Property Name="NMR_CMD" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NOM_CLIENT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CODE_CLIENT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DOSSIER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="VERSION" Type="Int16" />
+          <Property Name="COMMENTAIRE2" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="REFERENCE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="COMPL_REF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FPERSO" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="GAMME_FREQ" Type="Int16" />
+          <Property Name="CANAL" Type="Int16" />
+          <Property Name="CANALPC" Type="Int16" />
+          <Property Name="ARRET_PASSIF" Type="Int16" />
+          <Property Name="REF_ASSO" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="COMPL_REF_ASSO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Erreur" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="URE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMR_CLE" Type="Int64" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DOSSIER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="VERSION" Type="Int16" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_ID" Type="Int64" />
+          <Property Name="CODE_ID2" Type="Int64" />
+          <Property Name="REFERENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MASQUE_BP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TEMPS_HM" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GAMME_FREQ" Type="Int16" />
+          <Property Name="CANAL" Type="Int16" />
+          <Property Name="OPTION1" Type="Int16" />
+          <Property Name="DATE_PROG" Type="DateTime" Precision="3" />
+          <Property Name="DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Erreur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMPL_REF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="URR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_ID" Type="Int32" Nullable="false" />
+          <Property Name="NMR_SERIE" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DATE_PROG" Type="DateTime" Precision="3" />
+          <Property Name="NMR_CMD" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NOM_CLIENT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CODE_CLIENT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DOSSIER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="VERSION" Type="Int16" />
+          <Property Name="COMMENTAIRE2" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="REFERENCE" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="COMPL_REF" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FPERSO" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="GAMME_FREQ" Type="Int16" />
+          <Property Name="CANAL" Type="Int16" />
+          <Property Name="CANALPC" Type="Int16" />
+          <Property Name="ARRET_PASSIF" Type="Int16" />
+          <Property Name="REF_ASSO" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="COMPL_REF_ASSO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DATE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Erreur" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GAMME_UD_UR_UCModelStoreContainer" CdmEntityContainer="GAMME_UD_UR_UCEntities">
+          <EntitySetMapping Name="TRACAFABUDE">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.TRACAFABUDE">
+              <MappingFragment StoreEntitySet="TRACAFABUDE">
+                <ScalarProperty Name="INDEXREF" ColumnName="INDEXREF" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="NMRSERIE" ColumnName="NMRSERIE" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACACODEID">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.TRACACODEID">
+              <MappingFragment StoreEntitySet="TRACACODEID">
+                <ScalarProperty Name="CODEID" ColumnName="CODEID" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+                <ScalarProperty Name="NMROF" ColumnName="NMROF" />
+                <ScalarProperty Name="INDEXCODEID" ColumnName="INDEXCODEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACA_PROGRAMMATION">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.TRACA_PROGRAMMATION">
+              <MappingFragment StoreEntitySet="TRACA_PROGRAMMATION">
+                <ScalarProperty Name="OF_CplCle" ColumnName="OF_CplCle" />
+                <ScalarProperty Name="OF_Canal2" ColumnName="OF_Canal2" />
+                <ScalarProperty Name="OF_Canal1" ColumnName="OF_Canal1" />
+                <ScalarProperty Name="OF_APASS" ColumnName="OF_APASS" />
+                <ScalarProperty Name="OF_Cle" ColumnName="OF_Cle" />
+                <ScalarProperty Name="OF_CONF_BTS" ColumnName="OF_CONF_BTS" />
+                <ScalarProperty Name="OF_RassoTX" ColumnName="OF_RassoTX" />
+                <ScalarProperty Name="OF_RassoRX" ColumnName="OF_RassoRX" />
+                <ScalarProperty Name="OF_CodeID" ColumnName="OF_CodeID" />
+                <ScalarProperty Name="OF_Fperso" ColumnName="OF_Fperso" />
+                <ScalarProperty Name="OF_Cplref" ColumnName="OF_Cplref" />
+                <ScalarProperty Name="OF_RefProduit" ColumnName="OF_RefProduit" />
+                <ScalarProperty Name="OF_Quantite" ColumnName="OF_Quantite" />
+                <ScalarProperty Name="OF_Nmrordre" ColumnName="OF_Nmrordre" />
+                <ScalarProperty Name="OF_NmrOF" ColumnName="OF_NmrOF" />
+                <ScalarProperty Name="OF_Commande" ColumnName="OF_Commande" />
+                <ScalarProperty Name="OF_DateTime" ColumnName="OF_DateTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRACAFABUDR">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.TRACAFABUDR">
+              <MappingFragment StoreEntitySet="TRACAFABUDR">
+                <ScalarProperty Name="ISMT" ColumnName="ISMT" />
+                <ScalarProperty Name="ISCLE" ColumnName="ISCLE" />
+                <ScalarProperty Name="NMRCLE" ColumnName="NMRCLE" />
+                <ScalarProperty Name="CODEID" ColumnName="CODEID" />
+                <ScalarProperty Name="QTROF" ColumnName="QTROF" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+                <ScalarProperty Name="NMRSERIE" ColumnName="NMRSERIE" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="INDEXREF" ColumnName="INDEXREF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDE">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.UDE">
+              <MappingFragment StoreEntitySet="UDE">
+                <ScalarProperty Name="COMPL_REF" ColumnName="COMPL_REF" />
+                <ScalarProperty Name="Erreur" ColumnName="Erreur" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="DATE_PROG" ColumnName="DATE_PROG" />
+                <ScalarProperty Name="OPTION1" ColumnName="OPTION1" />
+                <ScalarProperty Name="CANAL" ColumnName="CANAL" />
+                <ScalarProperty Name="GAMME_FREQ" ColumnName="GAMME_FREQ" />
+                <ScalarProperty Name="TEMPS_HM" ColumnName="TEMPS_HM" />
+                <ScalarProperty Name="MASQUE_BP" ColumnName="MASQUE_BP" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="CODE_ID2" ColumnName="CODE_ID2" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DOSSIER" ColumnName="DOSSIER" />
+                <ScalarProperty Name="NMR_SERIE" ColumnName="NMR_SERIE" />
+                <ScalarProperty Name="NMR_CLE" ColumnName="NMR_CLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDR">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.UDR">
+              <MappingFragment StoreEntitySet="UDR">
+                <ScalarProperty Name="Erreur" ColumnName="Erreur" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="COMPL_REF_ASSO" ColumnName="COMPL_REF_ASSO" />
+                <ScalarProperty Name="REF_ASSO" ColumnName="REF_ASSO" />
+                <ScalarProperty Name="ARRET_PASSIF" ColumnName="ARRET_PASSIF" />
+                <ScalarProperty Name="CANALPC" ColumnName="CANALPC" />
+                <ScalarProperty Name="CANAL" ColumnName="CANAL" />
+                <ScalarProperty Name="GAMME_FREQ" ColumnName="GAMME_FREQ" />
+                <ScalarProperty Name="FPERSO" ColumnName="FPERSO" />
+                <ScalarProperty Name="COMPL_REF" ColumnName="COMPL_REF" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="COMMENTAIRE2" ColumnName="COMMENTAIRE2" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DOSSIER" ColumnName="DOSSIER" />
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="CODE_CLIENT" ColumnName="CODE_CLIENT" />
+                <ScalarProperty Name="NOM_CLIENT" ColumnName="NOM_CLIENT" />
+                <ScalarProperty Name="NMR_CMD" ColumnName="NMR_CMD" />
+                <ScalarProperty Name="DATE_PROG" ColumnName="DATE_PROG" />
+                <ScalarProperty Name="NMR_SERIE" ColumnName="NMR_SERIE" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URE">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.URE">
+              <MappingFragment StoreEntitySet="URE">
+                <ScalarProperty Name="COMPL_REF" ColumnName="COMPL_REF" />
+                <ScalarProperty Name="Erreur" ColumnName="Erreur" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="DATE_PROG" ColumnName="DATE_PROG" />
+                <ScalarProperty Name="OPTION1" ColumnName="OPTION1" />
+                <ScalarProperty Name="CANAL" ColumnName="CANAL" />
+                <ScalarProperty Name="GAMME_FREQ" ColumnName="GAMME_FREQ" />
+                <ScalarProperty Name="TEMPS_HM" ColumnName="TEMPS_HM" />
+                <ScalarProperty Name="MASQUE_BP" ColumnName="MASQUE_BP" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="CODE_ID2" ColumnName="CODE_ID2" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DOSSIER" ColumnName="DOSSIER" />
+                <ScalarProperty Name="NMR_SERIE" ColumnName="NMR_SERIE" />
+                <ScalarProperty Name="NMR_CLE" ColumnName="NMR_CLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URR">
+            <EntityTypeMapping TypeName="GAMME_UD_UR_UCModel.URR">
+              <MappingFragment StoreEntitySet="URR">
+                <ScalarProperty Name="Erreur" ColumnName="Erreur" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="COMPL_REF_ASSO" ColumnName="COMPL_REF_ASSO" />
+                <ScalarProperty Name="REF_ASSO" ColumnName="REF_ASSO" />
+                <ScalarProperty Name="ARRET_PASSIF" ColumnName="ARRET_PASSIF" />
+                <ScalarProperty Name="CANALPC" ColumnName="CANALPC" />
+                <ScalarProperty Name="CANAL" ColumnName="CANAL" />
+                <ScalarProperty Name="GAMME_FREQ" ColumnName="GAMME_FREQ" />
+                <ScalarProperty Name="FPERSO" ColumnName="FPERSO" />
+                <ScalarProperty Name="COMPL_REF" ColumnName="COMPL_REF" />
+                <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+                <ScalarProperty Name="COMMENTAIRE2" ColumnName="COMMENTAIRE2" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DOSSIER" ColumnName="DOSSIER" />
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="CODE_CLIENT" ColumnName="CODE_CLIENT" />
+                <ScalarProperty Name="NOM_CLIENT" ColumnName="NOM_CLIENT" />
+                <ScalarProperty Name="NMR_CMD" ColumnName="NMR_CMD" />
+                <ScalarProperty Name="DATE_PROG" ColumnName="DATE_PROG" />
+                <ScalarProperty Name="NMR_SERIE" ColumnName="NMR_SERIE" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

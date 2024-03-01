@@ -1,0 +1,69 @@
+﻿@model GenerateurDFUSafir.Models.SupprControleFinal
+@{
+    ViewBag.Title = "SuppressionOfKepler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <link href="~/Content/form.css" rel="stylesheet" />
+    <link href="~/Content/gammeUD.css" rel="stylesheet" />
+}
+
+<style>
+    .infos {
+        min-width: 800px
+    }
+
+    .list-elem tr, td, th {
+        border: none;
+        padding: 3px;
+    }
+
+        .list-elem tr:nth-child(2n+1) {
+            background-color: #00000008;
+        }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    tr:has(.clickable:hover) {
+        background-color: #FF640055;
+    }
+</style>
+
+@using (Html.BeginForm("RemoveControlPack", "Controle", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input hidden name="IDOPE" id="IDOPE" value="@Model.ID" />
+    <main>
+        <div class="frm-box">
+            <h2 class="frm-title">Suppression Contrôle final/UDR</h2>
+            <p class="frm-description">Entrez le numéro d'ordre de fabrication :</p>
+
+            <div class="frm-row">
+                <div class="frm-group">
+                    <label for="numof">Numéro d'OF</label>
+                    <input type="text" id="numof" name="numof" class="frm-input frm-required" />
+                </div>
+            </div>
+
+            <div class="frm-button-box">
+                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
+                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" disabled>VALIDER</button>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.erreurs))
+        {
+            <div class="frm-error-message">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                @ViewBag.erreurs
+            </div>
+        }
+
+
+    </main>
+}
+
+<script src="~/Scripts/form.js"></script>
+
+

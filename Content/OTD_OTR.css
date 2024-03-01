@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto';
+
+}
+
+/* ---------------------------- haut de page -------------------------*/
+
+#topInfos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+#topInfos .prodPic {
+        border-radius: 100%;
+        width: 0px;
+        background-color: white;
+    }
+
+#logo {
+    width: 350px;
+}
+
+#logoBackGround {
+    width: 75%;
+    max-width: 600px;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0.15;
+}
+
+.container {
+    padding-left: 5px;
+    padding-right: 0;
+}
+
+.body-content { /* permet de gerer les conflits avec les autres css car il y avait une marge gauche qui décalé le site */
+    margin-left: 0;
+    width: 100%; /* permet aussi de gerer les conflits car la largeur ne prenait pas 100% */
+}
+
+#clock {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+@media all and (max-width: 1080px) {
+    #topInfos {
+        flex-direction: column;
+    }
+
+    #clock, #topInfos {
+        position: initial;
+    }
+
+    #clock {
+        margin-bottom: 16px;
+    }
+}
+
+/*------------------------------fin haut de page ---------------------*/
+
+/* conteneur principal qui contient le graphique et les compteurs  */
+
+#OtdOtr {
+  display: flex;
+  align-items: center;
+}
+
+/* charte graphique */
+
+#chartNbFrcParService-container {
+    width: 75%;
+    height: 600px;
+}
+
+/* compteur OTD OTR */
+
+#counters {
+  width: 25%;
+}
+
+/* -------------------------  début compteurs ------------------------------- */
+
+.boxCounter {
+    padding: 8px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fafafa;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+}
+
+.boxCounter p h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.boxCounter p {
+    max-width: 120px;
+    width: 45%;
+    min-width: 80px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border: 1px solid #E0E0E0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.boxCounter h3 {
+    border-bottom: 1px solid #E0E0E0;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+}
+
+.thumbnailCounter {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counterContent {
+    padding-left: 5px; /* pour éviter que le texte soit collé à l'image  */
+    width: 70%;
+}
+
+/* affichage sur tablette et mobile */
+@media all and (max-width: 1080px) {
+    .boxCounter {
+        width: 75%;
+        margin: 0 auto;
+        margin-bottom: 16px;
+        max-width: 500px;
+  	     align-items: center;
+        padding-right: 5px;
+    }
+}
+
+#otdYear, #otrYear, #otrMonth, #otdMonth{ /* => images responsive */
+    width: 100%;
+    max-width: 80px;
+    height: auto;
+    
+   
+    box-sizing: border-box;
+}
+
+/* -------------------------  fin compteurs ------------------------------- */
+
+/*
+      -------------------------------------------------------------------------
+      |                        Tablette et mobile                             |
+      -------------------------------------------------------------------------
+*/
+
+@media all and (max-width: 1080px) {
+  /* conteneur principal disposition en une colonne */
+  #OtdOtr {
+    flex-direction: column;
+    align-items: initial;
+  }
+
+  /* les lignes de la colonne prennent 100% de l'espace libre */
+  #chartNbFrcParService-container, #counters {
+    width: 100%;
+  }
+
+
+}
+#DataKPIProd
+{
+    display : none;
+}

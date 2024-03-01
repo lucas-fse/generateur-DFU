@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABE770DB-722A-4989-BFCD-16B60E5C41E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JAY.PegaseCore</RootNamespace>
+    <AssemblyName>PegaseCore</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\InterfaceClient\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF4, Version=3.0.0.19994, Culture=neutral, PublicKeyToken=63eb5c012e0b3c1c, processorArchitecture=MSIL" />
+    <Reference Include="GToolApplicative, Version=1.0.0.0, Culture=neutral, PublicKeyToken=99efb999773ff723, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\GToolApplicative.dll</HintPath>
+    </Reference>
+    <Reference Include="Pegase.CDfu, Version=1.0.7409.19677, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\iDialog 6.0.8 -dfu\Solution GFI\Pegase\Solution\Pegase.DFU\PC_Soft\Pegase.CDfu\bin\x86\Debug\Pegase.CDfu.dll</HintPath>
+    </Reference>
+    <Reference Include="Pegase.CompilEquation, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Pegase.CompilEquation.dll</HintPath>
+    </Reference>
+    <Reference Include="Pegase.Dfu, Version=4.6.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Pegase.Dfu.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlsVM\EditAideViewModel.cs" />
+    <Compile Include="ControlsVM\EditMasquesViewModel.cs" />
+    <Compile Include="Controls\B2.xaml.cs">
+      <DependentUpon>B2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\B6.xaml.cs">
+      <DependentUpon>B6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConvEquationState2Color.cs" />
+    <Compile Include="Controls\ConvFormuleState2Color.cs" />
+    <Compile Include="Controls\ConvTypeFormule2Enable.cs" />
+    <Compile Include="Controls\EditAide.xaml.cs">
+      <DependentUpon>EditAide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditEquationView.xaml.cs">
+      <DependentUpon>EditEquationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditLabelCtrl.xaml.cs">
+      <DependentUpon>EditLabelCtrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditMasquesView.xaml.cs">
+      <DependentUpon>EditMasquesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\G1.xaml.cs">
+      <DependentUpon>G1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\G6.xaml.cs">
+      <DependentUpon>G6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\M2.xaml.cs">
+      <DependentUpon>M2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\M3.xaml.cs">
+      <DependentUpon>M3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\M6.xaml.cs">
+      <DependentUpon>M6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\P1.xaml.cs">
+      <DependentUpon>P1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\P2.xaml.cs">
+      <DependentUpon>P2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\Time2StringConverter.cs" />
+    <Compile Include="Converter\StringToBitmapSourceConverter.cs" />
+    <Compile Include="EquationEditor\IntelliSensSource.cs" />
+    <Compile Include="GroupVariable.cs" />
+    <Compile Include="Helper\BitHelper.cs" />
+    <Compile Include="Helper\ConnectedProduct.cs" />
+    <Compile Include="Helper\ConnectProductService.cs" />
+    <Compile Include="Helper\DecodConfigRefIndusAppl.cs" />
+    <Compile Include="Helper\GenerateurDfu.cs" />
+    <Compile Include="Helper\HTMLHelper.cs" />
+    <Compile Include="Helper\ResolvOptionsLogiciels.cs" />
+    <Compile Include="Helper\VidPid.cs" />
+    <Compile Include="Helper\Xml.cs" />
+    <Compile Include="HID\Hid.cs" />
+    <Compile Include="HID\HidDll.cs" />
+    <Compile Include="InternalDataModel\Alarme.cs" />
+    <Compile Include="InternalDataModel\AnalyseEquation.cs" />
+    <Compile Include="InternalDataModel\Carte.cs" />
+    <Compile Include="InternalDataModel\CollecConfigRetour.cs" />
+    <Compile Include="InternalDataModel\Commentaires.cs" />
+    <Compile Include="InternalDataModel\ComplementaryData.cs" />
+    <Compile Include="InternalDataModel\ConfigGainOffsetESAna.cs" />
+    <Compile Include="InternalDataModel\Couplage.cs" />
+    <Compile Include="InternalDataModel\DescriptionE.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Converters\AxeAnaVisibility.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Converters\ColorCourbe.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Converters\ColorLine.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\EasyConfigData.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\EquationBuilder.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Colonne.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Effecteur.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_MaskMode.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Mode.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_OrganAna.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Output.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Position.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_SortieAna.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_VarNetwork.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\EC_Verrou.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\Metier\Objects\ListChoixVariableImage.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\ViewModel\CalibrateAxisViewModel.cs" />
+    <Compile Include="InternalDataModel\Données commune easy config\View\CalibrAxeAnaView.xaml.cs">
+      <DependentUpon>CalibrAxeAnaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InternalDataModel\ES.cs" />
+    <Compile Include="InternalDataModel\ESDivers.cs" />
+    <Compile Include="InternalDataModel\ESTOR.cs" />
+    <Compile Include="InternalDataModel\Equation.cs" />
+    <Compile Include="InternalDataModel\ESAna.cs" />
+    <Compile Include="InternalDataModel\Formule.cs" />
+    <Compile Include="InternalDataModel\GestionInfraRouge.cs" />
+    <Compile Include="InternalDataModel\GestionLiaisonFilaire.cs" />
+    <Compile Include="InternalDataModel\GestionModbus.cs" />
+    <Compile Include="InternalDataModel\GestionPLD.cs" />
+    <Compile Include="InternalDataModel\GestionTempo.cs" />
+    <Compile Include="InternalDataModel\GestionVariableSimple.cs" />
+    <Compile Include="InternalDataModel\HorsMode.cs" />
+    <Compile Include="InternalDataModel\InfoByMode.cs" />
+    <Compile Include="InternalDataModel\Information.cs" />
+    <Compile Include="InternalDataModel\InformationLabel.cs" />
+    <Compile Include="InternalDataModel\IdentPack.cs" />
+    <Compile Include="InternalDataModel\LabelBase.cs" />
+    <Compile Include="InternalDataModel\MacroFonction.cs" />
+    <Compile Include="InternalDataModel\ModeExploitation.cs" />
+    <Compile Include="InternalDataModel\Option.cs" />
+    <Compile Include="InternalDataModel\OutputTemplateII.cs" />
+    <Compile Include="InternalDataModel\PlastronData.cs" />
+    <Compile Include="InternalDataModel\TraceRefFile.cs" />
+    <Compile Include="InternalDataModel\TraitementMacroInterprete.cs" />
+    <Compile Include="InternalDataModel\VariableE.cs" />
+    <Compile Include="JournalLine.cs" />
+    <Compile Include="JournalRef.cs" />
+    <Compile Include="JournalRefLine.cs" />
+    <Compile Include="ListChoixManager.cs" />
+    <Compile Include="InternalDataModel\OrganeCommand.cs" />
+    <Compile Include="ListErreurGeneration.cs" />
+    <Compile Include="LutteAntiGFI.cs" />
+    <Compile Include="MaskUserMode.cs" />
+    <Compile Include="NomOrgans.cs" />
+    <Compile Include="Rapport\RapportBuilder.cs" />
+    <Compile Include="Rapport\RapportData.cs" />
+    <Compile Include="ReadInfoLine.cs" />
+    <Compile Include="VariableControls.cs" />
+    <Compile Include="VariableEditable.cs" />
+    <Compile Include="XamlElementLibrary\XamlElement.cs" />
+    <Compile Include="XamlElementLibrary\XamlLibrary.cs" />
+    <Compile Include="XMLTools.cs" />
+    <Compile Include="InternalDataModel\RefGainOffset.cs" />
+    <Compile Include="InternalDataModel\Selecteur.cs" />
+    <Compile Include="InternalDataModel\SelecteurLabel.cs" />
+    <Compile Include="InternalDataModel\MO.cs" />
+    <Compile Include="InternalDataModel\MT.cs" />
+    <Compile Include="InternalDataModel\OptionsLogiciels.cs" />
+    <Compile Include="InternalDataModel\PegaseData.cs" />
+    <Compile Include="InternalDataModel\PegaseEnum.cs" />
+    <Compile Include="InternalDataModel\SIM.cs" />
+    <Compile Include="PegaseType.cs" />
+    <Compile Include="PIHM.cs" />
+    <Compile Include="PluginsMenu.cs" />
+    <Compile Include="Programmation\ProgrammationBusinessService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValMenu.cs" />
+    <Compile Include="Helper\VidPidHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseObjects\BaseObjects.csproj">
+      <Project>{B057018E-C536-4F40-957B-78CC7C7734D8}</Project>
+      <Name>BaseObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileCore\FileCore.csproj">
+      <Project>{078A958E-FDFF-42A2-9B69-54F8A485DA70}</Project>
+      <Name>FileCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Journal\Journal.csproj">
+      <Project>{CC9253D4-F3E6-430F-AF2F-5444EEF3E515}</Project>
+      <Name>Journal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LanguageModule\LanguageModule.csproj">
+      <Project>{96E1A840-0BCC-47B4-83C0-5AAD4CFD508B}</Project>
+      <Name>LanguageModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Patcher\Patcher.csproj">
+      <Project>{15DBEFB6-5CE4-4342-B6E0-9C27373EB959}</Project>
+      <Name>Patcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PegaseDAL\PegaseDAL.csproj">
+      <Project>{221DC562-9B7B-46C5-AB9A-F0C97EF1ADEB}</Project>
+      <Name>PegaseDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfCore\WpfCore.csproj">
+      <Project>{C8B892D9-7764-4A41-ABBF-335FB9520289}</Project>
+      <Name>WpfCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLCore\XMLCore.csproj">
+      <Project>{22FAFAD3-C6A2-448D-8D3F-EE36E73E2CA8}</Project>
+      <Name>XMLCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\ModeText.png" />
+    <Resource Include="Controls\ModeBitmap.png" />
+    <Content Include="Affichage\View\B2_F.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\B6_F.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\BIR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\Gama_10_Face_v1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\Gama_6_Face_v1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\M2J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\M3J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\MOKA_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\M_2J-3J-6B.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\P1J-2J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\P1J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Affichage\View\P2J.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL_Pegase_Equations.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll_pegase_hid.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcr100.dll" />
+    <Content Include="msvcr80.dll" />
+    <Content Include="Pegase.Dfu.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pegase.Hid.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="STDFU.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="STDFUFiles.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="STDFUPRT.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="STTubeDevice30.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\B2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\B6.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditAide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EditEquationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditLabelCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EditMasquesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\G1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\G6.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\M2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\M3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\M6.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\P1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\P2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InternalDataModel\Données commune easy config\View\CalibrAxeAnaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+﻿@model GenerateurDFUSafir.Models.InfoOrdreFabricationBidir
+
+@{
+    ViewBag.Title = "Synthèse";
+    Layout = "../../Views/Shared/_Layout.cshtml";
+}
+    <head>
+        <link rel="stylesheet" href="~/Content/graph.css">
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/Scripts/graph.js"></script>
+    </head>
+    <body>
+        <h1>Synthese</h1>
+        <h2 class="jumbotron" style="max-width:600px">Repartition des OFs par status</h2>
+
+        <div id="myPieChart" style="width:400px; height:300px" class="graphPieChart" abscisse="semaine" ordonne="pourcentage">
+            <ul id="toto">
+                <li>@Model.OfEdit.Count():Edité</li>
+                <li>@Model.OfEnAttente.Count():En attente</li>
+                <li>@Model.OfEnCours.Count():En cours</li>
+                <li>@(Model.OrdreFabrications.Count()-Model.OfEdit.Count()-Model.OfEnAttente.Count()-Model.OfEnCours.Count()):Autre</li>
+            </ul>
+        </div>
+
+        <h2 class="jumbotron" style="max-width:600px">Repartition des OFs par semaine</h2>
+        <div id="myPieChart2" style="width:400px; height:300px" class="graphArrayChart" abscisse="semaine" ordonne="Nbr OF">
+            <ul>
+                <li>@Model.OFSemaineCourante.Count():@Model.SemaineCourante</li>
+                <li>@Model.OFSemainePlus1.Count():@Model.SemainePlus1</li>
+                <li>@Model.OFSemainePlus2.Count():@Model.SemainePlus2</li>
+                <li>@Model.OFSemainePlus3.Count():@Model.SemainePlus3</li>
+            </ul>
+        </div>
+        <h2 class="jumbotron" style="max-width:600px">Repartition des OFs par pays</h2>
+        <div id="regions_div" style="width: 800px; height: 500px;" class="chartGeoCharts">
+            <ul>
+                @foreach (var pays in @Model.OfsParPays)
+                {
+                    <li>@pays.Key:@pays.Value</li>
+                }
+            </ul>
+        </div>
+    </body>

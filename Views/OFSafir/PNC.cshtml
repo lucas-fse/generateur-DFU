@@ -1,0 +1,89 @@
+﻿@model GenerateurDFUSafir.Models.InfoNonConformite
+
+@{
+    ViewBag.Title = "Traitement des non conformités  NC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PNC</h2>
+
+
+
+<h1 class="jumbotron">Liste des NC en status "Non traité"</h1>
+@using (Html.BeginForm("GestionTypePNC", "OFSafir"))
+{
+    @Html.AntiForgeryToken()
+    <div style="display: inline">
+        @Html.DropDownListFor(m => m.InfoStatusPNCnullable, // Store selected value in Model.DefaultStcId
+          new SelectList(Model.ListStatusPNC, "Value", "Text", Model.TypeData),
+          new { @class = "form-control", onchange = @"submit();" })
+    </div>
+}
+
+    <table class="table">
+        <tr>
+            <td>
+                <h3>ID</h3>
+            </td>
+            <td>
+                <h3>Chrono NC</h3>
+            </td>
+            <td>
+                <h3>Item</h3>
+            </td>
+            <td>
+                <h3>Qtr </h3>
+            </td>
+            <td>
+                <h3>Description</h3>
+            </td>
+            <td>
+                <h3>Date</h3>
+            </td>
+            <td>
+                <h3>Status de traitement</h3>
+            </td>
+
+        </tr>
+        @foreach (var item in Model.ListNonConformite)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(model => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.NmrChronoS)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Item)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Qtr)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DescriptionUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Datetime)
+                </td>
+                <td>
+                    <div style="width: 100px;">
+                        @using (Html.BeginForm("GestionPNC", "OFSafir"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" value="@item.ID" id="ID" />
+                            <input type="hidden" name="Datatype" value="@Model.TypeData" id="Datatype" />
+
+                            @Html.DropDownListFor(m => item.StatusNCnullable, // Store selected value in Model.DefaultStcId
+                                                new SelectList(item.ListStatus, "Value", "Text", item.Status),
+                                                new { @class = "form-control", onchange = @"submit();" })
+
+
+                        }
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </table>

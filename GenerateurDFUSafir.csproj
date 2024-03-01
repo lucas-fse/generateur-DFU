@@ -1,0 +1,1996 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73610F10-6594-4338-9E1D-065B7FDB99E2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GenerateurDFUSafir</RootNamespace>
+    <AssemblyName>GenerateurDFUSafir</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <IISExpressSSLPort>44369</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataMatrix.net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DataMatrix.net.0.4.2\lib\20\DataMatrix.net.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DecimalModelBinder.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ControleController.cs" />
+    <Compile Include="Controllers\FusionImage.cs" />
+    <Compile Include="Controllers\GammeUDController.cs" />
+    <Compile Include="Controllers\GeneriqueController.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Controllers\GestionGammeUD.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MarketingController.cs" />
+    <Compile Include="Controllers\OFSafirController.cs" />
+    <Compile Include="Controllers\OperateursController.cs" />
+    <Compile Include="Controllers\PlanningController.cs" />
+    <Compile Include="Controllers\ProductionController.cs" />
+    <Compile Include="Controllers\QualiteController.cs" />
+    <Compile Include="Controllers\RechercheDeveloppementController.cs" />
+    <Compile Include="Controllers\STCTCSController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Models\AccueilKPI.cs" />
+    <Compile Include="Models\AddSousProjet.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\AffectationOperateurs.cs" />
+    <Compile Include="Models\AndroidAppList.cs" />
+    <Compile Include="Models\ControleFinal.cs" />
+    <Compile Include="Models\ControleQualite.cs" />
+    <Compile Include="Models\ControlFinalScan.cs" />
+    <Compile Include="Models\DAL\ACCIDENT.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ACTIONIMMEDIATE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\AIC_EQUIPE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\AIC_POLE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\AIC_PROD.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ALEAS_OF.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ALEAS_OF_DETAILS.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\AMELIORATION.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CLIENT.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\COMPTEUR.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CONTROLE_QUALITE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CONTROLE_QUALITE2.cs" />
+    <Compile Include="Models\DAL\CONTROLPACK.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLPACK.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CONTROLPACK.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLPACK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CONTROLPACK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLPACK.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\DATA_GENERIQUE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\EVENEMENT.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\FICHE_PACK_TRACABILITE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\FICHE_PERSO.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\FRC.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\GestionTracaProd.cs" />
+    <Compile Include="Models\DAL\HISTORIQUE_CONTROL.cs">
+      <DependentUpon>CONTROLPACK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\HISTORIQUE_CONTROL2.cs" />
+    <Compile Include="Models\DAL\ITEM_LOCALISATION.cs">
+      <DependentUpon>STAMP_LOG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ITEM_LOCALISATION2.cs" />
+    <Compile Include="Models\DAL\KEPLER.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KEPLER.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\KEPLER.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KEPLER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\KEPLER.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KEPLER.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\KPI_CA.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\KPI_PROD.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\KPI_STC.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\LIENS_OUTILS.cs">
+      <DependentUpon>PEGASE_GENERIQUE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\MO.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ModelTRACAPROD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelTRACAPROD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ModelTRACAPROD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelTRACAPROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ModelTRACAPROD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelTRACAPROD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\MOMT.cs">
+      <DependentUpon>KEPLER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\MO_ETAPE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\MT.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\MT_ETAPE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\NON_CONFORMITE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\NON_CONFORMITE1.cs" />
+    <Compile Include="Models\DAL\NON_DETECTION.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\OCCURRENCE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\OF_PROD_TRAITE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\OPERATEURS.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ORDRE_FABRICATION.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ORDRE_FABRICATION_ETAPE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ORDRE_FABRICATION_GENERE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ORDRE_FABRICATION_KEPLER.cs">
+      <DependentUpon>KEPLER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PACK_INSTALLATION.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PACK_INSTALLE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PACK_INSTALLE_ETAPE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PEGASE_GENERIQUE.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PEGASE_GENERIQUE.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PEGASE_GENERIQUE.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PEGASE_GENERIQUE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PEGASE_GENERIQUE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PEGASE_GENERIQUE.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PLANIFICATION_OF.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PLANIF_OF.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PLANNING_OPERATEUR.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PLANNING_VALUE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\POLES.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\POLES2.cs" />
+    <Compile Include="Models\DAL\POSTES.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PROD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PROD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PROD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\QRQC.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\QUESTIONS_QRQC.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SERENITE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SIM.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SIM_ETAPE.cs">
+      <DependentUpon>PROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SOLUTION_DURABLE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SOUSPROJET.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SQUOTE.cs">
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SQUOTED.cs">
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STATUS_PNC.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SUIVI_OFFRE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TEMPS_SAISI.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TEMPS_SEMAINE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TEST_OF.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TEST_OPERATION.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACABILITE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACACMD.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACACMDMONO.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACAFABUDR.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACA_CHANGE_GESTIONSTATUS.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACA_DATA.cs">
+      <DependentUpon>ModelTRACAPROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACA_ETAPE_FAB.cs">
+      <DependentUpon>KEPLER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACA_ETIQUETTES.cs">
+      <DependentUpon>ModelTRACAPROD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACA_PROGRAMMATION.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TYPE_ANOMALIE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TYPE_CAUSE.cs">
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\UDE.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\UDR.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\URE.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\URR.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataOperateursSTC.cs" />
+    <Compile Include="Models\EtiquetteBac.cs" />
+    <Compile Include="Models\GestionArticlePNC.cs" />
+    <Compile Include="Models\GestionOFX3.cs" />
+    <Compile Include="Models\GestionOutilAdmin.cs" />
+    <Compile Include="Models\GestionSTCOperateur.cs" />
+    <Compile Include="Models\Impersonation.cs" />
+    <Compile Include="Models\CmdEnCours.cs" />
+    <Compile Include="Models\CodeBarre.cs" />
+    <Compile Include="Models\DAL\AIC_EQUIPE2.cs" />
+    <Compile Include="Models\DAL\AIC_PROD2.cs" />
+    <Compile Include="Models\DAL\ModelOF1_2.cs" />
+    <Compile Include="Models\DAL\ofProdIieCmd.cs" />
+    <Compile Include="Models\DAL\OutilProductInfo.cs" />
+    <Compile Include="Models\DAL\QRQC2.cs" />
+    <Compile Include="Models\DAL\TRACACMDMONO1.cs" />
+    <Compile Include="Models\EtiquetteLogistique.cs" />
+    <Compile Include="Models\GestionOp.cs" />
+    <Compile Include="Models\InfoAIC2.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\DAL\ACCIDENT2.cs" />
+    <Compile Include="Models\DAL\Amelioration2.cs" />
+    <Compile Include="Models\DAL\CHECKFPS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHECKFPS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CHECKFPS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\CHECKFPS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHECKFPS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SERENITE2.cs" />
+    <Compile Include="Models\DAL\COMMENTAIRE.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\DELAIFPS.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\FRC2.cs" />
+    <Compile Include="Models\DAL\GAMME_UD_UR_UC.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GAMME_UD_UR_UC.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\GAMME_UD_UR_UC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\GAMME_UD_UR_UC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GAMME_UD_UR_UC.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\SORDER.cs">
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STATUSFPS.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STATUSRELANCE.cs">
+      <DependentUpon>CHECKFPS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TEMPS_SAISI2.cs" />
+    <Compile Include="Models\DAL\TRACACMD1.cs" />
+    <Compile Include="Models\DAL\TRACACODEID.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACAFABUDE.cs">
+      <DependentUpon>GAMME_UD_UR_UC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeclarationCodeErreurs.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\FPSEncours.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\FRC_PROD.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoAmelioration.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoKPI.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoNonConformite.cs" />
+    <Compile Include="Models\InfoOf.cs" />
+    <Compile Include="Models\InfoQRQC.cs" />
+    <Compile Include="Models\InfoSerenite.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoUSer.cs" />
+    <Compile Include="Models\JobERP.cs" />
+    <Compile Include="Models\KPI.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoDATAQRQC.cs" />
+    <Compile Include="Models\Mail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\MonoEncours.cs" />
+    <Compile Include="Models\GestionNonConformite.cs" />
+    <Compile Include="Models\OffreX3.cs" />
+    <Compile Include="Models\OfPlan.cs" />
+    <Compile Include="Models\OfProdModel.cs" />
+    <Compile Include="Models\OFView.cs" />
+    <Compile Include="Models\OldOF.cs" />
+    <Compile Include="Models\OPERATEURS2.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\ParametresModel.cs" />
+    <Compile Include="Models\PlanificationModel.cs" />
+    <Compile Include="Models\PlanificationOf.cs" />
+    <Compile Include="Models\PlanifieOF.cs" />
+    <Compile Include="Models\PlanningSociete.cs" />
+    <Compile Include="Models\PosteProduction.cs" />
+    <Compile Include="Models\Production.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Projet.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Qualité.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\RawPrinterHelper.cs" />
+    <Compile Include="Models\SaisiModel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\DAL\BPADDRESS.cs">
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\DAL_X3.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL_X3.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\DAL_X3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\DAL_X3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL_X3.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\OfX3.cs" />
+    <Compile Include="Models\DAL\OF_PROD_TRAITE2.cs" />
+    <Compile Include="Models\DAL\PROD2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PROD2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\PROD2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PROD2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STAMP_LOG.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>STAMP_LOG.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STAMP_LOG.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>STAMP_LOG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\STAMP_LOG.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>STAMP_LOG.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\TRACABILITE_BL.cs">
+      <DependentUpon>STAMP_LOG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL\ZCONFPACK4.cs">
+      <DependentUpon>DAL_X3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GestionOperateursProd.cs" />
+    <Compile Include="Models\CodeGroupe.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataGammeUD.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\DataOperateurProd.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\DeclarationAlea.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\GestionTraitementOFs.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\IncidentModel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Indicateur.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoAllProduction.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoLogistique.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\InfoOrdreFabricationBidir.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\OrdreFabricationMono.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\OrdreFabrication.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\OrdreFabricationBiDir.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\ProduitMono.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\RetDInformation.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\SECU_PROD.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\StatSTCTCS.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\StatSTCTCSV2.cs" />
+    <Compile Include="Models\StatusOf.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\StructLabel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\SupprControleFinal.cs" />
+    <Compile Include="Models\Temps_SAISI_Model.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\TestOutilProductionVue.cs" />
+    <Compile Include="Models\TestOutilProduction.cs" />
+    <Compile Include="Models\TimedHostedService .cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\TRACAALLCMD.cs" />
+    <Compile Include="Models\TracaPack.cs" />
+    <Compile Include="Models\utile.cs" />
+    <Compile Include="Models\Utilitaire.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Accident.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\activiteStyle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\AffectationOperateur.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\AIC2.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Amelioration.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-theme.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\charte.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DeclAccident.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\form.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gestionstc.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GOA.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DynamicDropDownMenu.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\FRC.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gammeUD.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GestionFPS.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gestionOF.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GestionOp.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\graph.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\home-slider.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Home.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\homeProd.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\impressionQRQC.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\IndexOFOperateur.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ListQRQC.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\of.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\OFNumeric.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\OTD_OTR.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Parametres.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\PlanificationOf.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Proposition.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\QRQC.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Qualité.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\RetD.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Serenite.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\STCTCS.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ABUS.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ADE10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ADE6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ADE8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\BPDVDroite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\BPDVGauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\BPSVDroite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\BPSVGauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\BPTR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\CMI.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\CodeErreurs.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_2Droite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_2Gauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_2SPEGauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_3Droite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_3Gauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_3RDroite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\COM_3RGauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\ConfigRefIndusMono.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19051.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19063.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19063R.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19063RR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19073.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19073R.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19101.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E19291.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\E23610.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\FacInfraRouge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\FacSSInfraRouge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\MTInfraRouge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\OBTDroite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\OBTGauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\Test.xml" />
+    <Content Include="data\UDE10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\UDE6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\UDE8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\VIDE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="image\Accident.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\accident.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\addHover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\AIC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\alea.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\android.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\attention.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\bacbleu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\BD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\BlackCross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\BoutonNoel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\bychristian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\calendrier.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\conception-planification.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\ConductixWampfler2008_black-.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Content.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\coupe.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\croix.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\croixRouge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\dnc-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\docs.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\double_fleche.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\double_fleche2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\download.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\emoji_content.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\emoji_pas_content.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\en-savoir-plus-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\etiquette354140A.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\etiquettelogistique.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\euro.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\euro1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\euro2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\fleche_bas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\fleche_droite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\fleche_haut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\FRC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\gammud.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Gear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\GrapheVide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\GreenCross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\health_and_safety.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\hourglass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\idea.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\JNoel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\List_BD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\localisation-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\local_shipping.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\logoA.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\logo_OF\ATEX.png" />
+    <Content Include="image\logo_OF\SAV.png" />
+    <Content Include="image\logo_OF\Test_RD.png" />
+    <Content Include="image\logo_OF\Test_STC.png" />
+    <Content Include="image\logo_OF\UL.png" />
+    <Content Include="image\marketing1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\marketing2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\MerryChrismas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\month.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Moyen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\noel.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OF-en-cours2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OF1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OrangeCross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OTD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OTD1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OTR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\OTR1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\PasAccident.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\PasContent.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\PasContentDuTout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\pause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\pdf1-removebg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\perenoel.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\pouceVert.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\pouce_en_haut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Production.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\Profil.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\qualite Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\qualite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\questionTag.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\RedCross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\rightArrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\R_D1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\R_D2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\sablier.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\search-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\securite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\serenite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\STC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\stop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\supervision.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\SuppBDD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\swirl.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\swirl2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\TCS1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\TCS2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\TCS3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\traitement1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\traitement2-removebg-preview.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\trash.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\TresContent.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\tri.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\trophy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\UD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\validate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\white-icon-pause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\white-stop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\year.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\YellowCross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Models\DAL\CHECKFPS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CHECKFPS.edmx</DependentUpon>
+      <LastGenOutput>CHECKFPS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\CHECKFPS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CHECKFPS.edmx</DependentUpon>
+      <LastGenOutput>CHECKFPS.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\CONTROLPACK.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CONTROLPACK.edmx</DependentUpon>
+      <LastGenOutput>CONTROLPACK.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\CONTROLPACK.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CONTROLPACK.edmx</DependentUpon>
+      <LastGenOutput>CONTROLPACK.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\DAL_X3.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DAL_X3.Context.cs</LastGenOutput>
+      <DependentUpon>DAL_X3.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DAL\DAL_X3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAL_X3.edmx</DependentUpon>
+      <LastGenOutput>DAL_X3.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\GAMME_UD_UR_UC.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GAMME_UD_UR_UC.edmx</DependentUpon>
+      <LastGenOutput>GAMME_UD_UR_UC.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\GAMME_UD_UR_UC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GAMME_UD_UR_UC.edmx</DependentUpon>
+      <LastGenOutput>GAMME_UD_UR_UC.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\KEPLER.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KEPLER.edmx</DependentUpon>
+      <LastGenOutput>KEPLER.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\KEPLER.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KEPLER.edmx</DependentUpon>
+      <LastGenOutput>KEPLER.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\ModelTRACAPROD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelTRACAPROD.edmx</DependentUpon>
+      <LastGenOutput>ModelTRACAPROD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\ModelTRACAPROD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelTRACAPROD.edmx</DependentUpon>
+      <LastGenOutput>ModelTRACAPROD.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PEGASE_GENERIQUE.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PEGASE_GENERIQUE.edmx</DependentUpon>
+      <LastGenOutput>PEGASE_GENERIQUE.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PEGASE_GENERIQUE.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PEGASE_GENERIQUE.edmx</DependentUpon>
+      <LastGenOutput>PEGASE_GENERIQUE.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PROD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PROD.edmx</DependentUpon>
+      <LastGenOutput>PROD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PROD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PROD.edmx</DependentUpon>
+      <LastGenOutput>PROD.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PROD2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PROD2.edmx</DependentUpon>
+      <LastGenOutput>PROD2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\PROD2.edmx.sql" />
+    <Content Include="Models\DAL\PROD2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PROD2.edmx</DependentUpon>
+      <LastGenOutput>PROD2.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\STAMP_LOG.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>STAMP_LOG.edmx</DependentUpon>
+      <LastGenOutput>STAMP_LOG.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAL\STAMP_LOG.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>STAMP_LOG.edmx</DependentUpon>
+      <LastGenOutput>STAMP_LOG.cs</LastGenOutput>
+    </Content>
+    <Content Include="data\CodeAlea.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\agenou.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\court.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image\debout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursA\CR.bmp" />
+    <Content Include="operateurs\OperateursA\FM.bmp" />
+    <Content Include="operateurs\OperateursA\LP.bmp" />
+    <Content Include="operateurs\MiniOperateurs\Alex.png" />
+    <Content Include="operateurs\MiniOperateurs\Christine.png" />
+    <Content Include="operateurs\MiniOperateurs\Dolores.png" />
+    <Content Include="operateurs\MiniOperateurs\Faty.png" />
+    <Content Include="operateurs\MiniOperateurs\Gaelle.png" />
+    <Content Include="operateurs\MiniOperateurs\Gwenael.png" />
+    <Content Include="operateurs\MiniOperateurs\Laetitia.jpg" />
+    <Content Include="operateurs\MiniOperateurs\Louis.png" />
+    <Content Include="operateurs\MiniOperateurs\Sylvie.png" />
+    <Content Include="operateurs\MiniOperateurs\Vanessa.png" />
+    <Content Include="operateurs\MiniOperateurs\Veronique.png" />
+    <Content Include="operateurs\OperateursB\AC.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\AE.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\AK.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\CR.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\DA.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\DI.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\DZ.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\FM.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\GD.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\JS.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\LF.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\LG.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\LJ.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\LP.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\RD.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\SA.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\SC.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\SD.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\ST.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="operateurs\OperateursB\VM.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\DAL\DAL_X3.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DAL_X3.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\DAL_X3.edmx.diagram">
+      <DependentUpon>DAL_X3.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\STAMP_LOG.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>STAMP_LOG.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\STAMP_LOG.edmx.diagram">
+      <DependentUpon>STAMP_LOG.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\PROD2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PROD2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\PROD2.edmx.diagram">
+      <DependentUpon>PROD2.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\CHECKFPS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CHECKFPS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\CHECKFPS.edmx.diagram">
+      <DependentUpon>CHECKFPS.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-theme.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\DAL\GAMME_UD_UR_UC.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GAMME_UD_UR_UC.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\GAMME_UD_UR_UC.edmx.diagram">
+      <DependentUpon>GAMME_UD_UR_UC.edmx</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Beep.js" />
+    <Content Include="Scripts\draganddrop.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ScanControl.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\STCTCS\GestionSTC.cshtml" />
+    <EntityDeploy Include="Models\DAL\KEPLER.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KEPLER.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\KEPLER.edmx.diagram">
+      <DependentUpon>KEPLER.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\PROD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PROD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\PROD.edmx.diagram">
+      <DependentUpon>PROD.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\PEGASE_GENERIQUE.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PEGASE_GENERIQUE.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\PEGASE_GENERIQUE.edmx.diagram">
+      <DependentUpon>PEGASE_GENERIQUE.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\CONTROLPACK.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CONTROLPACK.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\CONTROLPACK.edmx.diagram">
+      <DependentUpon>CONTROLPACK.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DAL\ModelTRACAPROD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelTRACAPROD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAL\ModelTRACAPROD.edmx.diagram">
+      <DependentUpon>ModelTRACAPROD.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile Local.pubxml" />
+    <Content Include="operateurs\OperateursA\SC.bmp" />
+    <Content Include="operateurs\OperateursA\SD.bmp" />
+    <Content Include="operateurs\OperateursA\VB.bmp" />
+    <Content Include="operateurs\OperateursA\VM.bmp" />
+    <Content Include="Scripts\Accident.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AIC2.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bootstrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\chart.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\chartNbAmelioration.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\chartNbFrcParService.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\chartOtdOtr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\clock.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\compteur.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\compteursGreenCross.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\CountDown.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\CountDown2.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\drag-drop-function.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\drag-drop.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\drag-drop2.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\form.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\graph.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\PublishProfiles\JAYSVIISINTGreen.pubxml" />
+    <None Include="Properties\PublishProfiles\JAYSVRIISINTBlue.pubxml" />
+    <None Include="Properties\PublishProfiles\profile local 2.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Scripts\home.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Del_Enter_Touch.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.slim.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.4.1.min.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Scripts\jquery.validate-vsdoc.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\modernizr-2.8.3.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\move.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\numcounter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\openNewTab.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\popup.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Proposition.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\reloadOF.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ReloadTimer.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\saisiscript.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Serenite.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\slider.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ViewImage.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ViewWebcam.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\webcam.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\wrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\About.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\OFSafir\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\Synthese.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\Logistique.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\OFSafir\Edit.cshtml" />
+    <Content Include="Views\OFOperateurs\Index.cshtml" />
+    <Content Include="Views\OFOperateurs\Edit.cshtml" />
+    <Content Include="Views\OFOperateurs\Alea.cshtml" />
+    <Content Include="Views\GammeUD\Index.cshtml" />
+    <Content Include="Views\RechercheDeveloppement\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\RechercheDeveloppement\Incident.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\RechercheDeveloppement\Saisi.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Marketing\Index.cshtml" />
+    <Content Include="Views\Marketing\Saisi.cshtml" />
+    <Content Include="Views\RechercheDeveloppement\Projet.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Marketing\Projet.cshtml" />
+    <Content Include="Views\STCTCS\Index.cshtml" />
+    <Content Include="Views\STCTCS\GestionFPS.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\GammeUD\CodeId.cshtml" />
+    <Content Include="Views\Qualite\Qualite.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Qualite\Activite.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Qualite\Liens.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Qualite.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Securite.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Serenite.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Production.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Amelioration.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\KPIProd.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\AIC2.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\QRQC.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\DataQRQC.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\gestionOF.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\IndexOFOperateur.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\STCTCS\GestionMono.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\STCTCS\GestionCmd.cshtml" />
+    <Content Include="Views\Production\OutilProd.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\OutilProdLog.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\OFEdite.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Generique\Parametres.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Generique\GestionOp.cshtml" />
+    <Content Include="Views\Production\OFNumeric.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\AnalyseOF.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\PlanificationOf.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\AffectationOperateurs.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\OFSafir\PNC.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\STCTCS\GestionFPSFull.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\GestionOutilAdmin.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\DeclaNonConform.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\SuppressionOFBidir.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\DeclAccident.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\Proposition.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\of.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Controle\AfficheControles.cshtml" />
+    <Content Include="Views\Controle\ControleQualite.cshtml" />
+    <Content Include="Views\Production\OutilProdBac.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Production\SuppressionOfKepler.cshtml" />
+    <Content Include="Views\Planning\index.cshtml" />
+    <Content Include="Views\Test\index.cshtml" />
+    <Content Include="Views\Controle\PackControle.cshtml" />
+    <Content Include="Views\Controle\SuppressionControleFinal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="operateurs\old\" />
+    <Folder Include="pdf\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DLL_Compteur_Mono\DLL_Compteur_Mono.csproj">
+      <Project>{7e356229-86fe-470d-bd69-22896c336364}</Project>
+      <Name>DLL_Compteur_Mono</Name>
+    </ProjectReference>
+    <ProjectReference Include="GenerateurDFU\DALPEGASE\DALPEGASE.csproj">
+      <Project>{c36c261a-095f-462f-81d1-18861cdcff59}</Project>
+      <Name>DALPEGASE</Name>
+    </ProjectReference>
+    <ProjectReference Include="GenerateurDFU\DAL_PEGASE\DAL_PEGASE.csproj">
+      <Project>{d5095f10-e147-4dc5-8621-78bf0a848e19}</Project>
+      <Name>DAL_PEGASE</Name>
+    </ProjectReference>
+    <ProjectReference Include="InitFile\InitFile.csproj">
+      <Project>{E511CD91-B280-4C57-BBCC-9DBCA2F3DAC9}</Project>
+      <Name>InitFile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63096</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63096/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://dell070219:8080/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

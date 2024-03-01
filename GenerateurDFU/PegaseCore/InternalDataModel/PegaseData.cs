@@ -1,0 +1,3920 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Xml.Linq;
+using JAY.XMLCore;
+using JAY.FileCore;
+using System.Reflection;
+using JAY.PegaseCore.Helper;
+using JAY.DAL;
+using System.Security.Cryptography;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Forms;
+using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Documents;
+
+namespace JAY.PegaseCore
+{
+
+
+    public class Flashage
+    {
+
+
+        /// <summary>
+        /// La date de dernière génération
+        /// </summary>
+        public DateTime DateGeneration
+        {
+            get;
+            set;
+        } // endProperty: LastGeneration
+
+        /// <summary>
+        /// La dernière version d'iDialog
+        /// </summary>
+        public String iDialogVersion
+        {
+            get;
+            set;
+        } // endProperty: iDialogVersion
+
+        /// <summary>
+        /// Le numéro de série du dernier produit à avoir été flashé
+        /// </summary>
+        public String NumSerieProduct
+        {
+            get;
+            set;
+        } // endProperty: NumSerieProduct
+
+        /// <summary>
+        /// le code de hashage MD5 calculer sur la partie XmlTechnique
+        /// </summary>
+        public String Hashage
+        {
+            get;
+            set;
+        } // endProperty: Hashage
+
+        public Flashage()
+        {
+            this.DateGeneration = new DateTime();
+            this.iDialogVersion = "0.0.0";
+            this.NumSerieProduct = "-";
+            this.Hashage = "00000000000000000000000000000000";
+        }
+    }
+
+    /// <summary>
+    /// class PegaseData : 
+    /// la classe principale de représentation interne des données.
+    /// Il s'agit d'un singleton afin de prévenir le risque d'avoir plusieurs instances de données
+    /// ne désignant pas les mêmes appareils.
+    /// </summary>
+    public class PegaseData
+    {
+
+        // Variables singleton
+        private static PegaseData _instance;
+        static readonly object instanceLock = new object();
+
+
+        // Variables
+        #region Variables
+
+        private XMLProcessing                        _xmlFile;    // Représente le fichier XML source des données
+        private IdentPack                 _identificationPack;    // Les données d'identification du pack
+        private MO                                        _mo;    // La collection des MOs
+        private MT                                        _mt;    // Le MT associé à la fiche
+        private OptionsLogiciels                          _ol;    // Les options logiciels retenues
+        private XMLProcessing                      _navMetier;    // Un outil de navigation dans le xml métier
+        private XMLProcessing                   _navTechnique;    // Un outil de navigation dans le xml technique
+        private HorsMode                            _horsMode;    // La section Hors Mode du XML Métier
+        private iDialogPackage                _currentPackage;    // Le package en cours d'utilisation
+        private Int32                         _currentVersion;    // La version du fichier utilisée actuellement
+        private String                              _fileName;    // Le nom du fichier iDialog portant la configuration
+        private SIM                                 _carteSIM;    // Les données de la carte SIM
+        private UInt32                                 _crc32;    // Le CRC du fichier
+        private String                          _referenceFPA;    // La référence lié à la fiche
+        private ObservableCollection<String> _imagesInPackage;    // Les images du package
+        private ObservableCollection<TraceRefFile> _traceFiles;   // Les fichiers qui ont servi à fabriquer le fichier xml
+        private GestionTempo                    _gestionTempo;    // La gestion des différentes temporisations
+        private GestionPLD                 _gestionPLDFonction;
+        private GestionModbus                   _gestionModBus;   // gestion des données lie au modbus
+        private GestionLiaisonFilaire  _gestionLiaisonFilaire;   // gestion de la liaison filaire
+        private GestionInfraRouge          _gestionInfraRouge;// gestion de l'infrarouge
+        private UInt32                             _maskAdmin;    // Le masque de mode pour l'utilisateur 'administrateur'
+        private UInt32                     _maskApprentissage;    // Le masque de mode pour l'utilisateur 'apprentissage'
+        private UInt32                             _maskRunPP;    // Le masque de mode pour l'utilisateur 'démmarage ++'
+        private UInt32                               _maskRun;    // Le masque de mode pour l'utilisateur 'démmarage'
+        private ObservableCollection<VariableE>    _variables;    // L'ensemble des variables gérées par l'embarqué
+        public ObservableCollection<DescriptionE> _descriptions;
+        private Couplage                         _couplageMTs;    // Les données de couplage des MTs
+        
+        private UInt32                  _SBCmasqueExploitHors;    // Masque définissant les modes d'exploitations accessibles hors support de charge
+        private UInt32                      _SBCmasqueExploit;    // Masque définissant les modes d'exploitations accessibles sur support de charge
+        private UInt32                      _SBCmasqueOrganOn;    // Masque des organes fonctionnant sur support de charge
+        private Boolean                   _SBCCommandeRelais1;
+        private Boolean                   _SBCCommandeRelais2;
+        private Boolean                    _SBCCommandeBuzzer;
+        private Int32                         _SBCModeExploit;
+        private Int32                   _SBCRetourModeExploit;
+        private Int32                  _SBCDelaiPassageCharge;
+        private Int32                   _SBCDelaiRelacheRelai;
+        private UInt32                            _SBCOptions;
+        private Int32                         _numFileVersion;    // Numéro de version du fichier
+        private Boolean                     _demarageEnCharge;
+        private Boolean                    _demarrageSecurise;
+        private Int32                  _currentStartOnSBCMode;
+
+
+        private String                              _refErpMO;    // Ref ERP MO
+        private String                              _refErpMT;    // Ref ERP MT
+        private String                             _refErpSIM;    // Ref ERP SIM
+        private String                          _refErpCHARGE;
+        private String                              _refIdWeb;
+        private String                           _refCodeAplli;
+        private String                              _refProjet;
+        private PlastronData                    _dataPlastron;    // Les données du plastron
+        private String                                 _refJAY;
+
+        private Commentaires _commentaire;
+
+        private ObservableCollection<String> _componentFileName;  // la liste des fichiers intégrés pour construire la fiche
+
+        private Flashage                        _LastFlashage;    // La dernière date de génération de la fiche
+        private ProjectDetail                  _projectDetail;    // Le détail du projet
+
+        private String _refCustomer;
+        private String _refCompany;
+        private String _refCustomerCode;
+        private String _refPartNumber;
+        private DateTime _refDate;
+        private String _refIndice;
+        private ObservableCollection<MacroFonction> _collecMacro;
+        private List<string> _listMacroName;
+        private VariableControls _readInfoData;
+        #endregion
+
+        // Propriétés
+        #region Propriétés
+        /// <summary>
+        /// R
+        /// </summary>
+        public FlowDocument EquationModeEasyConfig
+        {
+            get;
+            set;
+        } // endProperty:
+        /// <summary>
+        /// Le détail du projet en cours d'édition
+        /// </summary>
+        public ProjectDetail CurrentProjectDetail
+        {
+            get
+            {
+                return this._projectDetail;
+            }
+            set
+            {
+                this._projectDetail = value;
+            }
+        } // endProperty: CurrentProjectDetail
+
+        /// <summary>
+        /// La dernière date de génération 
+        /// </summary>
+        public Flashage LastFlashage
+        {
+            get
+            {
+                if (this._LastFlashage == null)
+                {
+                    this._LastFlashage = new Flashage();
+                }
+                return this._LastFlashage;
+            }
+            set
+            {
+                this._LastFlashage = value;
+            }
+        } // endProperty: DateGeneration
+
+        /// <summary>
+        /// La liste des fichiers intégrés pour construire la fiche
+        /// </summary>
+        public ObservableCollection<String> ComponentFileName
+        {
+            get
+            {
+                if (this._componentFileName == null)
+                {
+                    this._componentFileName = new ObservableCollection<String>();
+                }
+
+                return this._componentFileName;
+            }
+        } // endProperty: ComponentFileName
+
+        /// <summary>
+        /// Les commentaires liés à la fiche
+        /// </summary>
+        public Commentaires Commentaire
+        {
+            get
+            {
+                if (this._commentaire == null)
+                {
+                    this._commentaire = new Commentaires();
+                }
+                return this._commentaire;
+            }
+            set
+            {
+                this._commentaire = value;
+            }
+        } // endProperty: Commentaire
+
+        /// <summary>
+        /// Les données du plastron
+        /// </summary>
+        public PlastronData DataPlastron
+        {
+            get
+            {
+                if (this._dataPlastron == null)
+                {
+                    this._dataPlastron = new PlastronData();
+                }
+                return this._dataPlastron;
+            }
+        } // endProperty: DataPlastron
+
+        /// <summary>
+        /// Le numéro de version de iDialog
+        /// </summary>
+        public String VersionIDialog
+        {
+            get
+            {
+                string result = string.Empty;
+                // first, try to get the version string from the assembly.
+                Version version = Assembly.GetEntryAssembly().GetName().Version;
+                if (version != null)
+                {
+                    result = version.ToString();
+                    String[] parts = result.Split(new Char[] { '.' });
+                    if (parts.Count() >= 3)
+                    {
+                        result = parts[0] + "." + parts[1] + "." + parts[2];
+                    }
+                }
+
+                return result;
+            }
+        } // endProperty: VersionIDialog
+
+        /// <summary>
+        /// La référence RefCustomer
+        /// </summary>
+        public String RefCustomer
+        {
+            get
+            {
+                if (this._refCustomer == null)
+                {
+                    this._refCustomer = "";
+                }
+                return this._refCustomer;
+            }
+            set
+            {
+                this._refCustomer = value;
+            }
+        } // endProperty
+        /// <summary>
+        /// La référence RefCompany
+        /// </summary>
+        public String RefCompany
+        {
+            get
+            {
+                if (this._refCompany == null)
+                {
+                    this._refCompany = "";
+                }
+                return this._refCompany;
+            }
+            set
+            {
+                this._refCompany = value;
+            }
+        } // endProperty
+        /// La référence RefCustomerCode
+        /// </summary>
+        public String RefCustomerCode
+        {
+            get
+            {
+                if (this._refCustomerCode == null)
+                {
+                    this._refCustomerCode = "";
+                }
+                return this._refCustomerCode;
+            }
+            set
+            {
+                this._refCustomerCode = value;
+            }
+        } // endProperty
+        /// La référence RefPartNumber
+        /// </summary>
+        public String RefPartNumber
+        {
+            get
+            {
+                if (this._refPartNumber == null)
+                {
+                    this._refPartNumber = "";
+                }
+                return this._refPartNumber;
+            }
+            set
+            {
+                this._refPartNumber = value;
+            }
+        } // endProperty
+        /// La référence RefDate
+        /// </summary>
+        public DateTime RefDate
+        {
+            get
+            {
+                CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageSupport.Get().LanguageType);
+                if ((this._refDate == null) || (DateTime.MinValue == this._refDate))
+                {
+                    this._refDate = DateTime.Now;
+                }
+                return this._refDate;
+            }
+            set
+            {
+                CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageSupport.Get().LanguageType);
+                this._refDate = value;
+            }
+        } // endProperty
+          /// La référence RefIndice
+          /// </summary>
+        public String RefIndice
+        {
+            get
+            {
+                if (this._refIndice == null)
+                {
+                    this._refIndice = "";
+                }
+                return this._refIndice;
+            }
+            set
+            {
+                this._refIndice = value;
+            }
+        } // endProperty
+
+        /// <summary>
+        /// La référence ERP du MO
+        /// </summary>
+        public String RefErpMO
+        {
+            get
+            {
+                return this._refErpMO;
+            }
+            set
+            {
+                this._refErpMO = value;
+            }
+        } // endProperty: RefErpMO
+
+        /// <summary>
+        /// Reférence ERP du MT
+        /// </summary>
+        public String RefErpMT
+        {
+            get
+            {
+                return this._refErpMT;
+            }
+            set
+            {
+                this._refErpMT = value;
+            }
+        } // endProperty: RefErpMT
+
+
+
+        /// <summary>
+        /// Référence ERP de la SIM
+        /// </summary>
+        public String RefErpSIM
+        {
+            get
+            {
+                return this._refErpSIM;
+            }
+            set
+            {
+                this._refErpSIM = value;
+            }
+        } // endProperty: RefErpSIM
+
+        /// <summary>
+        /// Référence ERP de la charge
+        /// </summary>
+        public String RefErpCHARGE
+        {
+            get
+            {
+                return this._refErpCHARGE;
+            }
+            set
+            {
+                this._refErpCHARGE = value;
+            }
+        } // endProperty: RefErpSIM
+        public String RefIdWeb
+        {
+            get
+            {
+                return this._refIdWeb;
+            }
+            set
+            {
+                this._refIdWeb = value;
+            }
+        }
+        public String RefCodeAppli
+        {
+            get
+            {
+                if (this._refCodeAplli == null)
+                {
+                    this._refCodeAplli = "";
+                }
+                return this._refCodeAplli;
+            }
+            set
+            {
+                this._refCodeAplli = value;
+            }
+        }
+        public String RefJAY
+        {
+            get
+            {
+                if( this._refJAY == null)
+                {
+                    this._refJAY = "";
+                }
+                return this._refJAY;
+            }
+            set
+            {
+                this._refJAY = value;
+
+            }
+        }
+        public String RefProjet
+        {
+            get
+            {
+                if (this._refProjet == null)
+                {
+                    this._refProjet = "";
+                }
+                return this._refProjet;
+            }
+            set
+            {
+                this._refProjet = value;
+            }
+        }
+        /// <summary>
+        /// Numéro de version du fichier
+        /// </summary>
+        public Int32 NumFileVersion
+        {
+            get
+            {
+                return this._numFileVersion;
+            }
+            private set
+            {
+                this._numFileVersion = value;
+            }
+        } // endProperty: NumFileVersion
+
+        /// <summary>
+        /// Les options sur support de charge
+        /// </summary>
+        public UInt32 SBC_Options
+        {
+            get
+            {
+                return this._SBCOptions;
+            }
+            set
+            {
+                this._SBCOptions = value;
+            }
+        } // endProperty: SBCOptions
+
+        /// <summary>
+        /// Délai de passage en charge
+        /// </summary>
+        public Int32 SBC_DelaiPassageCharge
+        {
+            get
+            {
+                return this._SBCDelaiPassageCharge;
+            }
+            set
+            {
+                this._SBCDelaiPassageCharge = value;
+            }
+        } // endProperty: SBCDelaiPassageCharge
+
+        /// <summary>
+        /// Délais de relachement des relais et du buzzer du support de charge
+        /// </summary>
+        public Int32 SBC_DelaiRelacheRelais
+        {
+            get
+            {
+                return this._SBCDelaiRelacheRelai;
+            }
+            set
+            {
+                this._SBCDelaiRelacheRelai = value;
+            }
+        } // endProperty: SBCDelaiRelacheRelais
+
+        /// <summary>
+        /// Le mode d'exploitation utilisé lors de la mise en place du MO sur chargeur
+        /// </summary>
+        public Int32 SBC_ModeExploit
+        {
+            get
+            {
+                return this._SBCModeExploit;
+            }
+            set
+            {
+                this._SBCModeExploit = value;
+            }
+        } // endProperty: SBC_ModeExploit;
+
+        /// <summary>
+        /// Le mode d'exploitation utilisé lors du décrochage du MO depuis le chargeur
+        /// </summary>
+        public Int32 SBC_RetourModeExploit
+        {
+            get
+            {
+                return this._SBCRetourModeExploit;
+            }
+            set
+            {
+                this._SBCRetourModeExploit = value;
+            }
+        } // endProperty: SBC_RetourModeExploit
+
+        /// <summary>
+        /// La commande du relais 1 sur support de charge
+        /// </summary>
+        public Boolean SBC_CommandeRelais1
+        {
+            get
+            {
+                return this._SBCCommandeRelais1;
+            }
+            set
+            {
+                this._SBCCommandeRelais1 = value;
+            }
+        } // endProperty: SBC_CommandeRelais1
+
+        /// <summary>
+        /// La commande du relais 2 sur support de charge
+        /// </summary>
+        public Boolean SBC_CommandeRelais2
+        {
+            get
+            {
+                return this._SBCCommandeRelais2;
+            }
+            set
+            {
+                this._SBCCommandeRelais2 = value;
+            }
+        } // endProperty: SBC_CommandeRelais2
+
+        /// <summary>
+        /// La commande du Buzzer
+        /// </summary>
+        public Boolean SBC_CommandeBuzzer
+        {
+            get
+            {
+                return this._SBCCommandeBuzzer;
+            }
+            set
+            {
+                this._SBCCommandeBuzzer = value;
+            }
+        } // endProperty: SBC_CommandeBuzzer
+
+        /// <summary>
+        /// Masque des organes fonctionnant sur support de charge
+        /// </summary>
+        public UInt32 SBC_MasqueOrganOn
+        {
+            get
+            {
+                return this._SBCmasqueOrganOn;
+            }
+            set
+            {
+                this._SBCmasqueOrganOn = value;
+            }
+        } // endProperty: MasqueOrganOnSBC
+
+        /// <summary>
+        /// Masque définissant les modes d'exploitations accessibles hors support de charge
+        /// </summary>
+        public UInt32 SBC_MasqueExploitHors
+        {
+            get
+            {
+                return this._SBCmasqueExploitHors;
+            }
+            set
+            {
+                this._SBCmasqueExploitHors = value;
+            }
+        } // endProperty: MasqueExploitHorsSBC
+
+        /// <summary>
+        /// Masque définissant les modes d'exploitations accessibles sur support de charge
+        /// </summary>
+        public UInt32 SBC_MasqueExploitation
+        {
+            get
+            {
+                return this._SBCmasqueExploit;
+            }
+            set
+            {
+                this._SBCmasqueExploit = value;
+            }
+        } // endProperty: MasqueExploitationSBC
+
+        /// <summary>
+        /// Les données de couplage du Mt
+        /// </summary>
+        public Couplage CouplageMTs
+        {
+            get
+            {
+                if (this._couplageMTs == null)
+                {
+                    this._couplageMTs = new Couplage();
+                }
+                return this._couplageMTs;
+            }
+            set
+            {
+                this._couplageMTs = value;
+            }
+        } // endProperty: CouplageMTs
+
+        /// <summary>
+        /// Retourner la collection de variables du système embarqué
+        /// </summary>
+        public ObservableCollection<VariableE> Variables
+        {
+            get
+            {
+                if (this._variables == null)
+                {
+                    this._variables = this.InitVariables();
+                }
+                return this._variables;
+            }
+            set
+            {
+                this._variables = value;
+            }
+        } // endProperty: Variables
+        /// <summary>
+        /// Retourner la collection de variables du système embarqué
+        /// </summary>
+        public ObservableCollection<DescriptionE> Descriptions
+        {
+            get
+            {
+                if (this._descriptions == null)
+                {
+                    this._descriptions = this.InitDescriptions();
+                }
+                return this._descriptions;
+            }
+            set
+            {
+                this._descriptions = value;
+            }
+        } // endProperty: Variables
+        /// <summary>
+        /// Les données liées à la gestion de la temporisation
+        /// </summary>
+        public GestionTempo GestionTemporisation
+        {
+            get
+            {
+                return this._gestionTempo;
+            }
+            private set
+            {
+                this._gestionTempo = value;
+            }
+        } // endProperty: GestionTemporisation
+
+        public GestionPLD GestionPLDfonction
+        {
+            get
+            {
+                if (this._gestionPLDFonction == null)
+                {
+                    _gestionPLDFonction = new GestionPLD();
+                }
+                _gestionPLDFonction.ConversionPLDLevel();
+                return this._gestionPLDFonction;
+            }
+            private set
+            {
+                this._gestionPLDFonction = value;
+            }
+        }
+
+        /// Les données liées à la gestion du modbus
+        /// </summary>
+        public GestionModbus GestionModBus
+        {
+            get
+            {
+                return this._gestionModBus;
+            }
+            private set
+            {
+                this._gestionModBus = value;
+            }
+        } // endProperty: GestionTemporisation
+        public GestionLiaisonFilaire GestionLiaisonFilaire
+        {
+            get
+            {
+                return this._gestionLiaisonFilaire;
+            }
+            private set
+            {
+                this._gestionLiaisonFilaire = value;
+            }
+        }
+
+        // endProperty: GestionTemporisation
+        public GestionInfraRouge GestionInfraRouge
+        {
+            get
+            {
+                return this._gestionInfraRouge;
+            }
+            private set
+            {
+                this._gestionInfraRouge = value;
+            }
+        }
+
+        /// <summary>
+        /// Le mot de passe de démarrage
+        /// utiliser pour le rapport
+        /// </summary>
+        public Int16 PassWordStart
+        {
+            get
+            {
+                Int16 Result = 0;
+                String V = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin3", "", "", XML_ATTRIBUTE.VALUE);
+                if (V != "")
+                {
+                    if (!V.Contains("0x"))
+                    {
+                        Result = Convert.ToInt16(V);
+                    }
+                    else
+                    {
+                        V = V.Substring(2);
+                        Result = Convert.ToInt16(V, 16);
+                    }
+                }
+
+                return Result;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin3", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+            }
+        } // endProperty: PassWord
+
+        /// <summary>
+        /// Le mot de passe de démarrage ++
+        /// utilisé pour le rapport
+        /// </summary>
+        public Int16 PassWordStartPP
+        {
+            get
+            {
+                Int16 Result = 0;
+                String V = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin2", "", "", XML_ATTRIBUTE.VALUE);
+                if (V != "")
+                {
+                    if (!V.Contains("0x"))
+                    {
+                        Result = Convert.ToInt16(V);
+                    }
+                    else
+                    {
+                        V = V.Substring(2);
+                        Result = Convert.ToInt16(V, 16);
+                    }
+                }
+                return Result;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin2", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+            }
+        } // endProperty: PassWordStartPP
+
+        public Byte LockKey
+        {
+            get
+            {
+                String XValue;
+                byte organemo;
+                // Initialiser
+                // OrganeMO
+                XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/OrganeMO", "", "", XML_ATTRIBUTE.VALUE);
+                if ((XValue != null) && (XValue != ""))
+                {
+                    try
+                    {
+                        if (!XValue.Contains("0x"))
+                        {
+                            organemo = Convert.ToByte(XValue);
+                        }
+                        else
+                        {
+                            organemo = Convert.ToByte(XValue.Substring(2), 16);
+                        }
+                    }
+                    catch
+                    {
+                        organemo = 0xFF;
+                    }
+                }
+                else
+                {
+                    organemo = 0xFF;
+                }
+                return organemo;
+            }
+
+            set
+            {
+                String V = String.Format("0x{0:X2}", value);
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/OrganeMO", "", "", XML_ATTRIBUTE.VALUE, V);
+            }
+
+        }
+        public Byte LockKeyPosition
+        {
+            get
+            {
+                String XValue;
+                Byte organemoposition;
+                XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/PositionVerrou", "", "", XML_ATTRIBUTE.VALUE);
+                if ((XValue != null) && (XValue != ""))
+                {
+                    try
+                    {
+                        if (!XValue.Contains("0x"))
+                        {
+                            organemoposition = Convert.ToByte(XValue);
+                        }
+                        else
+                        {
+                            organemoposition = Convert.ToByte(XValue.Substring(2), 16);
+                        }
+                    }
+                    catch
+                    {
+                        organemoposition = 0x00;
+                    }
+                }
+                else
+                {
+                    organemoposition = 0x00;
+                }
+                return organemoposition;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/PositionVerrou", "", "", XML_ATTRIBUTE.VALUE, String.Format("0x{0:X2}", value));
+            }
+        }
+        public UInt32 LockKeyMaskToggle
+        {
+            get{
+            String XValue;
+            UInt32 organemomasktoggle;
+            XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/MasqueBoutonsToggle", "", "", XML_ATTRIBUTE.VALUE);
+            if ((XValue != null) && (XValue != ""))
+            {
+                try
+                {
+                    if (!XValue.Contains("0x"))
+                    {
+                        organemomasktoggle = Convert.ToUInt32(XValue);
+                    }
+                    else
+                    {
+                        organemomasktoggle = Convert.ToUInt32(XValue.Substring(2), 16);
+                    }
+                }
+                catch
+                {
+                    organemomasktoggle = 0xFFFFFFFF;
+                }
+            }
+            else
+            {
+                organemomasktoggle = 0xFFFFFFFF;
+            }
+                return organemomasktoggle;
+            }
+            set
+            {
+            PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/MasqueBoutonsToggle", "", "", XML_ATTRIBUTE.VALUE,value.ToString());
+            }
+        }
+        public UInt32 LockKeyMaskAxe
+        {
+            get{
+                String XValue;
+                UInt32 organemomaskaxe;
+                XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/MasqueCom12AxesPot", "", "", XML_ATTRIBUTE.VALUE);
+                if ((XValue != null) && (XValue != ""))
+                {
+                    try
+                    {
+                        if (!XValue.Contains("0x"))
+                        {
+                            organemomaskaxe = Convert.ToUInt32(XValue);
+                        }
+                        else
+                        {
+                            organemomaskaxe = Convert.ToUInt32(XValue.Substring(2), 16);
+                        }
+                    }
+                    catch
+                    {
+                        organemomaskaxe = 0xFFFFFFFF;
+                    }
+                }
+                else
+                {
+                    organemomaskaxe = 0xFFFFFFFF;
+                }
+                return organemomaskaxe;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionFonctionCle/MasqueCom12AxesPot", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+            }
+        }
+
+
+        /// <summary>
+        /// Le mot de passe d'association
+        /// utilisé pour le rapport
+        /// </summary>
+        public Int16 PassWordAssociation
+        {
+            get
+            {
+                Int16 Result = 0;
+                String V = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin1", "", "", XML_ATTRIBUTE.VALUE);
+                if (V != "")
+                {
+                    if (!V.Contains("0x"))
+                    {
+                        Result = Convert.ToInt16(V);
+                    }
+                    else
+                    {
+                        V = V.Substring(2);
+                        Result = Convert.ToInt16(V, 16);
+                    }
+                }
+
+                return Result;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin1", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/OptionFoncMT/AppSecurise", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+            }
+        } // endProperty: PassWordAssociation
+
+        /// <summary>
+        /// Le mot de passe de configuration
+        /// utilisé pour le rapport
+        /// </summary>
+        public Int16 PassWordConfig
+        {
+            get
+            {
+                Int16 Result = 0;
+                String V = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin0", "", "", XML_ATTRIBUTE.VALUE);
+                if (V != "")
+                {
+                    if (!V.Contains("0x"))
+                    {
+                        Result = Convert.ToInt16(V);
+                    }
+                    else
+                    {
+                        V = V.Substring(2);
+                        Result = Convert.ToInt16(V, 16);
+                    }
+                }
+
+                return Result;
+            }
+            set
+            {
+                PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionDesDroits/Utilisateur/TableUtilisateur/CodePin0", "", "", XML_ATTRIBUTE.VALUE, value.ToString());
+            }
+        } // endProperty: PassWordConfig
+
+        /// <summary>
+        /// Le masque pour l'utilisateur 'Administrateur'
+        /// </summary>
+        public UInt32 MaskUserAdmin
+        {
+            get
+            {
+                return this._maskAdmin;
+            }
+            set
+            {
+                this._maskAdmin = value;
+            }
+        } // endProperty: MaskUserAdmin
+
+        /// <summary>
+        /// Le masque pour l'utilisateur 'Apprentissage'
+        /// </summary>
+        public UInt32 MaskUserApprentissage
+        {
+            get
+            {
+                return this._maskApprentissage;
+            }
+            set
+            {
+                this._maskApprentissage = value;
+            }
+        } // endProperty: MaskUserApprentissage
+
+        /// <summary>
+        /// Le masque pour l'utilisateur 'démmarage ++'
+        /// </summary>
+        public UInt32 MaskUserRunPP
+        {
+            get
+            {
+                return this._maskRunPP;
+            }
+            set
+            {
+                this._maskRunPP = value;
+            }
+        } // endProperty: MaskUserRunPP
+
+        /// <summary>
+        /// Le Masque pour l'utilisateur 'démmarage'
+        /// </summary>
+        public UInt32 MaskUserRun
+        {
+            get
+            {
+                return this._maskRun;
+            }
+            set
+            {
+                this._maskRun = value;
+            }
+        } // endProperty: MaskUserRun
+
+        /// <summary>
+        /// La liste des fichiers qui ont servi à créer la fiche
+        /// </summary>
+        public ObservableCollection<TraceRefFile> TraceFiles
+        {
+            get
+            {
+                if (this._traceFiles == null)
+                {
+                    this._traceFiles = this.InitTraceFiles();
+                }
+                return this._traceFiles;
+            }
+        } // endProperty: TraceFiles
+
+        /// <summary>
+        /// Les images présentent dans le package
+        /// </summary>
+        public ObservableCollection<String> ImagesInPackage
+        {
+            get
+            {
+                if (this._imagesInPackage == null && this.CurrentPackage!= null)
+                {
+                    this._imagesInPackage = this.CurrentPackage.PackageImages;
+                }
+                return this._imagesInPackage;
+            }
+        } // endProperty: ImagesInPackage
+
+        /// <summary>
+        /// Le document charger
+        /// </summary>
+        public XDocument Document
+        {
+            get
+            {
+                return PegaseData.Instance.XMLFile.Document;
+            }
+            set
+            {
+                // Assigner la valeur du nouveau document XML
+                String FileName = this.FileName;
+                PegaseData.Instance.XMLFile.Document = value;
+                //this.Save();
+                //this.CloseFile();
+                // Réinitialiser les données depuis le fichier
+                //this._xmlFile = new XMLProcessing();
+                //this.InitFromFile(FileName, false);
+            }
+        } // endProperty: Document
+
+        /// <summary>
+        /// Le package en cours d'utilisation
+        /// </summary>
+        public iDialogPackage CurrentPackage
+        {
+            get
+            {
+                return PegaseData.Instance._currentPackage;
+            }
+            set
+            {
+                PegaseData.Instance._currentPackage = value;
+            }
+        } // endProperty: CurrentPackage
+
+        /// <summary>
+        /// Le package est-il ouvert?
+        /// </summary>
+        public Boolean IsOpen
+        {
+            get
+            {
+                return PegaseData.Instance.CurrentPackage.IsOpen;
+            }
+        } // endProperty: IsOpen
+
+        /// <summary>
+        /// La version en cours d'utilisation
+        /// </summary>
+        public Int32 CurrentVersion
+        {
+            get
+            {
+                return PegaseData.Instance._currentVersion;
+            }
+            private set
+            {
+                PegaseData.Instance._currentVersion = value;
+            }
+        } // endProperty: CurrentVersion
+
+        /// <summary>
+        /// L'instance unique de la classe
+        /// </summary>
+        public static PegaseData Instance
+        {
+            get
+            {
+                return Get();
+            }
+        } // endProperty: Instance
+
+        /// <summary>
+        /// L'ID du projet dans la base de données locale
+        /// </summary>
+        public Int32 IDProject
+        {
+            get;
+            set;
+        } // endProperty: IDProject
+
+
+        public ObservableCollection<MacroFonction> CollecMacro
+        {
+            get
+            {
+                if (PegaseData.Instance._collecMacro == null)
+                {
+                    PegaseData.Instance._collecMacro = new ObservableCollection<MacroFonction>();
+                    PegaseData.Instance.InitMacroFonction();
+               }
+              return _collecMacro;
+            }
+        }
+        public List<String> ListMacroName
+        {
+            get
+            {
+                if (PegaseData.Instance._listMacroName == null)
+                {
+                    PegaseData.Instance._listMacroName = new List<string>();
+                    PegaseData.Instance.InitMacroFonction();
+                }
+                return _listMacroName;
+            }
+            set
+            {
+                _listMacroName = value;
+            }
+        }
+
+        public VariableControls ReadInfoData
+        {
+            get
+            {
+                if (PegaseData.Instance._readInfoData == null)
+                {
+                    PegaseData.Instance._readInfoData = new VariableControls();
+                    PegaseData.Instance.InitReadInfoFile();
+                }
+                return _readInfoData;
+            }
+            set
+            {
+                _readInfoData = value;
+            }
+        }
+        /// <summary>
+        /// La racine de la section métier du XML
+        /// </summary>
+        public XElement MetierRoot
+        {
+            get
+            {
+                XElement Result = null;
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    Result = PegaseData.Instance.XMLFile.GetNodeByPath("XmlMetier").FirstOrDefault();
+                }
+
+                return Result;
+            }
+        } // endProperty: MetierROOT
+
+        /// <summary>
+        /// La racine de la section technique du fichier XML
+        /// </summary>
+        public XElement TechniqueRoot
+        {
+            get
+            {
+                XElement Result = null;
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    Result = PegaseData.Instance.XMLFile.GetNodeByPath("XmlTechnique").FirstOrDefault();
+                }
+
+                return Result;
+            }
+        } // endProperty: TechniqueRoot
+
+        /// <summary>
+        /// La racine du XML chargé
+        /// </summary>
+        public XElement XMLRoot
+        {
+            get
+            {
+                XElement Result = null;
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    Result = PegaseData.Instance.XMLFile.RootNode;
+                }
+                return Result;
+            }
+        } // endProperty: XMLRoot
+
+        /// <summary>
+        /// La racine de la section identification du fichier XML
+        /// </summary>
+        public XElement IdentificationRoot
+        {
+            get
+            {
+                XElement Result = null;
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    Result = PegaseData.Instance.XMLFile.GetNodeByPath("XmlIdentification").FirstOrDefault();
+                }
+                return Result;
+            }
+        } // endProperty: IdentificationRoot
+
+        /// <summary>
+        /// Le nom du fichier iDialog contenant la fiche de configuration
+        /// </summary>
+        public String FileName
+        {
+            get
+            {
+                return PegaseData.Instance._fileName;
+            }
+            private set
+            {
+                PegaseData.Instance._fileName = value;
+            }
+        } // endProperty: FileName
+
+        /// <summary>
+        /// Les paramètres hors mode
+        /// </summary>
+        public HorsMode ParamHorsMode
+        {
+            get
+            {
+                if (PegaseData.Instance._horsMode == null)
+                {
+                    PegaseData.Instance.InitHorsMode();
+                }
+                return PegaseData.Instance._horsMode;
+            }
+            private set
+            {
+                PegaseData.Instance._horsMode = value;
+            }
+        } // endProperty: ParamHorsMode
+
+        /// <summary>
+        /// L'outil de lecture du fichier XML
+        /// </summary>
+        public XMLProcessing XMLFile
+        {
+            get
+            {
+                if (PegaseData.Instance._xmlFile == null)
+                {
+                    PegaseData.Instance._xmlFile = new XMLProcessing();
+                }
+                return PegaseData.Instance._xmlFile;
+            }
+        } // endProperty: XMLFile
+
+        /// <summary>
+        /// Données d'identification du pack
+        /// </summary>
+        public IdentPack IdentificationPack
+        {
+            get
+            {
+                if (PegaseData.Instance._identificationPack == null)
+                {
+                    PegaseData.Instance._identificationPack = new IdentPack();
+                }
+                return PegaseData.Instance._identificationPack;
+            }
+        } // endProperty: IdentificationPack
+
+        /// <summary>
+        /// La liste des MOs disponibles
+        /// </summary>
+        public MO MOperateur
+        {
+            get
+            {
+                return PegaseData.Instance._mo;
+            }
+        } // endProperty: MOs
+
+        /// <summary>
+        /// La référence de la FPA
+        /// </summary>
+        public String ReferenceFPA
+        {
+            get
+            {
+                return this._referenceFPA;
+            }
+            private set
+            {
+                this._referenceFPA = value;
+            }
+        } // endProperty: ReferenceFPA
+
+        /// <summary>
+        /// La SIM décrite dans la 
+        /// </summary>
+        public SIM CarteSIM
+        {
+            get
+            {
+                return PegaseData.Instance._carteSIM;
+            }
+            private set
+            {
+                PegaseData.Instance._carteSIM = null;
+            }
+        } // endProperty: CarteSIM
+
+        /// <summary>
+        /// Démarrage en charge
+        /// </summary>
+        public Boolean DemarrageEnCharge
+        {
+            get
+            {
+                return this._demarageEnCharge;
+            }
+            set
+            {
+                this._demarageEnCharge = value;
+            }
+        } // endProperty: DemarrageEnCharge
+
+        /// <summary>
+        /// Démarrage sécurisé
+        /// </summary>
+        public Boolean DemarrageSecurise
+        {
+            get
+            {
+                return this._demarrageSecurise;
+            }
+            set
+            {
+                this._demarrageSecurise = value;
+            }
+        } // endProperty: DemarrageSecurise
+
+        /// <summary>
+        /// Le mode de démarrage sur chargeur en cours
+        /// </summary>
+        public Int32 CurrentStartOnSBCMode
+        {
+            get
+            {
+                return this._currentStartOnSBCMode;
+            }
+            set
+            {
+                this._currentStartOnSBCMode = value;
+
+                switch (this._currentStartOnSBCMode)
+                {
+                    case 0:
+                        this.DemarrageEnCharge = false;
+                        this.DemarrageSecurise = false;
+                        break;
+                    case 1:
+                        this.DemarrageEnCharge = true;
+                        this.DemarrageSecurise = false;
+                        break;
+                    case 2:
+                        this.DemarrageEnCharge = true;
+                        this.DemarrageSecurise = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } // endProperty: CurrentStartOnSBCMode
+
+        /// <summary>
+        /// La liste des MT du pack
+        /// </summary>
+        public MT ModuleT
+        {
+            get
+            {
+                return PegaseData.Instance._mt;
+            }
+        } // endProperty: MTs
+
+
+        /// <summary>
+        /// Les options logiciels
+        /// </summary>
+        public OptionsLogiciels OLogiciels
+        {
+            get
+            {
+                return PegaseData.Instance._ol;
+            }
+            private set
+            {
+                PegaseData.Instance._ol = null;
+            }
+        } // endProperty: OLogiciels
+
+
+
+
+        /// <summary>
+        /// Retourner un outil de navigation vers le xml métier
+        /// </summary>
+        public XMLProcessing NavMetier
+        {
+            get
+            {
+                if (PegaseData.Instance._navMetier == null)
+                {
+                    PegaseData.Instance._navMetier = new XMLProcessing();
+                    PegaseData.Instance._navMetier.OpenXML(this.MetierRoot);
+                }
+                return PegaseData.Instance._navMetier;
+            }
+        } // endProperty: NavMetier
+
+        /// <summary>
+        /// Retourner un outil de navigation vers le xml technique
+        /// </summary>
+        public XMLProcessing NavTechnique
+        {
+            get
+            {
+                if (PegaseData.Instance._navTechnique == null)
+                {
+                    PegaseData.Instance._navTechnique = new XMLProcessing();
+                    PegaseData.Instance._navTechnique.OpenXML(this.TechniqueRoot);
+                }
+                return PegaseData.Instance._navTechnique;
+            }
+        } // endProperty: NavTechnique
+
+       
+
+        #endregion
+
+        // Constructeur
+        #region Constructeur
+
+        private PegaseData()
+        {
+            this._fileName = "";
+        }
+
+        #endregion
+
+        #region Méthodes static
+
+        /// <summary>
+        /// Convertir une valeur numérique String en valeur numérique
+        /// </summary>
+        public static Int32 ConvertString2Value(String Value)
+        {
+            Int32 Result;
+
+            try
+            {
+                if (Value.Contains("0x"))
+                {
+                    Value = Value.Replace("0x", " ").Trim();
+                    Result = Convert.ToInt32(Value, 16);
+                }
+                else
+                {
+                    Result = Convert.ToInt32(Value);
+                }
+            }
+            catch
+            {
+                Result = 0;
+            }
+
+            return Result;
+        } // endMethod: ConvertString2Value
+
+        #endregion
+
+        // Méthodes
+        #region Méthodes
+
+        // Retourne une instance unique de la classe
+        private static PegaseData Get()
+        {
+            lock (instanceLock)
+            {
+                if (_instance == null)
+                    _instance = new PegaseData();
+                return _instance;
+            }
+        }
+        
+        /// <summary>
+        /// Sérialiser les données Hors mode (mode universel)
+        /// </summary>
+        public void SerialiseHorsMode ( )
+        {
+            this.ParamHorsMode.SerialiseHorsMode();
+        } // endMethod: SerialiseHorsMode
+
+        /// <summary>
+        /// Initialiser les fichiers de traçabilité
+        /// </summary>
+        public ObservableCollection<TraceRefFile> InitTraceFiles( )
+        {
+            ObservableCollection<TraceRefFile> Result = new ObservableCollection<TraceRefFile>();
+
+            ObservableCollection<XElement> XTraceFile = this.XMLFile.GetNodeByPath("XmlTracabilite/Component");
+
+            if (XTraceFile != null)
+            {
+                foreach (var traceFile in XTraceFile)
+                {
+                    TraceRefFile TRF = new TraceRefFile(traceFile);
+                    Result.Add(TRF);
+                }
+            }
+
+            return Result;
+        } // endMethod: InitTraceFiles
+
+        /// <summary>
+        /// Y a-t-il besoin de patcher le fichier ?
+        /// </summary>
+        public Boolean NeedApplyPatch ( )
+        {
+            Boolean Result = false;
+            iDialogPackage pack;
+
+            pack = iDialogPackage.OpenPackage(FileName, System.IO.FileMode.Open);
+            
+
+            if ((pack != null) && (pack.UserText != null))
+            {
+                Int32 IsError;
+                XMLProcessing XProcess = new XMLProcessing();
+
+                IsError = XProcess.OpenXML(pack.GetCurrentVersionFileStream());
+                if (IsError == XML_ERROR.NO_ERROR)
+                {
+                    // Vérifier que la version de fichier est supportée par l'application iDialog
+                    ObservableCollection<XElement> XVerif = XProcess.GetNodeByPath("XmlTracabilite/XMLFileVersion");
+                    if (XVerif == null)
+                    {
+                        // Fichier vraiment ancien
+                        IsError = XML_ERROR.ERROR_XML_TOO_OLD;
+                        Result = false;
+                    }
+                    else
+                    {
+                        String SValue = XVerif.First().Attribute(XML_ATTRIBUTE.VALUE).Value;
+                        Int32 Value = Convert.ToInt32(SValue);
+
+                        this.NumFileVersion = Value;
+                        Result = true;
+                    }
+                }
+                pack.ClosePackage();
+                //pack.CurrentPackage.Close();
+                pack = null; 
+            }
+
+            return Result;
+        } // endMethod: ApplyPatch
+
+        /// <summary>
+        /// Sauver les paramètres de flashage
+        /// </summary>
+        public void SaveFlashParam(Helper.ConnectedProduct Product)
+        {
+            String RefProduct = "";
+            String Hashage;
+
+            if (Product != null)
+            {
+                if (Product.SerialNumberMO != null)
+                {
+                    RefProduct += Product.SerialNumberMO + " | ";
+                }
+
+                if (Product.SerialNumberMT != null)
+                {
+                    RefProduct = Product.SerialNumberMT + " | ";
+                }
+
+                if (Product.SerialNumberSIM != null)
+                {
+                    Product.SerialNumberSIM = Product.SerialNumberSIM.Replace('\0', '-');
+                    RefProduct += Product.SerialNumberSIM;
+                }
+            }
+
+            Hashage = this.CalculateHash(this.TechniqueRoot);
+            //DateTime datefr = DateTime.Parse(DateTime.UtcNow.ToString(), CultureInfo.CreateSpecificCulture("fr-FR"));
+            String datefr = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.CreateSpecificCulture("fr-FR"));
+            String Result = String.Format("date : {0} ; version iDialog : {1} ; num série : {2}", datefr, this.VersionIDialog, RefProduct);
+            PegaseData.Instance.XMLFile.SetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.VALUE, Result);
+            PegaseData.Instance.XMLFile.SetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.COMMENTAIRE, Hashage);
+        } // endMethod: SaveFlashParam
+        
+        /// <summary>
+        /// Calculer la signature unique à partir de l'élément XML spécifié
+        /// </summary>
+        public String CalculateHash ( XElement element )
+        {
+            String Result = "";
+            String StrElement = element.ToString();
+            Byte[] computeHash;
+
+            MD5 hashage = MD5.Create();
+
+            computeHash = hashage.ComputeHash(Encoding.UTF8.GetBytes(StrElement));
+
+            for (int i = 0; i < computeHash.Length; i++)
+            {
+                Result += computeHash[i].ToString("X2");
+            }
+
+            return Result;
+        } // endMethod: CalculateHash
+
+        /// <summary>
+        /// Initialiser les données depuis un fichier
+        /// </summary>
+        public Int32 InitFromFile(ProjectDetail PrjD, String FileName, Boolean Optimise, Boolean Patching)
+        {
+            Int32 Result = XML_ERROR.ERROR_FILE_NOT_FOUND;
+
+            // Ouvrir le package
+            this.IDProject = PrjD.IdProject;
+            this.CurrentProjectDetail = PrjD;
+
+            Result = this.InitFromFile(FileName, Optimise, Patching);
+
+            return Result;
+        } // endMethod: InitFromFile
+
+        /// <summary>
+        /// Initialiser les données depuis un fichier
+        /// </summary>
+        public Int32 InitFromFile(String FileName, Boolean Optimise, Boolean Patching)
+        {
+            Int32 Result = XML_ERROR.ERROR_FILE_NOT_FOUND;
+            bool RequestResult = true;
+            this.FileName = FileName;
+            Messenger.Default.Send<CommandMessage>(new CommandMessage(null, PegaseCore.Commands.CMD_WAIT_ON));
+            PegaseData.Instance.CouplageMTs = null;
+
+            if (DefaultValues.Get().IsLogsUsed)
+            {
+                DefaultValues.Get().Logs.AppendLog(String.Format("Try open {0}", FileName)); 
+            }
+
+            // Ouvrir le package
+            if (File.Exists(FileName))
+            {
+
+                if (DefaultValues.Get().IsLogsUsed)
+                {
+                    DefaultValues.Get().Logs.AppendLog(String.Format("File Exist -> OK")); 
+                }
+                // Vérifier si le fichier doit être patcher
+                JAY.Patcher.PatcherWindow Patcher; // = new Patcher.PatcherWindow();
+                JAY.Patcher.ViewModelPatcherWindow VMPW = new Patcher.ViewModelPatcherWindow(); //Patcher.DataContext as JAY.Patcher.ViewModelPatcherWindow;
+                while ((true == VMPW.EndOfPatch) && (RequestResult == true) && (Patching== true))
+                {
+                    Patcher = new Patcher.PatcherWindow();
+                    Patcher.DataContext = VMPW;
+                    if (this.NeedApplyPatch())
+                    {
+                        if (Patching)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog(String.Format("ApplyPatch on {0}, Version {1}", Path.GetFileNameWithoutExtension(FileName), this.NumFileVersion)); 
+                            }
+                            RequestResult = VMPW.UpdateFile(FileName, this.NumFileVersion);
+                            if (RequestResult)
+                            {
+                                Patcher.ShowDialog();
+                            }
+                            else
+                            {
+                                Patcher.Close();
+                                Patcher = null;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RequestResult = false;
+                    }
+                }
+                // Charger la dernière version
+                iDialogPackage pack = iDialogPackage.OpenPackage(FileName, System.IO.FileMode.Open);
+                
+                if ((pack != null) && (pack.UserText != null))
+                {
+                    if (DefaultValues.Get().IsLogsUsed)
+                    {
+                        DefaultValues.Get().Logs.AppendLog(String.Format("Try open last version -> OK")); 
+                    }
+
+                    PegaseData.Instance.CurrentPackage = pack;
+                    Result = PegaseData.Instance.XMLFile.OpenXML(this.CurrentPackage.GetCurrentVersionFileStream());
+
+                    if (Result == XML_ERROR.NO_ERROR)
+                    {
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Try open last version xml file -> OK"); 
+                        }
+                        
+                        // Vérifier que la version de fichier est supportée par l'application iDialog
+                        ObservableCollection<XElement> XVerif = this.XMLFile.GetNodeByPath("XmlTracabilite/XMLFileVersion");
+                        if (XVerif == null)
+                        {
+                            // Fichier vraiment ancien
+                            Result = XML_ERROR.ERROR_XML_TOO_OLD;
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Error XML Version too Old to Open!"); 
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            pack.ClosePackage();
+
+                            // Version 2 à 99 disponible
+                            if ((this.NumFileVersion < 2 || this.NumFileVersion > 99) && (Patching == true))
+                            {
+                                Result = XML_ERROR.ERROR_XML_TOO_OLD;
+                                if (DefaultValues.Get().IsLogsUsed)
+                                {
+                                    DefaultValues.Get().Logs.AppendLog("Error XML Version too Old to Open!"); 
+                                }
+                                return Result;
+                            }
+                        }
+
+                        Result = PegaseData.Instance.InitSBC();
+                        
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("InitSBC -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("InitSBC -> OK"); 
+                            }
+                        }
+
+                        // Finir l'ouverture du fichier
+                        try
+                        {
+                            string toto = LanguageSupport.Get().LanguageName;
+                            LanguageSupport.Get().InitialiseLanguage(LanguageSupport.Get().LanguageName, AppDomain.CurrentDomain.BaseDirectory + "Languages\\", PegaseCore.PegaseData.Instance.CurrentPackage);
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise Language -> OK"); 
+                            }
+                        }
+                        catch
+                        {
+                            if (LanguageSupport.Get().LanguageName == null)
+                            {
+                                LanguageSupport.Get().InitialiseLanguage("francais", AppDomain.CurrentDomain.BaseDirectory + "Languages\\", PegaseCore.PegaseData.Instance.CurrentPackage);
+                            }
+                            else
+                            {
+                                if (DefaultValues.Get().IsLogsUsed)
+                                {
+                                    DefaultValues.Get().Logs.AppendLog("Initialise Language -> WRONG"); 
+                                }
+                            }
+                        }
+                        
+                        PegaseData.Instance.CurrentPackage.ClosePackage();
+
+                        PegaseData.Instance.InitUserMasks();
+
+                        Result = PegaseData.Instance.InitMT();
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise MT Data -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise MT Data -> OK"); 
+                            }
+                        }
+                        Result = PegaseData.Instance.ModuleT.InitUIESAna();
+                        PegaseData.Instance._crc32 = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise UI I/O Ana -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise UI I/O Ana -> OK"); 
+                            }
+                        }
+                        
+                        Result = PegaseData.Instance.InitMO();
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise MO Data -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise MO Data -> OK"); 
+                            }
+                        }
+                        PegaseData.Instance.CouplageMTs.InitCouplage();
+                        if (Optimise)
+                        {
+                            // Optimiser la version
+
+                            //XMLTools.OptimiseNbMode(); // CB : JAY -> Ne plus optimiser les modes à l'ouverture, l'ensemble des fiches a été mis à jour, l'optimisation supprime le mode 33 'en sécurité'
+                            XMLTools.ImportNewBitmaps();
+
+                            // Plus besoin de recharger la fiche, déjà fait dans Save
+                            // recharger le fichier
+                            //pack = iDialogPackage.OpenPackage(FileName, System.IO.FileMode.Open);
+                            //Cmd = PegaseData.Instance._xmlFile.OpenXML(this.CurrentPackage.GetCurrentVersionFileStream());
+
+                            PegaseData.Instance.CurrentPackage.ClosePackage();
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Optimise (Import bitmaps) -> OK"); 
+                            }
+                        }
+                        // inversion init hors mode et mode pour gestion nouvelle saisie equation
+                        Result = PegaseData.Instance.InitHorsMode();
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise Hors Mode -> WRONG");
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise Hors Mode -> OK");
+                            }
+                        }
+                        // Si le mode Optimise est chargé, les options logiciels seront chargées après optimisation
+                        Result = PegaseData.Instance.InitOptionsLogiciels(true);
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise Options logiciels -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+	                    {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise Options logiciels -> OK"); 
+                            }
+	                    }
+
+
+                        Result = PegaseData.Instance.InitSIM();
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise SIM -> WRONG"); 
+                            }
+                            return Result;
+                        }
+                        else
+	                    {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise SIM -> OK");
+                            }
+	                    }
+
+                        Result = PegaseData.Instance.InitTracabilite();
+
+                        if (Result != XML_ERROR.NO_ERROR)
+                        {
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Initialise 'traçabilité' -> WRONG");
+                            }
+                            return Result;
+                        }
+                        else
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Initialise 'traçabilité' -> OK");
+                        }
+
+                        // Lire les données du plastron
+                        this.DataPlastron.Load();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Plastron Data -> OK"); 
+                        }
+
+                        // Lire les données des commentaire
+                        if (PegaseData.Instance.Commentaire != null)
+                        {
+                            PegaseData.Instance.Commentaire.Load();
+                            if (DefaultValues.Get().IsLogsUsed)
+                            {
+                                DefaultValues.Get().Logs.AppendLog("Comment load -> OK");
+                            }
+                        }
+
+                        PegaseData.Instance.GestionTemporisation = new GestionTempo();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Gestion tempo -> OK"); 
+                        }
+                        PegaseData.Instance.GestionModBus = new GestionModbus();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Gestion Modbus -> OK");
+                        }
+                        PegaseData.Instance.GestionLiaisonFilaire = new GestionLiaisonFilaire();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Gestion Liaison filaire -> OK");
+                        }
+                        PegaseData.Instance.GestionInfraRouge = new GestionInfraRouge();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Gestion InfraRouge -> OK");
+                        }
+                        this.Variables = this.InitVariables();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Initialise Variables -> OK"); 
+                        }
+                        pack.GetUserFileContent();
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("GetUserFileContent -> OK");
+                        }
+                        this.ReferenceFPA = pack.UserText;
+
+
+                        this.InitEquationsTxt();
+                        // Initialiser les données EasyConfig
+                        EasyConfigData.Get().Load();
+                        EasyConfigData.Get().BuildEquations();
+                        //EasyConfigData.Get();
+                        // Initialiser les données des variables simples
+                        PegaseCore.InternalDataModel.GestionVariableSimple.Instance.InitList();
+                       
+
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog("Initialise Simple Variables -> OK");
+                        }
+
+
+                        PegaseData.Instance._crc32 = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+                        if (Optimise)
+                        {
+                            // CB : JAY -> Récupérer les données des libellés sélecteurs avant de sauvegarder. Sinon, les données sont écrasées
+                            PegaseData.Instance.Save();
+                        }
+
+                        
+                    }
+                    else
+                    {
+                        if (DefaultValues.Get().IsLogsUsed)
+                        {
+                            DefaultValues.Get().Logs.AppendLog(String.Format("Try open last version xml file -> WRONG ({0})", this.CurrentPackage.GetLastVersionNumber())); 
+                        }
+                    }
+                }
+                else
+                {
+                    if (DefaultValues.Get().IsLogsUsed)
+                    {
+                    //    DefaultValues.Get().Logs.AppendLog(String.Format("Try open last version -> WRONG ({0})", Path.GetFileNameWithoutExtension(FileName))); 
+                    }
+                }
+            }
+            else
+            {
+                // le fichier n'existe pas
+                Result = XML_ERROR.ERROR_FILE_NOT_EXIST;
+            }
+            Messenger.Default.Send<CommandMessage>(new CommandMessage(null, PegaseCore.Commands.CMD_WAIT_OFF));
+
+            return Result;
+        } // endMethod: InitFromFile
+
+        private void InitEquationsTxt()
+        {
+            if (PegaseData.Instance.ParamHorsMode.EquationTxt == null)
+            {
+                Paragraph para = new Paragraph();
+                FlowDocument doc = new FlowDocument();
+                // Add the paragraph to blocks of paragraph
+                //para.Inlines.Add(new Run("<Universel_Mode>"));
+                doc.Blocks.Add(new Paragraph(new Run("<Universal_Mode>")));
+                AnalyseEquation analyse = new AnalyseEquation();
+
+                foreach (var eq in PegaseData.Instance.ParamHorsMode.Formules)
+                {
+                    if (eq.FormuleType != TypeFormule.AUTO)
+                    {
+                        foreach (var ligne in eq.Equations)
+                        {
+                            if (!String.IsNullOrEmpty(ligne.TextEquation))
+                            {
+                                string result = "";
+                                analyse.RetroFit(ligne.TextEquation, out result);
+                                doc.Blocks.Add(new Paragraph(new Run(result + ";")));
+                            }
+                        }
+                        doc.Blocks.Add(new Paragraph(new Run(" ")));
+                    }
+                }
+                // para.Inlines.Add(new Run("<\\Universel_Mode>\r\n"));
+                doc.Blocks.Add(new Paragraph(new Run("<\\Universal_Mode>")));
+                doc.Blocks.Add(new Paragraph(new Run("")));
+                foreach (ModeExploitation mode in PegaseData.Instance.OLogiciels.ModesExploitation)
+                {
+                    int nmr_mode = mode.Position + 1;
+                    string nom_mode = "<Mode_" + nmr_mode.ToString("00") + ">";
+                    string nom_mode_barre = "<\\Mode_" + nmr_mode.ToString("00") + ">";
+                    doc.Blocks.Add(new Paragraph(new Run(nom_mode)));
+                    foreach (var eq in mode.Formules)
+                    {
+                        if (eq.FormuleType != TypeFormule.AUTO)
+                        {
+                            foreach (var ligne in eq.Equations)
+                            {
+                                if (!String.IsNullOrEmpty(ligne.TextEquation))
+                                {   // convertir les noms avant affichage
+                                    string result = "";
+                                    analyse.RetroFit(ligne.TextEquation, out result);
+                                    doc.Blocks.Add(new Paragraph(new Run(result + ";")));
+                                }
+                            }
+                            doc.Blocks.Add(new Paragraph(new Run(" ")));
+                        }
+                    }
+                    doc.Blocks.Add(new Paragraph(new Run(nom_mode_barre)));
+                    doc.Blocks.Add(new Paragraph(new Run("")));
+                }
+                doc.Blocks.Add(new Paragraph(new Run("<Security_Mode>")));
+                foreach (var eq in PegaseData.Instance.OLogiciels.ModeSecurite.Formules)
+                {
+                    if (eq.FormuleType != TypeFormule.AUTO)
+                    {
+                        foreach (var ligne in eq.Equations)
+                        {
+                            if (!String.IsNullOrEmpty(ligne.TextEquation))
+                            {
+                                string result = "";
+                                analyse.RetroFit(ligne.TextEquation, out result);
+                                doc.Blocks.Add(new Paragraph(new Run(result + ";")));
+                            }
+                        }
+                        doc.Blocks.Add(new Paragraph(new Run(" ")));
+                    }
+                }
+                doc.Blocks.Add(new Paragraph(new Run("<\\Security_Mode>")))
+                    ;
+                doc.Blocks.Add(new Paragraph(new Run("<PLD_Section>")));
+                doc.Blocks.Add(new Paragraph(new Run("<\\PLD_Section>")));
+                PegaseData.Instance.ParamHorsMode.EquationTxt = doc;
+
+            }
+            else// si bloc text non null
+            {
+                List<AnalyseEquation.EquationBymode> list = new List<AnalyseEquation.EquationBymode>();
+                if (PegaseData.Instance.ParamHorsMode.EquationTxt != null)
+                {
+                    JAY.PegaseCore.AnalyseEquation analyse = new AnalyseEquation();
+                    string result;
+                    analyse.RechercheCommentaire(PegaseData.Instance.ParamHorsMode.EquationTxt, out result);
+                    list = analyse.AnalyseEquationByModeByFonction(ref result);
+                }
+                // si equation different de null 
+                if (PegaseData.Instance.ParamHorsMode.EquationTxt != null)
+                {
+                    if (PegaseData.Instance.ParamHorsMode != null && PegaseData.Instance.ParamHorsMode.Formules != null)
+                    {
+                        PegaseData.Instance.ParamHorsMode.Formules.Clear();
+                        Formule NewFormule = new Formule(32);
+                        foreach (var formule in list)
+                        {
+                            NewFormule = new Formule(32);
+                            if (formule.mode.Equals(32))
+                            {
+                                Equation equation = new Equation("Flowdocument", formule.equation, NewFormule);
+
+                                NewFormule.Equations.Add(equation);
+                                PegaseData.Instance.ParamHorsMode.Formules.Add(NewFormule);
+                            }
+                        }
+                    }
+
+                    // Modes utilisateurs
+                    if (PegaseData.Instance.OLogiciels != null && PegaseData.Instance.OLogiciels.ModesExploitation != null)
+                    {
+
+                        foreach (var mode in PegaseData.Instance.OLogiciels.ModesExploitation)
+                        {
+                            mode.Formules.Clear();
+                            Formule NewFormule = new Formule(mode.Position);
+                            foreach (var formule in list)
+                            {
+                                if (formule.mode.Equals(mode.Position))
+                                {
+                                    Equation equation = new Equation("Flowdocument", formule.equation, NewFormule);
+                                    NewFormule.Equations.Add(equation);
+                                    mode.Formules.Add(NewFormule);
+                                }
+                            }
+                        }
+                    }
+
+                    // Mode en sécurité
+                    if (PegaseData.Instance.OLogiciels != null && PegaseData.Instance.OLogiciels.ModeSecurite != null && PegaseData.Instance.OLogiciels.ModeSecurite.Formules != null)
+                    {
+                        PegaseData.Instance.OLogiciels.ModeSecurite.Formules.Clear();
+                        Formule NewFormule = new Formule(PegaseData.Instance.OLogiciels.ModeSecurite.Position);
+                        foreach (var formule in list)
+                        {
+                            if (formule.mode.Equals(PegaseData.Instance.OLogiciels.ModeSecurite.Position))
+                            {
+                                Equation equation = new Equation("Flowdocument", formule.equation, NewFormule);
+                                NewFormule.Equations.Add(equation);
+                                PegaseData.Instance.OLogiciels.ModeSecurite.Formules.Add(NewFormule);
+                            }
+                        }
+                    }
+                }// si equation different de null 
+            }
+        }
+
+        /// <summary>
+        /// Initialiser les masques utilisateurs
+        /// </summary>
+        public void InitUserMasks ( )
+        {
+            String XValue;
+
+            // Masque User Admin
+            XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_Admin", "", "", XML_ATTRIBUTE.VALUE);
+            if (XValue != null && XValue != "")
+            {
+                if (XValue.Contains("0x"))
+                {
+                    XValue = XValue.Trim().Substring(2);
+                    this.MaskUserAdmin = Convert.ToUInt32(XValue, 16);
+                }
+                else
+                {
+                    this.MaskUserAdmin = Convert.ToUInt32(XValue);
+                }
+            }
+            else
+            {
+                this.MaskUserAdmin = 0xFFFFFFFF;
+            }
+
+            // Masque User Apprentissage
+            XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_1", "", "", XML_ATTRIBUTE.VALUE);
+            if (XValue != null && XValue != "")
+            {
+                if (XValue.Contains("0x"))
+                {
+                    XValue = XValue.Trim().Substring(2);
+                    this.MaskUserApprentissage = Convert.ToUInt32(XValue, 16);
+                }
+                else
+                {
+                    this.MaskUserApprentissage = Convert.ToUInt32(XValue);
+                }
+            }
+            else
+            {
+                this.MaskUserApprentissage = 0xFFFFFFFF;
+            }
+
+            // Masque User Run ++
+            XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_2", "", "", XML_ATTRIBUTE.VALUE);
+            if (XValue != null && XValue != "")
+            {
+                if (XValue.Contains("0x"))
+                {
+                    XValue = XValue.Trim().Substring(2);
+                    this.MaskUserRunPP = Convert.ToUInt32(XValue, 16);
+                }
+                else
+                {
+                    this.MaskUserRunPP = Convert.ToUInt32(XValue);
+                }
+            }
+            else
+            {
+                this.MaskUserRunPP = 0xFFFFFFFF;
+            }
+
+            // Masque User Run
+            XValue = PegaseData.Instance.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_3", "", "", XML_ATTRIBUTE.VALUE);
+            if (XValue != null && XValue != "")
+            {
+                if (XValue.Contains("0x"))
+                {
+                    XValue = XValue.Trim().Substring(2);
+                    this.MaskUserRun = Convert.ToUInt32(XValue, 16);
+                }
+                else
+                {
+                    this.MaskUserRun = Convert.ToUInt32(XValue);
+                }
+            }
+            else
+            {
+                this.MaskUserRun = 0xFFFFFFFF;
+            }
+        } // endMethod: InitUserMask
+        
+        /// <summary>
+        /// Sauvegarder les masques utilisateurs dans le xml
+        /// </summary>
+        public void SaveUserMasks ( )
+        {
+            // Masque User Admin
+            PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_Admin", "", "", XML_ATTRIBUTE.VALUE, PegaseData.Instance.MaskUserAdmin.ToString());
+
+            // Masque User Apprentissage
+            PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_1", "", "", XML_ATTRIBUTE.VALUE, PegaseData.Instance.MaskUserApprentissage.ToString());
+
+            // Masque User Run ++
+            PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_2", "", "", XML_ATTRIBUTE.VALUE, PegaseData.Instance.MaskUserRunPP.ToString());
+
+            // Masque User Run
+            PegaseData.Instance.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/ConfigDesModesDExploitation/MasqueAccesMode/MasqueDroits_User_3", "", "", XML_ATTRIBUTE.VALUE, PegaseData.Instance.MaskUserRun.ToString());
+            
+        } // endMethod: SaveUserMasks
+
+        /// <summary>
+        /// Sauver le fichier
+        /// </summary>
+        public Int32 Save ( )
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+            
+
+            if (this.PrepareSerialize())
+            {
+                // vérifier si le CRC à changer
+                // s'il est identique, ne pas enregistrer
+                UInt32 NewCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+                PegaseData.Instance.LastFlashage.Hashage = this.CalculateHash(PegaseData.Instance.XMLFile.RootNode);
+                
+                if (NewCRC != this._crc32)
+                {
+                    String Filename = PegaseData.Instance.CurrentPackage.PackageFileName;
+                    if (!PegaseData.Instance.CurrentPackage.SaveCurrentVersion(PegaseData.Instance.XMLFile.ToString()))
+                    {
+                        Result = XML_ERROR.ERROR_FILE_NOT_FOUND;
+                        return Result;
+                    }
+                    if (PegaseData.Instance.CurrentProjectDetail != null)
+                    {
+                        PegaseData.Instance.CurrentProjectDetail.Hash = PegaseData.Instance.LastFlashage.Hashage;
+                        //BDDClient.Get().iDialogLocalData.SaveChanges(); 
+                    }
+                    PegaseData.Instance.CurrentPackage.ClosePackage();
+
+                    String NewVersion = this.CurrentPackage.GetCurrentVersionXML();
+                    UInt32 SavedCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+                    if (NewCRC != SavedCRC)
+                    {
+                        System.Windows.MessageBox.Show("Le CRC calculé avant enregistrement est différent du CRC calculé après enregistrement, des pertes de données sont possibles.");
+                    }
+                    //System.Windows.MessageBox.Show("Le fichier a été modifié, les données sont sauvegardées");
+                }
+            }
+           
+            return Result;
+        } // endMethod: SaveFilename
+
+        /// <summary>
+        /// Préparer la sérialisation des données avant sauvegarde
+        /// </summary>
+        public Boolean PrepareSerialize ()
+        {
+            Boolean Result = false;
+
+            if (PegaseData.Instance.CurrentPackage != null)
+            {
+                // Préparer les données de sauvegarde du plastron
+                if (this.DataPlastron != null)
+                {
+                    this.DataPlastron.Save();
+                }
+                // Serialiser les données de couplage
+                if (this.CouplageMTs != null)
+                {
+                    this.CouplageMTs.Save();
+                }
+                // Serialiser les données MT
+                if (this.ModuleT != null)
+                {
+                    this.ModuleT.SerialiseMT();
+                }
+
+                // Serialiser les données MO
+                if (this.MOperateur != null)
+                {
+                    this.MOperateur.SerialiseMO();
+                }
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    if (this._horsMode != null)
+                    {
+                        this.SerialiseHorsMode();
+                    }
+                    if (PegaseData.Instance.GestionPLDfonction!= null)
+                    {
+                        PegaseData.Instance.GestionPLDfonction.Save();
+                    }
+                    // reconstruire la partie Options Logicielles
+                    if (PegaseData.Instance.OLogiciels != null)
+                    {
+                        PegaseData.Instance.OLogiciels.SaveOptionsLogiciels();
+                    }
+                    if (PegaseData.Instance.GestionTemporisation != null)
+                    {
+                        PegaseData.Instance.GestionTemporisation.Save();
+                    }
+                    if(PegaseData.Instance.GestionLiaisonFilaire != null)
+                    {
+                        PegaseData.Instance.GestionLiaisonFilaire.Save();
+                    }
+                    if (PegaseData.Instance.GestionModBus != null)
+                    {
+                        PegaseData.Instance.GestionModBus.Save();
+                    }
+                    if (PegaseData.Instance.GestionInfraRouge != null)
+                    {
+                        PegaseData.Instance.GestionInfraRouge.Save();
+                    }
+                    // Enregistrer les masques utilisateurs
+                    PegaseData.Instance.SaveUserMasks();
+
+                    // Enregistrer les paramètres SBC
+                    this.SaveSBC();
+                    this.SaveTracabilite();
+
+                    //PegaseCore.EasyConfigData.Get().Load();
+
+                    // Easyconfig
+                    EasyConfigData.Get().Save();
+
+                    if (PegaseData.Instance._commentaire != null)
+                    {
+                        PegaseData.Instance.Commentaire.Save(); 
+                    }
+
+                    // Variable simple
+                    PegaseCore.InternalDataModel.GestionVariableSimple.Instance.SaveList();
+
+                    Result = true;
+                }
+            }
+
+            return Result;
+        } // endMethod: PrepareSerialize
+
+        /// <summary>
+        /// Le nom de fichier
+        /// </summary>
+        public Int32 SaveNewVersion(String xmlDoc, String MOType, String MTType)
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            PegaseData.Instance.LastFlashage.Hashage = this.CalculateHash(PegaseData.Instance.XMLFile.RootNode);
+            // vérifier si le CRC à changer
+            // s'il est identique, ne pas enregistrer
+
+            this.SaveNewFileParam();
+            String NextFileName, shortFileName;
+            shortFileName = Path.GetFileNameWithoutExtension(PegaseData.Instance.FileName);
+
+            PegaseData.Instance.CurrentPackage.ClosePackage();
+
+            //BDDClient.Get().SaveProjectNewVersion(PegaseData.Instance.IDProject, PegaseData.Instance.LastFlashage.Hashage, xmlDoc, out NextFileName, shortFileName, MOType, MTType);
+
+            //this.FileName = NextFileName;
+
+            String NewVersion = this.CurrentPackage.GetCurrentVersionXML();
+            UInt32 SavedCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+            return Result;
+        } // endMethod: SaveAs
+
+        /// <summary>
+        /// Le nom de fichier
+        /// </summary>
+        public Int32 SaveNewVersion()
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            if (this.PrepareSerialize())
+            {
+                PegaseData.Instance.LastFlashage.Hashage = this.CalculateHash(PegaseData.Instance.XMLFile.RootNode);
+                // vérifier si le CRC à changer
+                // s'il est identique, ne pas enregistrer
+                UInt32 NewCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+                if (NewCRC != this._crc32)
+                {
+                    this.SaveNewFileParam();
+
+                    String NextFileName, shortFileName;
+                    shortFileName = Path.GetFileNameWithoutExtension(PegaseData.Instance.FileName);
+
+                    PegaseData.Instance.CurrentPackage.ClosePackage();
+
+                    String MOType, MTType;
+
+                    MOType = PegaseData.Instance.MOperateur.TypeMO + " - " + PegaseData.Instance.RefErpMO;
+                    MTType = PegaseData.Instance.ModuleT.TypeMT + " - " + PegaseData.Instance.RefErpMT;
+/*
+                    if (BDDClient.Get().SaveProjectNewVersion(PegaseData.Instance.IDProject, PegaseData.Instance.LastFlashage.Hashage, PegaseData.Instance.XMLFile.ToString(), out NextFileName, shortFileName, MOType, MTType) != null)
+                    {
+                        Result = XML_ERROR.ERROR_FILE_NOT_FOUND;
+                        return Result;
+                    }
+                    */
+                    //this.FileName = NextFileName;
+
+                    String NewVersion = this.CurrentPackage.GetCurrentVersionXML();
+                    UInt32 SavedCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+                    if (NewCRC != SavedCRC)
+                    {
+                        System.Windows.MessageBox.Show("Le CRC calculé avant enregistrement est différent du CRC calculé après enregistrement, des pertes de données sont possibles.");
+                    }
+                    //System.Windows.MessageBox.Show("Le fichier a été modifié, les données sont sauvegardées dans une nouvelle version");
+                }
+            }
+
+            return Result;
+        } // endMethod: SaveAs
+
+        public MessageBoxResult SaveQuestionFile()
+        {
+            
+            if (this.PrepareSerialize())
+            {
+                PegaseData.Instance.LastFlashage.Hashage = this.CalculateHash(PegaseData.Instance.XMLFile.RootNode);
+                // vérifier si le CRC à changer
+                // s'il est identique, ne pas enregistrer
+                XMLTools.ImportNewBitmaps();
+                UInt32 NewCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+                if (NewCRC != this._crc32)
+                {
+                    MessageBoxButton buttons = MessageBoxButton.YesNoCancel;
+                    string caption = LanguageSupport.Get().GetText("DECONNEXION/SAVE"); ;
+                    string message = LanguageSupport.Get().GetToolTip("DECONNEXION/SAVE");//"Voulez-vous enregistrer les modifications apportées au project?";
+                    MessageBoxResult result = System.Windows.MessageBox.Show(message, caption, buttons);
+                    return result;
+                }
+            }
+            return MessageBoxResult.No;
+        }
+
+        public Int32 SaveAsNewFile()
+        {
+            System.Windows.Forms.SaveFileDialog SFD = new System.Windows.Forms.SaveFileDialog();
+            SFD.Filter = LanguageSupport.Get().GetText("FILTER/IDIALOG_FILTER");
+
+            if (SFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+               
+                if (!SFD.FileName.EndsWith(".idialog", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    FileName = FileName + ".idialog";
+                }
+                //forcage du crc pour permettre la sauvegarde
+                this._crc32 = 0;
+                Int32 retour = SaveNewFile(SFD.FileName);
+                return retour;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// enregistere sous
+        /// </summary>
+        public Int32 SaveNewFile(string filename)
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+            Messenger.Default.Send<CommandMessage>(new CommandMessage(null, PegaseCore.Commands.CMD_WAIT_ON));
+            if (this.PrepareSerialize())
+            {
+                PegaseData.Instance.LastFlashage.Hashage = this.CalculateHash(PegaseData.Instance.XMLFile.RootNode);
+                // vérifier si le CRC à changer
+                // s'il est identique, ne pas enregistrer
+                XMLTools.ImportNewBitmaps();
+                UInt32 NewCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+                
+                if (NewCRC != this._crc32)
+                {
+                //    XMLTools.ImportNewBitmaps();
+                    this.SaveNewFileParam();
+                    NewCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+                    if (!String.IsNullOrEmpty(filename))
+                    {
+                        if (!filename.Equals(PegaseData.Instance.FileName))
+                        {
+                            File.Copy(PegaseData.Instance.FileName, filename,true);
+                            PegaseData.Instance.FileName = filename;
+                        }
+                    }
+                    // 1.5 - Supprimer les parties du fichier ZIP
+                    iDialogPackageBase package = iDialogPackageBase.OpenPackage(PegaseData.Instance.FileName, FileMode.Open);
+                    Uri oldPartUri = new Uri("/IDialogDataPart", UriKind.Relative);
+                    package.DeletePackagePart(oldPartUri);
+                    if (package.XMLParts.Count > 0)
+                    {
+                        foreach (var item in package.XMLParts)
+                        {
+                            package.DeletePackagePart(item);
+                        }
+                    }
+
+                    // 2 - Enregistrer la partie correctement nommées pour le logiciel de production
+                    String baseFileName = "IDialogDataPart";
+
+                    baseFileName += "_00_01.xml";
+                    PegaseData.Instance.CurrentPackage.CurrentVersion = 1;
+                    package.AddXmlPackage(baseFileName, PegaseData.Instance.XMLFile.ToString());
+                    // 3 - Fermer le package
+                    package.ClosePackage();
+                    // PegaseData.Instance.InitFromFile(PegaseData.Instance.FileName, true, false);
+                    PegaseCore.InternalDataModel.GestionVariableSimple.Instance.InitList();
+                    UInt32 SavedCRC = XMLTools.CalculCRCXML(PegaseData.Instance.XMLFile.RootNode);
+
+                    if (NewCRC != SavedCRC)
+                        //if (false)
+                    {
+                        System.Windows.MessageBox.Show("Le CRC calculé avant enregistrement est différent du CRC calculé après enregistrement, des pertes de données sont possibles.");
+                    }
+                    else
+                    {
+                        this._crc32 = SavedCRC;
+                        ProjectsFile recent = new DAL.ProjectsFile();
+                        string TypeMO, TypeMT;
+                        TypeMO = PegaseData.Instance.MOperateur.TypeMO + " - " + PegaseData.Instance.RefErpMO;
+                        TypeMT = PegaseData.Instance.ModuleT.TypeMT + " - " + PegaseData.Instance.RefErpMT;
+                        recent.AddItemToList(Path.GetFileName(PegaseData.Instance.FileName), Path.GetDirectoryName(PegaseData.Instance.FileName), TypeMO, TypeMT);
+                    }
+                    //System.Windows.MessageBox.Show("Le fichier a été modifié, les données sont sauvegardées dans une nouvelle version");
+                }
+            }
+            Messenger.Default.Send<CommandMessage>(new CommandMessage(null, PegaseCore.Commands.CMD_WAIT_OFF));
+            return Result;
+        } // endMethod: SaveAs
+
+
+
+        //public ProjectDetail SaveFile( String Hash, String XML, out String NextFileName, String currentShortFileName, String MOType, String MTType)
+        //{
+        //    ProjectDetail Result = null;
+
+        //    // ouverture du package et recherche des fichier de configuration XML
+        //    iDialogPackage package = iDialogPackage.OpenPackage(currentShortFileName, FileMode.Open);
+
+
+        //    // 1.5 - trouver le nom du prochain fichier
+        //    String[] parts;
+        //    String nextShortFileName;
+        //    String ShortFileName = "";
+
+        //    parts = currentShortFileName.Split(new Char[] { '_' });
+        //    if (parts.Length == 0)
+        //    {
+        //        ShortFileName = "Default";
+        //    }
+        //    else if (parts.Length == 1)
+        //    {
+        //        ShortFileName = parts[0];
+        //    }
+        //    else
+        //    {
+        //        ShortFileName = parts[0];
+
+        //        for (int i = 1; i < parts.Length - 1; i++)
+        //        {
+        //            ShortFileName += "_" + parts[i];
+        //        }
+        //    }
+
+
+        //    nextShortFileName = String.Format("{0}_{1:0000}", ShortFileName, currentVersion);
+
+        //    // 2 - enregistrer le fichier sous une nouvelle version
+        //    NextFileName = String.Format("{0}{1}\\{2}.idialog", DefaultValues.Get().iDialogFileFolder, prj.ProjectName, nextShortFileName);
+        //    if (File.Exists(NextFileName))
+        //    {
+
+        //        nextShortFileName = String.Format("{0}_{1:0000}", ShortFileName, currentVersion);
+        //        NextFileName = String.Format("{0}{1}\\{2}.idialog", DefaultValues.Get().iDialogFileFolder, prj.ProjectName, nextShortFileName);
+        //    }
+        //    if (File.Exists(NextFileName))
+        //    {
+        //        File.Delete(NextFileName);
+        //    }
+        //    File.Copy(CurrentFilename, NextFileName);
+
+            
+           // bool retour = package.SaveCurrentVersion(XML);
+            
+
+        //    package.ClosePackage();
+
+        //    return Result;
+        //} // endMethod: SaveProjectNewVersion
+
+        /// <summary>
+        /// Sauver la date de modification du nouveau fichier
+        /// </summary>
+        public void SaveNewFileParam()
+        {
+            String Result;
+            //          DateTime datefr = DateTime.Parse(DateTime.UtcNow.ToString(), CultureInfo.CreateSpecificCulture("fr-FR"));
+            String datefr = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss", CultureInfo.CreateSpecificCulture("fr-FR"));
+            Result = String.Format("Dernière modification : {0}", datefr);
+            PegaseData.Instance.XMLFile.SetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.PLAGE_VALEUR, Result);
+            String Tracabilite = this.XMLFile.GetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.COMMENTAIRE);
+            PegaseData.Instance.XMLFile.SetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.COMMENTAIRE, "");
+        } // endMethod: SaveNewFileParam
+
+        /// <summary>
+        /// Valider les variables pour les équations
+        /// </summary>
+        public void CheckValidVariableForEquation ( )
+        {
+            // Marquer toutes les variables comme non utilisées
+            foreach (var variable in PegaseData.Instance.Variables)
+            {
+                variable.IsUsedByiDialog = false;
+                variable.IsUsedByUser = false;
+            }
+
+            // Mode universel
+            if (PegaseData.Instance.ParamHorsMode != null && PegaseData.Instance.ParamHorsMode.Formules != null)
+            {
+                foreach (var formule in PegaseData.Instance.ParamHorsMode.Formules)
+                {
+                    this.ParseFormule(formule);
+                }
+            }
+
+            // Modes utilisateurs
+            if (PegaseData.Instance.OLogiciels != null && PegaseData.Instance.OLogiciels.ModesExploitation != null)
+            {
+                foreach (var mode in PegaseData.Instance.OLogiciels.ModesExploitation)
+                {
+                    if (mode.Formules != null)
+                    {
+                        foreach (var formule in mode.Formules)
+                        {
+                            this.ParseFormule(formule);
+                        }
+                    }
+                }
+            }
+
+            // Mode en sécurité
+            if (PegaseData.Instance.OLogiciels != null && PegaseData.Instance.OLogiciels.ModeSecurite != null && PegaseData.Instance.OLogiciels.ModeSecurite.Formules != null)
+            {
+                foreach (var formule in PegaseData.Instance.OLogiciels.ModeSecurite.Formules)
+                {
+                    this.ParseFormule(formule);
+                }
+            }
+        } // endMethod: CheckValidVariableForEquation
+        
+        /// <summary>
+        /// Parser les équations d'une formule et identifier les variables utilisées
+        /// </summary>
+        private void ParseFormule ( Formule formule )
+        {
+            if (formule != null && formule.Equations != null)
+            {
+                if (formule.FormuleType == TypeFormule.USER)
+                {
+                    foreach (var equation in formule.Equations)
+                    {
+                        this.ParseEquations(equation);
+                    }
+                }
+            }
+        } // endMethod: ParseFormule
+
+        /// <summary>
+        /// Parser une équation utilisateur afin de marquer toutes les variables utilisées
+        /// </summary>
+        public void ParseEquations ( Equation equation )
+        {
+            if (!String.IsNullOrEmpty(equation.TextEquation))
+            {
+              //  String[] Tokens = equation.TextEquation.Split(new Char[] { ' ' });
+
+                //for (int i = 0; i < Tokens.Length; i++)
+                //{
+                    //var queryToken = from token in PegaseData.Instance.Variables
+                    //                 where token.Name.Contains(Tokens[i])
+                    //                 select token;
+                   // if (Tokens[i] != "")
+                  //  { 
+                    foreach (var variable in PegaseData.Instance.Variables)
+                    {
+                        if (equation.TextEquation.Contains(variable.Name))
+                        {
+                            variable.IsUsedByUser = true;
+                        }
+                //    }
+               // }
+                    //   if (queryToken.Count() > 0)
+                    //  {
+                    //     queryToken.First().IsUsedByUser = true;
+                    // }
+                }
+            }
+        } // endMethod: ParseEquations
+
+        /// <summary>
+        /// Initialiser les options logiciels
+        /// </summary>
+        public Int32 InitOptionsLogiciels ( Boolean Optimized )
+        {
+            Int32 Result;
+
+            try
+            {
+                // Détection et récupération des Options logiciels
+                if (PegaseData.Instance.XMLFile.RootNode != null)
+                {
+                    XElement OL = this.XMLFile.GetNodeByPath("XmlTechnique/ParametresApplicatifs").FirstOrDefault();
+                    XElement PAFMO = this.XMLFile.GetNodeByPath("XmlMetier/ParametresApplicatifsFixesMO").FirstOrDefault();
+                    PegaseData.Instance._ol = OptionsLogiciels.Instance;
+                    PegaseData.Instance._ol.ConstructOptionsLogiciels(OL, PAFMO);
+
+                    if (Optimized)
+                    {
+                        PegaseData.Instance._ol.InitModes();
+                        // lancer les routines d'optimisations pour rendre conforme les fiches développées à la main
+                        PegaseData.Instance._ol.OptimiseSelecteur();
+                        PegaseData.Instance._ol.OptimiseRetourInfo();
+                        PegaseData.Instance._ol.OptimiseLibelRetourInfo();
+                        PegaseData.Instance._ol.OptimiseLibelSelecteur();
+
+                        //PegaseData.Instance._ol.InitCollecConfigRetour();
+                        //PegaseData.Instance._ol.InitSelecteur();
+                        //PegaseData.Instance._ol.InitRetourInfos();
+                        PegaseData.Instance._ol.InitModes();
+                    }
+                }
+                Result = XML_ERROR.NO_ERROR;
+            }
+            catch
+            {
+                Result = XML_ERROR.ERROR_XML_INTEGRITY;
+            }
+
+            return Result;
+        } // endMethod: InitOptionsLogiciels
+
+        /// <summary>
+        /// Initialise la collection de variables embarquées
+        /// </summary>
+        public ObservableCollection<VariableE> InitVariables ( )
+        {
+            ObservableCollection<VariableE> Result = null;
+
+            FilePackage package = FilePackage.OpenPackage(DefaultValues.Get().ParamData, System.IO.FileMode.Open);
+            if (package != null)
+            {
+                Uri variablesUri = new Uri("/DefVariables.xml", UriKind.Relative);
+                System.IO.Stream stream = package.GetPartStream(variablesUri);
+
+                XDocument doc = XDocument.Load(stream);
+                var Query = from variable in doc.Root.Elements("Variable")
+                            select variable;
+
+                Result = new ObservableCollection<VariableE>();
+
+                foreach (var variable in Query)
+                {
+                    String name = variable.Attribute("name").Value;
+                    String userName = variable.Attribute("username").Value;
+                    String userNameTimo = "";
+                    if (variable.Attribute("usernameTimo") != null)
+                    {
+                         userNameTimo = variable.Attribute("usernameTimo").Value;
+                    }
+                    String associateoutput = "";
+                    if (variable.Attribute("associateoutput") != null)
+                    {
+                         associateoutput = variable.Attribute("associateoutput").Value;
+                    }
+
+                    if (userName == "")
+                    {
+                        userName = name;
+                    }
+                    String typeX = variable.Attribute("type").Value;
+                    Type type;
+                    switch (typeX)
+                    {
+                        case "Booleen":
+                            type = typeof(Boolean);
+                            break;
+                        case "Double":
+                            type = typeof(Double);
+                            break;
+                        case "UInt32":
+                            type = typeof(UInt32);
+                            break;
+                        case "UInt16":
+                            type = typeof(UInt16);
+                            break;
+                        default:
+                            type = null;
+                            break;
+                    }
+
+                    String io = variable.Attribute("IO").Value;
+                    VariableE V = new VariableE(name, userName, type, io,userNameTimo,associateoutput);
+
+                    Result.Add(V);
+                }
+                package.ClosePackage();
+            }
+
+            return Result;
+        } // endMethod: InitVariables
+
+        /// </summary>
+        public ObservableCollection<DescriptionE> InitDescriptions()
+        {
+            ObservableCollection<DescriptionE> Result = null;
+
+            FilePackage package = FilePackage.OpenPackage(DefaultValues.Get().ParamData, System.IO.FileMode.Open);
+            if (package != null)
+            {
+                Uri variablesUri = new Uri("/DefVariables.xml", UriKind.Relative);
+                System.IO.Stream stream = package.GetPartStream(variablesUri);
+
+                XDocument doc = XDocument.Load(stream);
+                var Query = from variable in doc.Root.Elements("Description")
+                            select variable;
+
+                Result = new ObservableCollection<DescriptionE>();
+
+                foreach (var variable in Query)
+                {
+                    String name = variable.Attribute("name").Value;
+                    String texte = variable.Attribute("texte").Value;
+                    String typeX = variable.Attribute("type1").Value;
+                   
+                    DescriptionE V = new DescriptionE(name,  typeX, texte);
+
+                    Result.Add(V);
+                }
+                package.ClosePackage();
+            }
+
+            return Result;
+        } // endMethod: InitVariables
+
+        /// <summary>
+        /// Initialiser les données liées à la traçabilité
+        /// </summary>
+        public Int32 InitTracabilite ( )
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+            ComponentFileName.Clear();
+            // Reference MO
+            String RefMO = this.XMLFile.GetValue("XmlTracabilite/MORef", "", "", XML_ATTRIBUTE.VALUE);
+            if (RefMO != null)
+            {
+                this.RefErpMO = RefMO;
+            }
+            else
+            {
+                this.RefErpMO = "";
+            }
+
+            // Reference MT
+            String RefMT = this.XMLFile.GetValue("XmlTracabilite/MTRef", "", "", XML_ATTRIBUTE.VALUE);
+            if (RefMT != null)
+            {
+                this.RefErpMT = RefMT;
+            }
+            else
+            {
+                this.RefErpMT = "";
+            }
+
+            // Reference SIM
+            String RefSIM = this.XMLFile.GetValue("XmlTracabilite/SIMRef", "", "", XML_ATTRIBUTE.VALUE);
+            if (RefSIM != null)
+            {
+                this.RefErpSIM = RefSIM;
+            }
+            else
+            {
+                this.RefErpSIM = "";
+            }
+            // Reference SIM
+            String RefCHARGE = this.XMLFile.GetValue("XmlTracabilite/CHARGERef", "", "", XML_ATTRIBUTE.VALUE);
+            if (RefCHARGE != null)
+            {
+                this.RefErpCHARGE = RefCHARGE;
+            }
+            else
+            {
+                this.RefErpCHARGE = "";
+            }
+            // Reference idweb
+            String RefIdWeb = this.XMLFile.GetValue("XmlTracabilite/IDWEB", "", "", XML_ATTRIBUTE.VALUE);
+            if (RefIdWeb != null)
+            {
+                this.RefIdWeb = RefIdWeb;
+            }
+            else
+            {
+                this.RefIdWeb = "";
+            }
+            String refCodeAplli = this.XMLFile.GetValue("XmlTracabilite/CODEAPPLI", "", "", XML_ATTRIBUTE.VALUE);
+            if (refCodeAplli != null)
+            {
+                this.RefCodeAppli = refCodeAplli;
+            }
+            else
+            {
+                this.RefCodeAppli = "";
+            }
+            String RefPartNumber = this.XMLFile.GetValue("XmlTracabilite/RefPartNumber", "", "", XML_ATTRIBUTE.VALUE);
+            if (refCodeAplli != null)
+            {
+                this.RefPartNumber = RefPartNumber;
+            }
+            else
+            {
+                this.RefCodeAppli = "";
+            }
+            
+            String Refprojet = this.XMLFile.GetValue("XmlTracabilite/REFPROJET", "", "", XML_ATTRIBUTE.VALUE);
+            if (Refprojet != null)
+            {
+                this.RefProjet = Refprojet;
+            }
+            else
+            {
+                this.RefProjet = "";
+            }
+            // Les différents fichiers constituant la fiche xml
+            IEnumerable<XElement> Components = this.XMLFile.GetNodeByPath("XmlTracabilite/Component");
+
+            if (Components != null)
+            {
+                foreach (XElement component in Components)
+                {
+                    if (component.Attribute(XML_ATTRIBUTE.VALUE) != null)
+                    {
+                        this.ComponentFileName.Add("/Parts/" + component.Attribute(XML_ATTRIBUTE.VALUE).Value + ".xml"); 
+                    }
+                }
+            }
+
+            // Les données concernant le dernier flashage
+
+            String Tracabilite = this.XMLFile.GetValue("XmlTracabilite/XMLFileGenerated", "", "", XML_ATTRIBUTE.VALUE);
+
+            if (Tracabilite != null && Tracabilite != "")
+            {
+
+                Regex Dateregex = new Regex("date : ([0-9/:APM ]*);");
+                MatchCollection datematches = Dateregex.Matches(Tracabilite);
+                String result = null;
+                if ((datematches != null) && (datematches.Count > 0))
+                {
+                    result = datematches[0].Groups[1].Value;
+                    try
+                    {
+                        this.LastFlashage.DateGeneration = DateTime.Parse(result, CultureInfo.CreateSpecificCulture("fr-FR"));
+                    }
+                    catch
+                    {
+                        this.LastFlashage.DateGeneration = DateTime.Parse("01/01/1970 0:00:00", CultureInfo.CreateSpecificCulture("fr-FR"));
+                    }
+                }
+                else
+                {
+                    result = "";
+                    this.LastFlashage.DateGeneration = DateTime.Parse("01/01/1970 0:00:00", CultureInfo.CreateSpecificCulture("fr-FR"));
+                }
+                 
+                Int32 DATE = 1, VERSION_IDIALOG = 5, PRODUCT_SERIAL = 7;
+                String[] Params = Tracabilite.Split(new Char[] { ';', ':' });
+                if (Params.Length > PRODUCT_SERIAL)
+                {
+                   // this.LastFlashage.DateGeneration = Convert.ToDateTime(Params[DATE] + ":" + Params[DATE + 1] + ":" + Params[DATE + 2]);
+                    this.LastFlashage.iDialogVersion = Params[VERSION_IDIALOG];
+                    this.LastFlashage.NumSerieProduct = Params[PRODUCT_SERIAL];
+                    this.LastFlashage.Hashage = this.CalculateHash(this.TechniqueRoot);
+                }
+            }
+
+            return Result;
+        } // endMethod: InitTracabilite
+
+        /// <summary>
+        /// Initialiser le MO
+        /// </summary>
+        public Int32 InitMO ( )
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            try
+            {
+                // Détection et récupération du MO
+                ObservableCollection<XElement> MOs = PegaseData.Instance.XMLFile.GetNodeByPath("XmlTechnique/IdentificationProduit/MO");
+
+                MO m = new MO(MOs.First());
+                PegaseData.Instance._mo = m;
+            }
+            catch
+            {
+                Result = XML_ERROR.ERROR_XML_INTEGRITY;
+            }
+
+            return Result;
+        } // endMethod: InitMO
+
+        /// <summary>
+        /// Initialiser les données du MT
+        /// </summary>
+        public Int32 InitMT ( )
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            try
+            {
+                // Détection et récupération des MTs
+                if (PegaseData.Instance.XMLFile != null && PegaseData.Instance.Document != null)
+                {
+                    ObservableCollection<XElement> MTs = PegaseData.Instance.XMLFile.GetNodeByPath("XmlTechnique/IdentificationProduit/MT");
+                    XElement mt = MTs.FirstOrDefault();
+
+                    if (mt != null)
+                    {
+                        PegaseData.Instance._mt = new MT(mt);
+                        PegaseData.Instance._mt.InitES();
+                    }
+                }
+            }
+            catch
+            {
+                Result = XML_ERROR.ERROR_XML_INTEGRITY;
+            }
+
+            return Result;
+        } // endMethod: InitMT
+        
+        /// <summary>
+        /// Initialiser les données du SBC à partir du XML
+        /// </summary>
+        public Int32 InitSBC ( )
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+            // Masque sur support de charge
+            UInt32 UIntValue;
+            Int32 IntValue;
+            String Value;
+
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresFixesMO/SectionSelecteurs/ConfigModeExploit/MasqueExploitSurSBC", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                UIntValue = Convert.ToUInt32(Value);
+            }
+            catch
+            {
+                UIntValue = 0;
+            }
+            this.SBC_MasqueExploitation = UIntValue;
+
+            // Masque hors support de charge
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresFixesMO/SectionSelecteurs/ConfigModeExploit/MasqueExploitHorsSBC", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                UIntValue = Convert.ToUInt32(Value);
+            }
+            catch
+            {
+                UIntValue = 0xFFFFFFFF;
+            }
+            this.SBC_MasqueExploitHors = UIntValue;
+
+            // Masque organes sur support de charge
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/MasqueOrgane", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                UIntValue = Convert.ToUInt32(Value);
+            }
+            catch
+            {
+                UIntValue = 0;
+            }
+            this.SBC_MasqueOrganOn = UIntValue;
+
+            // Commande Relais 1
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeRelais_1", "", "", XML_ATTRIBUTE.VALUE);
+            if (Value != null)
+            {
+                if (Value == "1")
+                {
+                    this.SBC_CommandeRelais1 = true;
+                }
+                else
+                {
+                    this.SBC_CommandeRelais1 = false;
+                }
+            }
+            else
+            {
+                this.SBC_CommandeRelais1 = false;
+            }
+
+            // Commande Relais 2
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeRelais_2", "", "", XML_ATTRIBUTE.VALUE);
+
+            if (Value != null)
+            {
+                if (Value == "1")
+                {
+                    this.SBC_CommandeRelais2 = true;
+                }
+                else
+                {
+                    this.SBC_CommandeRelais2 = false;
+                }
+            }
+            else
+            {
+                this.SBC_CommandeRelais2 = false;
+            }
+
+            // Commande Buzzer
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeBuzzer", "", "", XML_ATTRIBUTE.VALUE);
+            if (Value != null)
+            {
+                if (Value == "1")
+                {
+                    this.SBC_CommandeBuzzer = true;
+                }
+                else
+                {
+                    this.SBC_CommandeBuzzer = false;
+                }
+            }
+            else
+            {
+                this.SBC_CommandeBuzzer = false;
+            }
+
+            // Mode d'exploitation
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/ModeExploit", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                IntValue = Convert.ToInt32(Value);
+                if (IntValue == 255)
+                {
+                    IntValue = -1;
+                }
+            }
+            catch
+            {
+                IntValue = 0;
+            }
+            this.SBC_ModeExploit = IntValue;
+
+            // Retour Mode d'exploitation
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/RetourExploit", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                IntValue = Convert.ToInt32(Value);
+                if (IntValue == 255)
+                {
+                    IntValue = -1;
+                }
+            }
+            catch
+            {
+                IntValue = 0;
+            }
+            this.SBC_RetourModeExploit = IntValue;
+
+            // Délais passage en charge
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/DelaisPassCharge", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                IntValue = Convert.ToInt32(Value);
+            }
+            catch
+            {
+                IntValue = 0;
+            }
+            this.SBC_DelaiPassageCharge = IntValue;
+
+            // Délais relachement des relais
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/DelaisRelRelais", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                IntValue = Convert.ToInt32(Value);
+            }
+            catch
+            {
+                IntValue = 0;
+            }
+            this.SBC_DelaiRelacheRelais = IntValue;
+
+
+
+            // Options sur chargeur
+            Value = this.XMLFile.GetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/OptionSBC", "", "", XML_ATTRIBUTE.VALUE);
+            try
+            {
+                UIntValue = Convert.ToUInt32(Value);
+                if (UIntValue == 255)
+                {
+                    UIntValue = 1;
+                }
+            }
+            catch
+            {
+                UIntValue = 0;
+            }
+            this.SBC_Options = UIntValue;
+
+            // Option démarrage en charge
+            if (PegaseCore.Helper.BitHelper.ReadBit(PegaseData.Instance.SBC_Options, 0))
+            {
+                this.DemarrageEnCharge = true;
+            }
+            else
+            {
+                this.DemarrageEnCharge = false;
+            }
+
+            // Option démarrage sécurisé
+            if (PegaseCore.Helper.BitHelper.ReadBit(PegaseData.Instance.SBC_Options, 6))
+            {
+                this.DemarrageSecurise = true;
+            }
+            else
+            {
+                this.DemarrageSecurise = false;
+            }
+
+            // Initialisation de la position de la combobox
+            if (this.DemarrageEnCharge == false && this.DemarrageSecurise == false)
+            {
+                this.CurrentStartOnSBCMode = 0;
+            }
+            else if (this.DemarrageEnCharge == true && this.DemarrageSecurise == false)
+            {
+                this.CurrentStartOnSBCMode = 1;
+            }
+            else
+            {
+                this.CurrentStartOnSBCMode = 2;
+            }
+
+            
+
+            
+            return Result;
+        } // endMethod: InitSBC
+        
+
+        /// <summary>
+        /// Sauver la traçabilité
+        /// </summary>
+        public void SaveTracabilite ( )
+        {
+            // Reference MO
+            this.XMLFile.SetValue("XmlTracabilite/MORef", "", "", XML_ATTRIBUTE.VALUE, this.RefErpMO);
+
+            // Reference MT
+            this.XMLFile.SetValue("XmlTracabilite/MTRef", "", "", XML_ATTRIBUTE.VALUE, this.RefErpMT);
+
+            // Reference SIM
+            this.XMLFile.SetValue("XmlTracabilite/SIMRef", "", "", XML_ATTRIBUTE.VALUE, this.RefErpSIM);
+            // Reference CHARGE
+            this.XMLFile.SetValue("XmlTracabilite/CHARGEref", "", "", XML_ATTRIBUTE.VALUE, this.RefErpCHARGE);
+            // idweb
+            this.XMLFile.SetValue("XmlTracabilite/IDWEB", "", "", XML_ATTRIBUTE.VALUE, this.RefIdWeb);
+            // idweb
+            this.XMLFile.SetValue("XmlTracabilite/CODEAPPLI", "", "", XML_ATTRIBUTE.VALUE, this.RefCodeAppli);
+            this.XMLFile.SetValue("XmlTracabilite/RefPartNumber", "", "", XML_ATTRIBUTE.VALUE, this.RefPartNumber);
+            // ref projet
+            this.XMLFile.SetValue("XmlTracabilite/REFPROJET", "", "", XML_ATTRIBUTE.VALUE, this.RefProjet);
+
+        } // endMethod: SaveTracabilite
+
+        /// <summary>
+        /// Enregistrer les données du numéro de série de la carte SIM
+        /// </summary>
+        public UInt32 SaveNmrSerieSim(ConnectedProduct product)
+        {
+            // 1 - Vérifier l'existence de la variable
+            ObservableCollection<XElement> elements = this.XMLFile.GetNodeByPath("XmlTechnique/ParametresApplicatifs/ParametresModifiables/OptionsDispo/Options/NmrSimTraceur");
+
+            if (elements == null)
+            {
+                // 2 - Transformer la réserve en NmrSimTraceur
+                elements = this.XMLFile.GetNodeByPath("XmlTechnique/ParametresApplicatifs/ParametresModifiables/OptionsDispo/Options/Reserve");
+                if (elements.Count > 0)
+                {
+                    XElement element = elements.First();
+                    element.Attribute(XML_ATTRIBUTE.CODE).Value = "NmrSimTraceur";
+                    element.Attribute(XML_ATTRIBUTE.DESCRIPTION).Value = "Descrip_NmrSimTraceur";
+                    element.Attribute(XML_ATTRIBUTE.PLAGE_VALEUR).Value = "Plage_NmrSimTraceur";
+                    element.Attribute(XML_ATTRIBUTE.TYPE).Value = "ASCII";
+                }
+                else
+                {
+                    return ErrorCode.UNKNOWN_ERROR;
+                }
+            }
+
+            if (product.TypeProduct == ProductType.MT)
+            {
+                try
+                {
+                    
+                    this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/OptionsDispo/Options/NmrSimTraceur", "", "", XML_ATTRIBUTE.VALUE, XMLCore.Tools.ConvertFromText2ASCII(product.SerialNumberSIM));
+                    return (ErrorCode.NO_ERROR);
+                }
+                catch
+                {
+                    return (ErrorCode.UNKNOWN_ERROR);
+                }
+            }
+            else
+            {
+                try
+                {
+                    String NumSimTraceur = product.GetEEPROMASCIIValue(0x41E, 5, Hid.CIBLE_HID_e.CIBLE_EEP_0);
+                    this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/OptionsDispo/Options/NmrSimTraceur", "", "", XML_ATTRIBUTE.VALUE, XMLCore.Tools.ConvertFromText2ASCII(NumSimTraceur));
+                }
+                catch
+                {
+                    return (ErrorCode.UNKNOWN_ERROR);
+                }
+            }
+            return (ErrorCode.NO_ERROR);
+        }
+
+        /// <summary>
+        /// Enregistrer les données particulières au SBC
+        /// </summary>
+        public void SaveSBC ( )
+        {
+            String Value;
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresFixesMO/SectionSelecteurs/ConfigModeExploit/MasqueExploitSurSBC", "", "", XML_ATTRIBUTE.VALUE, this.SBC_MasqueExploitation.ToString());
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresFixesMO/SectionSelecteurs/ConfigModeExploit/MasqueExploitHorsSBC", "", "", XML_ATTRIBUTE.VALUE, this.SBC_MasqueExploitHors.ToString());
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/MasqueOrgane", "", "", XML_ATTRIBUTE.VALUE, this.SBC_MasqueOrganOn.ToString());
+
+            // Commande relais 1
+            if (this.SBC_CommandeRelais1)
+            {
+                Value = "1";
+            }
+            else
+            {
+                Value = "0";
+            }
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeRelais_1", "", "", XML_ATTRIBUTE.VALUE, Value);
+
+            // Commande relais 2
+            if (this.SBC_CommandeRelais2)
+            {
+                Value = "1";
+            }
+            else
+            {
+                Value = "0";
+            }
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeRelais_2", "", "", XML_ATTRIBUTE.VALUE, Value);
+
+            // Commande buzzer
+            if (this.SBC_CommandeBuzzer)
+            {
+                Value = "1";
+            }
+            else
+            {
+                Value = "0";
+            }
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/CdeBuzzer", "", "", XML_ATTRIBUTE.VALUE, Value);
+
+            // Mode d'exploitation
+            if (this.SBC_ModeExploit > -1)
+            {
+                this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/ModeExploit", "", "", XML_ATTRIBUTE.VALUE, this.SBC_ModeExploit.ToString());
+            }
+            else
+            {
+                this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/ModeExploit", "", "", XML_ATTRIBUTE.VALUE, "-1");
+            }
+
+            // Retour mode d'exploitation
+            if (this.SBC_RetourModeExploit > -1)
+            {
+                this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/RetourExploit", "", "", XML_ATTRIBUTE.VALUE, this.SBC_RetourModeExploit.ToString()); 
+            }
+            else
+            {
+                this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/RetourExploit", "", "", XML_ATTRIBUTE.VALUE, "255"); 
+            }
+
+            // Délais passage en charge
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/DelaisPassCharge", "", "", XML_ATTRIBUTE.VALUE, this.SBC_DelaiPassageCharge.ToString());
+
+            // Délais relachement des relais
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/DelaisRelRelais", "", "", XML_ATTRIBUTE.VALUE, this.SBC_DelaiRelacheRelais.ToString());
+
+            // Options sur chargeur
+            this.XMLFile.SetValue("XmlTechnique/ParametresApplicatifs/ParametresModifiables/GestionSupportDeCharge/OptionSBC", "", "", XML_ATTRIBUTE.VALUE, this.SBC_Options.ToString());
+        } // endMethod: SaveSBC
+
+        /// <summary>
+        /// initialiser les données Hors Mode
+        /// </summary>
+        private Int32 InitHorsMode()
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            try
+            {
+                if (PegaseData.Instance.NavMetier != null)
+                {
+                    ObservableCollection<XElement> XHorsMode = PegaseData.Instance.NavMetier.GetNodeByPath("HorsMode");
+                    if (XHorsMode != null)
+                    {
+                        PegaseData.Instance._horsMode = new HorsMode(XHorsMode.First());
+                    }
+                    else
+                    {
+                        Result = XML_ERROR.ERROR_XML_INTEGRITY;
+                    }
+                }
+            }
+            catch
+            {
+                Result = XML_ERROR.ERROR_XML_INTEGRITY;
+            }
+
+            return Result;
+        } // endMethod: InitHorsMode
+
+
+        public void InitMacroFonction()
+        {
+            // ObservableCollection<MacroFonction> CollecMacro = new ObservableCollection<MacroFonction>();
+
+            FilePackage package = FilePackage.OpenPackage(DefaultValues.Get().ParamData, System.IO.FileMode.Open);
+            if (package != null)
+            {
+                Uri variablesUri = new Uri("/Macrolib.xml", UriKind.Relative);
+                System.IO.Stream stream = package.GetPartStream(variablesUri);
+
+                XDocument doc = XDocument.Load(stream);
+                var Query = from variable in doc.Root.Elements("groupe") //("groupe")
+                            select variable;
+
+                foreach (var macro in Query)
+                {
+                    string Name = macro.Attribute("MacroName").Value;
+                    string Prototype = macro.Attribute("Protoptype").Value;
+                    string sectionvalid = macro.Attribute("Sectionvalid").Value;
+                    string Analyse = macro.Attribute("Analyse").Value;
+                    int Nbparams = Int32.Parse(macro.Attribute("Nbparam").Value); 
+                    string aliastexte = macro.Attribute("texte").Value;
+                    bool modeinterprete = false;
+                    try
+                    {
+                        if (macro.Attribute("modeinterprete")!= null)
+                        {
+                            modeinterprete = Convert.ToBoolean(macro.Attribute("modeinterprete").Value);
+                        }
+                        
+                    }
+                    catch
+                    { }
+                    var equation = from variable in macro.Elements("Module")
+                                   select variable;
+                    ObservableCollection<string> listeequation = new ObservableCollection<string>();
+                    foreach (var module in equation)
+                    {
+                        String equa = module.Attribute("MnemoLogique").Value;
+                        if (!String.IsNullOrEmpty(equa))
+                        {
+                            listeequation.Add(equa);
+                        }
+                    }
+                    var parms = from variable in macro.Attributes()
+                                where variable.Name.ToString().Contains("Param")
+                                select variable;
+                    Dictionary<int, string> parametre_eq = new Dictionary<int, string>();
+                    foreach (var paramametre in parms)
+                    {
+
+                        int numero = Int32.Parse(paramametre.Name.ToString().Remove(0,5)); 
+                        parametre_eq.Add(numero, paramametre.Value);
+                    }
+                    //creation de la collection des macro
+                    MacroFonction macroitem = new MacroFonction();
+                    macroitem.Name = Name;
+                    macroitem.Prototype = Prototype;
+                    macroitem.Analyse = Analyse;
+                    macroitem.Equation = listeequation;
+                    macroitem.NbParams = Nbparams;
+                    macroitem.Params_eq = parametre_eq;
+                    macroitem.AliasTexte = aliastexte;
+                    macroitem.ModeInterprete = modeinterprete;
+                    macroitem.SectionValid = sectionvalid;
+                    CollecMacro.Add(macroitem);
+                    ListMacroName.Add(Name);
+                }
+                package.ClosePackage();
+            }
+        }
+
+        public void InitReadInfoFile()
+        {
+            FilePackage package = FilePackage.OpenPackage(DefaultValues.Get().ParamData, System.IO.FileMode.Open);
+            if (package != null)
+            {
+                Uri variablesUri = new Uri("/ReadInfo.xml", UriKind.Relative);
+                System.IO.Stream stream = package.GetPartStream(variablesUri);
+
+                XDocument doc = XDocument.Load(stream);
+                var QueryC = from variable in doc.Root.Elements("Controle").Elements("data")
+                            select variable;
+                var QueryA = from variable in doc.Root.Elements("Affichage").Elements("info")
+                             select variable;
+                var QueryI = from variable in doc.Root.Elements("Interpretation").Elements("zone")
+                             select variable;
+
+                ReadInfoData.Controles = new Dictionary<string, string>();
+                ReadInfoData.Affichage = new List<infoAffichage>();
+                ReadInfoData.interpretations = new List<string>();
+                foreach (var ctrl in QueryC)
+                {
+                    string valeur = ctrl.Attribute("valeur").Value;
+                    string adresse = ctrl.Attribute("adresse").Value;
+                    ReadInfoData.Controles.Add(valeur, adresse);
+                }
+                foreach (var ctrl in QueryA)
+                {
+                    infoAffichage addinfo = new infoAffichage();
+                    addinfo.valeur = ctrl.Attribute("valeur").Value;
+                    addinfo.adresse = ctrl.Attribute("adresse").Value;
+                    addinfo.longueur = ctrl.Attribute("longueur").Value;
+                    addinfo.plage = ctrl.Attribute("plage").Value;
+                    addinfo.module = ctrl.Attribute("module").Value;
+                    ReadInfoData.Affichage.Add(addinfo);
+                }
+                foreach (var ctrl in QueryI)
+                {
+                    string zone = ctrl.Attribute("valeur").Value;
+                    ReadInfoData.interpretations.Add(zone);
+                }
+                package.ClosePackage();
+            }
+            
+        }
+
+        /// <summary>
+        /// Initialiser les données de la SIM
+        /// </summary>
+        public Int32 InitSIM()
+        {
+            Int32 Result = XML_ERROR.NO_ERROR;
+
+            try
+            {
+                // initialiser les données
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    IEnumerable<XElement> sims = PegaseData.Instance.XMLFile.GetNodeByPath("XmlTechnique/IdentificationSIM");
+                    if (sims != null)
+                    {
+                        PegaseData.Instance._carteSIM = new SIM(sims.First());
+                    }
+                }
+            }
+            catch
+            {
+                Result = XML_ERROR.ERROR_XML_INTEGRITY;
+            }
+
+            return Result;
+        } // endMethod: InitSIM
+
+        /// <summary>
+        /// Fermer le fichier en cours d'utilisation
+        /// </summary>
+        public void CloseFile ( )
+        {
+            if (PegaseData.Instance.CurrentPackage != null)
+            {
+                PegaseData.Instance.CurrentPackage.ClosePackage();
+                PegaseData.Instance.FileName = "";
+
+                // nettoyer la mémoire proprement
+
+                // carte SIM
+                if (PegaseData.Instance.CarteSIM != null)
+                {
+                    PegaseData.Instance.CarteSIM = null;
+                }
+
+                // options logicielles
+                if (PegaseData.Instance.OLogiciels != null)
+                {
+                    PegaseData.Instance.OLogiciels.Dispose();
+                    PegaseData.Instance.OLogiciels = null;
+                }
+
+                // Données hors mode
+                if (PegaseData.Instance.ParamHorsMode != null)
+                {
+                    PegaseData.Instance.ParamHorsMode.Dispose();
+                    PegaseData.Instance.ParamHorsMode = null;
+                }
+                if (PegaseData.Instance._couplageMTs != null)
+                {
+                    PegaseData.Instance._couplageMTs = null;
+
+                }
+
+                // le MO
+                if (PegaseData.Instance._mo != null)
+	            {
+                    this._mo.Dispose();
+                    PegaseData.Instance._mo = null; 
+	            }
+            
+                //  MT
+                if (PegaseData.Instance._mt != null)
+                {
+                    PegaseData.Instance._mt.Dispose();
+                    PegaseData.Instance._mt = null;
+                }
+
+                // Navigation dans le fichier XML
+                if (PegaseData.Instance._navMetier != null)
+                {
+                    PegaseData.Instance._navMetier.Close();
+                    PegaseData.Instance._navMetier = null; 
+                }
+
+                if (PegaseData.Instance._navTechnique != null)
+                {
+                    PegaseData.Instance._navTechnique.Close();
+                    PegaseData.Instance._navTechnique = null; 
+                }
+
+                if (PegaseData.Instance.XMLFile != null)
+                {
+                    PegaseData.Instance.XMLFile.Close();
+                    PegaseData.Instance._xmlFile = null;
+                }
+                PegaseData.Instance._refCustomer = null;
+                PegaseData.Instance._refCompany = null;
+                PegaseData.Instance._refCustomerCode = null;
+                PegaseData.Instance._refPartNumber = null;
+                PegaseData.Instance._refDate = DateTime.Now;
+                PegaseData.Instance._refIndice = null;
+                PegaseData.Instance._dataPlastron = null;
+                PegaseData.Instance._commentaire = null;
+            }
+        } // endMethod: CloseFile
+
+        #endregion
+
+        // Messages
+        #region Messages
+
+        #endregion
+
+    } // endClass: PegaseData
+}

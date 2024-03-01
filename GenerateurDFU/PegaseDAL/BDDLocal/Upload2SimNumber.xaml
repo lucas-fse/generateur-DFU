@@ -1,0 +1,27 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="JAY.Upload2SimNumber"
+	x:Name="Window"
+	Title="Upload2SimNumber"
+	Width="542" Height="154"
+    Closed="Window_Closed">
+    
+	<Grid x:Name="LayoutRoot">
+		<Rectangle x:Name="Fond" Margin="0">
+			<Rectangle.Fill>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="DarkOrange" Offset="1"/>
+					<GradientStop Color="White"/>
+					<GradientStop Color="#FFFFEA65" Offset="0.3"/>
+				</LinearGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		<Image x:Name="Icon" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="8,8,0,0" Source="icone edialog 100x100.png" d:LayoutOverrides="VerticalAlignment"/>
+		<Button Click="Button_Click" Content="{Binding LibelUpload}" HorizontalAlignment="Right" Height="27" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="126" Style="{DynamicResource ButtonStyleIDialog}" Command="{Binding CommandUpload}"/>
+		<TextBlock Margin="112,17,8,0" TextWrapping="Wrap" Text="{Binding Message}" VerticalAlignment="Top"/>
+		<TextBox Margin="165.453,41.276,0,0" TextWrapping="Wrap" Text="{Binding CurrentIDSim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Width="87.553" MaxLength="5"/>
+		<TextBlock HorizontalAlignment="Left" Margin="112,44.276,0,0" TextWrapping="Wrap" Text="{Binding LibelIDSim}" d:LayoutOverrides="Height" FontSize="16" FontWeight="Bold" VerticalAlignment="Top"/>
+	</Grid>
+</Window>

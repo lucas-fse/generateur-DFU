@@ -1,0 +1,17 @@
+﻿.cercle {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    background: lightgrey;
+    font-size:40px;
+
+}
+.elementuser {
+    padding-left: 5px;
+    padding-top: 5px;
+    white-space: normal;
+}
+
+.elementuser td {
+    padding-right: 5px
+}
