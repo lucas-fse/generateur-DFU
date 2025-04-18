@@ -292,5 +292,55 @@ namespace GenerateurDFUSafir.Models.DAL
         public byte ZREL1OK_0 { get; set; }
         public byte ZREL2OK_0 { get; set; }
         public int ROWID { get; set; }
+        public int UPDTICK_0 { get; set; }
+        public string SQHTYP_0 { get; set; }
+        public string SOHTYP_0 { get; set; }
+        public string SSTENTCOD_0 { get; set; }
+        public short ADRVAL_0 { get; set; }
+        public string SFISSTCOD_0 { get; set; }
+        public string SFISSTCOD_1 { get; set; }
+        public string SFISSTCOD_2 { get; set; }
+        public string SFISSTCOD_3 { get; set; }
+        public string SFISSTCOD_4 { get; set; }
+        public string SFISSTCOD_5 { get; set; }
+        public string SFISSTCOD_6 { get; set; }
+        public string SFISSTCOD_7 { get; set; }
+        public string SFISSTCOD_8 { get; set; }
+        public string SFISSTCOD_9 { get; set; }
+        public string SFISSTCOD_10 { get; set; }
+        public string SFISSTCOD_11 { get; set; }
+        public string SFISSTCOD_12 { get; set; }
+        public string SFISSTCOD_13 { get; set; }
+        public string SFISSTCOD_14 { get; set; }
+        public string SFISSTCOD_15 { get; set; }
+        public string SFISSTCOD_16 { get; set; }
+        public string SFISSTCOD_17 { get; set; }
+        public string SFISSTCOD_18 { get; set; }
+        public string SFISSTCOD_19 { get; set; }
+        public string SFISSTCOD_20 { get; set; }
+        public string SFISSTCOD_21 { get; set; }
+        public string SFISSTCOD_22 { get; set; }
+        public string SFISSTCOD_23 { get; set; }
+        public string SFISSTCOD_24 { get; set; }
+        public string SFISSTCOD_25 { get; set; }
+        public string SFISSTCOD_26 { get; set; }
+        public string SFISSTCOD_27 { get; set; }
+        public string SFISSTCOD_28 { get; set; }
+        public string SFISSTCOD_29 { get; set; }
+        public System.DateTime CREDATTIM_0 { get; set; }
+        public System.DateTime UPDDATTIM_0 { get; set; }
+        public byte[] AUUID_0 { get; set; }
+        public short REVNUM_0 { get; set; }
+        public short SQHCFMFLG_0 { get; set; }
+        public byte X4SQHENVAUT_0 { get; set; }
+        public string SQHNUMEND_0 { get; set; }
+        public string X4SQHEXP_0 { get; set; }
+        public string ZDEVDUP_0 { get; set; }
+        public System.DateTime SQHVALDAT_0 { get; set; }
+        public string X4SQHDEST_0 { get; set; }
+        public string X4RGOP_0 { get; set; }
+        public byte X4DEBCTLCON_0 { get; set; }
+        public string X4NUMDEMAND_0 { get; set; }
+        public string X4NUMINT_0 { get; set; }
     }
 }

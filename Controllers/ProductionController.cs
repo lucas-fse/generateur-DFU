@@ -953,6 +953,7 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
+            bool ChargeOfPlanifie = false;
             if (id == null)
             {
                 return RedirectToAction("IndexOFOperateur", "Production");
@@ -963,11 +964,13 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ViewData["PopUpOf"] = "false";
                     ViewData["OfTrouve"] = "";
+                    ChargeOfPlanifie = false;
                 }
                 else if (viewAction == 1)
                 {
                     ViewData["PopUpOf"] = "true";
                     ViewData["OfTrouve"] = "";
+                    ChargeOfPlanifie = true;
                 }
                 else if (viewAction == 2)
                 {
@@ -992,7 +995,7 @@ namespace GenerateurDFUSafir.Controllers
 				PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
                 
-                ope.initOfList((int) pole, ofCherche);
+                ope.initOfList((int) pole, ofCherche,ChargeOfPlanifie);
                 return View(ope);
             }
         }
@@ -1000,7 +1003,6 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("gestionOf")]
         public ActionResult gestionOfPopup(DataOperateurProd ope)
         {
-
             // description des diferent formulaire de la page GestionOf
             // bouton de of non trite par pole  
             //name="cat" value = 2 bidir 3 mono 4 test 1 tous
@@ -1040,6 +1042,7 @@ namespace GenerateurDFUSafir.Controllers
                     }
                     else if (Ilotid != 5 && Ilotid != 6)
                     {
+                        // ilot1 affiched'une popup
                         viewAction = 1;
                     }
                     // planification des of
@@ -1049,6 +1052,7 @@ namespace GenerateurDFUSafir.Controllers
                     }
                     else
                     {
+                        // (Ilotid == 5) print ZEN pour etiquette
                         viewAction = 5;
                     }
                 }
@@ -1084,7 +1088,7 @@ namespace GenerateurDFUSafir.Controllers
             {
 
             }
-            if (viewAction ==1)
+            if (viewAction ==1) // affichage de l'of plannifie
             {
                 OfX3 data = new OfX3();
                 OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == (long)id_demande).First();
@@ -1479,7 +1483,7 @@ namespace GenerateurDFUSafir.Controllers
                     writer.WriteLine(string.Concat(StructLabel.OF1, "=\"", op.MFGNUM_0, "\""));
                     if (op.SERNUM == 3)
                     {
-                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1+ (i + 1).ToString("00") , "=\"", numserie, "\""));
+                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1 , "=\"", numserie+ (i + 1).ToString("00"), "\""));
                     }
                     if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                     {
@@ -1504,10 +1508,10 @@ namespace GenerateurDFUSafir.Controllers
                     {
                         writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT2, "=\"", op.ITMREF_0, "\""));
                         writer.WriteLine(string.Concat(StructLabel.OF2, "=\"", op.MFGNUM_0, "\""));
-                        //if (op.SERNUM == 3)
-                        //{
-                        //    writer.WriteLine(string.Concat(StructLabel.NMRSERIE1 + (i + 2).ToString("00"), "=\"", numserie, "\""));
-                        //}   
+                        if (op.SERNUM == 3)
+                        {
+                            writer.WriteLine(string.Concat(StructLabel.NMRSERIE2 , "=\"", numserie + (i + 2).ToString("00"), "\""));
+                        }
                         if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                         {
                             writer.WriteLine(string.Concat(StructLabel.CDE2, "=\"", op.VCRNUMORI_0, "\""));

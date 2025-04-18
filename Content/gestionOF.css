@@ -1,17 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.body-content 
-{
-    padding: 0;
-}
-
-body {
-  width: 85%;
-  height: auto;
-  margin: 0 auto;
-  font-family: 'Roboto';
-  font-size: 17px;
-}
 
 @media all and (max-width: 800px) {
     body {
@@ -28,6 +16,11 @@ body {
 .body-content { /* permet de gerer les conflits avec les autres css car il y avait une marge gauche qui décalé le site */
     margin-left: 0;
     width: 100%; /* permet aussi de gerer les conflits car la largeur ne prenait pas 100% */
+    font-family: 'Roboto';
+    font-size: 17px;
+    height: auto;
+    margin: 0 auto;
+    width:85%;
 }
 
 /* a enlever */

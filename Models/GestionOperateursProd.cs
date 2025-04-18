@@ -48,7 +48,16 @@ namespace GenerateurDFUSafir.Models
             result.Prenom = Operateur.PRENOM;
             result.Animateur = Operateur.ANIMATEUR;
             result.Initial = Operateur.INITIAL.Trim();
-            result.Photo = "/operateurs"+Operateur.PATHB;
+            string photoRelatif = "/operateurs" + Operateur.PATHB;
+            string photoPhsyique = HttpContext.Current.Server.MapPath(photoRelatif);
+            if (System.IO.File.Exists(photoPhsyique))
+            {
+                result.Photo = photoRelatif;
+            }
+            else
+            {
+                result.Photo = "/operateurs/OperateursA/default.bmp";
+            }
             try
             {
                 if (Operateur.POLE != null)
@@ -181,8 +190,18 @@ namespace GenerateurDFUSafir.Models
                 dataOperateur.Prenom = operateur.PRENOM;
                 dataOperateur.Animateur = operateur.ANIMATEUR;
                 dataOperateur.Initial = operateur.INITIAL.Trim();
-                dataOperateur.Photo = "/operateurs"+operateur.PATHB;
-                DataOperateurs.Add(dataOperateur);
+                //génération de la récupération de la photo de l'utilisateur, si celle-ci n'existe pas, mettre le lien vers une photo générique
+                string photoRelatif = "/operateurs" + operateur.PATHB;
+                string photoPhysique = HttpContext.Current.Server.MapPath(photoRelatif);
+                if (System.IO.File.Exists(photoPhysique))
+                {
+                    dataOperateur.Photo = photoRelatif;
+                }
+                else
+                {
+                    dataOperateur.Photo = "/operateurs/OperateursA/default.bmp";
+                }
+                    DataOperateurs.Add(dataOperateur);
                 dataOperateur.OfEncours = new List<OF_PROD_TRAITE>();
                 DateTime nowmoins1 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddDays(-1);
                 foreach (var of in OfTraite)

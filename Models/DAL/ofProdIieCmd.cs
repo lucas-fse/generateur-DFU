@@ -134,6 +134,83 @@ namespace GenerateurDFUSafir.Models.DAL
 			        on ZFPA.ZFPCONTROLM_0 = [APLSTD].LANNUM_0
 			        and [APLSTD].LANCHP_0 ='6101' and [APLSTD].LAN_0 = 'FRA' 
 					where(";
+		string of1bis = @" SELECT
+					MFGHEAD.MFGNUM_0,
+					[MFGITM].ITMREF_0,
+					[MFGITM].VCRNUMORI_0,
+					[MFGITM].MFGDES_0,
+					SORDERQ.SHIDAT_0, -- date expede commande
+					
+					MFGHEAD.[STRDAT_0],-- date debut of
+					MFGHEAD.EXTQTY_0,
+					MFGHEAD.[XDATREFEND_0], -- date de fin
+					MFGHEAD.XTYPOF_0, -- SAV
+					
+					
+					MFGHEAD.MFGTRKFLG_0,
+					MFGHEAD.ALLSTA_0,					
+
+									
+					
+					[MFGITM].MFGNUM_0,
+					[MFGITM].MFGLIN_0,
+					[MFGITM].ITMREF_0,
+					[MFGITM].ITMTYP_0,
+					[MFGITM].MFGDES_0,
+					[MFGITM].[UOMEXTQTY_0],
+					MFGITM.MFGSTA_0,
+
+					
+	
+					[ITMFACILIT].DEFLOC_5,
+
+					
+
+					[SORDERQ].SOHNUM_0,
+					SORDERQ.SHIDAT_0,
+					[SORDERQ].SOPLIN_0,
+					[SORDERQ].SOQSEQ_0,
+					[SORDERQ].CPY_0,
+					[SORDERQ].SOHCAT_0,
+					[SORDERQ].SALFCY_0,
+					[SORDERQ].BPCORD_0,
+					[SORDERQ].BPAADD_0,
+					SORDER.YSTC_0,
+
+					[MFGOPE].EXTWST_0 AS EXTWST_0,
+					
+
+				  FROM[CLTPROD].[MFGHEAD][MFGHEAD]
+
+
+
+				  inner join[CLTPROD].[MFGITM][MFGITM]
+				  on[MFGHEAD].MFGNUM_0 = [MFGITM].MFGNUM_0
+
+	
+				  inner join[CLTPROD].[ITMFACILIT][ITMFACILIT]
+				  on[MFGITM].ITMREF_0 = [ITMFACILIT].ITMREF_0 and
+					[MFGITM].MFGFCY_0 = [ITMFACILIT].STOFCY_0
+
+				  left join[CLTPROD].[SORDERQ][SORDERQ]
+				  on[MFGITM].VCRNUMORI_0 = [SORDERQ].SOHNUM_0 and
+					[MFGITM].VCRLINORI_0 = [SORDERQ].SOPLIN_0
+
+				 
+
+				  
+
+				 
+					
+					left join [CLTPROD].[MFGOPE] [MFGOPE]
+				   on [MFGOPE].MFGNUM_0 = [MFGITM].MFGNUM_0 
+
+					
+
+                   
+
+                     
+					where(";
 		string of2 = @" )";
 		string of3=@"
 		order by SORDERQ.SHIDAT_0,MFGHEAD.[STRDAT_0],[MFGITM].VCRNUMORI_0";
@@ -170,6 +247,67 @@ namespace GenerateurDFUSafir.Models.DAL
 			RequeteOF(ref table1, "", statusof);
 
 		}
+		public void RequeteOFBis(ref DataTable table1,string listeof ,string statusof)
+		{
+			RequeteOF(ref table1, listeof, statusof);
+
+		}
+		public void RequeteOFbis(ref DataTable table1, string listof, string statusof)
+		{
+			bool result = false;
+			string of = "";
+			if (statusof.Contains("EDITE"))
+			{
+				// of en attente edité ou (en cours et quantite non totalement termine)
+				// 1 en attente 3 edit 4 en cours 5 soldé
+				//of = "MFGHEAD.MFGTRKFLG_0 = '3' or MFGHEAD.MFGTRKFLG_0 = '1' or (MFGHEAD.MFGTRKFLG_0 = '4' and MFGITM.RMNEXTQTY_0 != '0')";
+				of = "MFGHEAD.MFGTRKFLG_0 = '3'  or (MFGHEAD.MFGTRKFLG_0 = '4' and MFGITM.RMNEXTQTY_0 != '0')";
+			}
+			if (statusof.Contains("ENCOURS"))
+			{
+				if (!string.IsNullOrEmpty(of))
+				{
+					of += " or ";
+				}
+				of += "MFGHEAD.MFGTRKFLG_0 = '4'";
+			}
+			if (statusof.Contains("SOLDE"))
+			{
+				if (!string.IsNullOrEmpty(of))
+				{
+					of += " or ";
+				}
+				of += "MFGHEAD.MFGTRKFLG_0 = '5'";
+			}
+			of = of1 + of + of2;
+			if (!string.IsNullOrWhiteSpace(listof))
+			{
+				of += "and MFGHEAD.MFGNUM_0 IN (" + listof + ")";
+			}
+			of = of + of3;
+			string connectionString = Resource1.ERPString;
+			try
+			{
+				SqlConnection db1 = null;
+				SqlCommand RequeteSql = new SqlCommand();
+				db1 = new SqlConnection(connectionString);
+				RequeteSql.Connection = db1;
+				RequeteSql.CommandText = of;
+				RequeteSql.CommandTimeout = 60;
+				db1.Open();
+
+				SqlDataReader monReader = RequeteSql.ExecuteReader();
+				table1 = new DataTable();
+				table1.Load(monReader);
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				result = false;
+			}
+		}
+
 		public void RequeteOF(ref DataTable table1, string listof, string statusof)
 		{
 			bool result = false;
@@ -200,7 +338,7 @@ namespace GenerateurDFUSafir.Models.DAL
 			of = of1 + of + of2;
 			if (!string.IsNullOrWhiteSpace(listof))
             {
-				of += "and MFGHEAD.MFGNUM_0 IN (" + listof+ ")";
+				of += "and MFGHEAD.MFGNUM_0 IN ('" + listof+ "')";
             }
 			of= of +of3;
 			string connectionString = Resource1.ERPString;

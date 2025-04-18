@@ -1,104 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Saira:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@800&family=Chivo+Mono:wght@800&display=swap');
+/* --- CSS inclus ici pour la démonstration --- */
 html, body {
     margin: 0;
     padding: 0;
-    font-family: Helvetica;
-
-    background-color: #222222;
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
-.main {
-
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4px;
-    width: 110vw;
-    height: 100vh;
-
-    transform: translateX(-5vw);
+.body-content {
+    padding: 0;
     background-color: black;
+    font-family: inherit;
+}
 
-    overflow: hidden;
-
+.sections-container {
+    height: 100vh;
+    width: 100vw;
+    transition: transform 0.5s ease-in-out;
 }
 
 .section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    opacity: 1;
+    position: relative;
+}
+
+/* Couleurs de fond des sections */
+.section-1 {
+    background-color: rgba(255, 100, 0, 0.533);
+    color: white;
+}
+
+.section-2 {
+    background-color: #8F8F8F88;
+    color: white;
+}
+
+.section-3 {
+    background-color: #FF640077;
+    color: white;
+}
+
+.section-4 {
+    background-color: #8F8F8F88;
+    color: white;
+}
+
+/* Conteneur général du contenu de chaque section */
+.content {
+    width: 80%;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Nouveau conteneur pour la zone de gauche */
+.left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre verticalement */
+    align-items: center; /* Centre horizontalement si besoin */
+    position: relative;
+}
+
+    /* Style de l'image dans la zone de gauche */
+    .left-content img {
+
+        width: 450px;
+        opacity: 0.2;
+        pointer-events: none;
+        /* Pour centrer l'image dans la zone left-content, on utilise margin auto sur l'axe vertical */
+        /* Ici, la propriété flex avec justify-content:center assure déjà le centrage vertical */
+    }
+
+/* Conteneur pour la partie droite */
+.right-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 10px;
-    width: 25%;
-    flex-grow: 1;
-    margin: 0 6px;
-    background-color: #FF640088;
-
-    height: 150%;
-    transform: translateY(-20%) rotate(10deg) ;
-    transition: 0.5s;
-    cursor: pointer;
-
-    overflow: hidden;
-    opacity: 100%;
-
-
-}
-
-.section:nth-child(2n) {
-    background-color: #8F8F8F88;
-}
-
-.section-open:nth-child(2n+1) {
-    background-color: #FF640077;
-}
-
-.section-open:nth-child(2n) {
-
-    background-color: #8F8F8F77;
-}
-
-.section-open {
-    width: 60%;
-    flex-grow: 3;
-}
-
-.section:nth-child(2n) > h1 {
-    margin-bottom: 70px;
 }
 
 .infossup {
-
-    opacity: 0%;
     transition: 0.5s;
-
     z-index: 5;
-
     min-width: 500px;
     max-width: 500px;
-
     color: white;
     text-align: justify;
     font-weight: bold;
-
     font-size: 14pt;
-
 }
 
 .subtitle {
     align-self: center;
     text-align: center;
     font-weight: 700;
-    font-size: 24pt;
+    font-size: 30pt;
     font-variant: small-caps;
     color: #ffffffee;
-}
-
-.section-open .infossup {
-    display: block;
-    opacity: 100%;
-
 }
 
 .infossup .title {
@@ -118,64 +129,20 @@ html, body {
 }
 
 .value {
-    font-size: 25pt;
-    font-family: 'Azeret Mono', monospace;
     font-variant-numeric: slashed-zero;
-}
-
-.content {
-    width: 80%;
-    height: 50vh;
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-
-
-}
-
-
-
-.section > * {
-    transform: rotate(-10deg) translateY(20%);
-}
-
-.section img {
-
-    position: absolute;
-    width: 250px;
-    opacity: 20%;
-    fill: white;
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-
 }
 
 .content h1 {
     opacity: 95%;
-    margin: 0;
-    font-size: 55pt;
+    margin-bottom: 10px;
+    font-size: 20pt;
     font-weight: 800;
     text-align: center;
     color: white;
     font-family: 'Azeret Mono', monospace;
     font-variant-numeric: slashed-zero;
-    z-index: 10;
     white-space: nowrap;
 }
-
-.section:nth-child(2n) img {
-    margin-bottom: 100px ;
-}
-
-.section:nth-child(2n+1) img {
-    margin-top: 100px ;
-}
-
-
 
 .goal-box {
     width: 500px;
@@ -184,42 +151,44 @@ html, body {
     border: 3px solid white;
     opacity: 80%;
     padding: 3px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
 }
 
 .goal {
     display: flex;
-    align-self: center;
+    align-items: center;
+    height: 100%;
     width: 0%;
-    max-width: 0%;
-    height: 20px;
-    transform: translate(-1px, -1px);
-    border: none;
     background-color: white;
-    color: white;
-    transition: 5s;
+    color: black;
+    transition: width 1.5s ease-in-out;
+    border-radius: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
 }
+
+    .goal > p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: bold;
+        opacity: 0.9;
+    }
 
 .section-open .goal {
     width: 100%;
     max-width: 490px;
 }
 
-.goal > p {
-    margin-left: 5px;
-    filter: invert();
-    opacity: 80%;
-    white-space: nowrap;
-}
-
-.conductix-logo img{
+.conductix-logo img {
     max-width: 100px;
     max-height: 100px;
-
     position: absolute;
     top: 50px;
     right: 0px;
     object-fit: cover;
-
     margin: 20px;
 }
 
@@ -240,6 +209,4 @@ html, body {
     .value {
         font-size: 14pt;
     }
-    
 }
-

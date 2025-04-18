@@ -103,7 +103,7 @@ namespace GenerateurDFUSafir.Models
                     {
                         ControlFinalScan art = new ControlFinalScan();
                         art.NumOf = rowArt["MFGNUM_0"].ToString();
-                        art.ItemRef = rowArt["CPNITMREF_0"].ToString();
+                        art.ItemRef = rowArt["ITMREF_0"].ToString();
                         art.ItemDescript = rowArt["ITMDES1_0"].ToString();
                         art.QTr = (int)Convert.ToDouble(rowArt["LIKQTY_0"].ToString());
                         // serialié?
