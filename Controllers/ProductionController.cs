@@ -1045,13 +1045,13 @@ namespace GenerateurDFUSafir.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreerMotDePasse(long id, string motdepasse)
+        public ActionResult CreerPassword(long id, string motdepasse)
         {
             if (string.IsNullOrEmpty(motdepasse))
             {
                 ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
-                return View("CreerMotDePasse", operateur);
+                return View("DefinirPassword", operateur);
             }
 
             string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
@@ -1062,7 +1062,7 @@ namespace GenerateurDFUSafir.Controllers
             {
                 ViewBag.Erreur = "Erreur lors de l'enregistrement du mot de passe.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
-                return View("CreerMotDePasse", operateur);
+                return View("DefinirPassword", operateur);
             }
 
             return RedirectToAction("GestionOF", new { id = id });

@@ -31,10 +31,10 @@
     <div id="ListOperateur">
         @foreach (var item in @Model.DataOperateurs)
         {
-            string lien = !item.isValidPasswd
+            string lien = !item.isValidPasswd 
                 ? Url.Action("DefinirMDP", "Production", new { id = item.ID })
                 : Url.Action("ConnexionOp", "Production", new { id = item.ID });
-
+            
 
             <div class="Operateur">
                 <a href="@lien">

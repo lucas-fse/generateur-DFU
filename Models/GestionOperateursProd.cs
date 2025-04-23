@@ -3,6 +3,7 @@ using GenerateurDFUSafir.Models;
 using GenerateurDFUSafir.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -37,23 +38,34 @@ namespace GenerateurDFUSafir.Models
             bool result = false;
             try
             {
-                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
-                var FirstOP = _db.OPERATEURS.Include("OPERATEURS_PWD").Where(p=>p.ID == idOperateur).FirstOrDefault();
-
-                if (FirstOP != null)
+                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
                 {
-                    FirstOP.OPERATEURS_PWD.Password = hashedPassword;
-                    FirstOP.isValidPasswd = true;
-                    _db.SaveChanges();
-                    result = true;
+                    var FirstOP = _db.OPERATEURS
+                                     .Include("OPERATEURS_PWD")
+                                     .FirstOrDefault(p => p.ID == idOperateur);
+
+                    if (FirstOP != null && FirstOP.OPERATEURS_PWD != null)
+                    {
+                        FirstOP.OPERATEURS_PWD.Password = hashedPassword;
+                        FirstOP.isValidPasswd = true;
+
+                        _db.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opérateur ou mot de passe introuvable pour l'ID : " + idOperateur);
+                    }
                 }
             }
-            catch
+            catch (Exception e)
             {
                 
             }
             return result;
         }
+
+
 
 
 
@@ -206,6 +218,7 @@ namespace GenerateurDFUSafir.Models
                 dataOperateur.Anniversaire = operateur.ANNIVERSAIRE;
                 dataOperateur.Nom = operateur.NOM;
                 dataOperateur.Prenom = operateur.PRENOM;
+                dataOperateur.isValidPasswd = (bool)operateur.isValidPasswd;
                 dataOperateur.Animateur = operateur.ANIMATEUR;
                 dataOperateur.Initial = operateur.INITIAL.Trim();
                 dataOperateur.Photo = "/operateurs"+operateur.PATHB;
