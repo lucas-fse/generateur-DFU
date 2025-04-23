@@ -9,18 +9,22 @@
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
+          <Property Name="UPDTICK_0" Type="int" Nullable="false" />
           <Property Name="BPATYP_0" Type="tinyint" Nullable="false" />
           <Property Name="BPANUM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="BPAADD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="BPADES_0" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPABID_0" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="BPAADDFLG_0" Type="tinyint" Nullable="false" />
-          <Property Name="BPAADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPAADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPAADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPAADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPAADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPAADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="XEXT2NUM_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="POSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CODSEE_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="SAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="XSRVFAC_0" Type="nvarchar" MaxLength="17" Nullable="false" />
           <Property Name="CRY_0" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="CRYNAM_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="TEL_0" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -37,30 +41,31 @@
           <Property Name="WEB_4" Type="nvarchar" MaxLength="80" Nullable="false" />
           <Property Name="FCYWEB_0" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="EXTNUM_0" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="XEXT2NUM_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="EXPNUM_0" Type="int" Nullable="false" />
-          <Property Name="XSRVFAC_0" Type="nvarchar" MaxLength="17" Nullable="false" />
           <Property Name="CREUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CREDAT_0" Type="datetime" Nullable="false" />
-          <Property Name="CRETIM_0" Type="int" Nullable="false" />
           <Property Name="UPDUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="UPDDAT_0" Type="datetime" Nullable="false" />
-          <Property Name="UPDTIM_0" Type="int" Nullable="false" />
-          <Property Name="CRESTP_0" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="UPDSTP_0" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="IDTSGL_0" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="CREDATTIM_0" Type="datetime" Nullable="false" />
+          <Property Name="UPDDATTIM_0" Type="datetime" Nullable="false" />
+          <Property Name="AUUID_0" Type="binary" MaxLength="16" Nullable="false" />
           <Property Name="XEDICOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="X4VALID_0" Type="tinyint" Nullable="false" />
+          <Property Name="ADRVAL_0" Type="tinyint" Nullable="false" />
           <Property Name="X4ADREXP_0" Type="tinyint" Nullable="false" />
+          <Property Name="GLNCOD_0" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="CRN_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="X4EECNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="X4ADRFAB_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4EDIQUAL_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="X4VALID_0" Type="tinyint" Nullable="false" />
           <Property Name="YDEP_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ROWID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="X4ADRFAB_0" Type="tinyint" Nullable="false" />
+          <Property Name="ROWID" Type="numeric" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SORDER">
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
+          <Property Name="UPDTICK_0" Type="int" Nullable="false" />
           <Property Name="SOHNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CPY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="SOHTYP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
@@ -73,7 +78,7 @@
           <Property Name="BPCGRU_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="BPAADD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CUSORDREF_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="PJT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PJT_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="ORDDAT_0" Type="datetime" Nullable="false" />
           <Property Name="VLYDATCON_0" Type="datetime" Nullable="false" />
           <Property Name="SHIDAT_0" Type="datetime" Nullable="false" />
@@ -83,9 +88,9 @@
           <Property Name="BPCNAM_0" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPCNAM_1" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPAORD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="BPCADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPCADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPCADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPCADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPCADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPCADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPCPOSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="BPCCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BPCSAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
@@ -95,9 +100,9 @@
           <Property Name="BPINAM_0" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPINAM_1" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPAINV_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="BPIADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPIADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPIADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPIADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPIADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPIADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPIPOSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="BPICTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BPISAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
@@ -107,9 +112,9 @@
           <Property Name="CNINAM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="BPDNAM_0" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPDNAM_1" Type="nvarchar" MaxLength="35" Nullable="false" />
-          <Property Name="BPDADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPDADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPDADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPDADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPDADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPDADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPDPOSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="BPDCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BPDSAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
@@ -162,14 +167,15 @@
           <Property Name="CCE_18" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="CCE_19" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="LAN_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="VACBPR_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="VACBPR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="SSTENTCOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="PTE_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="TSCCOD_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TSCCOD_1" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TSCCOD_2" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TSCCOD_3" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TSCCOD_4" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="DEP_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DEP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="BPTNUM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="MDL_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="STOFCY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
@@ -182,8 +188,8 @@
           <Property Name="OCNFLG_0" Type="tinyint" Nullable="false" />
           <Property Name="OCNPRN_0" Type="tinyint" Nullable="false" />
           <Property Name="COPNBR_0" Type="smallint" Nullable="false" />
-          <Property Name="SOHTEX1_0" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="SOHTEX2_0" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="SOHTEX1_0" Type="nvarchar" MaxLength="17" Nullable="false" />
+          <Property Name="SOHTEX2_0" Type="nvarchar" MaxLength="17" Nullable="false" />
           <Property Name="SQHNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BETFCY_0" Type="tinyint" Nullable="false" />
           <Property Name="BETCPY_0" Type="tinyint" Nullable="false" />
@@ -313,6 +319,36 @@
           <Property Name="INVDTA_27" Type="smallint" Nullable="false" />
           <Property Name="INVDTA_28" Type="smallint" Nullable="false" />
           <Property Name="INVDTA_29" Type="smallint" Nullable="false" />
+          <Property Name="SFISSTCOD_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_1" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_2" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_3" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_4" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_5" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_6" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_7" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_8" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_9" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_10" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_11" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_12" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_13" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_14" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_15" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_16" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_17" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_18" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_19" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_20" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_21" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_22" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_23" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_24" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_25" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_26" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_27" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_28" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_29" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="PRITYP_0" Type="tinyint" Nullable="false" />
           <Property Name="ORDNOT_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="ORDATI_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
@@ -358,14 +394,14 @@
           <Property Name="APPFLG_0" Type="tinyint" Nullable="false" />
           <Property Name="REVNUM_0" Type="smallint" Nullable="false" />
           <Property Name="SHIADECOD_0" Type="nvarchar" MaxLength="35" Nullable="false" />
-          <Property Name="EECICT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EECICT_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="EECLOC_0" Type="tinyint" Nullable="false" />
-          <Property Name="XNBEDT_0" Type="smallint" Nullable="false" />
           <Property Name="ICTCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="FFWNUM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="FFWADD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="GEOCOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="INSCTYFLG_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="XNBEDT_0" Type="smallint" Nullable="false" />
           <Property Name="VTT_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="AMTTAX_0" Type="numeric" Precision="28" Scale="8" Nullable="false" />
           <Property Name="BASTAX_0" Type="numeric" Precision="28" Scale="8" Nullable="false" />
@@ -375,16 +411,17 @@
           <Property Name="SRENUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CMGNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="OPGNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="OPGTYP_0" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="XMODGFI_0" Type="smallint" Nullable="false" />
+          <Property Name="OPGTYP_0" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="PLISTC_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="EXPNUM_0" Type="int" Nullable="false" />
           <Property Name="SINUM_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="DSPTOTQTY_0" Type="numeric" Precision="22" Scale="7" Nullable="false" />
           <Property Name="DSPTOTWEI_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
           <Property Name="DSPTOTVOL_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
-          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SDHTYP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CREUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CREDAT_0" Type="datetime" Nullable="false" />
           <Property Name="UPDUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
@@ -393,33 +430,72 @@
           <Property Name="HLDCOD_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="HLDUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="HLDDAT_0" Type="datetime" Nullable="false" />
-          <Property Name="HLDTIM_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="ZTEXTLIV_0" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="HLDTIM_0" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="HLDCODP_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ZTEXTLIV_0" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="HLDUSRP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="ZINFINT_0" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="HLDDATP_0" Type="datetime" Nullable="false" />
-          <Property Name="HLDTIMP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="HLDTIMP_0" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="ZINFINT_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CDTSTAP_0" Type="tinyint" Nullable="false" />
+          <Property Name="ADRVAL_0" Type="smallint" Nullable="false" />
+          <Property Name="DEMDLVHOU_0" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="ZDELAIOK_0" Type="tinyint" Nullable="false" />
+          <Property Name="CREDATTIM_0" Type="datetime" Nullable="false" />
           <Property Name="YTCS_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="UPDDATTIM_0" Type="datetime" Nullable="false" />
           <Property Name="YSTC_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="AUUID_0" Type="binary" MaxLength="16" Nullable="false" />
           <Property Name="ZSTATCDE_0" Type="tinyint" Nullable="false" />
+          <Property Name="INVCND_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="YTRANSTRS_0" Type="tinyint" Nullable="false" />
+          <Property Name="VCRINVCNDDAT_0" Type="datetime" Nullable="false" />
           <Property Name="YSSTLOGIS_0" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="INRNOT_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="ZCE1_0" Type="tinyint" Nullable="false" />
+          <Property Name="INRATI_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="ZAMTCXW_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
+          <Property Name="INRSCHNOT_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="ZCURCXW_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="INRSCHATI_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="ZCNTNAM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="DRAFTSTATUS_0" Type="smallint" Nullable="false" />
           <Property Name="ZCUSORDREF_0" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="DRAFTREJ_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4AVMOT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ZDELAIVAL_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DRAFTREJREN_0" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="ZDATDELAIVAL_0" Type="datetime" Nullable="false" />
-          <Property Name="ROWID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SOHCFMFLG_0" Type="smallint" Nullable="false" />
+          <Property Name="ZCDEDUP_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SOHNUMEND_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X1TYPPREPA_0" Type="smallint" Nullable="false" />
+          <Property Name="X4AVMOTCOM_0" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ZARCMAIL_0" Type="tinyint" Nullable="false" />
+          <Property Name="SOHVALDAT_0" Type="datetime" Nullable="false" />
+          <Property Name="X1TYPPREPMAN_0" Type="smallint" Nullable="false" />
+          <Property Name="X1PRECODMAN_0" Type="smallint" Nullable="false" />
+          <Property Name="X4SOHENVAUT_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4SOHEXP_0" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="X4SOHDEST_0" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="X4RGOP_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X4EXCLRFA_0" Type="tinyint" Nullable="false" />
+          <Property Name="XCOLSOUPLE_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4FORREL_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4REGREL_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="X4DEBCTLCON_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4TRTREL_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4NUMDEMAND_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X4NUMINT_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ROWID" Type="numeric" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SQUOTE">
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
+          <Property Name="UPDTICK_0" Type="int" Nullable="false" />
           <Property Name="SQHNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SQHTYP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CPY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="SALFCY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="BPCORD_0" Type="nvarchar" MaxLength="15" Nullable="false" />
@@ -427,13 +503,14 @@
           <Property Name="QUODAT_0" Type="datetime" Nullable="false" />
           <Property Name="VLYDAT_0" Type="datetime" Nullable="false" />
           <Property Name="DAYLTI_0" Type="smallint" Nullable="false" />
+          <Property Name="SOHTYP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="BPAADD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="BPCNAM_0" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPCNAM_1" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPAORD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="BPCADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPCADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPCADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPCADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPCADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPCADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPCPOSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="BPCCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BPCSAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
@@ -442,9 +519,9 @@
           <Property Name="CNCNAM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="BPDNAM_0" Type="nvarchar" MaxLength="35" Nullable="false" />
           <Property Name="BPDNAM_1" Type="nvarchar" MaxLength="35" Nullable="false" />
-          <Property Name="BPDADDLIG_0" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPDADDLIG_1" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BPDADDLIG_2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BPDADDLIG_0" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPDADDLIG_1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BPDADDLIG_2" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BPDPOSCOD_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="BPDCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="BPDSAT_0" Type="nvarchar" MaxLength="35" Nullable="false" />
@@ -457,9 +534,10 @@
           <Property Name="CUR_0" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="CHGTYP_0" Type="tinyint" Nullable="false" />
           <Property Name="CHGRAT_0" Type="numeric" Precision="18" Scale="7" Nullable="false" />
-          <Property Name="PJT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PJT_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="LAN_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="VACBPR_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="VACBPR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="SSTENTCOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="STOFCY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="PRITYP_0" Type="tinyint" Nullable="false" />
           <Property Name="QUONOT_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
@@ -471,7 +549,7 @@
           <Property Name="QUOINVNOTL_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="QUOINVATIL_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="PFMTOT_0" Type="numeric" Precision="27" Scale="13" Nullable="false" />
-          <Property Name="DEP_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DEP_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="PTE_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="DISCRGTYP_0" Type="tinyint" Nullable="false" />
           <Property Name="DISCRGTYP_1" Type="tinyint" Nullable="false" />
@@ -621,10 +699,10 @@
           <Property Name="APPFLG_0" Type="tinyint" Nullable="false" />
           <Property Name="QUOPRN_0" Type="tinyint" Nullable="false" />
           <Property Name="COPNBR_0" Type="smallint" Nullable="false" />
-          <Property Name="SQHTEX1_0" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="SQHTEX2_0" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="SQHTEX1_0" Type="nvarchar" MaxLength="17" Nullable="false" />
+          <Property Name="SQHTEX2_0" Type="nvarchar" MaxLength="17" Nullable="false" />
           <Property Name="PRFNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="EECICT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EECICT_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="EECLOC_0" Type="tinyint" Nullable="false" />
           <Property Name="ICTCTY_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="FFWNUM_0" Type="nvarchar" MaxLength="15" Nullable="false" />
@@ -680,28 +758,75 @@
           <Property Name="DSPTOTQTY_0" Type="numeric" Precision="22" Scale="7" Nullable="false" />
           <Property Name="DSPTOTWEI_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
           <Property Name="DSPTOTVOL_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
-          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CREUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CREDAT_0" Type="datetime" Nullable="false" />
           <Property Name="UPDUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="UPDDAT_0" Type="datetime" Nullable="false" />
-          <Property Name="XSQHTYP_0" Type="tinyint" Nullable="false" />
           <Property Name="YSTC_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="UPDDAT_0" Type="datetime" Nullable="false" />
           <Property Name="YTCS_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="ADRVAL_0" Type="smallint" Nullable="false" />
+          <Property Name="XSQHTYP_0" Type="tinyint" Nullable="false" />
           <Property Name="ZMOTIFPERT_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_1" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_2" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_3" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_4" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_5" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_6" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_7" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_8" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_9" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_10" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_11" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_12" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_13" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_14" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_15" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_16" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_17" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_18" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_19" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_20" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_21" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_22" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_23" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_24" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_25" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_26" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_27" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_28" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SFISSTCOD_29" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ZDATREL1_0" Type="datetime" Nullable="false" />
+          <Property Name="CREDATTIM_0" Type="datetime" Nullable="false" />
           <Property Name="ZDATREL2_0" Type="datetime" Nullable="false" />
+          <Property Name="UPDDATTIM_0" Type="datetime" Nullable="false" />
           <Property Name="ZUSREL1_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="AUUID_0" Type="binary" MaxLength="16" Nullable="false" />
           <Property Name="ZUSREL2_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="REVNUM_0" Type="smallint" Nullable="false" />
           <Property Name="ZREL1OK_0" Type="tinyint" Nullable="false" />
+          <Property Name="SQHCFMFLG_0" Type="smallint" Nullable="false" />
+          <Property Name="X4SQHENVAUT_0" Type="tinyint" Nullable="false" />
           <Property Name="ZREL2OK_0" Type="tinyint" Nullable="false" />
-          <Property Name="ROWID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SQHNUMEND_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X4SQHEXP_0" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ZDEVDUP_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SQHVALDAT_0" Type="datetime" Nullable="false" />
+          <Property Name="X4SQHDEST_0" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="X4RGOP_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X4DEBCTLCON_0" Type="tinyint" Nullable="false" />
+          <Property Name="X4NUMDEMAND_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="X4NUMINT_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ROWID" Type="numeric" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SQUOTED">
           <Key>
             <PropertyRef Name="ROWID" />
           </Key>
+          <Property Name="UPDTICK_0" Type="int" Nullable="false" />
           <Property Name="SQHNUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="SQDLIN_0" Type="int" Nullable="false" />
           <Property Name="CPY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
@@ -710,11 +835,13 @@
           <Property Name="QUODAT_0" Type="datetime" Nullable="false" />
           <Property Name="DAYLTI_0" Type="smallint" Nullable="false" />
           <Property Name="ITMREF_0" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ECCVALMAJ_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ECCVALMIN_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ITMDES1_0" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="ITMDES_0" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="VACITM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="VACITM_1" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="VACITM_2" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="VACITM_0" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="VACITM_1" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="VACITM_2" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="REP1_0" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="REPRAT1_0" Type="numeric" Precision="8" Scale="3" Nullable="false" />
           <Property Name="REP2_0" Type="nvarchar" MaxLength="15" Nullable="false" />
@@ -770,8 +897,8 @@
           <Property Name="DDTANOT_7" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="DDTANOT_8" Type="numeric" Precision="27" Scale="13" Nullable="false" />
           <Property Name="QTY_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
-          <Property Name="SAU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="STU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="SAU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="STU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SAUSTUCOE_0" Type="numeric" Precision="18" Scale="7" Nullable="false" />
           <Property Name="BPAADD_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="STOFCY_0" Type="nvarchar" MaxLength="5" Nullable="false" />
@@ -783,7 +910,7 @@
           <Property Name="SOPLIN_0" Type="int" Nullable="false" />
           <Property Name="ORDFLG_0" Type="tinyint" Nullable="false" />
           <Property Name="ORDQTY_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
-          <Property Name="SQDTEX_0" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="SQDTEX_0" Type="nvarchar" MaxLength="17" Nullable="false" />
           <Property Name="GEOCOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="INSCTYFLG_0" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="VTS_0" Type="nvarchar" MaxLength="1" Nullable="false" />
@@ -795,24 +922,39 @@
           <Property Name="BASTAXLIN_0" Type="numeric" Precision="28" Scale="8" Nullable="false" />
           <Property Name="OCNPRNBOM_0" Type="tinyint" Nullable="false" />
           <Property Name="NDEPRNBOM_0" Type="tinyint" Nullable="false" />
+          <Property Name="XFLAGLM_0" Type="smallint" Nullable="false" />
           <Property Name="INVPRNBOM_0" Type="tinyint" Nullable="false" />
           <Property Name="EXPNUM_0" Type="int" Nullable="false" />
-          <Property Name="XFLAGLM_0" Type="smallint" Nullable="false" />
+          <Property Name="XQUONUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DSPLINWEI_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
           <Property Name="DSPLINVOL_0" Type="numeric" Precision="28" Scale="13" Nullable="false" />
-          <Property Name="XQUONUM_0" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DSPWEU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DSPVOU_0" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PJT_0" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="IMPNUMLIG_0" Type="int" Nullable="false" />
           <Property Name="CREUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CREDAT_0" Type="datetime" Nullable="false" />
           <Property Name="UPDUSR_0" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="UPDDAT_0" Type="datetime" Nullable="false" />
           <Property Name="ZMAPPLI_0" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="ROWID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SSTCOD_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ZIDWEB_0" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="DLVFLG_0" Type="tinyint" Nullable="false" />
+          <Property Name="CREDATTIM_0" Type="datetime" Nullable="false" />
+          <Property Name="UPDDATTIM_0" Type="datetime" Nullable="false" />
+          <Property Name="AUUID_0" Type="binary" MaxLength="16" Nullable="false" />
+          <Property Name="SQDPSONUM_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="SQDSEQNUM_0" Type="smallint" Nullable="false" />
+          <Property Name="LINREVNUM_0" Type="smallint" Nullable="false" />
+          <Property Name="X4RGOPL_0" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="XDESTFIN_0" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="XDESINT_0" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="X4FACTURE_0" Type="smallint" Nullable="false" />
+          <Property Name="X4SAVLIV_0" Type="smallint" Nullable="false" />
+          <Property Name="ROWID" Type="numeric" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+avertissement 6002: La table/vue 'x112p.CLTPROD.ZCONFPACK4' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ZCONFPACK4">
           <Key>
             <PropertyRef Name="ZOF_0" />
@@ -938,65 +1080,13 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="ZCFGLIN_0" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ZVERSION_0" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="x160Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="x160Entities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="ZCONFPACK4" EntityType="Self.ZCONFPACK4" />
-          <EntitySet Name="BPADDRESS" EntityType="x160Model.BPADDRESS" />
           <EntitySet Name="SORDER" EntityType="x160Model.SORDER" />
           <EntitySet Name="SQUOTE" EntityType="x160Model.SQUOTE" />
           <EntitySet Name="SQUOTED" EntityType="x160Model.SQUOTED" />
+          <EntitySet Name="BPADDRESS" EntityType="x160Model.BPADDRESS" />
           </EntityContainer>
-        <EntityType Name="BPADDRESS">
-          <Key>
-            <PropertyRef Name="ROWID" />
-          </Key>
-          <Property Name="BPATYP_0" Type="Byte" Nullable="false" />
-          <Property Name="BPANUM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="BPAADD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="BPADES_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BPABID_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BPAADDFLG_0" Type="Byte" Nullable="false" />
-          <Property Name="BPAADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPAADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPAADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="POSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="SAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="CRY_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="CRYNAM_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="TEL_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TEL_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TEL_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TEL_3" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TEL_4" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="FAX_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MOB_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="WEB_0" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="WEB_1" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="WEB_2" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="WEB_3" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="WEB_4" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="FCYWEB_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="EXTNUM_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="XEXT2NUM_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="EXPNUM_0" Type="Int32" Nullable="false" />
-          <Property Name="XSRVFAC_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
-          <Property Name="CREUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="CREDAT_0" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CRETIM_0" Type="Int32" Nullable="false" />
-          <Property Name="UPDUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="UPDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UPDTIM_0" Type="Int32" Nullable="false" />
-          <Property Name="CRESTP_0" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="UPDSTP_0" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="IDTSGL_0" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="XEDICOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="X4VALID_0" Type="Byte" Nullable="false" />
-          <Property Name="X4ADREXP_0" Type="Byte" Nullable="false" />
-          <Property Name="X4EECNUM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="X4ADRFAB_0" Type="Byte" Nullable="false" />
-          <Property Name="YDEP_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ROWID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="SORDER">
           <Key>
             <PropertyRef Name="ROWID" />
@@ -1013,7 +1103,7 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="BPCGRU_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="BPAADD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="CUSORDREF_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="PJT_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PJT_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="ORDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="VLYDATCON_0" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SHIDAT_0" Type="DateTime" Nullable="false" Precision="3" />
@@ -1023,9 +1113,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="BPCNAM_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPCNAM_1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPAORD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BPCPOSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BPCCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BPCSAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
@@ -1035,9 +1125,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="BPINAM_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPINAM_1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPAINV_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="BPIADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPIADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPIADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BPIADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPIADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPIADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BPIPOSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BPICTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BPISAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
@@ -1047,9 +1137,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="CNINAM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="BPDNAM_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPDNAM_1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BPDPOSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BPDCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BPDSAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
@@ -1102,14 +1192,14 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="CCE_18" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CCE_19" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="LAN_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="VACBPR_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VACBPR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="PTE_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="TSCCOD_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TSCCOD_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TSCCOD_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TSCCOD_3" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TSCCOD_4" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DEP_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DEP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="BPTNUM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="MDL_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="STOFCY_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -1122,8 +1212,8 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="OCNFLG_0" Type="Byte" Nullable="false" />
           <Property Name="OCNPRN_0" Type="Byte" Nullable="false" />
           <Property Name="COPNBR_0" Type="Int16" Nullable="false" />
-          <Property Name="SOHTEX1_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="SOHTEX2_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="SOHTEX1_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
+          <Property Name="SOHTEX2_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
           <Property Name="SQHNUM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="BETFCY_0" Type="Byte" Nullable="false" />
           <Property Name="BETCPY_0" Type="Byte" Nullable="false" />
@@ -1298,7 +1388,7 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="APPFLG_0" Type="Byte" Nullable="false" />
           <Property Name="REVNUM_0" Type="Int16" Nullable="false" />
           <Property Name="SHIADECOD_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="EECICT_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EECICT_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="EECLOC_0" Type="Byte" Nullable="false" />
           <Property Name="XNBEDT_0" Type="Int16" Nullable="false" />
           <Property Name="ICTCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
@@ -1323,8 +1413,8 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="DSPTOTQTY_0" Type="Decimal" Nullable="false" Precision="22" Scale="7" />
           <Property Name="DSPTOTWEI_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
           <Property Name="DSPTOTVOL_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
-          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CREUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="CREDAT_0" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UPDUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -1333,13 +1423,13 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="HLDCOD_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="HLDUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="HLDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HLDTIM_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="HLDTIM_0" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="ZTEXTLIV_0" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="HLDCODP_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="HLDUSRP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="ZINFINT_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HLDDATP_0" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HLDTIMP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="HLDTIMP_0" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="ZDELAIOK_0" Type="Byte" Nullable="false" />
           <Property Name="YTCS_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="YSTC_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -1354,6 +1444,76 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="ZCUSORDREF_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="ZDELAIVAL_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="ZDATDELAIVAL_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDTICK_0" Type="Int32" Nullable="false" />
+          <Property Name="SSTENTCOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_3" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_4" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_5" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_6" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_7" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_8" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_9" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_10" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_11" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_12" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_13" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_14" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_15" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_16" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_17" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_18" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_19" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_20" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_21" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_22" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_23" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_24" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_25" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_26" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_27" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_28" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_29" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SDHTYP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CDTSTAP_0" Type="Byte" Nullable="false" />
+          <Property Name="ADRVAL_0" Type="Int16" Nullable="false" />
+          <Property Name="DEMDLVHOU_0" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="CREDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AUUID_0" Type="Binary" Nullable="false" MaxLength="16" FixedLength="true" />
+          <Property Name="INVCND_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VCRINVCNDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="INRNOT_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
+          <Property Name="INRATI_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
+          <Property Name="INRSCHNOT_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
+          <Property Name="INRSCHATI_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
+          <Property Name="DRAFTSTATUS_0" Type="Int16" Nullable="false" />
+          <Property Name="DRAFTREJ_0" Type="Byte" Nullable="false" />
+          <Property Name="X4AVMOT_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DRAFTREJREN_0" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="SOHCFMFLG_0" Type="Int16" Nullable="false" />
+          <Property Name="ZCDEDUP_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SOHNUMEND_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X1TYPPREPA_0" Type="Int16" Nullable="false" />
+          <Property Name="X4AVMOTCOM_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ZARCMAIL_0" Type="Byte" Nullable="false" />
+          <Property Name="SOHVALDAT_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="X1TYPPREPMAN_0" Type="Int16" Nullable="false" />
+          <Property Name="X1PRECODMAN_0" Type="Int16" Nullable="false" />
+          <Property Name="X4SOHENVAUT_0" Type="Byte" Nullable="false" />
+          <Property Name="X4SOHEXP_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="X4SOHDEST_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="X4RGOP_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X4EXCLRFA_0" Type="Byte" Nullable="false" />
+          <Property Name="XCOLSOUPLE_0" Type="Byte" Nullable="false" />
+          <Property Name="X4FORREL_0" Type="Byte" Nullable="false" />
+          <Property Name="X4REGREL_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="X4DEBCTLCON_0" Type="Byte" Nullable="false" />
+          <Property Name="X4TRTREL_0" Type="Byte" Nullable="false" />
+          <Property Name="X4NUMDEMAND_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X4NUMINT_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SQUOTE">
           <Key>
@@ -1371,9 +1531,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="BPCNAM_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPCNAM_1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPAORD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPCADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPCADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BPCPOSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BPCCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BPCSAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
@@ -1382,9 +1542,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="CNCNAM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="BPDNAM_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="BPDNAM_1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BPDADDLIG_2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPDADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BPDPOSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BPDCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BPDSAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
@@ -1397,9 +1557,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="CUR_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="CHGTYP_0" Type="Byte" Nullable="false" />
           <Property Name="CHGRAT_0" Type="Decimal" Nullable="false" Precision="18" Scale="7" />
-          <Property Name="PJT_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PJT_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="LAN_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="VACBPR_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VACBPR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="STOFCY_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="PRITYP_0" Type="Byte" Nullable="false" />
           <Property Name="QUONOT_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
@@ -1411,7 +1571,7 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="QUOINVNOTL_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
           <Property Name="QUOINVATIL_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
           <Property Name="PFMTOT_0" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
-          <Property Name="DEP_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DEP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="PTE_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="DISCRGTYP_0" Type="Byte" Nullable="false" />
           <Property Name="DISCRGTYP_1" Type="Byte" Nullable="false" />
@@ -1561,10 +1721,10 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="APPFLG_0" Type="Byte" Nullable="false" />
           <Property Name="QUOPRN_0" Type="Byte" Nullable="false" />
           <Property Name="COPNBR_0" Type="Int16" Nullable="false" />
-          <Property Name="SQHTEX1_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="SQHTEX2_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="SQHTEX1_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
+          <Property Name="SQHTEX2_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
           <Property Name="PRFNUM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EECICT_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EECICT_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="EECLOC_0" Type="Byte" Nullable="false" />
           <Property Name="ICTCTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="FFWNUM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
@@ -1620,8 +1780,8 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="DSPTOTQTY_0" Type="Decimal" Nullable="false" Precision="22" Scale="7" />
           <Property Name="DSPTOTWEI_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
           <Property Name="DSPTOTVOL_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
-          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CREUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="CREDAT_0" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UPDUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -1637,6 +1797,56 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="ZREL1OK_0" Type="Byte" Nullable="false" />
           <Property Name="ZREL2OK_0" Type="Byte" Nullable="false" />
           <Property Name="ROWID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UPDTICK_0" Type="Int32" Nullable="false" />
+          <Property Name="SQHTYP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="SOHTYP_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="SSTENTCOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ADRVAL_0" Type="Int16" Nullable="false" />
+          <Property Name="SFISSTCOD_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_3" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_4" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_5" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_6" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_7" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_8" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_9" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_10" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_11" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_12" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_13" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_14" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_15" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_16" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_17" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_18" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_19" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_20" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_21" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_22" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_23" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_24" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_25" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_26" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_27" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_28" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SFISSTCOD_29" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CREDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AUUID_0" Type="Binary" Nullable="false" MaxLength="16" FixedLength="true" />
+          <Property Name="REVNUM_0" Type="Int16" Nullable="false" />
+          <Property Name="SQHCFMFLG_0" Type="Int16" Nullable="false" />
+          <Property Name="X4SQHENVAUT_0" Type="Byte" Nullable="false" />
+          <Property Name="SQHNUMEND_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X4SQHEXP_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ZDEVDUP_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SQHVALDAT_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="X4SQHDEST_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="X4RGOP_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X4DEBCTLCON_0" Type="Byte" Nullable="false" />
+          <Property Name="X4NUMDEMAND_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="X4NUMINT_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SQUOTED">
           <Key>
@@ -1652,9 +1862,9 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="ITMREF_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ITMDES1_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ITMDES_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="VACITM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="VACITM_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="VACITM_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VACITM_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="VACITM_1" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="VACITM_2" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="REP1_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="REPRAT1_0" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
           <Property Name="REP2_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
@@ -1710,8 +1920,8 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="DDTANOT_7" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
           <Property Name="DDTANOT_8" Type="Decimal" Nullable="false" Precision="27" Scale="13" />
           <Property Name="QTY_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
-          <Property Name="SAU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="STU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="SAU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="STU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SAUSTUCOE_0" Type="Decimal" Nullable="false" Precision="18" Scale="7" />
           <Property Name="BPAADD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="STOFCY_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
@@ -1723,7 +1933,7 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="SOPLIN_0" Type="Int32" Nullable="false" />
           <Property Name="ORDFLG_0" Type="Byte" Nullable="false" />
           <Property Name="ORDQTY_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
-          <Property Name="SQDTEX_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="SQDTEX_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
           <Property Name="GEOCOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="INSCTYFLG_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="VTS_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
@@ -1741,8 +1951,8 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="DSPLINWEI_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
           <Property Name="DSPLINVOL_0" Type="Decimal" Nullable="false" Precision="28" Scale="13" />
           <Property Name="XQUONUM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DSPWEU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DSPVOU_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IMPNUMLIG_0" Type="Int32" Nullable="false" />
           <Property Name="CREUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="CREDAT_0" Type="DateTime" Nullable="false" Precision="3" />
@@ -1750,6 +1960,80 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <Property Name="UPDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ZMAPPLI_0" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="ROWID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UPDTICK_0" Type="Int32" Nullable="false" />
+          <Property Name="ECCVALMAJ_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ECCVALMIN_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PJT_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SSTCOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ZIDWEB_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DLVFLG_0" Type="Byte" Nullable="false" />
+          <Property Name="CREDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AUUID_0" Type="Binary" Nullable="false" MaxLength="16" FixedLength="true" />
+          <Property Name="SQDPSONUM_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SQDSEQNUM_0" Type="Int16" Nullable="false" />
+          <Property Name="LINREVNUM_0" Type="Int16" Nullable="false" />
+          <Property Name="X4RGOPL_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="XDESTFIN_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="XDESINT_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="X4FACTURE_0" Type="Int16" Nullable="false" />
+          <Property Name="X4SAVLIV_0" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BPADDRESS">
+          <Key>
+            <PropertyRef Name="ROWID" />
+          </Key>
+          <Property Name="UPDTICK_0" Type="Int32" Nullable="false" />
+          <Property Name="BPATYP_0" Type="Byte" Nullable="false" />
+          <Property Name="BPANUM_0" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BPAADD_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="BPADES_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPABID_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BPAADDFLG_0" Type="Byte" Nullable="false" />
+          <Property Name="BPAADDLIG_0" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPAADDLIG_1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BPAADDLIG_2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XEXT2NUM_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="POSCOD_0" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CTY_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CODSEE_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SAT_0" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="XSRVFAC_0" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
+          <Property Name="CRY_0" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="CRYNAM_0" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_3" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_4" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FAX_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MOB_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_0" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_1" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_2" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_3" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_4" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="FCYWEB_0" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EXTNUM_0" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EXPNUM_0" Type="Int32" Nullable="false" />
+          <Property Name="CREUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CREDAT_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDUSR_0" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="UPDDAT_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPDDATTIM_0" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AUUID_0" Type="Binary" Nullable="false" MaxLength="16" FixedLength="true" />
+          <Property Name="XEDICOD_0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ADRVAL_0" Type="Byte" Nullable="false" />
+          <Property Name="X4ADREXP_0" Type="Byte" Nullable="false" />
+          <Property Name="GLNCOD_0" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="CRN_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="X4EECNUM_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="X4EDIQUAL_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="X4VALID_0" Type="Byte" Nullable="false" />
+          <Property Name="YDEP_0" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="X4ADRFAB_0" Type="Byte" Nullable="false" />
+          <Property Name="ROWID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1790,62 +2074,79 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BPADDRESS">
-            <EntityTypeMapping TypeName="x160Model.BPADDRESS">
-              <MappingFragment StoreEntitySet="BPADDRESS">
-                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
-                <ScalarProperty Name="YDEP_0" ColumnName="YDEP_0" />
-                <ScalarProperty Name="X4ADRFAB_0" ColumnName="X4ADRFAB_0" />
-                <ScalarProperty Name="X4EECNUM_0" ColumnName="X4EECNUM_0" />
-                <ScalarProperty Name="X4ADREXP_0" ColumnName="X4ADREXP_0" />
-                <ScalarProperty Name="X4VALID_0" ColumnName="X4VALID_0" />
-                <ScalarProperty Name="XEDICOD_0" ColumnName="XEDICOD_0" />
-                <ScalarProperty Name="IDTSGL_0" ColumnName="IDTSGL_0" />
-                <ScalarProperty Name="UPDSTP_0" ColumnName="UPDSTP_0" />
-                <ScalarProperty Name="CRESTP_0" ColumnName="CRESTP_0" />
-                <ScalarProperty Name="UPDTIM_0" ColumnName="UPDTIM_0" />
-                <ScalarProperty Name="UPDDAT_0" ColumnName="UPDDAT_0" />
-                <ScalarProperty Name="UPDUSR_0" ColumnName="UPDUSR_0" />
-                <ScalarProperty Name="CRETIM_0" ColumnName="CRETIM_0" />
-                <ScalarProperty Name="CREDAT_0" ColumnName="CREDAT_0" />
-                <ScalarProperty Name="CREUSR_0" ColumnName="CREUSR_0" />
-                <ScalarProperty Name="XSRVFAC_0" ColumnName="XSRVFAC_0" />
-                <ScalarProperty Name="EXPNUM_0" ColumnName="EXPNUM_0" />
-                <ScalarProperty Name="XEXT2NUM_0" ColumnName="XEXT2NUM_0" />
-                <ScalarProperty Name="EXTNUM_0" ColumnName="EXTNUM_0" />
-                <ScalarProperty Name="FCYWEB_0" ColumnName="FCYWEB_0" />
-                <ScalarProperty Name="WEB_4" ColumnName="WEB_4" />
-                <ScalarProperty Name="WEB_3" ColumnName="WEB_3" />
-                <ScalarProperty Name="WEB_2" ColumnName="WEB_2" />
-                <ScalarProperty Name="WEB_1" ColumnName="WEB_1" />
-                <ScalarProperty Name="WEB_0" ColumnName="WEB_0" />
-                <ScalarProperty Name="MOB_0" ColumnName="MOB_0" />
-                <ScalarProperty Name="FAX_0" ColumnName="FAX_0" />
-                <ScalarProperty Name="TEL_4" ColumnName="TEL_4" />
-                <ScalarProperty Name="TEL_3" ColumnName="TEL_3" />
-                <ScalarProperty Name="TEL_2" ColumnName="TEL_2" />
-                <ScalarProperty Name="TEL_1" ColumnName="TEL_1" />
-                <ScalarProperty Name="TEL_0" ColumnName="TEL_0" />
-                <ScalarProperty Name="CRYNAM_0" ColumnName="CRYNAM_0" />
-                <ScalarProperty Name="CRY_0" ColumnName="CRY_0" />
-                <ScalarProperty Name="SAT_0" ColumnName="SAT_0" />
-                <ScalarProperty Name="CTY_0" ColumnName="CTY_0" />
-                <ScalarProperty Name="POSCOD_0" ColumnName="POSCOD_0" />
-                <ScalarProperty Name="BPAADDLIG_2" ColumnName="BPAADDLIG_2" />
-                <ScalarProperty Name="BPAADDLIG_1" ColumnName="BPAADDLIG_1" />
-                <ScalarProperty Name="BPAADDLIG_0" ColumnName="BPAADDLIG_0" />
-                <ScalarProperty Name="BPAADDFLG_0" ColumnName="BPAADDFLG_0" />
-                <ScalarProperty Name="BPABID_0" ColumnName="BPABID_0" />
-                <ScalarProperty Name="BPADES_0" ColumnName="BPADES_0" />
-                <ScalarProperty Name="BPAADD_0" ColumnName="BPAADD_0" />
-                <ScalarProperty Name="BPANUM_0" ColumnName="BPANUM_0" />
-                <ScalarProperty Name="BPATYP_0" ColumnName="BPATYP_0" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SORDER">
             <EntityTypeMapping TypeName="x160Model.SORDER">
               <MappingFragment StoreEntitySet="SORDER">
+                <ScalarProperty Name="X4NUMINT_0" ColumnName="X4NUMINT_0" />
+                <ScalarProperty Name="X4NUMDEMAND_0" ColumnName="X4NUMDEMAND_0" />
+                <ScalarProperty Name="X4TRTREL_0" ColumnName="X4TRTREL_0" />
+                <ScalarProperty Name="X4DEBCTLCON_0" ColumnName="X4DEBCTLCON_0" />
+                <ScalarProperty Name="X4REGREL_0" ColumnName="X4REGREL_0" />
+                <ScalarProperty Name="X4FORREL_0" ColumnName="X4FORREL_0" />
+                <ScalarProperty Name="XCOLSOUPLE_0" ColumnName="XCOLSOUPLE_0" />
+                <ScalarProperty Name="X4EXCLRFA_0" ColumnName="X4EXCLRFA_0" />
+                <ScalarProperty Name="X4RGOP_0" ColumnName="X4RGOP_0" />
+                <ScalarProperty Name="X4SOHDEST_0" ColumnName="X4SOHDEST_0" />
+                <ScalarProperty Name="X4SOHEXP_0" ColumnName="X4SOHEXP_0" />
+                <ScalarProperty Name="X4SOHENVAUT_0" ColumnName="X4SOHENVAUT_0" />
+                <ScalarProperty Name="X1PRECODMAN_0" ColumnName="X1PRECODMAN_0" />
+                <ScalarProperty Name="X1TYPPREPMAN_0" ColumnName="X1TYPPREPMAN_0" />
+                <ScalarProperty Name="SOHVALDAT_0" ColumnName="SOHVALDAT_0" />
+                <ScalarProperty Name="ZARCMAIL_0" ColumnName="ZARCMAIL_0" />
+                <ScalarProperty Name="X4AVMOTCOM_0" ColumnName="X4AVMOTCOM_0" />
+                <ScalarProperty Name="X1TYPPREPA_0" ColumnName="X1TYPPREPA_0" />
+                <ScalarProperty Name="SOHNUMEND_0" ColumnName="SOHNUMEND_0" />
+                <ScalarProperty Name="ZCDEDUP_0" ColumnName="ZCDEDUP_0" />
+                <ScalarProperty Name="SOHCFMFLG_0" ColumnName="SOHCFMFLG_0" />
+                <ScalarProperty Name="DRAFTREJREN_0" ColumnName="DRAFTREJREN_0" />
+                <ScalarProperty Name="X4AVMOT_0" ColumnName="X4AVMOT_0" />
+                <ScalarProperty Name="DRAFTREJ_0" ColumnName="DRAFTREJ_0" />
+                <ScalarProperty Name="DRAFTSTATUS_0" ColumnName="DRAFTSTATUS_0" />
+                <ScalarProperty Name="INRSCHATI_0" ColumnName="INRSCHATI_0" />
+                <ScalarProperty Name="INRSCHNOT_0" ColumnName="INRSCHNOT_0" />
+                <ScalarProperty Name="INRATI_0" ColumnName="INRATI_0" />
+                <ScalarProperty Name="INRNOT_0" ColumnName="INRNOT_0" />
+                <ScalarProperty Name="VCRINVCNDDAT_0" ColumnName="VCRINVCNDDAT_0" />
+                <ScalarProperty Name="INVCND_0" ColumnName="INVCND_0" />
+                <ScalarProperty Name="AUUID_0" ColumnName="AUUID_0" />
+                <ScalarProperty Name="UPDDATTIM_0" ColumnName="UPDDATTIM_0" />
+                <ScalarProperty Name="CREDATTIM_0" ColumnName="CREDATTIM_0" />
+                <ScalarProperty Name="DEMDLVHOU_0" ColumnName="DEMDLVHOU_0" />
+                <ScalarProperty Name="ADRVAL_0" ColumnName="ADRVAL_0" />
+                <ScalarProperty Name="CDTSTAP_0" ColumnName="CDTSTAP_0" />
+                <ScalarProperty Name="SDHTYP_0" ColumnName="SDHTYP_0" />
+                <ScalarProperty Name="SFISSTCOD_29" ColumnName="SFISSTCOD_29" />
+                <ScalarProperty Name="SFISSTCOD_28" ColumnName="SFISSTCOD_28" />
+                <ScalarProperty Name="SFISSTCOD_27" ColumnName="SFISSTCOD_27" />
+                <ScalarProperty Name="SFISSTCOD_26" ColumnName="SFISSTCOD_26" />
+                <ScalarProperty Name="SFISSTCOD_25" ColumnName="SFISSTCOD_25" />
+                <ScalarProperty Name="SFISSTCOD_24" ColumnName="SFISSTCOD_24" />
+                <ScalarProperty Name="SFISSTCOD_23" ColumnName="SFISSTCOD_23" />
+                <ScalarProperty Name="SFISSTCOD_22" ColumnName="SFISSTCOD_22" />
+                <ScalarProperty Name="SFISSTCOD_21" ColumnName="SFISSTCOD_21" />
+                <ScalarProperty Name="SFISSTCOD_20" ColumnName="SFISSTCOD_20" />
+                <ScalarProperty Name="SFISSTCOD_19" ColumnName="SFISSTCOD_19" />
+                <ScalarProperty Name="SFISSTCOD_18" ColumnName="SFISSTCOD_18" />
+                <ScalarProperty Name="SFISSTCOD_17" ColumnName="SFISSTCOD_17" />
+                <ScalarProperty Name="SFISSTCOD_16" ColumnName="SFISSTCOD_16" />
+                <ScalarProperty Name="SFISSTCOD_15" ColumnName="SFISSTCOD_15" />
+                <ScalarProperty Name="SFISSTCOD_14" ColumnName="SFISSTCOD_14" />
+                <ScalarProperty Name="SFISSTCOD_13" ColumnName="SFISSTCOD_13" />
+                <ScalarProperty Name="SFISSTCOD_12" ColumnName="SFISSTCOD_12" />
+                <ScalarProperty Name="SFISSTCOD_11" ColumnName="SFISSTCOD_11" />
+                <ScalarProperty Name="SFISSTCOD_10" ColumnName="SFISSTCOD_10" />
+                <ScalarProperty Name="SFISSTCOD_9" ColumnName="SFISSTCOD_9" />
+                <ScalarProperty Name="SFISSTCOD_8" ColumnName="SFISSTCOD_8" />
+                <ScalarProperty Name="SFISSTCOD_7" ColumnName="SFISSTCOD_7" />
+                <ScalarProperty Name="SFISSTCOD_6" ColumnName="SFISSTCOD_6" />
+                <ScalarProperty Name="SFISSTCOD_5" ColumnName="SFISSTCOD_5" />
+                <ScalarProperty Name="SFISSTCOD_4" ColumnName="SFISSTCOD_4" />
+                <ScalarProperty Name="SFISSTCOD_3" ColumnName="SFISSTCOD_3" />
+                <ScalarProperty Name="SFISSTCOD_2" ColumnName="SFISSTCOD_2" />
+                <ScalarProperty Name="SFISSTCOD_1" ColumnName="SFISSTCOD_1" />
+                <ScalarProperty Name="SFISSTCOD_0" ColumnName="SFISSTCOD_0" />
+                <ScalarProperty Name="SSTENTCOD_0" ColumnName="SSTENTCOD_0" />
+                <ScalarProperty Name="UPDTICK_0" ColumnName="UPDTICK_0" />
                 <ScalarProperty Name="ZDATDELAIVAL_0" ColumnName="ZDATDELAIVAL_0" />
                 <ScalarProperty Name="ZDELAIVAL_0" ColumnName="ZDELAIVAL_0" />
                 <ScalarProperty Name="ZCUSORDREF_0" ColumnName="ZCUSORDREF_0" />
@@ -2205,6 +2506,56 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <EntitySetMapping Name="SQUOTE">
             <EntityTypeMapping TypeName="x160Model.SQUOTE">
               <MappingFragment StoreEntitySet="SQUOTE">
+                <ScalarProperty Name="X4NUMINT_0" ColumnName="X4NUMINT_0" />
+                <ScalarProperty Name="X4NUMDEMAND_0" ColumnName="X4NUMDEMAND_0" />
+                <ScalarProperty Name="X4DEBCTLCON_0" ColumnName="X4DEBCTLCON_0" />
+                <ScalarProperty Name="X4RGOP_0" ColumnName="X4RGOP_0" />
+                <ScalarProperty Name="X4SQHDEST_0" ColumnName="X4SQHDEST_0" />
+                <ScalarProperty Name="SQHVALDAT_0" ColumnName="SQHVALDAT_0" />
+                <ScalarProperty Name="ZDEVDUP_0" ColumnName="ZDEVDUP_0" />
+                <ScalarProperty Name="X4SQHEXP_0" ColumnName="X4SQHEXP_0" />
+                <ScalarProperty Name="SQHNUMEND_0" ColumnName="SQHNUMEND_0" />
+                <ScalarProperty Name="X4SQHENVAUT_0" ColumnName="X4SQHENVAUT_0" />
+                <ScalarProperty Name="SQHCFMFLG_0" ColumnName="SQHCFMFLG_0" />
+                <ScalarProperty Name="REVNUM_0" ColumnName="REVNUM_0" />
+                <ScalarProperty Name="AUUID_0" ColumnName="AUUID_0" />
+                <ScalarProperty Name="UPDDATTIM_0" ColumnName="UPDDATTIM_0" />
+                <ScalarProperty Name="CREDATTIM_0" ColumnName="CREDATTIM_0" />
+                <ScalarProperty Name="SFISSTCOD_29" ColumnName="SFISSTCOD_29" />
+                <ScalarProperty Name="SFISSTCOD_28" ColumnName="SFISSTCOD_28" />
+                <ScalarProperty Name="SFISSTCOD_27" ColumnName="SFISSTCOD_27" />
+                <ScalarProperty Name="SFISSTCOD_26" ColumnName="SFISSTCOD_26" />
+                <ScalarProperty Name="SFISSTCOD_25" ColumnName="SFISSTCOD_25" />
+                <ScalarProperty Name="SFISSTCOD_24" ColumnName="SFISSTCOD_24" />
+                <ScalarProperty Name="SFISSTCOD_23" ColumnName="SFISSTCOD_23" />
+                <ScalarProperty Name="SFISSTCOD_22" ColumnName="SFISSTCOD_22" />
+                <ScalarProperty Name="SFISSTCOD_21" ColumnName="SFISSTCOD_21" />
+                <ScalarProperty Name="SFISSTCOD_20" ColumnName="SFISSTCOD_20" />
+                <ScalarProperty Name="SFISSTCOD_19" ColumnName="SFISSTCOD_19" />
+                <ScalarProperty Name="SFISSTCOD_18" ColumnName="SFISSTCOD_18" />
+                <ScalarProperty Name="SFISSTCOD_17" ColumnName="SFISSTCOD_17" />
+                <ScalarProperty Name="SFISSTCOD_16" ColumnName="SFISSTCOD_16" />
+                <ScalarProperty Name="SFISSTCOD_15" ColumnName="SFISSTCOD_15" />
+                <ScalarProperty Name="SFISSTCOD_14" ColumnName="SFISSTCOD_14" />
+                <ScalarProperty Name="SFISSTCOD_13" ColumnName="SFISSTCOD_13" />
+                <ScalarProperty Name="SFISSTCOD_12" ColumnName="SFISSTCOD_12" />
+                <ScalarProperty Name="SFISSTCOD_11" ColumnName="SFISSTCOD_11" />
+                <ScalarProperty Name="SFISSTCOD_10" ColumnName="SFISSTCOD_10" />
+                <ScalarProperty Name="SFISSTCOD_9" ColumnName="SFISSTCOD_9" />
+                <ScalarProperty Name="SFISSTCOD_8" ColumnName="SFISSTCOD_8" />
+                <ScalarProperty Name="SFISSTCOD_7" ColumnName="SFISSTCOD_7" />
+                <ScalarProperty Name="SFISSTCOD_6" ColumnName="SFISSTCOD_6" />
+                <ScalarProperty Name="SFISSTCOD_5" ColumnName="SFISSTCOD_5" />
+                <ScalarProperty Name="SFISSTCOD_4" ColumnName="SFISSTCOD_4" />
+                <ScalarProperty Name="SFISSTCOD_3" ColumnName="SFISSTCOD_3" />
+                <ScalarProperty Name="SFISSTCOD_2" ColumnName="SFISSTCOD_2" />
+                <ScalarProperty Name="SFISSTCOD_1" ColumnName="SFISSTCOD_1" />
+                <ScalarProperty Name="SFISSTCOD_0" ColumnName="SFISSTCOD_0" />
+                <ScalarProperty Name="ADRVAL_0" ColumnName="ADRVAL_0" />
+                <ScalarProperty Name="SSTENTCOD_0" ColumnName="SSTENTCOD_0" />
+                <ScalarProperty Name="SOHTYP_0" ColumnName="SOHTYP_0" />
+                <ScalarProperty Name="SQHTYP_0" ColumnName="SQHTYP_0" />
+                <ScalarProperty Name="UPDTICK_0" ColumnName="UPDTICK_0" />
                 <ScalarProperty Name="ROWID" ColumnName="ROWID" />
                 <ScalarProperty Name="ZREL2OK_0" ColumnName="ZREL2OK_0" />
                 <ScalarProperty Name="ZREL1OK_0" ColumnName="ZREL1OK_0" />
@@ -2489,6 +2840,24 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
           <EntitySetMapping Name="SQUOTED">
             <EntityTypeMapping TypeName="x160Model.SQUOTED">
               <MappingFragment StoreEntitySet="SQUOTED">
+                <ScalarProperty Name="X4SAVLIV_0" ColumnName="X4SAVLIV_0" />
+                <ScalarProperty Name="X4FACTURE_0" ColumnName="X4FACTURE_0" />
+                <ScalarProperty Name="XDESINT_0" ColumnName="XDESINT_0" />
+                <ScalarProperty Name="XDESTFIN_0" ColumnName="XDESTFIN_0" />
+                <ScalarProperty Name="X4RGOPL_0" ColumnName="X4RGOPL_0" />
+                <ScalarProperty Name="LINREVNUM_0" ColumnName="LINREVNUM_0" />
+                <ScalarProperty Name="SQDSEQNUM_0" ColumnName="SQDSEQNUM_0" />
+                <ScalarProperty Name="SQDPSONUM_0" ColumnName="SQDPSONUM_0" />
+                <ScalarProperty Name="AUUID_0" ColumnName="AUUID_0" />
+                <ScalarProperty Name="UPDDATTIM_0" ColumnName="UPDDATTIM_0" />
+                <ScalarProperty Name="CREDATTIM_0" ColumnName="CREDATTIM_0" />
+                <ScalarProperty Name="DLVFLG_0" ColumnName="DLVFLG_0" />
+                <ScalarProperty Name="ZIDWEB_0" ColumnName="ZIDWEB_0" />
+                <ScalarProperty Name="SSTCOD_0" ColumnName="SSTCOD_0" />
+                <ScalarProperty Name="PJT_0" ColumnName="PJT_0" />
+                <ScalarProperty Name="ECCVALMIN_0" ColumnName="ECCVALMIN_0" />
+                <ScalarProperty Name="ECCVALMAJ_0" ColumnName="ECCVALMAJ_0" />
+                <ScalarProperty Name="UPDTICK_0" ColumnName="UPDTICK_0" />
                 <ScalarProperty Name="ROWID" ColumnName="ROWID" />
                 <ScalarProperty Name="ZMAPPLI_0" ColumnName="ZMAPPLI_0" />
                 <ScalarProperty Name="UPDDAT_0" ColumnName="UPDDAT_0" />
@@ -2597,6 +2966,63 @@ avertissement 6002: La table/vue 'x160.CLTPROD.ZCONFPACK4' n'a pas de clé prima
                 <ScalarProperty Name="CPY_0" ColumnName="CPY_0" />
                 <ScalarProperty Name="SQDLIN_0" ColumnName="SQDLIN_0" />
                 <ScalarProperty Name="SQHNUM_0" ColumnName="SQHNUM_0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPADDRESS">
+            <EntityTypeMapping TypeName="x160Model.BPADDRESS">
+              <MappingFragment StoreEntitySet="BPADDRESS">
+                <ScalarProperty Name="ROWID" ColumnName="ROWID" />
+                <ScalarProperty Name="X4ADRFAB_0" ColumnName="X4ADRFAB_0" />
+                <ScalarProperty Name="YDEP_0" ColumnName="YDEP_0" />
+                <ScalarProperty Name="X4VALID_0" ColumnName="X4VALID_0" />
+                <ScalarProperty Name="X4EDIQUAL_0" ColumnName="X4EDIQUAL_0" />
+                <ScalarProperty Name="X4EECNUM_0" ColumnName="X4EECNUM_0" />
+                <ScalarProperty Name="CRN_0" ColumnName="CRN_0" />
+                <ScalarProperty Name="GLNCOD_0" ColumnName="GLNCOD_0" />
+                <ScalarProperty Name="X4ADREXP_0" ColumnName="X4ADREXP_0" />
+                <ScalarProperty Name="ADRVAL_0" ColumnName="ADRVAL_0" />
+                <ScalarProperty Name="XEDICOD_0" ColumnName="XEDICOD_0" />
+                <ScalarProperty Name="AUUID_0" ColumnName="AUUID_0" />
+                <ScalarProperty Name="UPDDATTIM_0" ColumnName="UPDDATTIM_0" />
+                <ScalarProperty Name="CREDATTIM_0" ColumnName="CREDATTIM_0" />
+                <ScalarProperty Name="UPDDAT_0" ColumnName="UPDDAT_0" />
+                <ScalarProperty Name="UPDUSR_0" ColumnName="UPDUSR_0" />
+                <ScalarProperty Name="CREDAT_0" ColumnName="CREDAT_0" />
+                <ScalarProperty Name="CREUSR_0" ColumnName="CREUSR_0" />
+                <ScalarProperty Name="EXPNUM_0" ColumnName="EXPNUM_0" />
+                <ScalarProperty Name="EXTNUM_0" ColumnName="EXTNUM_0" />
+                <ScalarProperty Name="FCYWEB_0" ColumnName="FCYWEB_0" />
+                <ScalarProperty Name="WEB_4" ColumnName="WEB_4" />
+                <ScalarProperty Name="WEB_3" ColumnName="WEB_3" />
+                <ScalarProperty Name="WEB_2" ColumnName="WEB_2" />
+                <ScalarProperty Name="WEB_1" ColumnName="WEB_1" />
+                <ScalarProperty Name="WEB_0" ColumnName="WEB_0" />
+                <ScalarProperty Name="MOB_0" ColumnName="MOB_0" />
+                <ScalarProperty Name="FAX_0" ColumnName="FAX_0" />
+                <ScalarProperty Name="TEL_4" ColumnName="TEL_4" />
+                <ScalarProperty Name="TEL_3" ColumnName="TEL_3" />
+                <ScalarProperty Name="TEL_2" ColumnName="TEL_2" />
+                <ScalarProperty Name="TEL_1" ColumnName="TEL_1" />
+                <ScalarProperty Name="TEL_0" ColumnName="TEL_0" />
+                <ScalarProperty Name="CRYNAM_0" ColumnName="CRYNAM_0" />
+                <ScalarProperty Name="CRY_0" ColumnName="CRY_0" />
+                <ScalarProperty Name="XSRVFAC_0" ColumnName="XSRVFAC_0" />
+                <ScalarProperty Name="SAT_0" ColumnName="SAT_0" />
+                <ScalarProperty Name="CODSEE_0" ColumnName="CODSEE_0" />
+                <ScalarProperty Name="CTY_0" ColumnName="CTY_0" />
+                <ScalarProperty Name="POSCOD_0" ColumnName="POSCOD_0" />
+                <ScalarProperty Name="XEXT2NUM_0" ColumnName="XEXT2NUM_0" />
+                <ScalarProperty Name="BPAADDLIG_2" ColumnName="BPAADDLIG_2" />
+                <ScalarProperty Name="BPAADDLIG_1" ColumnName="BPAADDLIG_1" />
+                <ScalarProperty Name="BPAADDLIG_0" ColumnName="BPAADDLIG_0" />
+                <ScalarProperty Name="BPAADDFLG_0" ColumnName="BPAADDFLG_0" />
+                <ScalarProperty Name="BPABID_0" ColumnName="BPABID_0" />
+                <ScalarProperty Name="BPADES_0" ColumnName="BPADES_0" />
+                <ScalarProperty Name="BPAADD_0" ColumnName="BPAADD_0" />
+                <ScalarProperty Name="BPANUM_0" ColumnName="BPANUM_0" />
+                <ScalarProperty Name="BPATYP_0" ColumnName="BPATYP_0" />
+                <ScalarProperty Name="UPDTICK_0" ColumnName="UPDTICK_0" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

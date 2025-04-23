@@ -14,6 +14,7 @@ namespace GenerateurDFUSafir.Models.DAL
     
     public partial class BPADDRESS
     {
+        public int UPDTICK_0 { get; set; }
         public byte BPATYP_0 { get; set; }
         public string BPANUM_0 { get; set; }
         public string BPAADD_0 { get; set; }
@@ -23,9 +24,12 @@ namespace GenerateurDFUSafir.Models.DAL
         public string BPAADDLIG_0 { get; set; }
         public string BPAADDLIG_1 { get; set; }
         public string BPAADDLIG_2 { get; set; }
+        public string XEXT2NUM_0 { get; set; }
         public string POSCOD_0 { get; set; }
         public string CTY_0 { get; set; }
+        public string CODSEE_0 { get; set; }
         public string SAT_0 { get; set; }
+        public string XSRVFAC_0 { get; set; }
         public string CRY_0 { get; set; }
         public string CRYNAM_0 { get; set; }
         public string TEL_0 { get; set; }
@@ -42,24 +46,24 @@ namespace GenerateurDFUSafir.Models.DAL
         public string WEB_4 { get; set; }
         public string FCYWEB_0 { get; set; }
         public string EXTNUM_0 { get; set; }
-        public string XEXT2NUM_0 { get; set; }
         public int EXPNUM_0 { get; set; }
-        public string XSRVFAC_0 { get; set; }
         public string CREUSR_0 { get; set; }
         public System.DateTime CREDAT_0 { get; set; }
-        public int CRETIM_0 { get; set; }
         public string UPDUSR_0 { get; set; }
         public System.DateTime UPDDAT_0 { get; set; }
-        public int UPDTIM_0 { get; set; }
-        public string CRESTP_0 { get; set; }
-        public string UPDSTP_0 { get; set; }
-        public string IDTSGL_0 { get; set; }
+        public System.DateTime CREDATTIM_0 { get; set; }
+        public System.DateTime UPDDATTIM_0 { get; set; }
+        public byte[] AUUID_0 { get; set; }
         public string XEDICOD_0 { get; set; }
-        public byte X4VALID_0 { get; set; }
+        public byte ADRVAL_0 { get; set; }
         public byte X4ADREXP_0 { get; set; }
+        public string GLNCOD_0 { get; set; }
+        public string CRN_0 { get; set; }
         public string X4EECNUM_0 { get; set; }
-        public byte X4ADRFAB_0 { get; set; }
+        public string X4EDIQUAL_0 { get; set; }
+        public byte X4VALID_0 { get; set; }
         public string YDEP_0 { get; set; }
-        public int ROWID { get; set; }
+        public byte X4ADRFAB_0 { get; set; }
+        public decimal ROWID { get; set; }
     }
 }

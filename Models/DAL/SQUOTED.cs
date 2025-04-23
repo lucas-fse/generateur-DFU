@@ -122,5 +122,23 @@ namespace GenerateurDFUSafir.Models.DAL
         public System.DateTime UPDDAT_0 { get; set; }
         public string ZMAPPLI_0 { get; set; }
         public int ROWID { get; set; }
+        public int UPDTICK_0 { get; set; }
+        public string ECCVALMAJ_0 { get; set; }
+        public string ECCVALMIN_0 { get; set; }
+        public string PJT_0 { get; set; }
+        public string SSTCOD_0 { get; set; }
+        public string ZIDWEB_0 { get; set; }
+        public byte DLVFLG_0 { get; set; }
+        public System.DateTime CREDATTIM_0 { get; set; }
+        public System.DateTime UPDDATTIM_0 { get; set; }
+        public byte[] AUUID_0 { get; set; }
+        public string SQDPSONUM_0 { get; set; }
+        public short SQDSEQNUM_0 { get; set; }
+        public short LINREVNUM_0 { get; set; }
+        public string X4RGOPL_0 { get; set; }
+        public string XDESTFIN_0 { get; set; }
+        public string XDESINT_0 { get; set; }
+        public short X4FACTURE_0 { get; set; }
+        public short X4SAVLIV_0 { get; set; }
     }
 }

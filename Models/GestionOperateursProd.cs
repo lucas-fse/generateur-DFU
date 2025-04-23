@@ -31,6 +31,32 @@ namespace GenerateurDFUSafir.Models
             List<OF_PROD_TRAITE> OfTraite = data.ListOFsTraite();
             return InitDataOperateurs(Operateurs,OfTraite);
         }
+
+        public static bool SavePasswordOperateur(long idOperateur, string hashedPassword)
+        {
+            bool result = false;
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var FirstOP = _db.OPERATEURS.Include("OPERATEURS_PWD").Where(p=>p.ID == idOperateur).FirstOrDefault();
+
+                if (FirstOP != null)
+                {
+                    FirstOP.OPERATEURS_PWD.Password = hashedPassword;
+                    FirstOP.isValidPasswd = true;
+                    _db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch
+            {
+                
+            }
+            return result;
+        }
+
+
+
         public static DataOperateurProd GestionOFOperateur(long id, bool timelimit, string numeroOF = null)
         {
             string[] DEFPOSTEBIDIR = new string[] { "A5/01", "C6/00", "P0/01", "P1/01", "P1/02", "P1/03", "P1/99", "P2/01", "P3/01","A5/01" };
@@ -49,6 +75,7 @@ namespace GenerateurDFUSafir.Models
             result.Animateur = Operateur.ANIMATEUR;
             result.Initial = Operateur.INITIAL.Trim();
             result.Photo = "/operateurs"+Operateur.PATHB;
+            result.Password = Operateur.Password;
             try
             {
                 if (Operateur.POLE != null)

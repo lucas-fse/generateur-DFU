@@ -6,9 +6,6 @@
     int i = Model.DataOperateurs.Count % 5;
 }
 
-
-
-
 <body onload="init()">
 
     <img id="FondEcran" src="../image/swirl.png" alt="">
@@ -33,21 +30,26 @@
     <div id="BarreSeparation"></div>
     <div id="ListOperateur">
         @foreach (var item in @Model.DataOperateurs)
-                {
-                    <div class="Operateur">
-                        <a href="@Url.Action("gestionOf", "Production", new { id = item.ID , popUp = "" })">
-                            <img src="@item.Photo" />
-                            <p>@item.Nom @item.Prenom</p>
-                        </a>
-                    </div>
+        {
+            string lien = !item.isValidPasswd
+                ? Url.Action("DefinirMDP", "Production", new { id = item.ID })
+                : Url.Action("ConnexionOp", "Production", new { id = item.ID });
 
-                }
-            @for (int y = 0; y < @i; y++)
-            {
-                    <div style="width : 300px;">
 
-                    </div>
-            }
+            <div class="Operateur">
+                <a href="@lien">
+                    <img src="@item.Photo" />
+                    <p>@item.Nom @item.Prenom</p>
+                </a>
+            </div>
+        }
+
+        @for (int y = 0; y < @i; y++)
+        {
+            <div style="width : 300px;">
+
+            </div>
+        }
     </div>
 
 

@@ -84,8 +84,8 @@ namespace GenerateurDFUSafir.DAL
 
 
                 //HERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
-
-                db1 = new SqlConnection(@"data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;");
+                string connectionString = Resource1.ERPString;
+                db1 = new SqlConnection(connectionString);
                 x160Entities db = new x160Entities();
                 RequeteSql.Connection = db1; 
                 RequeteSql.CommandText = text;
@@ -135,7 +135,8 @@ namespace GenerateurDFUSafir.DAL
                             WHERE ZEMPLOIFAN.ARTICLE_0 = ITMMASTER.ITMREF_0 AND ((ZEMPLOIFAN.ARTICLE_INIT_0='" + article + 
                             @"') AND (ZEMPLOIFAN.CATEG_ART_0 Not In ('FAN01','FAN02','MRP01','MRP02','MRP03','MRP04','MRP05','MRP06','MRP07')) AND 
                             (ITMMASTER.ITMSTA_0 In (1,2)) AND (ZEMPLOIFAN.ALT_0=1))";
-            db1 = new SqlConnection(@"data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;");
+            string connectionString = Resource1.ERPString;
+            db1 = new SqlConnection(connectionString);
             x160Entities db = new x160Entities();
             RequeteSql.Connection = db1;
             RequeteSql.CommandText = text;
@@ -184,7 +185,9 @@ namespace GenerateurDFUSafir.DAL
 
                              WHERE(((MFGITM.ITMREF_0 Like 'UD%') OR(MFGITM.ITMREF_0 Like 'UC%')OR(MFGITM.ITMREF_0 Like 'ADE%') OR(MFGITM.ITMREF_0 Like 'UR%')OR(MFGITM.ITMREF_0 Like 'D228%') OR(MFGITM.ITMREF_0 Like 'PR0124%')) and(MFGITM.MFGSTA_0  like '1' OR  MFGITM.MFGSTA_0  like '2' or MFGITM.MFGSTA_0  like '3' OR MFGITM.MFGSTA_0 is null))";
                 //WHERE(((SORDERQ.ITMREF_0 Like 'UD%') OR(SORDERQ.ITMREF_0 Like 'UC%') OR(SORDERQ.ITMREF_0 Like 'UR%')) and SORDERQ.SOQSTA_0 not like '3' and(MFGITM.MFGSTA_0  like '1' OR  MFGITM.MFGSTA_0  like '2' or MFGITM.MFGSTA_0  like '3' OR MFGITM.MFGSTA_0 is null))
-                db1 = new SqlConnection(@"data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;");
+
+                string connectionString = Resource1.ERPString;
+                db1 = new SqlConnection(connectionString);
                 x160Entities db = new x160Entities();
                 RequeteSql.Connection = db1;
                 RequeteSql.CommandText = text;
@@ -214,6 +217,7 @@ namespace GenerateurDFUSafir.DAL
             }
             return result;
         }
+
         public List<OrdreFabrication> ListOfAllProductionX3()
         {
             SqlConnection db1 = null;
@@ -241,7 +245,9 @@ namespace GenerateurDFUSafir.DAL
 
                 //HERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
 
-                db1 = new SqlConnection(@"data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;");
+
+                string connectionString = Resource1.ERPString;
+                db1 = new SqlConnection(connectionString);
                 x160Entities db = new x160Entities();
                 RequeteSql.Connection = db1;
                 RequeteSql.CommandText = text;
@@ -305,16 +311,16 @@ namespace GenerateurDFUSafir.DAL
                 LEFT join CLTPROD.MFGHEADTRK MFGHEADTRK
 		        on MFGHEAD.MFGNUM_0 = MFGHEADTRK.MFGNUM_0
 
-                WHERE  MFGHEADTRK.MFGTRKDAT_0 > '" +  olddate.Day + "/" + olddate.Month + "/" + olddate.Year+"'";    
-                             //wHERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
+                WHERE  MFGHEADTRK.MFGTRKDAT_0 > '" +  olddate.Day + "/" + olddate.Month + "/" + olddate.Year+"'";
+                //wHERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
 
                 // ITMREF ref com
                 //CFGLIN egal indus 
 
 
                 //HERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
-
-                db1 = new SqlConnection(@"data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;");
+                string connectionString = Resource1.ERPString;
+                db1 = new SqlConnection(connectionString);
                 x160Entities db = new x160Entities();
                 RequeteSql.Connection = db1;
                 RequeteSql.CommandText = text;
@@ -390,7 +396,7 @@ namespace GenerateurDFUSafir.DAL
             List<OF_PROD_TRAITE> result = new List<OF_PROD_TRAITE>();
             using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
             {
-                IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Include("ALEAS_OF.ALEAS_OF_DETAILS").Where(p => p.ISALIVE != false);
+                IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Include("ALEAS_OF.ALEAS_OF_DETAILS").Where(p => p.ISALIVE != false && !p.STATUSTYPE.Contains("CLOSED"));
                 //IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Where(p => p.ISALIVE != false );
                 if (queryoftraite != null && queryoftraite.Count() > 0)
                 {
@@ -866,6 +872,31 @@ namespace GenerateurDFUSafir.DAL
             }
             return result;
         }
+
+        public bool SavePasswordOperateur(long idOperateur, string hashedPassword)
+        {
+            bool result = false;
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+
+                var operateur = _db.OPERATEURS.FirstOrDefault(op => op.ID == idOperateur);
+                if (operateur != null)
+                {
+                    operateur.Password = hashedPassword;
+                    _db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch
+            {
+                // log éventuellement
+            }
+
+            return result;
+        }
+
+
         public bool SaveDbOFNewAlea(OF_PROD_TRAITE OfGenere)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();            
@@ -1023,6 +1054,7 @@ namespace GenerateurDFUSafir.DAL
 
             return true;
         }
+
         public bool SaveDbDeleteAlea(long? idAlea)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();

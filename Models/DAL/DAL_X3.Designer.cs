@@ -1,4 +1,4 @@
-﻿// La génération de code T4 est activée pour le modèle 'C:\Users\fournier\source\repos\GenerateurDFUSafirV20\Models\DAL\DAL_X3.edmx'. 
+﻿// La génération de code T4 est activée pour le modèle 'D:\source\repos\GenerateurDFUSafirV26 2022\Models\DAL\DAL_X3.edmx'. 
 // Pour activer la génération de code héritée, définissez la valeur de la propriété
 // du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
 //  est ouvert dans le concepteur.

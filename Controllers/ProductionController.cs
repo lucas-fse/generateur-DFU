@@ -951,8 +951,139 @@ namespace GenerateurDFUSafir.Controllers
             return View(vue);
         }
 
+        //Accès à la page Connexion Operateur, situé entre indexOfOperateur et gestionOf
+        //Permet de s'authentifier pour avoir accès aux informations de l'opérateur
+        public ActionResult ConnexionOp(long? id)
+        {
+            var idConnecte = Session["OperateurConnecte"];
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            if (idConnecte != null && (long)idConnecte == id)
+            {
+                return RedirectToAction("GestionOF", new { id = id });
+            }
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+            return View("ConnexionOperateur", operateur);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult ConnexionOperateur(long id, string motdepasse)
+        {
+            // Récupère l'opérateur depuis la base de données
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+
+            if (operateur == null)
+            {
+                return RedirectToAction("IndexOFOperateur"); // retour si opérateur inconnu
+            }
+
+            // Vérifie le mot de passe
+            if (operateur.Password == motdepasse)
+            {
+                Session["OperateurConnecte"] = operateur.ID;
+                //"Password                      "
+                return RedirectToAction("gestionOF", new { id = operateur.ID });
+            }
+
+            // Mot de passe incorrect → retourne la vue avec un message d'erreur
+            ViewBag.Erreur = "Mot de passe incorrect";
+            return View("ConnexionOperateur", operateur);
+        }
+
+        public ActionResult ConnexionAd(long? id)
+        {
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+            return View("ConnexionAdmin", operateur); // 
+        }
+
+
+        [HttpPost]
+        public ActionResult ConnexionAdmin(long id, string adminPassword)
+        {
+            // Mot de passe admin temporaire
+            const string motDePasseAdmin = "admin123"; // à remplacer plus tard par une config sécurisée
+
+            if (adminPassword == motDePasseAdmin)
+            {
+                // on autorise l'accès à l'espace opérateur en tant qu'admin
+                Session["OperateurConnecte"] = id;
+                Session["EstAdmin"] = true;
+
+                return RedirectToAction("GestionOF", new { id = id });
+            }
+
+            // mot de passe incorrect → retour à la page avec message
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+            ViewBag.ErreurAdmin = "Mot de passe admin incorrect";
+            return View("ConnexionAdmin", operateur);
+        }
+
+
+        public ActionResult Deconnexion()
+        {
+            Session["OperateurConnecte"] = null;
+            return RedirectToAction("IndexOFOperateur");
+        }
+
+        public ActionResult DefinirMDP(long? id)
+        {
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+            return View("DefinirPassword", operateur); // 
+        }
+
+        [HttpPost]
+        public ActionResult CreerMotDePasse(long id, string motdepasse)
+        {
+            if (string.IsNullOrEmpty(motdepasse))
+            {
+                ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
+                var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                return View("CreerMotDePasse", operateur);
+            }
+
+            string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
+
+            bool ok = GestionOperateursProd.SavePasswordOperateur(id, hashed);
+
+            if (!ok)
+            {
+                ViewBag.Erreur = "Erreur lors de l'enregistrement du mot de passe.";
+                var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                return View("CreerMotDePasse", operateur);
+            }
+
+            return RedirectToAction("GestionOF", new { id = id });
+        }
+
+
+
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
+            // Pour éviter de pouvoir accéder à l'espace juste en tapant le bon URL
+            // On met en place un id de Session
+            var idConnecte = Session["OperateurConnecte"];
+            var estAdmin = Session["EstAdmin"] != null && (bool)Session["EstAdmin"];
+
+            // Donc si il n'est pas connecté il ne peut pas y accéder
+            if (idConnecte == null || (!estAdmin && Convert.ToInt64(idConnecte) != id))
+            {
+                return RedirectToAction("ConnexionOp", new { id = id }); // redirige vers la connexion
+            }
+
+            bool ChargeOfPlanifie = false;
             if (id == null)
             {
                 return RedirectToAction("IndexOFOperateur", "Production");
@@ -963,11 +1094,13 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ViewData["PopUpOf"] = "false";
                     ViewData["OfTrouve"] = "";
+                    ChargeOfPlanifie = false;
                 }
                 else if (viewAction == 1)
                 {
                     ViewData["PopUpOf"] = "true";
                     ViewData["OfTrouve"] = "";
+                    ChargeOfPlanifie = true;
                 }
                 else if (viewAction == 2)
                 {
@@ -992,7 +1125,9 @@ namespace GenerateurDFUSafir.Controllers
 				PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
                 
-                ope.initOfList((int) pole, ofCherche);
+                ope.initOfList((int) pole, ofCherche,ChargeOfPlanifie);
+                ViewBag.OperateurID = id;
+                ViewBag.EstAdmin = estAdmin;
                 return View(ope);
             }
         }
@@ -1000,7 +1135,6 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("gestionOf")]
         public ActionResult gestionOfPopup(DataOperateurProd ope)
         {
-
             // description des diferent formulaire de la page GestionOf
             // bouton de of non trite par pole  
             //name="cat" value = 2 bidir 3 mono 4 test 1 tous
@@ -1040,6 +1174,7 @@ namespace GenerateurDFUSafir.Controllers
                     }
                     else if (Ilotid != 5 && Ilotid != 6)
                     {
+                        // ilot1 affiched'une popup
                         viewAction = 1;
                     }
                     // planification des of
@@ -1049,6 +1184,7 @@ namespace GenerateurDFUSafir.Controllers
                     }
                     else
                     {
+                        // (Ilotid == 5) print ZEN pour etiquette
                         viewAction = 5;
                     }
                 }
@@ -1084,7 +1220,7 @@ namespace GenerateurDFUSafir.Controllers
             {
 
             }
-            if (viewAction ==1)
+            if (viewAction ==1) // affichage de l'of plannifie
             {
                 OfX3 data = new OfX3();
                 OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == (long)id_demande).First();
@@ -1479,7 +1615,7 @@ namespace GenerateurDFUSafir.Controllers
                     writer.WriteLine(string.Concat(StructLabel.OF1, "=\"", op.MFGNUM_0, "\""));
                     if (op.SERNUM == 3)
                     {
-                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1+ (i + 1).ToString("00") , "=\"", numserie, "\""));
+                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1 , "=\"", numserie+ (i + 1).ToString("00"), "\""));
                     }
                     if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                     {
@@ -1504,10 +1640,10 @@ namespace GenerateurDFUSafir.Controllers
                     {
                         writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT2, "=\"", op.ITMREF_0, "\""));
                         writer.WriteLine(string.Concat(StructLabel.OF2, "=\"", op.MFGNUM_0, "\""));
-                        //if (op.SERNUM == 3)
-                        //{
-                        //    writer.WriteLine(string.Concat(StructLabel.NMRSERIE1 + (i + 2).ToString("00"), "=\"", numserie, "\""));
-                        //}   
+                        if (op.SERNUM == 3)
+                        {
+                            writer.WriteLine(string.Concat(StructLabel.NMRSERIE2 , "=\"", numserie + (i + 2).ToString("00"), "\""));
+                        }
                         if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                         {
                             writer.WriteLine(string.Concat(StructLabel.CDE2, "=\"", op.VCRNUMORI_0, "\""));

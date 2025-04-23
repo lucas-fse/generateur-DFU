@@ -1,0 +1,52 @@
+﻿@model GenerateurDFUSafir.Models.DataOperateurProd
+@{
+    ViewBag.Title = "ConnexionAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/ConnexionAdmin.css" rel="stylesheet" />
+
+<div id="login-container">
+    <div id="top">
+        <h2 id="title">ConnecZEN</h2>
+    </div>
+
+    <div id="profil">
+        
+        <div class="nom-op">
+            <strong>Administrateur</strong>
+        </div>
+    </div>
+
+    <form method="post" action="@Url.Action("ConnexionAdmin", "Production")" id="login-form">
+        <input type="hidden" name="id" value="@Model.ID" />
+        <input type="password" id="motdepasse" name="motdepasse" readonly />
+
+        <div id="digicode">
+            @for (int i = 1; i <= 9; i++)
+            {
+                <button type="button" onclick="ajouterChiffre('@i')">@i</button>
+            }
+            <button type="button" onclick="supprimerDernier()">⌫</button>
+            <button type="button" onclick="ajouterChiffre('0')">0</button>
+            <button type="submit">✔️</button>
+        </div>
+    </form>
+
+    @if (ViewBag.ErreurAdmin != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErreurAdmin</div>
+    }
+</div>
+
+<script>
+    function ajouterChiffre(c) {
+        const input = document.getElementById("motdepasse");
+        input.value += c;
+    }
+
+    function supprimerDernier() {
+        const input = document.getElementById("motdepasse");
+        input.value = input.value.slice(0, -1);
+    }
+</script>
