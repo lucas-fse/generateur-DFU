@@ -18,7 +18,6 @@ namespace GenerateurDFUSafir.Models.DAL
         public x160Entities()
             : base("name=x160Entities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,9 +26,9 @@ namespace GenerateurDFUSafir.Models.DAL
         }
     
         public virtual DbSet<ZCONFPACK4> ZCONFPACK4 { get; set; }
+        public virtual DbSet<BPADDRESS> BPADDRESS { get; set; }
         public virtual DbSet<SORDER> SORDER { get; set; }
         public virtual DbSet<SQUOTE> SQUOTE { get; set; }
         public virtual DbSet<SQUOTED> SQUOTED { get; set; }
-        public virtual DbSet<BPADDRESS> BPADDRESS { get; set; }
     }
 }

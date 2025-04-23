@@ -270,17 +270,9 @@
           <Property Name="PATHB" Type="nvarchar" MaxLength="256" />
           <Property Name="SousService" Type="nchar" MaxLength="5" />
           <Property Name="HoraireByWeek" Type="float" />
+          <Property Name="Password" Type="nchar" MaxLength="30" />
           <Property Name="Login" Type="nchar" MaxLength="100" />
           <Property Name="Matricule" Type="nchar" MaxLength="10" />
-          <Property Name="isValidPasswd" Type="bit" />
-          <Property Name="Password" Type="nchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="OPERATEURS_PWD">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ORDRE_FABRICATION_GENERE">
           <Key>
@@ -699,18 +691,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OPERATEURS_PWD_OPERATEURS">
-          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
-          <End Role="OPERATEURS_PWD" Type="Self.OPERATEURS_PWD" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="OPERATEURS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OPERATEURS_PWD">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OPERATEURSTEMPS_SEMAINE">
           <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
           <End Role="TEMPS_SEMAINE" Type="Self.TEMPS_SEMAINE" Multiplicity="*" />
@@ -1019,7 +999,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySet Name="OCCURRENCE" EntityType="Self.OCCURRENCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OF_PROD_TRAITE" EntityType="Self.OF_PROD_TRAITE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OPERATEURS" EntityType="Self.OPERATEURS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OPERATEURS_PWD" EntityType="Self.OPERATEURS_PWD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="Self.ORDRE_FABRICATION_GENERE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANIF_OF" EntityType="Self.PLANIF_OF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANIFICATION_OF" EntityType="Self.PLANIFICATION_OF" Schema="dbo" store:Type="Tables" />
@@ -1101,10 +1080,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <AssociationSet Name="FK_OCCURRENCE_QRQC" Association="Self.FK_OCCURRENCE_QRQC">
             <End Role="QRQC" EntitySet="QRQC" />
             <End Role="OCCURRENCE" EntitySet="OCCURRENCE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OPERATEURS_PWD_OPERATEURS" Association="Self.FK_OPERATEURS_PWD_OPERATEURS">
-            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
-            <End Role="OPERATEURS_PWD" EntitySet="OPERATEURS_PWD" />
           </AssociationSet>
           <AssociationSet Name="FK_OPERATEURSTEMPS_SEMAINE" Association="Self.FK_OPERATEURSTEMPS_SEMAINE">
             <End Role="OPERATEURS" EntitySet="OPERATEURS" />
@@ -1396,11 +1371,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             <End Role="TYPE_CAUSE" EntitySet="TYPE_CAUSE" />
             <End Role="CONTROLE_QUALITE" EntitySet="CONTROLE_QUALITE" />
           </AssociationSet>
-          <EntitySet Name="OPERATEURS_PWD" EntityType="PEGASE_PROD2Model.OPERATEURS_PWD" />
-          <AssociationSet Name="FK_OPERATEURS_PWD_OPERATEURS" Association="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS">
-            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
-            <End Role="OPERATEURS_PWD" EntitySet="OPERATEURS_PWD" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ACCIDENT">
           <Key>
@@ -1664,6 +1634,7 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <Property Name="PATHB" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="SousService" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="HoraireByWeek" Type="Double" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Login" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="KPI_STC" Relationship="PEGASE_PROD2Model.FK_KPI_STC_OPERATEURS" FromRole="OPERATEURS" ToRole="KPI_STC" />
           <NavigationProperty Name="NON_CONFORMITE" Relationship="PEGASE_PROD2Model.FK_NON_CONFORMITE_OPERATEURS" FromRole="OPERATEURS" ToRole="NON_CONFORMITE" />
@@ -1674,9 +1645,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <NavigationProperty Name="TEMPS_SAISI" Relationship="PEGASE_PROD2Model.FK_TEMPS_SAISIOPERATEURS" FromRole="OPERATEURS" ToRole="TEMPS_SAISI" />
           <Property Name="Matricule" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="CONTROLE_QUALITE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS" FromRole="OPERATEURS" ToRole="CONTROLE_QUALITE" />
-          <Property Name="isValidPasswd" Type="Boolean" />
-          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="OPERATEURS_PWD" Relationship="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS" FromRole="OPERATEURS" ToRole="OPERATEURS_PWD" />
         </EntityType>
         <EntityType Name="ORDRE_FABRICATION_GENERE">
           <Key>
@@ -2450,26 +2418,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="OPERATEURS_PWD">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS" FromRole="OPERATEURS_PWD" ToRole="OPERATEURS" />
-        </EntityType>
-        <Association Name="FK_OPERATEURS_PWD_OPERATEURS">
-          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
-          <End Type="PEGASE_PROD2Model.OPERATEURS_PWD" Role="OPERATEURS_PWD" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="OPERATEURS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OPERATEURS_PWD">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2726,10 +2674,9 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySetMapping Name="OPERATEURS">
             <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS">
               <MappingFragment StoreEntitySet="OPERATEURS">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="isValidPasswd" ColumnName="isValidPasswd" />
                 <ScalarProperty Name="Matricule" ColumnName="Matricule" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="HoraireByWeek" ColumnName="HoraireByWeek" />
                 <ScalarProperty Name="SousService" ColumnName="SousService" />
                 <ScalarProperty Name="PATHB" ColumnName="PATHB" />
@@ -3041,14 +2988,6 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             <EntityTypeMapping TypeName="PEGASE_PROD2Model.TYPE_CAUSE">
               <MappingFragment StoreEntitySet="TYPE_CAUSE">
                 <ScalarProperty Name="Valeur" ColumnName="Valeur" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OPERATEURS_PWD">
-            <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS_PWD">
-              <MappingFragment StoreEntitySet="OPERATEURS_PWD">
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

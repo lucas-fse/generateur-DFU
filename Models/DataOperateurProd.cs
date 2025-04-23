@@ -20,10 +20,6 @@ namespace GenerateurDFUSafir.Models
         public String Prenom { get; set; }
         public String Initial  { get;set;}
 
-        public String Password { get; set; }
-
-        public bool isValidPasswd { get; set; }
-
         public List<OFView> ofAfaire { get; set; }
         public bool Animateur { get; set; }
         public DateTime? Anniversaire { get; set; }
@@ -84,10 +80,9 @@ namespace GenerateurDFUSafir.Models
 
         }
 
-        public void initOfList(int pole,string ofCherche,bool ChargeOfPlanifie)
+        public void initOfList(int pole,string ofCherche)
         {
-            ofAfaire = getOfsAFaire(pole, ofCherche, ChargeOfPlanifie);
-            //ofAfaire = new List<OFView>();
+            ofAfaire = getOfsAFaire(pole, ofCherche);
         }
 
         public void ToJson()
@@ -100,11 +95,9 @@ namespace GenerateurDFUSafir.Models
             //JsonOfEnCours = JsonConvert.SerializeObject(OfEncours);
         }
 
-        private List<OFView> getOfsAFaire(long pole,string ofCherche,bool ChargeOfPlanifie)
+        private List<OFView> getOfsAFaire(long pole,string ofCherche)
         {
             PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
-            DataTable rawResult = new DataTable();
-            ofProdIieCmd Ofs = new ofProdIieCmd();
             List<PLANIF_OF> ofs = new List<PLANIF_OF>();
             if (!string.IsNullOrWhiteSpace(ofCherche))
             {
@@ -112,29 +105,24 @@ namespace GenerateurDFUSafir.Models
                 of.NumOF = ofCherche.Trim();
                 of.Etat = 1;
                 ofs.Add(of);
-                Ofs.RequeteOFBis(ref rawResult, ofCherche, "EDITE");
             }
             else
             {
-                if (ChargeOfPlanifie)
-                {
-                    ofs = db.PLANIF_OF.Where(i => i.Pole == pole).OrderBy(i => i.DatePlanif)
-                       .ThenBy(i => i.Rang).ToList();
-                    Ofs.RequeteOFBis(ref rawResult, "", "EDITE");
-                }
+                 ofs = db.PLANIF_OF.Where(i => i.Pole == pole).OrderBy(i => i.DatePlanif)
+                    .ThenBy(i => i.Rang).ToList();
             }
             // On récupère les vrais ofs de X3 correspondant
-            
-            //Ofs.RequeteOF(ref rawResult,"EDITE");
-            
+            DataTable rawResult = new DataTable();
+            ofProdIieCmd Ofs = new ofProdIieCmd();
+            Ofs.RequeteOF(ref rawResult,"EDITE");
 
             List<OFView> liste_of = new List<OFView>();
             List<string> poste_occupe = new List<string>();
 
-            List<POSTES> ListPostes = db.POSTES.ToList();
-            List<OF_PROD_TRAITE> oF_PROD_TRAITEs = db.OF_PROD_TRAITE.ToList();
             foreach (PLANIF_OF of in ofs)
-            {              
+            {
+
+                List<POSTES> ListPostes = db.POSTES.ToList();
 
                 OFView of_cherche = null;
 
@@ -183,8 +171,9 @@ namespace GenerateurDFUSafir.Models
                 {
                     if (of.Etat == 1) // OF disponible et prêt
                     {
-                        
-                        int nb_op = oF_PROD_TRAITEs.Where(p => p.STATUSTYPE.Equals("INPROGRESS") && p.ILOT!= null && p.ILOT.Equals(of_cherche.poste)).Count();
+
+                        // On regarde si le poste est disponible
+                        int nb_op = db.OF_PROD_TRAITE.Where(p => p.STATUSTYPE.Equals("INPROGRESS") && p.ILOT.Equals(of_cherche.poste)).Count();
 
                         if ((nb_op == 0)|| !string.IsNullOrWhiteSpace(ofCherche))
                         {
@@ -197,7 +186,7 @@ namespace GenerateurDFUSafir.Models
 
             //var liste_of_a_faire = liste_of.Where(i => i.rupture == false).Take(3);
             var liste_of_a_faire = liste_of.Take(3);
-            
+
             return liste_of_a_faire.ToList();
         }
     }

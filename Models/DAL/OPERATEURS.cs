@@ -41,10 +41,9 @@ namespace GenerateurDFUSafir.Models.DAL
         public string PATHB { get; set; }
         public string SousService { get; set; }
         public Nullable<double> HoraireByWeek { get; set; }
+        public string Password { get; set; }
         public string Login { get; set; }
         public string Matricule { get; set; }
-        public Nullable<bool> isValidPasswd { get; set; }
-        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KPI_STC> KPI_STC { get; set; }
@@ -62,6 +61,5 @@ namespace GenerateurDFUSafir.Models.DAL
         public virtual ICollection<TEMPS_SAISI> TEMPS_SAISI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTROLE_QUALITE> CONTROLE_QUALITE { get; set; }
-        public virtual OPERATEURS_PWD OPERATEURS_PWD { get; set; }
     }
 }

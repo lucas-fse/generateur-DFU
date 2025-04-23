@@ -151,7 +151,7 @@
     <value>\\Jaysvrfiles\donnees_production\DONNEES_INDUSTRIELLES\ETIQUETTES\Etiquettes_Models\Emballage DATAMATRIX x2.Lab</value>
   </data>
   <data name="ERPString" xml:space="preserve">
-    <value>data source=CXWFRSAI-SV0197\SAGEX3V12;initial catalog=x112p;persist security info=True;user id=CLTPROD;password=8hpyY6m9HpdY;multipleactiveresultsets=True;encrypt=true;trustServerCertificate=true</value>
+    <value>data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;</value>
   </data>
   <data name="DomaineAccesReseau" xml:space="preserve">
     <value>jayelectronique</value>
@@ -172,7 +172,7 @@
     <value>CLTPROD</value>
   </data>
   <data name="NOMJAY" xml:space="preserve">
-    <value>E:\Sage\X3U12PROD\dossiers\CLTPROD\EXTBATCH\job\</value>
+    <value>F:\SAGE\SAGEX3V6\V6JAYSVRZ\Dossiers\EXTBATCH\job\</value>
   </data>
   <data name="PASS" xml:space="preserve">
     <value>CDC43F6FA4E98675CBB561D9</value>

@@ -133,6 +133,7 @@ namespace GenerateurDFUSafir.Controllers
         {
             InfoUSer datas = new InfoUSer(numof);
             return Json(datas, JsonRequestBehavior.AllowGet);
+
         }
         [HttpPost, ActionName("ControleQualite")]
         public ActionResult AjoutControleQualite(long? ID, HttpPostedFileBase ImageControle)

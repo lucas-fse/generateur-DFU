@@ -19,7 +19,7 @@ namespace GenerateurDFUSafir {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource1 {
@@ -79,7 +79,7 @@ namespace GenerateurDFUSafir {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à data source=CXWFRSAI-SV0197\SAGEX3V12;initial catalog=x112p;persist security info=True;user id=CLTPROD;password=8hpyY6m9HpdY;multipleactiveresultsets=True;encrypt=true;trustServerCertificate=true.
+        ///   Recherche une chaîne localisée semblable à data source=JAYSVRZ2\X3V6;initial catalog=x160;persist security info=True;user id=X3;password=tiger;multipleactiveresultsets=True;.
         /// </summary>
         public static string ERPString {
             get {
@@ -196,7 +196,7 @@ namespace GenerateurDFUSafir {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à E:\Sage\X3U12PROD\dossiers\CLTPROD\EXTBATCH\job\.
+        ///   Recherche une chaîne localisée semblable à F:\SAGE\SAGEX3V6\V6JAYSVRZ\Dossiers\EXTBATCH\job\.
         /// </summary>
         public static string NOMJAY {
             get {
