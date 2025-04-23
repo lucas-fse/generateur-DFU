@@ -229,13 +229,14 @@ textarea {
     }
 
     .badge-etat.negative {
-        background-color: #ff
+        background-color: #ff000099;
     }
 
 :root {
     --orange-main: #FF6600;
     --orange-dark: #cc5200;
     --orange-light: #ff944d;
+    --gris-light: #E0E0E0;
 }
 
 /* Bouton principal orange */
@@ -255,7 +256,7 @@ textarea {
     }
 
 .btn-orange:disabled {
-    background-color: var(--orange-light);
+    background-color: var(--gris-light);
     border: none;
     color: white;
     font-weight: bold;

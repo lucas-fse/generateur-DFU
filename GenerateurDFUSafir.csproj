@@ -768,6 +768,7 @@
     <Content Include="Content\AffectationOperateur.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\AfficheControles.css" />
     <Content Include="Content\AIC2.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1928,6 +1929,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ClientApp\" />
     <Folder Include="operateurs\old\" />
     <Folder Include="pdf\" />
     <Folder Include="Views\Default\" />

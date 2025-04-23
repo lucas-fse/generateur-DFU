@@ -1,0 +1,123 @@
+/* Styles pour le tableau */
+.table-conductix {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table-conductix th,
+    .table-conductix td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+
+
+/* Styles pour les images */
+td > img {
+    text-align: center;
+    min-width: 80%;
+    min-height: 30px;
+    max-width: 80%;
+    max-height: 30px;
+    border: 1px solid black;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.td-center {
+    text-align: center;
+}
+
+/* Styles pour le zoom d'image */
+.zoom-image img {
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 90vw;
+    height: 80vw;
+    max-width: 1000px;
+    max-height: 600px;
+    box-shadow: 0 0 25px 3px black;
+    object-fit: contain;
+    background-color: black;
+}
+
+/* Style pour les boutons */
+.frm-button {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+/* Style pour l'en-tête des boutons */
+.en-tete {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Bouton Nouveau contrôle */
+.btn.btn-orange {
+    background-color: #FF6600 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Boutons de filtrage */
+.filter-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto; /* Pousse à droite */
+}
+
+.checkbox-filter {
+    display: none;
+}
+
+.btn.btn-orange-filtre {
+    background-color: #FF6600 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox-filter:checked + .btn.btn-orange-filtre.for-checkbox-filter,
+.checkbox-filter:not(:checked) + .btn.btn-orange-filtre.for-checkbox-filter {
+    display: inline-block;
+    padding: 10px 20px;
+    width: 200px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #ffffff;
+    transition: all 300ms linear;
+}
+
+.filter-buttons .checkbox-filter:not(:checked) + .btn.btn-orange-filtre.for-checkbox-filter {
+    background-color: #808080 !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.filter-buttons .checkbox-filter:checked + .btn.btn-orange-filtre.for-checkbox-filter {
+    background-color: #FF6600 !important;
+    color: white !important;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.filter-buttons .checkbox-filter:not(:checked) + .btn.btn-orange-filtre.for-checkbox-filter:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}

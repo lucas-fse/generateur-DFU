@@ -389,13 +389,10 @@ table textarea[disabled] {
 	text-align: left;
 }
 
-#submitButton {
+.btn-orange {
 	padding: 10px;
-	font-weight: bold;
 	display: block;
 	margin: 10px auto;
-	color: white;
-	background-color: rgb(250, 120, 0);
 }
 
 input[type=number],
@@ -441,19 +438,7 @@ textarea {
 	align-items: center;
 }
 
-.editLine {
-	font-weight: bold;
-	border: 1px solid grey;
-	background-color: white;
-	border-radius: 5px;
-	padding: 2.5px 10px;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-	max-width: fit-content;
-}
+
 
 @media all and (max-width: 1200px) {
 	.editLine {

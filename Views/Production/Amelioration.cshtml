@@ -15,13 +15,27 @@
 
 <div id="fondTransparent"></div>
 
+
+
+
 <div id="AmeliorationDiv">
     <div id="topInfos">
         <h2>Proposition amélioration</h2>
     </div>
 
+    <div class="btn-container">
+        <button type="button"
+                class="btn btn-orange"
+                onclick="OuvrirPopUp()">
+            Nouvelle Proposition
+        </button>
+    </div>
+    </div>
+
     <div id="Middle">
         <div id="DivCases">
+
+
             <div class="boxCounter">
                 <div class="thumbnailCounter">
                     <img src="../image/sablier.png" alt="" class="imgIndicateur">
@@ -51,9 +65,6 @@
                     <p id="AMcpt3" initvalue="@Model.NbAmeliorationProductionsecurite" class="ValueCase"><span>0</span></p>
                 </div>
             </div>
-
-            <a href="#0" class="bttn" onclick="OuvrirPopUp()">Nouvelle Proposition</a>
-
         </div>
         <div id="Graph">
             <div id="Graph1">
@@ -68,8 +79,7 @@
                         TitreAmeliorationParService += item.Key + ":";
                     }
 
-                    <label id="click" class="for-checkbox-tools" for="tool-1" onclick="GraphService(@("'"+NbAmeliorationParService+";"+TitreAmeliorationParService+"'"))">
-                        <i class='uil uil-line-alt'></i>
+                    <label id="click" class="btn btn-orange for-checkbox-tools" for="tool-1" onclick="GraphService(@("'"+NbAmeliorationParService+";"+TitreAmeliorationParService+"'"))">
                         Par Services
                     </label>
                     <br />
@@ -80,10 +90,9 @@
                         TitreAmeliorationParSecteur += item.Key + ":";
                     }
 
-                    <label class="for-checkbox-tools" for="tool-2" onclick="GraphSecteur(@("'"+NbAmeliorationParSecteur+";"+TitreAmeliorationParSecteur+"'"))">
-                        <i class='uil uil-vector-square'></i>
-                        Par Secteurs
-                    </label>
+                <label class="btn btn-orange for-checkbox-tools" for="tool-2" onclick="GraphSecteur(@("'"+NbAmeliorationParSecteur+";"+TitreAmeliorationParSecteur+"'"))">
+                    Par Secteur
+                </label>
                     <br />
                     <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
                     @foreach (var item in Model.AmeliorationParStatus)
@@ -91,11 +100,9 @@
                         NbAmeliorationParStatus += (item.Value.Count) + ":";
                         TitreAmeliorationParStatus += item.Key + ":";
                     }
-
-                    <label class="for-checkbox-tools" for="tool-3" onclick="GraphStatus(@("'"+NbAmeliorationParStatus+";"+TitreAmeliorationParStatus+"'"))">
-                        <i class='uil uil-ruler'></i>
-                        Par Status
-                    </label>
+                <label class="btn btn-orange for-checkbox-tools" for="tool-3" onclick="GraphStatus(@("'"+NbAmeliorationParStatus+";"+TitreAmeliorationParStatus+"'"))">
+                    Par Status
+                </label>
                 </div>
 
             </div>
@@ -334,7 +341,7 @@
                     newDiv.appendChild(DivText1);
                     DivText1.appendChild(text1);
                     DivText1.append(infoSups);
-                    
+
 
                     var text2 = document.createElement("label");
                     var DivText2 = document.createElement("div")
@@ -499,11 +506,11 @@
                         newDiv.appendChild(DivText7);
                         DivText7.appendChild(text7);
                     }
-                    
+
                     document.getElementById('DetailAmelioration').appendChild(newDiv);
                 }
             }
     </script>
     <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
     <script type="text/javascript" src="~/Scripts/form.js"></script>
-</div>
+

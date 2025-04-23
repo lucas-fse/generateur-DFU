@@ -188,8 +188,11 @@ namespace GenerateurDFUSafir.Controllers
         }
         public ActionResult AfficheControles(long? ID, int? type)
         {
-            ControleQualite vue = new ControleQualite(ID,type);
+            // Définir type=0 (non conforme) par défaut si non spécifié
+            int filterType = type ?? 0;
+            ControleQualite vue = new ControleQualite(ID, filterType);
             ViewBag.ID = ID;
+            ViewBag.type = filterType; // Passer type à la vue
             return View(vue);
         }
         public ActionResult SearchOfControle(string nmrof)

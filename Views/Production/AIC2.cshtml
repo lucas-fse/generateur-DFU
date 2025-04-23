@@ -151,7 +151,7 @@
                                         <input type="checkbox" beforeSendForm="true" disabled name=@String.Concat("CHECKBOXCOMMUNICATION",communication.Key) />
                                         <span class="slider round"></span>
                                     </label> <!-- checked -->                                
-                                    <span class="editLine">Editer</span>
+                                    <button type="button" class="btn btn-outline-orange editLine">Editer</button>
                                 </td>
                                
                             </tr>
@@ -209,7 +209,7 @@
                             </label> <!-- checked -->
                         </td>
                         <td class="flexTd">
-                            <span class="editLine">Editer</span>
+                            <button type="button" class="editLine btn btn-outline-orange">Editer</button>
                         </td>
                     </tr>
                 }
@@ -237,7 +237,7 @@
                 </tr>
             </tbody>
         </table>
-        <input type="submit" value="Sauvegarder" name="submitButton" class="btn btn-default" id="submitButton" />
+        <button type="submit" name="submitButton" class="btn btn-orange" id="submitButton">Sauvegarder</button>
     }
     <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/clock.js"></script>
