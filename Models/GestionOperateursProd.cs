@@ -3,6 +3,7 @@ using GenerateurDFUSafir.Models;
 using GenerateurDFUSafir.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,43 @@ namespace GenerateurDFUSafir.Models
             List<OF_PROD_TRAITE> OfTraite = data.ListOFsTraite();
             return InitDataOperateurs(Operateurs,OfTraite);
         }
+
+        public static bool SavePasswordOperateur(long idOperateur, string hashedPassword)
+        {
+            bool result = false;
+            try
+            {
+                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
+                {
+                    var FirstOP = _db.OPERATEURS
+                                     .Include("OPERATEURS_PWD")
+                                     .FirstOrDefault(p => p.ID == idOperateur);
+
+                    if (FirstOP != null && FirstOP.OPERATEURS_PWD != null)
+                    {
+                        FirstOP.OPERATEURS_PWD.Password = hashedPassword;
+                        FirstOP.isValidPasswd = true;
+
+                        _db.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opérateur ou mot de passe introuvable pour l'ID : " + idOperateur);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+            return result;
+        }
+
+
+
+
+
         public static DataOperateurProd GestionOFOperateur(long id, bool timelimit, string numeroOF = null)
         {
             string[] DEFPOSTEBIDIR = new string[] { "A5/01", "C6/00", "P0/01", "P1/01", "P1/02", "P1/03", "P1/99", "P2/01", "P3/01","A5/01" };
@@ -188,6 +226,7 @@ namespace GenerateurDFUSafir.Models
                 dataOperateur.Anniversaire = operateur.ANNIVERSAIRE;
                 dataOperateur.Nom = operateur.NOM;
                 dataOperateur.Prenom = operateur.PRENOM;
+                dataOperateur.isValidPasswd = (bool)operateur.isValidPasswd;
                 dataOperateur.Animateur = operateur.ANIMATEUR;
                 dataOperateur.Initial = operateur.INITIAL.Trim();
                 //génération de la récupération de la photo de l'utilisateur, si celle-ci n'existe pas, mettre le lien vers une photo générique

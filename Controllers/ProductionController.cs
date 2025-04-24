@@ -951,6 +951,125 @@ namespace GenerateurDFUSafir.Controllers
             return View(vue);
         }
 
+        //Accès à la page Connexion Operateur, situé entre indexOfOperateur et gestionOf
+        //Permet de s'authentifier pour avoir accès aux informations de l'opérateur
+        public ActionResult ConnexionOp(long? id)
+        {
+            var idConnecte = Session["OperateurConnecte"];
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            if (idConnecte != null && (long)idConnecte == id)
+            {
+                return RedirectToAction("GestionOF", new { id = id });
+            }
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+            return View("ConnexionOperateur", operateur);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult ConnexionOperateur(long id, string motdepasse)
+        {
+            // Récupère l'opérateur depuis la base de données
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+
+            if (operateur == null)
+            {
+                return RedirectToAction("IndexOFOperateur"); // retour si opérateur inconnu
+            }
+
+            // Vérifie le mot de passe
+            if (operateur.Password == motdepasse)
+            {
+                Session["OperateurConnecte"] = operateur.ID;
+                //"Password                      "
+                return RedirectToAction("gestionOF", new { id = operateur.ID });
+            }
+
+            // Mot de passe incorrect → retourne la vue avec un message d'erreur
+            ViewBag.Erreur = "Mot de passe incorrect";
+            return View("ConnexionOperateur", operateur);
+        }
+
+        public ActionResult ConnexionAd(long? id)
+        {
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+            return View("ConnexionAdmin", operateur); // 
+        }
+
+
+        [HttpPost]
+        public ActionResult ConnexionAdmin(long id, string adminPassword)
+        {
+            // Mot de passe admin temporaire
+            const string motDePasseAdmin = "admin123"; // à remplacer plus tard par une config sécurisée
+
+            if (adminPassword == motDePasseAdmin)
+            {
+                // on autorise l'accès à l'espace opérateur en tant qu'admin
+                Session["OperateurConnecte"] = id;
+                Session["EstAdmin"] = true;
+
+                return RedirectToAction("GestionOF", new { id = id });
+            }
+
+            // mot de passe incorrect → retour à la page avec message
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+            ViewBag.ErreurAdmin = "Mot de passe admin incorrect";
+            return View("ConnexionAdmin", operateur);
+        }
+
+
+        public ActionResult Deconnexion()
+        {
+            Session["OperateurConnecte"] = null;
+            return RedirectToAction("IndexOFOperateur");
+        }
+
+        public ActionResult DefinirMDP(long? id)
+        {
+            if (id == null)
+                return RedirectToAction("IndexOFOperateur");
+
+            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
+
+            return View("DefinirPassword", operateur); // 
+        }
+
+        [HttpPost]
+        public ActionResult CreerMotDePasse(long id, string motdepasse)
+        {
+            if (string.IsNullOrEmpty(motdepasse))
+            {
+                ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
+                var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                return View("CreerMotDePasse", operateur);
+            }
+
+            string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
+
+            bool ok = GestionOperateursProd.SavePasswordOperateur(id, hashed);
+
+            if (!ok)
+            {
+                ViewBag.Erreur = "Erreur lors de l'enregistrement du mot de passe.";
+                var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                return View("CreerMotDePasse", operateur);
+            }
+
+            return RedirectToAction("GestionOF", new { id = id });
+        }
+
+
+
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
             bool ChargeOfPlanifie = false;
