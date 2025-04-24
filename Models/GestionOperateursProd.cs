@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
+
 namespace GenerateurDFUSafir.Models
 {
     /// <summary>
@@ -58,11 +59,17 @@ namespace GenerateurDFUSafir.Models
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                
+                Console.WriteLine("Exception : " + ex.Message);
             }
             return result;
+        }
+
+        public static string GetMotDePasseHash(long idOperateur)
+        {
+            OfX3 data = new OfX3();
+            return data.GetPasswordOperateur(idOperateur);
         }
 
 

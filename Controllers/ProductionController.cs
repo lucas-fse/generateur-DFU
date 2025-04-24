@@ -963,7 +963,6 @@ namespace GenerateurDFUSafir.Controllers
             {
                 return RedirectToAction("GestionOF", new { id = id });
             }
-
             var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
             return View("ConnexionOperateur", operateur);
         }
@@ -973,27 +972,31 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost]
         public ActionResult ConnexionOperateur(long id, string motdepasse)
         {
-            // Récupère l'opérateur depuis la base de données
-            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
-
+            // 1. Récupère l'opérateur pour affichage (photo, nom, etc.)
+            var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
 
             if (operateur == null)
             {
-                return RedirectToAction("IndexOFOperateur"); // retour si opérateur inconnu
+                return RedirectToAction("IndexOFOperateur");
             }
 
-            // Vérifie le mot de passe
-            if (operateur.Password == motdepasse)
+            // 2. Récupère le mot de passe haché depuis OPERATEURS_PWD
+            var hashStocke = GestionOperateursProd.GetMotDePasseHash(id);
+
+            // 3. Vérifie le mot de passe
+            if (!string.IsNullOrEmpty(hashStocke) &&
+                BCrypt.Net.BCrypt.Verify(motdepasse, hashStocke))
             {
                 Session["OperateurConnecte"] = operateur.ID;
-                //"Password                      "
-                return RedirectToAction("gestionOF", new { id = operateur.ID });
+                return RedirectToAction("GestionOF", new { id = operateur.ID });
             }
 
-            // Mot de passe incorrect → retourne la vue avec un message d'erreur
+            // 4. Sinon, erreur
             ViewBag.Erreur = "Mot de passe incorrect";
             return View("ConnexionOperateur", operateur);
         }
+
+
 
         public ActionResult ConnexionAd(long? id)
         {
@@ -1122,10 +1125,11 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ope = GestionOperateursProd.GestionOFOperateur((long)id, false);
                 }
-				PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+                PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
-                
-                ope.initOfList((int) pole, ofCherche,ChargeOfPlanifie);
+
+                ope.initOfList((int)pole, ofCherche, ChargeOfPlanifie);
+
                 ViewBag.OperateurID = id;
                 ViewBag.EstAdmin = estAdmin;
                 return View(ope);

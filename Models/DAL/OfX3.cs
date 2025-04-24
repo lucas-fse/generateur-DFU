@@ -896,6 +896,21 @@ namespace GenerateurDFUSafir.DAL
             return result;
         }
 
+        public string GetPasswordOperateur(long idOperateur)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var entry = _db.OPERATEURS_PWD.FirstOrDefault(p => p.ID == idOperateur);
+                return entry?.Password;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
 
         public bool SaveDbOFNewAlea(OF_PROD_TRAITE OfGenere)
         {
