@@ -99,6 +99,7 @@ namespace GenerateurDFUSafir.Models
                 }
                 if (AmeliorationParSujet.ContainsKey(AMELIORATION.StringSujet(amelioration.Type)))
                 {
+
                     List<AMELIORATION> tmp = null;
                     AmeliorationParSujet.TryGetValue(AMELIORATION.StringSujet(amelioration.Type), out tmp);
                     tmp.Add(amelioration);
@@ -111,7 +112,7 @@ namespace GenerateurDFUSafir.Models
                     AmeliorationParSujet.Add(AMELIORATION.StringSujet(amelioration.Type), tmp);
                 }
         
-                if (AmeliorationParStatus.ContainsKey(AMELIORATION.StringStatus( amelioration.Status)))
+                if (AmeliorationParStatus.ContainsKey(AMELIORATION.StringStatus(amelioration.Status)))
                 {
                     List<AMELIORATION> tmp = null;
                     AmeliorationParStatus.TryGetValue(AMELIORATION.StringStatus(amelioration.Status), out tmp);

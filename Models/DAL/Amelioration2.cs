@@ -25,6 +25,9 @@ namespace GenerateurDFUSafir.Models.DAL
         {
             switch (type)
             {
+                case 0:
+                    return "AUTRE";
+                    break;
                 case 1:
                     return "5S";
                     break;

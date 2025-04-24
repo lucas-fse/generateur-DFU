@@ -284,7 +284,7 @@ h1 {
 #idee-right {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 
@@ -473,15 +473,17 @@ h1 {
 
 .enSavoirPlusContainer {
   position: relative;
-  width: 160px;
-  color: white;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
 }
 
-.enSavoirPlusContainer a {
-  color: white;
+.btn-orange{
+    margin : 7px;
+    padding-left : 20px;
+    padding-right : 20px;
+}
+
+.btn-outline-orange{
+    width:95%;
+    margin : 5px;
 }
 
 .centered-text-on-pic { /* pour centrer le texte sur l'image */

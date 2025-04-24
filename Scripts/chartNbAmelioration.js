@@ -9,6 +9,8 @@ var chartElem = document.getElementById('Graphique').getContext('2d');
 
 function GraphSecteur(val1) {
 
+    console.log(val1)
+
     document.getElementById("Graphique").remove();
     var content1 = val1.split(";");
     var contenta = content1[0].split(":");
@@ -89,7 +91,8 @@ function GraphSecteur(val1) {
 }
 
 function GraphService(val1) {
-    
+
+    console.log(val1);
     document.getElementById("Graphique").remove();
     var ServiceElem = document.createElement('canvas');
     document.getElementById('canvas1').append(ServiceElem);

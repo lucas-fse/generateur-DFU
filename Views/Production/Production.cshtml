@@ -338,12 +338,7 @@
 
 
                         <div class="enSavoirPlusContainer centered">
-                            <a href="../Production/Securite">
-                                <img class="enSavoirPlusPic" src="~/image/en-savoir-plus-2.png" />
-                                <div class="centered-text-on-pic">
-                                    En savoir +
-                                </div>
-                            </a>
+                            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Securite", "Production")'">Accéder</button>
                         </div>
 
                     </div> <!-- là où sera affiché les informations de sécurité -->
@@ -494,12 +489,7 @@
                             <canvas id="chartNbFrcParService"></canvas>
                         </div>
                         <div class="enSavoirPlusContainer centered">
-                            <a href="../Production/Qualite">
-                                <img class="enSavoirPlusPic" src="~/image/en-savoir-plus-2.png" />
-                                <div class="centered-text-on-pic">
-                                    En savoir +
-                                </div>
-                            </a>
+                            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Qualite", "Production")'">Accéder</button>
                         </div>
                     </div><!-- là où sera les informations usr-->
 
@@ -514,7 +504,7 @@
                         <h4 id="Plannif-leftTitle">Plannification</h4>
                     </div>
                     <div id="Plannif-right">
-                        <a href="@Url.Action("AffectationOperateurs", "Production")" class="Plannif-link">Affectation aux Pôles</a>
+                        <button class="btn btn-outline-orange" onclick="location.href = '@Url.Action("AffectationOperateurs", "Production")'">Affectation aux Pôles</button>
                     </div>
                 </div>
                 <div id="idee">
@@ -547,14 +537,9 @@
 
                         </div>
                         <div class="enSavoirPlusContainer centered">
-                            <a href="../Production/KPIProd">
-                                <img class="enSavoirPlusPic" src="~/image/en-savoir-plus-2.png" />
-                                <div class="centered-text-on-pic">
-                                    En savoir +
-                                </div>
-                            </a>
+                            <button class="btn btn-orange" onclick="location.href = '@Url.Action("KPIProd", "Production")'">Accéder</button>
                         </div>
-                    </div>
+                       </div>
                 </div>
             </div>
             <hr />
@@ -597,13 +582,9 @@
                             </div>
                         </div>
                         <div class="enSavoirPlusContainer centered">
-                            <a href="../Production/Amelioration">
-                                <img class="enSavoirPlusPic" src="~/image/en-savoir-plus-2.png" />
-                                <div class="centered-text-on-pic">
-                                    En savoir +
-                                </div>
-                            </a>
+                            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Amelioration", "Production")'">Accéder</button>
                         </div>
+
                     </div>
                 </div>
                 <div id="AIC">
@@ -612,9 +593,9 @@
                         <h4 id="AIC-leftTitle">AIC2</h4>
                     </div>
                     <div id="AIC-right">
-                        <a href="@Url.Action("AIC2", "Production", new {id =1  })" class="Plannif-link">AIC 2 - Monodirectionnel</a>
-                        <a href="@Url.Action("AIC2", "Production", new {id =2  })" class="Plannif-link">AIC 2 - Bidirectionnel</a>
-                        <a href="@Url.Action("DataQRQC", "Production", null)" class="Plannif-link">QRQC</a>
+                        <button class="btn btn-outline-orange" onclick="location.href = '@Url.Action("AIC2", "Production", new {id =1  })'">AIC 2 - Monodirectionnel</button>
+                        <button class="btn btn-outline-orange" onclick="location.href = '@Url.Action("AIC2", "Production", new {id =2  })'">AIC 2 - Bidirectionnel</button>
+                        <button class="btn btn-outline-orange" onclick="location.href = '@Url.Action("DataQRQC", "Production", null)'">QRQC</button>
                     </div>
                 </div>
             </div>
@@ -635,13 +616,9 @@
                             <p id="cpt3" initvalue="@Model.NbHumeurPositiveString"><span>- -%</span></p>
                         </div>
                     </div>
+
                     <div class="enSavoirPlusContainer centered">
-                        <a href="../Production/serenite">
-                            <img class="enSavoirPlusPic" src="~/image/en-savoir-plus-2.png" />
-                            <div class="centered-text-on-pic">
-                                En savoir +
-                            </div>
-                        </a>
+                        <button class="btn btn-orange" onclick="location.href = '@Url.Action("serenite", "Production")'">Accéder</button>
                     </div>
                 </div>
             </div>

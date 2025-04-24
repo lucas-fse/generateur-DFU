@@ -423,28 +423,25 @@ input[type="search"]:focus + #submitButton{
 }
 
 /* ------------ fin liste OF en cours ------------*/
-.cat-OF-button {
+
+
+.btn-outline-orange {
     display: flex;
     align-items: center;
     margin: 0 auto;
     min-width: 250px;
     margin-bottom: 5px;
     position: relative;
-    background: white;
-    background-clip: padding-box;
-    border: solid 4px transparent;
     justify-content: center;
-    padding: 2px 0;
-    color: black;
-    cursor: pointer;
     box-sizing: border-box;
-    border-radius: 25px;
 }
 
 @media all and (min-width: 1081px) and (max-width: 1200px) {
-    .cat-OF-button {
+    .btn-outline-orange {
         min-width: 100%;
     }
+
+
 }
 
 .cat-OF-button:before {
