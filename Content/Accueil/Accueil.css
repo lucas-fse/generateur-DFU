@@ -1,0 +1,54 @@
+/* --- CSS inclus ici pour la démonstration --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+#ListOperateur {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.Operateur a {
+    width: 300px;
+    height: 85px;
+    border-radius: 43px;
+    margin-top: 40px;
+    background: #FF8C00;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+    .Operateur a:hover {
+        background: #0066cc;
+        text-decoration: none;
+    }
+
+.Operateur img {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    margin-left: 5px;
+}
+
+.Operateur p {
+    padding-top: 3px;
+    color: white;
+    font-size: 1.4em;
+    text-align: end;
+    margin-right: 40px;
+    margin-bottom: 0px;
+    height: auto;
+}

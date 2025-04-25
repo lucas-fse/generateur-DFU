@@ -781,6 +781,7 @@
     <Content Include="Content\Accident.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Accueil\Accueil.css" />
     <Content Include="Content\activiteStyle.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1945,6 +1946,7 @@
     <Content Include="Views\Test\index.cshtml" />
     <Content Include="Views\Controle\PackControle.cshtml" />
     <Content Include="Views\Controle\SuppressionControleFinal.cshtml" />
+    <Content Include="Views\Home\Accueil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
