@@ -47,7 +47,7 @@ namespace GenerateurDFUSafir.Controllers
         }
 
         public ActionResult SuppressionOFBidir(long? id)
-        {           
+        {
             GestionOutilAdmin vue = new GestionOutilAdmin();
             if (id == null)
             {
@@ -94,13 +94,13 @@ namespace GenerateurDFUSafir.Controllers
         }
 
         [HttpPost, ActionName("SuppressionOfKepler")]
-        public ActionResult SuppressionOfKeplerSearch(long id,long? IDOPE)
+        public ActionResult SuppressionOfKeplerSearch(long id, long? IDOPE)
         {
             ViewBag.resultView = true;
             string numof = Request.Form["numof"].ToUpper();
             string numordre = Request.Form["numordre"];
             GestionTracaProd traca = new GestionTracaProd();
-            List <TracaPack> listraca = traca.GetInfo(numof, numordre);
+            List<TracaPack> listraca = traca.GetInfo(numof, numordre);
             TracaPackOPE tracaV = new TracaPackOPE();
             tracaV.IDOpe = IDOPE;
             tracaV.tracaPacks = listraca;
@@ -114,7 +114,7 @@ namespace GenerateurDFUSafir.Controllers
         public ActionResult SupprKepler(long ID, string Gamme, long? IDOPE)
         {
             GestionTracaProd tracaP = new GestionTracaProd();
-            bool result = tracaP.DeleteID(Gamme, ID,IDOPE);
+            bool result = tracaP.DeleteID(Gamme, ID, IDOPE);
             if (result)
             {
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
@@ -130,25 +130,25 @@ namespace GenerateurDFUSafir.Controllers
         }
         // reimpression des etiquette kepler
         [ActionName("ImpressionLigneKepler")]
-        public ActionResult ImpressionKepler(long ID, string Gamme,long? IDOPE)
+        public ActionResult ImpressionKepler(long ID, string Gamme, long? IDOPE)
         {
-           GestionTracaProd tracaP = new GestionTracaProd();
-           bool result = tracaP.PrintEtiquette(ID, Gamme);
-           if (result)
-           {
+            GestionTracaProd tracaP = new GestionTracaProd();
+            bool result = tracaP.PrintEtiquette(ID, Gamme);
+            if (result)
+            {
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
             }
-           else
-           {
+            else
+            {
                 List<TracaPack> listraca = new List<TracaPack>();
                 TracaPackOPE traca = new TracaPackOPE();
                 traca.IDOpe = IDOPE;
                 traca.tracaPacks = listraca;
                 return View(traca);
-           }
+            }
         }
         public ActionResult DeclaNonConform(long? ID)
-        {          
+        {
             if (ID == null)
             {
                 return RedirectToAction("Production", "Production");
@@ -175,7 +175,7 @@ namespace GenerateurDFUSafir.Controllers
             newnc.OperateursID = ID;
             newnc.Item = item;
             newnc.Qtr = quantite;
-            newnc.DescriptionUser = descriptionNC ;
+            newnc.DescriptionUser = descriptionNC;
             newnc.DescriptionItem = nom;
             newnc.NmrOF = numOF;
 
@@ -186,7 +186,7 @@ namespace GenerateurDFUSafir.Controllers
                 newnc.NmrChronoS = cptnc;
                 ImprimerEtiquetteNC(newnc);
 
-                
+
 
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
@@ -226,9 +226,9 @@ namespace GenerateurDFUSafir.Controllers
             op.POLE = Convert.ToInt32(idPole);
 
             db.SaveChanges();
-            
-            
-            return Json("OK", JsonRequestBehavior.AllowGet);												
+
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult ChangeAnimatrice()
@@ -241,7 +241,7 @@ namespace GenerateurDFUSafir.Controllers
                 int Animatriceint = Convert.ToInt32(name2);
                 PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 var querypole = db.POLES.Where(i => i.ID == poleint);
-                if (querypole != null && querypole.Count()>0)
+                if (querypole != null && querypole.Count() > 0)
                 {
                     POLES poles = querypole.First();
                     poles.Animateur = Animatriceint;
@@ -251,22 +251,22 @@ namespace GenerateurDFUSafir.Controllers
             catch
             {
 
-            }            
+            }
             return RedirectToAction("AffectationOperateurs", "Production", null);
         }
-        public ActionResult PlanificationOf(int? Pole , DateTime? date)
+        public ActionResult PlanificationOf(int? Pole, DateTime? date)
         {
             PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
             List<long> pole = db.POLES.Select(i => i.ID).ToList();
             if (Pole == null || !pole.Contains((long)Pole)) { Pole = (int)pole.First(); }
             if (date == null) date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
-            PlanificationOf vue = new PlanificationOf((int) Pole, (DateTime) date);         
+            PlanificationOf vue = new PlanificationOf((int)Pole, (DateTime)date);
 
             return View(vue);
         }
         [HttpPost, ActionName("SavePlanifOF")]
-        public ActionResult SavePlanification(int pole, DateTime ?date)
+        public ActionResult SavePlanification(int pole, DateTime? date)
         {
 
             if (date == null) date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -290,7 +290,7 @@ namespace GenerateurDFUSafir.Controllers
 
             // On regarde tout les ofs qui ont été déplanifié
             //List<PLANIF_OF> planif_a_supprimer = new List<PLANIF_OF>();
-            foreach(PLANIF_OF pla in planif_act)
+            foreach (PLANIF_OF pla in planif_act)
             {
                 List<string> liste_of = ofs_planifie.Select(i => i.numof).ToList();
                 if (!liste_of.Contains(pla.NumOF))
@@ -344,8 +344,8 @@ namespace GenerateurDFUSafir.Controllers
         {
             //GestionOperateursProd.GestionOFOperateur((long) ID, false, of);
 
-            
-            
+
+
 
             DataOperateurProd dataoperateur = GestionOperateursProd.GestionOFOperateur((long)ID, false, of);
             var tmp1 = dataoperateur.OfEncours.Where(p => p.NMROF == of && p.ISALIVE == true && p.STATUSTYPE.Contains("CLOSED"));
@@ -356,11 +356,11 @@ namespace GenerateurDFUSafir.Controllers
                 OfX3 db = new OfX3();
                 if (of_traite.STATUSTYPE.Contains("CLOSED"))
                 {
-                    
+
                     of_traite.STATUSTYPE = "INPROGRESS";
                     of_traite.ENDTIME = DateTime.Now;
                     db.SaveDbOF_PROD_TRAITE(of_traite);
-                    
+
                 }
                 db.SaveDbOF_PLANIF_OF(of_traite.NMROF, 2);
             }
@@ -393,15 +393,15 @@ namespace GenerateurDFUSafir.Controllers
             InfoOf vue = new InfoOf(0);
             return View(vue);
         }
-        public ActionResult OfNumeric(string nmrof,long? ID)
+        public ActionResult OfNumeric(string nmrof, long? ID)
         {
             OfProdModel vue = new OfProdModel();
             vue.OfProdModelFull(nmrof);
             vue.ofProdModelInfo.ID = ID;
-            
+
             return View(vue.ofProdModelInfo);
         }
-       
+
 
 
         public ActionResult OFEdite(string Of)
@@ -421,7 +421,7 @@ namespace GenerateurDFUSafir.Controllers
             //System.Diagnostics.EventLog.WriteEntry("GenerateurDFUSource", "Requete Index" + "Message");
             return View(et);
         }
-        
+
         [HttpPost, ActionName("OutilProdLog")]
         public ActionResult ImpressionEtiquetteLogistique(EtiquetteLogistique et1)
         {
@@ -434,23 +434,23 @@ namespace GenerateurDFUSafir.Controllers
             else
             {
                 try
-                {   
-                    if (et1.Lot== null) { et1.Lot = ""; }
+                {
+                    if (et1.Lot == null) { et1.Lot = ""; }
                     int cpt = Convert.ToInt32(et1.Qtr);
                     //using (Impersonation imp = new Impersonation("product", "jayelectronique", "2017Pr01"))
                     //{
-                        result = et1.PrintEtiquetteQTR();
-                   // }
+                    result = et1.PrintEtiquetteQTR();
+                    // }
                     if (!result)
                     {
                         et1 = new EtiquetteLogistique();
                     }
                 }
-                catch 
-                { 
+                catch
+                {
                 }
-                
-                
+
+
             }
             if (result)
             {
@@ -472,7 +472,7 @@ namespace GenerateurDFUSafir.Controllers
                     et.OFdeIDList = new List<string>();
                     if (id != null)
                     {
-                        IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Where(p => p.ISALIVE != false && p.STATUSTYPE!= "CLOSED" && p.OPERATEUR != null && p.OPERATEUR == id);
+                        IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Where(p => p.ISALIVE != false && p.STATUSTYPE != "CLOSED" && p.OPERATEUR != null && p.OPERATEUR == id);
 
                         foreach (var of in queryoftraite.ToList())
                         {
@@ -507,7 +507,7 @@ namespace GenerateurDFUSafir.Controllers
                 name = name2;
             }
             bool result = false;
-            if ( string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 et = new EtiquetteLogistique();
                 et.id = et1.id;
@@ -532,9 +532,9 @@ namespace GenerateurDFUSafir.Controllers
                     List<string> casdemploi = ofs.ListCasDEmploi("354140A");
                     if (casdemploi.Contains(op.ITMREF_0))
                     {
-                      //  using (Impersonation imp = new Impersonation(Resource1.LoginAccesReseau, Resource1.DomaineAccesReseau, Resource1.PasswordAccesReseau))
-                       // {
-                            ImprimerEtiquette(op);
+                        //  using (Impersonation imp = new Impersonation(Resource1.LoginAccesReseau, Resource1.DomaineAccesReseau, Resource1.PasswordAccesReseau))
+                        // {
+                        ImprimerEtiquette(op);
                         //}
                         result = true;
                     }
@@ -549,7 +549,7 @@ namespace GenerateurDFUSafir.Controllers
                 //op = FindOF(TryToOFUD, "^UDE|^ADE");
             }
 
-            if (result && et1 != null && et1.id!= null)
+            if (result && et1 != null && et1.id != null)
             {
                 return RedirectToAction("gestionOf", "Production", new { id = et1.id });
             }
@@ -563,8 +563,8 @@ namespace GenerateurDFUSafir.Controllers
             ITEM_LOCALISATION et = null;
             if (et == null)
             {
-                List<ITEM_LOCALISATION> list  =  EtiquetteBac.GetEtiquetteBac(bac);
-                if (list!= null && list.Count()==1)
+                List<ITEM_LOCALISATION> list = EtiquetteBac.GetEtiquetteBac(bac);
+                if (list != null && list.Count() == 1)
                 {
                     et = list.First();
                 }
@@ -582,11 +582,11 @@ namespace GenerateurDFUSafir.Controllers
             var opID = Request.Form["IDOp"];
             var nameID = Request.Form["IdRef"];
             var nameRef = Request.Form["refPiece"];
-            var namechar= Request.Form["chariotpos"];
+            var namechar = Request.Form["chariotpos"];
             var nameqtr = Request.Form["nbPiece"];
             ITEM_LOCALISATION et = null;
             et = EtiquetteBac.SetEtiquetteBac(nameID, nameRef, namechar, nameqtr);
-            ImprimerEtiquette(et,false);
+            ImprimerEtiquette(et, false);
 
             //pour impression en volume de toute les étiquettes
             List<ITEM_LOCALISATION> tmp = EtiquetteBac.GetAllList();
@@ -612,12 +612,12 @@ namespace GenerateurDFUSafir.Controllers
             }
             else
             {
-                return RedirectToAction("outilProdBac", "Production", new { IDop= Convert.ToUInt64(opID), bac = "" });
+                return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = "" });
             }
         }
         public ActionResult SearchBacControle(string itemref)
         {
-            List<ITEM_LOCALISATION>Bacinfo = EtiquetteBac.GetEtiquetteBac(itemref);
+            List<ITEM_LOCALISATION> Bacinfo = EtiquetteBac.GetEtiquetteBac(itemref);
 
             return Json(Bacinfo, JsonRequestBehavior.AllowGet);
         }
@@ -655,7 +655,7 @@ namespace GenerateurDFUSafir.Controllers
 
                 if (ImageAccident != null && ImageAccident.ContentType.Contains("image/jpeg"))
                 {
-                    
+
                     byte[] thePictureAsBytes = new byte[ImageAccident.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(ImageAccident.InputStream))
                     {
@@ -692,7 +692,7 @@ namespace GenerateurDFUSafir.Controllers
             }
             return RedirectToAction("Securite");
             //return View(obj);
-            }
+        }
         [HttpPost, ActionName("Qualite")]
         public ActionResult traiterFRC()
         {
@@ -729,7 +729,7 @@ namespace GenerateurDFUSafir.Controllers
             InfoSerenite obj = new InfoSerenite();
             try
             {
-                 id = Convert.ToInt32(Request.Form["IdSalarie"]);
+                id = Convert.ToInt32(Request.Form["IdSalarie"]);
                 level = Convert.ToInt32(submitButton);
             }
             catch
@@ -745,7 +745,7 @@ namespace GenerateurDFUSafir.Controllers
         //GET: 
         public ActionResult Production()
         {
-            
+
             Production production = new Production();
             return View(production);
         }
@@ -831,7 +831,7 @@ namespace GenerateurDFUSafir.Controllers
             }
             return RedirectToAction("Amelioration", "Production");
         }
-        
+
         public ActionResult KPIProd()
         {
             InfoKPI kpi = new InfoKPI();
@@ -856,20 +856,20 @@ namespace GenerateurDFUSafir.Controllers
         public ActionResult traiterFormulaire()
         {
             int index = 0;
-            Dictionary<string,string> listtmp = new Dictionary<string, string>();
+            Dictionary<string, string> listtmp = new Dictionary<string, string>();
             foreach (var itemFormulaire in Request.Form) //Pour récupérer les clés et valeurs du formulaire
             {
                 string clee = itemFormulaire.ToString();
                 string valeur = Request.Form[clee];
                 listtmp.Add(clee, valeur);
-                if (clee.Contains("ID+")){ index = Convert.ToInt32(valeur); }
+                if (clee.Contains("ID+")) { index = Convert.ToInt32(valeur); }
             }
 
             InfoAIC2 aic = new InfoAIC2();
             aic.Addligne(listtmp);
 
             return RedirectToAction("AIC2", "Production", index);
-            
+
         }
 
         public ActionResult QRQC(int? id)
@@ -891,7 +891,7 @@ namespace GenerateurDFUSafir.Controllers
             try { DateCloture = DateTime.Parse(Request.Form["DateCloture"]); } catch { DateCloture = null; }
             DateTime? DateSuivis;
             try { DateSuivis = DateTime.Parse(Request.Form["DateSuivis"]); } catch { DateSuivis = null; }
-            
+
             string Participants = Request.Form["Participants"];
             string Pilote = Request.Form["Pilote"];
             string Origine = Request.Form["Origine"];
@@ -923,9 +923,9 @@ namespace GenerateurDFUSafir.Controllers
             for (int i = 0; i < 7; i++)
             {
                 DateTime? tmpdate = null;
-                
+
                 try { tmpdate = DateTime.Parse(Request.Form["Delai_" + i]); } catch { tmpdate = null; }
-                
+
                 string tmp = Request.Form["Pilote_" + i];
                 string tmp2 = Request.Form["item_" + i];
                 string tmp3 = Request.Form["Action_" + i];
@@ -937,7 +937,7 @@ namespace GenerateurDFUSafir.Controllers
             obj.SaveQRQC(id, DateOuverture, DateCloture, DateSuivis, Participants, Pilote, Origine, SevenQuestion, DescriptionProcess, ActionsImmediat, Occurrence, NonDetection, Solutions, image);
             return RedirectToAction("DataQRQC");
         }
-  
+
         public ActionResult DataQRQC(int? id)
         {
             InfoDATAQRQC list = new InfoDATAQRQC();
@@ -963,7 +963,6 @@ namespace GenerateurDFUSafir.Controllers
             {
                 return RedirectToAction("GestionOF", new { id = id });
             }
-
             var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
             return View("ConnexionOperateur", operateur);
         }
@@ -973,27 +972,31 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost]
         public ActionResult ConnexionOperateur(long id, string motdepasse)
         {
-            // Récupère l'opérateur depuis la base de données
-            var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
-
+            // 1. Récupère l'opérateur pour affichage (photo, nom, etc.)
+            var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
 
             if (operateur == null)
             {
-                return RedirectToAction("IndexOFOperateur"); // retour si opérateur inconnu
+                return RedirectToAction("IndexOFOperateur");
             }
 
-            // Vérifie le mot de passe
-            if (operateur.Password == motdepasse)
+            // 2. Récupère le mot de passe haché depuis OPERATEURS_PWD
+            var hashStocke = GestionOperateursProd.GetMotDePasseHash(id);
+
+            // 3. Vérifie le mot de passe
+            if (!string.IsNullOrEmpty(hashStocke) &&
+                BCrypt.Net.BCrypt.Verify(motdepasse, hashStocke))
             {
                 Session["OperateurConnecte"] = operateur.ID;
-                //"Password                      "
-                return RedirectToAction("gestionOF", new { id = operateur.ID });
+                return RedirectToAction("GestionOF", new { id = operateur.ID });
             }
 
-            // Mot de passe incorrect → retourne la vue avec un message d'erreur
+            // 4. Sinon, erreur
             ViewBag.Erreur = "Mot de passe incorrect";
             return View("ConnexionOperateur", operateur);
         }
+
+
 
         public ActionResult ConnexionAd(long? id)
         {
@@ -1045,13 +1048,13 @@ namespace GenerateurDFUSafir.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreerMotDePasse(long id, string motdepasse)
+        public ActionResult CreerPassword(long id, string motdepasse)
         {
             if (string.IsNullOrEmpty(motdepasse))
             {
                 ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
-                return View("CreerMotDePasse", operateur);
+                return View("DefinirPassword", operateur);
             }
 
             string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
@@ -1062,7 +1065,7 @@ namespace GenerateurDFUSafir.Controllers
             {
                 ViewBag.Erreur = "Erreur lors de l'enregistrement du mot de passe.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
-                return View("CreerMotDePasse", operateur);
+                return View("DefinirPassword", operateur);
             }
 
             return RedirectToAction("GestionOF", new { id = id });
@@ -1072,6 +1075,17 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
+            // Pour éviter de pouvoir accéder à l'espace juste en tapant le bon URL
+            // On met en place un id de Session
+            var idConnecte = Session["OperateurConnecte"];
+            var estAdmin = Session["EstAdmin"] != null && (bool)Session["EstAdmin"];
+
+            // Donc si il n'est pas connecté il ne peut pas y accéder
+            if (idConnecte == null || (!estAdmin && Convert.ToInt64(idConnecte) != id))
+            {
+                return RedirectToAction("ConnexionOp", new { id = id }); // redirige vers la connexion
+            }
+
             bool ChargeOfPlanifie = false;
             if (id == null)
             {
@@ -1111,10 +1125,13 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ope = GestionOperateursProd.GestionOFOperateur((long)id, false);
                 }
-				PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+                PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
-                
-                ope.initOfList((int) pole, ofCherche,ChargeOfPlanifie);
+
+                ope.initOfList((int)pole, ofCherche, ChargeOfPlanifie);
+
+                ViewBag.OperateurID = id;
+                ViewBag.EstAdmin = estAdmin;
                 return View(ope);
             }
         }
@@ -1131,7 +1148,7 @@ namespace GenerateurDFUSafir.Controllers
             //name="ID" value="@Model.ID"
             //id="searched-OF" name="searched-OF"
             //name="submitButton"
-            
+
             int? id_demande = null;
             int viewAction = 0;  // Indicateur pour ouvrir un pop up au rechargement suivant de la page
             string OFcherche = "";
@@ -1175,12 +1192,12 @@ namespace GenerateurDFUSafir.Controllers
                         viewAction = 5;
                     }
                 }
-               else if (Request.Form["searchedOF"] != null)
+                else if (Request.Form["searchedOF"] != null)
                 {
                     OFcherche = Request.Form["searchedOF"].ToUpper().Trim().ToUpper();
                 }
                 else if (Request.Form["newOf"] != null)
-                    // ajouter un of 
+                // ajouter un of 
                 {
                     OFaajouter = Request.Form["newOf"];
                 }
@@ -1207,7 +1224,7 @@ namespace GenerateurDFUSafir.Controllers
             {
 
             }
-            if (viewAction ==1) // affichage de l'of plannifie
+            if (viewAction == 1) // affichage de l'of plannifie
             {
                 OfX3 data = new OfX3();
                 OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == (long)id_demande).First();
@@ -1221,7 +1238,7 @@ namespace GenerateurDFUSafir.Controllers
             {
                 OfX3 data = new OfX3();
                 OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == (long)id_demande).First();
-                if (Operateur!= null &&  Operateur.POLE != null)
+                if (Operateur != null && Operateur.POLE != null)
                 {
                     posteDemande = (int)Operateur.POLE;
                 }
@@ -1237,12 +1254,12 @@ namespace GenerateurDFUSafir.Controllers
             else if (!string.IsNullOrWhiteSpace(OFcherche))
             {
                 DataOperateurProd dataoperateur = GestionOperateursProd.GestionOFOperateur((long)id_demande, false, OFcherche);
-                if (dataoperateur.OfEncours.Any(p => p.NMROF.Contains(OFcherche) && p.ISALIVE == true && !p.STATUSTYPE.Contains( "CLOSED")))
+                if (dataoperateur.OfEncours.Any(p => p.NMROF.Contains(OFcherche) && p.ISALIVE == true && !p.STATUSTYPE.Contains("CLOSED")))
                 {
-                    viewAction = 2;                    
+                    viewAction = 2;
                 }
                 else if (dataoperateur.OfNontraiteNontrace.Any(p => p.NMROF == OFcherche))
-                {                    
+                {
                     viewAction = 3;
                 }
             }
@@ -1251,7 +1268,7 @@ namespace GenerateurDFUSafir.Controllers
                 DataOperateurProd dataoperateur = GestionOperateursProd.GestionOFOperateur((long)id_demande, false, OFaajouter);
                 var tmp1 = dataoperateur.OfEncours.Where(p => p.NMROF == OFaajouter && p.ISALIVE == true && p.STATUSTYPE.Contains("CLOSED"));
                 var tmp = dataoperateur.OfNontraiteNontrace.Where(p => p.NMROF.Contains(OFaajouter));
-                if (tmp1!= null && tmp1.Count() == 1)
+                if (tmp1 != null && tmp1.Count() == 1)
                 {
                     OF_PROD_TRAITE of_traite = tmp1.First();
                     if (of_traite.STATUSTYPE.Contains("CLOSED"))
@@ -1306,7 +1323,7 @@ namespace GenerateurDFUSafir.Controllers
                         of.ALEAS_OF.Add(alea_de_OF);
                     }
                 }
-                db.SaveDbOFAlea(of,null);
+                db.SaveDbOFAlea(of, null);
             }
             else if (!string.IsNullOrWhiteSpace(ArretOF))
             {
@@ -1320,7 +1337,7 @@ namespace GenerateurDFUSafir.Controllers
                 int quantiteReelle = Int32.Parse(Request.Form["quantite-reelle"]);
                 foreach (var itemFormulaire in Request.Form)
                 {
-                    if (itemFormulaire.ToString().Contains("SelectAlea") && itemFormulaire.ToString().Length >10)
+                    if (itemFormulaire.ToString().Contains("SelectAlea") && itemFormulaire.ToString().Length > 10)
                     {
                         int nbr = Convert.ToInt32(itemFormulaire.ToString().Substring(10, itemFormulaire.ToString().Length - 10));
                         listNewAlea["Alea"].Add(Request.Form[itemFormulaire.ToString()]);
@@ -1347,7 +1364,7 @@ namespace GenerateurDFUSafir.Controllers
                 aleas.GestionCodeOF();
                 DataOperateurProd dataoperateur = GestionOperateursProd.GestionOFOperateur((long)id_demande, false);
                 OF_PROD_TRAITE of_traite = dataoperateur.OfEncours.Where(p => p.ID == ID_OF && p.ISALIVE != false).First();
-                
+
                 for (int i = 0; i < listNewAlea["Alea"].Count; i++)
                 {
                     int codeerreur = Convert.ToInt32(listNewAlea["Alea"][i]);
@@ -1376,21 +1393,21 @@ namespace GenerateurDFUSafir.Controllers
                     alea_de_OF.Delai = long.Parse(Regex.Match(listNewPauses[i], @"\d+").Value);
                     of_traite.ALEAS_OF.Add(alea_de_OF);
                 }
-                db.SaveDbOFAlea(of_traite,null);
+                db.SaveDbOFAlea(of_traite, null);
 
-                    
+
                 if (!of_traite.STATUSTYPE.Contains("ENPAUSE"))
                 {
                     of_traite.ENDTIME = DateTime.Now;
                 }
                 else
                 {
-                    
+
                 }
                 of_traite.STATUSTYPE = "CLOSED";
                 of_traite.QTRREEL = quantiteReelle;
-                
-                if (db.SaveDbOF_PROD_TRAITE(of_traite)>0)
+
+                if (db.SaveDbOF_PROD_TRAITE(of_traite) > 0)
                 {
                     // soldé OF X3
                     OfProdModel OfASolde = new OfProdModel();
@@ -1431,7 +1448,7 @@ namespace GenerateurDFUSafir.Controllers
                 OfX3 db = new OfX3();
                 db.SaveDbOFAlea(of_traite, idAlea);
             }
-            
+
 
             if (viewAction == 1)
             {
@@ -1472,10 +1489,10 @@ namespace GenerateurDFUSafir.Controllers
         {
             OfX3 db = new OfX3();
             DataOperateurProd ope = GestionOperateursProd.GestionOFOperateur((long)idOperateur, false);
-            
-            if (ope!= null && ope.OfEncours.Where(p =>p.ID == idOF && p.OPERATEUR == idOperateur).Count() > 0)
+
+            if (ope != null && ope.OfEncours.Where(p => p.ID == idOF && p.OPERATEUR == idOperateur).Count() > 0)
             {
-                OF_PROD_TRAITE of_traite = ope.OfEncours.Where(p => p.ID == idOF ).First();
+                OF_PROD_TRAITE of_traite = ope.OfEncours.Where(p => p.ID == idOF).First();
                 if (of_traite != null)
                 {
                     if (actionof.Equals("PAUSE"))
@@ -1485,7 +1502,7 @@ namespace GenerateurDFUSafir.Controllers
                             of_traite.STATUSTYPE = "ENPAUSE";
                             of_traite.ENDTIME = DateTime.Now;
                             int tmp = (int)((DateTime)of_traite.STARTTIME - DateTime.Now).TotalSeconds;
-                            
+
                         }
                     }
                     else if (actionof.Equals("REPRISE"))
@@ -1500,7 +1517,7 @@ namespace GenerateurDFUSafir.Controllers
                         of.STATUSTYPE = "ENPAUSE";
                         of.ENDTIME = DateTime.Now;
                         int tmp = (int)((DateTime)of_traite.STARTTIME - DateTime.Now).TotalSeconds;
-                       
+
                         db.SaveDbOF_PROD_TRAITE(of);
                     }
                 }
@@ -1516,11 +1533,11 @@ namespace GenerateurDFUSafir.Controllers
 
 
 
-        public OrdreFabrication FinfOfAllX3( string ofdemande )
+        public OrdreFabrication FinfOfAllX3(string ofdemande)
         {
             OfX3 ofs = new OfX3();
             List<OrdreFabrication> tmp = ofs.ListOfAllProductionX3().Where(p => p.MFGNUM_0.Equals(ofdemande.Trim())).ToList();
-            if (tmp.Count>0)
+            if (tmp.Count > 0)
             {
                 return tmp.First();
             }
@@ -1541,10 +1558,10 @@ namespace GenerateurDFUSafir.Controllers
                 et.Of1 = op.MFGNUM_0;
                 if (op.VCRNUMORI_0.Trim().StartsWith("C20"))
                 {
-                    et.Commande1 = "ar: "+op.VCRNUMORI_0;                    
+                    et.Commande1 = "ar: " + op.VCRNUMORI_0;
                 }
                 et.Date1 = num_semaine.ToString("00") + "/" + DateTime.Now.Year.ToString("00");
-                if (i%2!=0)
+                if (i % 2 != 0)
                 {
                     et.Reference2 = op.ITMREF_0;
                     et.Of2 = op.MFGNUM_0;
@@ -1556,8 +1573,8 @@ namespace GenerateurDFUSafir.Controllers
                 // obtenir les bons droits d'ecriture sur le reseau
                 //using (Impersonation imp = new Impersonation(Resource1.LoginAccesReseau, Resource1.DomaineAccesReseau, Resource1.PasswordAccesReseau))
                 //{
-                    et.PrintEtiquetteQTR();
-               // }
+                et.PrintEtiquetteQTR();
+                // }
                 i += 2;
             }
         }
@@ -1572,8 +1589,8 @@ namespace GenerateurDFUSafir.Controllers
             ParametresModel param = new ParametresModel(null);
             string imprimante = param.ParametresModelValue(5);
             string numserie = op.MFGNUM_0.Substring(1, op.MFGNUM_0.Length - 1);
-            
-            
+
+
             GestionTracaProd traca = new GestionTracaProd();
             TRACA_ETIQUETTES traca_et = new TRACA_ETIQUETTES();
             traca_et.CMD = op.VCRNUMORI_0;
@@ -1593,16 +1610,16 @@ namespace GenerateurDFUSafir.Controllers
                 DateTime now = DateTime.Now;
                 for (int i = 0; i < quantite;)
                 {
-                    FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", op.MFGNUM_0, (i+1).ToString("00"), ".cmd"), FileMode.Create);
+                    FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", op.MFGNUM_0, (i + 1).ToString("00"), ".cmd"), FileMode.Create);
                     StreamWriter writer = new StreamWriter(fileStream);
-                    
+
                     writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", Resource1.LABELNAME_DATAMATRIX, "\""));
                     //writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", "57X21 DATAMATRIX.Lab", "\""));
                     writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT1, "=\"", op.ITMREF_0, "\""));
                     writer.WriteLine(string.Concat(StructLabel.OF1, "=\"", op.MFGNUM_0, "\""));
                     if (op.SERNUM == 3)
                     {
-                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1 , "=\"", numserie+ (i + 1).ToString("00"), "\""));
+                        writer.WriteLine(string.Concat(StructLabel.NMRSERIE1, "=\"", numserie + (i + 1).ToString("00"), "\""));
                     }
                     if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                     {
@@ -1629,7 +1646,7 @@ namespace GenerateurDFUSafir.Controllers
                         writer.WriteLine(string.Concat(StructLabel.OF2, "=\"", op.MFGNUM_0, "\""));
                         if (op.SERNUM == 3)
                         {
-                            writer.WriteLine(string.Concat(StructLabel.NMRSERIE2 , "=\"", numserie + (i + 2).ToString("00"), "\""));
+                            writer.WriteLine(string.Concat(StructLabel.NMRSERIE2, "=\"", numserie + (i + 2).ToString("00"), "\""));
                         }
                         if (!string.IsNullOrWhiteSpace(op.VCRNUMORI_0) && op.VCRNUMORI_0.StartsWith("C"))
                         {
@@ -1649,12 +1666,12 @@ namespace GenerateurDFUSafir.Controllers
             else if (imprimante.Contains("TYPE_319321"))
             {
                 DateTime now = DateTime.Now;
-                for (int i = 0; i < quantite;i++)
+                for (int i = 0; i < quantite; i++)
                 {
                     FileStream fileStream = new FileStream(string.Concat(path, "\\ET319321_", op.MFGNUM_0, i.ToString("00"), ".cmd"), FileMode.Create);
                     StreamWriter writer = new StreamWriter(fileStream);
                     //writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", Resource1.LABELNAME_DATAMATRIX, "\"")); 
-                    writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", "57X21 DATAMATRIX.Lab", "\"")); 
+                    writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", "57X21 DATAMATRIX.Lab", "\""));
                     writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT1, "=\"", op.ITMREF_0, "\""));
                     writer.WriteLine(string.Concat(StructLabel.OF1, "=\"", op.MFGNUM_0, "\""));
 
@@ -1673,7 +1690,7 @@ namespace GenerateurDFUSafir.Controllers
 
                     writer.WriteLine(string.Concat(StructLabel.QUANTITY, "=\"", "1", "\""));
                     writer.Close();
-                    fileStream.Close();                    
+                    fileStream.Close();
                 }
             }
             // doc rapport
@@ -1686,30 +1703,30 @@ namespace GenerateurDFUSafir.Controllers
 
 
             ParametresModel param = new ParametresModel(null);
-            string imprimante =  param.ParametresModelValue(5);
+            string imprimante = param.ParametresModelValue(5);
             string tmp = ((int)op.Qtr).ToString("00");
 
             if (imprimante.Contains("TYPE_354140A"))
             {
                 DateTime now = DateTime.Now;
-                
-                    FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", op.Item, ( 1).ToString("00"), ".cmd"), FileMode.Create);
-                    StreamWriter writer = new StreamWriter(fileStream);
 
-                    writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", Resource1.LABELNAME_PNC, "\""));
-                    //writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", "57X21 DATAMATRIX.Lab", "\""));
-                    writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT1, "=\"", op.Item, "\""));
-                    writer.WriteLine(string.Concat(StructLabel.NC, "=\"", op.NmrChronoS, "\""));
-                    writer.WriteLine(string.Concat(StructLabel.AUTRE, "=\"", "Qtr:",((int)op.Qtr).ToString("00"), "\""));
+                FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", op.Item, (1).ToString("00"), ".cmd"), FileMode.Create);
+                StreamWriter writer = new StreamWriter(fileStream);
 
-                    writer.WriteLine(string.Concat(StructLabel.QUANTITY, "=\"", "1", "\""));
-                    writer.Close();
-                    fileStream.Close();                   
-                
+                writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", Resource1.LABELNAME_PNC, "\""));
+                //writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", "57X21 DATAMATRIX.Lab", "\""));
+                writer.WriteLine(string.Concat(StructLabel.CODE_PRODUIT1, "=\"", op.Item, "\""));
+                writer.WriteLine(string.Concat(StructLabel.NC, "=\"", op.NmrChronoS, "\""));
+                writer.WriteLine(string.Concat(StructLabel.AUTRE, "=\"", "Qtr:", ((int)op.Qtr).ToString("00"), "\""));
+
+                writer.WriteLine(string.Concat(StructLabel.QUANTITY, "=\"", "1", "\""));
+                writer.Close();
+                fileStream.Close();
+
             }
             else if (imprimante.Contains("TYPE_319321"))
             {
-                
+
             }
         }
         private void ImprimerEtiquette(ITEM_LOCALISATION et, bool nbbac)
@@ -1728,7 +1745,7 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     DateTime now = DateTime.Now;
 
-                    FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", et.ITEMREF,et.ID.ToString(), (i).ToString("00"), ".cmd"), FileMode.Create);
+                    FileStream fileStream = new FileStream(string.Concat(path, "\\ET354140A_", et.ITEMREF, et.ID.ToString(), (i).ToString("00"), ".cmd"), FileMode.Create);
                     StreamWriter writer = new StreamWriter(fileStream);
 
                     writer.WriteLine(string.Concat(StructLabel.LABELNAME, "=\"", Resource1.LABELNAME_BAC, "\""));

@@ -18,9 +18,9 @@ namespace GenerateurDFUSafir.Models.DAL
                 int AnneeeEnCours = CultureInfo.CurrentCulture.Calendar.GetYear(DateTime.Now);
                 int nbsweekok = TEMPS_SEMAINE.Where(s => s.Annee == AnneeeEnCours && s.Semaine >= semaineStart && s.Complete == true).Count();
                 int nbwweektobeok = 0;
-                if ((SemaineEnCours- semaineStart)<0) { nbwweektobeok = SemaineEnCours; }
+                if ((SemaineEnCours - semaineStart) < 0) { nbwweektobeok = SemaineEnCours; }
                 else { nbwweektobeok = SemaineEnCours - semaineStart; }
-                if ((nbwweektobeok- nbsweekok)<=0)
+                if ((nbwweektobeok - nbsweekok) <= 0)
                 {
                     return 100.ToString();
                 }
@@ -32,7 +32,7 @@ namespace GenerateurDFUSafir.Models.DAL
                 {
                     return 50.ToString();
                 }
-                else 
+                else
                 {
                     return 10.ToString();
                 }

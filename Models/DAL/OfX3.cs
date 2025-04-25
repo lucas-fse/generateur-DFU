@@ -13,7 +13,7 @@ namespace GenerateurDFUSafir.DAL
 {
     public class OfX3
     {
-        public List<OrdreFabricationBiDir>  ListOfBidirX3()
+        public List<OrdreFabricationBiDir> ListOfBidirX3()
         {
             SqlConnection db1 = null;
             List<OrdreFabricationBiDir> result = new List<OrdreFabricationBiDir>();
@@ -87,7 +87,7 @@ namespace GenerateurDFUSafir.DAL
                 string connectionString = Resource1.ERPString;
                 db1 = new SqlConnection(connectionString);
                 x160Entities db = new x160Entities();
-                RequeteSql.Connection = db1; 
+                RequeteSql.Connection = db1;
                 RequeteSql.CommandText = text;
                 db1.Open();
                 SqlDataReader monReader = RequeteSql.ExecuteReader();
@@ -103,21 +103,21 @@ namespace GenerateurDFUSafir.DAL
                     }
                     else
                     {
-                        status= Convert.ToInt32(item["MFGTRKFLG_0"]);
+                        status = Convert.ToInt32(item["MFGTRKFLG_0"]);
                     }
                     string client = item["BPCORD_0"].ToString(); string adress = item["BPAADD_0"].ToString();
                     List<BPADDRESS> adresses = db.BPADDRESS.Where(p => p.BPAADD_0 == adress && p.BPANUM_0 == client).ToList();
                     string pays = adresses.First().CRY_0;
-                    result.Add(new OrdreFabricationBiDir(cpt.ToString(),                     item["MFGNUM_0"].ToString(),    Convert.ToInt32(item["QTY_0"]),     item["ITMREF_0"].ToString(),
-                                                    item["VAL_FPARAM_0"].ToString(),    item["ZFPS_0"].ToString(),      
-                                                    0,                                  item["SIM-C"].ToString(),       item["CFGFLDALP4_0"].ToString(),           
-                                                    0,                                  item["MT-C"].ToString(),        item["MT-I"].ToString(), item["CFGFLDALP3_0"].ToString(),
-                                                    0,                                  item["MO-C"].ToString(),        item["MO-I"].ToString(), item["CFGFLDALP2_0"].ToString(),item["VAL_SYNCHRO_0"].ToString(), item["ZVERSION_0"].ToString(),
+                    result.Add(new OrdreFabricationBiDir(cpt.ToString(), item["MFGNUM_0"].ToString(), Convert.ToInt32(item["QTY_0"]), item["ITMREF_0"].ToString(),
+                                                    item["VAL_FPARAM_0"].ToString(), item["ZFPS_0"].ToString(),
+                                                    0, item["SIM-C"].ToString(), item["CFGFLDALP4_0"].ToString(),
+                                                    0, item["MT-C"].ToString(), item["MT-I"].ToString(), item["CFGFLDALP3_0"].ToString(),
+                                                    0, item["MO-C"].ToString(), item["MO-I"].ToString(), item["CFGFLDALP2_0"].ToString(), item["VAL_SYNCHRO_0"].ToString(), item["ZVERSION_0"].ToString(),
                                                     Convert.ToDateTime(item["EXTDLVDAT_0"].ToString()), status,
-                                                    client, adress,pays));
+                                                    client, adress, pays));
                     cpt++;
                 }
-                
+
             }
             finally
             {
@@ -132,7 +132,7 @@ namespace GenerateurDFUSafir.DAL
             SqlCommand RequeteSql = new SqlCommand();
             string text = @"SELECT ZEMPLOIFAN.ARTICLE_INIT_0, ZEMPLOIFAN.DES_ART_INIT_0, ZEMPLOIFAN.NIVEAU_0, ZEMPLOIFAN.ARTICLE_0 AS ARTICLE1, ZEMPLOIFAN.CATEG_ART_0,ZEMPLOIFAN.QTE_0 
                             FROM CLTPROD.ITMMASTER ITMMASTER, CLTPROD.ZEMPLOIFAN ZEMPLOIFAN
-                            WHERE ZEMPLOIFAN.ARTICLE_0 = ITMMASTER.ITMREF_0 AND ((ZEMPLOIFAN.ARTICLE_INIT_0='" + article + 
+                            WHERE ZEMPLOIFAN.ARTICLE_0 = ITMMASTER.ITMREF_0 AND ((ZEMPLOIFAN.ARTICLE_INIT_0='" + article +
                             @"') AND (ZEMPLOIFAN.CATEG_ART_0 Not In ('FAN01','FAN02','MRP01','MRP02','MRP03','MRP04','MRP05','MRP06','MRP07')) AND 
                             (ITMMASTER.ITMSTA_0 In (1,2)) AND (ZEMPLOIFAN.ALT_0=1))";
             string connectionString = Resource1.ERPString;
@@ -144,7 +144,7 @@ namespace GenerateurDFUSafir.DAL
             SqlDataReader monReader = RequeteSql.ExecuteReader();
             DataTable table = new DataTable();
             table.Load(monReader);
-            foreach(DataRow item in table.Rows)
+            foreach (DataRow item in table.Rows)
             {
                 string itemRef = item["ARTICLE1"].ToString();
                 if (!result.Contains(itemRef))
@@ -217,6 +217,7 @@ namespace GenerateurDFUSafir.DAL
             }
             return result;
         }
+
         public List<OrdreFabrication> ListOfAllProductionX3()
         {
             SqlConnection db1 = null;
@@ -257,27 +258,27 @@ namespace GenerateurDFUSafir.DAL
                 int cpt = 1;
                 foreach (DataRow item in table.Rows)
                 {
-                    OrdreFabrication itemOF = new OrdreFabrication(item["MFGNUM_0"].ToString(), 
+                    OrdreFabrication itemOF = new OrdreFabrication(item["MFGNUM_0"].ToString(),
                                                                    item["VCRNUMORI_0"].ToString(),
                                                                    item["MFGSTA_0"].ToString(),
                                                                    Convert.ToDateTime(item["STRDAT_0"]),
-                                                                   Convert.ToDateTime(item["ENDDAT_0"]), 
-                                                                   item["EXTWST_0"].ToString(), 
-                                                                   item["EXTQTY_0"].ToString(), 
-                                                                   item["EXTUNTTIM_0"].ToString(), 
-                                                                   item["EXTOPETIM_0"].ToString(), 
-                                                                   item["TEXTE_0"].ToString(), 
-                                                                   item["TCLCOD_0"].ToString(), 
-                                                                   item["ITMREF_0"].ToString(), 
-                                                                   item["MFGDES_0"].ToString(), 
-                                                                   item["TSICOD_4"].ToString(), 
-                                                                   item["MFGPIO_0"].ToString(), 
-                                                                   item["MFGTRKFLG_0"].ToString(), 
-                                                                   item["MRPMES_0"].ToString(), 
-                                                                   item["WIPTYP_0"].ToString(), 
-                                                                   item["ITMREFORI_0"].ToString(), 
-                                                                   item["ORI_0"].ToString(), 
-                                                                   item["ALLSTA_0"].ToString(), 
+                                                                   Convert.ToDateTime(item["ENDDAT_0"]),
+                                                                   item["EXTWST_0"].ToString(),
+                                                                   item["EXTQTY_0"].ToString(),
+                                                                   item["EXTUNTTIM_0"].ToString(),
+                                                                   item["EXTOPETIM_0"].ToString(),
+                                                                   item["TEXTE_0"].ToString(),
+                                                                   item["TCLCOD_0"].ToString(),
+                                                                   item["ITMREF_0"].ToString(),
+                                                                   item["MFGDES_0"].ToString(),
+                                                                   item["TSICOD_4"].ToString(),
+                                                                   item["MFGPIO_0"].ToString(),
+                                                                   item["MFGTRKFLG_0"].ToString(),
+                                                                   item["MRPMES_0"].ToString(),
+                                                                   item["WIPTYP_0"].ToString(),
+                                                                   item["ITMREFORI_0"].ToString(),
+                                                                   item["ORI_0"].ToString(),
+                                                                   item["ALLSTA_0"].ToString(),
                                                                    item["RMNEXTQTY_0"].ToString()
                                                                    , Convert.ToDateTime(item["OBJDAT_0"]),
                                                                    Convert.ToInt32(item["SERMGTCOD_0"].ToString()));
@@ -310,7 +311,7 @@ namespace GenerateurDFUSafir.DAL
                 LEFT join CLTPROD.MFGHEADTRK MFGHEADTRK
 		        on MFGHEAD.MFGNUM_0 = MFGHEADTRK.MFGNUM_0
 
-                WHERE  MFGHEADTRK.MFGTRKDAT_0 > '" +  olddate.Day + "/" + olddate.Month + "/" + olddate.Year+"'";
+                WHERE  MFGHEADTRK.MFGTRKDAT_0 > '" + olddate.Day + "/" + olddate.Month + "/" + olddate.Year + "'";
                 //wHERE MFGITM.MFGSTA_0 not like '4' AND SORDERQ.SOQSTA_0 not like '3' MFGSTAT of clos 4 SOQSTA ligne de commande soldé == 3 
 
                 // ITMREF ref com
@@ -328,10 +329,10 @@ namespace GenerateurDFUSafir.DAL
                 DataTable table = new DataTable();
                 table.Load(monReader);
                 int cpt = 1;
-                
+
                 foreach (DataRow item in table.Rows)
                 {
-                    
+
                     OrdreFabrication itemOF = new OrdreFabrication(item["MFGNUM_0"].ToString(),
                                                                     item["VCRNUMORI_0"].ToString(),
                                                                    item["MFGSTA_0"].ToString(),
@@ -353,7 +354,7 @@ namespace GenerateurDFUSafir.DAL
                                                                    "",
                                                                    "",
                                                                    "",
-                                                                   "", 
+                                                                   "",
                                                                    Convert.ToDateTime(item["MFGTRKDAT_0"]),
                                                                    0);
                     result.Add(itemOF);
@@ -372,7 +373,7 @@ namespace GenerateurDFUSafir.DAL
         }
         public List<OPERATEURS> ListOPERATEURs(string service)
         {
-           List<OPERATEURS> result = new List<OPERATEURS>();
+            List<OPERATEURS> result = new List<OPERATEURS>();
             using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
             {
                 if (!string.IsNullOrWhiteSpace(service))
@@ -384,11 +385,11 @@ namespace GenerateurDFUSafir.DAL
                 {
                     IQueryable<OPERATEURS> queryoperateurs = _db.OPERATEURS.Include("TEMPS_SEMAINE").Include("TEMPS_SAISI").Where(p => p.SERVICE != null && (p.FINCONTRAT == null || p.FINCONTRAT > DateTime.Now));
                     result = queryoperateurs.ToList();
-                } 
+                }
             }
             return result;
         }
-       
+
 
         public List<OF_PROD_TRAITE> ListOFsTraite()
         {
@@ -409,11 +410,11 @@ namespace GenerateurDFUSafir.DAL
             List<OF_PROD_TRAITE> result = new List<OF_PROD_TRAITE>();
             using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
             {
-               IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Where(p => p.NMROF.Contains(Nmrof));
-               if (queryoftraite != null && queryoftraite.Count() > 0)
-               {
-                  result = queryoftraite.ToList();
-               }
+                IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Where(p => p.NMROF.Contains(Nmrof));
+                if (queryoftraite != null && queryoftraite.Count() > 0)
+                {
+                    result = queryoftraite.ToList();
+                }
             }
             return result;
         }
@@ -433,16 +434,16 @@ namespace GenerateurDFUSafir.DAL
             }
             return result;
         }
-            public bool SaveDbOperateur(OPERATEURS ope)
+        public bool SaveDbOperateur(OPERATEURS ope)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
             IQueryable<OPERATEURS> queryopee = _db.OPERATEURS.Where(p => p.ID == ope.ID);
-            if (queryopee!=  null && queryopee.Count()>0)
+            if (queryopee != null && queryopee.Count() > 0)
             {
                 OPERATEURS ope1 = queryopee.FirstOrDefault();
                 if (!ope1.ANIMATEUR)
                 {
-                  //  ope1.POSTE = ope.POSTE;
+                    //  ope1.POSTE = ope.POSTE;
                 }
                 _db.SaveChanges();
             }
@@ -452,7 +453,7 @@ namespace GenerateurDFUSafir.DAL
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
             IQueryable<OPERATEURS> queryopee = _db.OPERATEURS.Where(p => p.ID == ope.ID);
-            if (queryopee != null && queryopee.Count() ==1)
+            if (queryopee != null && queryopee.Count() == 1)
             {
                 OPERATEURS ope1 = queryopee.FirstOrDefault();
                 ope1.NOM = ope.NOM;
@@ -460,7 +461,7 @@ namespace GenerateurDFUSafir.DAL
                 ope1.ANIMATEUR = ope.ANIMATEUR;
                 ope1.ANNIVERSAIRE = ope.ANNIVERSAIRE;
                 ope1.FINCONTRAT = ope.FINCONTRAT;
-                if (ope.ID==0)
+                if (ope.ID == 0)
                 {
                     ope1.INITIAL = ope.INITIAL;
                 }
@@ -472,7 +473,7 @@ namespace GenerateurDFUSafir.DAL
                 }
                 _db.SaveChanges();
             }
-            else if (ope.ID==0)
+            else if (ope.ID == 0)
             {
                 _db.OPERATEURS.Add(ope);
                 _db.SaveChanges();
@@ -496,13 +497,13 @@ namespace GenerateurDFUSafir.DAL
         public bool SaveDbTemsSaisi(OPERATEURS ope, TEMPS_SAISI week)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
-            IQueryable<TEMPS_SAISI> querysemainaUpgrede = _db.TEMPS_SAISI.Where(p => p.OPERATEURS_ID == ope.ID && p.Semaine==week.Semaine && p.Annee == week.Annee && p.SOUSPROJET_ID == week.SOUSPROJET_ID);
-            if (querysemainaUpgrede != null && querysemainaUpgrede.Count() ==1)
+            IQueryable<TEMPS_SAISI> querysemainaUpgrede = _db.TEMPS_SAISI.Where(p => p.OPERATEURS_ID == ope.ID && p.Semaine == week.Semaine && p.Annee == week.Annee && p.SOUSPROJET_ID == week.SOUSPROJET_ID);
+            if (querysemainaUpgrede != null && querysemainaUpgrede.Count() == 1)
             {
                 TEMPS_SAISI semaineupgrade1 = querysemainaUpgrede.FirstOrDefault();
-                
-                semaineupgrade1.Days1 = Math.Round(week.Days1,1);
-                semaineupgrade1.Days2 = Math.Round(week.Days2,1);
+
+                semaineupgrade1.Days1 = Math.Round(week.Days1, 1);
+                semaineupgrade1.Days2 = Math.Round(week.Days2, 1);
                 semaineupgrade1.Days3 = Math.Round(week.Days3, 1);
                 semaineupgrade1.Days4 = Math.Round(week.Days4, 1);
                 semaineupgrade1.Days5 = Math.Round(week.Days5, 1);
@@ -511,22 +512,22 @@ namespace GenerateurDFUSafir.DAL
 
                 _db.SaveChanges();
             }
-            else if(querysemainaUpgrede != null && querysemainaUpgrede.Count() == 0)
+            else if (querysemainaUpgrede != null && querysemainaUpgrede.Count() == 0)
             {
                 SOUSPROJET ssprojet = _db.SOUSPROJET.Where(p => p.ID == week.SOUSPROJET_ID).First();
-                if (ssprojet!= null && week.Days1+ week.Days2+ week.Days3+ week.Days4+ week.Days5+ week.Days6+ week.Days7 !=0)
+                if (ssprojet != null && week.Days1 + week.Days2 + week.Days3 + week.Days4 + week.Days5 + week.Days6 + week.Days7 != 0)
                 {
 
                     TEMPS_SAISI semaineupgrade1 = new TEMPS_SAISI();
                     semaineupgrade1.Annee = week.Annee;
                     semaineupgrade1.Semaine = week.Semaine;
-                    semaineupgrade1.Days1 = Math.Round(week.Days1,1);
-                    semaineupgrade1.Days2 = Math.Round(week.Days2,1);
-                    semaineupgrade1.Days3 = Math.Round(week.Days3,1);
-                    semaineupgrade1.Days4 = Math.Round(week.Days4,1);
-                    semaineupgrade1.Days5 = Math.Round(week.Days5,1);
-                    semaineupgrade1.Days6 = Math.Round(week.Days6,1);
-                    semaineupgrade1.Days7 = Math.Round(week.Days7,1);
+                    semaineupgrade1.Days1 = Math.Round(week.Days1, 1);
+                    semaineupgrade1.Days2 = Math.Round(week.Days2, 1);
+                    semaineupgrade1.Days3 = Math.Round(week.Days3, 1);
+                    semaineupgrade1.Days4 = Math.Round(week.Days4, 1);
+                    semaineupgrade1.Days5 = Math.Round(week.Days5, 1);
+                    semaineupgrade1.Days6 = Math.Round(week.Days6, 1);
+                    semaineupgrade1.Days7 = Math.Round(week.Days7, 1);
                     semaineupgrade1.OPERATEURS_ID = ope.ID;
                     semaineupgrade1.OPERATEURS = null;
                     semaineupgrade1.SOUSPROJET = null;
@@ -538,16 +539,16 @@ namespace GenerateurDFUSafir.DAL
             }
             return true;
         }
-        public void SaveDbTempsSemaine(short id, int semaine,int annee, bool full)
+        public void SaveDbTempsSemaine(short id, int semaine, int annee, bool full)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
             var query = _db.TEMPS_SEMAINE.Where(s => s.OPERATEURS.ID == id && s.Semaine == semaine && s.Annee == annee);
             TEMPS_SEMAINE temspByweek = new TEMPS_SEMAINE();
-            if (query != null && query.Count()>0)
+            if (query != null && query.Count() > 0)
             {
                 temspByweek = query.First();
             }
-            
+
             if (temspByweek != null && query.Count() > 0)
             {
                 temspByweek.Complete = full;
@@ -555,9 +556,9 @@ namespace GenerateurDFUSafir.DAL
             }
             else
             {
-                OPERATEURS op = _db.OPERATEURS.Where(s => s.ID == id ).First();
+                OPERATEURS op = _db.OPERATEURS.Where(s => s.ID == id).First();
                 temspByweek = new TEMPS_SEMAINE();
-                
+
                 temspByweek.Annee = (short)annee;
                 temspByweek.Semaine = (short)semaine;
                 temspByweek.Complete = full;
@@ -574,8 +575,8 @@ namespace GenerateurDFUSafir.DAL
             {
                 PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
                 List<OF_PROD_TRAITE> resultof = new List<OF_PROD_TRAITE>();
-                IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Include("ALEAS_OF").Where(p => p.OPERATEUR == OfGenere.OPERATEUR && p.NMROF==OfGenere.NMROF && p.ISALIVE!=false );
-                IQueryable<OF_PROD_TRAITE> queryoftraiteAllOpe = _db.OF_PROD_TRAITE.Include("ALEAS_OF").Where(p => p.OPERATEUR != OfGenere.OPERATEUR &&  p.NMROF == OfGenere.NMROF && p.ISALIVE != false);
+                IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Include("ALEAS_OF").Where(p => p.OPERATEUR == OfGenere.OPERATEUR && p.NMROF == OfGenere.NMROF && p.ISALIVE != false);
+                IQueryable<OF_PROD_TRAITE> queryoftraiteAllOpe = _db.OF_PROD_TRAITE.Include("ALEAS_OF").Where(p => p.OPERATEUR != OfGenere.OPERATEUR && p.NMROF == OfGenere.NMROF && p.ISALIVE != false);
                 IQueryable<PLANIF_OF> queryofplanif = _db.PLANIF_OF.Where(p => p.NumOF == OfGenere.NMROF);
                 List<PLANIF_OF> resultplanifof = new List<PLANIF_OF>();
 
@@ -616,7 +617,7 @@ namespace GenerateurDFUSafir.DAL
                                 }
                             }
                         }
-                        
+
 
                         // on solde tt les autres of qui était en cours si la quantité est atteinte
                         if (queryoftraiteAllOpe.Count() > 0 && of_db.QTRREEL >= of_db.QTRTHEORIQUE)
@@ -645,10 +646,10 @@ namespace GenerateurDFUSafir.DAL
                             }
                         }
                     }
-                    else if (of_db.STATUSTYPE.Contains( "ENPAUSE") && !OfGenere.STATUSTYPE.Contains("ENPAUSE"))
+                    else if (of_db.STATUSTYPE.Contains("ENPAUSE") && !OfGenere.STATUSTYPE.Contains("ENPAUSE"))
                     {
                         // test reprise d'un of en pause
-                        OF_PROD_TRAITE tmp =new OF_PROD_TRAITE();
+                        OF_PROD_TRAITE tmp = new OF_PROD_TRAITE();
                         tmp.NMROF = of_db.NMROF;
                         tmp.ITEMREF = of_db.ITEMREF;
                         tmp.Alea = of_db.Alea;
@@ -675,7 +676,7 @@ namespace GenerateurDFUSafir.DAL
                                 alea.ID_OF_PROD_ORIG = alea.ID_OF_PROD_TRAITE;
                             }
                             alea.ID_OF_PROD_TRAITE = tmp.ID;
-                            if ( alea.IsAlwaysOn == true)
+                            if (alea.IsAlwaysOn == true)
                             {
                                 ALEAS_OF_DETAILS newdetails = new ALEAS_OF_DETAILS(); newdetails.DateStart = DateTime.Now;
                                 alea.ALEAS_OF_DETAILS.Add(newdetails);
@@ -690,7 +691,7 @@ namespace GenerateurDFUSafir.DAL
                         of_db.ENDTIME = OfGenere.ENDTIME;
                         //of_db.OPERATEUR = OfGenere.OPERATEUR;
                         of_db.STATUSTYPE = OfGenere.STATUSTYPE;
-                        foreach(var alea in of_db.ALEAS_OF)
+                        foreach (var alea in of_db.ALEAS_OF)
                         {
                             if (of_db.STATUSTYPE.Contains("ENPAUSE"))
                             {
@@ -746,7 +747,7 @@ namespace GenerateurDFUSafir.DAL
                             {
                                 alea.ID_OF_PROD_ORIG = alea.ID_OF_PROD_TRAITE;
                             }
-                            alea.ID_OF_PROD_TRAITE = tmp.ID;                            
+                            alea.ID_OF_PROD_TRAITE = tmp.ID;
 
                         }
                         _db.OF_PROD_TRAITE.Add(tmp);
@@ -763,7 +764,7 @@ namespace GenerateurDFUSafir.DAL
                     JobERP.CreateEditeOF(OfGenere);
                     result = 2;
                 }
-                
+
             }
             catch (DbEntityValidationException ex)
             {
@@ -782,17 +783,17 @@ namespace GenerateurDFUSafir.DAL
             catch (Exception e)
             {
                 result = -3;
-                return result; 
+                return result;
             }
-            return result; 
+            return result;
         }
-        public bool SaveDbOF_PLANIF_OF(string nmrof , int etat)
+        public bool SaveDbOF_PLANIF_OF(string nmrof, int etat)
         {
             bool result = false;
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
             IQueryable<PLANIF_OF> queryofplanif = _db.PLANIF_OF.Where(p => p.NumOF == nmrof);
             List<PLANIF_OF> resultplanifof = new List<PLANIF_OF>();
-            if (queryofplanif!= null && queryofplanif.Count()>0)
+            if (queryofplanif != null && queryofplanif.Count() > 0)
             {
                 resultplanifof = queryofplanif.ToList();
             }
@@ -804,7 +805,7 @@ namespace GenerateurDFUSafir.DAL
                 ofplanif = new PLANIF_OF();
                 _db.PLANIF_OF.Add(ofplanif);
                 ofplanif.NumOF = nmrof;
-                
+
                 ofplanif.DatePlanif = DateTime.Now;
                 // recherche du poste
                 DataTable rawResult = new DataTable();
@@ -836,7 +837,7 @@ namespace GenerateurDFUSafir.DAL
                 PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
                 _db.SOUSPROJET.Add(ssprj);
                 _db.SaveChanges();
-                
+
             }
             catch
             {
@@ -871,9 +872,49 @@ namespace GenerateurDFUSafir.DAL
             }
             return result;
         }
+
+        public bool SavePasswordOperateur(long idOperateur, string hashedPassword)
+        {
+            bool result = false;
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+
+                var operateur = _db.OPERATEURS.FirstOrDefault(op => op.ID == idOperateur);
+                if (operateur != null)
+                {
+                    operateur.Password = hashedPassword;
+                    _db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch
+            {
+                // log éventuellement
+            }
+
+            return result;
+        }
+
+        public string GetPasswordOperateur(long idOperateur)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var entry = _db.OPERATEURS_PWD.FirstOrDefault(p => p.ID == idOperateur);
+                return entry?.Password;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+
         public bool SaveDbOFNewAlea(OF_PROD_TRAITE OfGenere)
         {
-            PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();            
+            PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
 
             try
             {
@@ -892,7 +933,7 @@ namespace GenerateurDFUSafir.DAL
                         {
                             newAlea.DateStart = alea.DateStart;
                         }
-                        else if (alea.Delai !=null)
+                        else if (alea.Delai != null)
                         {
                             newAlea.Delai = alea.Delai;
                         }
@@ -919,13 +960,13 @@ namespace GenerateurDFUSafir.DAL
                     try
                     {
                         //IQueryable<OPERATEURS> querytemspsaisi = _db.OPERATEURS;
-                        IQueryable<OPERATEURS> querytemspsaisi = _db.OPERATEURS.Include("TEMPS_SAISI").Include("TEMPS_SEMAINE").Where(x => x.ID== ID);
+                        IQueryable<OPERATEURS> querytemspsaisi = _db.OPERATEURS.Include("TEMPS_SAISI").Include("TEMPS_SEMAINE").Where(x => x.ID == ID);
                         IQueryable<TEMPS_SAISI> querytemspsaisi2 = _db.TEMPS_SAISI.Include("OPERATEURS").Include("SOUSPROJET").Where(x => x.OPERATEURS_ID == ID);
                         var toto = (from c in querytemspsaisi select c.TEMPS_SAISI);
                         result = querytemspsaisi.ToList().First();
                         tata = querytemspsaisi2.ToList();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
 
                     }
@@ -939,18 +980,18 @@ namespace GenerateurDFUSafir.DAL
             List<SOUSPROJET> result = new List<SOUSPROJET>();
             using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
             {
-                
-                    try
-                    {
-                        
-                        IQueryable<SOUSPROJET> querytemsp = _db.SOUSPROJET;
-                        result = querytemsp.ToList();
-                    }
-                    catch (Exception e)
-                    {
 
-                    }
-                
+                try
+                {
+
+                    IQueryable<SOUSPROJET> querytemsp = _db.SOUSPROJET;
+                    result = querytemsp.ToList();
+                }
+                catch (Exception e)
+                {
+
+                }
+
             }
             return result;
         }
@@ -963,8 +1004,8 @@ namespace GenerateurDFUSafir.DAL
             {
                 List<OF_PROD_TRAITE> resultof = new List<OF_PROD_TRAITE>();
                 IQueryable<OF_PROD_TRAITE> queryoftraite = _db.OF_PROD_TRAITE.Include("ALEAS_OF.ALEAS_OF_DETAILS").Where(p => p.OPERATEUR == OfGenere.OPERATEUR && p.NMROF == OfGenere.NMROF && p.ISALIVE != false);
-                 resultof = queryoftraite.ToList();
-               
+                resultof = queryoftraite.ToList();
+
                 OF_PROD_TRAITE of_db;
                 if (queryoftraite.Count() > 0)
                 {
@@ -1007,7 +1048,7 @@ namespace GenerateurDFUSafir.DAL
                                 {
                                     newAlea.IsAlwaysOn = false;
                                     newAleaDetails.StopTime = newAleaDetails.DateStart;
-                                }                                
+                                }
                                 newAlea.ALEAS_OF_DETAILS.Add(newAleaDetails);
                                 of_db.ALEAS_OF.Add(newAlea);
 
@@ -1018,7 +1059,7 @@ namespace GenerateurDFUSafir.DAL
                             }
                         }
                     }
-                    
+
                 }
             }
             catch (Exception e)
@@ -1028,6 +1069,7 @@ namespace GenerateurDFUSafir.DAL
 
             return true;
         }
+
         public bool SaveDbDeleteAlea(long? idAlea)
         {
             PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
@@ -1039,10 +1081,10 @@ namespace GenerateurDFUSafir.DAL
                 ALEAS_OF alea_db;
                 alea_db = resultAlea.FirstOrDefault();
 
-                List<ALEAS_OF_DETAILS> tmp =  alea_db.ALEAS_OF_DETAILS.ToList();
-                foreach(var details in tmp)
-                {                    
-                   _db.Entry(details).State = System.Data.Entity.EntityState.Deleted;
+                List<ALEAS_OF_DETAILS> tmp = alea_db.ALEAS_OF_DETAILS.ToList();
+                foreach (var details in tmp)
+                {
+                    _db.Entry(details).State = System.Data.Entity.EntityState.Deleted;
                 }
                 _db.Entry(alea_db).State = System.Data.Entity.EntityState.Deleted;
                 _db.SaveChanges();
@@ -1053,6 +1095,6 @@ namespace GenerateurDFUSafir.DAL
             }
             return true;
         }
-        
+
     }
 }

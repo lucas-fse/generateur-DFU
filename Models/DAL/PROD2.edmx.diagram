@@ -82,6 +82,8 @@
         <EntityTypeShape EntityType="PEGASE_PROD2Model.TYPE_CAUSE" Width="1.5" PointX="20.375" PointY="15.875" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.OPERATEURS_PWD" Width="1.5" PointX="3" PointY="10.25" />
+        <AssociationConnector Association="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

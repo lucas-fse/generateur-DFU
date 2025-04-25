@@ -25,7 +25,7 @@
     margin-bottom: 20px;
 }
 
-/* Titre / en-tête */
+/* Titre / en-t?te */
 #header h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -79,7 +79,7 @@
     border: 2px solid #ccc;
 }
 
-/* Clavier numérique */
+/* Clavier num?rique */
 #digicode {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -105,7 +105,7 @@
             transform: scale(0.95);
         }
 
-/* Lien Accès Admin ou messages */
+/* Lien Acc?s Admin ou messages */
 #admin-link,
 .alert-danger {
     margin-top: 2vh;
@@ -116,7 +116,7 @@
     max-width: 400px;
 }
 
-/* Responsive mini-écrans */
+/* Responsive mini-?crans */
 @media screen and (max-height: 600px), screen and (max-width: 350px) {
     #digicode button {
         font-size: 1.4rem;

@@ -29,7 +29,7 @@
 }
 
 #title {
-    display:flex;
+    display: flex;
     margin-top: 20px;
     justify-content: center;
 }
@@ -73,7 +73,7 @@
 #login-form {
     display: flex;
     flex-direction: column;
-    padding:20px;
+    padding: 20px;
     align-items: center;
     width: 100%;
     max-width: 400px;
@@ -154,5 +154,3 @@
         width: 300px;
     }
 }
-
-

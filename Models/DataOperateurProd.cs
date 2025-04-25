@@ -18,22 +18,29 @@ namespace GenerateurDFUSafir.Models
         public bool Popup { get; set; }
 
         public String Prenom { get; set; }
-        public String Initial  { get;set;}
+        public String Initial { get; set; }
+
+        public String Password { get; set; }
+
+        public bool isValidPasswd { get; set; }
 
         public List<OFView> ofAfaire { get; set; }
         public bool Animateur { get; set; }
         public DateTime? Anniversaire { get; set; }
         [Required]
-        public   List<OF_PROD_TRAITE> OfEncours { 
-            get; 
-            set; } /* OF en haut */
+        public List<OF_PROD_TRAITE> OfEncours
+        {
+            get;
+            set;
+        } /* OF en haut */
         public List<OF_PROD_TRAITE> OfNontraiteNontrace
-        { 
-            get; 
-            set; 
-        } 
+        {
+            get;
+            set;
+        }
         /* tous les OF pour un operateur */
-        public List<OF_PROD_TRAITE> OfNontraiteNontraceAff { /* tous les OF selon ilot */
+        public List<OF_PROD_TRAITE> OfNontraiteNontraceAff
+        { /* tous les OF selon ilot */
             get
             {
                 DateTime now = DateTime.Now;
@@ -41,7 +48,7 @@ namespace GenerateurDFUSafir.Models
                 //return OfNontraiteNontrace.Where(p => p.ENDTIMETHEORIQUE >= nowfiltre).OrderBy(t  => t.NMROF).ToList();
                 return OfNontraiteNontrace.ToList();
             }
-                }
+        }
         //public string Photo 
         //{
         //    get
@@ -49,10 +56,10 @@ namespace GenerateurDFUSafir.Models
         //        return "/operateurs/OperateursA/"+ Initial + ".bmp";
         //    }
         //}
-        
-        public string Photo { get;  set ; }
+
+        public string Photo { get; set; }
         public string OFFindToStart { get; set; }
-        public IEnumerable<SelectListItem> ListIlotdispo 
+        public IEnumerable<SelectListItem> ListIlotdispo
         {
             get
             {
@@ -63,7 +70,7 @@ namespace GenerateurDFUSafir.Models
                     new SelectListItem {Text = "Mono", Value="3"},
                     new SelectListItem {Text = "Test", Value="4"}
                 };
-              }  
+            }
         }
         public int DefaultIlotid { get; internal set; }
         public int Ilotid { get; set; }
@@ -80,7 +87,7 @@ namespace GenerateurDFUSafir.Models
 
         }
 
-        public void initOfList(int pole,string ofCherche,bool ChargeOfPlanifie)
+        public void initOfList(int pole, string ofCherche, bool ChargeOfPlanifie)
         {
             ofAfaire = getOfsAFaire(pole, ofCherche, ChargeOfPlanifie);
             //ofAfaire = new List<OFView>();
@@ -88,7 +95,7 @@ namespace GenerateurDFUSafir.Models
 
         public void ToJson()
         {
-            JsonOfEnCours= JsonConvert.SerializeObject(OfEncours, Formatting.None,
+            JsonOfEnCours = JsonConvert.SerializeObject(OfEncours, Formatting.None,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -96,7 +103,7 @@ namespace GenerateurDFUSafir.Models
             //JsonOfEnCours = JsonConvert.SerializeObject(OfEncours);
         }
 
-        private List<OFView> getOfsAFaire(long pole,string ofCherche,bool ChargeOfPlanifie)
+        private List<OFView> getOfsAFaire(long pole, string ofCherche, bool ChargeOfPlanifie)
         {
             PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
             DataTable rawResult = new DataTable();
@@ -120,9 +127,9 @@ namespace GenerateurDFUSafir.Models
                 }
             }
             // On récupère les vrais ofs de X3 correspondant
-            
+
             //Ofs.RequeteOF(ref rawResult,"EDITE");
-            
+
 
             List<OFView> liste_of = new List<OFView>();
             List<string> poste_occupe = new List<string>();
@@ -130,7 +137,7 @@ namespace GenerateurDFUSafir.Models
             List<POSTES> ListPostes = db.POSTES.ToList();
             List<OF_PROD_TRAITE> oF_PROD_TRAITEs = db.OF_PROD_TRAITE.ToList();
             foreach (PLANIF_OF of in ofs)
-            {              
+            {
 
                 OFView of_cherche = null;
 
@@ -154,7 +161,7 @@ namespace GenerateurDFUSafir.Models
                         }
                         else
                         {
-                            of_cherche.dateExpe=of_cherche.dateDebut;
+                            of_cherche.dateExpe = of_cherche.dateDebut;
                         }
 
                         of_cherche.poste = row["EXTWST_0"].ToString();
@@ -179,10 +186,10 @@ namespace GenerateurDFUSafir.Models
                 {
                     if (of.Etat == 1) // OF disponible et prêt
                     {
-                        
-                        int nb_op = oF_PROD_TRAITEs.Where(p => p.STATUSTYPE.Equals("INPROGRESS") && p.ILOT!= null && p.ILOT.Equals(of_cherche.poste)).Count();
 
-                        if ((nb_op == 0)|| !string.IsNullOrWhiteSpace(ofCherche))
+                        int nb_op = oF_PROD_TRAITEs.Where(p => p.STATUSTYPE.Equals("INPROGRESS") && p.ILOT != null && p.ILOT.Equals(of_cherche.poste)).Count();
+
+                        if ((nb_op == 0) || !string.IsNullOrWhiteSpace(ofCherche))
                         {
                             liste_of.Add(of_cherche);
                         }
@@ -193,7 +200,7 @@ namespace GenerateurDFUSafir.Models
 
             //var liste_of_a_faire = liste_of.Where(i => i.rupture == false).Take(3);
             var liste_of_a_faire = liste_of.Take(3);
-            
+
             return liste_of_a_faire.ToList();
         }
     }

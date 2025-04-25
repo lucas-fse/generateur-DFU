@@ -6,9 +6,6 @@
     int i = Model.DataOperateurs.Count % 5;
 }
 
-
-
-
 <body onload="init()">
 
     <img id="FondEcran" src="../image/swirl.png" alt="">
@@ -22,10 +19,10 @@
             {
                 <label for="searched-OF">Référence de l'OF:</label>
                 <!--
-        -->
+                -->
                 <input type="search" id="searched-OF" name="searched-OF">
                 <!--
-        -->
+                -->
                 <button type="submit" name="submitButton" id="submitButton"><img src="~/image/search.png" alt="Alternate Text" width="20" /></button>
             }
         </div>
@@ -40,10 +37,10 @@
 
 
             <div class="Operateur">
-                <a href="@Url.Action("gestionOf", "Production", new { id = item.ID , popUp = "" })">
-    <img src="@item.Photo" />
-    <p>@item.Nom @item.Prenom</p>
-</a>
+                <a href="@lien">
+                    <img src="@item.Photo" />
+                    <p>@item.Nom @item.Prenom</p>
+                </a>
             </div>
         }
 
@@ -51,8 +48,8 @@
         {
             <div style="width : 300px;">
 
-                    </div>
-            }
+            </div>
+        }
     </div>
 
 
@@ -61,7 +58,6 @@
         function init() {
             document.getElementById("searched-OF").focus()
         }
-  
+
     </script>
 </body>
-

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ConnexionOperateur";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <link href="~/Content/ConnexionOperateur.css" rel="stylesheet" />
+<link href="~/Content/ConnexionOperateur.css" rel="stylesheet" />
 }
 
 <body onload="init()">
@@ -19,14 +19,14 @@
             </div>
         </div>
 
-        <form method="post" action="@Url.Action("ConnexionOperateur", "Production")" id="login-form">
+        <form method="post" action="@Url.Action("ConnexionOperateur", "Production" )" id="login-form">
             <input type="hidden" name="id" value="@Model.ID" />
             <input type="password" id="motdepasse" name="motdepasse" readonly />
 
             <div id="digicode">
                 @for (int i = 1; i <= 9; i++)
                 {
-                    <button type="button" onclick="ajouterChiffre('@i')">@i</button>
+                <button type="button" onclick="ajouterChiffre('@i')">@i</button>
                 }
                 <button type="button" onclick="supprimerDernier()">⌫</button>
                 <button type="button" onclick="ajouterChiffre('0')">0</button>
@@ -35,11 +35,11 @@
         </form>
         @if (ViewBag.Erreur != null)
         {
-            <div class="alert alert-danger">@ViewBag.Erreur</div>
+        <div class="alert alert-danger">@ViewBag.Erreur</div>
         }
 
         <div id="admin-link">
-            <a id="admin-text" href="@Url.Action("ConnexionAd", "Production", new { id = Model.ID })">Accès Admin</a>
+            <a id="admin-text" href="@Url.Action("ConnexionAd", "Production" , new { id=Model.ID })">Accès Admin</a>
         </div>
     </div>
 
@@ -56,6 +56,5 @@
         input.value = input.value.slice(0, -1);
     }
 </script>
-
 
 
