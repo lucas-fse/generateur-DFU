@@ -28,6 +28,16 @@
     margin-bottom: 20px;
 }
 
+#introduction {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
 #title {
     display: flex;
     margin-top: 20px;
