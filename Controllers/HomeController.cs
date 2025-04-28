@@ -88,6 +88,13 @@ namespace GenerateurDFUSafir.Controllers
             RefreshData();
            return View(InfoOrdreFabrications);
         }
+
+        public ActionResult Accueil()
+        {
+            GestionTraitementOFs vue = new GestionTraitementOFs();
+            return View(vue);
+        }
+
         private void RefreshDataLogistique()
         {
             try
