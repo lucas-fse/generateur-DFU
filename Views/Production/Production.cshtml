@@ -3,6 +3,7 @@
     ViewBag.Title = "Production";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Content/homeProd.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
 
     string Date = DateTime.Now.Date.AddDays(-1).ToString();
 }
@@ -338,7 +339,7 @@
 
 
                         <div class="enSavoirPlusContainer centered">
-                            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Securite", "Production")'">Accéder</button>
+                            <div id="root"></div>
                         </div>
 
                     </div> <!-- là où sera affiché les informations de sécurité -->
@@ -424,10 +425,10 @@
                                 <div class="Q-CrossCase top bottom right bg-case cliquable @Html.DisplayFor(model => Model.CasesQcross[16].Couleurstring)">17</div>
                                 <div class="Q-CrossCase "></div>
                                 <!--
-                        -->
+                                -->
                                 <div class="Q-CrossCase"></div>
                                 <!--
-                        -->
+                                -->
                             </div>
                             <div class="Q-CrossRow">
                                 <!-- ligne 7 -->
@@ -539,7 +540,7 @@
                         <div class="enSavoirPlusContainer centered">
                             <button class="btn btn-orange" onclick="location.href = '@Url.Action("KPIProd", "Production")'">Accéder</button>
                         </div>
-                       </div>
+                    </div>
                 </div>
             </div>
             <hr />
@@ -639,5 +640,21 @@
     <script type="text/javascript" src="~/Scripts/CountDown.js"></script>
     <script type="text/javascript" src="~/Scripts/CountDown2.js"></script>
     <script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+
+    <!-- Charger React en premier -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    @{
+        var reactFiles = System.IO.Directory
+            .EnumerateFiles(Server.MapPath("~/Scripts/react/assets"), "index-*.js")
+            .Select(Path.GetFileName)
+            .ToList();
+    }
+
+    @if (reactFiles.Any())
+    {
+        <script type="module" src="~/Scripts/react/assets/@reactFiles.First()"></script>
+    }
 </body>
 
