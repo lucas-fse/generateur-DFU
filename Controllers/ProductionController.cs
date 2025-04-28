@@ -947,6 +947,11 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult indexOFOperateur()
         {
+            var idConnecte = Session["OperateurConnecte"];
+            if (idConnecte != null)
+            {
+                return RedirectToAction("GestionOF", new { id = idConnecte });
+            }
             GestionTraitementOFs vue = new GestionTraitementOFs();
             return View(vue);
         }
@@ -988,7 +993,7 @@ namespace GenerateurDFUSafir.Controllers
                 BCrypt.Net.BCrypt.Verify(motdepasse, hashStocke))
             {
                 Session["OperateurConnecte"] = operateur.ID;
-                return RedirectToAction("GestionOF", new { id = operateur.ID });
+                return RedirectToAction("Index", "Home");
             }
 
             // 4. Sinon, erreur

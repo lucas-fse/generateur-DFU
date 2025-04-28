@@ -38,31 +38,20 @@
     opacity: 0.15;
 }
 
+#buttons-container{
+    display:flex;
+    justify-content: center;
+}
+
 #topInfos {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    position: relative;
     width: 100%;
-    padding-right: 10px;
+    padding-top: 20px;
     margin-bottom: 10px;
     margin-top: 40px;
-  
 }
-
-
-@media all and (max-width: 501px) {
-
-   #topInfos {
-        flex-direction: column;
-    }
-}
-
-    #topInfos .prodPic {
-        border-radius: 100%;
-        width: 0px;
-        background-color: white;
-    }
 
 #logo {
     width: 350px;
@@ -429,8 +418,8 @@ input[type="search"]:focus + #submitButton{
     display: flex;
     align-items: center;
     margin: 0 auto;
-    min-width: 250px;
     margin-bottom: 5px;
+    min-width: 150px;
     position: relative;
     justify-content: center;
     box-sizing: border-box;

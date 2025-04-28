@@ -33,7 +33,7 @@ textarea {
     padding: 1.6rem 3.2rem;
 }
 
-.operateur {
+operateur {
     border: 5px solid rgb(111,41,97);
     border-radius: .5em;
     padding: 10px;

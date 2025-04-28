@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "gestion OF";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <link href="~/Content/gestionOF.css?13" rel="stylesheet" />
+    <link href="~/Content/gestionOF.css" rel="stylesheet" />
     <link href="~/Content/of.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 }
@@ -13,9 +13,7 @@
     <p id="ouverturepopup" initvalue="@Model.Popup.ToString()" hidden></p>
     <div id="gestion-OF-container">
         <div id="topInfos">
-            <div class="">
-                <img src="~/image/logo.png" id="logo" alt="logo">
-            </div>
+            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Deconnexion", "Production")'">Déconnexion</button>
         </div>
         <div id="categorie-OF">
             <!-- debut barre latérale gauche -->
