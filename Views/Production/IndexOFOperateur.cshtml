@@ -2,62 +2,47 @@
 @{
     ViewBag.Title = "IndexOFOperateur";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <link href="~/Content/IndexOFOperateur.css" rel="stylesheet" />
-    int i = Model.DataOperateurs.Count % 5;
 }
 
-<body onload="init()">
+<link href="~/Content/IndexOFOperateur.css" rel="stylesheet" />
+<meta charset="UTF-8" />
 
-    <img id="FondEcran" src="../image/swirl.png" alt="">
+<div id="root"></div>
 
-    <div id="fondTransparent"></div>
+@{
+    var reactFiles = System.IO.Directory
+        .EnumerateFiles(Server.MapPath("~/Scripts/react/assets"), "index-*.js")
+        .Select(System.IO.Path.GetFileName)
+        .ToList();
+}
 
-    <div id="top">
-        <h2 id="title">FabriZEN</h2>
-        <div id="searchOF">
-            @using (Html.BeginForm())
+@if (reactFiles.Any())
+{
+    <script type="module" src="~/Scripts/react/assets/@reactFiles.First()"></script>
+}
+else
+{
+    <p>Erreur : Aucun fichier React trouvé dans ~/Scripts/react/assets/</p>
+}
+
+@using Newtonsoft.Json
+<script>
+   @{
+        // Définir le type anonyme une seule fois pour éviter les incompatibilités
+        var emptyOperatorList = new[] { new { ID = 0L, Photo = "", Nom = "", Prenom = "", isValidPasswd = false } }.Take(0).ToList();
+        var operators = Model.DataOperateurs != null
+            ? Model.DataOperateurs.Select(op => new
             {
-                <label for="searched-OF">Référence de l'OF:</label>
-                <!--
-                -->
-                <input type="search" id="searched-OF" name="searched-OF">
-                <!--
-                -->
-                <button type="submit" name="submitButton" id="submitButton"><img src="~/image/search.png" alt="Alternate Text" width="20" /></button>
-            }
-        </div>
-    </div>
-    <div id="BarreSeparation"></div>
-    <div id="ListOperateur">
-        @foreach (var item in @Model.DataOperateurs)
-        {
-            string lien = !item.isValidPasswd
-                ? Url.Action("DefinirMDP", "Production", new { id = item.ID })
-                : Url.Action("ConnexionOp", "Production", new { id = item.ID });
-
-
-            <div class="Operateur">
-                <a href="@lien">
-                    <img src="@item.Photo" />
-                    <p>@item.Nom @item.Prenom</p>
-                </a>
-            </div>
-        }
-
-        @for (int y = 0; y < @i; y++)
-        {
-            <div style="width : 300px;">
-
-            </div>
-        }
-    </div>
-
-
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
-        function init() {
-            document.getElementById("searched-OF").focus()
-        }
-
-    </script>
-</body>
+                op.ID,
+                op.Photo,
+                op.Nom,
+                op.Prenom,
+                op.isValidPasswd
+            }).ToList()
+            : emptyOperatorList;
+    }
+    window.reactData = @Html.Raw(JsonConvert.SerializeObject(new
+    {
+        ListOperateur = operators
+    }));
+</script>

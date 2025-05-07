@@ -279,3 +279,68 @@ operateur {
         color: white;
     }
 
+
+.boxCounter {
+    padding: 5px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: center;
+    min-height: 84px;
+    width: 95%;
+    max-width: 300px;
+    background-color: #fafafa;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+    .boxCounter p h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .boxCounter p {
+        background-color: white;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        border: 1px solid #E0E0E0;
+        text-align: center;
+        font-size: 1.5em;
+        width: 40%;
+        margin: 0 auto;
+        font-weight: bold;
+    }
+
+    .boxCounter h3 {
+        border-bottom: 1px solid #E0E0E0;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 1em;
+    }
+
+.thumbnailCounter {
+    width: 30%;
+}
+
+.counterContent {
+    padding-left: 5px; /* pour éviter que le texte soit collé à l'image  */
+    width: 70%;
+}
+
+
+    .counterContent p {
+        margin-top: 5px;
+    }
+
+.imgIndicateur { /* => images responsive */
+    max-width: 100%;
+    height: auto;
+}
+
+.imgIndicateur {
+    width: 50px; /* taille des images sur PC */
+    border-radius: 100%;
+    border: 1px solid #E0E0E0;
+}

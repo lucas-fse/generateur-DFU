@@ -219,16 +219,32 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost]
         public ActionResult AffectationOperateurs(long? ID, string idPole)
         {
+            if (ID == null || string.IsNullOrWhiteSpace(idPole))
+            {
+                return Json(new { status = "error", message = "Paramètres invalides." }, JsonRequestBehavior.AllowGet);
+            }
 
-            PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+            try
+            {
+                using (var db = new PEGASE_PROD2Entities2())
+                {
+                    var op = db.OPERATEURS.FirstOrDefault(i => i.ID == ID.Value);
+                    if (op == null)
+                    {
+                        return Json(new { status = "error", message = "Opérateur non trouvé." }, JsonRequestBehavior.AllowGet);
+                    }
 
-            OPERATEURS op = db.OPERATEURS.Where(i => i.ID == ID).First();
-            op.POLE = Convert.ToInt32(idPole);
+                    op.POLE = Convert.ToInt32(idPole);
+                    db.SaveChanges();
 
-            db.SaveChanges();
-
-
-            return Json("OK", JsonRequestBehavior.AllowGet);
+                    return Json(new { status = "success", message = "Affectation enregistrée." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tu peux loguer l'erreur ici avec un logger
+                return Json(new { status = "error", message = "Erreur serveur : " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult ChangeAnimatrice()
@@ -655,30 +671,27 @@ namespace GenerateurDFUSafir.Controllers
 
                 if (ImageAccident != null && ImageAccident.ContentType.Contains("image/jpeg"))
                 {
-
                     byte[] thePictureAsBytes = new byte[ImageAccident.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(ImageAccident.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(ImageAccident.ContentLength);
                     }
                     ImageDB = Convert.ToBase64String(thePictureAsBytes);
-                    //ImageDB = ImageDB.Remove(0, 23);
                 }
                 else if (!String.IsNullOrWhiteSpace(PhotoAccident))
                 {
                     PhotoAccident = PhotoAccident.Remove(0, 23);
                     ImageDB = PhotoAccident;
                 }
-                else { }
 
                 string pathimage = "";
                 int result = obj.AddAccident(SaisieNiveau, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", gravitepotentiel, ImageDB, ref pathimage);
                 if (result > 0)
                 {
+                    /*
                     Mail mail = new Mail();
                     mail.From = "iisProd.Conductix@laposte.net";
                     mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
-
                     mail.Subject = "Déclaration Accidents type : " + obj.NiveauAccident(Niveausaisie);
                     mail.Message = "Niveau d'accident : " + "Niveau " + SaisieNiveau + " - " + obj.NiveauAccident(Niveausaisie) + "\r\n" +
                                    "Victime : " + SaisieVictime + "\r\n" +
@@ -688,10 +701,24 @@ namespace GenerateurDFUSafir.Controllers
                                    "Description complémentaire :" + SaisieDescription2;
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
+                    */
+
+                    Session["Message"] = "Accident déclaré avec succès.";
+                    Session["MessageType"] = "success";
+                }
+                else
+                {
+                    Session["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    Session["MessageType"] = "error";
                 }
             }
-            return RedirectToAction("Securite");
-            //return View(obj);
+            else
+            {
+                Session["Message"] = "Aucune donnée soumise";
+                Session["MessageType"] = "error";
+            }
+
+                return RedirectToAction("Securite", "Production");
         }
         [HttpPost, ActionName("Qualite")]
         public ActionResult traiterFRC()
@@ -777,6 +804,7 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult Amelioration()
         {
+
             InfoAmelioration vue = new InfoAmelioration();
             return View(vue);
         }
@@ -816,6 +844,7 @@ namespace GenerateurDFUSafir.Controllers
 
             if (result > 0)
             {
+                /*
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
                 mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -827,9 +856,17 @@ namespace GenerateurDFUSafir.Controllers
                                "Description : " + Proposition + "\r\n" +
                                " -" + Solution;
                 mail.AttachementPath = pathimage;
-                mail.btnSendMail();
+                mail.btnSendMail();*/
+
+                TempData["Message"] = "Demande enregistrée avec succès.";
+                TempData["MessageType"] = "success";
             }
-            return RedirectToAction("Amelioration", "Production");
+            else
+            {
+                TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                TempData["MessageType"] = "error";
+            }
+                return RedirectToAction("Amelioration", "Production");
         }
 
         public ActionResult KPIProd()

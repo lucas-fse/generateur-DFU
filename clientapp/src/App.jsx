@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Production from './Production/Production.jsx';  
+import Securite from './Production/Securite.jsx';
+import IndexOFOperateur from './Production/IndexOFOperateur.jsx'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => {
+    const [model, setModel] = useState(null);
 
-export default App
+    useEffect(() => {
+        // Récupérer les données injectées depuis Razor
+        setModel(window.reactData);  // Assurez-vous que window.reactData est bien disponible
+    }, []);
+
+    // Si les données ne sont pas encore chargées, afficher un message de chargement
+    if (!model) return <p>Chargement...</p>;
+
+    return (
+        <Routes>
+            {/* Définir des routes pour chaque page */}
+            <Route path="/Production/Production" element={<Production model={model} />} />
+            <Route path="/Production/Securite" element={<Securite model={model} />} />
+            <Route path="/Production/indexofoperateur" element={<IndexOFOperateur model={model} />} />
+        </Routes>
+    );
+};
+
+export default App;

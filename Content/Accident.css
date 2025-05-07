@@ -68,7 +68,7 @@ newDiv.appendChild(divBandeau);*/
         border: 1px solid #E0E0E0;
         text-align: center;
         font-size: 1.5em;
-        width: 35%;
+        width: 45%;
         margin: 0 auto;
         font-weight: bold;
     }
@@ -140,23 +140,23 @@ newDiv.appendChild(divBandeau);*/
 
 /* ligne de la green cross*/
 .greenCrossRow {
-    vertical-align: middle;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* case de la green cross */
 
 .greenCrossCase {
-    width: 40px;
-    height: 40px;
+    aspect-ratio: 1 / 1;
+    width: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box; /* => (largeur case + bordure = 50px) */
-    border: 1px solid black;
-    background-color: #FFFFFF;
+    box-sizing: border-box;
+    background-color: lightgrey;
+    border: 1px solid grey;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 
@@ -171,9 +171,14 @@ newDiv.appendChild(divBandeau);*/
 /* pour ne pas afficher les cases qui n'ont pas de bordure */
 
 .hiddenCase {
-    visibility: hidden;
-    border: none
+    aspect-ratio: 1 / 1;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
+
 
 .topleft {
     border-radius: 25% 0% 0% 0%;
@@ -194,29 +199,15 @@ newDiv.appendChild(divBandeau);*/
 
 
 
+
 #Smiley {
-    margin-top: 50px;
-    margin-right: 100px;
-    width: 450px;
-    height: 250px;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    border-radius: 20px;
+    align-items: flex-end ;
+        justify-content: center;
+        margin-bottom : 20px;
+        margin-right : 35px;
 }
-
-    #Smiley b1div p {
-        margin: 0 auto;
-        font-size: 1.4em;
-        width: 150px;
-    }
-
-    #Smiley b2div p {
-        margin: 0 auto;
-        font-size: 1.4em;
-        width: 150px;
-    }
 
 .humeur {
     width: 100%;
@@ -238,24 +229,6 @@ newDiv.appendChild(divBandeau);*/
         width: 100%;
     }
 
-.button {
-    width: 150px;
-    height: 150px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 50px;
-    background: white;
-    background-size: 110% 120%;
-    background-repeat: no-repeat;
-    border: 2px solid black;
-    border-radius: 25px;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
-}
-
-    .button:hover {
-        width: 160px;
-        height: 160px;
-    }
 
 #b1 {
     background-image: url('../image/PasAccident.gif');

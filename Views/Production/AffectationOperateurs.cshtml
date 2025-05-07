@@ -107,6 +107,7 @@
 
 
 <script type="text/javascript" src="~/Scripts/draganddrop.js"></script>
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>
 
 <script>
     
@@ -118,13 +119,26 @@
 
     setCallback(async (op, pole) => {
         if (pole != null) {
-            console.log("test");
             document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-spinner fa-spin\"></i>ENREGISTREMENT EN COURS";
-            await fetch('/Production/AffectationOperateurs/' + op + "?idPole=" + pole, { method: 'POST' });
 
-            setTimeout(() => document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-check\"></i>ENREGISTREMENT TERMINÉ", 2000);
+            const response = await fetch(`/Production/AffectationOperateurs/${op}?idPole=${pole}`, {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+
+            if (result.status === "success") {
+                showCustomAlert("success", result.message); // Ton popup personnalisé
+            } else {
+                showCustomAlert("error", result.message); // Ton popup en cas d'erreur
+            }
+
+            setTimeout(() => {
+                document.querySelector('.saveLoading').innerHTML = "<i class=\"fa-solid fa-check\"></i>ENREGISTREMENT TERMINÉ";
+            }, 2000);
         }
     });
+
 
     const fD = document.querySelector('#fleche-droite');
     const fG = document.querySelector('#fleche-gauche');

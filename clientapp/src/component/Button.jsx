@@ -1,8 +1,13 @@
 import React from 'react';
 
-const Button = ({ label }) => {
+const redirection = (acces) => {
+    window.location.href = acces;
+}
+
+
+const Button = ({ label ,onClick }) => {
     return (
-        <button className="btn btn-orange">
+        <button className="btn btn-orange" onClick={() => redirection(onClick)}>
             {label}
         </button>
     );
