@@ -4,8 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Content/Accident.css" rel="stylesheet" />
 
-    var message = Session["Message"] as string;
-    var messageType = Session["MessageType"] as string;
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+     window.onload = function () {
+         showCustomAlert('@type', '@message');
+     };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
 }
 
 <div id="root"></div>
@@ -28,20 +41,5 @@
 <script>
     window.reactData = @Html.Raw(JsonConvert.SerializeObject(Model));
 
-    // Débogage direct pour confirmer la session
-    console.log('Session Message:', '@message', 'Session Type:', '@messageType');
 
-    // Afficher le pop-up directement
-    @if (!string.IsNullOrEmpty(message))
-    {
-        @:if (typeof showCustomAlert === 'function') {
-        @:    showCustomAlert('@messageType', '@message');
-        @:} else {
-        @:    console.log('showCustomAlert is not available');
-        @:}
-
-        // Nettoyer la session après utilisation
-        Session["Message"] = null;
-        Session["MessageType"] = null;
-    }
 </script>

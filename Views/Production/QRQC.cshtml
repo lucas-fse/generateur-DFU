@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     string Date = DateTime.Now.ToString("dd-MM-yyyy");
     string DateAnglaise = Date.Substring(6, 4) + Date.Substring(2, 3) + "-" + Date.Substring(0, 2);
-    
+
+
 }
 
 <head>
@@ -359,8 +360,8 @@
         }
 
         function save() {
-           
-           // sessionStorage.setItem("autosave", canvas.toDataURL());
+
+            // sessionStorage.setItem("autosave", canvas.toDataURL());
             inputab.setAttribute("value", canvas.toDataURL());
             //inputab.value = canvas.toDataURL();
             // mettre a jour element input

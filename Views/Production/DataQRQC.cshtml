@@ -3,6 +3,22 @@
     ViewBag.Title = "ListeQRQC";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Content/ListQRQC.css" rel="stylesheet" />
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+     window.onload = function () {
+         showCustomAlert('@type', '@message');
+     };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
 }
 <div id="QRQCDiv">
     <div id="topInfos">
@@ -21,42 +37,43 @@
 </div>
 
 
-    <table class="qrqc-table">
-        <thead>
-            <tr>
-                <th>Date Ouverture</th>
-                <th class="Affichage">Date Clôture</th>
-                <th class="Affichage">Date de Suivi</th>
-                <th>Pilote</th>
-                <th>Participants</th>
-                <th class="Affichage">Origine</th>
-                <th>Accès</th>
+<table class="qrqc-table">
+    <thead>
+        <tr>
+            <th>Date Ouverture</th>
+            <th class="Affichage">Date Clôture</th>
+            <th class="Affichage">Date de Suivi</th>
+            <th>Pilote</th>
+            <th>Participants</th>
+            <th class="Affichage">Origine</th>
+            <th>Accès</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.ListQRQC.Count; i++)
+        {
+            var qrqc = Model.ListQRQC[i];
+            var rowClass = i % 2 == 0 ? "even-row" : "odd-row";
+            <tr class="@rowClass">
+                <td>@qrqc.DateOuvertureString</td>
+                <td class="Affichage">@qrqc.DateClotureString</td>
+                <td class="Affichage">@qrqc.DateSuivisString</td>
+                <td>@qrqc.Pilote</td>
+                <td>@qrqc.Participants</td>
+                <td class="Affichage">@qrqc.Origine</td>
+                <td>
+                    <a class="btn btn-outline-orange" href="@Url.Action("QRQC", "Production", new { id = qrqc.ID })">Accès QRQC</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.ListQRQC.Count; i++)
-            {
-                var qrqc = Model.ListQRQC[i];
-                var rowClass = i % 2 == 0 ? "even-row" : "odd-row";
-                <tr class="@rowClass">
-                    <td>@qrqc.DateOuvertureString</td>
-                    <td class="Affichage">@qrqc.DateClotureString</td>
-                    <td class="Affichage">@qrqc.DateSuivisString</td>
-                    <td>@qrqc.Pilote</td>
-                    <td>@qrqc.Participants</td>
-                    <td class="Affichage">@qrqc.Origine</td>
-                    <td>
-                        <a class="btn btn-outline-orange" href="@Url.Action("QRQC", "Production", new { id = qrqc.ID })">Accès QRQC</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 
 </div>
-
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/clock.js" charset="utf-8"></script>
 </div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/clock.js" charset="utf-8"></script>
+<script src="~/Scripts/alertes.js"></script>
+
 
