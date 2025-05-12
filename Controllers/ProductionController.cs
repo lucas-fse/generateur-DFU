@@ -18,10 +18,11 @@ using System.Web.Http.Results;
 using System.Web.Script.Serialization;
 using System.Data;
 using System.Web.WebPages;
+using System.Web.Security;
 
 namespace GenerateurDFUSafir.Controllers
 {
-    public class ProductionController : Controller
+    public class ProductionController : ConnexController
     {
         public ActionResult GestionOutilAdmin(long? ID)
         {
@@ -945,64 +946,87 @@ namespace GenerateurDFUSafir.Controllers
 
         }
 
-        public ActionResult indexOFOperateur()
+        public ActionResult IndexOFOperateur()
         {
             var idConnecte = Session["OperateurConnecte"];
+
             if (idConnecte != null)
             {
-                return RedirectToAction("GestionOF", new { id = idConnecte });
+                long id = Convert.ToInt64(idConnecte);
+                var admin = GestionOperateursProd.GetIsAdmin(id);
+
+                if (!admin)
+                {
+                    return RedirectToAction("GestionOF", new { id = id });
+                }
             }
+
             GestionTraitementOFs vue = new GestionTraitementOFs();
             return View(vue);
         }
 
         //Accès à la page Connexion Operateur, situé entre indexOfOperateur et gestionOf
         //Permet de s'authentifier pour avoir accès aux informations de l'opérateur
+        
         public ActionResult ConnexionOp(long? id)
         {
-            var idConnecte = Session["OperateurConnecte"];
+            // Si l'identifiant n'est pas précisé, afficher une page ou liste d'opérateurs
             if (id == null)
-                return RedirectToAction("IndexOFOperateur");
-
-            if (idConnecte != null && (long)idConnecte == id)
             {
+                GestionTraitementOFs ofs = new GestionTraitementOFs();
+                return View("~/Views/Home/Accueil.cshtml", ofs);
+            }
+
+            // Si l'utilisateur est déjà connecté et que l'ID correspond
+            if (User.Identity.IsAuthenticated && User.Identity.Name == id.ToString())
+            {
+                long idOp = long.Parse(User.Identity.Name);
+                if (GestionOperateursProd.GetIsAdmin(idOp))
+                {
+                    Session["isAdmin"] = 1;
+                }
+
                 return RedirectToAction("GestionOF", new { id = id });
             }
+
+            // Sinon, afficher la page de saisie du mot de passe
             var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
             return View("ConnexionOperateur", operateur);
         }
 
 
-
+        
         [HttpPost]
         public ActionResult ConnexionOperateur(long id, string motdepasse)
         {
-            // 1. Récupère l'opérateur pour affichage (photo, nom, etc.)
+            // Récupère l'opérateur pour affichage (photo, nom, etc.)
             var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
 
             if (operateur == null)
             {
-                return RedirectToAction("IndexOFOperateur");
+                GestionTraitementOFs ofs = new GestionTraitementOFs();
+                return View("~/Views/Home/Accueil.cshtml", ofs);
             }
 
-            // 2. Récupère le mot de passe haché depuis OPERATEURS_PWD
+            // Récupère le mot de passe haché depuis OPERATEURS_PWD
             var hashStocke = GestionOperateursProd.GetMotDePasseHash(id);
 
-            // 3. Vérifie le mot de passe
+            // Vérifie le mot de passe
             if (!string.IsNullOrEmpty(hashStocke) &&
                 BCrypt.Net.BCrypt.Verify(motdepasse, hashStocke))
             {
                 Session["OperateurConnecte"] = operateur.ID;
-                return RedirectToAction("Index", "Home");
+                Session["isAdmin"] = GestionOperateursProd.GetIsAdmin(id) ? 1 : 0;
+                return RedirectToAction("GestionOF", new { id = id });
             }
 
-            // 4. Sinon, erreur
+            // Sinon, erreur
             ViewBag.Erreur = "Mot de passe incorrect";
             return View("ConnexionOperateur", operateur);
         }
 
 
-
+        //à enlever
         public ActionResult ConnexionAd(long? id)
         {
             if (id == null)
@@ -1013,7 +1037,7 @@ namespace GenerateurDFUSafir.Controllers
             return View("ConnexionAdmin", operateur); // 
         }
 
-
+        //à enlever
         [HttpPost]
         public ActionResult ConnexionAdmin(long id, string adminPassword)
         {
@@ -1035,13 +1059,108 @@ namespace GenerateurDFUSafir.Controllers
             return View("ConnexionAdmin", operateur);
         }
 
-
-        public ActionResult Deconnexion()
+        
+        [HttpPost]
+        public ActionResult DemanderReinitialisation(long id)
         {
-            Session["OperateurConnecte"] = null;
-            return RedirectToAction("IndexOFOperateur");
+            var user = GestionOperateursProd.GestionOFOperateur(id, false); // Appel direct par ID
+
+            if (user != null)
+            {
+                var token = Guid.NewGuid();
+                var expiration = DateTime.Now.AddHours(1);
+
+                OfX3 data = new OfX3();
+                data.SavePwdToken(user.ID, token, expiration);
+
+                var resetLink = Url.Action("ReinitialiserMotDePasse", "Production", new { token = token }, protocol: Request.Url.Scheme);
+
+                Mail mail = new Mail();
+                mail.From = "iisProd.Conductix@laposte.net";
+                mail.To = user.Email;
+                mail.Subject = "Réinitialisation de votre mot de passe";
+                mail.Message = $"Bonjour {user.Prenom},\n\nVeuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe :\n{resetLink}\n\nCe lien expirera dans 1 heure.";
+                mail.btnSendMail();
+
+                return RedirectToAction("ConfirmationEnvoiEmail", new { id = user.ID });
+            }
+            else
+            {
+                return View("~/Views/Authentification/EmailNonTrouve.cshtml");
+            }
         }
 
+
+        
+        [HttpGet]
+        public ActionResult ConfirmationEnvoiEmail(long id)
+        {
+            var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+            return View("~/Views/Authentification/ConfirmationEnvoiEmail.cshtml", operateur);
+        }
+
+        
+        [HttpGet]
+        public ActionResult ReinitialiserMotDePasse(Guid token)
+        {
+            OfX3 data = new OfX3();
+            var pwdToken = data.GetPwdToken(token);
+
+            if (pwdToken == null || (pwdToken.IsUsed ?? false) || pwdToken.ExpirationDate < DateTime.Now)
+            {
+                return View("~/Views/Authentification/LienInvalideOuExpire.cshtml");
+            }
+
+            // Récupérer l'ID de l'opérateur depuis le token
+            var idOperateur = pwdToken.UserID;
+
+            var operateur = GestionOperateursProd.GestionOFOperateur(idOperateur, false);
+
+            ViewBag.Token = token;
+            return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateur);
+        }
+
+        
+        [HttpPost]
+        public ActionResult ReinitialiserMotDePasse(Guid token, string nouveauMotDePasse)
+        {
+            OfX3 data = new OfX3();
+            var pwdToken = data.GetPwdToken(token);
+
+            if (pwdToken == null || (pwdToken.IsUsed ?? false) || pwdToken.ExpirationDate < DateTime.Now)
+            {
+                return View("~/Views/Authentification/LienInvalideOuExpire.cshtml");
+            }
+
+            var idOperateur = pwdToken.UserID;
+
+            // Mise à jour du mot de passe
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(nouveauMotDePasse);
+
+            bool success = data.SavePWDOp(idOperateur, hashedPassword);
+
+            if (success)
+            {
+                data.MarkPwdTokenAsUsed(token);
+                return View("~/Views/Authentification/MotDePasseReinitialise.cshtml");
+            }
+
+            ViewBag.Erreur = "Erreur lors de la réinitialisation du mot de passe.";
+
+            var operateur = GestionOperateursProd.GestionOFOperateur(idOperateur, false);
+            ViewBag.Token = token;
+            return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateur);
+        }
+
+        
+        public ActionResult Deconnexion()
+        {
+            Session.Clear();
+            GestionTraitementOFs ofs = new GestionTraitementOFs();
+            return View("~/Views/Home/Accueil.cshtml", ofs);
+        }
+
+        
         public ActionResult DefinirMDP(long? id)
         {
             if (id == null)
@@ -1052,6 +1171,7 @@ namespace GenerateurDFUSafir.Controllers
             return View("DefinirPassword", operateur); // 
         }
 
+        
         [HttpPost]
         public ActionResult CreerPassword(long id, string motdepasse)
         {
@@ -1076,8 +1196,30 @@ namespace GenerateurDFUSafir.Controllers
             return RedirectToAction("GestionOF", new { id = id });
         }
 
+        
+        [HttpPost]
+        public ActionResult ChangerPhoto(HttpPostedFileBase nouvellePhoto)
+        {
+            if (Session["OperateurConnecte"] == null)
+                return RedirectToAction("ConnexionOp");
 
+            var userId = (long)Session["OperateurConnecte"];
 
+            if (nouvellePhoto != null && nouvellePhoto.ContentLength > 0)
+            {
+                string filename = Path.GetFileName(nouvellePhoto.FileName).Replace(" ", "_");
+                string path = Path.Combine(Server.MapPath("~/operateurs/OperateursA"), filename);
+                nouvellePhoto.SaveAs(path);
+
+                // Enregistre le chemin dans la base
+                OfX3 data = new OfX3();
+                data.MettreAJourPhoto(userId, "/OperateursA/" + filename);
+            }
+
+            return RedirectToAction("GestionOF", new { id = userId });
+        }
+
+        
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
             // Pour éviter de pouvoir accéder à l'espace juste en tapant le bon URL

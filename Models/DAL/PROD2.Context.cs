@@ -66,5 +66,6 @@ namespace GenerateurDFUSafir.Models.DAL
         public virtual DbSet<TYPE_ANOMALIE> TYPE_ANOMALIE { get; set; }
         public virtual DbSet<TYPE_CAUSE> TYPE_CAUSE { get; set; }
         public virtual DbSet<OPERATEURS_PWD> OPERATEURS_PWD { get; set; }
+        public virtual DbSet<PWD_TOKEN> PWD_TOKEN { get; set; }
     }
 }

@@ -873,26 +873,35 @@ namespace GenerateurDFUSafir.DAL
             return result;
         }
 
-        public bool SavePasswordOperateur(long idOperateur, string hashedPassword)
+        public bool SavePWDOp(long idOperateur, string hashedPassword)
         {
             bool result = false;
             try
             {
-                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
-
-                var operateur = _db.OPERATEURS.FirstOrDefault(op => op.ID == idOperateur);
-                if (operateur != null)
+                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
                 {
-                    operateur.Password = hashedPassword;
-                    _db.SaveChanges();
-                    result = true;
+                    var FirstOP = _db.OPERATEURS
+                                     .Include("OPERATEURS_PWD")
+                                     .FirstOrDefault(p => p.ID == idOperateur);
+
+                    if (FirstOP != null && FirstOP.OPERATEURS_PWD != null)
+                    {
+                        FirstOP.OPERATEURS_PWD.Password = hashedPassword;
+                        FirstOP.isValidPasswd = true;
+
+                        _db.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opérateur ou mot de passe introuvable pour l'ID : " + idOperateur);
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // log éventuellement
+                Console.WriteLine("Exception : " + ex.Message);
             }
-
             return result;
         }
 
@@ -908,6 +917,139 @@ namespace GenerateurDFUSafir.DAL
             {
                 return null;
             }
+        }
+
+        public bool GetIsAdmin(long idOperateur)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var entry = _db.OPERATEURS.FirstOrDefault(p => p.ID == idOperateur);
+
+                // Si isAdmin est null, on considère que ce n'est PAS admin (false par défaut)
+                return entry?.isAdmin ?? false;
+            }
+            catch
+            {
+                return false; // En cas d'erreur, pas admin par défaut
+            }
+        }
+
+        public bool SavePwdToken(long userId, Guid token, DateTime expiration)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+
+                PWD_TOKEN pwdToken = new PWD_TOKEN
+                {
+                    UserID = userId,
+                    Token = token,
+                    ExpirationDate = expiration,
+                    IsUsed = false
+                };
+
+                _db.PWD_TOKEN.Add(pwdToken);
+                _db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool MarkPwdTokenAsUsed(Guid token)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var pwdToken = _db.PWD_TOKEN.FirstOrDefault(p => p.Token == token);
+                if (pwdToken != null)
+                {
+                    pwdToken.IsUsed = true;
+                    _db.SaveChanges();
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public bool SuppToken()
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                var now = DateTime.Now;
+                var tokensExpirés = _db.PWD_TOKEN.Where(t => t.ExpirationDate <= now).ToList();
+
+                if (tokensExpirés.Any())
+                {
+                    _db.PWD_TOKEN.RemoveRange(tokensExpirés);
+                    _db.SaveChanges();
+                }
+            } catch
+            { } 
+            return false;
+        }
+
+
+        public PWD_TOKEN GetPwdToken(Guid token)
+        {
+            try
+            {
+                PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                return _db.PWD_TOKEN.FirstOrDefault(p => p.Token == token);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public bool MettreAJourPhoto(long idOperateur, string nouveauChemin)
+        {
+            try
+            {
+                using (PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2())
+                {
+                    var operateur = db.OPERATEURS.FirstOrDefault(o => o.ID == idOperateur);
+                    if (operateur != null)
+                    {
+                        operateur.PATHB = nouveauChemin;
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de la mise à jour de la photo : " + ex.Message);
+            }
+
+            return false;
+        }
+
+
+        public List<DataOperateurProd> ListAllOperateurs()
+        {
+            PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+            var operateurs = _db.OPERATEURS.ToList();
+
+            List<DataOperateurProd> list = new List<DataOperateurProd>();
+            foreach (var op in operateurs)
+            {
+                list.Add(new DataOperateurProd
+                {
+                    ID = op.ID,
+                    Nom = op.NOM,
+                    Prenom = op.PRENOM,
+                    Email = op.Email,
+                });
+            }
+
+            return list;
         }
 
 

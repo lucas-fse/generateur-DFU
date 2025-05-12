@@ -24,6 +24,8 @@ namespace GenerateurDFUSafir.Models
 
         public bool isValidPasswd { get; set; }
 
+        public string Email { get; set; }
+
         public List<OFView> ofAfaire { get; set; }
         public bool Animateur { get; set; }
         public DateTime? Anniversaire { get; set; }

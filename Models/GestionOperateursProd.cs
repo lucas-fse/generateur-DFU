@@ -3,6 +3,7 @@ using GenerateurDFUSafir.Models;
 using GenerateurDFUSafir.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
@@ -36,35 +37,16 @@ namespace GenerateurDFUSafir.Models
 
         public static bool SavePasswordOperateur(long idOperateur, string hashedPassword)
         {
-            bool result = false;
-            try
-            {
-                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
-                {
-                    var FirstOP = _db.OPERATEURS
-                                     .Include("OPERATEURS_PWD")
-                                     .FirstOrDefault(p => p.ID == idOperateur);
-
-                    if (FirstOP != null && FirstOP.OPERATEURS_PWD != null)
-                    {
-                        FirstOP.OPERATEURS_PWD.Password = hashedPassword;
-                        FirstOP.isValidPasswd = true;
-
-                        _db.SaveChanges();
-                        result = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Opérateur ou mot de passe introuvable pour l'ID : " + idOperateur);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception : " + ex.Message);
-            }
-            return result;
+            OfX3 data = new OfX3();
+            return data.SavePWDOp(idOperateur, hashedPassword);
         }
+
+        public static bool MarkPwdTokenAsUsed(Guid token)
+        {
+            OfX3 data = new OfX3();
+            return data.MarkPwdTokenAsUsed(token);
+        }
+
 
         public static string GetMotDePasseHash(long idOperateur)
         {
@@ -72,8 +54,36 @@ namespace GenerateurDFUSafir.Models
             return data.GetPasswordOperateur(idOperateur);
         }
 
+        public static List<DataOperateurProd> GetAllOperateurs()
+        {
+            OfX3 data = new OfX3();
+            return data.ListAllOperateurs(); 
+        }
+
+        public static bool GetIsAdmin(long idOperateur)
+        {
+            OfX3 data = new OfX3();
+            return data.GetIsAdmin(idOperateur);
+        }
+
+        public static bool MettreAJourPhoto(long idOperateur, string nouveauChemin)
+        {
+            OfX3 data = new OfX3();
+            return data.MettreAJourPhoto(idOperateur, nouveauChemin);
+        }
 
 
+        public static PWD_TOKEN GetPwdToken(Guid token)
+        {
+            OfX3 data = new OfX3();
+            return data.GetPwdToken(token);
+        }
+
+        public static bool SuppTousLesTokens()
+        {
+            OfX3 data = new OfX3();
+            return data.SuppToken();
+        }
 
 
         public static DataOperateurProd GestionOFOperateur(long id, bool timelimit, string numeroOF = null)
@@ -86,12 +96,18 @@ namespace GenerateurDFUSafir.Models
 
             DataOperateurProd result = new DataOperateurProd();
             OfX3 data = new OfX3();
-            OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == id).First();
+            OPERATEURS Operateur = data.ListOPERATEURs("PROD").Where(p => p.ID == id).FirstOrDefault();
+            if (Operateur == null)
+            {
+                return null; // ou une gestion spéciale erreur
+            }
+
             result.Anniversaire = Operateur.ANNIVERSAIRE;
             result.ID = Operateur.ID;
             result.Nom = Operateur.NOM;
             result.Prenom = Operateur.PRENOM;
             result.Animateur = Operateur.ANIMATEUR;
+            result.Email = Operateur.Email;
             result.Initial = Operateur.INITIAL.Trim();
             string photoRelatif = "/operateurs" + Operateur.PATHB;
             string photoPhsyique = HttpContext.Current.Server.MapPath(photoRelatif);
@@ -236,6 +252,7 @@ namespace GenerateurDFUSafir.Models
                 dataOperateur.Prenom = operateur.PRENOM;
                 dataOperateur.isValidPasswd = (bool)operateur.isValidPasswd;
                 dataOperateur.Animateur = operateur.ANIMATEUR;
+                dataOperateur.Email = operateur.Email;
                 dataOperateur.Initial = operateur.INITIAL.Trim();
                 string photoRelatif = "/operateurs" + operateur.PATHB;
                 string photoPhysique = HttpContext.Current.Server.MapPath(photoRelatif);

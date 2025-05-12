@@ -1,17 +1,16 @@
 ﻿@model GenerateurDFUSafir.Models.DataOperateurProd
 @{
-    ViewBag.Title = "Connexion";
+    ViewBag.Title = "FormulaireNouveauMDP";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/ConnexionOperateur.css" rel="stylesheet" />
 }
-
-<link href="~/Content/ConnexionOperateur.css" rel="stylesheet" />
-
 
 <body onload="init()">
     <div id="fondTransparent"></div>
     <div id="login-container">
         <div id="introduction">
-            <h2 id="title">ConnecZEN</h2>
+            <h2 id="title">Recréer votre Mot de Passe</h2>
+            <p>Veuillez redéfinir votre mot de passe ici @Model.Prenom :</p>
         </div>
         <div id="digi-container">
             <div id="profil">
@@ -20,9 +19,10 @@
                     <strong>@Model.Nom</strong> @Model.Prenom
                 </div>
             </div>
-            <form method="post" action="@Url.Action("ConnexionOperateur", "Production")" id="login-form">
+            <form method="post" action="@Url.Action("ReinitialiserMotDePasse", "Production")" id="login-form">
                 <input type="hidden" name="id" value="@Model.ID" />
-                <input type="password" id="motdepasse" name="motdepasse" readonly />
+                <input type="hidden" name="token" value="@ViewBag.Token" />
+                <input type="password" id="motdepasse" name="nouveauMotDePasse" readonly />
 
                 <div id="digicode">
                     @for (int i = 1; i <= 9; i++)
@@ -34,21 +34,12 @@
                     <button type="submit">✔️</button>
                 </div>
             </form>
+
         </div>
         @if (ViewBag.Erreur != null)
         {
             <div class="alert alert-danger">@ViewBag.Erreur</div>
         }
-
-        <div id="admin-link">
-            <form method="post" action="@Url.Action("DemanderReinitialisation", "Production")" style="display:inline;">
-                <input type="hidden" name="id" value="@Model.ID" />
-                <button type="submit" id="admin-text" style="background:none; border:none; color:grey; text-decoration:none; cursor:pointer;">
-                    Mot de passe oublié
-                </button>
-            </form>
-
-        </div>
     </div>
 
 </body>

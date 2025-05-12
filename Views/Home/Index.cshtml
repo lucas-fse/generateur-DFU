@@ -11,6 +11,8 @@
     @{
         ViewBag.Title = "Accueil";
         Layout = "~/Views/Shared/_Layout.cshtml";
+        var isAdmin = Session["isAdmin"];
+        long admin = Convert.ToInt64(isAdmin);
     }
 
     <div class="main">

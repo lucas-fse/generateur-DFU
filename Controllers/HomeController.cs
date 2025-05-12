@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace GenerateurDFUSafir.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ConnexController
     {
         public ActionResult Index()
         {
@@ -89,6 +89,7 @@ namespace GenerateurDFUSafir.Controllers
            return View(InfoOrdreFabrications);
         }
 
+        [AllowAnonymous]
         public ActionResult Accueil()
         {
             GestionTraitementOFs vue = new GestionTraitementOFs();

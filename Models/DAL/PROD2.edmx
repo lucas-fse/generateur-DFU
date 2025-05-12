@@ -274,6 +274,8 @@
           <Property Name="Matricule" Type="nchar" MaxLength="10" />
           <Property Name="isValidPasswd" Type="bit" />
           <Property Name="Password" Type="nchar" MaxLength="10" />
+          <Property Name="isAdmin" Type="bit" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="OPERATEURS_PWD">
           <Key>
@@ -389,6 +391,16 @@
           <Property Name="pole" Type="bigint" Nullable="false" />
           <Property Name="libelle" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="couleur" Type="nchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="PWD_TOKEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="Token" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" />
         </EntityType>
         <EntityType Name="QRQC">
           <Key>
@@ -543,6 +555,18 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Valeur" Type="varchar" MaxLength="30" />
         </EntityType>
+        <Association Name="FK__PWD_TOKEN__UserI__3E3D3572">
+          <End Role="OPERATEURS" Type="Self.OPERATEURS" Multiplicity="1" />
+          <End Role="PWD_TOKEN" Type="Self.PWD_TOKEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PWD_TOKEN">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ACTIONIMMEDIATE_QRQC">
           <End Role="QRQC" Type="Self.QRQC" Multiplicity="1" />
           <End Role="ACTIONIMMEDIATE" Type="Self.ACTIONIMMEDIATE" Multiplicity="*" />
@@ -1027,6 +1051,7 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySet Name="PLANNING_VALUE" EntityType="Self.PLANNING_VALUE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POLES" EntityType="Self.POLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POSTES" EntityType="Self.POSTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PWD_TOKEN" EntityType="Self.PWD_TOKEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QRQC" EntityType="Self.QRQC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QUESTIONS_QRQC" EntityType="Self.QUESTIONS_QRQC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SERENITE" EntityType="Self.SERENITE" Schema="dbo" store:Type="Tables" />
@@ -1050,6 +1075,10 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
     [TRACABILITE].[time] AS [time]
     FROM [dbo].[TRACABILITE] AS [TRACABILITE]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__PWD_TOKEN__UserI__3E3D3572" Association="Self.FK__PWD_TOKEN__UserI__3E3D3572">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="PWD_TOKEN" EntitySet="PWD_TOKEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_ACTIONIMMEDIATE_QRQC" Association="Self.FK_ACTIONIMMEDIATE_QRQC">
             <End Role="QRQC" EntitySet="QRQC" />
             <End Role="ACTIONIMMEDIATE" EntitySet="ACTIONIMMEDIATE" />
@@ -1401,6 +1430,11 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             <End Role="OPERATEURS" EntitySet="OPERATEURS" />
             <End Role="OPERATEURS_PWD" EntitySet="OPERATEURS_PWD" />
           </AssociationSet>
+          <EntitySet Name="PWD_TOKEN" EntityType="PEGASE_PROD2Model.PWD_TOKEN" />
+          <AssociationSet Name="FK__PWD_TOKEN__UserI__3E3D3572" Association="PEGASE_PROD2Model.FK__PWD_TOKEN__UserI__3E3D3572">
+            <End Role="OPERATEURS" EntitySet="OPERATEURS" />
+            <End Role="PWD_TOKEN" EntitySet="PWD_TOKEN" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ACCIDENT">
           <Key>
@@ -1677,6 +1711,9 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <NavigationProperty Name="CONTROLE_QUALITE" Relationship="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_OPERATEURS" FromRole="OPERATEURS" ToRole="CONTROLE_QUALITE" />
           <Property Name="isValidPasswd" Type="Boolean" />
           <NavigationProperty Name="OPERATEURS_PWD" Relationship="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS" FromRole="OPERATEURS" ToRole="OPERATEURS_PWD" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PWD_TOKEN" Relationship="PEGASE_PROD2Model.FK__PWD_TOKEN__UserI__3E3D3572" FromRole="OPERATEURS" ToRole="PWD_TOKEN" />
         </EntityType>
         <EntityType Name="ORDRE_FABRICATION_GENERE">
           <Key>
@@ -2470,6 +2507,29 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PWD_TOKEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Token" Type="Guid" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsUsed" Type="Boolean" />
+          <NavigationProperty Name="OPERATEURS" Relationship="PEGASE_PROD2Model.FK__PWD_TOKEN__UserI__3E3D3572" FromRole="PWD_TOKEN" ToRole="OPERATEURS" />
+        </EntityType>
+        <Association Name="FK__PWD_TOKEN__UserI__3E3D3572">
+          <End Type="PEGASE_PROD2Model.OPERATEURS" Role="OPERATEURS" Multiplicity="1" />
+          <End Type="PEGASE_PROD2Model.PWD_TOKEN" Role="PWD_TOKEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OPERATEURS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PWD_TOKEN">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2726,6 +2786,8 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySetMapping Name="OPERATEURS">
             <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS">
               <MappingFragment StoreEntitySet="OPERATEURS">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="isValidPasswd" ColumnName="isValidPasswd" />
                 <ScalarProperty Name="Matricule" ColumnName="Matricule" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -3049,6 +3111,17 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             <EntityTypeMapping TypeName="PEGASE_PROD2Model.OPERATEURS_PWD">
               <MappingFragment StoreEntitySet="OPERATEURS_PWD">
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PWD_TOKEN">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PWD_TOKEN">
+              <MappingFragment StoreEntitySet="PWD_TOKEN">
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

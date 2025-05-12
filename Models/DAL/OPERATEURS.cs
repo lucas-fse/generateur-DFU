@@ -25,6 +25,7 @@ namespace GenerateurDFUSafir.Models.DAL
             this.SERENITE = new HashSet<SERENITE>();
             this.TEMPS_SAISI = new HashSet<TEMPS_SAISI>();
             this.CONTROLE_QUALITE = new HashSet<CONTROLE_QUALITE>();
+            this.PWD_TOKEN = new HashSet<PWD_TOKEN>();
         }
     
         public long ID { get; set; }
@@ -45,6 +46,8 @@ namespace GenerateurDFUSafir.Models.DAL
         public string Login { get; set; }
         public string Matricule { get; set; }
         public Nullable<bool> isValidPasswd { get; set; }
+        public Nullable<bool> isAdmin { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KPI_STC> KPI_STC { get; set; }
@@ -63,5 +66,7 @@ namespace GenerateurDFUSafir.Models.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTROLE_QUALITE> CONTROLE_QUALITE { get; set; }
         public virtual OPERATEURS_PWD OPERATEURS_PWD { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PWD_TOKEN> PWD_TOKEN { get; set; }
     }
 }
