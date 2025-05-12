@@ -4,6 +4,23 @@
 @{
     ViewBag.Title = "Contrôles qualité";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+    
+
 }
 
 <link rel="stylesheet" href="~/Content/form.css" />
@@ -11,7 +28,7 @@
 
 <div class="body-content">
     <div class="en-tete">
-        <button class="btn btn-orange" onclick="location.href = '@Url.Action("ControleQualite", "Controle", new {ID = ViewBag.ID})'">Nouveau contrôle</button>
+        <button class="btn btn-orange" onclick="window.location.href = '@Url.Action("ControleQualite", "Controle", new {ID = ViewBag.ID})'">Nouveau contrôle</button>
         <div class="filter-buttons">
             <input class="checkbox-filter" type="radio" name="filter" id="filter-conforme" @(ViewBag.type == 1 ? "checked" : "")>
             <label class="btn btn-orange btn-orange-filtre for-checkbox-filter" for="filter-conforme" onclick="location.href='@Url.Action("AfficheControles", "Controle", new {ID = ViewBag.ID, type = 1})'">
@@ -93,3 +110,4 @@
         }
     };
 </script>
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>

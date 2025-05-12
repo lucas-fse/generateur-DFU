@@ -115,6 +115,48 @@ namespace GenerateurDFUSafir.Models.DAL
 
             }
         }
+
+        public static short ServicebyString(string service)
+        {
+            switch (service.Trim().ToUpper())
+            {
+                case "Production":
+                    return 1;
+                    break;
+                case "Logistique":
+                    return 2;
+                    break;
+                case "SAV":
+                    return 3;
+                    break;
+                case "BE":
+                    return 4;
+                    break;
+                case "Support Tech":
+                    return 5;
+                    break;
+                case "Commercial":
+                    return 6;
+                    break;
+                case "Marketing":
+                    return 7;
+                    break;
+                case "Administratif":
+                    return 7;
+                    break;
+                case "Entreprise":
+                    return 8;
+                    break;
+                case "":
+                    return -1;
+                    break;
+
+                default:
+                    return 0;
+                    break;
+
+            }
+        }
         public string FullUrlImage
         {
             get

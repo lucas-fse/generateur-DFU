@@ -2,6 +2,23 @@
 @{
     ViewBag.Title = "OutilProdLog";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+window.onload = function () {
+    showCustomAlert('@type', '@message');
+};
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
+
 }
 
 <h2>OutilProdLog</h2>
@@ -22,7 +39,7 @@
         @Html.EditorFor(model => model.Lot)
 
         <div id="PopUpButton">
-            <button type="submit" value="Niveau" id="Valider" name="submitButton" class="buttonF" onclick="location.href='@Url.Action("OutilProdLog", "Production", new { et1 = Model })'"> Valider </button>
+            <button type="submit" value="Niveau" id="Valider" name="submitButton" class="btn btn-orange" onclick="location.href='@Url.Action("OutilProdLog", "Production", new { et1 = Model })'">Valider</button>
 
         </div>
     </div>
@@ -33,3 +50,5 @@
 
 }
 
+
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>

@@ -205,210 +205,187 @@ namespace GenerateurDFUSafir.Models
                 }
             }
         }
-        public void SaveQRQC(string _Id, DateTime? _DateOuverture, DateTime? _DateCloture,DateTime? _DateSuivis, string _Participants, 
-                             string _Pilote, string _Origine, Dictionary<string, string> _SevenQuestion, string _DescriptionProcess, 
-                             List<ActionImmediate> _ActionsImmediat, List<string>_Occurrence, List<string> _NonDetection, 
-                             List<SolutionDurable> _Solutions,string _image)
+        public void SaveQRQC(string _Id, DateTime? _DateOuverture, DateTime? _DateCloture, DateTime? _DateSuivis, string _Participants,
+                     string _Pilote, string _Origine, Dictionary<string, string> _SevenQuestion, string _DescriptionProcess,
+                     List<ActionImmediate> _ActionsImmediat, List<string> _Occurrence, List<string> _NonDetection,
+                     List<SolutionDurable> _Solutions, string _image)
         {
-            int index;
-            QRQC result = null;
-            try { index = Convert.ToInt32(_Id); } catch { index = -1; }
-
-
             PEGASE_PROD2Entities2 pEGASE_PROD2Entities = new PEGASE_PROD2Entities2();
-            List<QRQC> listQrqc = pEGASE_PROD2Entities.QRQC.Include("ACTIONIMMEDIATE").Include("QUESTIONS_QRQC").Include("SOLUTION_DURABLE").Include("NON_DETECTION").Include("OCCURRENCE").Where(i => i.ID.Equals(index)).ToList();
-            if (listQrqc.Count() > 0)
-            {  result = listQrqc.First(); }
-            else if (index == -1)
+            QRQC result = null;
+            int index;
+
+            try
             {
-                result = new QRQC();
-                pEGASE_PROD2Entities.QRQC.Add(result);
+                index = Convert.ToInt32(_Id);
             }
-            
-            if (result!=null)
+            catch
             {
-               
-                if (_DateOuverture != null) { result.DateOuverture = (DateTime)_DateOuverture; } else { result.DateOuverture = DateTime.Now; }
+                index = -1;
+            }
+
+            try
+            {
+                var listQrqc = pEGASE_PROD2Entities.QRQC
+                    .Include("ACTIONIMMEDIATE")
+                    .Include("QUESTIONS_QRQC")
+                    .Include("SOLUTION_DURABLE")
+                    .Include("NON_DETECTION")
+                    .Include("OCCURRENCE")
+                    .Where(i => i.ID.Equals(index)).ToList();
+
+                result = listQrqc.FirstOrDefault();
+
+                if (result == null && index == -1)
+                {
+                    result = new QRQC();
+                    pEGASE_PROD2Entities.QRQC.Add(result);
+                }
+
+                if (result == null) throw new Exception("Impossible d’instancier ou de récupérer l’objet QRQC.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de l'initialisation du QRQC : " + ex.Message, ex);
+            }
+
+            try
+            {
+                result.DateOuverture = _DateOuverture ?? DateTime.Now;
                 result.DateCloture = _DateCloture;
                 result.DateSuivis = _DateSuivis;
                 result.DescriptionProcess = _DescriptionProcess;
                 result.Participants = _Participants;
                 result.Pilote = _Pilote;
                 result.Origine = _Origine;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de l’affectation des champs principaux du QRQC : " + ex.Message, ex);
+            }
 
-                QUESTIONS_QRQC Questions;
-                if (result.QUESTIONS_QRQC != null && result.QUESTIONS_QRQC.Count > 0)
-                {
-                    Questions = result.QUESTIONS_QRQC.ToList().First();
-                }
-                else
-                {
-                    Questions = new QUESTIONS_QRQC();
-                    Questions.ID_QRQC = result.ID;
-                    pEGASE_PROD2Entities.QUESTIONS_QRQC.Add(Questions);
-                }                
+            try
+            {
+                QUESTIONS_QRQC Questions = result.QUESTIONS_QRQC?.FirstOrDefault() ?? new QUESTIONS_QRQC { ID_QRQC = result.ID };
+                if (Questions.ID == 0) pEGASE_PROD2Entities.QUESTIONS_QRQC.Add(Questions);
+
                 foreach (var question in _SevenQuestion)
                 {
-                    switch(question.Key)
+                    switch (question.Key)
                     {
-                        case "Q1":
-                            Questions.Q1 = question.Value;
-                            break;
-                        case "Q2":
-                            Questions.Q2 = question.Value;
-                            break;
-                        case "Q3":
-                            Questions.Q3 = question.Value;
-                            break;
-                        case "Q4":
-                            Questions.Q4 = question.Value;
-                            break;
-                        case "Q5":
-                            Questions.Q5 = question.Value;
-                            break;
-                        case "Q6":
-                            Questions.Q6 = question.Value;
-                            break;
-                        case "Q7":
-                            Questions.Q7 = question.Value;
-                            break;
+                        case "Q1": Questions.Q1 = question.Value; break;
+                        case "Q2": Questions.Q2 = question.Value; break;
+                        case "Q3": Questions.Q3 = question.Value; break;
+                        case "Q4": Questions.Q4 = question.Value; break;
+                        case "Q5": Questions.Q5 = question.Value; break;
+                        case "Q6": Questions.Q6 = question.Value; break;
+                        case "Q7": Questions.Q7 = question.Value; break;
                     }
                 }
-                List<ACTIONIMMEDIATE> actionImmediates; 
-                if (result.ACTIONIMMEDIATE != null && result.ACTIONIMMEDIATE.Count > 0)
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du traitement des 7 questions : " + ex.Message, ex);
+            }
+
+            try
+            {
+                var existingActions = result.ACTIONIMMEDIATE?.OrderBy(p => p.ID).ToList() ?? new List<ACTIONIMMEDIATE>();
+                for (int i = 0; i < _ActionsImmediat.Count; i++)
                 {
-                    actionImmediates = result.ACTIONIMMEDIATE.OrderBy(p=>p.ID).ToList();                    
+                    var ai = (i < existingActions.Count) ? existingActions[i] : new ACTIONIMMEDIATE { ID_QRQC = result.ID };
+                    if (i >= existingActions.Count) result.ACTIONIMMEDIATE.Add(ai);
+
+                    ai.Pilote = _ActionsImmediat[i].Pilote;
+                    ai.Status = _ActionsImmediat[i].Statut;
+                    ai.ActionPourClient = _ActionsImmediat[i].ActionPourClient;
+                    ai.Delai = _ActionsImmediat[i].Delai;
                 }
-                else
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du traitement des actions immédiates : " + ex.Message, ex);
+            }
+
+            try
+            {
+                var occurences = result.OCCURRENCE?.OrderBy(p => p.ID).ToList() ?? new List<OCCURRENCE>();
+                for (int i = 0; i < _Occurrence.Count; i++)
                 {
-                    actionImmediates = new List<ACTIONIMMEDIATE>();
+                    var o = (i < occurences.Count) ? occurences[i] : new OCCURRENCE { ID_QRQC = result.ID };
+                    if (i >= occurences.Count) result.OCCURRENCE.Add(o);
+                    o.Item = _Occurrence[i];
                 }
-                int cpt = 0;
-                foreach(var action in _ActionsImmediat)
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du traitement des occurrences : " + ex.Message, ex);
+            }
+
+            try
+            {
+                var nonDetections = result.NON_DETECTION?.OrderBy(p => p.ID).ToList() ?? new List<NON_DETECTION>();
+                for (int i = 0; i < _NonDetection.Count; i++)
                 {
-                    ACTIONIMMEDIATE ai;
-                    if (actionImmediates.Count>cpt)
-                    {
-                        ai = actionImmediates[cpt];
-                    }
-                    else
-                    {
-                        ai = new ACTIONIMMEDIATE();
-                        ai.ID_QRQC = result.ID;
-                        result.ACTIONIMMEDIATE.Add(ai);
-                    }
-                    ai.Pilote = action.Pilote;
-                    ai.Status = action.Statut;
-                    ai.ActionPourClient = action.ActionPourClient;
-                    ai.Delai =  action.Delai;
-                    cpt++;
+                    var nd = (i < nonDetections.Count) ? nonDetections[i] : new NON_DETECTION { ID_QRQC = result.ID };
+                    if (i >= nonDetections.Count) result.NON_DETECTION.Add(nd);
+                    nd.item = _NonDetection[i];
                 }
-                List<OCCURRENCE> occurences;
-                if (result.OCCURRENCE != null && result.OCCURRENCE.Count > 0)
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du traitement des non-détections : " + ex.Message, ex);
+            }
+
+            try
+            {
+                var solutions = result.SOLUTION_DURABLE?.OrderBy(p => p.ID).ToList() ?? new List<SOLUTION_DURABLE>();
+                for (int i = 0; i < _Solutions.Count; i++)
                 {
-                    occurences = result.OCCURRENCE.OrderBy(p => p.ID).ToList();
+                    var s = (i < solutions.Count) ? solutions[i] : new SOLUTION_DURABLE { ID_QRQC = result.ID };
+                    if (i >= solutions.Count) result.SOLUTION_DURABLE.Add(s);
+
+                    s.NmrItem = _Solutions[i].item;
+                    s.ActionAmelioration = _Solutions[i].ActionAmelioration;
+                    s.Pilote = _Solutions[i].Pilote;
+                    s.Delai = _Solutions[i].Delai;
+                    s.Statut = _Solutions[i].Statut;
                 }
-                else
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du traitement des solutions durables : " + ex.Message, ex);
+            }
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(result.UrlImage))
                 {
-                    occurences = new List<OCCURRENCE>();
+                    result.UrlImage = DateTime.Now.Ticks.ToString();
                 }
-                cpt = 0;
-                foreach (var occurence in _Occurrence)
-                {
-                    OCCURRENCE ai;
-                    if (occurences.Count > cpt)
-                    {
-                        ai = occurences[cpt];
-                    }
-                    else
-                    {
-                        ai = new OCCURRENCE();
-                        ai.ID_QRQC = result.ID;
-                        result.OCCURRENCE.Add(ai);
-                    }
-                    ai.Item = occurence;
-                    cpt++;
-                }
-                List<NON_DETECTION> nonDetections;
-                if (result.NON_DETECTION != null && result.NON_DETECTION.Count > 0)
-                {
-                    nonDetections = result.NON_DETECTION.OrderBy(p => p.ID).ToList();
-                }
-                else
-                {
-                    nonDetections = new List<NON_DETECTION>();
-                }
-                cpt = 0;
-                foreach (var nondetection in _NonDetection)
-                {
-                    NON_DETECTION ai;
-                    if (nonDetections.Count > cpt)
-                    {
-                        ai = nonDetections[cpt];
-                    }
-                    else
-                    {
-                        ai = new NON_DETECTION();
-                        ai.ID_QRQC = result.ID;
-                        result.NON_DETECTION.Add(ai);
-                    }
-                    ai.item = nondetection;
-                    cpt++;
-                }
-                List<SOLUTION_DURABLE> solutionDurables;
-                if (result.SOLUTION_DURABLE != null && result.SOLUTION_DURABLE.Count > 0)
-                {
-                    solutionDurables = result.SOLUTION_DURABLE.OrderBy(p => p.ID).ToList();
-                }
-                else
-                {
-                    solutionDurables = new List<SOLUTION_DURABLE>();
-                }
-                cpt = 0;
-                foreach (var solution in _Solutions)
-                {
-                    SOLUTION_DURABLE ai;
-                    if (solutionDurables.Count > cpt)
-                    {
-                        ai = solutionDurables[cpt];
-                    }
-                    else
-                    {
-                        ai = new SOLUTION_DURABLE();
-                        ai.ID_QRQC = result.ID;
-                        result.SOLUTION_DURABLE.Add(ai);
-                    }
-                    ai.NmrItem = solution.item;
-                    ai.ActionAmelioration = solution.ActionAmelioration;
-                    ai.Pilote = solution.Pilote;
-                    ai.Delai = solution.Delai;
-                    ai.Statut = solution.Statut;
-                    cpt++;
-                }
-                if (String.IsNullOrWhiteSpace(result.UrlImage))
-                {
-                    result.UrlImage =  DateTime.Now.Ticks.ToString();
-                }
-                string path = @"ImageQRQC\" + result.UrlImage.Trim() + ".img";
-                //path = "C:\\inetpub\\wwwroot\\GenerateurDFUSafir\\ImageQRQC\\" + result.UrlImage.Trim() + ".img";
-                path = "C:\\tmp\\ImageQRQC\\" + result.UrlImage.Trim() + ".img";
-                int len = _image.Length;
+                string path = @"C:\tmp\ImageQRQC\" + result.UrlImage.Trim() + ".img";
+
                 using (FileStream fs = File.OpenWrite(path))
                 {
                     fs.SetLength(0);
-                    Byte[] info =
-                        new UTF8Encoding(true).GetBytes(_image);
-                    // Add some information to the file.
+                    byte[] info = new UTF8Encoding(true).GetBytes(_image);
                     fs.Write(info, 0, info.Length);
-                    
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de l’écriture de l’image : " + ex.Message, ex);
+            }
+
+            try
+            {
                 pEGASE_PROD2Entities.SaveChanges();
             }
-            else
+            catch (Exception ex)
             {
-
+                throw new Exception("Erreur lors de la sauvegarde dans la base de données : " + ex.Message, ex);
             }
         }
+
     }
 
     public class ActionImmediate

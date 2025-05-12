@@ -96,22 +96,37 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("RemoveControlPack")]
         public ActionResult RemoveControlPack(long IDOPE , string numof)
         {
+            try
+            {
+                PEGASE_CONTROLEntities db = new PEGASE_CONTROLEntities();
 
-            PEGASE_CONTROLEntities db = new PEGASE_CONTROLEntities();
+                var query = db.HISTORIQUE_CONTROL.Where(i => i.NumOF.Equals(numof));
 
-            var query = db.HISTORIQUE_CONTROL.Where(i => i.NumOF.Equals(numof));
-
-            if(query != null && query.Count() > 0) { 
-                List<HISTORIQUE_CONTROL> l = query.ToList();
-
-                foreach(var i in l)
+                if (query != null && query.Count() > 0)
                 {
-                    db.HISTORIQUE_CONTROL.Remove(i);
+                    List<HISTORIQUE_CONTROL> l = query.ToList();
+
+                    foreach (var i in l)
+                    {
+                        db.HISTORIQUE_CONTROL.Remove(i);
+                    }
+                    db.SaveChanges();
+
+                    TempData["Message"] = "Suppression du contrôle réussie avec succès pour l'OF "+numof;
+                    TempData["MessageType"] = "success";
+
+                    return RedirectToAction("gestionOf", "Production", new { id = IDOPE });
                 }
-                db.SaveChanges();
-                return RedirectToAction("gestionOf", "Production",new { id = IDOPE } );
+
+                TempData["Message"] = "Aucun contrôle trouvé pour l'OF " + numof;
+                TempData["MessageType"] = "neutre";
+                return RedirectToAction("SuppressionControleFinal", "Controle", new { ID = IDOPE });
+            }catch (Exception e)
+            {
+                TempData["Message"] = "Erreur lors de la suppression des contrôles";
+                TempData["MessageType"] = "success";
+                return RedirectToAction("SuppressionControleFinal", "Controle", new { ID = IDOPE });
             }
-            return RedirectToAction("SuppressionControleFinal","Controle", new { ID = IDOPE });
         }
 
         public ActionResult ControleQualite(long? ID,long? IDCQ)
@@ -181,7 +196,17 @@ namespace GenerateurDFUSafir.Controllers
                 
                 int result = obj.AddControle(ID, Idqc, NumOF, Item, ItemDescript, TypeConforme, ItemAnomalie, ItemCause, SaisieDescription, ImageDB, ref pathimage);
 
-            }
+                if (result == 1)
+                {
+                    TempData["Message"] = "Contrôle qualité enregistré avec succès";
+                    TempData["MessageType"] = "success";
+                }
+                else
+                {
+                    TempData["Message"] = "Erreur lors de l'enregistrement du contrôle qualité";
+                    TempData["MessageType"] = "error";
+                }
+               }
             ControleQualite vue = new ControleQualite();
             vue.ID = ID.Value; // Stockez l'ID dans la propriété "ID" de votre modèle
             return View(vue);

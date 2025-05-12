@@ -118,10 +118,14 @@ namespace GenerateurDFUSafir.Controllers
             bool result = tracaP.DeleteID(Gamme, ID, IDOPE);
             if (result)
             {
+                TempData["Message"] = "Ligne supprimée avec succès";
+                TempData["MessageType"] = "success";
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
             }
             else
             {
+                TempData["Message"] = "Erreur lors de la suppression de la ligne.";
+                TempData["MessageType"] = "error";
                 List<TracaPack> listraca = new List<TracaPack>();
                 TracaPackOPE traca = new TracaPackOPE();
                 traca.IDOpe = IDOPE;
@@ -137,10 +141,14 @@ namespace GenerateurDFUSafir.Controllers
             bool result = tracaP.PrintEtiquette(ID, Gamme);
             if (result)
             {
+                TempData["Message"] = "Etiquette imprimée avec succès.";
+                TempData["MessageType"] = "success";
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
             }
             else
             {
+                TempData["Message"] = "Erreur lors de l'impression de l'étiquette";
+                TempData["MessageType"] = "error";
                 List<TracaPack> listraca = new List<TracaPack>();
                 TracaPackOPE traca = new TracaPackOPE();
                 traca.IDOpe = IDOPE;
@@ -180,28 +188,43 @@ namespace GenerateurDFUSafir.Controllers
             newnc.DescriptionItem = nom;
             newnc.NmrOF = numOF;
 
-            string cptnc = gnc.AddNonConformite(newnc);
-
-            if (!string.IsNullOrWhiteSpace(cptnc))
+            try
             {
-                newnc.NmrChronoS = cptnc;
-                ImprimerEtiquetteNC(newnc);
+                string cptnc = gnc.AddNonConformite(newnc);
+
+                if (!string.IsNullOrWhiteSpace(cptnc))
+                {
+                    newnc.NmrChronoS = cptnc;
+                    ImprimerEtiquetteNC(newnc);
 
 
 
-                Mail mail = new Mail();
-                mail.From = "iisProd.Conductix@laposte.net";
-                mail.To = "franck.moisy@conductix.com,Louis.Jeanningros@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
+                    Mail mail = new Mail();
+                    mail.From = "iisProd.Conductix@laposte.net";
+                    mail.To = "franck.moisy@conductix.com,Louis.Jeanningros@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
 
-                mail.Subject = "Déclaration de non conformité : " + newnc.NmrChronoS;
-                mail.Message = "Nonconformité : " + newnc.NmrChronoS + "\r\n" +
-                                "Article : " + newnc.Item + "\r\n" +
-                                "Nmr OF: " + newnc.NmrOF + "\r\n" +
-                                newnc.DescriptionItem + "\r\n" +
-                               "qtr : " + newnc.Qtr.ToString() + "\r\n" +
-                               "Description : " + newnc.DescriptionUser + "\r\n";
+                    mail.Subject = "Déclaration de non conformité : " + newnc.NmrChronoS;
+                    mail.Message = "Nonconformité : " + newnc.NmrChronoS + "\r\n" +
+                                    "Article : " + newnc.Item + "\r\n" +
+                                    "Nmr OF: " + newnc.NmrOF + "\r\n" +
+                                    newnc.DescriptionItem + "\r\n" +
+                                   "qtr : " + newnc.Qtr.ToString() + "\r\n" +
+                                   "Description : " + newnc.DescriptionUser + "\r\n";
 
-                mail.btnSendMail();
+                    mail.btnSendMail();
+
+                    TempData["Message"] = "Déclaration de non-conformité enregistrée avec succès.";
+                    TempData["MessageType"] = "success";
+                }
+                else
+                {
+                    TempData["Message"] = "Une erreur est survenue lors de l'enregistrement de la non-conformité.";
+                    TempData["MessageType"] = "error";
+                }
+            } catch (Exception ex)
+            {
+                TempData["Message"] = "Une erreur technique est survenue";
+                TempData["MessageType"] = "error";
             }
 
             if (!numOF.Equals("MANUEL"))
@@ -220,16 +243,32 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost]
         public ActionResult AffectationOperateurs(long? ID, string idPole)
         {
+            if (ID == null || string.IsNullOrWhiteSpace(idPole))
+            {
+                return Json(new { status = "error", message = "Paramètres invalides." }, JsonRequestBehavior.AllowGet);
+            }
 
-            PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+            try
+            {
+                using (var db = new PEGASE_PROD2Entities2())
+                {
+                    var op = db.OPERATEURS.FirstOrDefault(i => i.ID == ID.Value);
+                    if (op == null)
+                    {
+                        return Json(new { status = "error", message = "Opérateur non trouvé." }, JsonRequestBehavior.AllowGet);
+                    }
 
-            OPERATEURS op = db.OPERATEURS.Where(i => i.ID == ID).First();
-            op.POLE = Convert.ToInt32(idPole);
+                    op.POLE = Convert.ToInt32(idPole);
+                    db.SaveChanges();
 
-            db.SaveChanges();
-
-
-            return Json("OK", JsonRequestBehavior.AllowGet);
+                    return Json(new { status = "success", message = "Affectation enregistrée." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tu peux loguer l'erreur ici avec un logger
+                return Json(new { status = "error", message = "Erreur serveur : " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult ChangeAnimatrice()
@@ -430,6 +469,8 @@ namespace GenerateurDFUSafir.Controllers
             bool result = false;
             if (et1 == null || et1.Itmeref == null || et1.Qtr == null)
             {
+                TempData["Message"] = "Référence ou quantité manquante.";
+                TempData["MessageType"] = "error";
                 et = new EtiquetteLogistique();
             }
             else
@@ -444,11 +485,21 @@ namespace GenerateurDFUSafir.Controllers
                     // }
                     if (!result)
                     {
+                        TempData["Message"] = "Echec de l'impression de l'étiquette";
+                        TempData["MessageType"] = "error";
                         et1 = new EtiquetteLogistique();
                     }
+                    else
+                    {
+                        TempData["Message"] = "Etiquette imprimée avec succès";
+                        TempData["MessageType"] = "success";
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    TempData["Message"] = "Echec lors de l'impression";
+                    TempData["MessageType"] = "error";
+                    et1 = new EtiquetteLogistique();
                 }
 
 
@@ -507,47 +558,51 @@ namespace GenerateurDFUSafir.Controllers
             {
                 name = name2;
             }
+
             bool result = false;
+
             if (string.IsNullOrWhiteSpace(name))
             {
+                TempData["Message"] = "Aucun numéro OF fourni.";
+                TempData["MessageType"] = "error";
                 et = new EtiquetteLogistique();
                 et.id = et1.id;
             }
             else
             {
-                string ofacherche = "";
-                if (!string.IsNullOrWhiteSpace(name))
-                {
-                    ofacherche = name.ToUpper();
-                }
-                else
-                {
-                    ofacherche = name;
-                }
+                string ofacherche = name.ToUpper();
 
-                OrdreFabrication op = FinfOfAllX3(ofacherche.ToUpper());
-                if (op != null && !String.IsNullOrWhiteSpace(op.ITMREF_0))
+                OrdreFabrication op = FinfOfAllX3(ofacherche);
+                if (op != null && !string.IsNullOrWhiteSpace(op.ITMREF_0))
                 {
-                    // verifier si OF contient la reference étiquette a imprimer
                     OfX3 ofs = new OfX3();
                     List<string> casdemploi = ofs.ListCasDEmploi("354140A");
                     if (casdemploi.Contains(op.ITMREF_0))
                     {
-                        //  using (Impersonation imp = new Impersonation(Resource1.LoginAccesReseau, Resource1.DomaineAccesReseau, Resource1.PasswordAccesReseau))
-                        // {
-                        ImprimerEtiquette(op);
-                        //}
-                        result = true;
+                        try
+                        {
+                            ImprimerEtiquette(op);
+                            TempData["Message"] = $"Étiquette imprimée pour l'OF {op.MFGNUM_0}.";
+                            TempData["MessageType"] = "success";
+                            result = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            TempData["Message"] = "Erreur lors de l'impression : " + ex.Message;
+                            TempData["MessageType"] = "error";
+                        }
                     }
                     else
                     {
+                        TempData["Message"] = $"La référence {op.ITMREF_0} ne permet pas l'impression de l'étiquette.";
+                        TempData["MessageType"] = "error";
                     }
                 }
                 else
                 {
-
+                    TempData["Message"] = "Ordre de fabrication introuvable ou invalide.";
+                    TempData["MessageType"] = "error";
                 }
-                //op = FindOF(TryToOFUD, "^UDE|^ADE");
             }
 
             if (result && et1 != null && et1.id != null)
@@ -556,7 +611,7 @@ namespace GenerateurDFUSafir.Controllers
             }
             else
             {
-                return RedirectToAction("outilProd", "Production", new { id = et1.id });
+                return RedirectToAction("outilProd", "Production", new { id = et1?.id });
             }
         }
         public ActionResult OutilProdBac(long? IDop, string bac)
@@ -586,33 +641,45 @@ namespace GenerateurDFUSafir.Controllers
             var namechar = Request.Form["chariotpos"];
             var nameqtr = Request.Form["nbPiece"];
             ITEM_LOCALISATION et = null;
-            et = EtiquetteBac.SetEtiquetteBac(nameID, nameRef, namechar, nameqtr);
-            ImprimerEtiquette(et, false);
-
-            //pour impression en volume de toute les étiquettes
-            List<ITEM_LOCALISATION> tmp = EtiquetteBac.GetAllList();
-            int i = 0;
-            //List<string> list = new List<string> { "E26270B", "012174", "015324", "D30270C", "D30260C", "D30250C", "015333", "015034", "015312", "E26690TEST", "000252", "000149", "015218", "015262", "015028", "012712", "015266", "D30160B", "350910A", "M15200A", "013432", "351330A" };
-            //List<string> list = new List<string> { "353840A", "015325", "351330A" };
-            //foreach (var etiquette in tmp)
-            //{
-            //    //if (list.Contains(etiquette.ITEMREF))
-            //    if (etiquette.ID> 1180)
-            //    {
-            //        i++;
-            //        ImprimerEtiquette(etiquette, true);
-            //        //if (i == 50)
-            //        //{
-
-            //        //}
-            //    }
-            //}
-            if (et != null)
+            try
             {
-                return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = et.ITEMREF });
+                et = EtiquetteBac.SetEtiquetteBac(nameID, nameRef, namechar, nameqtr);
+                ImprimerEtiquette(et, false);
+                    //pour impression en volume de toute les étiquettes
+                    List<ITEM_LOCALISATION> tmp = EtiquetteBac.GetAllList();
+                int i = 0;
+                //List<string> list = new List<string> { "E26270B", "012174", "015324", "D30270C", "D30260C", "D30250C", "015333", "015034", "015312", "E26690TEST", "000252", "000149", "015218", "015262", "015028", "012712", "015266", "D30160B", "350910A", "M15200A", "013432", "351330A" };
+                //List<string> list = new List<string> { "353840A", "015325", "351330A" };
+                //foreach (var etiquette in tmp)
+                //{
+                //    //if (list.Contains(etiquette.ITEMREF))
+                //    if (etiquette.ID> 1180)
+                //    {
+                //        i++;
+                //        ImprimerEtiquette(etiquette, true);
+                //        //if (i == 50)
+                //        //{
+
+                //        //}
+                //    }
+                //}
+                if (et != null)
+                {
+                    TempData["Message"] = "Etiquette bac générée avec succès.";
+                    TempData["MessageType"] = "success";
+                    return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = et.ITEMREF });
+                }
+                else
+                {
+                    TempData["Message"] = "Echec de la génération de l'étiquette";
+                    TempData["MessageType"] = "error";
+                    return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = "" });
+                }
             }
-            else
+            catch (Exception ex)
             {
+                TempData["Message"] = "Erreur lors de la génération de l'étiquette";
+                TempData["MessageType"] = "error";
                 return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = "" });
             }
         }
@@ -656,30 +723,27 @@ namespace GenerateurDFUSafir.Controllers
 
                 if (ImageAccident != null && ImageAccident.ContentType.Contains("image/jpeg"))
                 {
-
                     byte[] thePictureAsBytes = new byte[ImageAccident.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(ImageAccident.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(ImageAccident.ContentLength);
                     }
                     ImageDB = Convert.ToBase64String(thePictureAsBytes);
-                    //ImageDB = ImageDB.Remove(0, 23);
                 }
                 else if (!String.IsNullOrWhiteSpace(PhotoAccident))
                 {
                     PhotoAccident = PhotoAccident.Remove(0, 23);
                     ImageDB = PhotoAccident;
                 }
-                else { }
 
                 string pathimage = "";
                 int result = obj.AddAccident(SaisieNiveau, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", gravitepotentiel, ImageDB, ref pathimage);
                 if (result > 0)
                 {
+                    /*
                     Mail mail = new Mail();
                     mail.From = "iisProd.Conductix@laposte.net";
                     mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
-
                     mail.Subject = "Déclaration Accidents type : " + obj.NiveauAccident(Niveausaisie);
                     mail.Message = "Niveau d'accident : " + "Niveau " + SaisieNiveau + " - " + obj.NiveauAccident(Niveausaisie) + "\r\n" +
                                    "Victime : " + SaisieVictime + "\r\n" +
@@ -689,10 +753,24 @@ namespace GenerateurDFUSafir.Controllers
                                    "Description complémentaire :" + SaisieDescription2;
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
+                    */
+
+                    TempData["Message"] = "Accident déclaré avec succès.";
+                    TempData["MessageType"] = "success";
+                }
+                else
+                {
+                    TempData["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    TempData["MessageType"] = "error";
                 }
             }
-            return RedirectToAction("Securite");
-            //return View(obj);
+            else
+            {
+                TempData["Message"] = "Aucune donnée soumise";
+                TempData["MessageType"] = "error";
+            }
+
+                return RedirectToAction("Securite", "Production");
         }
         [HttpPost, ActionName("Qualite")]
         public ActionResult traiterFRC()
@@ -778,6 +856,7 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult Amelioration()
         {
+
             InfoAmelioration vue = new InfoAmelioration();
             return View(vue);
         }
@@ -817,6 +896,7 @@ namespace GenerateurDFUSafir.Controllers
 
             if (result > 0)
             {
+                /*
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
                 mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -828,9 +908,17 @@ namespace GenerateurDFUSafir.Controllers
                                "Description : " + Proposition + "\r\n" +
                                " -" + Solution;
                 mail.AttachementPath = pathimage;
-                mail.btnSendMail();
+                mail.btnSendMail();*/
+
+                TempData["Message"] = "Demande enregistrée avec succès.";
+                TempData["MessageType"] = "success";
             }
-            return RedirectToAction("Amelioration", "Production");
+            else
+            {
+                TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                TempData["MessageType"] = "error";
+            }
+                return RedirectToAction("Amelioration", "Production");
         }
 
         public ActionResult KPIProd()
@@ -841,7 +929,9 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult AIC2(int? id)
         {
-            if (id == null)
+            TempData.Keep("Message");
+            TempData.Keep("MessageType");
+;            if (id == null)
             {
                 return RedirectToAction("Production", "Production");
             }
@@ -858,18 +948,29 @@ namespace GenerateurDFUSafir.Controllers
         {
             int index = 0;
             Dictionary<string, string> listtmp = new Dictionary<string, string>();
-            foreach (var itemFormulaire in Request.Form) //Pour récupérer les clés et valeurs du formulaire
+
+            try
             {
-                string clee = itemFormulaire.ToString();
-                string valeur = Request.Form[clee];
-                listtmp.Add(clee, valeur);
-                if (clee.Contains("ID+")) { index = Convert.ToInt32(valeur); }
+                foreach (var itemFormulaire in Request.Form) //Pour récupérer les clés et valeurs du formulaire
+                {
+                    string clee = itemFormulaire.ToString();
+                    string valeur = Request.Form[clee];
+                    listtmp.Add(clee, valeur);
+                    if (clee.Contains("ID+")) { index = Convert.ToInt32(valeur); }
+                }
+
+                InfoAIC2 aic = new InfoAIC2();
+                aic.Addligne(listtmp);
+
+                TempData["Message"] = "Ligne enregistrée avec succès";
+                TempData["MessageType"] = "success";
+            } catch(Exception ex)
+            {
+                TempData["Message"] = "Erreur lors de l'enregistrement";
+                TempData["MessageType"] = "error";
+
             }
-
-            InfoAIC2 aic = new InfoAIC2();
-            aic.Addligne(listtmp);
-
-            return RedirectToAction("AIC2", "Production", index);
+            return RedirectToAction("AIC2", "Production", new {id = index});
 
         }
 
@@ -883,64 +984,77 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("QRQC")]
         public ActionResult AjoutQRQC()
         {
-            string image = Request.Form["image"];
-            int leng = image.Length;
-            string id = Request.Form["Index"];
-            DateTime? DateOuverture;
-            try { DateOuverture = DateTime.Parse(Request.Form["DateOuverture"]); } catch { DateOuverture = null; }
-            DateTime? DateCloture;
-            try { DateCloture = DateTime.Parse(Request.Form["DateCloture"]); } catch { DateCloture = null; }
-            DateTime? DateSuivis;
-            try { DateSuivis = DateTime.Parse(Request.Form["DateSuivis"]); } catch { DateSuivis = null; }
-
-            string Participants = Request.Form["Participants"];
-            string Pilote = Request.Form["Pilote"];
-            string Origine = Request.Form["Origine"];
-            Dictionary<string, string> SevenQuestion = new Dictionary<string, string>();
-            List<string> Questions = new List<string>() { "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7" };
-            foreach (string item in Questions)
+            try
             {
-                SevenQuestion.Add(item, Request.Form[item].Trim());
-            }
-            string DescriptionProcess = Request.Form["DescritpionProcessus"];
-            List<ActionImmediate> ActionsImmediat = new List<ActionImmediate>();
-            for (int i = 0; i < 6; i++)
+                string image = Request.Form["image"];
+                int leng = image.Length;
+                string id = Request.Form["Index"];
+                DateTime? DateOuverture;
+                try { DateOuverture = DateTime.Parse(Request.Form["DateOuverture"]); } catch { DateOuverture = null; }
+                DateTime? DateCloture;
+                try { DateCloture = DateTime.Parse(Request.Form["DateCloture"]); } catch { DateCloture = null; }
+                DateTime? DateSuivis;
+                try { DateSuivis = DateTime.Parse(Request.Form["DateSuivis"]); } catch { DateSuivis = null; }
+
+                string Participants = Request.Form["Participants"];
+                string Pilote = Request.Form["Pilote"];
+                string Origine = Request.Form["Origine"];
+                Dictionary<string, string> SevenQuestion = new Dictionary<string, string>();
+                List<string> Questions = new List<string>() { "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7" };
+                foreach (string item in Questions)
+                {
+                    SevenQuestion.Add(item, Request.Form[item].Trim());
+                }
+                string DescriptionProcess = Request.Form["DescritpionProcessus"];
+                List<ActionImmediate> ActionsImmediat = new List<ActionImmediate>();
+                for (int i = 0; i < 6; i++)
+                {
+                    DateTime? tmpdate = null;
+                    String status = null;
+                    try { tmpdate = DateTime.Parse(Request.Form["DelaiI_" + i]); } catch { tmpdate = null; }
+                    try { status = Request.Form["StatutI_" + i]; } catch { status = null; }
+
+                    ActionsImmediat.Add(new ActionImmediate(Request.Form["ActionImmediat_" + i], Request.Form["PiloteI_" + i], tmpdate, status));
+                }
+                List<string> Occurrence = new List<string>();
+                List<string> NonDetection = new List<string>();
+                for (int i = 0; i < 5; i++)
+                {
+                    Occurrence.Add(Request.Form["PourquoiOccu_" + i].Trim());
+                    NonDetection.Add(Request.Form["PourquoiNonD_" + i].Trim());
+                }
+                List<SolutionDurable> Solutions = new List<SolutionDurable>();
+                for (int i = 0; i < 7; i++)
+                {
+                    DateTime? tmpdate = null;
+
+                    try { tmpdate = DateTime.Parse(Request.Form["Delai_" + i]); } catch { tmpdate = null; }
+
+                    string tmp = Request.Form["Pilote_" + i];
+                    string tmp2 = Request.Form["item_" + i];
+                    string tmp3 = Request.Form["Action_" + i];
+                    string tmp4 = Request.Form["Statut_" + i];
+
+                    Solutions.Add(new SolutionDurable(Request.Form["item_" + i], Request.Form["Action_" + i], Request.Form["Pilote_" + i], tmpdate, Request.Form["Statut_" + i]));
+                }
+                InfoQRQC obj = new InfoQRQC();
+                obj.SaveQRQC(id, DateOuverture, DateCloture, DateSuivis, Participants, Pilote, Origine, SevenQuestion, DescriptionProcess, ActionsImmediat, Occurrence, NonDetection, Solutions, image);
+                
+                TempData["Message"] = "Demande enregistrée avec succès.";
+                TempData["MessageType"] = "success";
+
+            } catch(Exception ex)
             {
-                DateTime? tmpdate = null;
-                String status = null;
-                try { tmpdate = DateTime.Parse(Request.Form["DelaiI_" + i]); } catch { tmpdate = null; }
-                try { status = Request.Form["StatutI_" + i]; } catch { status = null; }
-
-                ActionsImmediat.Add(new ActionImmediate(Request.Form["ActionImmediat_" + i], Request.Form["PiloteI_" + i], tmpdate, status));
+                TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                TempData["MessageType"] = "error";
             }
-            List<string> Occurrence = new List<string>();
-            List<string> NonDetection = new List<string>();
-            for (int i = 0; i < 5; i++)
-            {
-                Occurrence.Add(Request.Form["PourquoiOccu_" + i].Trim());
-                NonDetection.Add(Request.Form["PourquoiNonD_" + i].Trim());
-            }
-            List<SolutionDurable> Solutions = new List<SolutionDurable>();
-            for (int i = 0; i < 7; i++)
-            {
-                DateTime? tmpdate = null;
-
-                try { tmpdate = DateTime.Parse(Request.Form["Delai_" + i]); } catch { tmpdate = null; }
-
-                string tmp = Request.Form["Pilote_" + i];
-                string tmp2 = Request.Form["item_" + i];
-                string tmp3 = Request.Form["Action_" + i];
-                string tmp4 = Request.Form["Statut_" + i];
-
-                Solutions.Add(new SolutionDurable(Request.Form["item_" + i], Request.Form["Action_" + i], Request.Form["Pilote_" + i], tmpdate, Request.Form["Statut_" + i]));
-            }
-            InfoQRQC obj = new InfoQRQC();
-            obj.SaveQRQC(id, DateOuverture, DateCloture, DateSuivis, Participants, Pilote, Origine, SevenQuestion, DescriptionProcess, ActionsImmediat, Occurrence, NonDetection, Solutions, image);
-            return RedirectToAction("DataQRQC");
+                return RedirectToAction("DataQRQC");
         }
 
         public ActionResult DataQRQC(int? id)
         {
+            TempData.Keep("Message");
+            TempData.Keep("MessageType");
             InfoDATAQRQC list = new InfoDATAQRQC();
             return View(list);
 

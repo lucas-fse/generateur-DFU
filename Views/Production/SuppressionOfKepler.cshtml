@@ -8,6 +8,20 @@
     <link href="~/Content/gammeUD.css" rel="stylesheet" />
 
 
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
 }
 
 <style>
@@ -15,14 +29,14 @@
         min-width: 800px
     }
 
-    .list-elem tr,td,th {
+    .list-elem tr, td, th {
         border: none;
         padding: 3px;
     }
 
-    .list-elem tr:nth-child(2n+1) {
-        background-color: #00000008;
-    }
+        .list-elem tr:nth-child(2n+1) {
+            background-color: #00000008;
+        }
 
     .clickable {
         cursor: pointer;
@@ -54,8 +68,8 @@
             </div>
 
             <div class="frm-button-box">
-                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
-                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" disabled>VALIDER</button>
+                <input type="button" id="frm-back" value="ANNULER" class="btn btn-outline-orange" />
+                <button type="submit" name="default" id="frm-submit" class="btn btn-orange" disabled>VALIDER</button>
             </div>
         </div>
 
@@ -86,20 +100,20 @@
 
                         @foreach (var ligne in Model.tracaPacks)
                         {
-                            
-                    <tr>
-                        <td>@ligne.ID</td>
-                        <td>@ligne.TypeGamme</td>
-                        <td>@ligne.NmrOf</td>
-                        <td>@ligne.NmrOrder</td>
-                        <td>@ligne.Caract1</td>
-                        <td>@ligne.Caract2</td>
-                        <td class="clickable" onclick="window.location.href = '@Url.Action("SupprLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-trash"></i></td>
-                        <td class="clickable" onclick="window.location.href = '@Url.Action("ImpressionLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-print"></i></td>
-                    </tr>
-                            
+
+                            <tr>
+                                <td>@ligne.ID</td>
+                                <td>@ligne.TypeGamme</td>
+                                <td>@ligne.NmrOf</td>
+                                <td>@ligne.NmrOrder</td>
+                                <td>@ligne.Caract1</td>
+                                <td>@ligne.Caract2</td>
+                                <td class="clickable" onclick="window.location.href = '@Url.Action("SupprLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-trash"></i></td>
+                                <td class="clickable" onclick="window.location.href = '@Url.Action("ImpressionLigneKepler", "Production", new {ID = ligne.ID, Gamme = ligne.TypeGamme,IDOPE = Model.IDOpe })'"><i class="fa-solid fa-print"></i></td>
+                            </tr>
+
                         }
-                     </table>
+                    </table>
                 </div>
             </div>
         }
@@ -111,3 +125,4 @@
 <script src="~/Scripts/form.js"></script>
 
 
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>

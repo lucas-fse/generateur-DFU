@@ -8,6 +8,23 @@
     <link href="~/Content/gestionOF.css" rel="stylesheet" />
     <link href="~/Content/of.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
 }
 <body>
     <p id="ouverturepopup" initvalue="@Model.Popup.ToString()" hidden></p>
@@ -35,8 +52,8 @@
                     <!--<input type="hidden" id="gererPopup" name="endPopPup" value="" />-->
                     <input type="hidden" name="ID" value="@Model.ID" />
                     <!--<button type="submit" class="cat-OF-button" value="2" name="cat">Catégorie bidirectionnelle </button>
-        <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
-        <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
+                    <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
+                    <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
 
                     <button type="submit" class="btn btn-outline-orange" value="1" name="cat">OfZEN</button>
                     <br />
@@ -309,24 +326,24 @@
                 <button id="closechoix" onclick="AnnulerPopUp('PopUpOF')"><i class="fa-solid fa-x" style="color: #ffffff;"></i></button>
             </div>
         </div>
-        
-            <div id="selectOF">
-                <!-- ICI ON FAIT UN FOREACH POUR AFFICHER 3 OFS !-->
-                <div class="of-list">
 
-                    @if(Model.ofAfaire.Count() == 0)
-                    {
-                        <p>Aucun OF n'est disponible à la fabrication. Si vous pensez qu'il s'agit d'une erreur, rapprochez vous de l'animateur du pole.</p>
-                    }
+        <div id="selectOF">
+            <!-- ICI ON FAIT UN FOREACH POUR AFFICHER 3 OFS !-->
+            <div class="of-list">
 
-                    @foreach (var of in Model.ofAfaire)
-                    {
-                        <div onClick="window.location.href = '/Production/startOf?ID=@Model.ID&of=@of.numOF'">@Html.Partial("of", of)</div>
-                    }
+                @if (Model.ofAfaire.Count() == 0)
+                {
+                    <p>Aucun OF n'est disponible à la fabrication. Si vous pensez qu'il s'agit d'une erreur, rapprochez vous de l'animateur du pole.</p>
+                }
 
-                </div>        
+                @foreach (var of in Model.ofAfaire)
+                {
+                    <div onClick="window.location.href = '/Production/startOf?ID=@Model.ID&of=@of.numOF'">@Html.Partial("of", of)</div>
+                }
+
             </div>
-        
+        </div>
+
     </div>
 
 
@@ -399,7 +416,7 @@
             <input type="hidden" name="ArretOF" value="" id="ArretOF" />
             <input type="hidden" name="ID" value="@Model.ID" />
             <div class="bandeau">
-                <h2>Arret de l'OF - Stockage : <label name ="EmplacementItem" id="EmplacementItem"></label></h2>
+                <h2>Arret de l'OF - Stockage : <label name="EmplacementItem" id="EmplacementItem"></label></h2>
             </div>
             <div id="ArretOFBody">
                 <div id="AjoutAlea" class="GrisClair oublie">
@@ -959,4 +976,5 @@
         }
     </script>
     <script type="text/javascript" src="~/Scripts/reloadOF.js"></script>
+    <script type="text/javascript" src="~/Scripts/alertes.js"></script>
 </body>

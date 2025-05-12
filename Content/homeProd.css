@@ -8,9 +8,10 @@ hr {
 }
 
 h1 {
-  font-weight: normal;
-  font-size: 32px;
+    font-weight: normal;
+    font-size: 32px;
 }
+
 .container {
     padding-left: 5px;
     padding-right: 0;
@@ -33,64 +34,63 @@ h1 {
     background-position: 0 0;
     background-size: 100% 100%;
     */
-
 }
 
 /* tablette et smartphone */
 @media screen and (max-width: 1080px) {
-  #bandeau {
-    flex-direction: column;
-  }
+    #bandeau {
+        flex-direction: column;
+    }
 }
 
 #mainTitle { /* titre h1 */
-  padding-left: 50px;
-  font-weight: normal;
+    padding-left: 50px;
+    font-weight: normal;
 }
 
-@media screen and (max-width: 1080px)  {
-  #mainTitle {
-    text-align: center;
-    padding: 0;
-  }
+@media screen and (max-width: 1080px) {
+    #mainTitle {
+        text-align: center;
+        padding: 0;
+    }
 }
 
 /* contenu de la page : englobe tout le contenu */
 #contenuPage {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 /* colonne de gauche */
 
 #infoProd {
-  width: 70%;
+    width: 70%;
 }
 
 @media all and (max-width: 1080px) {
-  #infoProd {
-    width: 100%;
-  }
+    #infoProd {
+        width: 100%;
+    }
 }
 
 /*premiere ligne de la  colonne de gauche */
 
 #securite-qualite {
-  display: flex;
-  justify-content: space-between;
-  align-items:  stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
 }
 
 #securite, #qualite {
-   padding-top: 10px;
+    padding-top: 10px;
 }
 
 @media all and (max-width: 1550px) {
-  #securite-qualite {
-      flex-direction: column;
-  }
+    #securite-qualite {
+        flex-direction: column;
+    }
 }
 
 #securite {
@@ -127,11 +127,11 @@ h1 {
 }
 
 #infos-securite {
-  box-sizing: border-box;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #qualite {
@@ -144,7 +144,6 @@ h1 {
     border: 1px solid grey;
     flex-wrap: wrap;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
-   
 }
 
     #qualite #qualiteTitle {
@@ -162,38 +161,40 @@ h1 {
 
 #Q-cross {
     border-radius: 5px;
-    width:50%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 #infos-qualite {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
     width: 50%;
-
 }
 
 @media all and (max-width: 1550px) {
-  #securite, #qualite {
-    width: 100%;
-  }
+    #securite, #qualite {
+        width: 100%;
+    }
 }
 
 @media all and (max-width: 600px) {
     #securite, #qualite {
-      flex-direction: column;
-      justify-content: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     #green-cross, #Q-cross, #infos-securite, #infos-qualite {
-      width: 100%;
+        width: 100%;
     }
+
     #qualite #qualiteTitle {
         margin-top: 15px;
     }
+
     #DivCases {
         padding-top: 16px;
     }
@@ -204,9 +205,8 @@ h1 {
 /* debut deuxieme ligne colonne de gauche */
 
 #production-idee {
-  display: flex;
-  justify-content: space-between;
-
+    display: flex;
+    justify-content: space-between;
 }
 
 #production {
@@ -299,13 +299,13 @@ h1 {
 
 @media all and (max-width: 1080px) {
 
-  #production-idee {
-      flex-direction: column;
-  }
+    #production-idee {
+        flex-direction: column;
+    }
 
-  #production, #idee {
-    width: 100%;
-  }
+    #production, #idee {
+        width: 100%;
+    }
 }
 
 /* fin de la deuxieme ligne de la  colonne de gauche */
@@ -314,8 +314,8 @@ h1 {
 
 
 #otd-AIC {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 #otd {
@@ -374,7 +374,7 @@ h1 {
 }
 
 #AIC-pic, #Plannif-pic {
-  width: 100%;
+    width: 100%;
 }
 
 #AIC-left, #AIC-right, #Plannif-left, #Plannif-right {
@@ -395,10 +395,10 @@ h1 {
     text-decoration: none;
 }
 
-.AIC-link:hover, .AIC-link:active,.AIC-link:link, .Plannif-link:hover, .Plannif-link:active, .Plannif-link:link {
-    text-decoration: none !important;
-    color: black;
-}
+    .AIC-link:hover, .AIC-link:active, .AIC-link:link, .Plannif-link:hover, .Plannif-link:active, .Plannif-link:link {
+        text-decoration: none !important;
+        color: black;
+    }
 
 #AIC-left, #Plannif-left {
     display: flex;
@@ -427,13 +427,13 @@ h1 {
 }
 
 @media all and (max-width: 1080px) {
-  #otd-AIC {
-    flex-direction: column;
-  }
+    #otd-AIC {
+        flex-direction: column;
+    }
 
-  #otd, #AIC, #Plannif {
-    width: 100%;
-  }
+    #otd, #AIC, #Plannif {
+        width: 100%;
+    }
 }
 
 /* fin troisieme ligne colonne de gauche */
@@ -441,61 +441,59 @@ h1 {
 /* colonne de droite */
 
 #newsletter {
-  width: 30%;
+    width: 30%;
 }
 
 /*zone où apparait tous les pdf */
 
 #pdfNewsletter {
- 
-  width: 100%;
-  height: 900px;
+    width: 100%;
+    height: 900px;
 }
 
 /* tablette et smartphone */
 @media screen and (max-width: 1080px) {
 
-  #newsletter, #infoProd {
-    width: 100%;
-  }
+    #newsletter, #infoProd {
+        width: 100%;
+    }
 
-  #contenuPage {
-    flex-direction: column;
-  }
+    #contenuPage {
+        flex-direction: column;
+    }
 
-  #testImage {
-    max-width: 100%;
-  }
-
+    #testImage {
+        max-width: 100%;
+    }
 }
 
 /* en savoir plus button image */
 
 .enSavoirPlusContainer {
-  position: relative;
+    position: relative;
 }
 
-.btn-orange{
-    margin : 7px;
-    padding-left : 20px;
-    padding-right : 20px;
+.btn-orange {
+    margin: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.btn-outline-orange{
-    width:95%;
-    margin : 5px;
+.btn-outline-orange {
+    width: 95%;
+    margin: 5px;
 }
 
 .centered-text-on-pic { /* pour centrer le texte sur l'image */
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .enSavoirPlusPic {
-  margin: 0;
-  width: 100%;
+    margin: 0;
+    width: 100%;
 }
 
 /* générique */
@@ -503,7 +501,6 @@ h1 {
 #bandeau .prodPic {
     border-radius: 100%;
     width: 0px;
-
     background-color: white;
 }
 
@@ -516,51 +513,53 @@ h1 {
 }
 
 h2 {
-  text-align: center;
-  font-weight: normal;
-  color: white;
-  margin: 0;
-  padding: 0;
-  padding: 10px 20px;
+    text-align: center;
+    font-weight: normal;
+    color: white;
+    margin: 0;
+    padding: 0;
+    padding: 10px 20px;
 }
 
 h3 {
-  text-align: center;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
 }
 
-
-.btn-grad {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
 
 .btn-grad {
-  width: 90%;
-  margin: 0 auto;
-  max-width: 250px;
-  padding: 15px 45px;
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  display: block;
+    background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)
 }
 
-.btn-grad:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-  }
+.btn-grad {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 250px;
+    padding: 15px 45px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    display: block;
+}
 
-  .round {
+    .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+
+.round {
     aspect-ratio: 1/1;
     border-radius: 100%;
-  }
+}
 
-  .grey-border {
+.grey-border {
     border: 2px solid grey;
-  }
+}
 
 /*---------------------------- GreenCross -------------------------------------*/
 #greenCross /* 7 lignes 7 colonnes */ {
@@ -575,28 +574,27 @@ h3 {
 
 /* ligne de la green cross*/
 .greenCrossRow {
-    vertical-align: middle;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* case de la green cross */
 
 .greenCrossCase {
+    aspect-ratio: 1 / 1;
     width: 25px;
-    height: 25px;
     display: flex;
     justify-content: center;
-    background-color: lightgrey;
     align-items: center;
-    box-sizing: border-box; /* => (largeur case + bordure = 50px) */
+    box-sizing: border-box;
+    background-color: lightgrey;
     border: 1px solid grey;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 @media all and (max-width: 1080px) {
-  /* .greenCrossCase {
+    /* .greenCrossCase {
        width: 42px;
        height: 42px;
         aspect-ratio: 1/1;
@@ -615,8 +613,12 @@ h3 {
 /* pour ne pas afficher les cases qui n'ont pas de bordure */
 
 .hiddenCase {
-    border: none;
-    display : none;
+    aspect-ratio: 1 / 1;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .topleft {
@@ -639,10 +641,9 @@ h3 {
 /* ---------------------------------- Debut Q CROSS ------------------------------------------*/
 
 #Q-CrossTitle {
-
 }
 
-#Q-Cross {
+#Q-Cross1 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -675,7 +676,7 @@ h3 {
 }
 
 @media all and (max-width: 1080px) {
-    #Q-Cross {
+    #Q-Cross1 {
         width: 100%;
         margin: 0 auto;
         max-height: 300px;
@@ -743,7 +744,7 @@ h3 {
 
 .jour-inexistant {
     background-color: dimgrey;
-   /* 
+    /* 
       couleur gris foncé 
       le jour n'existe pas dans le mois courant
       ex: si mois courant = fevrier, alors le fond de la case aura cette couleur dans la Q-Cross
@@ -774,9 +775,7 @@ h3 {
 
 /* pour ne pas afficher les cases qui n'ont pas de bordure */
 
-.hiddenCase {
-    border: none
-}
+
 /* ---------------------------------- Fin Q CROSS ------------------------------------------*/
 
 /* -------------------------------- debut charte frc ------------------------------------ */
@@ -786,14 +785,12 @@ h3 {
 }
 
 chartNbFrcParService {
- 
 }
 
 /* -------------------------------- fin charte frc ------------------------------------ */
 
 @media screen and (max-width: 1080px) {
     #chartNbFrcParService-container {
-        
     }
 }
 
@@ -806,70 +803,7 @@ chartNbFrcParService {
     justify-content: space-between;
 }
 
-.boxCounter {
-    padding: 5px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-    align-items: center;
-    min-height: 84px;
-    width: 95%;
-    max-width: 300px;
-    background-color: #fafafa;
-    border-radius: 4px;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-}
 
-.boxCounter p h3 {
-    margin: 0;
-    padding: 0;
-}
-
-.boxCounter p {
-    background-color: white;
-    padding: 5px 10px;
-    box-sizing: border-box;
-    border: 1px solid #E0E0E0;
-    text-align: center;
-    font-size: 1.5em;
-    width: 35%;
-    margin: 0 auto;
-    font-weight: bold;
-}
-
-.boxCounter h3 {
-    border-bottom: 1px solid #E0E0E0;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 1em;
-}
-
-.thumbnailCounter {
-    width: 30%;
-}
-
-.counterContent {
-    padding-left: 5px; /* pour éviter que le texte soit collé à l'image  */
-    width: 70%;
-}
-
-
-.counterContent p {
-    margin-top: 5px;
-}
-
-    .imgIndicateur { /* => images responsive */
-        max-width: 100%;
-        height: auto;
-    }
-
-.imgIndicateur {
-    width: 50px; /* taille des images sur PC */
-    border-radius: 100%;
-    border: 1px solid #E0E0E0;
-}
 
 /* ------------------------------------ fin compteurs ------------------------*/
 
@@ -879,7 +813,7 @@ chartNbFrcParService {
     display: block;
     background: transparent;
     margin-right: 16px;
-} 
+}
 
 /* -------------------------- debut top infos -------------------*/
 
@@ -888,7 +822,6 @@ chartNbFrcParService {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 5px;
- 
 }
 
 @media all and (max-width: 1080px) {
@@ -903,8 +836,7 @@ chartNbFrcParService {
 
 /* -------------------------- fin top infos -------------------*/
 
-#SereniteStat
-{
+#SereniteStat {
     margin-top: 16px;
 }
 
@@ -941,6 +873,7 @@ chartNbFrcParService {
 #serenite-pic {
     margin: 0 auto;
 }
+
 #contenuPage {
     margin-top: 60px;
 }

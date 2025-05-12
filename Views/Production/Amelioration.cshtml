@@ -3,6 +3,7 @@
     ViewBag.Title = "Amelioration";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Content/Amelioration.css" rel="stylesheet" />
+    <meta charset="UTF-8">
     string Date = DateTime.Now.ToString("dd-MM-yyyy");
     string DateAnglaise = Date.Substring(6, 4) + Date.Substring(2, 3) + "-" + Date.Substring(0, 2);
     string NbAmeliorationParSecteur = "";
@@ -11,6 +12,23 @@
     string TitreAmeliorationParSecteur = "";
     string TitreAmeliorationParService = "";
     string TitreAmeliorationParStatus = "";
+
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
 }
 
 <div id="fondTransparent"></div>
@@ -30,97 +48,97 @@
             Nouvelle Proposition
         </button>
     </div>
-    </div>
+</div>
 
-    <div id="Middle">
-        <div id="DivCases">
+<div id="Middle">
+    <div id="DivCases">
 
 
-            <div class="boxCounter">
-                <div class="thumbnailCounter">
-                    <img src="../image/sablier.png" alt="" class="imgIndicateur">
-                </div>
-                <div class="counterContent">
-                    <h3>Nb amélioration derniers mois</h3>
-                    <p id="AMcpt1" initvalue="@Model.NbAmeliorationDernierMois" class="ValueCase"><span>0</span></p>
-                </div>
+        <div class="boxCounter">
+            <div class="thumbnailCounter">
+                <img src="../image/sablier.png" alt="" class="imgIndicateur">
             </div>
-
-            <div class="boxCounter">
-                <div class="thumbnailCounter">
-                    <img src="../image/coupe.png" alt="" class="imgIndicateur">
-                </div>
-                <div class="counterContent">
-                    <h3>Nb d'améliorations production sur l'année</h3>
-                    <p id="AMcpt2" initvalue="@Model.NbAmeliorationProduction" class="ValueCase"><span>0</span></p>
-                </div>
-            </div>
-
-            <div class="boxCounter" id="SereniteStat">
-                <div class="thumbnailCounter">
-                    <img src="../image/pouce_en_haut.png" alt="" class="imgIndicateur">
-                </div>
-                <div class="counterContent">
-                    <h3>Nb d'améliorations se sécurité</h3>
-                    <p id="AMcpt3" initvalue="@Model.NbAmeliorationProductionsecurite" class="ValueCase"><span>0</span></p>
-                </div>
+            <div class="counterContent">
+                <h3>Nb amélioration derniers mois</h3>
+                <p id="AMcpt1" initvalue="@Model.NbAmeliorationDernierMois" class="ValueCase"><span>0</span></p>
             </div>
         </div>
-        <div id="Graph">
-            <div id="Graph1">
-                <div class="DivCanvas" id="canvas1">
-                    <canvas id="Graphique"></canvas>
-                </div>
-                <div class="TypeGraph" id="TypeGraph">
-                    <input class="checkbox-tools" type="radio" name="tools" id="tool-1">
-                    @foreach (var item in Model.AmeliorationParSujet)
-                    {
-                        NbAmeliorationParService += (item.Value.Count) + ":";
-                        TitreAmeliorationParService += item.Key + ":";
-                    }
 
-                    <label id="click" class="btn btn-orange for-checkbox-tools" for="tool-1" onclick="GraphService(@("'"+NbAmeliorationParService+";"+TitreAmeliorationParService+"'"))">
-                        Par Services
-                    </label>
-                    <br />
-                    <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
-                    @foreach (var item in Model.AmeliorationParSecteur)
-                    {
-                        NbAmeliorationParSecteur += (item.Value.Count) + ":";
-                        TitreAmeliorationParSecteur += item.Key + ":";
-                    }
+        <div class="boxCounter">
+            <div class="thumbnailCounter">
+                <img src="../image/coupe.png" alt="" class="imgIndicateur">
+            </div>
+            <div class="counterContent">
+                <h3>Nb d'améliorations production sur l'année</h3>
+                <p id="AMcpt2" initvalue="@Model.NbAmeliorationProduction" class="ValueCase"><span>0</span></p>
+            </div>
+        </div>
+
+        <div class="boxCounter" id="SereniteStat">
+            <div class="thumbnailCounter">
+                <img src="../image/pouce_en_haut.png" alt="" class="imgIndicateur">
+            </div>
+            <div class="counterContent">
+                <h3>Nb d'améliorations se sécurité</h3>
+                <p id="AMcpt3" initvalue="@Model.NbAmeliorationProductionsecurite" class="ValueCase"><span>0</span></p>
+            </div>
+        </div>
+    </div>
+    <div id="Graph">
+        <div id="Graph1">
+            <div class="DivCanvas" id="canvas1">
+                <canvas id="Graphique"></canvas>
+            </div>
+            <div class="TypeGraph" id="TypeGraph">
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-1">
+                @foreach (var item in Model.AmeliorationParSujet)
+                {
+                    NbAmeliorationParService += (item.Value.Count) + ":";
+                    TitreAmeliorationParService += item.Key + ":";
+                }
+
+                <label id="click" class="btn btn-orange for-checkbox-tools" for="tool-1" onclick="GraphService(@("'"+NbAmeliorationParService+";"+TitreAmeliorationParService+"'"))">
+                    Par Services
+                </label>
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-2">
+                @foreach (var item in Model.AmeliorationParSecteur)
+                {
+                    NbAmeliorationParSecteur += (item.Value.Count) + ":";
+                    TitreAmeliorationParSecteur += item.Key + ":";
+                }
 
                 <label class="btn btn-orange for-checkbox-tools" for="tool-2" onclick="GraphSecteur(@("'"+NbAmeliorationParSecteur+";"+TitreAmeliorationParSecteur+"'"))">
                     Par Secteur
                 </label>
-                    <br />
-                    <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
-                    @foreach (var item in Model.AmeliorationParStatus)
-                    {
-                        NbAmeliorationParStatus += (item.Value.Count) + ":";
-                        TitreAmeliorationParStatus += item.Key + ":";
-                    }
+                <br />
+                <input class="checkbox-tools" type="radio" name="tools" id="tool-3">
+                @foreach (var item in Model.AmeliorationParStatus)
+                {
+                    NbAmeliorationParStatus += (item.Value.Count) + ":";
+                    TitreAmeliorationParStatus += item.Key + ":";
+                }
                 <label class="btn btn-orange for-checkbox-tools" for="tool-3" onclick="GraphStatus(@("'"+NbAmeliorationParStatus+";"+TitreAmeliorationParStatus+"'"))">
                     Par Status
                 </label>
-                </div>
-
             </div>
-            <div id="Graph2">
-                <div class="DivCanvas" id="canvas2">
-                    <canvas id="Graphique2"></canvas>
-                </div>
+
+        </div>
+        <div id="Graph2">
+            <div class="DivCanvas" id="canvas2">
+                <canvas id="Graphique2"></canvas>
             </div>
         </div>
-        <div id="DetailAmelioration"></div>
     </div>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/clock.js" charset="utf-8"></script>
-    <script type="text/javascript" src="~/Scripts/chart.js"></script>
-    <script type="text/javascript" src="~/Scripts/CountDown.js"></script>
-    <script type="text/javascript" src="~/Scripts/chartNbAmelioration.js"></script>
-    <script type="text/javascript" src="~/Scripts/Proposition.js"></script>
-    <script type="text/javascript">
+    <div id="DetailAmelioration"></div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/clock.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/Scripts/chart.js"></script>
+<script type="text/javascript" src="~/Scripts/CountDown.js"></script>
+<script type="text/javascript" src="~/Scripts/chartNbAmelioration.js"></script>
+<script type="text/javascript" src="~/Scripts/Proposition.js"></script>
+<script type="text/javascript">
             var chartObj1;
 
 	var listeAmeliorationParStatusStrJson = '<p>@Model.ChaineAmeliorationParStatus</p>';
@@ -510,7 +528,8 @@
                     document.getElementById('DetailAmelioration').appendChild(newDiv);
                 }
             }
-    </script>
-    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
-    <script type="text/javascript" src="~/Scripts/form.js"></script>
+</script>
+<script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+<script type="text/javascript" src="~/Scripts/form.js"></script>
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>
 

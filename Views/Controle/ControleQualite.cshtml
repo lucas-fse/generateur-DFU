@@ -4,6 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/Content/DeclAccident.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/form.css" />
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+    window.onload = function () {
+        showCustomAlert('@type', '@message');
+    };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
+
 }
 
 <style>
@@ -16,7 +32,7 @@
 @using (Html.BeginForm("ControleQualite", "Controle", FormMethod.Post, new { id = "Form", onsubmit = "ValiderPopUp()", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" name="refIDBDD"  id="refIDBDD" value="@Model.IDCQ" />
+    <input type="hidden" name="refIDBDD" id="refIDBDD" value="@Model.IDCQ" />
     <div class="frm-box">
         <div class="frm-title">
             <h2 class="frm-title">Effectuer un Contrôle Qualité</h2>
@@ -178,8 +194,8 @@
         <div style="display: flex; justify-content: space-between">
             <div class="frm-action" onclick="window.location.href = '@Url.Action("AfficheControles", "Controle", new {ID = Model.ID})'"><i class="fa-solid fa-eye"></i> CONSULTER LES CONTRÔLES</div>
             <div class="frm-button-box">
-                <button type="button" onclick="" id="frm-back" class="frm-button">ANNULER</button>
-                <button type="submit" value="Niveau" id="frm-submit" name="submitButton" class="frm-button action-button" disabled> VALIDER </button>
+                <button type="button" onclick="" id="frm-back" class="btn btn-orange">Annuler</button>
+                <button type="submit" value="Niveau" id="frm-submit" name="submitButton" class="btn btn-orange" disabled>Valider</button>
             </div>
         </div>
 
@@ -211,9 +227,10 @@
 <script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
 <script type="text/javascript" src="~/Scripts/ViewWebcam.js"></script>
 <script type="text/javascript" src="~/Scripts/form.js"></script>
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>
 
 <script>
-    
+
     // Fonction pour récupérer les informations de l'OF en fonction du numéro saisi
     function getOFInfo() {
         var numOF = document.getElementById('refPiece').value;
@@ -228,9 +245,9 @@
                 .then(data => {
 
                     list.innerHTML = "";
-                    
+
                     if (data.filter(i => i.NumOf.length === 8).length === 1) {
-                        
+
                         const nom = document.querySelector("#nomArticle");
                         const nomD = document.querySelector("#nomArticle-d");
                         const desc = document.querySelector("#nomDescription");
@@ -342,3 +359,5 @@
 
 </script>
 -->
+
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>

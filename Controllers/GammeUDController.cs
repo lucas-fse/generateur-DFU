@@ -107,7 +107,8 @@ namespace GenerateurDFUSafir.Controllers
             else
             {
                 ViewBag.resultView = false;
-                ViewBag.erreurs = "Numéro d'OF inconnu ou qui ne fait pas parti de la gamme UD.";
+                ViewBag.Message = "Numéro d'OF inconnu ou qui ne fait pas parti de la gamme UD.";
+                ViewBag.MessageType = "error";
             }        
 
 

@@ -5,7 +5,24 @@
 
     <link href="~/Content/form.css" rel="stylesheet" />
     <link href="~/Content/gammeUD.css" rel="stylesheet" />
+
+    var message = TempData["Message"] as string;
+    var type = TempData["MessageType"] as string;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+        </script>
+        TempData.Remove("Message");
+        TempData.Remove("MessageType");
+    }
 }
+
+
 
 <style>
     .infos {
@@ -47,8 +64,8 @@
             </div>
 
             <div class="frm-button-box">
-                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
-                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" disabled>VALIDER</button>
+                <input type="button" id="frm-back" value="Annuler" class="btn btn-outline-orange" />
+                <button type="submit" name="default" id="frm-submit" class="btn btn-orange" disabled>Valider</button>
             </div>
         </div>
 
@@ -65,5 +82,4 @@
 }
 
 <script src="~/Scripts/form.js"></script>
-
-
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>

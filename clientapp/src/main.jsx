@@ -1,9 +1,13 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client'; // attention à bien utiliser 'react-dom/client'
-import Button from './component/Button.jsx'; // ou ton composant principal
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'; // Import du BrowserRouter
+import App from './App'; // Ton composant principal
 
-
-const rootElement = document.getElementById('root'); // ou "contenuPage" si tu montes dans <main id="contenuPage">
+const rootElement = document.getElementById('root');
 if (rootElement) {
-    createRoot(rootElement).render(<Button label="Accéder" />);
+    ReactDOM.createRoot(rootElement).render(
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    );
 }

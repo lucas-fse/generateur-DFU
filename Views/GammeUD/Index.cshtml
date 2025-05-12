@@ -5,6 +5,19 @@
     <link href="~/Content/form.css" rel="stylesheet" />
     <link href="~/Content/gammeUD.css" rel="stylesheet" />
 
+    var message = ViewBag.Message;
+    var type = ViewBag.MessageType;
+
+
+    if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+    window.onload = function () {
+        showCustomAlert('@type', '@message');
+    };
+        </script>
+    }
+
 }
 
 
@@ -22,26 +35,20 @@
                 <input type="text" name="TryToOFUD" class="frm-input" value="@ViewBag.input" />
             </div>
             <div class="frm-button-box">
-                <input type="button" id="frm-back" value="ANNULER" class="frm-button" />
-                <button type="submit" name="default" id="frm-submit" class="frm-button action-button" >VALIDER</button>
+                <input type="button" id="frm-back" value="Annuler" class="btn btn-outline-orange" />
+                <button type="submit" name="default" id="frm-submit" class="btn btn-orange">Valider</button>
             </div>
         </div>
 
-        @if(!string.IsNullOrWhiteSpace(ViewBag.erreurs)){
-            <div class="frm-error-message">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                @ViewBag.erreurs
-            </div>         
-        }
-
-        @if (ViewBag.resultView) {
+        @if (ViewBag.resultView)
+        {
             <div class="result">
                 <div class="box-conductix infos">
                     <h2>Informations</h2>
                     <div class="infos-box">Référence <span class="value">@Model.Item</span></div>
                     <div class="infos-box">Quantité <input type="number" class="value" value="@Model.Qtr" id="quantite" name="quantite"></div>
                     <label for="printbutton" id="print" class="neutral-button">
-                        <i class="fa-solid fa-print" ></i> IMPRIMER ÉTIQUETTES
+                        <i class="fa-solid fa-print"></i> IMPRIMER ÉTIQUETTES
                         <input style="display: none" type="submit" id="printbutton" name="print">
                     </label>
                 </div>
@@ -65,3 +72,4 @@
 </script>
 
 <script src="~/Scripts/form.js"></script>
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>
