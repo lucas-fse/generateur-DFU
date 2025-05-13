@@ -100,7 +100,11 @@ html, body {
     text-align: center;
 }
 
-
+#encouragement {
+    color: orangered;
+    font-size: 20px ;
+    padding: 20px;
+}
 
 #top {
     width: 100%;
