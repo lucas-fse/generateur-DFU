@@ -24,7 +24,8 @@
         TempData.Remove("Message");
         TempData.Remove("MessageType");
     }
-
+    string Date = DateTime.Now.ToString("dd-MM-yyyy");
+    string DateAnglaise = Date.Substring(6, 4) + Date.Substring(2, 3) + "-" + Date.Substring(0, 2);
 }
 <body>
     <p id="ouverturepopup" initvalue="@Model.Popup.ToString()" hidden></p>
@@ -55,18 +56,20 @@
                     <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
                     <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
 
-                    <button type="submit" class="btn btn-outline-orange" value="1" name="cat">OfZEN</button>
+                    <button type="submit" class="btn btn-outline-orange-2" value="1" name="cat">OfZEN</button>
                     <br />
-                    <button type="submit" class="btn btn-outline-orange" value="5" name="cat">PrintZEN</button>
+                    <button type="submit" class="btn btn-outline-orange-2" value="5" name="cat">PrintZEN</button>
                     if (Model.Animateur)
                     {
-                        <button type="submit" class="btn btn-outline-orange" value="7" name="cat">AffectaZEN</button>
+                        <button type="submit" class="btn btn-outline-orange-2" value="7" name="cat">AffectaZEN</button>
 
-                        <button type="submit" class="btn btn-outline-orange" value="6" name="cat">PlaniZEN</button>
+                        <button type="submit" class="btn btn-outline-orange-2" value="6" name="cat">PlaniZEN</button>
                     }
-                    <button type="submit" class="btn btn-outline-orange" value="8" name="cat">ToolsZEN</button>
+
+                    <button type="submit" class="btn btn-outline-orange-2" value="8" name="cat">ToolsZEN</button>
 
                 }
+                <button class="btn btn-outline-orange-2" name="cat" onclick="ouvrirPopUpSignalement()">SignalZEN</button>
             </div>
         </div> <!-- fin barre latérale gauche -->
         <div id="OF-en-cours">
@@ -461,6 +464,168 @@
             </div>
         }
     </div>
+
+    <div id="popupSignalement">
+        <div class="popup-content">
+            @using (Html.BeginForm("AjoutSignalement", "Production", FormMethod.Post, new { id = "FormSignalement", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="frm-box">
+                    <div class="frm-title">
+                        <h1 class="main-title">SignalZEN</h1>
+                        <span class="close-btn" onclick="fermerPopUpSignalement()">&times;</span>
+                    </div>
+
+                    <!-- Champs communs : Nom et Date en haut -->
+                    <div class="frm-row">
+                        <div class="frm-group">
+                            <label>Nom</label>
+                            <input type="text" class="frm-input frm-required" id="SaisieNom" name="SaisieNom" />
+                        </div>
+                        <div class="frm-group">
+                            <label>Date</label>
+                            <input type="date" class="frm-input" id="SaisieDate" value="@ViewData["DateAnglaise"]" max="@ViewData["DateAnglaise"]" name="SaisieDate" />
+                        </div>
+                    </div>
+
+                    <!-- Type de signalement -->
+                    <div class="frm-group">
+                        <label>Type de signalement</label>
+                        <select class="frm-select" id="TypeSignalement" name="TypeSignalement" onchange="toggleFieldsAndEnableButtons()">
+                            <option value="">-- Sélectionner --</option>
+                            <option value="Proposition">Proposition d'amélioration</option>
+                            <option value="Accident">Déclaration d'accident</option>
+                        </select>
+                    </div>
+
+                    <!-- Champs spécifiques à Proposition -->
+                    <div id="PropositionFields" style="display: none;">
+                        <div class="frm-row">
+                            <div class="frm-group">
+                                <label>Services</label>
+                                <select class="frm-select" name="SaisieService" id="SaisieService" form="FormSignalement">
+                                    @foreach (var item in ViewData["Sujet"] as List<string>)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="frm-group">
+                                <label>Secteurs</label>
+                                <select class="frm-select" name="SaisieSecteur" id="SaisieSecteur" form="FormSignalement">
+                                    @foreach (var item in ViewData["Secteur"] as List<string>)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Champs spécifiques à Accident -->
+                    <div id="AccidentFields" style="display: none;">
+                        <div class="frm-row">
+                            <div class="frm-group">
+                                <label>Type d'accident</label>
+                                <select class="frm-select" id="TypeAccident" name="TypeAccident">
+                                    <option value="6">Accident Grave</option>
+                                    <option value="5">Accident Déclaré</option>
+                                    <option value="4">Soins Benins</option>
+                                    <option value="3">Presque Accident</option>
+                                    <option value="2">Situations Dangereuses</option>
+                                    <option value="1">Actes Dangereux</option>
+                                </select>
+                            </div>
+                            <div class="frm-group">
+                                <label>Gravité Potentielle</label>
+                                <select class="frm-select" id="Gravite" name="Gravite">
+                                    <option value="">-- Sélectionner --</option>
+                                    <option value="soin">Soin / Accident Bénin</option>
+                                    <option value="handicap">Handicap</option>
+                                    <option value="accident">Accident de travail</option>
+                                    <option value="deces">Décès</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Champs communs : Description -->
+                    <div class="frm-group" id="DescriptionGroup1" style="display: none;">
+                        <label id="LabelDescription">Entrez votre proposition</label>
+                        <textarea class="frm-input frm-required" id="SaisieDescription" name="SaisieDescription" form="FormSignalement"></textarea>
+                    </div>
+                    <div class="frm-group" id="DescriptionGroup2" style="display: none;">
+                        <label id="LabelDescription2">Entrez votre solution</label>
+                        <textarea class="frm-input" id="SaisieDescription2" name="SaisieDescription2" form="FormSignalement"></textarea>
+                    </div>
+
+                    <!-- Prise de photo via webcam -->
+                    <div class="frm-group photo-pc" id="FormContenantWebcam" style="display: none;">
+                        <div id="FormContenantPhotoProfil" class="frm-group">
+                            <div id="ChangeppMenu">
+                                <button id="ChangeppCamera" class="btn btn-orange" type="button" onclick="Changepp()">
+                                    <i class="fa-solid fa-camera" style="color: #f26222;"></i>
+                                    PRENDRE UNE PHOTO
+                                </button>
+                            </div>
+                        </div>
+                        <div id="WebcamOn">
+                            <div id="Contenant-video" style="position: relative; margin-right: 10px;">
+                                <div style="z-index: 1; text-align: initial;">
+                                    <video id="video" autoplay muted playsinline></video>
+                                </div>
+                            </div>
+                            <canvas id="canvas" hidden></canvas>
+                            <img src="" id="photo" alt="photo" style="display: none; position: relative; margin-right: 10px;">
+                            <input value="" name="srcImg" id="srcImg" type="hidden">
+                            <div id="WebcamMenu">
+                                <label>Video source: </label>
+                                <div class="select">
+                                    <label for="videoSource"></label><select id="videoSource"></select>
+                                </div>
+                                <button id="PrendreButtonPhoto" type="button" class="btn btn-orange" value="" onclick="previewPhoto()">
+                                    <i class='fa-solid fa-camera' style='color: #f26222;'></i>
+                                    Prendre photo
+                                </button>
+                                <button id="EmptyButtonPhoto" class="btn btn-orange" type="button" style="display:none">---</button>
+                                <button id="ReprendreButtonPhoto" type="button" class="btn btn-orange" value="" onclick="ReprendrePhoto()">
+                                    <i class="fa-solid fa-rotate-left" style="color: #f26222;"></i>
+                                    Reprendre photo
+                                </button>
+                                <button id="AnnulerButtonPhoto" class="btn btn-orange" type="button" onclick="AnnulerChangepp()">
+                                    <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                                    Annuler
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Import d'image -->
+                    <div class="frm-group" id="SignalementPicture" style="display: none;">
+                        <img id="blah" src="#preview" alt="" />
+                        <div class="alignement-fonctions">
+                            <label for="preview" class="btn btn-orange" id="button-image" onclick="importImage()">
+                                <i class="fa-solid fa-plus" style="color: #f26222;"></i>
+                                AJOUTER UNE IMAGE
+                            </label>
+                            <label for="" class="btn btn-orange" id="annulation-image" onclick="cancelImage()" style="display: none;">
+                                <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                                ANNULER L'IMAGE
+                            </label>
+                            <input class="frm-action" value="" type="file" name="ImageSignalement" id="preview" accept="image/jpeg, image/jpg" style="display: none;" />
+                        </div>
+                    </div>
+
+                    <!-- Boutons -->
+                    <div class="frm-button-box">
+                        <button type="button" id="fermerPopUp" onclick="fermerPopUpSignalement()" class="btn btn-outline-orange">ANNULER</button>
+                        <button type="submit" id="frm-submit" name="submitButton" class="btn btn-orange" disabled>VALIDER</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
 
 
     <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
@@ -974,7 +1139,89 @@
                 quantiteRelle.value = max;
             }
         }
+
+        function toggleFieldsAndEnableButtons() {
+            const typeSignalement = document.getElementById('TypeSignalement').value;
+            const propositionFields = document.getElementById('PropositionFields');
+            const accidentFields = document.getElementById('AccidentFields');
+            const descriptionGroup1 = document.getElementById('DescriptionGroup1');
+            const descriptionGroup2 = document.getElementById('DescriptionGroup2');
+            const description = document.getElementById('SaisieDescription');
+            const description2 = document.getElementById('SaisieDescription2');
+            const labelDescription = document.getElementById('LabelDescription');
+            const labelDescription2 = document.getElementById('LabelDescription2');
+            const webcam = document.getElementById('FormContenantWebcam');
+            const picture = document.getElementById('SignalementPicture');
+            const submitButton = document.getElementById('frm-submit');
+            const cancelButton = document.getElementById('fermerPopUp');
+
+            // Masquer tous les champs sauf Nom, Date et Type de signalement
+            propositionFields.style.display = 'none';
+            accidentFields.style.display = 'none';
+            descriptionGroup1.style.display = 'none';
+            descriptionGroup2.style.display = 'none';
+            description.style.display = 'none';
+            description2.style.display = 'none';
+            labelDescription.style.display = 'none';
+            labelDescription2.style.display = 'none';
+            webcam.style.display = 'none';
+            picture.style.display = 'none';
+
+            // Activer les boutons et afficher les champs uniquement si un type est sélectionné
+            if (typeSignalement === '') {
+
+            } else {
+                submitButton.disabled = false;
+
+                if (typeSignalement === 'Proposition') {
+                    propositionFields.style.display = 'block';
+                    descriptionGroup1.style.display = 'block';
+                    descriptionGroup2.style.display = 'block';
+                    description.style.display = 'block';
+                    description2.style.display = 'block';
+                    labelDescription.style.display = 'block';
+                    labelDescription2.style.display = 'block';
+                    webcam.style.display = 'block';
+                    picture.style.display = 'block';
+                    labelDescription.textContent = 'Entrez votre proposition';
+                    labelDescription2.textContent = 'Entrez votre solution';
+                } else if (typeSignalement === 'Accident') {
+                    accidentFields.style.display = 'block';
+                    descriptionGroup1.style.display = 'block';
+                    descriptionGroup2.style.display = 'block';
+                    description.style.display = 'block';
+                    description2.style.display = 'block';
+                    labelDescription.style.display = 'block';
+                    labelDescription2.style.display = 'block';
+                    webcam.style.display = 'block';
+                    picture.style.display = 'block';
+                    labelDescription.textContent = 'Entrez ce que vous avez observé';
+                    labelDescription2.textContent = 'Entrez ce que vous avez fait';
+                }
+            }
+        }
+
+        // Fonctions existantes pour ouvrir/fermer le pop-up
+        function ouvrirPopUpSignalement() {
+            const popup = document.getElementById("popupSignalement");
+            popup.classList.add("show");
+            popup.style.display = "flex";
+            // Initialiser avec les boutons désactivés
+            toggleFieldsAndEnableButtons();
+        }
+
+        function fermerPopUpSignalement() {
+            const popup = document.getElementById("popupSignalement");
+            popup.classList.remove("show");
+            setTimeout(() => popup.style.display = "none", 300);
+        }
+
     </script>
     <script type="text/javascript" src="~/Scripts/reloadOF.js"></script>
     <script type="text/javascript" src="~/Scripts/alertes.js"></script>
+    <script type="text/javascript" src="~/Scripts/ViewImage.js"></script>
+    <script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+    <script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/ViewWebcam.js"></script>
+
 </body>

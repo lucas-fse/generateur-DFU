@@ -41,6 +41,11 @@
 #buttons-container{
     display:flex;
     justify-content: center;
+    flex-direction:column;
+}
+
+form {
+    margin-bottom : 0px;
 }
 
 #topInfos {
@@ -413,8 +418,7 @@ input[type="search"]:focus + #submitButton{
 
 /* ------------ fin liste OF en cours ------------*/
 
-
-.btn-outline-orange {
+.btn-outline-orange-2 {
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -423,7 +427,18 @@ input[type="search"]:focus + #submitButton{
     position: relative;
     justify-content: center;
     box-sizing: border-box;
+    background-color: transparent;
+    border: 2px solid var(--orange-main);
+    color: var(--orange-main);
+    font-weight: bold;
+    transition: 0.3s;
 }
+
+.btn-outline-orange-2:hover {
+    background-color: var(--orange-light);
+    color: white;
+}
+
 
 @media all and (min-width: 1081px) and (max-width: 1200px) {
     .btn-outline-orange {
@@ -1676,9 +1691,10 @@ input[name="newOf"] {
         background: white;
         padding: 20px;
         border-radius: 8px;
-        width: 450px;
-        max-height: 85vh;
-        overflow-y: auto;
+        width: 90%; /* Ajustement pour éviter le débordement */
+        max-width: 500px; /* Largeur maximale */
+        max-height: 80vh; /* Hauteur maximale */
+        overflow-y: auto; /* Scroll vertical si contenu dépasse */
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
@@ -1688,23 +1704,39 @@ input[name="newOf"] {
     }
 
     #popupSignalement .frm-title {
-        background: #333; /* Fond gris foncé pour lisibilité */
-        color: white;
+        color: #F26222;
         padding: 10px;
         border-radius: 8px 8px 0 0;
         margin: -20px -20px 20px -20px;
+        position : relative;
     }
 
+    #popupSignalement .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--orange-main);
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+        #popupSignalement .close-btn:hover {
+            color: var(--orange-light); /* Couleur orange au survol, pour rester cohérent avec ton thème */
+        }
     #popupSignalement .frm-row {
         display: flex;
         justify-content: space-between;
         margin-bottom: 15px;
+        flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si trop large */
     }
 
     #popupSignalement .frm-group {
         flex: 1;
         margin: 0 10px;
         text-align: left;
+        min-width: 200px; /* Assure une largeur minimale pour éviter le débordement */
     }
 
     #popupSignalement .frm-input,
@@ -1721,10 +1753,12 @@ input[name="newOf"] {
         outline: none;
         background-color: #00000011;
         border-radius: 3px;
+        box-sizing: border-box; /* Inclut padding et bordure dans la taille */
     }
 
+
     #popupSignalement textarea {
-        height: 120px;
+        height: 120px !important;
         padding-top: 5px;
     }
 
@@ -1798,22 +1832,11 @@ input[name="newOf"] {
             text-align: center;
         }
 
-/* Masquer les champs initiaux et activer les boutons au besoin */
-#PropositionFields, #AccidentFields, #FormContenantWebcam, #SignalementPicture {
+/* Masquer tous les champs sauf Nom, Date, et Type de signalement au départ */
+#PropositionFields, #AccidentFields, #DescriptionGroup1, #DescriptionGroup2, #FormContenantWebcam, #SignalementPicture {
     display: none;
 }
 
-#frm-submit[disabled], #frm-submit[disabled]:hover {
-    background: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-#fermerPopUp[disabled], #fermerPopUp[disabled]:hover {
-    border-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
 
 #FormContenantPhotoProfil {
     position: static;
@@ -1831,7 +1854,7 @@ input[name="newOf"] {
     margin-bottom: 20px;
     position: absolute;
     display: none;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     margin-left: 10%;
 }
@@ -1870,5 +1893,10 @@ input[name="newOf"] {
         margin-bottom: 0px;
         margin-right: 5px;
         margin-left: 5px;
+    }
+
+    #popupSignalement .popup-content {
+        width: 95%; /* Ajustement pour les petits écrans */
+        max-width: 400px;
     }
 }
