@@ -22,11 +22,10 @@ using System.Web.Security;
 
 namespace GenerateurDFUSafir.Controllers
 {
-    public class ProductionController : ConnexController
+    public class ProductionController : Controller
     {
         public ActionResult GestionOutilAdmin(long? ID)
         {
-            // Un commentaire
             if (ID == null)
             {
                 return RedirectToAction("Production", "Production");

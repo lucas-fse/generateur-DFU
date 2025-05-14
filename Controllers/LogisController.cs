@@ -19,15 +19,16 @@ using System.Web.Script.Serialization;
 using System.Data;
 using System.Web.WebPages;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace GenerateurDFUSafir.Controllers
 {
-    public class LogisController : ConnexController
+    public class LogisController : Controller
     {
-        public static bool Index()
+        public static bool CaptureOCR()
         {
-            LogisController Logis = new LogisController();
-            return true; //View(Logis);
+            InfoAmelioration vue = new InfoAmelioration();
+            return View(vue);
         }
     }
 }
