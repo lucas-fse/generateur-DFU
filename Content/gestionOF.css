@@ -1653,3 +1653,222 @@ input[name="newOf"] {
         --rotate: 360deg;
     }
 }
+/* CSS personnalisé pour le pop-up, uniformisé avec Amelioration.cshtml */
+#popupSignalement {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.3s ease;
+}
+
+    #popupSignalement.show {
+        display: flex;
+    }
+
+    #popupSignalement .popup-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 450px;
+        max-height: 85vh;
+        overflow-y: auto;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #popupSignalement .frm-box {
+        padding: 0 30px;
+    }
+
+    #popupSignalement .frm-title {
+        background: #333; /* Fond gris foncé pour lisibilité */
+        color: white;
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+        margin: -20px -20px 20px -20px;
+    }
+
+    #popupSignalement .frm-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    #popupSignalement .frm-group {
+        flex: 1;
+        margin: 0 10px;
+        text-align: left;
+    }
+
+    #popupSignalement .frm-input,
+    #popupSignalement .frm-select,
+    #popupSignalement textarea {
+        flex-grow: 1;
+        min-width: 100%;
+        height: 40px;
+        max-width: 100%;
+        border: none;
+        border-left: 4px solid #F26222;
+        padding-left: 10px;
+        font-size: 14pt;
+        outline: none;
+        background-color: #00000011;
+        border-radius: 3px;
+    }
+
+    #popupSignalement textarea {
+        height: 120px;
+        padding-top: 5px;
+    }
+
+    #popupSignalement .frm-action {
+        min-width: 200px;
+        color: #F26222;
+        font-weight: 800;
+        background-color: white;
+        text-align: center;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+        #popupSignalement .frm-action:hover {
+            background: #d94f1a;
+            color: white;
+        }
+
+    #popupSignalement .frm-button-box {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    #popupSignalement .photo-pc {
+        margin: 15px 0;
+    }
+
+    #popupSignalement #WebcamMenu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    #popupSignalement .alignement-fonctions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    #popupSignalement #messagePopup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        display: none;
+        transition: opacity 0.3s ease;
+    }
+
+        #popupSignalement #messagePopup.show {
+            display: flex;
+        }
+
+        #popupSignalement #messagePopup .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+/* Masquer les champs initiaux et activer les boutons au besoin */
+#PropositionFields, #AccidentFields, #FormContenantWebcam, #SignalementPicture {
+    display: none;
+}
+
+#frm-submit[disabled], #frm-submit[disabled]:hover {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#fermerPopUp[disabled], #fermerPopUp[disabled]:hover {
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#FormContenantPhotoProfil {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#FormContenantWebcam {
+    margin: 0 auto;
+}
+
+#WebcamOn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: absolute;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 10%;
+}
+
+#video {
+    position: initial;
+}
+
+#ChangeppMenu {
+    align-items: center;
+    margin: 0 auto;
+}
+
+#button-image, #ChangeppCamera {
+    align-items: center;
+    margin: 0 auto;
+}
+
+@media all and (max-width: 880px) {
+    .photo-pc {
+        display: none;
+    }
+
+    textarea.frm-input {
+        height: 80px;
+        padding-top: 5px;
+    }
+
+    .main-title {
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    .frm-group {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+}

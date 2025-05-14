@@ -53,7 +53,6 @@ const Production = ({ model }) => {
                 '/Scripts/compteursGreenCross.js',
                 '/Scripts/chartNbFrcParService.js',
                 '/Scripts/jquery-3.4.1.js',
-                '/Scripts/clock.js',
                 '/Scripts/CountDown.js',
                 '/Scripts/CountDown2.js',
                 '/Scripts/ReloadTimer.js',
@@ -91,30 +90,7 @@ const Production = ({ model }) => {
                         <div>
                             <img src={logo} alt="logo" width="350" />
                         </div>
-                        <div id="animation">
-                            <div id="ligne-1-animation">
-                                {ListOperateur.slice(0, Math.ceil(ListOperateur.length / 2)).map((op, i) => (
-                                    <img
-                                        src={op}
-                                        alt="user"
-                                        id={`user${i}`}
-                                        className="prodPic"
-                                        key={i}
-                                    />
-                                ))}
-                            </div>
-                            <div id="ligne-2-animation">
-                                {ListOperateur.slice(Math.ceil(ListOperateur.length / 2)).map((op, i) => (
-                                    <img
-                                        src={op}
-                                        alt="user"
-                                        id={`user${i + Math.ceil(ListOperateur.length / 2)}`}
-                                        className="prodPic"
-                                        key={i}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                                              
                     </div>
                     <div id="topInfos">
                         <h1 id="mainTitle">Accueil ProductZEN</h1>
