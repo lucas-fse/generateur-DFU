@@ -3,10 +3,9 @@ import React from 'react';
 
 
 const OperatorCard = ({ operator }) => {
-    const lien = !operator.isValidPasswd
-        ? `/Production/DefinirMDP/${operator.ID}`
-        : `/Production/ConnexionOp/${operator.ID}`;
+    const lien = `/Production/gestionOf/${operator.ID}`;
 
+    
     return (
         <div className="Operateur" style={{ width: '300px' }}>
             <a href={lien} style={{ textDecoration: 'none', color: 'inherit' }}>

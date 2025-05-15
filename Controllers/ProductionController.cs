@@ -762,7 +762,7 @@ namespace GenerateurDFUSafir.Controllers
                 int result = obj.AddAccident(SaisieNiveau, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", gravitepotentiel, ImageDB, ref pathimage);
                 if (result > 0)
                 {
-                    /*
+                    
                     Mail mail = new Mail();
                     mail.From = "iisProd.Conductix@laposte.net";
                     mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -775,7 +775,7 @@ namespace GenerateurDFUSafir.Controllers
                                    "Description complémentaire :" + SaisieDescription2;
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
-                    */
+                    
 
                     TempData["Message"] = "Accident déclaré avec succès.";
                     TempData["MessageType"] = "success";
@@ -794,6 +794,121 @@ namespace GenerateurDFUSafir.Controllers
 
                 return RedirectToAction("Securite", "Production");
         }
+
+        [HttpPost]
+        public ActionResult SubmitSignalement(HttpPostedFileBase ImageAccident, HttpPostedFileBase ImageProposition, string SignalementType, string SaisieVictime, string SaisieDate, string TypeAccident, string Gravite, string SaisieDescription, string SaisieDescription2, string SaisieEmetteur, string SaisieService, string SaisieSecteur, string srcImg)
+        {
+            if (string.IsNullOrEmpty(SignalementType))
+            {
+                Session["Message"] = "Aucun type de signalement sélectionné.";
+                Session["MessageType"] = "error";
+                return RedirectToAction("GestionOf", "Production");
+            }
+
+            if (SignalementType == "accident")
+            {
+                SECU_PROD obj = new SECU_PROD();
+                int Niveausaisie = Convert.ToInt32(TypeAccident);
+                string PhotoAccident = srcImg;
+                string ImageDB = null;
+
+                if (ImageAccident != null && ImageAccident.ContentType.Contains("image/jpeg"))
+                {
+                    byte[] thePictureAsBytes = new byte[ImageAccident.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(ImageAccident.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(ImageAccident.ContentLength);
+                    }
+                    ImageDB = Convert.ToBase64String(thePictureAsBytes);
+                }
+                else if (!string.IsNullOrWhiteSpace(PhotoAccident))
+                {
+                    PhotoAccident = PhotoAccident.Remove(0, 23);
+                    ImageDB = PhotoAccident;
+                }
+
+                string pathimage = "";
+                int result = obj.AddAccident(TypeAccident, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", Gravite ?? "non renseigné", ImageDB, ref pathimage);
+                if (result > 0)
+                {
+                    Mail mail = new Mail
+                    {
+                        From = "iisProd.Conductix@laposte.net",
+                        To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net",
+                        Subject = "Déclaration Accidents type : " + obj.NiveauAccident(Niveausaisie),
+                        Message = "Niveau d'accident : " + "Niveau " + TypeAccident + " - " + obj.NiveauAccident(Niveausaisie) + "\r\n" +
+                                  "Victime : " + SaisieVictime + "\r\n" +
+                                  "Date : " + SaisieDate + "\r\n" +
+                                  "Description : " + SaisieDescription + "\r\n" +
+                                  "Niveau de risque: " + (Gravite ?? "non renseigné") + "\r\n" +
+                                  "Description complémentaire :" + SaisieDescription2,
+                        AttachementPath = pathimage
+                    };
+                    mail.btnSendMail();
+
+                    Session["Message"] = "Accident déclaré avec succès.";
+                    Session["MessageType"] = "success";
+                }
+                else
+                {
+                    Session["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    Session["MessageType"] = "error";
+                }
+            }
+            else if (SignalementType == "amelioration")
+            {
+                InfoAmelioration obj = new InfoAmelioration();
+                string PhotoProposition = srcImg;
+                string ImageDB = null;
+
+                if (ImageProposition != null && ImageProposition.ContentType.Contains("image/jpeg"))
+                {
+                    byte[] thePictureAsBytes = new byte[ImageProposition.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(ImageProposition.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(ImageProposition.ContentLength);
+                    }
+                    ImageDB = Convert.ToBase64String(thePictureAsBytes);
+                }
+                else if (!string.IsNullOrWhiteSpace(PhotoProposition))
+                {
+                    PhotoProposition = PhotoProposition.Remove(0, 23);
+                    ImageDB = PhotoProposition;
+                }
+
+                string pathimage = "";
+                int result = obj.AddAmelioration(SaisieDescription, SaisieDescription2, SaisieEmetteur, SaisieSecteur, SaisieService, SaisieDate, ImageDB, ref pathimage);
+                if (result > 0)
+                {
+                    Mail mail = new Mail
+                    {
+                        From = "iisProd.Conductix@laposte.net",
+                        To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net",
+                        Subject = "Proposition d'amélioration",
+                        Message = "Service : " + SaisieSecteur + "\r\n" +
+                                  "Type d'amélioration : " + SaisieService + "\r\n" +
+                                  "Emetteur : " + SaisieEmetteur + "\r\n" +
+                                  "Date : " + SaisieDate + "\r\n" +
+                                  "Description : " + SaisieDescription + "\r\n" +
+                                  "Solution : " + SaisieDescription2,
+                        AttachementPath = pathimage
+                    };
+                    mail.btnSendMail();
+
+                    Session["Message"] = "Demande enregistrée avec succès.";
+                    Session["MessageType"] = "success";
+                }
+                else
+                {
+                    Session["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                    Session["MessageType"] = "error";
+                }
+            }
+
+            return RedirectToAction("GestionOf", "Production");
+        }
+
+
         [HttpPost, ActionName("Qualite")]
         public ActionResult traiterFRC()
         {
@@ -918,7 +1033,7 @@ namespace GenerateurDFUSafir.Controllers
 
             if (result > 0)
             {
-                /*
+                
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
                 mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -930,7 +1045,7 @@ namespace GenerateurDFUSafir.Controllers
                                "Description : " + Proposition + "\r\n" +
                                " -" + Solution;
                 mail.AttachementPath = pathimage;
-                mail.btnSendMail();*/
+                mail.btnSendMail();
 
                 TempData["Message"] = "Demande enregistrée avec succès.";
                 TempData["MessageType"] = "success";
@@ -1403,21 +1518,20 @@ namespace GenerateurDFUSafir.Controllers
             return RedirectToAction("GestionOF", new { id = userId });
         }
 
-        
+
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
-            // Pour éviter de pouvoir accéder à l'espace juste en tapant le bon URL
-            // On met en place un id de Session
             var idConnecte = Session["OperateurConnecte"];
-            var estAdmin = Session["EstAdmin"] != null && (bool)Session["EstAdmin"];
+            var estAdmin = Convert.ToBoolean(Session["isAdmin"] ?? false);
 
-            // Donc si il n'est pas connecté il ne peut pas y accéder
-            if (idConnecte == null || (!estAdmin && Convert.ToInt64(idConnecte) != id))
+            // Si non admin et non connecté ou connecté avec un mauvais ID => redirection
+            if (!estAdmin && (idConnecte == null || Convert.ToInt64(idConnecte) != id))
             {
                 return RedirectToAction("ConnexionOp", new { id = id }); // redirige vers la connexion
             }
 
             bool ChargeOfPlanifie = false;
+
             if (id == null)
             {
                 return RedirectToAction("IndexOFOperateur", "Production");
@@ -1447,6 +1561,7 @@ namespace GenerateurDFUSafir.Controllers
                 }
 
                 DataOperateurProd ope = new DataOperateurProd();
+
                 if (viewAction == 3)
                 {
                     ViewData["PopUpOf"] = "true";
@@ -1456,18 +1571,138 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ope = GestionOperateursProd.GestionOFOperateur((long)id, false);
                 }
+
                 PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
 
                 ope.initOfList((int)pole, ofCherche, ChargeOfPlanifie);
 
+                InfoAmelioration info = new InfoAmelioration();
+                ViewData["Sujet"] = info.Sujet;
+                ViewData["Secteur"] = info.Secteur;
+
+                string date = DateTime.Now.ToString("dd-MM-yyyy");
+                string dateAnglaise = date.Substring(6, 4) + date.Substring(2, 3) + "-" + date.Substring(0, 2);
+                ViewData["DateAnglaise"] = dateAnglaise;
+
                 ViewBag.OperateurID = id;
                 ViewBag.EstAdmin = estAdmin;
+
                 return View(ope);
             }
         }
 
-        [HttpPost, ActionName("gestionOf")]
+
+        [HttpPost, ActionName("AjoutSignalement")]
+        public ActionResult AjoutSignalement(HttpPostedFileBase ImageSignalement)
+        {
+            string typeSignalement = Request.Form["TypeSignalement"];
+            string nom = Request.Form["SaisieNom"];
+            string date = Request.Form["SaisieDate"];
+            string description = Request.Form["SaisieDescription"];
+            string description2 = Request.Form["SaisieDescription2"];
+            string photoSignalement = Request.Form["srcImg"];
+            string imageDB = null;
+
+            // Gestion de l'image (commune aux deux types)
+            if (ImageSignalement != null && ImageSignalement.ContentType.Contains("image/jpeg"))
+            {
+                byte[] thePictureAsBytes = new byte[ImageSignalement.ContentLength];
+                using (BinaryReader theReader = new BinaryReader(ImageSignalement.InputStream))
+                {
+                    thePictureAsBytes = theReader.ReadBytes(ImageSignalement.ContentLength);
+                }
+                imageDB = Convert.ToBase64String(thePictureAsBytes);
+            }
+            else if (!string.IsNullOrWhiteSpace(photoSignalement))
+            {
+                photoSignalement = photoSignalement.Remove(0, 23);
+                imageDB = photoSignalement;
+            }
+
+            string pathimage = "";
+            int result = 0;
+
+            if (typeSignalement == "Proposition")
+            {
+                string service = Request.Form["SaisieService"];
+                string secteur = Request.Form["SaisieSecteur"];
+                InfoAmelioration obj = new InfoAmelioration();
+
+                result = obj.AddAmelioration(description, description2, nom, secteur, service, date, imageDB, ref pathimage);
+
+                if (result > 0)
+                {
+                    /*
+                    Mail mail = new Mail();
+                    mail.From = "iisProd.Conductix@laposte.net";
+                    mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
+                    mail.Subject = "Proposition d'amélioration";
+                    mail.Message = "Service : " + secteur + "\r\n" +
+                                   "Type d'amélioration : " + service + "\r\n" +
+                                   "Emetteur : " + nom + "\r\n" +
+                                   "Date : " + date + "\r\n" +
+                                   "Description : " + description + "\r\n" +
+                                   " -" + description2;
+                    mail.AttachementPath = pathimage;
+                    mail.btnSendMail();
+                    */
+                    TempData["Message"] = "Demande enregistrée avec succès.";
+                    TempData["MessageType"] = "success";
+                }
+                else
+                {
+                    TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                    TempData["MessageType"] = "error";
+                }
+            }
+            else if (typeSignalement == "Accident")
+            {
+                string typeAccident = Request.Form["TypeAccident"];
+                int niveauSaisie = Convert.ToInt32(typeAccident);
+                string gravite = Request.Form["Gravite"];
+                if (string.IsNullOrWhiteSpace(gravite)) { gravite = "non renseigné"; }
+                SECU_PROD obj = new SECU_PROD();
+
+                result = obj.AddAccident(typeAccident, date, description, description2, nom, "PRODUCTION", gravite, imageDB, ref pathimage);
+
+                if (result > 0)
+                {
+                    /*
+                    Mail mail = new Mail();
+                    mail.From = "iisProd.Conductix@laposte.net";
+                    mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
+                    mail.Subject = "Déclaration Accidents type : " + obj.NiveauAccident(niveauSaisie);
+                    mail.Message = "Niveau d'accident : " + "Niveau " + typeAccident + " - " + obj.NiveauAccident(niveauSaisie) + "\r\n" +
+                                   "Victime : " + nom + "\r\n" +
+                                   "Date : " + date + "\r\n" +
+                                   "Description : " + description + "\r\n" +
+                                   "Niveau de risque: " + gravite + "\r\n" +
+                                   "Description complémentaire :" + description2;
+                    mail.AttachementPath = pathimage;
+                    mail.btnSendMail();
+                    */
+                    TempData["Message"] = "Accident déclaré avec succès.";
+                    TempData["MessageType"] = "success";
+                }
+                else
+                {
+                    TempData["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    TempData["MessageType"] = "error";
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Type de signalement non valide.";
+                TempData["MessageType"] = "error";
+            }
+
+            return RedirectToAction("GestionOf", "Production", new { id = Session["OperateurConnecte"], viewAction = 0 });
+        }
+    
+
+
+[HttpPost, ActionName("gestionOf")]
         public ActionResult gestionOfPopup(DataOperateurProd ope)
         {
             // description des diferent formulaire de la page GestionOf
@@ -1809,6 +2044,13 @@ namespace GenerateurDFUSafir.Controllers
             {
                 return RedirectToAction("GestionOutilAdmin", "Production", new { id = (long)ope.ID });
             }
+
+            /*
+
+            else if (viewAction == 9)
+            {
+                return RedirectToAction("Signalement", "Production", new { id = (long)ope.ID });
+            }*/
             else
             {
                 return RedirectToAction("gestionOF", "Production", new { id = (long)ope.ID }); //tous les autres cas possibles
