@@ -24,89 +24,92 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">@Html.ActionLink("HomeZEN", "Index", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("SMI", "Qualite", "Qualite", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("FabriZEN", "indexofoperateur", "Production", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("ProductZEN", "Production", "Production", null, new { @class = "nav-link" })</li>
                     @if (Session["OperateurConnecte"] != null)
                     {
-                        <li class="nav-item">@Html.ActionLink("ProductZEN", "Production", "Production", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("R&D", "Index", "RechercheDeveloppement", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("FabriZEN", "indexofoperateur", "Production", null, new { @class = "nav-link" })</li>
+                        <!--<li class="nav-item">Html.ActionLink("R&D", "Index", "RechercheDeveloppement", null, new { class = "nav-link" })</li>-->
                         <li class="nav-item">@Html.ActionLink("StcTcsZEN", "Index", "STCTCS", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("ComZEN", "Index", "Planning", null, new { @class = "nav-link" })</li>
-                        <li class="nav-item">@Html.ActionLink("LogisZEN", "Index", "Logis", null, new { @class = "nav-link" })</li>
-                    }
+                        <!--<li class="nav-item">Html.ActionLink("LogisZEN", "Index", "Logis", null, new { class = "nav-link" })</li>-->
+                            }
 
-                    <li class="nav-item">@Html.ActionLink("À propos de ZEN", "About", "Home", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("À propos de ZEN", "About", "Home", null, new { @class = "nav-link" })</li>
+                            @if (Session["OperateurConnecte"] == null)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Se connecter", "Accueil", "Home", null, new { @class = "nav-link" })</li>
+                            }
+                            @if (Session["OperateurConnecte"] != null)
+                            {
+                                var userId = (long)Session["OperateurConnecte"];
+                                var operateur = GenerateurDFUSafir.Models.GestionOperateursProd.GestionOFOperateur(userId, false);
+                                <li class="nav-link" id="id-nav">
+                                    <a href="#" id="id-content" onclick="ouvrirPopupProfil()">@operateur.Nom @operateur.Prenom</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
+            <div id="popupProfil" style="display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.6);
+            justify-content: center; align-items: center; z-index: 10000;">
+                <div id="ctn-profil" style="background: rgb(250, 120, 0); padding: 20px; border-radius: 8px; width: 300px; height: 100%; max-height: 250px; text-align: center;">
                     @if (Session["OperateurConnecte"] != null)
                     {
                         var userId = (long)Session["OperateurConnecte"];
                         var operateur = GenerateurDFUSafir.Models.GestionOperateursProd.GestionOFOperateur(userId, false);
-                        <li class="nav-link" id="id-nav">
-                            <a href="#" id="id-content" onclick="ouvrirPopupProfil()">@operateur.Nom @operateur.Prenom</a>
-                        </li>
+                        if (operateur != null)
+                        {
+                            <img src="@operateur.Photo" id="photo-profil" />
+                            <strong>@operateur.Nom @operateur.Prenom</strong>
+                        }
+                        <form action="@Url.Action("Deconnexion", "Production")">
+                            <button id="btn-modif" type="submit" style="background: white; color: black; font-size: 11px">Se déconnecter</button>
+                        </form>
                     }
-                </ul>
+                </div>
+                <div id="ctn-pdp" style="background: white; padding: 20px; border-radius: 8px; width: 300px; height: 100%; max-height: 250px; text-align: center;">
+                    <h4 id="tit-pdp" >Changer votre photo</h4>
+                    <form action="@Url.Action("ChangerPhoto", "Production")" method="post" enctype="multipart/form-data">
+                        <input type="file" name="nouvellePhoto" accept="image/*" required />
+                        <br /><br />
+                        <button id="btn-modif" type="submit">Enregistrer</button>
+                        <button id="btn-modif" type="button" onclick="fermerPopup()">Annuler</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </nav>
 
-    <div id="popupProfil" style="display: none; position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%; background: rgba(0,0,0,0.6);
-    justify-content: center; align-items: center; z-index: 10000;">
-        <div id="ctn-profil" style="background: rgb(250, 120, 0); padding: 20px; border-radius: 8px; width: 300px; height: 100%; max-height: 250px; text-align: center;">
-            @if (Session["OperateurConnecte"] != null)
-            {
-                var userId = (long)Session["OperateurConnecte"];
-                var operateur = GenerateurDFUSafir.Models.GestionOperateursProd.GestionOFOperateur(userId, false);
-                if (operateur != null)
-                {
-                    <img src="@operateur.Photo" id="photo-profil" />
-                    <strong>@operateur.Nom @operateur.Prenom</strong>
-                }
-                <form action="@Url.Action("Deconnexion", "Production")">
-                    <button id="btn-modif" type="submit" style="background: white; color: black">Se déconnecter</button>
-                </form>
+
+            <div class="container-fluid body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - OptiZEN</p>
+                    <img src="/image/bychristian.png" height="32" width="80" />
+                </footer>
+            </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+            @Scripts.Render("~/bundles/Script-custom-graphs")
+            @RenderSection("scripts", required: false)
+            <script src="https://kit.fontawesome.com/37157d8223.js" crossorigin="anonymous"></script>
+        </body>
+        </html>
+
+        <script>
+            function ouvrirPopupProfil() {
+                const popup = document.getElementById("popupProfil");
+                popup.classList.add("show");
+                popup.style.display = "flex";
             }
-        </div>
-        <div id="ctn-pdp" style="background: white; padding: 20px; border-radius: 8px; width: 300px; height: 100%; max-height: 250px; text-align: center;">
-            <h4 id="tit-pdp" >Changer votre photo</h4>
-            <form action="@Url.Action("ChangerPhoto", "Production")" method="post" enctype="multipart/form-data">
-                <input type="file" name="nouvellePhoto" accept="image/*" required />
-                <br /><br />
-                <button id="btn-modif" type="submit">Enregistrer</button>
-                <button id="btn-modif" type="button" onclick="fermerPopup()">Annuler</button>
-            </form>
-        </div>
-    </div>
 
-
-    <div class="container-fluid body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - OptiZEN</p>
-            <img src="/image/bychristian.png" height="32" width="80" />
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
-    @Scripts.Render("~/bundles/Script-custom-graphs")
-    @RenderSection("scripts", required: false)
-    <script src="https://kit.fontawesome.com/37157d8223.js" crossorigin="anonymous"></script>
-</body>
-</html>
-
-<script>
-    function ouvrirPopupProfil() {
-        const popup = document.getElementById("popupProfil");
-        popup.classList.add("show");
-        popup.style.display = "flex";
-    }
-
-    function fermerPopup() {
-        const popup = document.getElementById("popupProfil");
-        popup.classList.remove("show");
-        setTimeout(() => popup.style.display = "none", 300);
-    }
-</script>
+            function fermerPopup() {
+                const popup = document.getElementById("popupProfil");
+                popup.classList.remove("show");
+                setTimeout(() => popup.style.display = "none", 300);
+            }
+        </script>

@@ -8,6 +8,14 @@
     justify-content: center;
 }
 
+#photo-profil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
 #tit-pdp {
     padding-bottom: 20px;
 }

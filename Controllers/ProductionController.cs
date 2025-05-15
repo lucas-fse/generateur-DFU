@@ -22,11 +22,10 @@ using System.Web.Security;
 
 namespace GenerateurDFUSafir.Controllers
 {
-    public class ProductionController : ConnexController
+    public class ProductionController : Controller
     {
         public ActionResult GestionOutilAdmin(long? ID)
         {
-            // Un commentaire
             if (ID == null)
             {
                 return RedirectToAction("Production", "Production");
@@ -1288,11 +1287,50 @@ namespace GenerateurDFUSafir.Controllers
             return View("ConnexionAdmin", operateur);
         }
 
-        
+        [HttpGet]
+        public ActionResult DefinirMDPParToken(Guid token)
+        {
+            OfX3 data = new OfX3();
+            var pwdToken = data.GetPwdToken(token);
+
+            if (pwdToken == null || (pwdToken.IsUsed ?? false) || pwdToken.ExpirationDate < DateTime.Now)
+                return View("LienInvalideOuExpire");
+
+            // Tu peux stocker l’ID en session si besoin
+            Session["OperateurConnecte"] = pwdToken.UserID;
+
+            return RedirectToAction("DefinirMDP", new { id = pwdToken.UserID });
+        }
+
+
+        public ActionResult EnvoyerTokensInitialisation(long id)
+        {
+            var user = GestionOperateursProd.GestionOFOperateur(id, false);
+
+            OfX3 data = new OfX3();
+
+                Guid token = Guid.NewGuid();
+                DateTime expiration = DateTime.Now.AddHours(1);
+
+                bool saved = data.SavePwdToken(user.ID, token, expiration);
+
+                string lien = Url.Action("DefinirMDPParToken", "Production", new { token = token }, protocol: Request.Url.Scheme);
+
+                Mail mail = new Mail();
+                mail.From = "iisProd.Conductix@laposte.net";
+                mail.To = user.Email;
+                mail.Subject = "Création de votre mot de passe ZEN";
+                mail.Message = $"Bonjour {user.Prenom},\n\nVeuillez cliquer sur ce lien pour créer votre mot de passe :\n{lien}\n\nCe lien est valable 1 heure.";
+                mail.btnSendMail();
+
+            return RedirectToAction("ConfirmationEnvoiEmail", new { id = user.ID });
+        }
+
+
         [HttpPost]
         public ActionResult DemanderReinitialisation(long id)
         {
-            var user = GestionOperateursProd.GestionOFOperateur(id, false); // Appel direct par ID
+            var user = GestionOperateursProd.GestionOFOperateur(id, false); 
 
             if (user != null)
             {
@@ -1397,35 +1435,44 @@ namespace GenerateurDFUSafir.Controllers
 
             var operateur = GestionOperateursProd.GestionOFOperateur((long)id, false);
 
-            return View("DefinirPassword", operateur); // 
+            return View("DefinirPassword", operateur);
         }
 
-        
+
         [HttpPost]
-        public ActionResult CreerPassword(long id, string motdepasse)
+        public ActionResult CreerPassword(long id, string motdepasse, Guid? token = null)
         {
             if (string.IsNullOrEmpty(motdepasse))
             {
                 ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                ViewBag.Token = token;
                 return View("DefinirPassword", operateur);
             }
 
             string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
-
             bool ok = GestionOperateursProd.SavePasswordOperateur(id, hashed);
 
             if (!ok)
             {
                 ViewBag.Erreur = "Erreur lors de l'enregistrement du mot de passe.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
+                ViewBag.Token = token;
                 return View("DefinirPassword", operateur);
             }
 
-            return RedirectToAction("GestionOF", new { id = id });
+            if (token.HasValue)
+            {
+                OfX3 data = new OfX3();
+                data.MarkPwdTokenAsUsed(token.Value);
+            }
+
+            GestionTraitementOFs ofs = new GestionTraitementOFs();
+            return View("~/Views/Home/Accueil.cshtml", ofs);
         }
 
-        
+
+
         [HttpPost]
         public ActionResult ChangerPhoto(HttpPostedFileBase nouvellePhoto)
         {
