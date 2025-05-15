@@ -33,50 +33,57 @@
     background: black;
 }
 
-#ListOperateur{
-    width : 95%;
-    margin : 0 auto;
-    display : flex;
-    flex-wrap : wrap;
+#ListOperateur {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content : space-around;
+    justify-content: space-around;
 }
-
 
 .Operateur a {
     width: 300px;
-    height: 85px;
-    border-radius: 43px;
-    margin-top: 40px;
-    background: #FF8C00;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background: white;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+    border: 2px rgb(226,226,226) solid;
+    text-decoration: none;
 }
 
-.Operateur a:hover {
-    background: #0066cc;
-    text-decoration : none;
+    .Operateur a:hover {
+        background: orange;
+        text-decoration: none;
+    }
+
+.Operateur img {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    margin-left: 5px;
 }
 
-.Operateur img{
-    height : 80px;
-    width : 80px;
-    border-radius : 40px;
-    margin-left : 5px;
+.Operateur p {
+    padding-top: 3px;
+    color: black;
+    font-size: 1em;
+    text-align: end;
+    margin-bottom: 0px;
+    height: auto;
+    text-decoration: none;
 }
 
-.Operateur p{
-    padding-top : 3px;
-    color : white;
-    font-size: 1.4em;
-    text-align : end;
-    margin-right : 40px;
-    margin-bottom : 0px;
-    height : auto;
+.Operateur #ctn-id {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media all and (max-width:1200px) {
@@ -103,6 +110,7 @@
         top : 18%;
         width: 600px;
     }
+
 }
 
 @media all and (max-width: 625px) {
@@ -111,7 +119,29 @@
         top: 28%;
         width: 300px;
     }
+
+
 }
+
+
+@media all and (max-width: 700px) {
+
+    .Operateur a {
+        width: 200px;
+    }
+
+    #ListOperateur {
+        width: 100%;
+    }
+
+    .Operateur img {
+        height: 60px;
+        width: 60px;
+        border-radius: 40px;
+        margin-left: 5px;
+    }
+}
+
 
 /* debut barre recherche  */
 
@@ -131,6 +161,8 @@
     #searchOF form label {
         font-size: 14px;
     }
+
+   
 }
 
 #searchOF input[type="search"] {
@@ -180,20 +212,4 @@
         justify-content: center;
         align-items: center;
     }
-}
-
-/* fin barre recherche */
-.Operateur a {
-    width: 300px;
-    height: 85px;
-    border-radius: 43px;
-    margin-top: 40px;
-    background: #FF8C00;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
-    text-decoration: none; /* Ajoutez cette ligne */
 }

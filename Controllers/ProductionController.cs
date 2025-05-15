@@ -1573,8 +1573,13 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("AjoutSignalement")]
         public ActionResult AjoutSignalement(HttpPostedFileBase ImageSignalement)
         {
+            PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+            var idConnecte = Session["OperateurConnecte"];
+            long operateurId = Convert.ToInt64(idConnecte);
+            var operateur = db.OPERATEURS.FirstOrDefault(o => o.ID == operateurId);
+
             string typeSignalement = Request.Form["TypeSignalement"];
-            string nom = Request.Form["SaisieNom"];
+            string nom = operateur.NOM + " " + operateur.PRENOM;
             string date = Request.Form["SaisieDate"];
             string description = Request.Form["SaisieDescription"];
             string description2 = Request.Form["SaisieDescription2"];
