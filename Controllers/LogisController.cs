@@ -28,7 +28,7 @@ namespace GenerateurDFUSafir.Controllers
         public static bool CaptureOCR()
         {
             InfoAmelioration vue = new InfoAmelioration();
-            return View(vue);
+            return true;
         }
     }
 }

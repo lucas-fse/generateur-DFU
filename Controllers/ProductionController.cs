@@ -1495,21 +1495,20 @@ namespace GenerateurDFUSafir.Controllers
             return RedirectToAction("GestionOF", new { id = userId });
         }
 
-        
+
         public ActionResult gestionOf(long? id, int? viewAction, string ofCherche)
         {
-            // Pour éviter de pouvoir accéder à l'espace juste en tapant le bon URL
-            // On met en place un id de Session
             var idConnecte = Session["OperateurConnecte"];
-            var estAdmin = Session["EstAdmin"] != null && (bool)Session["EstAdmin"];
+            var estAdmin = Convert.ToBoolean(Session["isAdmin"] ?? false);
 
-            // Donc si il n'est pas connecté il ne peut pas y accéder
-            if (idConnecte == null || (!estAdmin && Convert.ToInt64(idConnecte) != id))
+            // Si non admin et non connecté ou connecté avec un mauvais ID => redirection
+            if (!estAdmin && (idConnecte == null || Convert.ToInt64(idConnecte) != id))
             {
                 return RedirectToAction("ConnexionOp", new { id = id }); // redirige vers la connexion
             }
 
             bool ChargeOfPlanifie = false;
+
             if (id == null)
             {
                 return RedirectToAction("IndexOFOperateur", "Production");
@@ -1538,7 +1537,8 @@ namespace GenerateurDFUSafir.Controllers
                     return RedirectToAction("OutilProd");
                 }
 
-                    DataOperateurProd ope = new DataOperateurProd();
+                DataOperateurProd ope = new DataOperateurProd();
+
                 if (viewAction == 3)
                 {
                     ViewData["PopUpOf"] = "true";
@@ -1548,26 +1548,27 @@ namespace GenerateurDFUSafir.Controllers
                 {
                     ope = GestionOperateursProd.GestionOFOperateur((long)id, false);
                 }
+
                 PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
                 uint pole = (uint)(db.OPERATEURS.Where(i => i.ID == ope.ID).Select(i => i.POLE).First());
 
                 ope.initOfList((int)pole, ofCherche, ChargeOfPlanifie);
 
-                // Récupérer les données pour le pop-up
                 InfoAmelioration info = new InfoAmelioration();
-                ViewData["Sujet"] = info.Sujet; // Liste des services
-                ViewData["Secteur"] = info.Secteur; // Liste des secteurs
+                ViewData["Sujet"] = info.Sujet;
+                ViewData["Secteur"] = info.Secteur;
 
-                // Calculer la date anglaise pour le champ de date
                 string date = DateTime.Now.ToString("dd-MM-yyyy");
                 string dateAnglaise = date.Substring(6, 4) + date.Substring(2, 3) + "-" + date.Substring(0, 2);
                 ViewData["DateAnglaise"] = dateAnglaise;
 
                 ViewBag.OperateurID = id;
                 ViewBag.EstAdmin = estAdmin;
+
                 return View(ope);
             }
         }
+
 
         [HttpPost, ActionName("AjoutSignalement")]
         public ActionResult AjoutSignalement(HttpPostedFileBase ImageSignalement)
