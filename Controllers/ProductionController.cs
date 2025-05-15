@@ -19,11 +19,34 @@ using System.Web.Script.Serialization;
 using System.Data;
 using System.Web.WebPages;
 using System.Web.Security;
+using System.DirectoryServices.Protocols;
+
 
 namespace GenerateurDFUSafir.Controllers
 {
     public class ProductionController : Controller
     {
+
+        public ActionResult RechercheLDAP(long? ID)
+        {
+            var ldapServer = "ldap.votre-entreprise.com"; // Adresse LDAP
+            var searchBase = "OU=SousBranche,DC=branche,DC=entreprise,DC=com"; // Le chemin LDAP
+            var username = "votreUtilisateur"; // Format selon config : DOMAIN\\User ou UPN
+            var password = "votreMotDePasse";
+
+            var credential = new NetworkCredential(username, password);
+            var ldapConnection = new LdapConnection(ldapServer)
+            {
+                Credential = credential,
+                AuthType = AuthType.Negotiate // Ou Basic, selon l'infra
+            };
+
+            ldapConnection.Bind();
+
+
+            DataOperateurProd ope = GestionOperateursProd.GestionOFOperateur((long)ID, false);
+            return View(ope);
+        }
         public ActionResult GestionOutilAdmin(long? ID)
         {
             if (ID == null)
