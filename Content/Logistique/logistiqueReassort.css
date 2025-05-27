@@ -1,0 +1,122 @@
+
+.mainGauche {
+    border-right: 2px solid #DADADA;
+    width: 50%;
+    flex: 1;
+    justify-content: center;
+    margin: 5px;
+}
+
+.mainDroit {
+    width: 50%;
+    margin: 10px;
+}
+
+hr {
+    margin: 5px 0px 5px 0px;
+    padding: 0;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.title h2 {
+    margin-right: 9px;
+}
+
+.title {
+    display: flex;
+}
+
+.reassort-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+    .reassort-container h1 {
+        margin-bottom: 10px;
+    }
+
+.reassort-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.reassort-table {
+    width: 100%;
+    max-width: 850px;
+    border-collapse: collapse;
+}
+
+    .reassort-table th,
+    .reassort-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .reassort-table th {
+        background-color: #f2f2f2;
+    }
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 0 2px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+    .badge.green {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .badge.red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+.reassort-search {
+    min-width: 250px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #DADADA;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    height: fit-content;
+}
+
+    .reassort-search h3 {
+        margin-bottom: 10px;
+    }
+
+    .reassort-search input {
+        display: block;
+        width: 100%;
+        margin: 8px 0;
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+
+/* Responsive pour tablette et mobile */
+@media (max-width: 900px) {
+    .reassort-grid {
+        flex-direction: column;
+    }
+
+    .reassort-search {
+        width: 100%;
+    }
+
+    .reassort-table {
+        overflow-x: auto;
+    }
+}

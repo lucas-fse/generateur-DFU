@@ -3,6 +3,7 @@
 const QCross = ({ CasesQcross}) => {
     const rows = [];
 
+
     // Ligne 1: Cases 1 � 7 (index 0 � 6)
     rows.push(
         <div className="Q-CrossRow" key="row1">

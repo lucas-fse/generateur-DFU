@@ -1,0 +1,27 @@
+@model GenerateurDFUSafir.Models.Reassort
+@{
+    ViewBag.Title = "Reassort";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Logistique/logistiqueReassort.css" rel="stylesheet" />
+<link href="~/Content/QCross.css" rel="stylesheet" />
+<meta charset="UTF-8" />
+
+<div id="root"></div>
+
+
+@{
+    var reactFiles = System.IO.Directory
+        .EnumerateFiles(Server.MapPath("~/Scripts/react/assets"), "index-*.js")
+        .Select(Path.GetFileName)
+        .ToList();
+}
+
+@if (reactFiles.Any())
+{
+    <script type="module" src="~/Scripts/react/assets/@reactFiles.First()"></script>
+}
+@using Newtonsoft.Json
+<script>
+    window.reactData = @Html.Raw(JsonConvert.SerializeObject(Model));
+</script>

@@ -3,27 +3,37 @@ import { Routes, Route } from 'react-router-dom';
 import Production from './Production/Production.jsx';  
 import Securite from './Production/Securite.jsx';
 import IndexOFOperateur from './Production/IndexOFOperateur.jsx'
+import Logistique from './Logistique/Logistique.jsx'
+import PbCommandes from './Logistique/PbCommandes.jsx'
+import Reassort from './Logistique/Reassort.jsx'
+
 
 
 const App = () => {
     const [model, setModel] = useState(null);
 
     useEffect(() => {
-        // Récupérer les données injectées depuis Razor
+        // Rï¿½cupï¿½rer les donnï¿½es injectï¿½es depuis Razor
         setModel(window.reactData);  // Assurez-vous que window.reactData est bien disponible
     }, []);
 
-    // Si les données ne sont pas encore chargées, afficher un message de chargement
+    // Si les donnï¿½es ne sont pas encore chargï¿½es, afficher un message de chargement
     if (!model) return <p>Chargement...</p>;
 
     return (
         <Routes>
-            {/* Définir des routes pour chaque page */}
+            {/* Dï¿½finir des routes pour chaque page */}
             <Route path="/Production/Production" element={<Production model={model} />} />
             <Route path="/Production/Securite" element={<Securite model={model} />} />
             <Route path="/Production/indexofoperateur" element={<IndexOFOperateur model={model} />} />
+            <Route path="/Logistique/Index" element={<Logistique model={model} />} />
+            <Route path="/Logistique/PbCommandesFournisseur" element={<PbCommandes model={model} titre="problÃ¨mes commandes fournisseur"/>} />
+            <Route path="/Logistique/PbReceptionsFournisseur" element={<PbCommandes model={model} titre="problÃ¨mes rÃ©ceptions fournisseur"/>} />
+            <Route path="/Logistique/PbLivraisonsClient" element={<PbCommandes model={model} titre="problÃ¨mes livraisons client" />} />
+            <Route path="/Logistique/Reassort" element={<Reassort model={model} />}/>
         </Routes>
     );
 };
 
 export default App;
+

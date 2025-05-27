@@ -1,0 +1,161 @@
+@model GenerateurDFUSafir.Models.InfoAmelioration
+@{
+    ViewBag.Title = "CaptureOCR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/CaptureOCR.css" rel="stylesheet" />
+    <link href="~/Content/Proposition.css" rel="stylesheet" />
+    string Date = DateTime.Now.ToString("dd-MM-yyyy");
+    string DateAnglaise = Date.Substring(6, 4) + Date.Substring(2, 3) + "-" + Date.Substring(0, 2);
+}
+
+@using (Html.BeginForm("Amelioration", "Production", FormMethod.Post, new { id = "Form", onsubmit = "ValiderPopUp()", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="frm-box">
+        <div class="frm-title">
+            <h1 class="main-title">Faire une Proposition</h1>
+        </div>
+        <div class="frm-row" id="Nom">
+            <div class="frm-group">
+                <label>Nom</label>
+                <input type="text" class="frm-input frm-required" id="SaisieEmetteur" name="SaisieEmetteur" />
+            </div>
+            <div class="frm-group" id="Date">
+                <label>Date</label>
+                <input type="date" class="frm-input" id="SaisieDate" value="@DateAnglaise" max="@DateAnglaise" name="SaisieDate" />
+            </div>
+        </div>
+        <div class="PopDiv frm-row">
+            <div class="frm-group">
+                <label>Services</label>
+                <select class="frm-select" name="SaisieService" id="SaisieService" form="Form">
+                    @foreach (var item in Model.Sujet)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+            <div class="frm-group">
+                <label>Secteurs</label>
+                <select class="frm-select" name="SaisieSecteur" id="SaisieSecteur" form="Form">
+                    @foreach (var item in Model.Secteur)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="frm-group">
+            <label>Entrez votre proposition</label>
+            <textarea class="frm-input frm-required" id="SaisieDescription" name="SaisieDescription" form="Form"></textarea>
+        </div>
+        <div class="frm-group">
+            <label>Entrez votre solution</label>
+            <textarea class="frm-input" id="SaisieDescription2" name="SaisieDescription2" form="Form"></textarea>
+        </div>
+
+        <!---------------------------------------------------------------------------->
+        <div class="frm-group photo-pc" id="FormContenantWebcam">
+            <div id="FormContenantPhotoProfil" class="frm-group">
+                <!---<label>Prendre une photo de l'amelioration</label>-->
+                <div id="ChangeppMenu">
+                    <button id="ChangeppCamera" class="frm-action" type="button" onclick="Changepp()">
+                        <i class="fa-solid fa-camera" style="color: #f26222;"></i>
+                        PRENDRE UNE PHOTO
+                    </button>
+                </div>
+            </div>
+            <div id="WebcamOn">
+                <div id="Contenant-video" style="position: relative; margin-right: 10px;">
+                    <div style="z-index: 1; text-align: initial;">
+                        <video id="video" autoplay muted playsinline></video>
+                    </div>
+                </div>
+
+                <canvas id="canvas" hidden></canvas>
+                <img src="" id="photo" alt="photo" style="display: none; position: relative; margin-right: 10px;">
+                <input value="" name="srcImg" id="srcImg" type="hidden">
+                <canvas id="canvas" hidden></canvas>
+
+                <div id="WebcamMenu">
+                    <label>Video source: </label>
+                    <div class="select">
+                        <label for="videoSource"></label><select id="videoSource"></select>
+                    </div>
+                    <button id="PrendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="previewPhoto()">
+                        <i class='fa-solid fa-camera' style='color: #f26222;'></i>
+                        Prendre photo
+                    </button>
+
+                    <button id="EmptyButtonPhoto" class="FormppBtn" type="button" style="display:none">---</button>
+
+                    <button id="ReprendreButtonPhoto" type="button" class="FormppBtn frm-action" value="" onclick="ReprendrePhoto()">
+                        <i class="fa-solid fa-rotate-left" style="color: #f26222;"></i>
+                        Reprendre photo
+                    </button>
+
+                    <button id="AnnulerButtonPhoto" class="FormppBtn frm-action" type="button" onclick="AnnulerChangepp()">
+                        <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!---------------------------------------------------------------------------->
+        <div class="frm-group" id="AmeilorationPicture">
+            <!--<label>Ajouter une image de l'ameiloration</label>-->
+            @*On met le bouton pour ajouter une image et on lui donne l'id "preview" pour qu'il utilise le script javascript et affiche l'image*@
+            <img id="blah" src="#preview" alt="" />
+            <!--<input value="" name="srcImport" id="srcImport" type="hidden"> -->
+            <div class="alignement-fonctions">
+                <label for="preview" class="frm-action" id="button-image" onclick="importImage()">
+                    <i class="fa-solid fa-plus" style="color: #f26222;"></i>
+                    AJOUTER UNE IMAGE
+                </label>
+                <label for="" class="frm-action" id="annulation-image" onclick="cancelImage()" style="display: none;">
+                    <i class="fa-solid fa-xmark" style="color: #f26222;"></i>
+                    ANNULER L'IMAGE
+                </label>
+                <input class="frm-action" value="" type="file" name="ImageProposition" id="preview" accept="image/jpeg, image/jpg" style="display: none;" />
+            </div>
+        </div>
+
+        <div class="frm-button-box">
+            <button type="button" onclick="" id="frm-back" class="btn btn-outline-orange">ANNULER</button>
+            <button type="submit" value="Niveau" id="frm-submit" name="submitButton" class="btn btn-orange" disabled> VALIDER </button>
+        </div>
+        <div id="DetailAmelioration"></div>
+    </div>
+}
+
+
+}
+
+<script src="~/Scripts/jquery-3.6.0.slim.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ReloadTimer.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewImage.js"></script>
+<script>
+    const inputElement = document.getElementById("image-upload");
+
+    inputElement.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const imgElement = document.createElement("img");
+            imgElement.src = e.target.result;
+            document.body.appendChild(imgElement);
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+<script type="text/javascript" src="~/Scripts/Del_Enter_Touch.js"></script>
+<script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
+<script type="text/javascript" src="~/Scripts/ViewWebcam.js"></script>
+<script type="text/javascript" src="~/Scripts/Proposition.js"></script>
+<script type="text/javascript" src="~/Scripts/form.js"></script>
+<script>CheckList()</script>
+
+

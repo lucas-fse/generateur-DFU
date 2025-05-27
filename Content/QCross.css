@@ -1,0 +1,154 @@
+
+.Q-CrossRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+/* case de la green cross */
+
+.Q-CrossCase {
+    aspect-ratio: 1/1;
+    width: 75px; /* changer juste cette valeur pour regler la taille de la Q-cross */
+    min-width: 32px;
+    display: flex; /* pour center le texte à l'interieur  */
+    justify-content: center; /* pour center le texte horizontalement  */
+    align-items: center; /* pour center le texte verticalement  */
+    box-sizing: border-box; /* => (largeur case + bordure = 60px) */
+}
+
+    .Q-CrossCase.cliquable.rouge {
+        cursor: pointer;
+    }
+/* background case par defaut */
+
+.bg-case {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3), 0 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+/* background case verte */
+
+.bg-case-verte {
+    background-color: #5cb85c;
+}
+
+.vert {
+    background-color: #5cb85c; /* nombre de FRC == 0 => case verte  */
+}
+
+/* background case rouge */
+
+.bg-case-rouge {
+    background-color: #d9534f;
+}
+
+.rouge {
+    background-color: #d9534f; /* nombre de FRC >= 1 => case rouge  */
+}
+
+.gris {
+    background-color: lightgrey; /* jour aprés le jour courant => case grise */
+}
+
+
+/* max width 200 px */
+
+@media all and (max-width: 200px) {
+    .Q-CrossCase {
+        font-size: 5vw; /* => 5% largeur du viewport */
+    }
+}
+
+.Q-CrossCase::before { /* pour que la hauteur soit protionnelle à la largeur */
+    /* => case ratio 1:1 */
+}
+
+/* pour ne pas afficher les cases qui n'ont pas de bordure */
+
+.hiddenCase {
+    border: none
+}
+
+/* bordures style 1 */
+
+.right {
+    border-right: 3px solid grey;
+}
+
+.bottom {
+    border-bottom: 3px solid grey;
+}
+
+.top {
+    border-top: 3px solid grey;
+}
+
+.left {
+    border-left: 3px solid grey;
+}
+
+
+
+/* bordure contour */
+
+.test-pos {
+    position: relative;
+    top: -30px;
+}
+
+.big-right {
+    border-right: 5px solid grey;
+}
+
+.big-bottom {
+    border-bottom: 5px solid grey;
+}
+
+.big-top {
+    border-top: 5px solid grey;
+}
+
+.big-left {
+    border-left: 5px solid grey;
+}
+
+
+
+/* fin bordure contour */
+
+.jour-inexistant {
+    background-color: dimgrey;
+    /* couleur gris foncé
+      le jour n'existe pas dans le mois courant
+      ex: si mois courant = fevrier, alors le fond de la case aura cette couleur dans la Q-Cross
+    */
+}
+
+/* bordure style 2 */
+
+.arrondi-hg {
+    border-radius: 7px 0px 0px 0px;
+}
+
+.arrondi-hd {
+    border-radius: 0px 7px 0px 0px;
+}
+
+.arrondi-bg {
+    border-radius: 0px 0px 0px 7px;
+}
+
+.arrondi-bd {
+    border-radius: 0px 0px 7px 0px;
+}
+
+.arrondi-hd-bd {
+    border-radius: 0px 7px 7px 0px;
+}
+
+#Q-Cross {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
