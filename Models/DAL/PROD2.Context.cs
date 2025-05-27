@@ -67,5 +67,9 @@ namespace GenerateurDFUSafir.Models.DAL
         public virtual DbSet<TYPE_CAUSE> TYPE_CAUSE { get; set; }
         public virtual DbSet<OPERATEURS_PWD> OPERATEURS_PWD { get; set; }
         public virtual DbSet<PWD_TOKEN> PWD_TOKEN { get; set; }
+        public virtual DbSet<DMD_REASSORT> DMD_REASSORT { get; set; }
+        public virtual DbSet<PB_COMMANDES_FOURNISSEUR> PB_COMMANDES_FOURNISSEUR { get; set; }
+        public virtual DbSet<PB_LIVRAISONS_CLIENT> PB_LIVRAISONS_CLIENT { get; set; }
+        public virtual DbSet<PB_LIVRAISONS_FOURNISSEUR> PB_LIVRAISONS_FOURNISSEUR { get; set; }
     }
 }

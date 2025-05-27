@@ -163,7 +163,15 @@ namespace GenerateurDFUSafir.Models
                 oFATraite.quantite = (int)Convert.ToDouble(row["EXTQTY_0"].ToString());
                 oFATraite.numCommande = row["VCRNUMORI_0"].ToString();
                 oFATraite.Description = row["MFGDES_0"].ToString();
-                double duree_heures = Convert.ToDouble(row["EXTOPETIM_0"].ToString());
+                double duree_heures = 0;
+                try
+                {
+                    duree_heures = Convert.ToDouble(row["EXTOPETIM_0"].ToString());
+                } catch
+                {
+
+                }
+
                 oFATraite.duree = duree_heures * 60;
 
                 // On regarde si c'est Atex ou quelque chose du genre

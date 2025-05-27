@@ -1,0 +1,51 @@
+@model GenerateurDFUSafir.Models.PbCommandesFournisseur
+@{
+    ViewBag.Title = "Problèmes commandes fournisseur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <link href="~/Content/Logistique/logistiqueAleas.css" rel="stylesheet" />
+    <link href="~/Content/QCross.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    }
+
+@{
+    var message = Session["Message"] as string;
+    var type = Session["MessageType"] as string;
+    var hasMessage = !string.IsNullOrEmpty(message);
+
+
+}
+
+@if (hasMessage)
+{
+    <script>
+        window.onload = function () {
+            showCustomAlert('@type', '@message');
+        };
+    </script>
+}
+
+<div id="root"></div>
+
+
+<script type="text/javascript" src="~/Scripts/alertes.js"></script>
+
+@{
+    var reactFiles = System.IO.Directory
+        .EnumerateFiles(Server.MapPath("~/Scripts/react/assets"), "index-*.js")
+        .Select(Path.GetFileName)
+        .ToList();
+}
+
+@if (reactFiles.Any())
+{
+    <script type="module" src="~/Scripts/react/assets/@reactFiles.First()"></script>
+}
+@using Newtonsoft.Json
+<script>
+    window.reactData = @Html.Raw(JsonConvert.SerializeObject(Model));
+    window.apiUrl = {
+        submitProbleme: '@Url.Action("FormulaireDeclarationProbleme", "Logistique")'
+    };
+    console.log(@Html.Raw(JsonConvert.SerializeObject(message)));
+</script>

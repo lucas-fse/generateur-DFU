@@ -12,24 +12,7 @@
     string TitreAmeliorationParSecteur = "";
     string TitreAmeliorationParService = "";
     string TitreAmeliorationParStatus = "";
-
-
-    var message = TempData["Message"] as string;
-    var type = TempData["MessageType"] as string;
-
-
-    if (!string.IsNullOrEmpty(message))
-    {
-        <script>
-        window.onload = function () {
-            showCustomAlert('@type', '@message');
-        };
-        </script>
-        TempData.Remove("Message");
-        TempData.Remove("MessageType");
     }
-
-}
 
 <div id="fondTransparent"></div>
 
@@ -132,7 +115,7 @@
     </div>
     <div id="DetailAmelioration"></div>
 </div>
-<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.7.1.js"></script>
 <script src="~/Scripts/clock.js" charset="utf-8"></script>
 <script type="text/javascript" src="~/Scripts/chart.js"></script>
 <script type="text/javascript" src="~/Scripts/CountDown.js"></script>

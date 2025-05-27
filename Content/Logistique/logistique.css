@@ -1,0 +1,404 @@
+/* Disposition générale */
+.main {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    padding: 0 2vw; /* Petits bords réactifs */
+    gap: 20px;
+}
+
+
+
+
+hr {
+    margin: 5px 0;
+    padding: 0;
+}
+
+
+.mainGauche {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espacement cohérent entre les whiteBox */
+}
+
+.mainDroit {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    max-height: 100vh; /* Limite la hauteur de mainDroit pour contraindre notesBox */
+    overflow: hidden; /* Empêche mainDroit de dépasser la fenêtre */
+}
+
+.whiteBox {
+    border-radius: 10px;
+    padding: 20px 10px 20px 20px;
+    width: 49%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 310px;
+    border: 1px solid #DADADA;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    min-height: 310px; /* Remplace height fixe par min-height */
+}
+
+.wGauche {
+    width: 50%;
+    border-right: 2px solid #DADADA;
+}
+
+    .wGauche img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain; /* L'image s'adapte sans déformer */
+        display: block; /* Évite les marges indésirables */
+    }
+
+.wDroit {
+    width: 50%;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: 22px;
+    color: #8E8E8E;
+    font-weight: normal;
+}
+
+.btnWhite {
+    border-radius: 10px;
+    border: 2px solid #DADADA;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    height: 55px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+    .btnWhite:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px); /* Petit effet de soulèvement */
+    }
+
+.btnWhiteGauche {
+    text-align: center;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.btnWhiteDroit {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxInfo {
+    border-radius: 10px;
+    border: 2px solid #DADADA;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    height: 55px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.boxInfoGauche {
+    text-align: center;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.boxInfoDroit {
+    width: 15%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-right: 8px;
+}
+
+.whiteBoxRight {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.whiteBtn {
+    text-align: center;
+}
+
+/* Styles pour notesBox */
+.notesBox {
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    width: 70%;
+    box-sizing: border-box;
+    border: 1px solid #DADADA;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    height : auto;
+    min-height: 310px;
+    max-height: 100%; /* Limite à la hauteur de mainDroit */
+}
+
+.notesHeader {
+    border-bottom: 2px solid #DADADA;
+    margin-bottom: 9px;
+    flex-shrink: 0; /* Empêche l'en-tête de se compresser */
+}
+
+.notesMessages {
+    height:500px;
+    overflow-y: auto;
+    padding-right: 5px; /* évite que la scrollbar ne cache le contenu */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+
+.noteBox {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.noteLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 12px;
+    min-width: 50px;
+}
+
+.noteInitials {
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.noteDate {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+}
+
+.noteContent {
+    border-radius: 7px;
+    border: 1px solid #DADADA;
+    padding: 5px 10px 5px 5px;
+    margin-right: 30px;
+    display: flex;
+    flex: 1;
+}
+
+.noteText {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.nouvelleNote {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Empêche la compression */
+    margin-top: auto; /* Pousse en bas */
+}
+
+.nouveauMessage {
+    flex: 1;
+    border-radius: 7px;
+    border: 1px solid #DADADA;
+    padding: 5px 10px 5px 5px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.nouvelleNote img {
+    width: 24px; /* Taille fixe pour l'icône Envoyer */
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Remplace max-width: none pour éviter les débordements */
+input, select, textarea {
+    max-width: 100%; /* Assure que les inputs respectent les limites du conteneur */
+    box-sizing: border-box;
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 1500px) {
+    .mainGauche {
+        width: 80%;
+    }
+
+    .mainDroit {
+        width: 20%;
+    }
+
+    .notesBox {
+        width: 90%; /* Ajuste la largeur pour mieux s'adapter */
+        padding: 8px;
+    }
+
+    .notesMessages {
+        max-height: 250px; /* Réduit la hauteur pour les écrans plus petits */
+    }
+
+    .noteContent {
+        margin-right: 15px; /* Réduit la marge pour les écrans plus petits */
+    }
+
+    .nouveauMessage {
+        margin-right: 5px; /* Réduit la marge */
+    }
+
+    .noteInitials {
+        width: 32px; /* Réduit légèrement la taille */
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .noteDate {
+        font-size: 11px;
+    }
+
+    .noteText {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .mainGauche {
+        width: 100%;
+    }
+
+    .mainDroit {
+        display: none; /* Masque mainDroit, donc notesBox disparaît */
+    }
+
+    .btnWhite,
+    .boxInfo {
+        height: 75px;
+    }
+}
+
+@media (max-width: 700px) {
+    .whiteBox {
+        width: 100%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .btnWhite,
+    .boxInfo {
+        height: 45px;
+    }
+}
+
+@media (max-width: 570px) {
+    .whiteBox {
+        flex-direction: column;
+        padding: 15px;
+        height: auto;
+        min-height: 0;
+    }
+
+    .wGauche {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #DADADA;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .wDroit {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .whiteBoxRight {
+        order: 1;
+        flex: 1;
+        height: auto;
+    }
+
+    .whiteBtn {
+        order: 2;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .btnWhite,
+    .boxInfo {
+        height: 70px;
+        margin-bottom: 10px;
+    }
+
+    .boxInfoGauche {
+        width: 70%;
+    }
+
+    .boxInfoDroit {
+        width: 30%;
+        font-size: 16px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .wGauche img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+}

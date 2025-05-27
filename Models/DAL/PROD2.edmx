@@ -129,6 +129,19 @@
           <Property Name="StringValue2" Type="nchar" MaxLength="400" />
           <Property Name="Editable" Type="bit" />
         </EntityType>
+        <EntityType Name="DMD_REASSORT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="idPiece" Type="int" />
+          <Property Name="operateur" Type="int" />
+          <Property Name="traiteLe" Type="date" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="quantite" Type="int" />
+          <Property Name="dispo" Type="bit" />
+        </EntityType>
         <EntityType Name="FRC">
           <Key>
             <PropertyRef Name="ID" />
@@ -316,6 +329,39 @@
           <Property Name="MODIF_MANUEL" Type="bit" Nullable="false" />
           <Property Name="VERSION_LOG" Type="nvarchar" MaxLength="30" />
           <Property Name="FABRIQUE" Type="bit" />
+        </EntityType>
+        <EntityType Name="PB_COMMANDES_FOURNISSEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="NaturePB" Type="varchar" MaxLength="500" />
+          <Property Name="Probleme" Type="varchar" MaxLength="500" />
+          <Property Name="Resolution" Type="bit" />
+        </EntityType>
+        <EntityType Name="PB_LIVRAISONS_CLIENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Ncommande" Type="varchar" MaxLength="500" />
+          <Property Name="Service" Type="varchar" MaxLength="500" />
+          <Property Name="NaturePB" Type="varchar" MaxLength="500" />
+          <Property Name="Probleme" Type="varchar" MaxLength="500" />
+          <Property Name="Resolution" Type="bit" />
+        </EntityType>
+        <EntityType Name="PB_LIVRAISONS_FOURNISSEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Ncommande" Type="varchar" MaxLength="500" />
+          <Property Name="NaturePB" Type="varchar" MaxLength="500" />
+          <Property Name="Probleme" Type="varchar" MaxLength="500" />
+          <Property Name="Resolution" Type="bit" />
         </EntityType>
         <EntityType Name="PLANIF_OF">
           <Key>
@@ -1034,6 +1080,7 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySet Name="AMELIORATION" EntityType="Self.AMELIORATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTROLE_QUALITE" EntityType="Self.CONTROLE_QUALITE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATA_GENERIQUE" EntityType="Self.DATA_GENERIQUE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DMD_REASSORT" EntityType="Self.DMD_REASSORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FRC" EntityType="Self.FRC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KPI_CA" EntityType="Self.KPI_CA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KPI_PROD" EntityType="Self.KPI_PROD" Schema="dbo" store:Type="Tables" />
@@ -1045,6 +1092,9 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
           <EntitySet Name="OPERATEURS" EntityType="Self.OPERATEURS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OPERATEURS_PWD" EntityType="Self.OPERATEURS_PWD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDRE_FABRICATION_GENERE" EntityType="Self.ORDRE_FABRICATION_GENERE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PB_COMMANDES_FOURNISSEUR" EntityType="Self.PB_COMMANDES_FOURNISSEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PB_LIVRAISONS_CLIENT" EntityType="Self.PB_LIVRAISONS_CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PB_LIVRAISONS_FOURNISSEUR" EntityType="Self.PB_LIVRAISONS_FOURNISSEUR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANIF_OF" EntityType="Self.PLANIF_OF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANIFICATION_OF" EntityType="Self.PLANIFICATION_OF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PLANNING_OPERATEUR" EntityType="Self.PLANNING_OPERATEUR" Schema="dbo" store:Type="Tables" />
@@ -1435,6 +1485,10 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             <End Role="OPERATEURS" EntitySet="OPERATEURS" />
             <End Role="PWD_TOKEN" EntitySet="PWD_TOKEN" />
           </AssociationSet>
+          <EntitySet Name="DMD_REASSORT" EntityType="PEGASE_PROD2Model.DMD_REASSORT" />
+          <EntitySet Name="PB_COMMANDES_FOURNISSEUR" EntityType="PEGASE_PROD2Model.PB_COMMANDES_FOURNISSEUR" />
+          <EntitySet Name="PB_LIVRAISONS_CLIENT" EntityType="PEGASE_PROD2Model.PB_LIVRAISONS_CLIENT" />
+          <EntitySet Name="PB_LIVRAISONS_FOURNISSEUR" EntityType="PEGASE_PROD2Model.PB_LIVRAISONS_FOURNISSEUR" />
         </EntityContainer>
         <EntityType Name="ACCIDENT">
           <Key>
@@ -2530,6 +2584,52 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DMD_REASSORT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="idPiece" Type="Int32" />
+          <Property Name="operateur" Type="Int32" />
+          <Property Name="traiteLe" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="quantite" Type="Int32" />
+          <Property Name="dispo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PB_COMMANDES_FOURNISSEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="NaturePB" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Probleme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Resolution" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PB_LIVRAISONS_CLIENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Ncommande" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Service" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NaturePB" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Probleme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Resolution" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PB_LIVRAISONS_FOURNISSEUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Ncommande" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NaturePB" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Probleme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Resolution" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3122,6 +3222,56 @@ avertissement 6002: La table/vue 'PEGASE_PROD2.dbo.TRACABILITE' n'a pas de clé 
                 <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DMD_REASSORT">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.DMD_REASSORT">
+              <MappingFragment StoreEntitySet="DMD_REASSORT">
+                <ScalarProperty Name="dispo" ColumnName="dispo" />
+                <ScalarProperty Name="quantite" ColumnName="quantite" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="traiteLe" ColumnName="traiteLe" />
+                <ScalarProperty Name="operateur" ColumnName="operateur" />
+                <ScalarProperty Name="idPiece" ColumnName="idPiece" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PB_COMMANDES_FOURNISSEUR">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PB_COMMANDES_FOURNISSEUR">
+              <MappingFragment StoreEntitySet="PB_COMMANDES_FOURNISSEUR">
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="Probleme" ColumnName="Probleme" />
+                <ScalarProperty Name="NaturePB" ColumnName="NaturePB" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PB_LIVRAISONS_CLIENT">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PB_LIVRAISONS_CLIENT">
+              <MappingFragment StoreEntitySet="PB_LIVRAISONS_CLIENT">
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="Probleme" ColumnName="Probleme" />
+                <ScalarProperty Name="NaturePB" ColumnName="NaturePB" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Ncommande" ColumnName="Ncommande" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PB_LIVRAISONS_FOURNISSEUR">
+            <EntityTypeMapping TypeName="PEGASE_PROD2Model.PB_LIVRAISONS_FOURNISSEUR">
+              <MappingFragment StoreEntitySet="PB_LIVRAISONS_FOURNISSEUR">
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="Probleme" ColumnName="Probleme" />
+                <ScalarProperty Name="NaturePB" ColumnName="NaturePB" />
+                <ScalarProperty Name="Ncommande" ColumnName="Ncommande" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

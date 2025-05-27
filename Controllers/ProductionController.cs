@@ -19,13 +19,33 @@ using System.Web.Script.Serialization;
 using System.Data;
 using System.Web.WebPages;
 using System.Web.Security;
-using System.DirectoryServices.Protocols;
 
 
 namespace GenerateurDFUSafir.Controllers
 {
     public class ProductionController : Controller
     {
+
+        public ActionResult RechercheLDAP(long? ID)
+        {
+            var ldapServer = "ldap.votre-entreprise.com"; // Adresse LDAP
+            var searchBase = "OU=SousBranche,DC=branche,DC=entreprise,DC=com"; // Le chemin LDAP
+            var username = "votreUtilisateur"; // Format selon config : DOMAIN\\User ou UPN
+            var password = "votreMotDePasse";
+
+            var credential = new NetworkCredential(username, password);
+            var ldapConnection = new LdapConnection(ldapServer)
+            {
+                Credential = credential,
+                AuthType = AuthType.Negotiate // Ou Basic, selon l'infra
+            };
+
+            ldapConnection.Bind();
+
+
+            DataOperateurProd ope = GestionOperateursProd.GestionOFOperateur((long)ID, false);
+            return View(ope);
+        }
         public ActionResult GestionOutilAdmin(long? ID)
         {
             if (ID == null)
@@ -119,14 +139,14 @@ namespace GenerateurDFUSafir.Controllers
             bool result = tracaP.DeleteID(Gamme, ID, IDOPE);
             if (result)
             {
-                TempData["Message"] = "Ligne supprimée avec succès";
-                TempData["MessageType"] = "success";
+                Session["Message"] = "Ligne supprimée avec succès";
+                Session["MessageType"] = "success";
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
             }
             else
             {
-                TempData["Message"] = "Erreur lors de la suppression de la ligne.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de la suppression de la ligne.";
+                Session["MessageType"] = "error";
                 List<TracaPack> listraca = new List<TracaPack>();
                 TracaPackOPE traca = new TracaPackOPE();
                 traca.IDOpe = IDOPE;
@@ -142,14 +162,14 @@ namespace GenerateurDFUSafir.Controllers
             bool result = tracaP.PrintEtiquette(ID, Gamme);
             if (result)
             {
-                TempData["Message"] = "Etiquette imprimée avec succès.";
-                TempData["MessageType"] = "success";
+                Session["Message"] = "Etiquette imprimée avec succès.";
+                Session["MessageType"] = "success";
                 return RedirectToAction("gestionOf", "PRODUCTION", new { id = IDOPE });
             }
             else
             {
-                TempData["Message"] = "Erreur lors de l'impression de l'étiquette";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de l'impression de l'étiquette";
+                Session["MessageType"] = "error";
                 List<TracaPack> listraca = new List<TracaPack>();
                 TracaPackOPE traca = new TracaPackOPE();
                 traca.IDOpe = IDOPE;
@@ -172,6 +192,7 @@ namespace GenerateurDFUSafir.Controllers
         public ActionResult SaveDeclaNonConform()
         {
             int ID = Int32.Parse(Request.Form["ID"]);
+            Console.WriteLine("ID : " + ID);
             string item = Request.Form["refPiece"];
             int quantite = Int32.Parse(Request.Form["nbPiece"]);
             string nom = Request.Form["nomArticle"];
@@ -199,7 +220,7 @@ namespace GenerateurDFUSafir.Controllers
                     ImprimerEtiquetteNC(newnc);
 
 
-
+                    /*
                     Mail mail = new Mail();
                     mail.From = "iisProd.Conductix@laposte.net";
                     mail.To = "franck.moisy@conductix.com,Louis.Jeanningros@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -212,20 +233,21 @@ namespace GenerateurDFUSafir.Controllers
                                    "qtr : " + newnc.Qtr.ToString() + "\r\n" +
                                    "Description : " + newnc.DescriptionUser + "\r\n";
 
-                    mail.btnSendMail();
+                    mail.btnSendMail();*/
 
-                    TempData["Message"] = "Déclaration de non-conformité enregistrée avec succès.";
-                    TempData["MessageType"] = "success";
+                    Session["Message"] = "Déclaration de non-conformité enregistrée avec succès.";
+                    Session["MessageType"] = "success";
                 }
                 else
                 {
-                    TempData["Message"] = "Une erreur est survenue lors de l'enregistrement de la non-conformité.";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Une erreur est survenue lors de l'enregistrement de la non-conformité.";
+                    Session["MessageType"] = "error";
+
                 }
             } catch (Exception ex)
             {
-                TempData["Message"] = "Une erreur technique est survenue";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Une erreur technique est survenue";
+                Session["MessageType"] = "error";
             }
 
             if (!numOF.Equals("MANUEL"))
@@ -470,8 +492,8 @@ namespace GenerateurDFUSafir.Controllers
             bool result = false;
             if (et1 == null || et1.Itmeref == null || et1.Qtr == null)
             {
-                TempData["Message"] = "Référence ou quantité manquante.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Référence ou quantité manquante.";
+                Session["MessageType"] = "error";
                 et = new EtiquetteLogistique();
             }
             else
@@ -486,20 +508,20 @@ namespace GenerateurDFUSafir.Controllers
                     // }
                     if (!result)
                     {
-                        TempData["Message"] = "Echec de l'impression de l'étiquette";
-                        TempData["MessageType"] = "error";
+                        Session["Message"] = "Echec de l'impression de l'étiquette";
+                        Session["MessageType"] = "error";
                         et1 = new EtiquetteLogistique();
                     }
                     else
                     {
-                        TempData["Message"] = "Etiquette imprimée avec succès";
-                        TempData["MessageType"] = "success";
+                        Session["Message"] = "Etiquette imprimée avec succès";
+                        Session["MessageType"] = "success";
                     }
                 }
                 catch (Exception ex)
                 {
-                    TempData["Message"] = "Echec lors de l'impression";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Echec lors de l'impression";
+                    Session["MessageType"] = "error";
                     et1 = new EtiquetteLogistique();
                 }
 
@@ -564,8 +586,8 @@ namespace GenerateurDFUSafir.Controllers
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                TempData["Message"] = "Aucun numéro OF fourni.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Aucun numéro OF fourni.";
+                Session["MessageType"] = "error";
                 et = new EtiquetteLogistique();
                 et.id = et1.id;
             }
@@ -583,26 +605,26 @@ namespace GenerateurDFUSafir.Controllers
                         try
                         {
                             ImprimerEtiquette(op);
-                            TempData["Message"] = $"Étiquette imprimée pour l'OF {op.MFGNUM_0}.";
-                            TempData["MessageType"] = "success";
+                            Session["Message"] = $"Étiquette imprimée pour l'OF {op.MFGNUM_0}.";
+                            Session["MessageType"] = "success";
                             result = true;
                         }
                         catch (Exception ex)
                         {
-                            TempData["Message"] = "Erreur lors de l'impression : " + ex.Message;
-                            TempData["MessageType"] = "error";
+                            Session["Message"] = "Erreur lors de l'impression : " + ex.Message;
+                            Session["MessageType"] = "error";
                         }
                     }
                     else
                     {
-                        TempData["Message"] = $"La référence {op.ITMREF_0} ne permet pas l'impression de l'étiquette.";
-                        TempData["MessageType"] = "error";
+                        Session["Message"] = $"La référence {op.ITMREF_0} ne permet pas l'impression de l'étiquette.";
+                        Session["MessageType"] = "error";
                     }
                 }
                 else
                 {
-                    TempData["Message"] = "Ordre de fabrication introuvable ou invalide.";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Ordre de fabrication introuvable ou invalide.";
+                    Session["MessageType"] = "error";
                 }
             }
 
@@ -666,21 +688,21 @@ namespace GenerateurDFUSafir.Controllers
                 //}
                 if (et != null)
                 {
-                    TempData["Message"] = "Etiquette bac générée avec succès.";
-                    TempData["MessageType"] = "success";
+                    Session["Message"] = "Etiquette bac générée avec succès.";
+                    Session["MessageType"] = "success";
                     return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = et.ITEMREF });
                 }
                 else
                 {
-                    TempData["Message"] = "Echec de la génération de l'étiquette";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Echec de la génération de l'étiquette";
+                    Session["MessageType"] = "error";
                     return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = "" });
                 }
             }
             catch (Exception ex)
             {
-                TempData["Message"] = "Erreur lors de la génération de l'étiquette";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de la génération de l'étiquette";
+                Session["MessageType"] = "error";
                 return RedirectToAction("outilProdBac", "Production", new { IDop = Convert.ToUInt64(opID), bac = "" });
             }
         }
@@ -741,7 +763,7 @@ namespace GenerateurDFUSafir.Controllers
                 int result = obj.AddAccident(SaisieNiveau, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", gravitepotentiel, ImageDB, ref pathimage);
                 if (result > 0)
                 {
-                    
+                    /*
                     Mail mail = new Mail();
                     mail.From = "iisProd.Conductix@laposte.net";
                     mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -754,21 +776,21 @@ namespace GenerateurDFUSafir.Controllers
                                    "Description complémentaire :" + SaisieDescription2;
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
-                    
+                    */
 
-                    TempData["Message"] = "Accident déclaré avec succès.";
-                    TempData["MessageType"] = "success";
+                    Session["Message"] = "Accident déclaré avec succès.";
+                    Session["MessageType"] = "success";
                 }
                 else
                 {
-                    TempData["Message"] = "Erreur lors de la déclaration de l'accident.";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    Session["MessageType"] = "error";
                 }
             }
             else
             {
-                TempData["Message"] = "Aucune donnée soumise";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Aucune donnée soumise";
+                Session["MessageType"] = "error";
             }
 
                 return RedirectToAction("Securite", "Production");
@@ -810,6 +832,7 @@ namespace GenerateurDFUSafir.Controllers
                 int result = obj.AddAccident(TypeAccident, SaisieDate, SaisieDescription, SaisieDescription2, SaisieVictime, "PRODUCTION", Gravite ?? "non renseigné", ImageDB, ref pathimage);
                 if (result > 0)
                 {
+                    /*
                     Mail mail = new Mail
                     {
                         From = "iisProd.Conductix@laposte.net",
@@ -823,7 +846,7 @@ namespace GenerateurDFUSafir.Controllers
                                   "Description complémentaire :" + SaisieDescription2,
                         AttachementPath = pathimage
                     };
-                    mail.btnSendMail();
+                    mail.btnSendMail();*/
 
                     Session["Message"] = "Accident déclaré avec succès.";
                     Session["MessageType"] = "success";
@@ -859,6 +882,7 @@ namespace GenerateurDFUSafir.Controllers
                 int result = obj.AddAmelioration(SaisieDescription, SaisieDescription2, SaisieEmetteur, SaisieSecteur, SaisieService, SaisieDate, ImageDB, ref pathimage);
                 if (result > 0)
                 {
+                    /*
                     Mail mail = new Mail
                     {
                         From = "iisProd.Conductix@laposte.net",
@@ -872,7 +896,7 @@ namespace GenerateurDFUSafir.Controllers
                                   "Solution : " + SaisieDescription2,
                         AttachementPath = pathimage
                     };
-                    mail.btnSendMail();
+                    mail.btnSendMail();*/
 
                     Session["Message"] = "Demande enregistrée avec succès.";
                     Session["MessageType"] = "success";
@@ -1012,7 +1036,7 @@ namespace GenerateurDFUSafir.Controllers
 
             if (result > 0)
             {
-                
+                /*
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
                 mail.To = "franck.moisy@conductix.com,romain.destaing@conductix.com,christian.fournier@conductix.com,wilfrid.martin@conductix.com,iisProd.Conductix@laposte.net";
@@ -1025,14 +1049,14 @@ namespace GenerateurDFUSafir.Controllers
                                " -" + Solution;
                 mail.AttachementPath = pathimage;
                 mail.btnSendMail();
-
-                TempData["Message"] = "Demande enregistrée avec succès.";
-                TempData["MessageType"] = "success";
+                */
+                Session["Message"] = "Demande enregistrée avec succès.";
+                Session["MessageType"] = "success";
             }
             else
             {
-                TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                Session["MessageType"] = "error";
             }
                 return RedirectToAction("Amelioration", "Production");
         }
@@ -1045,8 +1069,6 @@ namespace GenerateurDFUSafir.Controllers
 
         public ActionResult AIC2(int? id)
         {
-            TempData.Keep("Message");
-            TempData.Keep("MessageType");
 ;            if (id == null)
             {
                 return RedirectToAction("Production", "Production");
@@ -1078,12 +1100,12 @@ namespace GenerateurDFUSafir.Controllers
                 InfoAIC2 aic = new InfoAIC2();
                 aic.Addligne(listtmp);
 
-                TempData["Message"] = "Ligne enregistrée avec succès";
-                TempData["MessageType"] = "success";
+                Session["Message"] = "Ligne enregistrée avec succès";
+                Session["MessageType"] = "success";
             } catch(Exception ex)
             {
-                TempData["Message"] = "Erreur lors de l'enregistrement";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de l'enregistrement";
+                Session["MessageType"] = "error";
 
             }
             return RedirectToAction("AIC2", "Production", new {id = index});
@@ -1155,22 +1177,20 @@ namespace GenerateurDFUSafir.Controllers
                 }
                 InfoQRQC obj = new InfoQRQC();
                 obj.SaveQRQC(id, DateOuverture, DateCloture, DateSuivis, Participants, Pilote, Origine, SevenQuestion, DescriptionProcess, ActionsImmediat, Occurrence, NonDetection, Solutions, image);
-                
-                TempData["Message"] = "Demande enregistrée avec succès.";
-                TempData["MessageType"] = "success";
+
+                Session["Message"] = "Demande enregistrée avec succès.";
+                Session["MessageType"] = "success";
 
             } catch(Exception ex)
             {
-                TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                Session["MessageType"] = "error";
             }
                 return RedirectToAction("DataQRQC");
         }
 
         public ActionResult DataQRQC(int? id)
         {
-            TempData.Keep("Message");
-            TempData.Keep("MessageType");
             InfoDATAQRQC list = new InfoDATAQRQC();
             return View(list);
 
@@ -1322,13 +1342,13 @@ namespace GenerateurDFUSafir.Controllers
                 bool saved = data.SavePwdToken(user.ID, token, expiration);
 
                 string lien = Url.Action("DefinirMDPParToken", "Production", new { token = token }, protocol: Request.Url.Scheme);
-
+            /*
                 Mail mail = new Mail();
                 mail.From = "iisProd.Conductix@laposte.net";
                 mail.To = user.Email;
                 mail.Subject = "Création de votre mot de passe ZEN";
                 mail.Message = $"Bonjour {user.Prenom},\n\nVeuillez cliquer sur ce lien pour créer votre mot de passe :\n{lien}\n\nCe lien est valable 1 heure.";
-                mail.btnSendMail();
+                mail.btnSendMail();*/
 
             return RedirectToAction("ConfirmationEnvoiEmail", new { id = user.ID });
         }
@@ -1598,8 +1618,13 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost, ActionName("AjoutSignalement")]
         public ActionResult AjoutSignalement(HttpPostedFileBase ImageSignalement)
         {
+            PEGASE_PROD2Entities2 db = new PEGASE_PROD2Entities2();
+            var idConnecte = Session["OperateurConnecte"];
+            long operateurId = Convert.ToInt64(idConnecte);
+            var operateur = db.OPERATEURS.FirstOrDefault(o => o.ID == operateurId);
+
             string typeSignalement = Request.Form["TypeSignalement"];
-            string nom = Request.Form["SaisieNom"];
+            string nom = operateur.NOM + " " + operateur.PRENOM;
             string date = Request.Form["SaisieDate"];
             string description = Request.Form["SaisieDescription"];
             string description2 = Request.Form["SaisieDescription2"];
@@ -1649,13 +1674,13 @@ namespace GenerateurDFUSafir.Controllers
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
                     */
-                    TempData["Message"] = "Demande enregistrée avec succès.";
-                    TempData["MessageType"] = "success";
+                    Session["Message"] = "Demande enregistrée avec succès.";
+                    Session["MessageType"] = "success";
                 }
                 else
                 {
-                    TempData["Message"] = "Erreur lors de l'enregistrement de la demande.";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Erreur lors de l'enregistrement de la demande.";
+                    Session["MessageType"] = "error";
                 }
             }
             else if (typeSignalement == "Accident")
@@ -1684,19 +1709,19 @@ namespace GenerateurDFUSafir.Controllers
                     mail.AttachementPath = pathimage;
                     mail.btnSendMail();
                     */
-                    TempData["Message"] = "Accident déclaré avec succès.";
-                    TempData["MessageType"] = "success";
+                    Session["Message"] = "Accident déclaré avec succès.";
+                    Session["MessageType"] = "success";
                 }
                 else
                 {
-                    TempData["Message"] = "Erreur lors de la déclaration de l'accident.";
-                    TempData["MessageType"] = "error";
+                    Session["Message"] = "Erreur lors de la déclaration de l'accident.";
+                    Session["MessageType"] = "error";
                 }
             }
             else
             {
-                TempData["Message"] = "Type de signalement non valide.";
-                TempData["MessageType"] = "error";
+                Session["Message"] = "Type de signalement non valide.";
+                Session["MessageType"] = "error";
             }
 
             return RedirectToAction("GestionOf", "Production", new { id = Session["OperateurConnecte"], viewAction = 0 });
@@ -2339,6 +2364,12 @@ namespace GenerateurDFUSafir.Controllers
                 }
             }
         }
+        [HttpPost]
+        public ActionResult TestPost()
+        {
+            Console.WriteLine("POST reçu !");
+            return Content("OK");
+        }
+    }
 
     }
-}

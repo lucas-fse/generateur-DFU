@@ -7,10 +7,13 @@ const OperatorCard = ({ operator }) => {
 
     
     return (
-        <div className="Operateur" style={{ width: '300px' }}>
+        <div className="Operateur">
             <a href={lien} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <img src={operator.Photo} alt={`${operator.Nom} ${operator.Prenom}`} />
-                <p>{operator.Nom} {operator.Prenom}</p>
+                <div id="ctn-id">
+                    <p>{operator.Nom}</p>
+                    <p>{operator.Prenom}</p>
+                </div>
             </a>
         </div>
     );

@@ -16,7 +16,9 @@ namespace GenerateurDFUSafir.Models
             try
             {
                 PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2();
+                Console.WriteLine("test1");
                 OPERATEURS op = _db.OPERATEURS.Where(o => o.ID == newnc.OperateursID).FirstOrDefault();
+                Console.WriteLine("test2");
                 DateTime now = DateTime.Now;
                 string recherche = "PNC" + now.ToString("yy") + now.ToString("MM");
                 List<NON_CONFORMITE> Listnc = _db.NON_CONFORMITE.Where(p => p.NmrChronoS.StartsWith(recherche)).ToList();
@@ -39,6 +41,8 @@ namespace GenerateurDFUSafir.Models
             }
             catch(Exception e)
             {
+                Console.WriteLine("Erreur lors de AddNonConformite: " + e.Message);
+                 Console.WriteLine("Détail: " + e.InnerException.Message);
                 result = "";
             }
             return result;

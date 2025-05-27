@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5aebba06eae1446499b199501912da97" Name="Diagram1" ZoomLevel="106" >
+      <Diagram DiagramId="5aebba06eae1446499b199501912da97" Name="Diagram1" ZoomLevel="74" >
         <EntityTypeShape EntityType="PEGASE_PROD2Model.ACCIDENT" Width="1.5" PointX="15.75" PointY="12.75" />
         <EntityTypeShape EntityType="PEGASE_PROD2Model.ACTIONIMMEDIATE" Width="1.5" PointX="8" PointY="13.625" />
         <EntityTypeShape EntityType="PEGASE_PROD2Model.AIC_EQUIPE" Width="1.5" PointX="16" PointY="6.125" />
@@ -82,10 +82,14 @@
         <EntityTypeShape EntityType="PEGASE_PROD2Model.TYPE_CAUSE" Width="1.5" PointX="20.375" PointY="15.875" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_ANOMALIE" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK_CONTROLE_QUALITE_TYPE_CAUSE" />
-        <EntityTypeShape EntityType="PEGASE_PROD2Model.OPERATEURS_PWD" Width="1.5" PointX="3.125" PointY="9.5" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.OPERATEURS_PWD" Width="1.5" PointX="3" PointY="10.25" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK_OPERATEURS_PWD_OPERATEURS" />
         <EntityTypeShape EntityType="PEGASE_PROD2Model.PWD_TOKEN" Width="1.5" PointX="4.75" PointY="13" />
         <AssociationConnector Association="PEGASE_PROD2Model.FK__PWD_TOKEN__UserI__3E3D3572" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.DMD_REASSORT" Width="1.5" PointX="20.375" PointY="18.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PB_COMMANDES_FOURNISSEUR" Width="1.5" PointX="21.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PB_LIVRAISONS_CLIENT" Width="1.5" PointX="5.375" PointY="21.75" />
+        <EntityTypeShape EntityType="PEGASE_PROD2Model.PB_LIVRAISONS_FOURNISSEUR" Width="1.5" PointX="21.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

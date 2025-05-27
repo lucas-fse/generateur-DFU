@@ -149,7 +149,7 @@ namespace GenerateurDFUSafir.Models
             {
                 _casesQcross[i] = new CasesQcrossType();
                 _casesQcross[i].Visible = true;
-                if (i < now.Day )
+                if (i <= now.Day )
                 {
                     _casesQcross[i].Couleur = CasesQcrossType.CasesColor.Green;
                 }
