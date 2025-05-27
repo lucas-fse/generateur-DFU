@@ -244,5 +244,86 @@ namespace GenerateurDFUSafir.Controllers
              
             return RedirectToAction("Parametres");
         }
+
+        [HttpPost]
+        public ActionResult CreerOperateur(
+        string Nom,
+        string Prenom,
+        string Contrat,
+        string Service,
+        string SousService,
+        string Animateur,
+        string Administrateur,
+        HttpPostedFileBase PhotoProfil)
+        {
+            try
+            {
+                // Création de l'entité OPERATEURS
+                OPERATEURS nouvelOperateur = new OPERATEURS
+                {
+                    NOM = Nom,
+                    PRENOM = Prenom,
+                    FINCONTRAT = string.IsNullOrWhiteSpace(Contrat) ? (DateTime?)null : DateTime.Parse(Contrat),
+                    SERVICE = Service,
+                    SousService = SousService,
+                    ANIMATEUR = Animateur == "on",
+                    isAdmin = Administrateur == "on"
+                };
+
+                // Appel à la méthode de création
+                bool success = OfX3.AddOperateur(nouvelOperateur, PhotoProfil);
+
+                if (!success)
+                {
+                    ViewBag.Erreur = "Erreur lors de la création de l'opérateur.";
+                    return View("ErreurModifOp");
+                }
+
+                return RedirectToAction("GestionOp", "Generique");
+            }
+            catch
+            {
+                ViewBag.Erreur = "Exception lors de la création.";
+                return View("ErreurModifOp");
+            }
+        }
+
+
+
+        [HttpPost]
+        public ActionResult ModifierOperateur(
+            long IdOperateur,
+            string Nom,
+            string Prenom,
+            string Contrat,
+            string Service,
+            string SousService,
+            string Animateur,
+            string Administrateur,
+            HttpPostedFileBase PhotoProfil)
+        {
+            // 1. Mettre à jour dans la BDD via OfX3
+            bool success = OfX3.UpdateOperateur(new OPERATEURS
+            {
+                ID = IdOperateur,
+                NOM = Nom,
+                PRENOM = Prenom,
+                FINCONTRAT = string.IsNullOrWhiteSpace(Contrat) ? (DateTime?)null : DateTime.Parse(Contrat),
+                SERVICE = Service,
+                SousService = SousService,
+                ANIMATEUR = !string.IsNullOrEmpty(Animateur) && Animateur == "on",
+                isAdmin = !string.IsNullOrEmpty(Administrateur) && Administrateur == "on",
+
+            }, PhotoProfil);
+
+            if (!success)
+            {
+                ViewBag.Erreur = "Erreur lors de la mise à jour.";
+                return RedirectToAction("ErreurModifOp"); // page d'erreur à créer si besoin
+            }
+
+            return RedirectToAction("GestionOp", "Generique");
+        }
+
     }
 }

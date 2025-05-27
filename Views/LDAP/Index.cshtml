@@ -1,0 +1,52 @@
+@model List<GenerateurDFUSafir.Controllers.UtilisateurLDAP>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/ConnexionOperateur.css" rel="stylesheet" />
+    Response.ContentEncoding = System.Text.Encoding.UTF8;
+}
+
+<body onload="init()">
+    <div id="fondTransparent"></div>
+    <div id="login-container">
+        <div id="introduction">
+            <meta charset="utf-8" />
+            <h2>Résultats LDAP</h2>
+        </div>
+        <div id="digi-container">
+
+            @if (ViewBag.Erreur != null)
+            {
+                <p style="color: red;">@ViewBag.Erreur</p>
+            }
+            else if (Model.Any())
+            {
+                <table>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                    </tr>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Prenom</td>
+                            <td>@user.Nom</td>
+                            <td>@user.Email</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Aucun résultat trouvé dans l'annuaire LDAP.</p>
+            }
+
+        </div>
+    </div>
+
+</body>
+
+
+
+

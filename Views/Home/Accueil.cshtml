@@ -10,9 +10,8 @@
     <div class="main">
         <div class="present">
             <p>Bienvenue dans</p>
-            <h2>INTRANET</h2>
             <h1>Conductix Wampfler</h1>
-            <p>Le mot d’ordre est votre sécurité, ainsi que la mienne, <br /> et celle de tout le monde en même temps, ça serait cool.</p>
+            <p>Le mot d’ordre est votre sécurité, ainsi que la mienne, et celle de tout le monde en même temps, ça serait cool.</p>
         </div>
 
 
@@ -26,22 +25,14 @@
                         ? Url.Action("EnvoyerTokensInitialisation", "Production", new { id = item.ID })
                         : Url.Action("ConnexionOp", "Production", new { id = item.ID });
 
-
                     <div class="Operateur">
                         <a href="@lien">
-                            <img src="@Url.Content(item.Photo)" />
+                            <img src="@Url.Content(item.Photo)" id="pdpopera"/>
                             <div id="ctn-id">
                                 <p>@item.Nom</p>
                                 <p>@item.Prenom</p>
                             </div>
                         </a>
-                    </div>
-                }
-
-                @for (int y = 0; y < @i; y++)
-                {
-                    <div style="width : 300px;">
-
                     </div>
                 }
             </div>

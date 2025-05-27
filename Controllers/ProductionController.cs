@@ -26,27 +26,6 @@ namespace GenerateurDFUSafir.Controllers
 {
     public class ProductionController : Controller
     {
-
-        public ActionResult RechercheLDAP(long? ID)
-        {
-            var ldapServer = "ldap.votre-entreprise.com"; // Adresse LDAP
-            var searchBase = "OU=SousBranche,DC=branche,DC=entreprise,DC=com"; // Le chemin LDAP
-            var username = "votreUtilisateur"; // Format selon config : DOMAIN\\User ou UPN
-            var password = "votreMotDePasse";
-
-            var credential = new NetworkCredential(username, password);
-            var ldapConnection = new LdapConnection(ldapServer)
-            {
-                Credential = credential,
-                AuthType = AuthType.Negotiate // Ou Basic, selon l'infra
-            };
-
-            ldapConnection.Bind();
-
-
-            DataOperateurProd ope = GestionOperateursProd.GestionOFOperateur((long)ID, false);
-            return View(ope);
-        }
         public ActionResult GestionOutilAdmin(long? ID)
         {
             if (ID == null)
@@ -1197,6 +1176,11 @@ namespace GenerateurDFUSafir.Controllers
 
         }
 
+        public ActionResult CaptureOCR()
+        {
+            return View("~/Views/Logisitque/CaptureOCR.cshtml");
+        }
+
         public ActionResult IndexOFOperateur()
         {
             var idConnecte = Session["OperateurConnecte"];
@@ -1410,39 +1394,52 @@ namespace GenerateurDFUSafir.Controllers
             return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateur);
         }
 
-        
+
         [HttpPost]
         public ActionResult ReinitialiserMotDePasse(Guid token, string nouveauMotDePasse)
         {
-            OfX3 data = new OfX3();
-            var pwdToken = data.GetPwdToken(token);
+            // Vérification du format : exactement 4 chiffres
+            if (string.IsNullOrWhiteSpace(nouveauMotDePasse) ||
+                nouveauMotDePasse.Length != 4 ||
+                !nouveauMotDePasse.All(char.IsDigit))
+            {
+                ViewBag.Erreur = "Le mot de passe doit contenir exactement 4 chiffres.";
+                var data = new OfX3();
+                var pwdToken = data.GetPwdToken(token);
 
-            if (pwdToken == null || (pwdToken.IsUsed ?? false) || pwdToken.ExpirationDate < DateTime.Now)
+                if (pwdToken != null)
+                {
+                    var operateur = GestionOperateursProd.GestionOFOperateur(pwdToken.UserID, false);
+                    ViewBag.Token = token;
+                    return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateur);
+                }
+
+                return View("~/Views/Authentification/LienInvalideOuExpire.cshtml");
+            }
+
+            var dataFinal = new OfX3();
+            var pwdTokenFinal = dataFinal.GetPwdToken(token);
+
+            if (pwdTokenFinal == null || (pwdTokenFinal.IsUsed ?? false) || pwdTokenFinal.ExpirationDate < DateTime.Now)
             {
                 return View("~/Views/Authentification/LienInvalideOuExpire.cshtml");
             }
 
-            var idOperateur = pwdToken.UserID;
-
-            // Mise à jour du mot de passe
+            var idOperateur = pwdTokenFinal.UserID;
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(nouveauMotDePasse);
-
-            bool success = data.SavePWDOp(idOperateur, hashedPassword);
+            bool success = dataFinal.SavePWDOp(idOperateur, hashedPassword);
 
             if (success)
             {
-                data.MarkPwdTokenAsUsed(token);
+                dataFinal.MarkPwdTokenAsUsed(token);
                 return View("~/Views/Authentification/MotDePasseReinitialise.cshtml");
             }
 
             ViewBag.Erreur = "Erreur lors de la réinitialisation du mot de passe.";
-
-            var operateur = GestionOperateursProd.GestionOFOperateur(idOperateur, false);
+            var operateurErr = GestionOperateursProd.GestionOFOperateur(idOperateur, false);
             ViewBag.Token = token;
-            return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateur);
+            return View("~/Views/Authentification/FormulaireNouveauMDP.cshtml", operateurErr);
         }
-
-        
         public ActionResult Deconnexion()
         {
             Session.Clear();
@@ -1465,14 +1462,16 @@ namespace GenerateurDFUSafir.Controllers
         [HttpPost]
         public ActionResult CreerPassword(long id, string motdepasse, Guid? token = null)
         {
-            if (string.IsNullOrEmpty(motdepasse))
+            // Vérification : exactement 4 chiffres
+            if (string.IsNullOrEmpty(motdepasse) || motdepasse.Length != 4 || !motdepasse.All(char.IsDigit))
             {
-                ViewBag.Erreur = "Le mot de passe ne peut pas être vide.";
+                ViewBag.Erreur = "Le mot de passe doit contenir exactement 4 chiffres.";
                 var operateur = GestionOperateursProd.GestionOFOperateur(id, false);
                 ViewBag.Token = token;
                 return View("DefinirPassword", operateur);
             }
 
+            // Hachage du mot de passe
             string hashed = BCrypt.Net.BCrypt.HashPassword(motdepasse);
             bool ok = GestionOperateursProd.SavePasswordOperateur(id, hashed);
 
@@ -1484,15 +1483,18 @@ namespace GenerateurDFUSafir.Controllers
                 return View("DefinirPassword", operateur);
             }
 
+            // Si un token était utilisé, on le marque comme utilisé
             if (token.HasValue)
             {
                 OfX3 data = new OfX3();
                 data.MarkPwdTokenAsUsed(token.Value);
             }
 
+            // Redirection vers l'accueil
             GestionTraitementOFs ofs = new GestionTraitementOFs();
             return View("~/Views/Home/Accueil.cshtml", ofs);
         }
+
 
 
 

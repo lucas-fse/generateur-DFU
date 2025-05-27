@@ -281,7 +281,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ORDRE_FABRICATION_GENERE">

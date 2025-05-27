@@ -1,0 +1,639 @@
+﻿@model GenerateurDFUSafir.Models.GestionOp
+@{
+    ViewBag.Title = "GestionOperateurueuza";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/GestionOp.css">
+</head>
+
+<body>
+    <div id"main">
+        <h2>@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+
+        <div id="bandeau">
+            <img id="logo" src="~/image/logo.png" alt="logo">
+            <p id="titre">Gestion opérateurs</p>
+            <button id="add" type="button" onclick="FormOp()">Ajouter opérateur</button>
+        </div>
+        @using (Html.BeginForm("listespe", "Generique", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div id="FiltreService">
+                <select name="FiltreSaisieService" id="FiltreSaisieService" onchange="submit()">
+                    @foreach (var item in Model.Service)
+                    {
+                        switch (item)
+                        {
+                            case "---":
+                                if (Model.ServiceSelectionne.Contains("ALL"))
+                                {
+                                    <option value="ALL" id="ServiceAll" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="ALL" id="ServiceAll">@item</option>
+                                }
+                                break;
+                            case "Production":
+                                if (Model.ServiceSelectionne.Contains("PROD"))
+                                {
+                                    <option value="PROD" id="ServiceProd" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="PROD" id="ServiceProd">@item</option>
+                                }
+                                break;
+                            case "R&D":
+                                if (Model.ServiceSelectionne.Contains("RD"))
+                                {
+                                    <option value="RD" id="ServiceRD" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="RD" id="ServiceRD">@item</option>
+                                }
+                                break;
+                            case "STC":
+                                if (Model.ServiceSelectionne.Contains("STC"))
+                                {
+                                    <option value="STC" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="STC">@item</option>
+                                }
+                                break;
+                            case "TCS":
+                                if (Model.ServiceSelectionne.Contains("TCS"))
+                                {
+                                    <option value="TCS" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="TCS">@item</option>
+                                }
+                                break;
+                            case "Marketing":
+                                if (Model.ServiceSelectionne.Contains("MKT"))
+                                {
+                                    <option value="MKT" selected>@item</option>
+                                }
+                                else
+                                {
+                                    <option value="MKT">@item</option>
+                                }
+                                break;
+                        }
+                    }
+                </select>
+                <button id="FiltreConfirmationService" onclick="SetFiltreService()">Afficher</button>
+            </div>
+        }
+        <div id="contenant-liste">
+            <table id="liste">
+                <tbody id="corps-liste">
+                    @{
+                        @*Pour chaque opérateur de la liste une ligne du tableau va être généré avec les attriburs propre à l'opérateur*@
+                        foreach (var operateur in Model.Operateurs)
+                        {
+                            <tr id="ligneOp">
+                                @*Si l'opérateur n'a pas de lien vers une photo de profile alors une par défault est implanté*@
+                                @{ if (string.IsNullOrWhiteSpace(operateur.PATHA))
+                                    {
+                                        <td id="zone-pp">
+                                            <img id="pp" src="../image/Profil.png" alt="Photo profil" />
+                                            @{ if (operateur.ANIMATEUR)
+                                                {
+                                                    <div id="contenant-Anim"><img id="anim" src="~/image/logoA.png" alt="Logo anim" /></div>
+                                                }
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td id="zone-pp">
+                                            <img id="pp" src="@operateur.PATHA" alt="Photo profil" />
+                                            @{ if (operateur.ANIMATEUR)
+                                                {
+                                                    <div id="contenant-Anim"><img id="anim" src="~/image/logoA.png" alt="Logo anim" /></div>
+                                                }
+                                            }
+                                        </td>
+                                    }
+                                }
+                                <td>
+                                    <div id="NomPrenom">
+                                        <p id="nom" class="text">@operateur.NOM</p>
+                                        <p id="prenom" class="text">@operateur.PRENOM</p>
+                                    </div>
+                                </td>
+                                <td id="contenant-date">
+                                    <div id="date">
+                                        @*Suppression des heures pour l'affichage de la date d'anniversaire*@
+                                        @{if (operateur.ANNIVERSAIRE != null)
+                                            {
+                                                string dateAnnivComplete = operateur.ANNIVERSAIRE.ToString();
+                                                string dateAnniv = dateAnnivComplete.Remove(10, 9);
+                                                <p class="text">@dateAnniv</p>
+                                            }
+                                            else
+                                            {
+                                            }
+                                        }
+
+
+
+                                        @*Suppression des heures pour l'affichage de la date de fin de contrat mais seulement elle existe*@
+                                        @{ if (operateur.FINCONTRAT != null)
+                                            {
+                                                string dateFinContratComplete = operateur.FINCONTRAT.ToString();
+                                                string dateFinContrat = dateFinContratComplete.Remove(10, 9);
+                                                <p class="text">@dateFinContrat</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="text">Contrat en cours</p>
+                                            }
+                                        }
+                                    </div>
+                                </td>
+                                @*Création des boutons pour modifier les opérateurs, il y en plusieurs pour les différents formats d'écran*@
+
+                                <td id="contenant-modif"><button id="modif" type="button" onclick="FormOp(@operateur.ID)">Modifier</button></td>
+                                <td id="contenant-modif-reduit"><button id="modif-reduit" type="button" onclick="FormOp(@operateur.ID)"><img id="gear" src="~/image/Gear.png" alt="Modification" /></button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="Contenant-PopUpFormOp">
+        <div id="fondTransparent"></div>
+        <div id="PopUpFormOp">
+            <button id="close-PopUpFormOp" onclick="AnnulerPopUp('Contenant-PopUpFormOp')">X</button>
+            <h1>Formulaire Opérateur</h1>
+
+            @using (Html.BeginForm(null, null, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div id="Formulaire">
+                    <input id="IdForm" type="hidden" name="Id" value="" />
+                    <div id="FormNomPrenom">
+                        <div id="FormNom">
+                            <h3>Nom : </h3>
+                            <input id="NomOp" type="text" maxlength="20" name="Nom" value="NOM" />
+                        </div>
+                        <div id="FormPrenom">
+                            <h3>Prenom : </h3>
+                            <input id="PrenomOp" type="text" maxlength="20" name="Prenom" value="Prénom" />
+                        </div>
+                    </div>
+
+                    <div id="FormContenantDate">
+                        <div id="FormDateAnniv">
+                            <h3>Date anniversaire : </h3>
+                            <input id="AnnivOp" type="date" name="Anniv" value="2022-07-05" />
+                        </div>
+                        <div id="FormDateFinContrat">
+                            <h3 id="FormDateFinContrat">Date fin contrat : </h3>
+                            <input id="FinContratOp" type="date" name="FinContrat" value="2022-07-05" />
+                        </div>
+                    </div>
+
+                    <div id="ServiceAnim">
+                        <div id="FormAnimateur">
+                            <div id="FormAnimateurTitre">
+                                <h3>Animateur/Animatrice : </h3>
+                            </div>
+                            <div id="FormAnimateurBtn">
+                                <div id="AnimOui">
+                                    <input type="radio" id="Anim1" name="Animatrice" value="Oui" onclick="ChangeAnim(1)">
+                                    <label for="Anim1">Oui</label>
+                                </div>
+                                <div id="AnimNon">
+                                    <input type="radio" id="Anim2" name="Animatrice" value="Non" checked onclick="ChangeAnim(0)">
+                                    <label for="Anim2">Non</label>
+                                </div>
+                                <input type="hidden" id="AnimOp" name="Anim" value="Non" />
+                            </div>
+                        </div>
+                        <div id="FormContenantService">
+                            <h3>Service : </h3>
+                            <select name="SaisieService" id="FormSaisieService" form="Form" onchange="ChangeService()">
+                                @foreach (var item in Model.Service)
+                                {
+                                    <option value="@item" onchange="ChangeService(@item)">@item</option>
+                                }
+                            </select>
+                            <input type="hidden" name="FormService" id="FormService" value="" />
+                            <h3>Sous Service : </h3>
+                            <select name="SaisieSousService" id="FormSaisieSousService" form="Form" onchange="ChangeSousService()">
+                                @foreach (var item in Model.SousService)
+                                {
+                                    <option value="@item" onchange="ChangeSousService(@item)">@item</option>
+                                }
+                            </select>
+                            <input type="hidden" name="FormSousService" id="FormSousService" value="" />
+                        </div>
+                    </div>
+
+                    <div id="FormContenantWebcam">
+                        <h3>Photo de profil : </h3>
+
+                        <div id="FormContenantPhotoProfil">
+                            <img id="FormPhotoProfil" src="#" alt="Photo de profil" />
+
+                            <div id="ChangeppMenu">
+                                <h4>Changer de photo de profil :</h4>
+                                <button id="ChangeppCamera" class="FormppBtn" type="button" onclick="Changepp()">Depuis la camera / webcam</button>
+                                @*<button id="ChangeppGalerie" type="button" onclick="">Depuis la galerie</button>*@
+                            </div>
+                        </div>
+
+                        <div id="WebcamOn">
+                            <div id="Contenant-video" style="position: relative; margin-right: 10px;">
+                                <div style="z-index: 1; text-align: initial;">
+                                    <video id="video" autoplay muted playsinline></video>
+                                </div>
+                                <div id="Cadre"></div>
+                            </div>
+                            <canvas id="canvas" hidden></canvas>
+                            <img src="" id="photo" alt="photo" style="display: none; position: relative; margin-right: 10px;">
+                            <input value="" name="srcImg" id="srcImg" type="hidden">
+                            <canvas id="canvas" hidden></canvas>
+
+                            <div id="WebcamMenu">
+                                <label>Video source: </label>
+                                <div class="select">
+                                    <label for="videoSource"></label><select id="videoSource"></select>
+                                </div>
+                                <input id="PrendreButtonPhoto" type="button" class="FormppBtn" value="Prendre photo" onclick="previewPhoto()" />
+                                <button id="EmptyButtonPhoto" class="FormppBtn" type="button" style="display:none">---</button>
+
+                                <input id="ReprendreButtonPhoto" type="button" class="FormppBtn" value="Reprendre photo" onclick="ReprendrePhoto()" />
+
+                                <button id="AnnulerButtonPhoto" class="FormppBtn" type="button" onclick="AnnulerChangepp()">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="FormSubmit">
+                        <input type="submit" id="SaveBtn" name="FormSubmit" value="Sauvegarder" />
+                        <button id="Cancel-Form" class="FormppBtn" onclick="AnnulerPopUp('Contenant-PopUpFormOp')">Annuler</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="~/Scripts/webcam.min.js"></script>
+@*<script src="~/Scripts/GestionOp.js" charset="utf-8"></script>*@
+<script>
+    console.log('script start');
+    var listOperateur = '<p>@Model.JsonListOperateurs</p>';
+    listOperateur = listOperateur.replace(/(\r\n|\n|\r)/gm, "\\n")
+    listOperateur = jQuery(listOperateur).text();
+    listOperateur = listOperateur.replace(/\\n/gm, "<br>")
+    var JsonlistOperateur = JSON.parse(listOperateur);
+
+    function SetFiltreService() {
+
+        //Récupération de la valeur selectionné
+        var newservice = document.getElementById("FiltreSaisieService").value
+
+        //Mise à jour du model
+        @Model.ServiceSelectionne = service;
+
+    }
+
+    ////////////////////////////////////////////////
+    //Script Webcam
+
+
+
+    //Méthode bouton "Prendre Photo"
+    function previewPhoto() {
+
+        //Méthode lié à la bibliothèque de la webcam
+        //Capture l'image et génère un lien stocké dans la variable "data_uri"
+        //On affiche le résultat dans une image et on stocke le lien dans un champ input
+        //pour le récupérer dans le controller via le formulaire
+
+
+        //On masque la webcam et on affiche l'image comme résultat
+        document.getElementById('Contenant-video').style.margin = "0";
+        document.getElementById('video').style.display = "none";
+        document.getElementById('video').style.position = "absolute";
+
+        document.getElementById('photo').style.display = "inline-block";
+        document.getElementById('photo').style.position = "static";
+
+        takePicture();
+        //Mise à jour des boutons du menu de la webcam
+        document.getElementById("PrendreButtonPhoto").style.position = "absolute";
+        document.getElementById("PrendreButtonPhoto").style.display = "none";
+
+        document.getElementById("ReprendreButtonPhoto").style.position = "static";
+        document.getElementById("ReprendreButtonPhoto").style.display = "block";
+
+    }
+
+    //Méthode bouton "Reprendre Photo"
+    function ReprendrePhoto() {
+
+        //La webcam se réactive
+
+
+        //On masque l'ancien résultat et on affiche le webcam
+        document.getElementById('Contenant-video').style.margin = "0 10px 0 0";
+        document.getElementById('video').style.position = "static";
+        document.getElementById('video').style.display = "block";
+
+        document.getElementById('photo').style.position = "absolute";
+        document.getElementById('photo').style.display = "none";
+
+        //Mise à jour des boutons du menu de la webcam
+        document.getElementById("ReprendreButtonPhoto").style.position = "absolute";
+        document.getElementById("ReprendreButtonPhoto").style.display = "none";
+
+        document.getElementById("PrendreButtonPhoto").style.position = "static";
+        document.getElementById("PrendreButtonPhoto").style.display = "block";
+    }
+
+    //Méthode bouton "Depuis la camera / webcam"
+    function Changepp() {
+
+        //Masque l'ancienne photo de profil et affiche la webcam
+        document.getElementById("FormContenantPhotoProfil").style.position = "absolute";
+        document.getElementById("FormContenantPhotoProfil").style.display = "none";
+
+        document.getElementById("WebcamOn").style.position = "static";
+        document.getElementById("WebcamOn").style.display = "flex";
+    }
+
+    //Méthode bouton "Annuler" dans le menu webcam
+    function AnnulerChangepp() {
+
+
+
+        //Suppression des potentiels données d'une photo
+        document.getElementById('srcImg').value = '';
+        document.getElementById('photo').src = '';
+
+
+        //Masque la webcam et on affiche l'ancienne photo de profil
+        document.getElementById("WebcamOn").style.position = "absolute";
+        document.getElementById("WebcamOn").style.display = "none";
+
+        document.getElementById("FormContenantPhotoProfil").style.position = "static";
+        document.getElementById("FormContenantPhotoProfil").style.display = "flex";
+
+        //Remise à l'état par défaut du menu de la webcam
+        document.getElementById('photo').style.position = "absolute";
+        document.getElementById('photo').style.display = "none";
+
+        document.getElementById('Contenant-video').style.margin = "0 10px 0 0";
+        document.getElementById('video').style.position = "static";
+        document.getElementById('video').style.display = "block";
+
+
+        document.getElementById("ReprendreButtonPhoto").style.position = "absolute";
+        document.getElementById("ReprendreButtonPhoto").style.display = "none";
+
+        document.getElementById("PrendreButtonPhoto").style.position = "static";
+        document.getElementById("PrendreButtonPhoto").style.display = "block";
+    }
+
+    function FormOp(id) {
+        if (id == undefined) {
+
+            //Si "id" n'est pas défini c'est que l'appelle de la fonction vient du bouton "créer"
+            //Alors se sont les valeurs par défaut qui sont remplis dans le formulaire
+
+            //Champ nom et prénom
+            document.getElementById("NomOp").value = "NOM";
+            document.getElementById("PrenomOp").value = "Prénom";
+
+            //Champ animateur, le bouton "non" est coché par défaut
+            document.getElementById("Anim1").checked = false;
+            document.getElementById("Anim2").checked = true;
+
+            document.getElementById("AnimOp").value = 0;
+
+            //Champ lié au date, anniversaire et fin de contrat
+            document.getElementById("AnnivOp").value = null;
+            document.getElementById("FinContratOp").value = null;
+
+            document.getElementById("FormSaisieService").selectedIndex = "0"
+            document.getElementById("FormSaisieSousService").selectedIndex = "0"
+
+            document.getElementById("FormPhotoProfil").src = "../image/Profil.png";
+
+        }
+        else {
+            //Recherche de l'opérateur correspondant à l'ID dans le liste JSON
+            var operateur;
+            JsonlistOperateur.forEach(
+                (op) => {
+                    if (op.ID == id) {
+                        operateur = op;
+                    }
+                }
+            )
+            document.getElementById("IdForm").value = operateur.ID;
+
+            //Champ nom et prénom
+            document.getElementById("NomOp").value = operateur.NOM;
+            document.getElementById("PrenomOp").value = operateur.PRENOM;
+
+            //Champ animateur, si "operateur.ANIMATEUR" renvoie vrai l'opérateur est un animateur
+            //Alors le bouton "oui" est coché et le champ "input hidden" est égal à 1
+            if (operateur.ANIMATEUR) {
+                document.getElementById("Anim2").checked = false;
+                document.getElementById("Anim1").checked = true;
+
+                document.getElementById("AnimOp").value = 1;
+            }
+            //Sinon inversement, le bouton "non" est coché et le champ "input hidden" est égal à 0
+            else {
+                document.getElementById("Anim1").checked = false;
+                document.getElementById("Anim2").checked = true;
+
+                document.getElementById("AnimOp").value = 0;
+            }
+
+            if (operateur.ANNIVERSAIRE != null) {
+                //Transformation de la chaine de caractère de la date pour qu'elle soit lisible par l'HTML
+                var dateAnniv = operateur.ANNIVERSAIRE.slice(0, 10);
+
+                document.getElementById("AnnivOp").value = dateAnniv;
+            } else {
+                //Si pas de date enregistré valeur null par défaut
+                document.getElementById("AnnivOp").value = null;
+            }
+
+            if (operateur.FINCONTRAT != null) {
+                //Transformation de la chaine de caractère de la date pour quelle soit lisible par l'HTML
+                var dateFinContrat = operateur.FINCONTRAT.slice(0, 10);
+
+                document.getElementById("FinContratOp").value = dateFinContrat;
+            } else {
+                //Si pas de date enregistré valeur null par défaut
+                document.getElementById("FinContratOp").value = null;
+            }
+
+            //Afficher la ligne du tableau déroulant correspondant au service de l'opérateur
+            if (operateur.SERVICE == null) {
+                document.getElementById("FormSaisieService").selectedIndex = "0";
+            } else {
+                document.getElementById("FormService").value = operateur.SERVICE.trim();
+                switch (operateur.SERVICE.trim()) {
+                    case "---":
+                        document.getElementById("FormSaisieService").selectedIndex = "0";
+                        break;
+                    case "PROD":
+                        document.getElementById("FormSaisieService").selectedIndex = "1";
+                        break;
+                    case "RD":
+                        document.getElementById("FormSaisieService").selectedIndex = "2";
+                        break;
+                    case "STC":
+                        document.getElementById("FormSaisieService").selectedIndex = "3";
+                        break;
+                    case "TCS":
+                        document.getElementById("FormSaisieService").selectedIndex = "4";
+                        break;
+                    case "MKT":
+                        document.getElementById("FormSaisieService").selectedIndex = "5";
+                        break;
+                    default:
+                        document.getElementById("FormSaisieService").selectedIndex = "0";
+                        break;
+                }
+            }
+
+            if (operateur.SousService == null) {
+                document.getElementById("FormSaisieSousService").selectedIndex = "0";
+            } else {
+                document.getElementById("FormSousService").value = operateur.SousService.trim();
+                switch (operateur.SousService.trim()) {
+                    case "---":
+                        document.getElementById("FormSaisieSousService").selectedIndex = "0";
+                        break;
+                    case "FAB":
+                        document.getElementById("FormSaisieSousService").selectedIndex = "1";
+                        break;
+                    case "LOG":
+                        document.getElementById("FormSaisieSousService").selectedIndex = "2";
+                        break;
+                    case "ADM":
+                        document.getElementById("FormSaisieSousService").selectedIndex = "3";
+                        break;
+
+                    default:
+                        document.getElementById("FormSaisieSousService").selectedIndex = "0";
+                        break;
+                }
+            }
+            if (!operateur.PATHA) {
+                document.getElementById("FormPhotoProfil").src = "../image/Profil.png";
+            } else {
+                document.getElementById("FormPhotoProfil").src = operateur.PATHA;
+            }
+        }
+
+        document.getElementById("ReprendreButtonPhoto").style.display = "none";
+
+        document.getElementById("PrendreButtonPhoto").style.display = "block";
+
+        document.getElementById("fondTransparent").style.opacity = 1;
+        document.getElementById("fondTransparent").style.pointerEvents = "all";
+        document.getElementById("Contenant-PopUpFormOp").style.display = "block";
+
+    }
+
+    function AnnulerPopUp(id) {
+
+        AnnulerChangepp()
+
+        document.getElementById(id).style.display = "none";
+        document.getElementById("fondTransparent").style.opacity = 0;
+        document.getElementById("fondTransparent").style.pointerEvents = "none";
+    }
+
+    function ChangeAnim(indice) {
+        if (indice == 1) {
+            document.getElementById("AnimOp").value = 1;
+            console.log("Anim oui");
+        } else {
+            document.getElementById("AnimOp").value = 0;
+            console.log("Anim non");
+        }
+    }
+
+    function ChangeService() {
+        var service = document.getElementById("FormSaisieService").selectedIndex;
+        console.log(service);
+        switch (service) {
+            case 0:
+                document.getElementById("FormService").value = "---";
+                break;
+            case 1:
+                document.getElementById("FormService").value = "PROD";
+                break;
+            case 2:
+                document.getElementById("FormService").value = "RD";
+                break;
+            case 3:
+                document.getElementById("FormService").value = "STC";
+                break;
+            case 4:
+                document.getElementById("FormService").value = "TCS";
+                break;
+            case 5:
+                document.getElementById("FormService").value = "MKT";
+                break;
+            default:
+                document.getElementById("FormService").value = "---";
+                break;
+        }
+    }
+    function ChangeSousService() {
+        var service = document.getElementById("FormSaisieSousService").selectedIndex;
+        console.log(service);
+        switch (service) {
+            case 0:
+                document.getElementById("FormSousService").value = "---";
+                break;
+            case 1:
+                document.getElementById("FormSousService").value = "FAB";
+                break;
+            case 2:
+                document.getElementById("FormSousService").value = "LOG";
+                break;
+            case 3:
+                document.getElementById("FormSousService").value = "ADM";
+                break;
+
+        }
+    }
+    function test(id)
+{
+    var a = document.getElementById("titre");
+    JsonlistOperateur.forEach(
+        (op) => {
+            if (op.ID == id) {
+                a.textContent = op.NOM;
+            }
+        }
+    )
+}
+
+
+</script>

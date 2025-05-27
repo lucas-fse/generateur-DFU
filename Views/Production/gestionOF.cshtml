@@ -30,9 +30,9 @@
 <body>
     <p id="ouverturepopup" initvalue="@Model.Popup.ToString()" hidden></p>
     <div id="gestion-OF-container">
-        <div id="topInfos">
-            <button class="btn btn-orange" onclick="location.href = '@Url.Action("Deconnexion", "Production")'">Déconnexion</button>
-        </div>
+        <!--<div id="topInfos">
+        <button class="btn btn-orange" onclick="location.href = 'Url.Action("Deconnexion", "Production")'">Déconnexion</button>
+    </div>-->
         <div id="categorie-OF">
             <!-- debut barre latérale gauche -->
             <img src="~/image/swirl.png" id="logoBackGround" />
@@ -53,8 +53,8 @@
                     <!--<input type="hidden" id="gererPopup" name="endPopPup" value="" />-->
                     <input type="hidden" name="ID" value="@Model.ID" />
                     <!--<button type="submit" class="cat-OF-button" value="2" name="cat">Catégorie bidirectionnelle </button>
-                    <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
-                    <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
+                <button type="submit" class="cat-OF-button" value="3" name="cat">Catégorie  monodirectionnelle</button>
+                <button type="submit" class="cat-OF-button" value="4" name="cat">Catégorie test </button>-->
 
                     <button type="submit" class="btn btn-outline-orange-2" value="1" name="cat">OfZEN</button>
                     <br />
@@ -80,11 +80,11 @@
                 {
                     <label for="searched-OF">Référence de l'OF:</label>
                     <!--
-                    -->
+                -->
                     <input type="hidden" name="ID" value="@Model.ID" />
                     <input type="search" id="searched-OF" name="searchedOF">
                     <!--
-                    -->
+                -->
                     <button type="submit" name="submitButton" id="submitButton"><img src="~/image/search.png" alt="Alternate Text" width="20" /></button>
                 }
             </div>

@@ -7,6 +7,8 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.IO;
+
 
 
 namespace GenerateurDFUSafir.DAL
@@ -1238,5 +1240,120 @@ namespace GenerateurDFUSafir.DAL
             return true;
         }
 
+        public static bool AddOperateur(OPERATEURS nouvelOperateur, HttpPostedFileBase nouvellePhoto)
+        {
+            try
+            {
+                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
+                {
+                    // 1. Gestion photo
+                    if (nouvellePhoto != null && nouvellePhoto.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(nouvellePhoto.FileName);
+                        string path = Path.Combine(HttpContext.Current.Server.MapPath("~/operateurs/OperateursA/"), fileName);
+                        nouvellePhoto.SaveAs(path);
+                        nouvelOperateur.PATHB = "OperateursA/" + fileName;
+                    }
+
+                    // 2. isValidPasswd à false
+                    nouvelOperateur.isValidPasswd = false;
+
+                    // 3. Génération initiale
+                    string baseInitiale = $"{nouvelOperateur.PRENOM?[0]}{nouvelOperateur.NOM?[0]}".ToUpper();
+                    string initialeFinale = baseInitiale;
+                    int ajout = 1;
+
+                    var existants = _db.OPERATEURS.Select(o => o.INITIAL).ToList();
+                    while (existants.Contains(initialeFinale))
+                    {
+                        if (nouvelOperateur.NOM.Length > ajout)
+                            initialeFinale = baseInitiale + nouvelOperateur.NOM[ajout];
+                        else if (nouvelOperateur.PRENOM.Length > ajout)
+                            initialeFinale = baseInitiale + nouvelOperateur.PRENOM[ajout];
+                        else
+                            initialeFinale = baseInitiale + ajout.ToString();
+
+                        initialeFinale = initialeFinale.ToUpper();
+                        ajout++;
+                    }
+                    nouvelOperateur.INITIAL = initialeFinale;
+
+                    // 4. Génération de l'email
+                    if (nouvelOperateur.FINCONTRAT == null)
+                    {
+                        // CDI : prenom.nom@conductix.com
+                        var email = $"{nouvelOperateur.PRENOM}.{nouvelOperateur.NOM}@conductix.com";
+                        nouvelOperateur.Email = email.ToLower().Replace(" ", "").Replace("é", "e").Replace("è", "e").Replace("ê", "e").Replace("à", "a"); 
+                    }
+                    else
+                    {
+                        // CDD : vers Romain et Wilfrid
+                        nouvelOperateur.Email = "romain.destaing@conductix.com;wilfrid.martin@conductix.com";
+                    }
+
+                    // 5. Ajout de l'opérateur
+                    _db.OPERATEURS.Add(nouvelOperateur);
+                    _db.SaveChanges();
+
+                    // 6. Création entrée dans OPERATEURS_PWD avec Password null
+                    if (!_db.OPERATEURS_PWD.Any(p => p.ID == nouvelOperateur.ID))
+                    {
+                        _db.OPERATEURS_PWD.Add(new OPERATEURS_PWD
+                        {
+                            ID = nouvelOperateur.ID,
+                            Password = null
+                        });
+                        _db.SaveChanges();
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur création opérateur : " + ex.Message);
+                return false;
+            }
+        }
+
+
+
+
+
+
+        public static bool UpdateOperateur(OPERATEURS operateurMaj, HttpPostedFileBase nouvellePhoto)
+        {
+            try
+            {
+                using (PEGASE_PROD2Entities2 _db = new PEGASE_PROD2Entities2())
+                {
+                    var op = _db.OPERATEURS.FirstOrDefault(o => o.ID == operateurMaj.ID);
+                    if (op == null) return false;
+
+                    op.NOM = operateurMaj.NOM;
+                    op.PRENOM = operateurMaj.PRENOM;
+                    op.FINCONTRAT = operateurMaj.FINCONTRAT;
+                    op.SERVICE = operateurMaj.SERVICE;
+                    op.SousService = operateurMaj.SousService;
+                    op.ANIMATEUR = operateurMaj.ANIMATEUR;
+                    op.isAdmin = operateurMaj.isAdmin;
+
+                    if (nouvellePhoto != null && nouvellePhoto.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(nouvellePhoto.FileName);
+                        string path = Path.Combine(HttpContext.Current.Server.MapPath("~/operateurs/OperateursA/"), fileName);
+                        nouvellePhoto.SaveAs(path);
+                        op.PATHB = "OperateursA/" + fileName;
+                    }
+
+                    _db.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

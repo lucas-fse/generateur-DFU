@@ -22,39 +22,58 @@
             <form method="post" action="@Url.Action("ReinitialiserMotDePasse", "Production")" id="login-form">
                 <input type="hidden" name="id" value="@Model.ID" />
                 <input type="hidden" name="token" value="@ViewBag.Token" />
-                <input type="password" id="motdepasse" name="nouveauMotDePasse" readonly />
+                <input type="password" id="motdepasse" name="nouveauMotDePasse" readonly maxlength="4" minlength="4" pattern="\d{4}" required />
 
                 <div id="digicode">
                     @for (int i = 1; i <= 9; i++)
                     {
                         <button type="button" onclick="ajouterChiffre('@i')">@i</button>
                     }
-                    <button type="button" onclick="supprimerDernier()">⌫</button>
-                    <button type="button" onclick="ajouterChiffre('0')">0</button>
-                    <button type="submit">✔️</button>
+                    <div id="digicode">
+                        @for (int i = 1; i <= 9; i++)
+                        {
+                            <button type="button" onclick="ajouterChiffre('@i')">@i</button>
+                        }
+                        <button type="button" onclick="supprimerDernier()">⌫</button>
+                        <button type="button" onclick="ajouterChiffre('0')">0</button>
+                        <button type="button" onclick="validerFormulaire()">✔️</button>
+                    </div>
+
                 </div>
             </form>
 
+            <div id="erreur-mdp" class="alert alert-danger" style="display:none; margin-top:10px;"></div>
         </div>
         @if (ViewBag.Erreur != null)
         {
             <div class="alert alert-danger">@ViewBag.Erreur</div>
         }
     </div>
-
 </body>
 
 <script>
     function ajouterChiffre(c) {
         const input = document.getElementById("motdepasse");
-        input.value += c;
+        if (input.value.length < 4) {
+            input.value += c;
+        }
     }
 
     function supprimerDernier() {
         const input = document.getElementById("motdepasse");
         input.value = input.value.slice(0, -1);
     }
+
+    function validerFormulaire() {
+        const input = document.getElementById("motdepasse");
+        const messageErreur = document.getElementById("erreur-mdp");
+
+        if (/^\d{4}$/.test(input.value)) {
+            messageErreur.style.display = "none";
+            document.getElementById("login-form").submit();
+        } else {
+            messageErreur.textContent = "Le mot de passe doit contenir exactement 4 chiffres.";
+            messageErreur.style.display = "block";
+        }
+    }
 </script>
-
-
-

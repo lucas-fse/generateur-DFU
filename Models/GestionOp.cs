@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,6 +31,7 @@ namespace GenerateurDFUSafir.Models
                 return _Service;
             }
         }
+
         public string ServiceSelectionne { get; set; }
         public GestionOp()
         {
@@ -54,18 +56,7 @@ namespace GenerateurDFUSafir.Models
                 }
             }
 
-            foreach (OPERATEURS o in Operateurs)
-            {
-                //Si le lien vers le photo de profil existe, il est corrigé pour bien pointé sur le fichier
-                if (!string.IsNullOrEmpty(o.PATHA))
-                {
-                    o.PATHA = "../operateurs/" + o.PATHA;
-                }
-                if (!string.IsNullOrEmpty(o.PATHB))
-                {
-                    o.PATHB = "../operateurs/" + o.PATHB;
-                }
-            }
+            
 
             ToJson();
         }
@@ -113,11 +104,11 @@ namespace GenerateurDFUSafir.Models
                 //Si le lien vers le photo de profil existe, il est corrigé pour bien pointé sur le fichier
                 if (!string.IsNullOrEmpty(o.PATHA))
                 {
-                    o.PATHA = "../operateurs/" + o.PATHA;
+                    o.PATHA = o.PATHA;
                 }
                 if (!string.IsNullOrEmpty(o.PATHB))
                 {
-                    o.PATHB = "../operateurs/" + o.PATHB;
+                    o.PATHB = o.PATHB;
                 }
             }
             ToJson();
